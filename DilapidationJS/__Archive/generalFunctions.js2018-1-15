@@ -1,0 +1,226 @@
+/**
+ * Created by TengShinan on 24/10/17.
+ */
+
+/**
+ * Determine the footer
+ * */
+function determineFooter(mode) {
+    var result;
+    if (mode == 'final') {
+        result = {
+            image: footerImage,
+            alignment: 'left',
+            margin: [40, -8, 0, 0],
+            width: 450,
+            height: 32
+        };
+        return result;
+    }
+    if (mode == 'preview') {
+        result = {
+            text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
+            alignment: 'left',
+            fontSize: 11,
+            color: 'red',
+            bold: true,
+            margin: [40, 10, 0, 0]
+        };
+        return result;
+    }
+}
+
+/**
+ * Determind the front page footer
+ */
+function determineFrontPageFooter(mode) {
+    var result;
+    if (mode == 'final') {
+        result = {
+            image: frontPageFooter,
+            alignment: 'left',
+            margin: [40, -8, 0, 0],
+            width: 320,
+            height: 38
+        };
+        return result;
+    }
+    if (mode == 'preview') {
+        result = {
+            text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
+            alignment: 'left',
+            fontSize: 11,
+            color: 'red',
+            bold: true,
+            margin: [40, 10, 0, 0]
+        };
+        return result;
+    }
+}
+
+
+/**
+ * Determine draft cover page
+ * */
+function giveMeHugeDraft(mode) {
+    var result;
+    if (mode == 'final') {
+        result = {
+            text: ''
+        };
+        return result;
+    }
+    if (mode == 'preview') {
+        result = {
+            text: '******DRAFT******',
+            fontSize: 40,
+            bold: true,
+            color: 'red',
+            alignment: 'center',
+            margin: [0, 0, 0, 10]
+        };
+        return result;
+    }
+}
+
+
+/**
+ *   check whether the image src is base64 or url path.
+ *   return -1 means base64
+ *   otherwise is url path
+ **/
+function checkImage(id) {
+    //console.log("click");
+    var image = document.getElementById(id);
+    var src = image.src;
+    //console.log(src.indexOf("photos"));
+    return(src.indexOf("photos"));
+}
+
+/**
+ * Images
+ * */
+function getCoverImage(id) {
+    var imageSection;
+    var myImage = document.getElementById(id);
+    var myWidth = myImage.width;
+
+    if (myWidth == 0) {
+        console.log('not cover');
+        imageSection = {
+            text: "",
+            width: 0,
+            height: 0
+        }
+    } 
+    else 
+    {
+        console.log('has cover');
+        if (checkImage(id) >= 0)
+        {
+            console.log('reload');
+            var canvas = document.createElement("canvas");
+            canvas.width = myImage.naturalWidth;
+            canvas.height = myImage.naturalHeight;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(myImage,0,0);
+            var src = canvas.toDataURL("image/png");
+            
+            imageSection = {
+                image:src,
+                height: 225,
+                width: 225
+            }
+        }
+        else{
+            console.log('just upload');
+            imageSection = {
+                image: myImage.src,
+                width: 225,
+                height: 225
+            }
+        }
+
+    }
+    return imageSection;
+}
+
+function getPhoto(id) {
+    var imageSection;
+    var myImage = document.getElementById(id);
+
+    if (myImage) {
+        var myWidth = myImage.style.width;
+        if (myWidth == "0px") {
+            console.log('0px');
+            imageSection = {
+                text: ""
+            };
+            return imageSection;
+        } 
+        else {
+            
+            if (checkImage(id) >= 0)
+            {
+                console.log('reload');
+                var canvas = document.createElement("canvas");
+                canvas.width = myImage.naturalWidth;
+                canvas.height = myImage.naturalHeight;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(myImage,0,0);
+                var src = canvas.toDataURL("image/png");
+            
+                imageSection = {
+                    image:src,
+                    height: 250,
+                    width: 250
+                }
+            }
+            else
+            {
+                console.log('upload')
+                imageSection = {
+                    image: myImage.src,
+                    width: 250,
+                    height: 250
+                };
+            }
+
+            return imageSection;
+        }
+    }
+    else
+    {  
+        imageSection = {
+            text: ''
+        };
+        return imageSection;
+    }
+}
+
+/**
+ * Get the value for the table cell
+ * */
+function getIt(id) {
+    var result;
+    result = document.getElementById(id).value.trim();
+    return result;
+}
+
+function getPicDes(id) {
+    var myText = document.getElementById(id);
+    if (myText) {
+        return myText.value;
+    } else {
+        return '';
+    }
+}
+
+/**
+ * Make a gap between the elements
+ * */
+function makeAGap() {
+    var result;
+    result = {text: ' '};
+    return result;
+}

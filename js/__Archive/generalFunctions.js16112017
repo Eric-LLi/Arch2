@@ -1,0 +1,353 @@
+/**
+ * Created by TengShinan on 4/10/17.
+ */
+
+var flag = false;
+
+/**
+ * Draw the key table - BetterTENG
+ * */
+function getKeyTable() {
+    var result;
+    result = {
+        table: {
+            widths: [13, '*', 13, '*'],
+            body: [
+                [{
+                    text: 'NA',
+                    style: 'tableText'
+                }, {
+                    text: '-    Not applicable, no such item',
+                    style: 'tableText'
+                }, {
+                    text: '√',
+                    style: 'tableText'
+                }, {
+                    text: '-    No visible significant defect',
+                    style: 'tableText'
+                }],
+                [{
+                    text: 'X',
+                    style: 'tableText'
+                }, {
+                    text: '-    Maintenance Item or Minor Defect',
+                    style: 'tableText'
+                }, {
+                    text: 'XX',
+                    style: 'tableText'
+                }, {
+                    text: '-    Major Defect',
+                    style: 'tableText'
+                }],
+                [{
+                    text: 'U',
+                    style: 'tableText'
+                }, {
+                    text: '-    Unknown / Inaccessible / not tested',
+                    style: 'tableText'
+                }, '', '']
+            ]
+        },
+        layout: 'noBorders'
+    };
+    return result;
+}
+
+/**
+ * Check if Summary of the Condition of the Property selects the [Other] option - BetterTENG 
+ * */
+function checkIfOther() {
+    if (document.getElementById('conditionOfBuilding').value == 'Other') {
+        document.getElementById('XiaoKe').style.display = 'block';
+        flag = true;
+        return 'otherSelected';
+    }
+    if (flag) {
+        if (document.getElementById('conditionOfBuilding').value != 'Other') {
+            document.getElementById('XiaoKe').style.display = 'none';
+            flag = false;
+            return 'otherNotSelected';
+        }
+    }
+    return 'normalCondition';
+}
+
+/**
+ * Get the value for the table cell
+ * */
+function getIt(id) {
+    var result;
+    result = document.getElementById(id).value.trim();
+    return result;
+}
+
+/**
+*   check whether the image src is base64 or url path.
+ *   return -1 means base64
+ *   otherwise is url path
+**/
+function checkImage(id) {
+        //console.log("click");
+        var image = document.getElementById(id);
+        var src = image.src;
+        //console.log(src.indexOf("photos"));
+        return(src.indexOf("photos"));
+    }
+
+/**
+ * Get image for the Cover page
+ * */
+function displayCoverImage(id) {
+    var imageDisplay = {};
+    var myImage = document.getElementById(id);
+    var myWidth = myImage.width;
+    if (myWidth == 0)
+    {
+        imageDisplay =
+        {
+            text: "",
+            width: 0,
+            height: 0
+        }
+    }
+    else
+    {
+        if (checkImage(id) >= 0)
+            {
+                //console.log('url image');
+                //console.log('url image');
+                var canvas = document.createElement("canvas");
+                canvas.width = myImage.naturalWidth;
+                canvas.height = myImage.naturalHeight;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(myImage,0,0);
+                var src = canvas.toDataURL("image/png");
+                imageDisplay = {
+                    image:src,
+                    height: 160,
+                    width: 230
+                }
+            }
+        else
+            {
+                console.log('base 64 image');
+                 imageDisplay =
+                {
+                    image: myImage.src,
+                    width: 230,
+                    height: 160
+                }
+            }
+       
+    }
+
+    return imageDisplay;
+}
+
+/*
+ display image based on the id.
+ if there is image src, set the width and height --> based on the src is a url or base64 to further display
+ if there is no image src, set width and height to 0 to save space
+ */
+function displayImage(id)
+{
+    var imageDisplay = {};
+    var myImage = document.getElementById(id);
+    var myWidth = myImage.width;
+    if (myWidth == 0)
+    {
+        imageDisplay =
+        {
+            text: "",
+            width: 0,
+            height: 0
+        }
+    }
+    else
+    {
+        if (checkImage(id) >= 0)
+        {
+            var canvas = document.createElement("canvas");
+            canvas.height = myImage.naturalHeight;
+            canvas.width = myImage.naturalWidth;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(myImage,0,0);
+            var src = canvas.toDataURL("image/png");
+            imageDisplay = {
+                image:src,
+                height: 120,
+                width: 160
+            }
+        }
+        else
+        {
+            imageDisplay =
+            {
+                image: myImage.src,
+                width: 160,
+                height: 120
+            }
+        }
+
+    }
+    return imageDisplay;
+}
+
+/**
+ * Make a gap between the elements
+ * */
+function makeAGap() {
+    var result;
+    result = {text: ' '};
+    return result;
+}
+
+/**
+ * Draw the Access Notes Table
+ * */
+function drawAccessNotesTable(AL, AN, MJF, LBL1, MNF, LBL2, GN) {
+    var result;
+    result = {
+        table: {
+            widths: ['*', '*'],
+            body: [
+                [{
+                    text: 'Access Limitations',
+                    style: 'tableHeader'
+                }, {
+                    text: getText(AL),
+                    style: 'tableText'
+                }],
+                [{
+                    text: 'Access Notes',
+                    style: 'tableHeader',
+                    colSpan: 2
+                }, {}],
+                [{
+                    text: getText(AN),
+                    alignment: 'justify',
+                    style: 'tableText',
+                    colSpan: 2
+                } ,{}],
+                [{
+                    text: 'Major and Serious Structural Defects Found:',
+                    colSpan: 2,
+                    style: 'tableHeader'
+                }, {}],
+                [{
+                    text: splitTextArea(getTextArea(MJF)),
+                    colSpan: 2,
+                    style: 'tableText',
+                    alignment: 'justify'
+                }, {}],
+                [{
+                    text: 'Professional and Trade Recommendations:',
+                    style: 'tableBoldTextAlignLeft'
+                }, {
+                    text: getLabelText(LBL1),
+                    style: 'tableText'
+                }],
+                [{
+                    text: 'Maintenance Items and Minor Defects Found:',
+                    colSpan: 2,
+                    style: 'tableHeader'
+                }, {}],
+                [{
+                    text: splitTextArea(getTextArea(MNF)),
+                    colSpan: 2,
+                    style: 'tableText',
+                    alignment: 'justify'
+                }, {}],
+                [{
+                    text: 'Professional and Trade Recommendations:',
+                    style: 'tableBoldTextAlignLeft'
+                }, {
+                    text: getLabelText(LBL2),
+                    style: 'tableText'
+                }],
+                [{
+                    text: 'General Notes:',
+                    colSpan: 2,
+                    style: 'tableHeader'
+                }, {}],
+                [{
+                    text: splitTextArea(getTextArea(GN)),
+                    colSpan: 2,
+                    style: 'tableText',
+                    alignment: 'justify'
+                }, {}]
+            ]
+        }
+    };
+    return result;
+}
+
+/**
+ * Check if it is a report for NSW
+ * */
+function checkNSW() {
+    var target = document.getElementById('squaredTwo').checked;
+    return target;
+}
+
+/**
+ * Choose the footer image
+ * */
+function giveMeTheFooter() {
+    if (checkNSW()) {
+        return footerImage2
+    } else {
+        return footerImage
+    }
+}
+
+/**
+ * Determine the footer
+ * */
+function determineFooter(mode) {
+    var result;
+    if (mode == 'final') {
+        result = {
+            image: giveMeTheFooter(),
+            alignment: 'left',
+            margin: [40, 0, 0, 0],
+            width: 280,
+            height: 20
+        };
+        return result;
+    }
+    if (mode == 'preview') {
+        result = {
+            text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
+            alignment: 'left',
+            fontSize: 11,
+            color: 'red',
+            bold: true,
+            margin: [40, 10, 0, 0]
+        };
+        return result;
+    }
+}
+
+/**
+ * Determine draft cover page
+ * */
+function giveMeHugeDraft(mode) {
+    var result;
+    if (mode == 'final') {
+        result = {
+            text: ''
+        };
+        return result;
+    }
+    if (mode == 'preview') {
+        result = {
+            text: '******DRAFT******',
+            fontSize: 40,
+            bold: true,
+            color: 'red',
+            alignment: 'center'
+        };
+        return result;
+    }
+}

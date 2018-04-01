@@ -1,0 +1,96 @@
+.firstH1 {
+    font-weight: 600;
+    color: red;
+    margin-top: 6%;
+}
+
+.sectionSubHead {
+    color: #f44336;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.sectionSubHeadBigger {
+    color: #f44336;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555;
+}
+
+textarea {
+    width: 100%;
+    height: 90px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: red;
+}
+
+.gray::-webkit-input-placeholder {
+    color: gray;
+}
+
+/*New*/
+.inputImage {
+    display: none
+}
+/*New*/
+.uploadImageButton {
+    background: #f9f9f9;
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 5px;
+    /*margin: 10px;*/
+    cursor: pointer;
+}
+
+.uploadCoverImageButton{
+    background: #f9f9f9;
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 5px;
+    /*margin: 5px;*/
+    margin-bottom: 5px;
+    cursor: pointer;
+    /*width:550px;*/
+    width:inherit;
+    height:50px;
+    align-content: center;
+    font-size: small;
+
+}
+
+/*New*/
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+/*New*/
+td, th {
+    border: 2px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}

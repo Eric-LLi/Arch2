@@ -1,0 +1,1347 @@
+/**
+ * Created by Fafa on 19/1/18.
+ */
+
+
+
+function AdviceCover(){
+    document.getElementById('AdviceUploadCoverImage').click();
+}
+
+function AdviceUploadImage(){
+    document.getElementById('AdviceUploadImages').click();
+}
+
+
+$('#AdviceUploadCoverImage').change(function(){
+    uploadCoverImage(this,'AdviceCoverImage','AdviceCoverImageRemoveButton','500px')
+});
+
+
+
+$('#AdviceUploadImages').change(function() {
+    $("#AdvicePhotographs").empty();
+    var table = document.getElementById("AdviceImagesTable");
+    table.style.display = 'block';
+    var count = this.files.length;
+    console.log(count);
+    //check the number of image
+    if (count > 30) {
+        alert("You can only select 30 images. It will only display the first 30 photos");
+    }
+
+    if (!(this.files && this.files[0])) {
+        addImageElements('image1', 'AdvicePhotographs', 'AdviceImage0', 'AdviceImageText0',
+            'AdviceImageRemoveButton0', 'AddAdviceImageButton0', 'AdviceUploadImage0',
+            'RemoveAdviceImage0()', 'AddAdviceImage0()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image1', 'AdvicePhotographs', 'AdviceImage0', 'AdviceImageText0',
+            'AdviceImageRemoveButton0', 'AddAdviceImageButton0', 'AdviceUploadImage0',
+            'RemoveAdviceImage0()', 'AddAdviceImage0()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage0').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton0').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton0').style.display = 'block';
+            document.getElementById('AdviceImageText0').style.display = 'block';
+            document.getElementById('AdviceImage0').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[0]);
+
+    }
+
+    if (!(this.files && this.files[1])) {
+        addImageElements('image2', 'AdvicePhotographs', 'AdviceImage1', 'AdviceImageText1',
+            'AdviceImageRemoveButton1', 'AddAdviceImageButton1', 'AdviceUploadImage1',
+            'RemoveAdviceImage1()', 'AddAdviceImage1()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image2', 'AdvicePhotographs', 'AdviceImage1', 'AdviceImageText1',
+            'AdviceImageRemoveButton1', 'AddAdviceImageButton1', 'AdviceUploadImage1',
+            'RemoveAdviceImage1()', 'AddAdviceImage1()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage1').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton1').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton1').style.display = 'block';
+            document.getElementById('AdviceImageText1').style.display = 'block';
+            document.getElementById('AdviceImage1').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[1]);
+
+    }
+
+    if (!(this.files && this.files[2])) {
+        addImageElements('image3', 'AdvicePhotographs', 'AdviceImage2', 'AdviceImageText2',
+            'AdviceImageRemoveButton2', 'AddAdviceImageButton2', 'AdviceUploadImage2',
+            'RemoveAdviceImage2()', 'AddAdviceImage2()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image3', 'AdvicePhotographs', 'AdviceImage2', 'AdviceImageText2',
+            'AdviceImageRemoveButton2', 'AddAdviceImageButton2', 'AdviceUploadImage2',
+            'RemoveAdviceImage2()', 'AddAdviceImage2()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage2').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton2').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton2').style.display = 'block';
+            document.getElementById('AdviceImageText2').style.display = 'block';
+            document.getElementById('AdviceImage2').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[2]);
+
+    }
+
+    if (!(this.files && this.files[3])) {
+        addImageElements('image4', 'AdvicePhotographs', 'AdviceImage3', 'AdviceImageText3',
+            'AdviceImageRemoveButton3', 'AddAdviceImageButton3', 'AdviceUploadImage3',
+            'RemoveAdviceImage3()', 'AddAdviceImage3()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image4', 'AdvicePhotographs', 'AdviceImage3', 'AdviceImageText3',
+            'AdviceImageRemoveButton3', 'AddAdviceImageButton3', 'AdviceUploadImage3',
+            'RemoveAdviceImage3()', 'AddAdviceImage3()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage3').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton3').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton3').style.display = 'block';
+            document.getElementById('AdviceImageText3').style.display = 'block';
+            document.getElementById('AdviceImage3').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[3]);
+
+    }
+
+    if (!(this.files && this.files[4])) {
+        addImageElements('image5', 'AdvicePhotographs', 'AdviceImage4', 'AdviceImageText4',
+            'AdviceImageRemoveButton4', 'AddAdviceImageButton4', 'AdviceUploadImage4',
+            'RemoveAdviceImage4()', 'AddAdviceImage4()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image5', 'AdvicePhotographs', 'AdviceImage4', 'AdviceImageText4',
+            'AdviceImageRemoveButton4', 'AddAdviceImageButton4', 'AdviceUploadImage4',
+            'RemoveAdviceImage4()', 'AddAdviceImage4()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage4').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton4').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton4').style.display = 'block';
+            document.getElementById('AdviceImageText4').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[4]);
+
+    }
+
+    if (!(this.files && this.files[5])) {
+        addImageElements('image6', 'AdvicePhotographs', 'AdviceImage5', 'AdviceImageText5',
+            'AdviceImageRemoveButton5', 'AddAdviceImageButton5', 'AdviceUploadImage5',
+            'RemoveAdviceImage5()', 'AddAdviceImage5()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image6', 'AdvicePhotographs', 'AdviceImage5', 'AdviceImageText5',
+            'AdviceImageRemoveButton5', 'AddAdviceImageButton5', 'AdviceUploadImage5',
+            'RemoveAdviceImage5()', 'AddAdviceImage5()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage5').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton5').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton5').style.display = 'block';
+            document.getElementById('AdviceImageText5').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[5]);
+
+    }
+
+    if (!(this.files && this.files[6])) {
+        addImageElements('image7', 'AdvicePhotographs', 'AdviceImage6', 'AdviceImageText6',
+            'AdviceImageRemoveButton6', 'AddAdviceImageButton6', 'AdviceUploadImage6',
+            'RemoveAdviceImage6()', 'AddAdviceImage6()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image7', 'AdvicePhotographs', 'AdviceImage6', 'AdviceImageText6',
+            'AdviceImageRemoveButton6', 'AddAdviceImageButton6', 'AdviceUploadImage6',
+            'RemoveAdviceImage6()', 'AddAdviceImage6()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage6').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton6').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton6').style.display = 'block';
+            document.getElementById('AdviceImageText6').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[6]);
+
+    }
+
+    if (!(this.files && this.files[7])) {
+        addImageElements('image8', 'AdvicePhotographs', 'AdviceImage7', 'AdviceImageText7',
+            'AdviceImageRemoveButton7', 'AddAdviceImageButton7', 'AdviceUploadImage7',
+            'RemoveAdviceImage7()', 'AddAdviceImage7()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image8', 'AdvicePhotographs', 'AdviceImage7', 'AdviceImageText7',
+            'AdviceImageRemoveButton7', 'AddAdviceImageButton7', 'AdviceUploadImage7',
+            'RemoveAdviceImage7()', 'AddAdviceImage7()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage7').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton7').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton7').style.display = 'block';
+            document.getElementById('AdviceImageText7').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[7]);
+
+    }
+
+    if (!(this.files && this.files[8])) {
+        addImageElements('image9', 'AdvicePhotographs', 'AdviceImage8', 'AdviceImageText8',
+            'AdviceImageRemoveButton8', 'AddAdviceImageButton8', 'AdviceUploadImage8',
+            'RemoveAdviceImage8()', 'AddAdviceImage8()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image9', 'AdvicePhotographs', 'AdviceImage8', 'AdviceImageText8',
+            'AdviceImageRemoveButton8', 'AddAdviceImageButton8', 'AdviceUploadImage8',
+            'RemoveAdviceImage8()', 'AddAdviceImage8()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage8').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton8').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton8').style.display = 'block';
+            document.getElementById('AdviceImageText8').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[8]);
+
+    }
+
+    if (!(this.files && this.files[9])) {
+        addImageElements('image10', 'AdvicePhotographs', 'AdviceImage9', 'AdviceImageText9',
+            'AdviceImageRemoveButton9', 'AddAdviceImageButton9', 'AdviceUploadImage9',
+            'RemoveAdviceImage9()', 'AddAdviceImage9()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image10', 'AdvicePhotographs', 'AdviceImage9', 'AdviceImageText9',
+            'AdviceImageRemoveButton9', 'AddAdviceImageButton9', 'AdviceUploadImage9',
+            'RemoveAdviceImage9()', 'AddAdviceImage9()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage9').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton9').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton9').style.display = 'block';
+            document.getElementById('AdviceImageText9').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[9]);
+
+    }
+
+    if (!(this.files && this.files[10])) {
+        addImageElements('image11', 'AdvicePhotographs', 'AdviceImage10', 'AdviceImageText10',
+            'AdviceImageRemoveButton10', 'AddAdviceImageButton10', 'AdviceUploadImage10',
+            'RemoveAdviceImage10()', 'AddAdviceImage10()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image11', 'AdvicePhotographs', 'AdviceImage10', 'AdviceImageText10',
+            'AdviceImageRemoveButton10', 'AddAdviceImageButton10', 'AdviceUploadImage10',
+            'RemoveAdviceImage10()', 'AddAdviceImage10()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage10').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton10').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton10').style.display = 'block';
+            document.getElementById('AdviceImageText10').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[10]);
+
+    }
+
+    if (!(this.files && this.files[11])) {
+        addImageElements('image12', 'AdvicePhotographs', 'AdviceImage11', 'AdviceImageText11',
+            'AdviceImageRemoveButton11', 'AddAdviceImageButton11', 'AdviceUploadImage11',
+            'RemoveAdviceImage11()', 'AddAdviceImage11()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image12', 'AdvicePhotographs', 'AdviceImage11', 'AdviceImageText11',
+            'AdviceImageRemoveButton11', 'AddAdviceImageButton11', 'AdviceUploadImage11',
+            'RemoveAdviceImage11()', 'AddAdviceImage11()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage11').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton11').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton11').style.display = 'block';
+            document.getElementById('AdviceImageText11').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[11]);
+
+    }
+
+
+    if (!(this.files && this.files[12])) {
+        addImageElements('image13', 'AdvicePhotographs', 'AdviceImage12', 'AdviceImageText12',
+            'AdviceImageRemoveButton12', 'AddAdviceImageButton12', 'AdviceUploadImage12',
+            'RemoveAdviceImage12()', 'AddAdviceImage12()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image13', 'AdvicePhotographs', 'AdviceImage12', 'AdviceImageText12',
+            'AdviceImageRemoveButton12', 'AddAdviceImageButton12', 'AdviceUploadImage12',
+            'RemoveAdviceImage12()', 'AddAdviceImage12()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage12').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton12').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton12').style.display = 'block';
+            document.getElementById('AdviceImageText12').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[12]);
+
+    }
+
+    if (!(this.files && this.files[13])) {
+        addImageElements('image14', 'AdvicePhotographs', 'AdviceImage13', 'AdviceImageText13',
+            'AdviceImageRemoveButton13', 'AddAdviceImageButton13', 'AdviceUploadImage13',
+            'RemoveAdviceImage13()', 'AddAdviceImage13()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image14', 'AdvicePhotographs', 'AdviceImage13', 'AdviceImageText13',
+            'AdviceImageRemoveButton13', 'AddAdviceImageButton13', 'AdviceUploadImage13',
+            'RemoveAdviceImage13()', 'AddAdviceImage13()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage13').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton13').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton13').style.display = 'block';
+            document.getElementById('AdviceImageText13').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[13]);
+
+    }
+
+
+
+    if (!(this.files && this.files[14])) {
+        addImageElements('image15', 'AdvicePhotographs', 'AdviceImage14', 'AdviceImageText14',
+            'AdviceImageRemoveButton14', 'AddAdviceImageButton14', 'AdviceUploadImage14',
+            'RemoveAdviceImage14()', 'AddAdviceImage14()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image15', 'AdvicePhotographs', 'AdviceImage14', 'AdviceImageText14',
+            'AdviceImageRemoveButton14', 'AddAdviceImageButton14', 'AdviceUploadImage14',
+            'RemoveAdviceImage14()', 'AddAdviceImage14()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage14').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton14').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton14').style.display = 'block';
+            document.getElementById('AdviceImageText14').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[14]);
+
+    }
+
+    if (!(this.files && this.files[15])) {
+        addImageElements('image16', 'AdvicePhotographs', 'AdviceImage15', 'AdviceImageText15',
+            'AdviceImageRemoveButton15', 'AddAdviceImageButton15', 'AdviceUploadImage15',
+            'RemoveAdviceImage15()', 'AddAdviceImage15()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image16', 'AdvicePhotographs', 'AdviceImage15', 'AdviceImageText15',
+            'AdviceImageRemoveButton15', 'AddAdviceImageButton15', 'AdviceUploadImage15',
+            'RemoveAdviceImage15()', 'AddAdviceImage15()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage15').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton15').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton15').style.display = 'block';
+            document.getElementById('AdviceImageText15').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[15]);
+
+    }
+
+    if (!(this.files && this.files[16])) {
+        addImageElements('image17', 'AdvicePhotographs', 'AdviceImage16', 'AdviceImageText16',
+            'AdviceImageRemoveButton16', 'AddAdviceImageButton16', 'AdviceUploadImage16',
+            'RemoveAdviceImage16()', 'AddAdviceImage16()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image17', 'AdvicePhotographs', 'AdviceImage16', 'AdviceImageText16',
+            'AdviceImageRemoveButton16', 'AddAdviceImageButton16', 'AdviceUploadImage16',
+            'RemoveAdviceImage16()', 'AddAdviceImage16()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage16').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton16').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton16').style.display = 'block';
+            document.getElementById('AdviceImageText16').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[16]);
+
+    }
+
+    if (!(this.files && this.files[17])) {
+        addImageElements('image18', 'AdvicePhotographs', 'AdviceImage17', 'AdviceImageText17',
+            'AdviceImageRemoveButton17', 'AddAdviceImageButton17', 'AdviceUploadImage17',
+            'RemoveAdviceImage17()', 'AddAdviceImage17()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image18', 'AdvicePhotographs', 'AdviceImage17', 'AdviceImageText17',
+            'AdviceImageRemoveButton17', 'AddAdviceImageButton17', 'AdviceUploadImage17',
+            'RemoveAdviceImage17()', 'AddAdviceImage17()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage17').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton17').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton17').style.display = 'block';
+            document.getElementById('AdviceImageText17').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[17]);
+
+    }
+
+
+    if (!(this.files && this.files[18])) {
+        addImageElements('image19', 'AdvicePhotographs', 'AdviceImage18', 'AdviceImageText18',
+            'AdviceImageRemoveButton18', 'AddAdviceImageButton18', 'AdviceUploadImage18',
+            'RemoveAdviceImage18()', 'AddAdviceImage18()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image19', 'AdvicePhotographs', 'AdviceImage18', 'AdviceImageText18',
+            'AdviceImageRemoveButton18', 'AddAdviceImageButton18', 'AdviceUploadImage18',
+            'RemoveAdviceImage18()', 'AddAdviceImage18()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage18').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton18').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton18').style.display = 'block';
+            document.getElementById('AdviceImageText18').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[18]);
+
+    }
+
+    if (!(this.files && this.files[19])) {
+        addImageElements('image20', 'AdvicePhotographs', 'AdviceImage19', 'AdviceImageText19',
+            'AdviceImageRemoveButton19', 'AddAdviceImageButton19', 'AdviceUploadImage19',
+            'RemoveAdviceImage19()', 'AddAdviceImage19()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image20', 'AdvicePhotographs', 'AdviceImage19', 'AdviceImageText19',
+            'AdviceImageRemoveButton19', 'AddAdviceImageButton19', 'AdviceUploadImage19',
+            'RemoveAdviceImage19()', 'AddAdviceImage19()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage19').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton19').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton19').style.display = 'block';
+            document.getElementById('AdviceImageText19').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[19]);
+
+    }
+
+
+    if (!(this.files && this.files[20])) {
+        addImageElements('image21', 'AdvicePhotographs', 'AdviceImage20', 'AdviceImageText20',
+            'AdviceImageRemoveButton20', 'AddAdviceImageButton20', 'AdviceUploadImage20',
+            'RemoveAdviceImage20()', 'AddAdviceImage20()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image21', 'AdvicePhotographs', 'AdviceImage20', 'AdviceImageText20',
+            'AdviceImageRemoveButton20', 'AddAdviceImageButton20', 'AdviceUploadImage20',
+            'RemoveAdviceImage20()', 'AddAdviceImage20()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage20').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton20').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton20').style.display = 'block';
+            document.getElementById('AdviceImageText20').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[20]);
+
+    }
+
+    if (!(this.files && this.files[21])) {
+        addImageElements('image22', 'AdvicePhotographs', 'AdviceImage21', 'AdviceImageText21',
+            'AdviceImageRemoveButton21', 'AddAdviceImageButton21', 'AdviceUploadImage21',
+            'RemoveAdviceImage21()', 'AddAdviceImage21()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image22', 'AdvicePhotographs', 'AdviceImage21', 'AdviceImageText21',
+            'AdviceImageRemoveButton21', 'AddAdviceImageButton21', 'AdviceUploadImage21',
+            'RemoveAdviceImage21()', 'AddAdviceImage21()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage21').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton21').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton21').style.display = 'block';
+            document.getElementById('AdviceImageText21').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[21]);
+
+    }
+
+
+    if (!(this.files && this.files[22])) {
+        addImageElements('image23', 'AdvicePhotographs', 'AdviceImage22', 'AdviceImageText22',
+            'AdviceImageRemoveButton22', 'AddAdviceImageButton22', 'AdviceUploadImage22',
+            'RemoveAdviceImage22()', 'AddAdviceImage22()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image23', 'AdvicePhotographs', 'AdviceImage22', 'AdviceImageText22',
+            'AdviceImageRemoveButton22', 'AddAdviceImageButton22', 'AdviceUploadImage22',
+            'RemoveAdviceImage22()', 'AddAdviceImage22()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage22').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton22').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton22').style.display = 'block';
+            document.getElementById('AdviceImageText22').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[22]);
+
+    }
+
+    if (!(this.files && this.files[23])) {
+        addImageElements('image24', 'AdvicePhotographs', 'AdviceImage23', 'AdviceImageText23',
+            'AdviceImageRemoveButton23', 'AddAdviceImageButton23', 'AdviceUploadImage23',
+            'RemoveAdviceImage23()', 'AddAdviceImage23()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image24', 'AdvicePhotographs', 'AdviceImage23', 'AdviceImageText23',
+            'AdviceImageRemoveButton23', 'AddAdviceImageButton23', 'AdviceUploadImage23',
+            'RemoveAdviceImage23()', 'AddAdviceImage23()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage23').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton23').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton23').style.display = 'block';
+            document.getElementById('AdviceImageText23').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[23]);
+
+    }
+
+    if (!(this.files && this.files[24])) {
+        addImageElements('image25', 'AdvicePhotographs', 'AdviceImage24', 'AdviceImageText24',
+            'AdviceImageRemoveButton24', 'AddAdviceImageButton24', 'AdviceUploadImage24',
+            'RemoveAdviceImage24()', 'AddAdviceImage24()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image25', 'AdvicePhotographs', 'AdviceImage24', 'AdviceImageText24',
+            'AdviceImageRemoveButton24', 'AddAdviceImageButton24', 'AdviceUploadImage24',
+            'RemoveAdviceImage24()', 'AddAdviceImage24()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage24').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton24').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton24').style.display = 'block';
+            document.getElementById('AdviceImageText24').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[24]);
+
+    }
+
+    if (!(this.files && this.files[25])) {
+        addImageElements('image26', 'AdvicePhotographs', 'AdviceImage25', 'AdviceImageText25',
+            'AdviceImageRemoveButton25', 'AddAdviceImageButton25', 'AdviceUploadImage25',
+            'RemoveAdviceImage25()', 'AddAdviceImage25()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image26', 'AdvicePhotographs', 'AdviceImage25', 'AdviceImageText25',
+            'AdviceImageRemoveButton25', 'AddAdviceImageButton25', 'AdviceUploadImage25',
+            'RemoveAdviceImage25()', 'AddAdviceImage25()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage25').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton25').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton25').style.display = 'block';
+            document.getElementById('AdviceImageText25').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[25]);
+
+    }
+
+    if (!(this.files && this.files[26])) {
+        addImageElements('image27', 'AdvicePhotographs', 'AdviceImage26', 'AdviceImageText26',
+            'AdviceImageRemoveButton26', 'AddAdviceImageButton26', 'AdviceUploadImage26',
+            'RemoveAdviceImage26()', 'AddAdviceImage26()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image27', 'AdvicePhotographs', 'AdviceImage26', 'AdviceImageText26',
+            'AdviceImageRemoveButton26', 'AddAdviceImageButton26', 'AdviceUploadImage26',
+            'RemoveAdviceImage26()', 'AddAdviceImage26()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage26').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton26').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton26').style.display = 'block';
+            document.getElementById('AdviceImageText26').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[26]);
+
+    }
+
+
+
+
+    if (!(this.files && this.files[27])) {
+        addImageElements('image28', 'AdvicePhotographs', 'AdviceImage27', 'AdviceImageText27',
+            'AdviceImageRemoveButton27', 'AddAdviceImageButton27', 'AdviceUploadImage27',
+            'RemoveAdviceImage27()', 'AddAdviceImage27()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image28', 'AdvicePhotographs', 'AdviceImage27', 'AdviceImageText27',
+            'AdviceImageRemoveButton27', 'AddAdviceImageButton27', 'AdviceUploadImage27',
+            'RemoveAdviceImage27()', 'AddAdviceImage27()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage27').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton27').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton27').style.display = 'block';
+            document.getElementById('AdviceImageText27').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[27]);
+
+    }
+
+
+    if (!(this.files && this.files[28])) {
+        addImageElements('image29', 'AdvicePhotographs', 'AdviceImage28', 'AdviceImageText28',
+            'AdviceImageRemoveButton28', 'AddAdviceImageButton28', 'AdviceUploadImage28',
+            'RemoveAdviceImage28()', 'AddAdviceImage28()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image29', 'AdvicePhotographs', 'AdviceImage28', 'AdviceImageText28',
+            'AdviceImageRemoveButton28', 'AddAdviceImageButton28', 'AdviceUploadImage28',
+            'RemoveAdviceImage28()', 'AddAdviceImage28()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage28').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton28').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton28').style.display = 'block';
+            document.getElementById('AdviceImageText28').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[28]);
+
+    }
+
+
+    if (!(this.files && this.files[29])) {
+        addImageElements('image30', 'AdvicePhotographs', 'AdviceImage29', 'AdviceImageText29',
+            'AdviceImageRemoveButton29', 'AddAdviceImageButton29', 'AdviceUploadImage29',
+            'RemoveAdviceImage29()', 'AddAdviceImage29()', '510px', '0px');
+    } else {
+
+        var reader = new FileReader();
+        addImageElements('image30', 'AdvicePhotographs', 'AdviceImage29', 'AdviceImageText29',
+            'AdviceImageRemoveButton29', 'AddAdviceImageButton29', 'AdviceUploadImage29',
+            'RemoveAdviceImage29()', 'AddAdviceImage29()', '510px', '510px');
+        reader.onload = function (e) {
+            $('#AdviceImage29').attr('src', e.target.result);
+            document.getElementById('AddAdviceImageButton29').style.display = 'none';
+            document.getElementById('AdviceImageRemoveButton29').style.display = 'block';
+            document.getElementById('AdviceImageText29').style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[29]);
+
+    }
+
+
+
+});
+
+
+
+function AddAdviceImage0(){
+    var x = document.getElementById("AdviceUploadImage0");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage0','AddAdviceImageButton0','AdviceImageRemoveButton0','AdviceImageText0','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage1(){
+    var x = document.getElementById("AdviceUploadImage1");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage1','AddAdviceImageButton1','AdviceImageRemoveButton1','AdviceImageText1','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage2(){
+    var x = document.getElementById("AdviceUploadImage2");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage2','AddAdviceImageButton2','AdviceImageRemoveButton2','AdviceImageText2','510px');
+    })
+}
+
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage3(){
+    var x = document.getElementById("AdviceUploadImage3");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage3','AddAdviceImageButton3','AdviceImageRemoveButton3','AdviceImageText3','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage4(){
+    var x = document.getElementById("AdviceUploadImage4");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage4','AddAdviceImageButton4','AdviceImageRemoveButton4','AdviceImageText4','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage5(){
+    var x = document.getElementById("AdviceUploadImage5");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage5','AddAdviceImageButton5','AdviceImageRemoveButton5','AdviceImageText5','510px');
+    })
+}
+
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage6(){
+    var x = document.getElementById("AdviceUploadImage6");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage6','AddAdviceImageButton6','AdviceImageRemoveButton6','AdviceImageText6','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage7(){
+    var x = document.getElementById("AdviceUploadImage7");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage7','AddAdviceImageButton7','AdviceImageRemoveButton7','AdviceImageText7','510px');
+    })
+}
+
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage8(){
+    var x = document.getElementById("AdviceUploadImage8");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage8','AddAdviceImageButton8','AdviceImageRemoveButton8','AdviceImageText8','510px');
+    })
+}
+
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage9(){
+    var x = document.getElementById("AdviceUploadImage9");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage9','AddAdviceImageButton9','AdviceImageRemoveButton9','AdviceImageText9','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage10(){
+    var x = document.getElementById("AdviceUploadImage10");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage10','AddAdviceImageButton10','AdviceImageRemoveButton10','AdviceImageText10','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage11(){
+    var x = document.getElementById("AdviceUploadImage11");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage11','AddAdviceImageButton11','AdviceImageRemoveButton11','AdviceImageText11','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage12(){
+    var x = document.getElementById("AdviceUploadImage12");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage12','AddAdviceImageButton12','AdviceImageRemoveButton12','AdviceImageText12','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage13(){
+    var x = document.getElementById("AdviceUploadImage13");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage13','AddAdviceImageButton13','AdviceImageRemoveButton13','AdviceImageText13','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage14(){
+    var x = document.getElementById("AdviceUploadImage14");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage14','AddAdviceImageButton14','AdviceImageRemoveButton14','AdviceImageText14','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage15(){
+    var x = document.getElementById("AdviceUploadImage15");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage15','AddAdviceImageButton15','AdviceImageRemoveButton15','AdviceImageText15','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage16(){
+    var x = document.getElementById("AdviceUploadImage16");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage16','AddAdviceImageButton16','AdviceImageRemoveButton16','AdviceImageText16','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage17(){
+    var x = document.getElementById("AdviceUploadImage17");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage17','AddAdviceImageButton17','AdviceImageRemoveButton17','AdviceImageText17','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage18(){
+    var x = document.getElementById("AdviceUploadImage18");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage18','AddAdviceImageButton18','AdviceImageRemoveButton18','AdviceImageText18','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage19(){
+    var x = document.getElementById("AdviceUploadImage19");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage19','AddAdviceImageButton19','AdviceImageRemoveButton19','AdviceImageText19','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage20(){
+    var x = document.getElementById("AdviceUploadImage20");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage20','AddAdviceImageButton20','AdviceImageRemoveButton20','AdviceImageText20','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage21(){
+    var x = document.getElementById("AdviceUploadImage21");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage21','AddAdviceImageButton21','AdviceImageRemoveButton21','AdviceImageText21','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage22(){
+    var x = document.getElementById("AdviceUploadImage22");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage22','AddAdviceImageButton22','AdviceImageRemoveButton22','AdviceImageText22','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage23(){
+    var x = document.getElementById("AdviceUploadImage23");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage23','AddAdviceImageButton23','AdviceImageRemoveButton23','AdviceImageText23','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage24(){
+    var x = document.getElementById("AdviceUploadImage24");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage24','AddAdviceImageButton24','AdviceImageRemoveButton24','AdviceImageText24','510px');
+    })
+}
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage25(){
+    var x = document.getElementById("AdviceUploadImage25");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage25','AddAdviceImageButton25','AdviceImageRemoveButton25','AdviceImageText25','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage26(){
+    var x = document.getElementById("AdviceUploadImage26");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage26','AddAdviceImageButton26','AdviceImageRemoveButton26','AdviceImageText26','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage27(){
+    var x = document.getElementById("AdviceUploadImage27");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage27','AddAdviceImageButton27','AdviceImageRemoveButton27','AdviceImageText27','510px');
+    })
+}
+
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage28(){
+    var x = document.getElementById("AdviceUploadImage28");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage28','AddAdviceImageButton28','AdviceImageRemoveButton28','AdviceImageText28','510px');
+    })
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddAdviceImage29(){
+    var x = document.getElementById("AdviceUploadImage29");
+    x.click();
+    x.addEventListener('change',function(){
+        readOneImageURL(x,'AdviceImage29','AddAdviceImageButton29','AdviceImageRemoveButton29','AdviceImageText29','510px');
+    })
+}
+
+function createFile(name,base64)
+{
+    return new File([base64], name, {type: "image/png"});
+}
+
+
+//add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
+function addImageElements(imageAltName, divID, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
+    var BigContainer = document.getElementById(divID);
+    var form = document.createElement("form");
+    //form.setAttribute("class","divForm");
+    //need four dividends in a form
+    var container1 = document.createElement("div");
+    var container2 = document.createElement("div");
+    var container3 = document.createElement("div");
+    var container4 = document.createElement("div");
+    container1.setAttribute("class", "col-sm");
+    container2.setAttribute("class", "col-sm");
+    container3.setAttribute("class", "col-sm");
+    container4.setAttribute("class", "col-sm");
+
+    //crate an image area
+    var img = document.createElement('img');
+    img.src = "#";
+    img.alt = imageAltName;
+    img.id = imageID;
+    img.style.display = 'none';
+    img.style.width = width;
+    img.style.height = imageSize;
+    img.style.paddingTop = '10px';
+
+    //create an input for the text
+    var textInput = document.createElement('INPUT');
+    textInput.setAttribute("type", "text");
+    textInput.style.width = imageSize;
+    textInput.style.height = "10px";
+    textInput.style.display = 'none';
+    textInput.id = imageTextID;
+
+    //create an input for the remove button
+    var removeButton = document.createElement('INPUT');
+    removeButton.setAttribute("type", "button");
+    removeButton.setAttribute("value", "Remove");
+    removeButton.setAttribute("onclick", removeFunction);
+    removeButton.id = removeButtonID;
+    //removeButton.onclick = removeFunction;
+    removeButton.style.width = imageSize;
+    removeButton.style.height = "25px";
+    removeButton.style.display = "none";
+
+
+    //create an input for add button
+    var addButton = document.createElement('INPUT');
+    addButton.setAttribute("type", "button");
+    addButton.setAttribute("value", "Add");
+    addButton.setAttribute("onclick", addFunction);
+    addButton.id = addButtonID;
+    addButton.style.width = imageSize;
+    addButton.style.height = "25px";
+    addButton.style.display = 'block';
+
+    //create an input for file, to upload images, this is the one with upload action
+    var uploadFile = document.createElement('INPUT');
+    uploadFile.setAttribute("type", "file");
+    uploadFile.id = uploadFileID;
+    uploadFile.setAttribute("class", "inputImage");
+    uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
+
+    uploadFile.style.display = 'none';
+
+
+
+
+    //put all elements into the correct container
+    BigContainer.appendChild(form);
+    form.appendChild(container1);
+    form.appendChild(container2);
+    form.appendChild(container3);
+    form.appendChild(container4);
+    container1.appendChild(img);
+    container2.appendChild(textInput);
+    container3.appendChild(removeButton);
+    container4.appendChild(addButton);
+    container4.appendChild(uploadFile);
+
+
+}
+
+//Upload Cover Image
+function uploadCoverImage(input,imageID0,removeButtonID,imageSize)
+{
+    if (input.files && input.files[0]){
+        console.log(input.files[0]);
+        loadImage.parseMetaData(input.files[0], function (data) {
+            console.log("i am in loadImage function");
+            var orientation = 0;
+            var date = new Date();
+            //var file = new File();
+            var imageName = input.files[0].name;
+            var imageType = input.files[0].type;
+
+            var formData = new FormData();
+           // formData.append('name',imageName);
+
+            //file.append('name',imageName);
+            //formData.append('name',input.files[0].name);
+            console.log(input.files[0].name);
+            console.log(input.files[0].type);
+            //console.log(formData.name);
+            var image = '#' + imageID0;
+            var removeButton = document.getElementById(removeButtonID);
+            var imageID = document.getElementById(imageID0);
+            imageID.alt = '';
+            //if exif data available, update orientation
+            if (data.exif) {
+                orientation = data.exif.get('Orientation');
+            }
+            var loadingImage = loadImage(
+                input.files[0],
+                function(canvas) {
+                    //here's the base64 data result
+                    var base64data = canvas.toDataURL('image/jpeg');
+                    //here's example to show it as on imae preview
+                    var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                    $(image).attr('src', base64data);
+                    removeButton.style.display = 'block';
+                    imageID.style.display = 'block';
+                    imageID.style.width = imageSize;
+                    imageID.style.height = imageSize/2;
+                    removeButton.style.width = imageSize;
+                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
+                    //var file2 = new File([base64data],imageName,{type: imageType, lastModified: date.getTime()});
+                    //console.log(file);
+                    //console.log(file2);
+                    doUploadFile(file,imageID0, '', removeButtonID, '','','cover image','','','','',imageSize/2,imageSize);
+                    //formData.append(imageName,convertBase64UrlToBlob(base64data));
+                    //file.append(imageName,convertBase64UrlToBlob(base64data));
+                },
+                {
+                    //should be set to canvas : true to activate auto fix orientation
+                    canvas: true,
+                    orientation: orientation,
+                    maxWidth:1300,
+                    maxHeight:1000
+                }
+            );
+            //console.log(file);
+            //console.log(formData);
+            //console.log(formData['name']);
+            //console.log(input.files[0]);
+            //doUploadFile(input.files[0],imageID0, '', removeButtonID, '','','cover image','','','','',imageSize/2,imageSize);
+        });
+
+        // var image = '#' + imageID0;
+        // var reader = new FileReader();
+        // var removeButton = document.getElementById(removeButtonID);
+        // var imageID = document.getElementById(imageID0);
+        // imageID.alt = '';
+        // reader.onload = function (e) {
+        //
+        //     $(image).attr('src', e.target.result);
+        //     removeButton.style.display = 'block';
+        //     imageID.style.display = 'block';
+        //     imageID.style.width = imageSize;
+        //     imageID.style.height = imageSize/2;
+        //     removeButton.style.width = imageSize;
+        // };
+        //reader.readAsDataURL(input.files[0]);
+        // doUploadFile(input.files[0],imageID0, '', removeButtonID, '','','cover image','','','','',imageSize/2,imageSize);
+    }
+}
+
+
+function readOneImageURL(input, imageID0, addButtonID, removeButtonID, textID, imageSize) {
+    if (input.files && input.files[0]) {
+        var image = '#' + imageID0;
+        var reader = new FileReader();
+        var button = document.getElementById(addButtonID);
+        var removeButton = document.getElementById(removeButtonID);
+        var imageID = document.getElementById(imageID0);
+        var text = document.getElementById(textID);
+        reader.onload = function (e) {
+
+            $(image).attr('src', e.target.result);
+            button.style.display = 'none';
+            removeButton.style.display = 'block';
+            imageID.style.display = 'block';
+            imageID.style.width = imageSize;
+            imageID.style.height = imageSize;
+            text.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+        doUploadFile(input.files[0],imageID0, textID, removeButtonID, addButtonID,'','','','','','',imageSize,imageSize);
+    }
+}
+
+
+function RemoveImage(imageID, removeButtonID, addButtonID) {
+    var imageSelect = '#' + imageID;
+    $(imageSelect).attr('src', '#');
+    var image = document.getElementById(imageID);
+    var button = document.getElementById(removeButtonID);
+    var addButton = document.getElementById(addButtonID);
+
+    button.style.display = 'none';
+    addButton.style.display = 'block';
+    image.style.width = '0px';
+
+}
+
+function RemoveCoverImage(imageID,removeButtonID)
+{
+    var imageSelect = '#' + imageID;
+    $(imageSelect).attr('src', '#');
+    var image = document.getElementById(imageID);
+    var button = document.getElementById(removeButtonID);
+
+    button.style.display = 'none';
+    image.style.width = '0px';
+    //image.style.height = '0px';
+}
+
+function RemoveAdviceCoverImage(){
+    RemoveCoverImage('AdviceCoverImage','AdviceCoverImageRemoveButton');
+}
+
+function RemoveAdviceImage0(){
+    RemoveImage('AdviceImage0', 'AdviceImageRemoveButton0', 'AddAdviceImageButton0');
+}
+
+function RemoveAdviceImage1(){
+    RemoveImage('AdviceImage1', 'AdviceImageRemoveButton1', 'AddAdviceImageButton1');
+}
+
+function RemoveAdviceImage2(){
+    RemoveImage('AdviceImage2', 'AdviceImageRemoveButton2', 'AddAdviceImageButton2');
+}
+
+function RemoveAdviceImage3(){
+    RemoveImage('AdviceImage3', 'AdviceImageRemoveButton3', 'AddAdviceImageButton3');
+}
+
+function RemoveAdviceImage4(){
+    RemoveImage('AdviceImage4', 'AdviceImageRemoveButton4', 'AddAdviceImageButton4');
+}
+
+function RemoveAdviceImage5(){
+    RemoveImage('AdviceImage5', 'AdviceImageRemoveButton5', 'AddAdviceImageButton5');
+}
+
+function RemoveAdviceImage6(){
+    RemoveImage('AdviceImage6', 'AdviceImageRemoveButton6', 'AddAdviceImageButton6');
+}
+
+function RemoveAdviceImage7(){
+    RemoveImage('AdviceImage7', 'AdviceImageRemoveButton7', 'AddAdviceImageButton7');
+}
+
+function RemoveAdviceImage8(){
+    RemoveImage('AdviceImage8', 'AdviceImageRemoveButton8', 'AddAdviceImageButton8');
+}
+
+function RemoveAdviceImage9(){
+    RemoveImage('AdviceImage9', 'AdviceImageRemoveButton8', 'AddAdviceImageButton9');
+}
+
+function RemoveAdviceImage10(){
+    RemoveImage('AdviceImage10', 'AdviceImageRemoveButton10', 'AddAdviceImageButton10');
+}
+
+
+function RemoveAdviceImage11(){
+    RemoveImage('AdviceImage11', 'AdviceImageRemoveButton11', 'AddAdviceImageButton11');
+}
+
+function RemoveAdviceImage12(){
+    RemoveImage('AdviceImage12', 'AdviceImageRemoveButton12', 'AddAdviceImageButton12');
+}
+
+function RemoveAdviceImage13(){
+    RemoveImage('AdviceImage13', 'AdviceImageRemoveButton13', 'AddAdviceImageButton13');
+}
+
+function RemoveAdviceImage14(){
+    RemoveImage('AdviceImage14', 'AdviceImageRemoveButton14', 'AddAdviceImageButton14');
+}
+
+function RemoveAdviceImage15(){
+    RemoveImage('AdviceImage15', 'AdviceImageRemoveButton15', 'AddAdviceImageButton15');
+}
+
+function RemoveAdviceImage16(){
+    RemoveImage('AdviceImage16', 'AdviceImageRemoveButton16', 'AddAdviceImageButton16');
+}
+
+function RemoveAdviceImage17(){
+    RemoveImage('AdviceImage17', 'AdviceImageRemoveButton17', 'AddAdviceImageButton17');
+}
+
+
+function RemoveAdviceImage18(){
+    RemoveImage('AdviceImage18', 'AdviceImageRemoveButton18', 'AddAdviceImageButton18');
+}
+
+
+function RemoveAdviceImage19(){
+    RemoveImage('AdviceImage19', 'AdviceImageRemoveButton19', 'AddAdviceImageButton19');
+}
+
+function RemoveAdviceImage20(){
+    RemoveImage('AdviceImage20', 'AdviceImageRemoveButton20', 'AddAdviceImageButton20');
+}
+
+function RemoveAdviceImage21(){
+    RemoveImage('AdviceImage21', 'AdviceImageRemoveButton21', 'AddAdviceImageButton21');
+}
+
+function RemoveAdviceImage22(){
+    RemoveImage('AdviceImage22', 'AdviceImageRemoveButton22', 'AddAdviceImageButton22');
+}
+
+function RemoveAdviceImage23(){
+    RemoveImage('AdviceImage23', 'AdviceImageRemoveButton23', 'AddAdviceImageButton23');
+}
+
+function RemoveAdviceImage24(){
+    RemoveImage('AdviceImage24', 'AdviceImageRemoveButton24', 'AddAdviceImageButton24');
+}
+
+function RemoveAdviceImage25(){
+    RemoveImage('AdviceImage25', 'AdviceImageRemoveButton25', 'AddAdviceImageButton25');
+}
+
+function RemoveAdviceImage26(){
+    RemoveImage('AdviceImage26', 'AdviceImageRemoveButton26', 'AddAdviceImageButton26');
+}
+
+function RemoveAdviceImage27(){
+    RemoveImage('AdviceImage27', 'AdviceImageRemoveButton27', 'AddAdviceImageButton27');
+}
+
+function RemoveAdviceImage28(){
+    RemoveImage('AdviceImage28', 'AdviceImageRemoveButton28', 'AddAdviceImageButton28');
+}
+
+function RemoveAdviceImage29(){
+    RemoveImage('AdviceImage29', 'AdviceImageRemoveButton29', 'AddAdviceImageButton29');
+}
+
+
+
+
+function convertBase64UrlToBlob(urlData){
+
+    var bytes=window.atob(urlData.split(',')[1]);        //remove url, convert to byte
+
+    //deal with anomalty, change the asci code less than = 0 to great ther zeor
+    // 处理异常,将ascii码小于0的转换为大于0
+    var ab = new ArrayBuffer(bytes.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < bytes.length; i++) {
+        ia[i] = bytes.charCodeAt(i);
+    }
+
+    return new Blob( [ab] , {type : 'image/png'});
+}
+
+
+
+$('#DilapidationUploadImages').change(function(){
+    $("#DilapidationPhotographs").empty();
+    var table = document.getElementById("DilapidationImagesTable");
+    table.style.display = 'block';
+    var count = this.files.length;
+    var imageFile = this.files;
+    console.log(count);
+    if (count > 60) {
+        alert("You can only select 60 images. It will only display the first 60 images");
+    }
+
+    for (var i = 0;i<60;i++) {
+        try {
+            //noinspection ExceptionCaughtLocallyJS
+            throw i
+        }
+        catch (ii) {
+            setTimeout(function () {
+                var nameID = ii + 1;
+                var altName = 'image' + nameID;
+                var imageID = 'DilapidationImage' + ii;
+                var textID = 'DilapidationImageText' + ii;
+                var removeButtonID = 'DilapidationImageRemoveButton' + ii;
+                var addButtonID = 'AddDilapidationImageButton' + ii;
+                var uploadID = 'DilapidationUploadImage' + ii;
+                //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
+
+                if (imageFile[ii]) {
+                    var reader = new FileReader();
+                    var selectionImage = '#DilapidationImage' + ii;
+                    addImageElements(altName, 'DilapidationPhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
+                        'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '510px', '510px');
+                    reader.readAsDataURL(imageFile[ii]);
+                    reader.onload = function (e) {
+                        $(selectionImage).attr('src', e.target.result);
+                        document.getElementById(addButtonID).style.display = 'none';
+                        document.getElementById(removeButtonID).style.display = 'block';
+                        document.getElementById(textID).style.display = 'block';
+                    };
+                    //f, imageid, textid, removeid, addid, table = '',imageAltName = '', divID = '', uploadID = '',removeFunction = '',addFunction = '',imageSize = '',width = ''
+                    doUploadFile(imageFile[ii],imageID, textID, removeButtonID, addButtonID,'DilapidationImagesTable',altName,'DilapidationPhotographs',uploadID,'RemoveOneDilapidationImage(this.id)','addOneDilapidationImage(this.id)','510px','510px');
+                }
+                else {
+                    addImageElements(altName, 'DilapidationPhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
+                        'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '510px', '0px');
+                }
+            }, 500);
+        }
+    }
+
+
+});
