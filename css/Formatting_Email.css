@@ -1,14 +1,11 @@
-h1{
-    color: red;
-}
-table{
-    border-style: dashed;
-    width: 100%;
+body{
+    width: 800px;
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
 }
-td {
+table td {
+    border-style:solid;
     height: 5px;
     margin: 0px;
     padding: 0px;
