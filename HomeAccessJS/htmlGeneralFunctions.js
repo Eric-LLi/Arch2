@@ -709,6 +709,310 @@ var tradeClear = function (tid) {
     mirror.value = "";
 };
 
+
+function CPUploadImages()
+{
+    document.getElementById('CPUploadImages').click();
+}
+
+$('#CPUploadImages').change(function(){
+    $("#CPImagesDIV").empty();
+    var table = document.getElementById("CPImagesTable");
+    table.style.display = 'block';
+    var count = this.files.length;
+    var imageFile = this.files;
+    //console.log(count);
+
+    for (var i = 0; i<count;i++)
+    {
+        try {
+            //noinspection ExceptionCaughtLocallyJS
+            throw i
+        }
+        catch (ii) {
+            setTimeout(function ()
+                       {
+                var nameID = ii + 1;
+                var altName = 'Image ' + nameID;
+                var imageID = 'CPImage' + ii;
+                var textID = 'CPImageText' + ii;
+                var removeButtonID = 'CPImageRemoveButton' + ii;
+                var addButtonID = 'CPImageAddButton' + ii;
+                var uploadID = 'CPImageUpload' + ii;
+
+                //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
+                //addDrawing();
+                addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,
+                                 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+
+                loadImage.parseMetaData(imageFile[ii], function (data) {
+                    //console.log('I am in loadImage function');
+                    var orientation = 0;
+                    var date = new Date();
+                    var imageName = imageFile[ii].name;
+                    var imageType = imageFile[ii].type;
+                    var image = document.getElementById(imageID);
+                    var removeButton = document.getElementById(removeButtonID);
+                    var description  = document.getElementById(textID);
+                    var addButton = document.getElementById(addButtonID);
+                    //if exif data available, update orientation
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
+                    var loadingImage = loadImage(imageFile[ii], function (canvas) {
+                        var base64data = canvas.toDataURL(imageType);
+                        //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                        image.setAttribute('src',base64data);
+                        //$(selectionImage).attr('src',base64data);
+                        removeButton.style.display = 'block';
+                        removeButton.style.width = '480px';
+                        addButton.style.display = 'none';
+                        addButton.style.width = '480px';
+                        description.style.display = 'block';
+                        image.style.display = 'block';
+                        image.style.width = '480px';
+                        description.style.width = '480px';
+                        // image.style.height = '250px';
+                        var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                        //console.log(file);
+                        doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'CPImagesTable',altName,'CPImagesDIV',uploadID,'removeOneCPImage(this.id)','addOneCPImage(this.id)','480px','480px');
+
+                    },
+                                                 {
+                        canvas: true,
+                        orientation: orientation,
+                        maxWidth:1500,
+                        maxHeight:1200
+                    }
+                                                );
+                });
+
+            }, 200);
+        }
+    }
+    setTimeout(function(){
+        //addDrawing();
+        var altID= count + 1;
+        var altName = 'Image' + altID;
+        var imageID = 'CPImage' + count;
+        var textID = 'CPImageText' + count;
+        var removeButtonID = 'CPImageRemoveButton' + count;
+        var addButtonID = 'CPImageAddButton' + count;
+        var uploadID = 'CPImageUpload' + count;
+        addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,
+                         'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+
+    },400)
+
+
+
+});
+
+function removeOneCPImage(click_id)
+{
+    var selectedID = String(click_id);
+    var id = selectedID.replace ( /[^\d.]/g, '' );
+    var imageID = 'CPImage' + id;
+    var removeButtonID = 'CPImageRemoveButton' + id;
+    var addButtonID = 'CPImageAddButton' + id;
+    var descriptionID = 'CPImageText' + id;
+
+
+    var imageSelect = '#' + imageID;
+    $(imageSelect).attr('src', '#');
+    var image = document.getElementById(imageID);
+    var button = document.getElementById(removeButtonID);
+    var addButton = document.getElementById(addButtonID);
+    var description = document.getElementById(descriptionID);
+
+    button.style.display = 'none';
+    addButton.style.display = 'block';
+    description.value = "";
+    description.style.display = 'none';
+    //image.style.width = '0px';
+    image.style.display = 'none';
+    doRemovePhoto(imageID);
+}
+
+function addOneCPImage(click_id)
+{
+    console.log(click_id);
+
+    var id;
+    var selectedID = String(click_id);
+    id = selectedID.replace ( /[^\d.]/g, '' );
+    var nameID = Number(id) + 1;
+    var altName = 'Image ' + nameID;
+    var imageID = 'CPImage' + id;
+    var textID = 'CPImageText' + id;
+    var removeButtonID = 'CPImageRemoveButton' + id;
+    var addButtonID = 'CPImageAddButton' + id;
+    var uploadID = 'CPImageUpload' + id;
+    console.log(uploadID);
+    var x = document.getElementById(uploadID);
+    x.click();
+    x.addEventListener('change',function(){
+        if (this.files && this.files[0]) {
+            var imageFile = this.files[0];
+            //load the image src to the current imageID.
+            loadImage.parseMetaData(imageFile, function (data) {
+                //console.log('I am in loadImage function');
+                var orientation = 0;
+                var date = new Date();
+                // var selectionImage = '#AdviceImage' + ii;
+                var imageName = imageFile.name;
+                var imageType = imageFile.type;
+                var image = document.getElementById(imageID);
+                var removeButton = document.getElementById(removeButtonID);
+                var description  = document.getElementById(textID);
+                var addButton = document.getElementById(addButtonID);
+                //if exif data available, update orientation
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
+                var loadingImage = loadImage(imageFile, function (canvas) {
+                    var base64data = canvas.toDataURL(imageType);
+                    //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                    image.setAttribute('src',base64data);
+                    //$(selectionImage).attr('src',base64data);
+                    removeButton.style.display = 'block';
+                    removeButton.style.width = '480px';
+                    addButton.style.display = 'none';
+                    description.style.display = 'block';
+                    image.style.display = 'block';
+                    image.style.width = '480px';
+                    // image.style.height = '250px';
+                    var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                    //console.log(file);
+                    doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'CPImagesTable',altName,'CPImagesDIV',uploadID,'removeCPHOWImage(this.id)','addOneCPImage(this.id)','480px','480px');
+
+                },
+                                             {
+                    canvas: true,
+                    orientation: orientation,
+                    maxWidth:1500,
+                    maxHeight:1200
+                }
+                                            );
+            });
+        }
+    });
+
+    var newID = $('#CPImagesDIV').find('> form').length;
+    var altID = $('#CPImagesDIV').find('> form').length + 1;
+    nextAltName = 'Image  ' + altID;
+    console.log("I am here!!! need another image element ,the next id  " + newID);
+    var nextImageID = 'CPImage' + newID;
+    var nextTextID = 'CPImageText' + newID;
+    var nextRemoveButtonID = 'CPImageRemoveButton' + newID;
+    var nextAddButtonID = 'CPImageAddButton' + newID;
+    var nextUploadID = 'CPImageUpload' + newID;
+    addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                     'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
+
+
+}
+
+//add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
+function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
+    var BigContainer = document.getElementById('CPImagesDIV');
+
+    //var BigContainer = document.getElementById(divID);
+    var form = document.createElement("form");
+    // console.log(form);
+    //form.setAttribute("class","divForm");
+    //need four dividends in a form
+    var container1 = document.createElement("div");
+    var container2 = document.createElement("div");
+    var container3 = document.createElement("div");
+    var container4 = document.createElement("div");
+    container1.setAttribute("class", "col-sm");
+    container2.setAttribute("class", "col-sm");
+    container3.setAttribute("class", "col-sm");
+    container4.setAttribute("class", "col-sm");
+
+    //crate an image area
+    var img = document.createElement('img');
+    img.src = "#";
+    img.alt = imageAltName;
+    img.id = imageID;
+    img.style.display = 'none';
+    img.style.marginLeft = '10px';
+    img.style.width = width;
+    img.style.height = imageSize;
+    img.style.paddingTop = '10px';
+
+    //create an input for the text
+    var textInput = document.createElement('INPUT');
+    textInput.setAttribute("type", "text");
+    textInput.style.width = imageSize;
+    textInput.style.marginLeft = '10px';
+    textInput.style.height = "10px";
+    textInput.style.display = 'none';
+    textInput.id = imageTextID;
+
+    //create an input for the remove button
+    var removeButton = document.createElement('INPUT');
+    removeButton.setAttribute("type", "button");
+    removeButton.setAttribute("value", "Remove");
+    removeButton.setAttribute("onclick", removeFunction);
+    removeButton.id = removeButtonID;
+    //removeButton.onclick = removeFunction;
+    removeButton.style.width = imageSize;
+    removeButton.style.marginLeft = '10px';
+    removeButton.style.height = "25px";
+    removeButton.style.display = "none";
+
+    //create an input for add button
+    var addButton = document.createElement('INPUT');
+    addButton.setAttribute("type", "button");
+    addButton.setAttribute("value", "Add");
+    addButton.setAttribute("onclick", addFunction);
+    addButton.id = addButtonID;
+    addButton.style.width = imageSize;
+    addButton.style.marginLeft = '10px';
+    addButton.style.height = "25px";
+    addButton.style.display = 'block';
+    addButton.style.marginTop = '20px';
+
+    //create an input for file, to upload images, this is the one with upload action
+    var uploadFile = document.createElement('INPUT');
+    uploadFile.setAttribute("type", "file");
+    uploadFile.id = uploadFileID;
+    uploadFile.setAttribute("class", "inputImage");
+    uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
+
+    uploadFile.style.display = 'none';
+
+    //put all elements into the correct container
+    //BigContainer.appendChild(form);
+    BigContainer.appendChild(form);
+    form.appendChild(container1);
+    form.appendChild(container2);
+    form.appendChild(container3);
+    form.appendChild(container4);
+    container1.appendChild(img);
+    container2.appendChild(textInput);
+    container3.appendChild(removeButton);
+    container4.appendChild(addButton);
+    container4.appendChild(uploadFile);
+}
+
+//Source from http://www.blogjava.net/jidebingfeng/articles/406171.html
+function convertBase64UrlToBlob(urlData,type){
+
+    var bytes = window.atob(urlData.split(',')[1]);        //remove url, convert to byte
+
+    //deal with anomaly, change the ASCI code less than = 0 to great than zero
+    var ab = new ArrayBuffer(bytes.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < bytes.length; i++) {
+        ia[i] = bytes.charCodeAt(i);
+    }
+
+    return new Blob( [ab] , {type : type});
+}
+
 $(document).ready(function () {
     "use strict";
 

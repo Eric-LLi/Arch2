@@ -15,6 +15,7 @@ require_once("loadbooking.php");
 
         <!-- Customized CSS -->
         <link rel="stylesheet" href="css/general.css">
+        <link href="css/bootstrap-imageupload.css" rel="stylesheet">
 
         <!--  Import JQuery  -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -1206,6 +1207,27 @@ require_once("loadbooking.php");
                     </div>
                 </div>
 
+                <!--First Tap Photo-->
+                <div title="Photo" style="padding: 10px;font-size: 18px">
+                    <div class="container">
+                        <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton"
+                               onclick="CPUploadImages()" style="white-space: normal; width: 15%">
+                        <input type="file" id="CPUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+
+                    </div>
+                    <div class="container" style = "margin-top:10px">
+                        <table id="CPImagesTable" style="display: none">
+                            <tr>
+                                <th>
+                                    <div class="row form-group" id="CPImagesDIV">
+                                    </div>
+
+                                </th>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                </div>
                 <!--
 <div title="Attachments" id="Attachments" style="padding: 10px;font-size: 18px">
 <form>
@@ -1274,7 +1296,7 @@ Cost Guide
         </div>
         <!--Scripts-->
         <!--<script src="js/images.js"></script>-->
-        <!--<script src="js/loadImageJS/load-image.all.min.js"></script>-->
+        <script src="js/loadImageJS/load-image.all.min.js"></script>
 
         <!--PDF Generator-->
         <!--            <script src="HomeAccessJS/PDFGenerator.js"></script>-->
