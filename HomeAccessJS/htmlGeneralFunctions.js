@@ -90,7 +90,7 @@ var keySelectOption = [
 ];
 
 //Store Category in Architect's Solution
-var category = [
+var C_category = [
     "Asbestos",
     "Architect's comment",
     "Bathroom Modifications",
@@ -238,12 +238,12 @@ function createS_Option() {
     "use strict";
     //Get 'select' category
     var selectCateID = document.getElementById("C0_category"),
-        selectM_CateID = document.getElementById("M_category"),
+        selectM_CateID = document.getElementById("M0_category"),
 
         //Get 'select' code
         selectCodeID = document.getElementById("C0_code"),
-        selectM_CodeID = document.getElementById("M_code"),
-        selectE_CodeID = document.getElementById("E_code"),
+        selectM_CodeID = document.getElementById("M0_code"),
+        selectE_CodeID = document.getElementById("E0_code"),
 
         //Get 'select' trade
         selectTradeID = document.getElementById("C0_tradeSelect"),
@@ -256,11 +256,11 @@ function createS_Option() {
         i;
 
     //Add category option
-    for (i = 0; i < category.length; i++) {
+    for (i = 0; i < C_category.length; i++) {
         //Add category name
-        C_opt.innerHTML = category[i];
+        C_opt.innerHTML = C_category[i];
         //Add category value
-        C_opt.setAttribute("value", category[i]);
+        C_opt.setAttribute("value", C_category[i]);
         //Add to html
         selectCateID.appendChild(C_opt);
         C_opt = document.createElement("option");
@@ -549,45 +549,70 @@ function button_EnergyCheckAdd() {
 }
 
 
+/*
+Count new row.
+C means Health & Safety Concerns page
+M means Repair & Maintenance page
+E means Energy Efficiency - Optional page
+*/
 var C_count = 1,
     M_count = 1,
     E_count = 1,
+    //Add_button event
     button_AddSolutionItem = function (id) {
         "use strict";
 
         //Decide which button C,M or E
         var btn_id = id.substr(0, 1),
+
+            //Get corresponding table
             table = document.getElementById(btn_id + "_SolutionTable"),
+            //Create new tr and td
             newTr = document.createElement("tr"),
             newTd1 = document.createElement("td"),
             newTd2 = document.createElement("td"),
             newTd3 = document.createElement("td"),
             newTd4 = document.createElement("td"),
             newTd5 = document.createElement("td"),
-            count;
+            count,
+            category,
+            code;
 
+        //Decide which count, category and code to use.
         switch (btn_id) {
             case "C":
                 count = C_count;
+                category = C_category;
+                code = C_Code;
                 break;
             case "M":
                 count = M_count;
+                category = M_category;
+                code = M_Code;
                 break;
             case "E":
                 count = E_count;
+                category = "";
+                code = E_Code;
                 break;
         }
 
+        //Set each element id
         var newCateSelectID = btn_id + count + "_category",
             newCodeSelectID = btn_id + count + "_code",
-            newCommondTextID = btn_id + count + "_commentItem",
+            newCommondTextID = btn_id + count + "_commentText",
             newTradeSelectID = btn_id + count + "_tradeSelect",
             newTradeTextID = btn_id + count + "_mirrorText",
             newTradeCleanID = btn_id + count + "_mirrorClean",
             newCostID = btn_id + count + "_costText";
 
+
         var text = "<select id=\"" + newCateSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Choose an item</option></select>";
-        newTd1.innerHTML = text;
+
+        if(btn_id!== "E")
+            newTd1.innerHTML = text;
+        else
+            newTd1.innerHTML = "Enenrgy Efficiency";
 
         text = "<select id=\"" + newCodeSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Internal use</option></select>";
         newTd2.innerHTML = text;
@@ -596,7 +621,7 @@ var C_count = 1,
         newTd3.innerHTML = text;
 
         text = "<select id=\"" + newTradeSelectID + "\" class=\"form-control\" onchange=\"tradeOnchange(this.id);\"><option value=\"-1\" disabled selected>--</option></select>" +
-            "<textarea class=\"form-control\" id=\"" + newTradeTextID + "\"></textarea>" +
+            "<textarea disabled class=\"form-control\" id=\"" + newTradeTextID + "\"></textarea>" +
             "<button class=\"btn btn-danger w-100\" id=\"" + newTradeCleanID + "\" onclick=\"tradeClear(this.id)\">Clear</button>";
         newTd4.innerHTML = text;
 
@@ -620,13 +645,12 @@ var C_count = 1,
             selectTradeID = document.getElementById(newTradeSelectID),
             i;
 
-
         //Load category option
         for (i = 0; i < category.length; i++) {
             //Add category name
-            C_opt.innerHTML = category[i];
+            C_opt.innerHTML = C_category[i];
             //Add category value
-            C_opt.setAttribute("value", category[i]);
+            C_opt.setAttribute("value", C_category[i]);
             //Add to html
             selectCateID.appendChild(C_opt);
 
@@ -634,7 +658,7 @@ var C_count = 1,
         }
 
         //Load CODE option
-        for (i = 0; i < C_Code.length; i++) {
+        for (i = 0; i < code.length; i++) {
             C_opt = document.createElement("option");
             C_opt.innerHTML = C_Code[i];
             C_opt.setAttribute("value", C_Code[i]);
@@ -651,7 +675,7 @@ var C_count = 1,
 
             selectTradeID.appendChild(C_opt);
         }
-        switch(btn_id){
+        switch (btn_id) {
             case "C":
                 C_count++;
                 break;
@@ -664,259 +688,39 @@ var C_count = 1,
         }
     };
 
-//Health Concerns Add button
-//function button_HConcernAdd() {
-//    "use strict";
-//
-//    var count = 1;
-//    document.getElementById("Button_HSConcernsAdd").onclick = function () {
-//
-//        var table = document.getElementById("Table_HSConcerns"),
-//            newTr = document.createElement("tr"),
-//            newTd1 = document.createElement("td"),
-//            newTd2 = document.createElement("td"),
-//            newTd3 = document.createElement("td"),
-//            newTd4 = document.createElement("td"),
-//            newTd5 = document.createElement("td"),
-//
-//            newCateSelectID = "newConCateItem_" + count,
-//            newCodeSelectID = "newConCodeItem_" + count,
-//            newTradeSelectID = "C" + count + "_tradeSelect",
-//            newTradeTextID = "C" + count + "_mirrorText",
-//            newTradeCleanID = "C" + count + "_mirrorClean";
-//
-//        newTd1.innerHTML = "<select id=\"" + newCateSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Choose an item</option></select>";
-//        newTd2.innerHTML = "<select id=\"" + newCodeSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Internal use</option></select>";
-//        newTd3.innerHTML = "<textarea placeholder=\"In addition to preset text only...\" class=\"form-control\"</textarea>";
-//        newTd4.innerHTML = "<select id=\"" + newTradeSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>--</option></select>";
-//        newTd3.innerHTML = "<textarea class=\"form-control\"</textarea>";
-//
-//        newTr.appendChild(newTd1);
-//        newTr.appendChild(newTd2);
-//        newTr.appendChild(newTd3);
-//        newTr.appendChild(newTd4);
-//        newTr.appendChild(newTd5);
-//        table.appendChild(newTr);
-//
-//        //Create option
-//        var C_opt = document.createElement("option"),
-//            //Get "select" category
-//            selectCateID = document.getElementById(newCateSelectID),
-//            //Get 'select' code
-//            selectCodeID = document.getElementById(newCodeSelectID),
-//            //Get 'select' trade
-//            selectTradeID = document.getElementById(newTradeSelectID),
-//            i;
-//
-//
-//        //Load category option
-//        for (i = 0; i < category.length; i++) {
-//            //Add category name
-//            C_opt.innerHTML = category[i];
-//            //Add category value
-//            C_opt.setAttribute("value", category[i]);
-//            //Add to html
-//            selectCateID.appendChild(C_opt);
-//
-//            C_opt = document.createElement("option");
-//        }
-//
-//        //Load CODE option
-//        for (i = 0; i < C_Code.length; i++) {
-//            C_opt = document.createElement("option");
-//            C_opt.innerHTML = C_Code[i];
-//            C_opt.setAttribute("value", C_Code[i]);
-//            selectCodeID.appendChild(C_opt);
-//
-//            C_opt = document.createElement("option");
-//        }
-//
-//        //Load Trade option
-//        for (i = 0; i < trade.length; i++) {
-//            C_opt = document.createElement("option");
-//            C_opt.innerHTML = trade[i];
-//            C_opt.setAttribute("value", trade[i]);
-//
-//            selectTradeID.appendChild(C_opt);
-//        }
-//
-//        count++;
-//    };
-//}
-
-//Repair&Maintenance Add button
-function button_RMaintenanceAdd() {
-    "use strict";
-
-    var count = 1;
-    document.getElementById("Button_RMaintenanceAdd").onclick = function () {
-
-        var table = document.getElementById("Table_RMaintenance"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            newTd3 = document.createElement("td"),
-            newTd4 = document.createElement("td"),
-            newTd5 = document.createElement("td"),
-
-            newCateItemID = "newRMCateItem_" + count,
-            newCodeItemID = "newRMCodeItem_" + count,
-            newTradeItemID = "newRMTradeItem_" + count;
-
-        newTd1.innerHTML = "<select id=\"" + newCateItemID + "\" class=\"form-control\"><option value=\"-1\">Choose an item</option></select>";
-        newTd2.innerHTML = "<select id=\"" + newCodeItemID + "\" class=\"form-control\"><option value=\"-1\">Internal use</option></select>";
-        newTd3.innerHTML = "<textarea placeholder=\"In addition to preset text only...\" class=\"form-control\"</textarea>";
-        newTd4.innerHTML = "<select id=\"" + newTradeItemID + "\" class=\"form-control\"><option value=\"-1\">--</option></select>";
-        newTd3.innerHTML = "<textarea class=\"form-control\"</textarea>";
-
-        newTr.appendChild(newTd1);
-        newTr.appendChild(newTd2);
-        newTr.appendChild(newTd3);
-        newTr.appendChild(newTd4);
-        newTr.appendChild(newTd5);
-        table.appendChild(newTr);
-
-        //Create option
-        var C_opt = document.createElement("option"),
-            //Get "select" category
-            selectCateID = document.getElementById(newCateItemID),
-            //Get 'select' code
-            selectCodeID = document.getElementById(newCodeItemID),
-            //Get 'select' trade
-            selectTradeID = document.getElementById(newTradeItemID),
-            i;
-
-
-        //Load category option
-        for (i = 0; i < M_category.length; i++) {
-            //Add category name
-            C_opt.innerHTML = M_category[i];
-            //Add category value
-            C_opt.setAttribute("value", M_category[i]);
-            //Add to html
-            selectCateID.appendChild(C_opt);
-
-            C_opt = document.createElement("option");
-        }
-
-        //Load CODE option
-        for (i = 0; i < M_Code.length; i++) {
-            C_opt = document.createElement("option");
-            C_opt.innerHTML = M_Code[i];
-            C_opt.setAttribute("value", M_Code[i]);
-            selectCodeID.appendChild(C_opt);
-
-            C_opt = document.createElement("option");
-        }
-
-        //Load Trade option
-        for (i = 0; i < trade.length; i++) {
-            C_opt = document.createElement("option");
-            C_opt.innerHTML = trade[i];
-            C_opt.setAttribute("value", trade[i]);
-
-            selectTradeID.appendChild(C_opt);
-        }
-
-        count++;
-    };
-}
-
-//Energy Efficiency Add button
-function button_enEfficiencyAdd() {
-    "use strict";
-
-    var count = 1;
-    document.getElementById("Button_eEfficiencyAdd").onclick = function () {
-
-        var table = document.getElementById("Table_eEfficiency"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            newTd3 = document.createElement("td"),
-            newTd4 = document.createElement("td"),
-            newTd5 = document.createElement("td"),
-
-            newCodeItemID = "newEffCodeItem_" + count,
-            newTradeItemID = "newEffTradeItem_" + count;
-
-
-        newTd1.innerHTML = "Enenrgy Efficiency";
-        newTd2.innerHTML = "<select id=\"" + newCodeItemID + "\" class=\"form-control\"><option value=\"-1\">Internal use</option></select>";
-        newTd3.innerHTML = "<textarea placeholder=\"In addition to preset text only...\" class=\"form-control\"</textarea>";
-        newTd4.innerHTML = "<select id=\"" + newTradeItemID + "\" class=\"form-control\"><option value=\"-1\">--</option></select>";
-        newTd5.innerHTML = "<textarea class=\"form-control\"</textarea>";
-
-        newTr.appendChild(newTd1);
-        newTr.appendChild(newTd2);
-        newTr.appendChild(newTd3);
-        newTr.appendChild(newTd4);
-        newTr.appendChild(newTd5);
-        table.appendChild(newTr);
-
-        //Create option
-        var C_opt = document.createElement("option"),
-            //Get 'select' code
-            selectCodeID = document.getElementById(newCodeItemID),
-            //Get 'select' trade
-            selectTradeID = document.getElementById(newTradeItemID),
-            i;
-
-        //Load CODE option
-        for (i = 0; i < E_Code.length; i++) {
-            C_opt = document.createElement("option");
-            C_opt.innerHTML = E_Code[i];
-            C_opt.setAttribute("value", E_Code[i]);
-            selectCodeID.appendChild(C_opt);
-
-            C_opt = document.createElement("option");
-        }
-
-        //Load Trade option
-        for (i = 0; i < trade.length; i++) {
-            C_opt = document.createElement("option");
-            C_opt.innerHTML = trade[i];
-            C_opt.setAttribute("value", trade[i]);
-
-            selectTradeID.appendChild(C_opt);
-        }
-        count++;
-    };
-}
-
-//trade mirror onchange
+//Solution's trade mirror onchange
 var tradeOnchange = function (tid) {
     "use strict";
+
+    //Get corresponding select element
     var selectedValue = document.getElementById(tid).value,
-        mirrorID = tid.substr(0, 2) + "_mirrorText",
+        //Get mirror textarea ID
+        mirrorID = tid.split("_")[0] + "_mirrorText",
         mirror = document.getElementById(mirrorID);
 
     mirror.value = mirror.value + selectedValue + " ";
 };
 
-//Clear trade textarea
+//Solution's Clear textarea
 var tradeClear = function (tid) {
     "use strict";
-    var mirrorID = tid.substr(0, 2) + "_mirrorText",
+    var mirrorID = tid.split("_")[0] + "_mirrorText",
         mirror = document.getElementById(mirrorID);
     mirror.value = "";
 };
 
-//Execute
 $(document).ready(function () {
     "use strict";
 
     loadPropertySelectData();
     loadSolutionSelectData();
 
+    //Property Summary add_button
     button_ConAdd();
     button_FaultAdd();
 
+    //Property Assessment add_button
     button_HealthCheckAdd();
     button_RepairsCheckAdd();
     button_EnergyCheckAdd();
-
-    //    button_HConcernAdd();
-    button_RMaintenanceAdd();
-    button_enEfficiencyAdd();
 });

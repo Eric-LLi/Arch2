@@ -982,13 +982,13 @@ require_once("loadbooking.php");
                                         </select>
                                     </td>
                                     <td>
-                                        <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="C0_comment"></textarea>
+                                        <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="C0_commentText"></textarea>
                                     </td>
                                     <td>
                                         <select class="form-control" id="C0_tradeSelect" onchange="tradeOnchange(this.id);">
                                             <option value="-1" disabled selected>--</option>
                                         </select>
-                                        <textarea class="form-control" id="C0_mirrorText"></textarea>
+                                        <textarea class="form-control" id="C0_mirrorText" disabled></textarea>
                                         <button class="btn btn-danger w-100" id="C0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
                                     <td>
@@ -1040,13 +1040,13 @@ require_once("loadbooking.php");
                                         </select>
                                     </td>
                                     <td>
-                                        <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="M0_comment"></textarea>
+                                        <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="M0_commentText"></textarea>
                                     </td>
                                     <td>
                                         <select class="form-control" id="M0_tradeSelect" onchange="tradeOnchange(this.id);">
                                             <option value="-1" disabled selected>--</option>
                                         </select>
-                                        <textarea class="form-control" id="M0_mirrorText"></textarea>
+                                        <textarea disabled class="form-control" id="M0_mirrorText"></textarea>
                                         <button class="btn btn-danger w-100" id="M0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
                                     <td>
@@ -1059,7 +1059,7 @@ require_once("loadbooking.php");
                             <table id="E_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <td colspan="5">
-                                        <button type="button" class="btn btn-primary" id="Button_eEfficiencyAdd">Add item</button>
+                                        <button type="button" class="btn btn-primary" id="E_SolutionAddItem" onclick="button_AddSolutionItem(this.id);">Add item</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1084,22 +1084,22 @@ require_once("loadbooking.php");
                                         Enenrgy Efficiency
                                     </td>
                                     <td>
-                                        <select class="form-control" id="E_code">
+                                        <select class="form-control" id="E0_code">
                                             <option value="-1" disabled selected>Internal use</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <textarea placeholder="In addition to preset text only..." class="form-control" id="E_comment"></textarea>
+                                        <textarea placeholder="In addition to preset text only..." class="form-control" id="E_commentText"></textarea>
                                     </td>
                                     <td>
                                         <select id="E0_tradeSelect" class="form-control" onchange="tradeOnchange(this.id);">
                                             <option value="-1" disabled selected>--</option>
                                         </select>
-                                        <textarea class="form-control" id="E0_mirrorText"></textarea>
+                                        <textarea disabled class="form-control" id="E0_mirrorText"></textarea>
                                         <button class="btn btn-danger w-100" id="E0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
                                     <td>
-                                        <textarea class="form-control" id="E_cost"></textarea>
+                                        <textarea class="form-control" id="E0_costText"></textarea>
                                     </td>
                                 </tr>
                             </table>
