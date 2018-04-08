@@ -69,7 +69,7 @@
     //"CommercialPropertyAssessmentReport.php",
     //"CommercialDilapidationSurvey.php",
 		
-		//"HomeAccessServicesReport.php",
+		"HomeAccessReport.php",
     "",
     ""
   ];

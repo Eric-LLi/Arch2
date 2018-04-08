@@ -261,7 +261,12 @@ require_once("loadbooking.php");
                         <div title="Construction Summary" style="padding:10px;font-size: 18px">
                             <form>
                                 <div class="form-group">
-                                    <table class="table table-bordered">
+                                    <table id="Table_CSummary" class="table table-bordered" style="table-layout:fixed">
+                                        <tr>
+                                            <td colspan="4">
+                                                <button type="button" class="btn btn-primary" id="Button_ConAdd">Add item</button>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td style="padding-right:0px;">
                                                 House Age
@@ -323,8 +328,7 @@ require_once("loadbooking.php");
                                                     <option value="ac">A.C.</option>
                                                 </select>
                                             </td>
-                                            <td></td>
-                                            <td></td>
+
                                         </tr>
                                     </table>
                                 </div>
@@ -333,7 +337,12 @@ require_once("loadbooking.php");
                         <div title="Fault Summary" style="padding:10px;font-size: 18px">
                             <form>
                                 <div class="form-group">
-                                    <table class="table table-bordered" style="table-layout:fixed">
+                                    <table id="Table_FalSummary" class="table table-bordered" style="table-layout:fixed">
+                                        <tr>
+                                            <td colspan="4">
+                                                <button type="button" class="btn btn-primary" id="Button_FaultAdd">Add item</button>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>
                                                 Trip & Slop
@@ -454,7 +463,12 @@ require_once("loadbooking.php");
                 <div title="Property Assessment" id="PAssessment" style="padding:10px;font-size: 18px">
                     <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
                         <div title="Health Check & Safety Check" style="padding:10px;font-size: 18px">
-                            <table  class="table table-bordered" style="table-layout:fixed">
+                            <table id="Table_HSCheck" class="table table-bordered" style="table-layout:fixed">
+                                <tr>
+                                    <td colspan="4">
+                                        <button type="button" class="btn btn-primary" id="Button_HSCheckAdd">Add item</button>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         Damp / Mould / Ventilation
@@ -584,10 +598,13 @@ require_once("loadbooking.php");
                             </table>
                         </div>
                         <div title="Repairs & Mainentance Check" style="padding:10px;font-size: 18px">
-                            <table  class="table table-bordered" style="table-layout:fixed">
+                            <table id="Table_RMCheck_S"  class="table table-bordered" style="table-layout:fixed">
                                 <tr>
-                                    <td colspan="4">
+                                    <td>
                                         <strong>Structure</strong>
+                                    </td>
+                                    <td colspan="3">
+                                        <button type="button" class="btn btn-primary" id="Button_RMCheckAdd_S">Add item</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -622,9 +639,14 @@ require_once("loadbooking.php");
                                         </select>
                                     </td>
                                 </tr>
+                            </table>
+                            <table id="Table_RMCheck_O"  class="table table-bordered" style="table-layout:fixed">
                                 <tr>
-                                    <td colspan="4">
+                                    <td>
                                         <strong>Other</strong>
+                                    </td>
+                                    <td colspan="3">
+                                        <button type="button" class="btn btn-primary" id="Button_RMCheckAdd_O">Add item</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -699,6 +721,8 @@ require_once("loadbooking.php");
                                         </select>
                                     </td>
                                 </tr>
+                            </table>
+                            <table class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <td colspan="4">
                                         <strong>NOTES:</strong><br>
@@ -709,7 +733,12 @@ require_once("loadbooking.php");
                             </table>
                         </div>
                         <div title="Energy & Wastage Check" style="padding:10px;font-size: 18px">
-                            <table  class="table table-bordered" style="table-layout:fixed">
+                            <table id="Table_EWCheck" class="table table-bordered" style="table-layout:fixed">
+                                <tr>
+                                    <td colspan="4">
+                                        <button type="button" class="btn btn-primary" id="Button_EWCheckAdd">Add item</button>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         Dual-Flush toilet
@@ -908,10 +937,10 @@ require_once("loadbooking.php");
                 </div>
 
                 <!--First Tap Architect’s Solution-->
-                <div title="Architect’s Solution" id="ASolution" style="padding:10px;font-size: 18px">
+                <div title="Architect’s Solutions" id="ASolution" style="padding:10px;font-size: 18px">
                     <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
                         <div title="Health & Safety Concerns" style="padding:10px;font-size: 18px">
-                            <table class="table table-bordered" style="table-layout:fixed">
+                            <table id="C_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <th colspan="5">
                                         <p class="text-center bg-danger">
@@ -920,6 +949,11 @@ require_once("loadbooking.php");
                                     </th>
                                 </tr>
                                 <tr>
+                                    <td colspan="5">
+                                        <button type="button" class="btn btn-primary" id="C_SolutionAddItem" onclick="button_AddSolutionItem(this.id);">Add item</button>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>
                                         Category
                                     </th>
@@ -938,38 +972,44 @@ require_once("loadbooking.php");
                                 </tr>
                                 <tr>
                                     <td>
-                                        <select class="form-control" id="C_category">
-                                            <option value="-1">Choose an item</option>
+                                        <select class="form-control" id="C0_category">
+                                            <option value="-1" disabled selected>Choose an item</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <select class="form-control" id="C_code">
-                                            <option value="-1">Internal use</option>
+                                        <select class="form-control" id="C0_code">
+                                            <option value="-1" disabled selected>Internal use</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="C_comment"></textarea>
+                                        <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="C0_comment"></textarea>
                                     </td>
                                     <td>
-                                        <select class="form-control" id="C_trade">
-                                            <option value="-1">--</option>
+                                        <select class="form-control" id="C0_tradeSelect" onchange="tradeOnchange(this.id);">
+                                            <option value="-1" disabled selected>--</option>
                                         </select>
+                                        <textarea class="form-control" id="C0_mirrorText"></textarea>
+                                        <button class="btn btn-danger w-100" id="C0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
                                     <td>
-                                        <textarea class="form-control" id="C_cost"></textarea>
+                                        <textarea class="form-control" id="C0_costText"></textarea>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                         <div title="Repair & Maintenance" style="padding:10px;font-size: 18px">
-                            <table  class="table table-bordered" style="table-layout:fixed">
+                            <table id="M_SolutionTable"  class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <th colspan="5">
                                         <p class="text-center bg-danger">
                                             Recommended - longer term.
                                         </p>
-
                                     </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <button type="button" class="btn btn-primary" id="M_SolutionAddItem" onclick="button_AddSolutionItem(this.id);">Add item</button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>
@@ -990,31 +1030,38 @@ require_once("loadbooking.php");
                                 </tr>
                                 <tr>
                                     <td>
-                                        <select class="form-control" id="M_category">
-                                            <option value="-1">Choose an item</option>
+                                        <select class="form-control" id="M0_category">
+                                            <option value="-1" disabled selected>Choose an item</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <select class="form-control" id="M_code">
-                                            <option value="-1">Internal use</option>
+                                        <select class="form-control" id="M0_code">
+                                            <option value="-1" disabled selected>Internal use</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="M_comment"></textarea>
+                                        <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="M0_comment"></textarea>
                                     </td>
                                     <td>
-                                        <select class="form-control" id="M_trade">
-                                            <option value="-1">--</option>
+                                        <select class="form-control" id="M0_tradeSelect" onchange="tradeOnchange(this.id);">
+                                            <option value="-1" disabled selected>--</option>
                                         </select>
+                                        <textarea class="form-control" id="M0_mirrorText"></textarea>
+                                        <button class="btn btn-danger w-100" id="M0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
                                     <td>
-                                        <textarea class="form-control" id="M_cost"></textarea>
+                                        <textarea class="form-control" id="M0_costText"></textarea>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                         <div title="Energy Efficiency - Optional" style="padding:10px;font-size: 18px">
-                            <table  class="table table-bordered" style="table-layout:fixed">
+                            <table id="E_SolutionTable" class="table table-bordered" style="table-layout:fixed">
+                                <tr>
+                                    <td colspan="5">
+                                        <button type="button" class="btn btn-primary" id="Button_eEfficiencyAdd">Add item</button>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <th>
                                         Category
@@ -1038,16 +1085,18 @@ require_once("loadbooking.php");
                                     </td>
                                     <td>
                                         <select class="form-control" id="E_code">
-                                            <option value="-1">Internal use</option>
+                                            <option value="-1" disabled selected>Internal use</option>
                                         </select>
                                     </td>
                                     <td>
                                         <textarea placeholder="In addition to preset text only..." class="form-control" id="E_comment"></textarea>
                                     </td>
                                     <td>
-                                        <select class="form-control" id="E_trade">
-                                            <option value="-1">--</option>
+                                        <select id="E0_tradeSelect" class="form-control" onchange="tradeOnchange(this.id);">
+                                            <option value="-1" disabled selected>--</option>
                                         </select>
+                                        <textarea class="form-control" id="E0_mirrorText"></textarea>
+                                        <button class="btn btn-danger w-100" id="E0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
                                     <td>
                                         <textarea class="form-control" id="E_cost"></textarea>
@@ -1059,74 +1108,170 @@ require_once("loadbooking.php");
                 </div>
 
                 <!--First Tap Attachment-->
-                <div title="Attachments" id="Attachments" style="padding: 10px;font-size: 18px">
-                    <form>
-                        <table class="table-bordered">
-                            <tr>
-                                <th colspan="6" style="color:red">
-                                    ITEM
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><input type="checkbox" value="P_Guide">
-                                        Property Maintenance Guide
-                                    </label>
-                                </td>
-                                <td>
-                                    <label><input type="checkbox" value="C_Masonry">
-                                        Cracking in Masonry
-                                    </label>
-                                </td>
-                                <td>
-                                    <label><input type="checkbox" value="T_Dampness">
-                                        Treatment of Dampness
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><input type="checkbox" value="Warning">
-                                        Health & Safety Warning
-                                    </label>
-                                </td>
-                                <td>
-                                    <label><input type="checkbox" value="R_Guttering">
-                                        Roofing & Guttering
-                                    </label>
-                                </td>
-                                <td>
-                                    <label><input type="checkbox" value="H_Checklist">
-                                        Home Safety Checklist
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><input type="checkbox" value="T_Borers">
-                                        Termites & Borers
-                                    </label>
-                                </td>
-                                <td>
-                                    <label><input type="checkbox" value="R_Stumping">
-                                        Re-stumping
-                                    </label>
-                                </td>
-                                <td>
-                                    <label><input type="checkbox" value="C_Guide">
-                                        Cost Guide
-                                    </label>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
+                <div title="Attachment" style="padding: 10px;font-size: 18px">
+                    <div class="container" style="margin-top: 20px" >
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label>Property Management Guide</label>
+                                <select id="propertyMaintenanceGuide" style="width:100%" title="property management guide">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Cracking in Masonry</label>
+                                <select id="crackingInMasonry" style="width:100%" title="cracking in masonry">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Treatment of Dampness </label>
+                                <select id="treatmentOfDampness" style="width:100%" title="treatment of dampness">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Health & Safety Warning</label>
+                                <select id='healthSafetyWarning' style="width:100%" title="health and safety warning">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Roofing & Guttering </label>
+                                <select id="roofingGuttering" style="width:100%" title="Roofing & Guttering">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Re-stumping </label>
+                                <select id="reStumping" style="width:100%" title="Roofing & Guttering">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label>Termites & Borers</label>
+                                <select id='termitesBorers' style="width:100%" title="health and safety warning">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label>Cost Guide</label>
+                                <select  id='costGuide' style="width:100%" title="Home Safety Checklist">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
+                <!--
+<div title="Attachments" id="Attachments" style="padding: 10px;font-size: 18px">
+<form>
+<table class="table-bordered">
+<tr>
+<th colspan="6" style="color:red">
+ITEM
+</th>
+</tr>
+<tr>
+<td>
+<label><input type="checkbox" value="P_Guide">
+Property Maintenance Guide
+</label>
+</td>
+<td>
+<label><input type="checkbox" value="C_Masonry">
+Cracking in Masonry
+</label>
+</td>
+<td>
+<label><input type="checkbox" value="T_Dampness">
+Treatment of Dampness
+</label>
+</td>
+</tr>
+<tr>
+<td>
+<label><input type="checkbox" value="Warning">
+Health & Safety Warning
+</label>
+</td>
+<td>
+<label><input type="checkbox" value="R_Guttering">
+Roofing & Guttering
+</label>
+</td>
+<td>
+<label><input type="checkbox" value="H_Checklist">
+Home Safety Checklist
+</label>
+</td>
+</tr>
+<tr>
+<td>
+<label><input type="checkbox" value="T_Borers">
+Termites & Borers
+</label>
+</td>
+<td>
+<label><input type="checkbox" value="R_Stumping">
+Re-stumping
+</label>
+</td>
+<td>
+<label><input type="checkbox" value="C_Guide">
+Cost Guide
+</label>
+</td>
+</tr>
+</table>
+</form>
+</div>
+-->
             </div>
         </div>
-
-
-
-
         <!--Scripts-->
         <!--<script src="js/images.js"></script>-->
         <!--<script src="js/loadImageJS/load-image.all.min.js"></script>-->

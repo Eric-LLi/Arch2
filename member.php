@@ -2390,9 +2390,9 @@
                   //case 20:
                     //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
                     //break;
-                  //case 21:
-                    //$.redirect('HomeAccessServicesReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    //break;	
+                  case 21:
+                    $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
                 }
               }
             )

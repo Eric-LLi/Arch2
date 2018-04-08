@@ -109,6 +109,17 @@ var category = [
     "WC Door"
 ];
 
+//Store Maintenance Category
+var M_category = [
+    "Energy Efficiency",
+    "Fencing",
+    "Government",
+    "Gutters",
+    "Hot Water Service",
+    "Pest Inspection",
+    "Vents"
+];
+
 //Store 'Trade' in Architect's Solution
 var trade = [
     "AR",
@@ -226,18 +237,18 @@ function createP_Option(nameid) {
 function createS_Option() {
     "use strict";
     //Get 'select' category
-    var selectCateID = document.getElementById("C_category"),
+    var selectCateID = document.getElementById("C0_category"),
         selectM_CateID = document.getElementById("M_category"),
 
         //Get 'select' code
-        selectCodeID = document.getElementById("C_code"),
+        selectCodeID = document.getElementById("C0_code"),
         selectM_CodeID = document.getElementById("M_code"),
         selectE_CodeID = document.getElementById("E_code"),
 
         //Get 'select' trade
-        selectTradeID = document.getElementById("C_trade"),
-        selectM_TradeID = document.getElementById("M_trade"),
-        selectE_TradeID = document.getElementById("E_trade"),
+        selectTradeID = document.getElementById("C0_tradeSelect"),
+        selectM_TradeID = document.getElementById("M0_tradeSelect"),
+        selectE_TradeID = document.getElementById("E0_tradeSelect"),
 
         C_opt = document.createElement("option"),
         M_opt = document.createElement("option"),
@@ -248,15 +259,21 @@ function createS_Option() {
     for (i = 0; i < category.length; i++) {
         //Add category name
         C_opt.innerHTML = category[i];
-        M_opt.innerHTML = category[i];
         //Add category value
         C_opt.setAttribute("value", category[i]);
-        M_opt.setAttribute("value", category[i]);
         //Add to html
         selectCateID.appendChild(C_opt);
-        selectM_CateID.appendChild(M_opt);
-
         C_opt = document.createElement("option");
+    }
+
+    //Add M_category option
+    for (i = 0; i < M_category.length; i++) {
+        //Add category name
+        M_opt.innerHTML = M_category[i];
+        //Add category value
+        M_opt.setAttribute("value", M_category[i]);
+        //Add to html
+        selectM_CateID.appendChild(M_opt);
         M_opt = document.createElement("option");
     }
 
@@ -312,7 +329,7 @@ function createS_Option() {
     }
 }
 
-//Load property select option data
+//Load property select data
 function loadPropertySelectData() {
     "use strict";
     var i;
@@ -322,14 +339,584 @@ function loadPropertySelectData() {
     }
 }
 
-//Load property select data
+//Load solution select data
 function loadSolutionSelectData() {
     "use strict";
     createS_Option();
 }
 
+//Construction Summary Add button
+function button_ConAdd() {
+    "use strict";
+
+    document.getElementById("Button_ConAdd").onclick = function () {
+        var newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            table = document.getElementById("Table_CSummary"),
+            lastTr = document.getElementById("Table_CSummary").getElementsByTagName("tr")[table.rows.length - 1],
+            lastRowCount = lastTr.childElementCount;
+
+        if (lastRowCount === 2) {
+            newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+            newTd2.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+            lastTr.appendChild(newTd1);
+            lastTr.appendChild(newTd2);
+
+        } else {
+            newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+            newTd2.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+
+            newTr.appendChild(newTd1);
+            newTr.appendChild(newTd2);
+            table.appendChild(newTr);
+        }
+    };
+}
+
+//Fault Summary Add button
+function button_FaultAdd() {
+    "use strict";
+
+    //    i = 0;
+    var newItemCount = 1;
+
+    document.getElementById("Button_FaultAdd").onclick = function () {
+
+        var table = document.getElementById("Table_FalSummary"),
+            newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            lastTr = document.getElementById("Table_FalSummary").getElementsByTagName("tr")[table.rows.length - 1],
+            newItemID = "newFalItem_" + newItemCount,
+            lastRowCount = lastTr.childElementCount;
+
+        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
+
+        if (lastRowCount === 2) {
+
+            lastTr.appendChild(newTd1);
+            lastTr.appendChild(newTd2);
+
+            //            i = 0;
+        } else {
+
+            newTr.appendChild(newTd1);
+            newTr.appendChild(newTd2);
+            table.appendChild(newTr);
+
+            //            i = 1;
+        }
+
+        createP_Option(newItemID);
+
+        newItemCount++;
+    };
+}
+
+//Health Check & Safety check Add button
+function button_HealthCheckAdd() {
+    "use strict";
+
+    var newItemCount = 1;
+
+    document.getElementById("Button_HSCheckAdd").onclick = function () {
+
+        var table = document.getElementById("Table_HSCheck"),
+            newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+            newItemID = "newHSCheckItem_" + newItemCount,
+            lastRowCount = lastTr.childElementCount;
+
+        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
+
+        if (lastRowCount === 2) {
+
+            lastTr.appendChild(newTd1);
+            lastTr.appendChild(newTd2);
+        } else {
+
+            newTr.appendChild(newTd1);
+            newTr.appendChild(newTd2);
+            table.appendChild(newTr);
+        }
+
+        createP_Option(newItemID);
+        newItemCount++;
+    };
+}
+
+//Repairs Check Add button
+function button_RepairsCheckAdd() {
+    "use strict";
+    var newItemCount = 1,
+        newItemCount2 = 1;
+
+    //First add button
+    document.getElementById("Button_RMCheckAdd_S").onclick = function () {
+
+        var table = document.getElementById("Table_RMCheck_S"),
+            newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+            newItemID = "newRMCheckSItem_" + newItemCount,
+            lastRowCount = lastTr.childElementCount;
+
+        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
+
+        if (lastRowCount === 2) {
+
+            lastTr.appendChild(newTd1);
+            lastTr.appendChild(newTd2);
+        } else {
+
+            newTr.appendChild(newTd1);
+            newTr.appendChild(newTd2);
+            table.appendChild(newTr);
+        }
+
+        createP_Option(newItemID);
+        newItemCount++;
+    };
+
+    //Second add button
+    document.getElementById("Button_RMCheckAdd_O").onclick = function () {
+
+        var table = document.getElementById("Table_RMCheck_O"),
+            newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+            newItemID = "newRMCheckOItem_" + newItemCount2,
+            lastRowCount = lastTr.childElementCount;
+
+        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
+
+        if (lastRowCount === 2) {
+            lastTr.appendChild(newTd1);
+            lastTr.appendChild(newTd2);
+        } else {
+            newTr.appendChild(newTd1);
+            newTr.appendChild(newTd2);
+            table.appendChild(newTr);
+        }
+
+        createP_Option(newItemID);
+        newItemCount2++;
+    };
+}
+
+//Energy Check Add button
+function button_EnergyCheckAdd() {
+    "use strict";
+
+    var newItemCount = 1;
+
+    document.getElementById("Button_EWCheckAdd").onclick = function () {
+
+        var table = document.getElementById("Table_EWCheck"),
+            newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+            newItemID = "newEWCheckItem_" + newItemCount,
+            lastRowCount = lastTr.childElementCount;
+
+        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
+        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
+
+        if (lastRowCount === 2) {
+
+            lastTr.appendChild(newTd1);
+            lastTr.appendChild(newTd2);
+        } else {
+
+            newTr.appendChild(newTd1);
+            newTr.appendChild(newTd2);
+            table.appendChild(newTr);
+        }
+
+        createP_Option(newItemID);
+        newItemCount++;
+    };
+}
+
+
+var C_count = 1,
+    M_count = 1,
+    E_count = 1,
+    button_AddSolutionItem = function (id) {
+        "use strict";
+
+        //Decide which button C,M or E
+        var btn_id = id.substr(0, 1),
+            table = document.getElementById(btn_id + "_SolutionTable"),
+            newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            newTd3 = document.createElement("td"),
+            newTd4 = document.createElement("td"),
+            newTd5 = document.createElement("td"),
+            count;
+
+        switch (btn_id) {
+            case "C":
+                count = C_count;
+                break;
+            case "M":
+                count = M_count;
+                break;
+            case "E":
+                count = E_count;
+                break;
+        }
+
+        var newCateSelectID = btn_id + count + "_category",
+            newCodeSelectID = btn_id + count + "_code",
+            newCommondTextID = btn_id + count + "_commentItem",
+            newTradeSelectID = btn_id + count + "_tradeSelect",
+            newTradeTextID = btn_id + count + "_mirrorText",
+            newTradeCleanID = btn_id + count + "_mirrorClean",
+            newCostID = btn_id + count + "_costText";
+
+        var text = "<select id=\"" + newCateSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Choose an item</option></select>";
+        newTd1.innerHTML = text;
+
+        text = "<select id=\"" + newCodeSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Internal use</option></select>";
+        newTd2.innerHTML = text;
+
+        text = "<textarea id=\"" + newCommondTextID + "\" placeholder=\"In addition to preset text only...\" class=\"form-control\"></textarea>";
+        newTd3.innerHTML = text;
+
+        text = "<select id=\"" + newTradeSelectID + "\" class=\"form-control\" onchange=\"tradeOnchange(this.id);\"><option value=\"-1\" disabled selected>--</option></select>" +
+            "<textarea class=\"form-control\" id=\"" + newTradeTextID + "\"></textarea>" +
+            "<button class=\"btn btn-danger w-100\" id=\"" + newTradeCleanID + "\" onclick=\"tradeClear(this.id)\">Clear</button>";
+        newTd4.innerHTML = text;
+
+        text = "<textarea id=\"" + newCostID + "\" class=\"form-control\"</textarea>";
+        newTd5.innerHTML = text;
+
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        newTr.appendChild(newTd3);
+        newTr.appendChild(newTd4);
+        newTr.appendChild(newTd5);
+        table.appendChild(newTr);
+
+        //Create option
+        var C_opt = document.createElement("option"),
+            //Get "select" category
+            selectCateID = document.getElementById(newCateSelectID),
+            //Get 'select' code
+            selectCodeID = document.getElementById(newCodeSelectID),
+            //Get 'select' trade
+            selectTradeID = document.getElementById(newTradeSelectID),
+            i;
+
+
+        //Load category option
+        for (i = 0; i < category.length; i++) {
+            //Add category name
+            C_opt.innerHTML = category[i];
+            //Add category value
+            C_opt.setAttribute("value", category[i]);
+            //Add to html
+            selectCateID.appendChild(C_opt);
+
+            C_opt = document.createElement("option");
+        }
+
+        //Load CODE option
+        for (i = 0; i < C_Code.length; i++) {
+            C_opt = document.createElement("option");
+            C_opt.innerHTML = C_Code[i];
+            C_opt.setAttribute("value", C_Code[i]);
+            selectCodeID.appendChild(C_opt);
+
+            C_opt = document.createElement("option");
+        }
+
+        //Load Trade option
+        for (i = 0; i < trade.length; i++) {
+            C_opt = document.createElement("option");
+            C_opt.innerHTML = trade[i];
+            C_opt.setAttribute("value", trade[i]);
+
+            selectTradeID.appendChild(C_opt);
+        }
+        switch(btn_id){
+            case "C":
+                C_count++;
+                break;
+            case "M":
+                M_count++;
+                break;
+            case "E":
+                E_count++;
+                break;
+        }
+    };
+
+//Health Concerns Add button
+//function button_HConcernAdd() {
+//    "use strict";
+//
+//    var count = 1;
+//    document.getElementById("Button_HSConcernsAdd").onclick = function () {
+//
+//        var table = document.getElementById("Table_HSConcerns"),
+//            newTr = document.createElement("tr"),
+//            newTd1 = document.createElement("td"),
+//            newTd2 = document.createElement("td"),
+//            newTd3 = document.createElement("td"),
+//            newTd4 = document.createElement("td"),
+//            newTd5 = document.createElement("td"),
+//
+//            newCateSelectID = "newConCateItem_" + count,
+//            newCodeSelectID = "newConCodeItem_" + count,
+//            newTradeSelectID = "C" + count + "_tradeSelect",
+//            newTradeTextID = "C" + count + "_mirrorText",
+//            newTradeCleanID = "C" + count + "_mirrorClean";
+//
+//        newTd1.innerHTML = "<select id=\"" + newCateSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Choose an item</option></select>";
+//        newTd2.innerHTML = "<select id=\"" + newCodeSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Internal use</option></select>";
+//        newTd3.innerHTML = "<textarea placeholder=\"In addition to preset text only...\" class=\"form-control\"</textarea>";
+//        newTd4.innerHTML = "<select id=\"" + newTradeSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>--</option></select>";
+//        newTd3.innerHTML = "<textarea class=\"form-control\"</textarea>";
+//
+//        newTr.appendChild(newTd1);
+//        newTr.appendChild(newTd2);
+//        newTr.appendChild(newTd3);
+//        newTr.appendChild(newTd4);
+//        newTr.appendChild(newTd5);
+//        table.appendChild(newTr);
+//
+//        //Create option
+//        var C_opt = document.createElement("option"),
+//            //Get "select" category
+//            selectCateID = document.getElementById(newCateSelectID),
+//            //Get 'select' code
+//            selectCodeID = document.getElementById(newCodeSelectID),
+//            //Get 'select' trade
+//            selectTradeID = document.getElementById(newTradeSelectID),
+//            i;
+//
+//
+//        //Load category option
+//        for (i = 0; i < category.length; i++) {
+//            //Add category name
+//            C_opt.innerHTML = category[i];
+//            //Add category value
+//            C_opt.setAttribute("value", category[i]);
+//            //Add to html
+//            selectCateID.appendChild(C_opt);
+//
+//            C_opt = document.createElement("option");
+//        }
+//
+//        //Load CODE option
+//        for (i = 0; i < C_Code.length; i++) {
+//            C_opt = document.createElement("option");
+//            C_opt.innerHTML = C_Code[i];
+//            C_opt.setAttribute("value", C_Code[i]);
+//            selectCodeID.appendChild(C_opt);
+//
+//            C_opt = document.createElement("option");
+//        }
+//
+//        //Load Trade option
+//        for (i = 0; i < trade.length; i++) {
+//            C_opt = document.createElement("option");
+//            C_opt.innerHTML = trade[i];
+//            C_opt.setAttribute("value", trade[i]);
+//
+//            selectTradeID.appendChild(C_opt);
+//        }
+//
+//        count++;
+//    };
+//}
+
+//Repair&Maintenance Add button
+function button_RMaintenanceAdd() {
+    "use strict";
+
+    var count = 1;
+    document.getElementById("Button_RMaintenanceAdd").onclick = function () {
+
+        var table = document.getElementById("Table_RMaintenance"),
+            newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            newTd3 = document.createElement("td"),
+            newTd4 = document.createElement("td"),
+            newTd5 = document.createElement("td"),
+
+            newCateItemID = "newRMCateItem_" + count,
+            newCodeItemID = "newRMCodeItem_" + count,
+            newTradeItemID = "newRMTradeItem_" + count;
+
+        newTd1.innerHTML = "<select id=\"" + newCateItemID + "\" class=\"form-control\"><option value=\"-1\">Choose an item</option></select>";
+        newTd2.innerHTML = "<select id=\"" + newCodeItemID + "\" class=\"form-control\"><option value=\"-1\">Internal use</option></select>";
+        newTd3.innerHTML = "<textarea placeholder=\"In addition to preset text only...\" class=\"form-control\"</textarea>";
+        newTd4.innerHTML = "<select id=\"" + newTradeItemID + "\" class=\"form-control\"><option value=\"-1\">--</option></select>";
+        newTd3.innerHTML = "<textarea class=\"form-control\"</textarea>";
+
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        newTr.appendChild(newTd3);
+        newTr.appendChild(newTd4);
+        newTr.appendChild(newTd5);
+        table.appendChild(newTr);
+
+        //Create option
+        var C_opt = document.createElement("option"),
+            //Get "select" category
+            selectCateID = document.getElementById(newCateItemID),
+            //Get 'select' code
+            selectCodeID = document.getElementById(newCodeItemID),
+            //Get 'select' trade
+            selectTradeID = document.getElementById(newTradeItemID),
+            i;
+
+
+        //Load category option
+        for (i = 0; i < M_category.length; i++) {
+            //Add category name
+            C_opt.innerHTML = M_category[i];
+            //Add category value
+            C_opt.setAttribute("value", M_category[i]);
+            //Add to html
+            selectCateID.appendChild(C_opt);
+
+            C_opt = document.createElement("option");
+        }
+
+        //Load CODE option
+        for (i = 0; i < M_Code.length; i++) {
+            C_opt = document.createElement("option");
+            C_opt.innerHTML = M_Code[i];
+            C_opt.setAttribute("value", M_Code[i]);
+            selectCodeID.appendChild(C_opt);
+
+            C_opt = document.createElement("option");
+        }
+
+        //Load Trade option
+        for (i = 0; i < trade.length; i++) {
+            C_opt = document.createElement("option");
+            C_opt.innerHTML = trade[i];
+            C_opt.setAttribute("value", trade[i]);
+
+            selectTradeID.appendChild(C_opt);
+        }
+
+        count++;
+    };
+}
+
+//Energy Efficiency Add button
+function button_enEfficiencyAdd() {
+    "use strict";
+
+    var count = 1;
+    document.getElementById("Button_eEfficiencyAdd").onclick = function () {
+
+        var table = document.getElementById("Table_eEfficiency"),
+            newTr = document.createElement("tr"),
+            newTd1 = document.createElement("td"),
+            newTd2 = document.createElement("td"),
+            newTd3 = document.createElement("td"),
+            newTd4 = document.createElement("td"),
+            newTd5 = document.createElement("td"),
+
+            newCodeItemID = "newEffCodeItem_" + count,
+            newTradeItemID = "newEffTradeItem_" + count;
+
+
+        newTd1.innerHTML = "Enenrgy Efficiency";
+        newTd2.innerHTML = "<select id=\"" + newCodeItemID + "\" class=\"form-control\"><option value=\"-1\">Internal use</option></select>";
+        newTd3.innerHTML = "<textarea placeholder=\"In addition to preset text only...\" class=\"form-control\"</textarea>";
+        newTd4.innerHTML = "<select id=\"" + newTradeItemID + "\" class=\"form-control\"><option value=\"-1\">--</option></select>";
+        newTd5.innerHTML = "<textarea class=\"form-control\"</textarea>";
+
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        newTr.appendChild(newTd3);
+        newTr.appendChild(newTd4);
+        newTr.appendChild(newTd5);
+        table.appendChild(newTr);
+
+        //Create option
+        var C_opt = document.createElement("option"),
+            //Get 'select' code
+            selectCodeID = document.getElementById(newCodeItemID),
+            //Get 'select' trade
+            selectTradeID = document.getElementById(newTradeItemID),
+            i;
+
+        //Load CODE option
+        for (i = 0; i < E_Code.length; i++) {
+            C_opt = document.createElement("option");
+            C_opt.innerHTML = E_Code[i];
+            C_opt.setAttribute("value", E_Code[i]);
+            selectCodeID.appendChild(C_opt);
+
+            C_opt = document.createElement("option");
+        }
+
+        //Load Trade option
+        for (i = 0; i < trade.length; i++) {
+            C_opt = document.createElement("option");
+            C_opt.innerHTML = trade[i];
+            C_opt.setAttribute("value", trade[i]);
+
+            selectTradeID.appendChild(C_opt);
+        }
+        count++;
+    };
+}
+
+//trade mirror onchange
+var tradeOnchange = function (tid) {
+    "use strict";
+    var selectedValue = document.getElementById(tid).value,
+        mirrorID = tid.substr(0, 2) + "_mirrorText",
+        mirror = document.getElementById(mirrorID);
+
+    mirror.value = mirror.value + selectedValue + " ";
+};
+
+//Clear trade textarea
+var tradeClear = function (tid) {
+    "use strict";
+    var mirrorID = tid.substr(0, 2) + "_mirrorText",
+        mirror = document.getElementById(mirrorID);
+    mirror.value = "";
+};
+
+//Execute
 $(document).ready(function () {
     "use strict";
+
     loadPropertySelectData();
     loadSolutionSelectData();
+
+    button_ConAdd();
+    button_FaultAdd();
+
+    button_HealthCheckAdd();
+    button_RepairsCheckAdd();
+    button_EnergyCheckAdd();
+
+    //    button_HConcernAdd();
+    button_RMaintenanceAdd();
+    button_enEfficiencyAdd();
 });
