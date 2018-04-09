@@ -2633,6 +2633,7 @@
           <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Redo</a>
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
           <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Customer</a>
+          <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
       <?php
         }
         else
@@ -2643,7 +2644,6 @@
         }
       ?>
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
-      <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
       <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>
     </div>
   </div>
