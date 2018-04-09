@@ -1206,7 +1206,7 @@ require_once("loadbooking.php");
                 </div>
 
                 <!--First Tap Photo-->
-                <div title="Photo1" style="padding: 10px;font-size: 18px">
+                <div title="Photo" style="padding: 10px;font-size: 18px">
                     <div class="container">
                         <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton"
                                onclick="CPUploadImages()" style="white-space: normal; width: 15%">
