@@ -1202,7 +1202,6 @@ require_once("loadbooking.php");
                                 </select>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
