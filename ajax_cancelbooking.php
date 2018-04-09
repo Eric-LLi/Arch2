@@ -43,7 +43,7 @@
                   "b1.renoadvice," .
                   "b1.pestinspection," .
                   "b1.commission," .
-
+                  
 
                   "b1.estateagentcompany," .
                   "b1.estateagentcontact," .
@@ -97,9 +97,12 @@
         if ($numrows = SharedNumRows($dbresult))
         {
           $booking = null;
+          
           while ($dbrow = SharedFetchArray($dbresult))
               $booking = $dbrow;
               //error_log($booking['archemail']);
+              $bookings_id = $booking["bookings_id"];
+              $linkBookingID = $booking['linked_bookingcode'];
 
               // Let customer know...
                if ($booking['custemail'] != "")
@@ -116,8 +119,8 @@
               //let architect/insespector knows
              if ($booking['archemail'] != "")
               {
-
-                if($booking['linked_bookingcode'] != "")//select the property assessment report in the combined report.after joined select, the result contains the linked timber report.
+          
+                if($booking['linked_bookingcode'] != "")//select the property assessment report in the combined report.after joined select, the result contains the linked timber report.  
                 {
                   error_log('select the property assessment report in the combined report need to send two emails');
                   $linkBookingID = $booking['linked_bookingcode'];
@@ -133,7 +136,7 @@
                   $html2 = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html2);
                   $html2 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html2);
                   SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], "Booking Cancellation Notification", $html2);
-
+                  
                   //Insepctor Notification
                   $html1 = file_get_contents('email_architectcancelnotification.html');
                   $html1 = str_replace("XXX_ARCHITECTNAME", $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], $html1);
@@ -141,7 +144,7 @@
                   $html1 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['linked_itype']], $html1);
                   SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_archemail'], $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], "Booking Cancellation Notification", $html1);
                 }
-                else if($booking["bookings_id"] != "")//select the timber report in the comibined reports, the booking will have the bookings_id for its linked property assessment report.
+                else if($booking["bookings_id"] != "")//select the timber report in the comibined reports, the booking will have the bookings_id for its linked property assessment report. 
                 {
                   error_log("select the timber report in the combine dreport, need to send two emails");
                   error_log($booking['archfirstname']);
@@ -182,7 +185,7 @@
                     "b1.renoadvice," .
                     "b1.pestinspection," .
                     "b1.commission," .
-
+                    
 
                     "b1.estateagentcompany," .
                     "b1.estateagentcontact," .
@@ -268,10 +271,12 @@
                   $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
                   SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], "Booking Cancellation Notification", $html);
                 }
-
+                
               }
-              // error_log($booking['linked_bookingcode']);
-              // error_log($booking["bookings_id"]);
+            error_log($booking['linked_bookingcode']);
+            error_log($booking["bookings_id"]);      
+            error_log($bookings_id);  
+            error_log($linkBookingID);         
         }
 
         error_log($linkBookingID);
@@ -298,7 +303,7 @@
           else
           {
             $msg = "Error removing booking...";
-          }
+          } 
         }
         else if($bookings_id != '')
         {
@@ -323,8 +328,8 @@
             else
             {
               $msg = "Error removing booking...";
-            }
-        }
+            }   
+        } 
         else
         {
           error_log('not a combined report');
@@ -342,11 +347,11 @@
             else
             {
               $msg = "Error removing booking...";
-            }
+            }  
         }
         error_log($dbupdate);
         error_log($dbupdate2);
-
+         
       }
     }
     else
