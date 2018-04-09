@@ -42,7 +42,7 @@ require_once("loadbooking.php");
 
         <!--Title-->
         <div class="container">
-            <div id="savingPDFAlert1" class="myAlert-top alert alert-info collapse">
+            <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
                 <strong>Saving PDF. Please don't close this page. It will take a while</strong>
             </div>
             <h1 class="content-head text-center firstH1">Home Access & Services Report</h1>
