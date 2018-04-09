@@ -1240,7 +1240,7 @@ require_once("loadbooking.php");
                 </div>
 
                 <!--First Tap Photo-->
-                <div title="XXXXX" style="padding: 10px;font-size: 18px">
+                <div title="XXXXxX" style="padding: 10px;font-size: 18px">
                     <button id="upload-button" class="btn btn-primary">Select PDF</button>
                     <input type="file" id="file-to-upload" accept="application/pdf" />
 
