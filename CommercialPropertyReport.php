@@ -39,10 +39,10 @@
 </nav>
 <!--Title-->
 <div class="container">
-    <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
+   <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
         <strong>Saving PDF. Please don't close this page. It will take a while</strong>
     </div>
-    <h2 class="content-head text-center firstH1">PROPERTY ASSESSMENT REPORT
+    <h2 class="content-head text-center firstH1" style="font-size: 2rem">PROPERTY ASSESSMENT REPORT
     <label style="color: black;font-size: 20px">– Commercial Industrial &amp;Institutional</label>
     </h2>
     <br>
@@ -64,15 +64,15 @@
                         <div class="row">
                             <div class="col-sm">
                                 <label>Name</label><br>
-                                <input id="CP_ClientName" class="form-control" type="text" title="name" style="margin-top: 0">
+                                <input id="CP_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
                             </div>
                             <div class="col-sm">
                                 <label>Phone</label><br>
-                                <input id="CP_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0">
+                                <input id="CP_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
                             </div>
                             <div class="col-sm">
                                 <label>Booking No.</label><br>
-                                <input id="CP_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0">
+                                <input id="CP_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0" value="<?php echo $bookingcode; ?>">
                             </div>
                         </div>
                     </form>
@@ -82,21 +82,21 @@
                     <div class="row">
                         <div class="col-sm">
                             <label>Address</label><br>
-                            <input id="CP_Address" class="form-control" type="text" title="address" style="margin-top: 0">
+                            <input id="CP_Address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-sm">
                             <label>Suburb</label><br>
-                            <input id="CP_Suburb" class="form-control" type="text" title="suburb" style="margin-top: 0">
+                            <input id="CP_Suburb" class="form-control" type="text" title="suburb" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('city'); ?>">
                         </div>
                         <div class="col-sm">
                             <label>State</label><br>
-                            <input id="CP_State" class="form-control" type="text" title="state" style="margin-top: 0">
+                            <input id="CP_State" class="form-control" type="text" title="state" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('state'); ?>">
                         </div>
                         <div class="col-sm">
                             <label>Postcode</label><br>
-                            <input id="CP_Postcode" class="form-control" type="text" title="postcode" style="margin-top: 0">
+                            <input id="CP_Postcode" class="form-control" type="text" title="postcode" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('postcode'); ?>">
                         </div>
                     </div>
                     </form>
@@ -139,27 +139,27 @@
                     <div class="row form-group">
                         <div class="col-sm">
                             <label>Architect Name</label><br>
-                            <input id="architectName" class="form-control" type="text" title="architectName" style="margin-top: 0">
+                            <input id="architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>">
                         </div>
                         <div class="col-sm">
                             <label>Registration No.</label><br>
-                            <input id="registrationNumber" class="form-control" type="text" title="registrationNo" style="margin-top: 0">
+                            <input id="registrationNumber" class="form-control" type="text" title="registrationNo" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm">
                             <label>Architect Address</label><br>
-                            <input id="architectAddress" class="form-control" type="text" title="architectAdd" style="margin-top: 0">
+                            <input id="architectAddress" class="form-control" type="text" title="architectAdd" style="margin-top: 0" value="<?php echo doNiceAddress(doNiceArrayElemAsString('archaddress1'), doNiceArrayElemAsString('archcity'), doNiceArrayElemAsString('archstate'), doNiceArrayElemAsString('archpostcode')); ?>">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-sm">
                             <label>Email</label><br>
-                            <input id="architectEmail" class="form-control" type="text" title="email" style="margin-top: 0">
+                            <input id="architectEmail" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archemail', false); ?>">
                         </div>
                         <div class="col-sm">
                             <label>Phone</label><br>
-                            <input id="architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0">
+                            <input id="architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archmobile', false); ?>">
                         </div>
                     </div>
 
@@ -351,17 +351,17 @@
                             </div>
                             <div class="col-sm-4">
                                 <br>
-                                <input id="siteAreaRow0_name3" placeholder="Put others here..." class="form-control gray">
+                                <input id="siteAreaRow0_name3" placeholder="Put others here..." class="form-control gray" type="text">
                                 <select id="siteAreaRow0_select3" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <br>
-                                <input id="siteAreaRow0_name4" placeholder="Put others here..." class="form-control gray">
+                                <input id="siteAreaRow0_name4" placeholder="Put others here..." class="form-control gray" type="text">
                                 <select id="siteAreaRow0_select4" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <br>
-                                <input id="siteAreaRow0_name5" placeholder="Put others here..." class="form-control gray">
+                                <input id="siteAreaRow0_name5" placeholder="Put others here..." class="form-control gray" type="text">
                                 <select id="siteAreaRow0_select5" style="width:100%" title="AreaSelect"></select>
                             </div>
                         </div>
@@ -385,17 +385,17 @@
                             </div>
                             <div class="col-sm-4">
                                 <br>
-                                <input id="siteAreaRow1_name3" placeholder="Put others here..." class="form-control gray">
+                                <input id="siteAreaRow1_name3" placeholder="Put others here..." class="form-control gray" type="text">
                                 <select id="siteAreaRow1_select3" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <br>
-                                <input id="siteAreaRow1_name4" placeholder="Put others here..." class="form-control gray">
+                                <input id="siteAreaRow1_name4" placeholder="Put others here..." class="form-control gray" type="text">
                                 <select id="siteAreaRow1_select4" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <br>
-                                <input id="siteAreaRow1_name5" placeholder="Put others here..." class="form-control gray">
+                                <input id="siteAreaRow1_name5" placeholder="Put others here..." class="form-control gray" type="text">
                                 <select id="siteAreaRow1_select5" style="width:100%" title="AreaSelect"></select>
                             </div>
                         </div>
@@ -404,7 +404,7 @@
                     </div>
                 </div>
                 <div title="Access Limitations (U)" style="padding: 10px;font-size: 18px">
-                    <button type="button" class="btn btn-primary" onclick="addOneAccessLimitation('siteAccessLimitationsTable','siteAccessItem','siteAccessImageRef','SiteAccessSelect','siteAccessNotes0')"
+                    <button type="button" class="btn btn-primary" onclick="addOneAccessLimitation('siteAccessLimitationsTable','siteAccessItem','siteAccessImageRef','SiteAccessSelect','siteAccessNotes')"
                             style="margin-bottom: 10px;font-size: 18px">Add One Access Limitation</button>
                     <table id="siteAccessLimitationsTable">
                         <tr>
@@ -414,8 +414,8 @@
                             <th style="color: #f44336;text-align: center;width:30%">ACCESS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" title="Item No." id="siteAccessItem0"></td>
-                            <td><input class="form-control" title="Image Ref"  id="siteAccessImageRef0" onblur=""></td>
+                            <td><input class="form-control" title="Item No." id="siteAccessItem0" type="text"></td>
+                            <td><input class="form-control" title="Image Ref"  id="siteAccessImageRef0" onblur="" type="text"></td>
                             <td>
                                 <select id="SiteAccessSelect0" style="width:100%" title="accessLimitationSelect"></select>
                             </td>
@@ -424,8 +424,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><input class="form-control" title="Item No." id="siteAccessItem1"></td>
-                            <td><input class="form-control" title="Image Ref" id="siteAccessImageRef1" onblur=""></td>
+                            <td><input class="form-control" title="Item No." id="siteAccessItem1" type="text"></td>
+                            <td><input class="form-control" title="Image Ref" id="siteAccessImageRef1" onblur="" type="text"></td>
                             <td>
                                 <select id="SiteAccessSelect1" style="width:100%" title="accessLimitationSelect"></select>
                             </td>
@@ -445,8 +445,8 @@
                             <th style="color: #f44336;text-align: center;width:70%">DEFECTS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" id="siteMaintenanceItemNo0" title="Item No." ></td>
-                            <td><input class="form-control" id="siteMaintenanceImgRef0" title="Image Ref"></td>
+                            <td><input class="form-control" id="siteMaintenanceItemNo0" title="Item No." type="text"></td>
+                            <td><input class="form-control" id="siteMaintenanceImgRef0" title="Image Ref" type="text"></td>
                             <td>
                                 <!--<input class="form-control" id="siteMaintenanceNotes0" title="DefectsNotes">-->
                                 <textarea id="siteMaintenanceNotes0" class="form-control" title="exteriorAccessNotes" style="height: 50px"></textarea>
@@ -478,8 +478,8 @@
 
                         </tr>
                         <tr>
-                            <td><input class="form-control" id="siteMajorItemNo0" title="Item No." ></td>
-                            <td><input class="form-control" id="siteMajorImgRef0" title="ImageRef"  onblur=""></td>
+                            <td><input class="form-control" id="siteMajorItemNo0" title="Item No." type="text"></td>
+                            <td><input class="form-control" id="siteMajorImgRef0" title="ImageRef"  onblur="" type="text"></td>
                             <td>
                                 <!--<input class="form-control" id="siteMajorNotes0" title="DefectsNotes">-->
                                 <textarea id="siteMajorNotes0" class="form-control" title="exteriorAccessNotes" style="height: 50px"></textarea>
@@ -514,37 +514,37 @@
                         <div class="row form-group" id="exteriorAreaRow0">
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name0" style="margin-bottom: 0">Covering</label>-->
-                                <input id="exteriorAreaRow0_name0" placeholder="Covering" class="form-control">
+                                <input id="exteriorAreaRow0_name0" placeholder="Covering" class="form-control" type="text">
                                 <select id="exteriorAreaRow0_select0" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name1" style="margin-bottom: 0">Valleys</label>-->
-                                <input id="exteriorAreaRow0_name1" placeholder="Valleys" class="form-control">
+                                <input id="exteriorAreaRow0_name1" placeholder="Valleys" class="form-control" type="text">
                                 <select id="exteriorAreaRow0_select1" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name2" style="margin-bottom: 0">Ridges</label>-->
-                                <input id="exteriorAreaRow0_name2" placeholder="Ridges" class="form-control">
+                                <input id="exteriorAreaRow0_name2" placeholder="Ridges" class="form-control" type="text">
                                 <select id="exteriorAreaRow0_select2" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="exteriorAreaRow0_name3" placeholder="Overhanging tree" class="form-control" >
+                                <input id="exteriorAreaRow0_name3" placeholder="Overhanging tree" class="form-control" type="text">
                                 <select id="exteriorAreaRow0_select3" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="exteriorAreaRow0_name4" placeholder="Chimney/Vents/Flues" class="form-control" >
+                                <input id="exteriorAreaRow0_name4" placeholder="Chimney/Vents/Flues" class="form-control" type="text">
                                 <select id="exteriorAreaRow0_select4" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="exteriorAreaRow0_name5" placeholder="Flashing" class="form-control" >
+                                <input id="exteriorAreaRow0_name5" placeholder="Flashing" class="form-control" type="text">
                                 <select id="exteriorAreaRow0_select5" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="exteriorAreaRow0_name6" placeholder="Box Gutters" class="form-control">
+                                <input id="exteriorAreaRow0_name6" placeholder="Box Gutters" class="form-control" type="text">
                                 <select id="exteriorAreaRow0_select6" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="exteriorAreaRow0_name7" placeholder="Skylights" class="form-control">
+                                <input id="exteriorAreaRow0_name7" placeholder="Skylights" class="form-control" type="text">
                                 <select id="exteriorAreaRow0_select7" style="width:100%" title="AreaSelect"></select>
                             </div>
                         </div>
@@ -556,29 +556,29 @@
                         <div class="row form-group" id="exteriorAreaRow1">
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name0" style="margin-bottom: 0">Covering</label>-->
-                                <input id="exteriorAreaRow1_name0" placeholder="Structure/Finish" class="form-control">
+                                <input id="exteriorAreaRow1_name0" placeholder="Structure/Finish" class="form-control" type="text">
                                 <select id="exteriorAreaRow1_select0" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name1" style="margin-bottom: 0">Valleys</label>-->
-                                <input id="exteriorAreaRow1_name1" placeholder="Eaves" class="form-control">
+                                <input id="exteriorAreaRow1_name1" placeholder="Eaves" class="form-control" type="text">
                                 <select id="exteriorAreaRow1_select1" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name2" style="margin-bottom: 0">Ridges</label>-->
-                                <input id="exteriorAreaRow1_name2" placeholder="Balcony/Deck" class="form-control">
+                                <input id="exteriorAreaRow1_name2" placeholder="Balcony/Deck" class="form-control" type="text">
                                 <select id="exteriorAreaRow1_select2" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="exteriorAreaRow1_name3" placeholder="Sub-Floor Vents" class="form-control" >
+                                <input id="exteriorAreaRow1_name3" placeholder="Sub-Floor Vents" class="form-control" type="text" >
                                 <select id="exteriorAreaRow1_select3" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="exteriorAreaRow1_name4" placeholder="Doors/Windows" class="form-control" >
+                                <input id="exteriorAreaRow1_name4" placeholder="Doors/Windows" class="form-control" type="text">
                                 <select id="exteriorAreaRow1_select4" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="exteriorAreaRow1_name5" placeholder="Gutter/Downpipe" class="form-control" >
+                                <input id="exteriorAreaRow1_name5" placeholder="Gutter/Downpipe" class="form-control" type="text">
                                 <select id="exteriorAreaRow1_select5" style="width:100%" title="AreaSelect"></select>
                             </div>
                         </div>
@@ -596,8 +596,8 @@
                             <th style="color: #f44336;text-align: center;width:30%">ACCESS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" title="Item No." id="exteriorAccessItem0"></td>
-                            <td><input class="form-control" title="Image Ref"  id="exteriorAccessImageRef0" onblur=""></td>
+                            <td><input class="form-control" title="Item No." id="exteriorAccessItem0" type="text"></td>
+                            <td><input class="form-control" title="Image Ref"  id="exteriorAccessImageRef0" onblur="" type="text"></td>
                             <td>
                                 <select id="exteriorAccessSelect0" style="width:100%" title="exteriorAccessSelect"></select>
                             </td>
@@ -606,8 +606,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><input class="form-control" title="Item No." id="exteriorAccessItem1"></td>
-                            <td><input class="form-control" title="Image Ref" id="exteriorAccessImageRef1" onblur=""></td>
+                            <td><input class="form-control" title="Item No." id="exteriorAccessItem1" type="text"></td>
+                            <td><input class="form-control" title="Image Ref" id="exteriorAccessImageRef1" onblur="" type="text"></td>
                             <td>
                                 <select id="exteriorAccessSelect1" style="width:100%" title="exteriorAccessSelect"></select>
                             </td>
@@ -626,8 +626,8 @@
                             <th style="color: #f44336;text-align: center;width:70%">DEFECTS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" id="exteriorMinorDefectItemNo0" title="Item No." ></td>
-                            <td><input class="form-control" id="exteriorMinorDefectImgRef0" title="Image Ref"></td>
+                            <td><input class="form-control" id="exteriorMinorDefectItemNo0" title="Item No." type="text"></td>
+                            <td><input class="form-control" id="exteriorMinorDefectImgRef0" title="Image Ref" type="text"></td>
                             <td>
                                 <!--<input class="form-control" id="exteriorMaintenanceNotes0" title="DefectsNotes">-->
                                 <textarea id="exteriorMinorDefectNotes0" class="form-control" title="exteriorAccessNotes" style="height: 50px"></textarea>
@@ -658,8 +658,8 @@
                             <th style="color: #f44336;text-align: center;width:70%">DEFECTS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" id="exteriorMajorItemNo0" title="Item No."></td>
-                            <td><input class="form-control" id="exteriorMajorImgRef0" title="ImageRef"></td>
+                            <td><input class="form-control" id="exteriorMajorItemNo0" title="Item No." type="text"></td>
+                            <td><input class="form-control" id="exteriorMajorImgRef0" title="ImageRef" type="text"></td>
                             <td>
                                 <!--<input class="form-control" id="exteriorMajorNotes0" title="DefectsNotes">-->
                                 <textarea id="exteriorMajorNotes0" class="form-control" title="exteriorAccessNotes" style="height: 50px"></textarea>
@@ -693,33 +693,33 @@
                         <div class="row form-group" id="InteriorDryAreaRow0">
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name0" style="margin-bottom: 0">Covering</label>-->
-                                <input id="InteriorDryAreaRow0_name0" placeholder="Floor Structure/Finish" class="form-control">
+                                <input id="InteriorDryAreaRow0_name0" placeholder="Floor Structure/Finish" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow0_select0" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name1" style="margin-bottom: 0">Valleys</label>-->
-                                <input id="InteriorDryAreaRow0_name1" placeholder="Walls" class="form-control">
+                                <input id="InteriorDryAreaRow0_name1" placeholder="Walls" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow0_select1" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name2" style="margin-bottom: 0">Ridges</label>-->
-                                <input id="InteriorDryAreaRow0_name2" placeholder="Ceiling" class="form-control">
+                                <input id="InteriorDryAreaRow0_name2" placeholder="Ceiling" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow0_select2" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorDryAreaRow0_name3" placeholder="Electrics" class="form-control" >
+                                <input id="InteriorDryAreaRow0_name3" placeholder="Electrics" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow0_select3" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorDryAreaRow0_name4" placeholder="Windows/Doors" class="form-control" >
+                                <input id="InteriorDryAreaRow0_name4" placeholder="Windows/Doors" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow0_select4" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorDryAreaRow0_name5" placeholder="Cupboards" class="form-control" >
+                                <input id="InteriorDryAreaRow0_name5" placeholder="Cupboards" class="form-control" type="text" >
                                 <select id="InteriorDryAreaRow0_select5" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorDryAreaRow0_name6" placeholder="Dampness" class="form-control">
+                                <input id="InteriorDryAreaRow0_name6" placeholder="Dampness" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow0_select6" style="width:100%" title="AreaSelect"></select>
                             </div>
                         </div>
@@ -731,21 +731,21 @@
                         <div class="row form-group" id="InteriorDryAreaRow1">
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name0" style="margin-bottom: 0">Covering</label>-->
-                                <input id="InteriorDryAreaRow1_name0" placeholder="Structure" class="form-control">
+                                <input id="InteriorDryAreaRow1_name0" placeholder="Structure" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow1_select0" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name1" style="margin-bottom: 0">Valleys</label>-->
-                                <input id="InteriorDryAreaRow1_name1" placeholder="Floor Finish" class="form-control">
+                                <input id="InteriorDryAreaRow1_name1" placeholder="Floor Finish" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow1_select1" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name2" style="margin-bottom: 0">Ridges</label>-->
-                                <input id="InteriorDryAreaRow1_name2" placeholder="Balustrade" class="form-control">
+                                <input id="InteriorDryAreaRow1_name2" placeholder="Balustrade" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow1_select2" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorDryAreaRow1_name3" placeholder="Electrics" class="form-control" >
+                                <input id="InteriorDryAreaRow1_name3" placeholder="Electrics" class="form-control" type="text">
                                 <select id="InteriorDryAreaRow1_select3" style="width:100%" title="AreaSelect"></select>
                             </div>
                         </div>
@@ -763,18 +763,18 @@
                             <th style="color: #f44336;text-align: center;width:30%">ACCESS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" title="Item No." id="interiorDryAccessItem0"></td>
-                            <td><input class="form-control" title="Image Ref"  id="interiorDryAccessImageRef0" onblur=""></td>
+                            <td><input class="form-control" title="Item No." id="interiorDryAccessItem0" type="text"></td>
+                            <td><input class="form-control" title="Image Ref"  id="interiorDryAccessImageRef0" onblur="" type="text"></td>
                             <td>
-                                <select id="interiorDryAccessSelect0" style="width:100%" title="interiorAccessSelect"></select>
+                                <select id="interiorDryAccessSelect0" style="width:100%" title="interiorAccessSelect" type="text"></select>
                             </td>
                             <td>
                                 <textarea id="interiorDryAccessNotes0" class="form-control" title="interiorAccessNotes" style="margin-top: 0;height: 70px"></textarea>
                             </td>
                         </tr>
                         <tr>
-                            <td><input class="form-control" title="Item No." id="interiorDryAccessItem1"></td>
-                            <td><input class="form-control" title="Image Ref" id="interiorDryAccessImageRef1" onblur=""></td>
+                            <td><input class="form-control" title="Item No." id="interiorDryAccessItem1" type="text"></td>
+                            <td><input class="form-control" title="Image Ref" id="interiorDryAccessImageRef1" onblur="" type="text"></td>
                             <td>
                                 <select id="interiorDryAccessSelect1" style="width:100%" title="interiorAccessSelect"></select>
                             </td>
@@ -793,8 +793,8 @@
                             <th style="color: #f44336;text-align: center;width:70%">DEFECTS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" id="interiorDryMinorItemNo0" title="Item No." ></td>
-                            <td><input class="form-control" id="interiorDryMinorImgRef0" title="Image Ref"></td>
+                            <td><input class="form-control" id="interiorDryMinorItemNo0" title="Item No." type="text"></td>
+                            <td><input class="form-control" id="interiorDryMinorImgRef0" title="Image Ref" type="text"></td>
                             <td>
                                 <!--<input class="form-control" id="exteriorMaintenanceNotes0" title="DefectsNotes">-->
                                 <textarea id="interiorDryMinorNotes0" class="form-control" title="interiorDryMinorNotes" style="height: 50px"></textarea>
@@ -816,7 +816,7 @@
                     </div>
                 </div>
                 <div title="Major Defects Found (XX)" style="padding: 10px;font-size: 18px">
-                    <button type="button" class="btn btn-primary" onclick="addOneDefects('interiorDryMajorTable','interiorDryMajorItemNo','interiorDryMajorImgRef','interiorDryMajorNotes')" style="margin-bottom: 10px;font-size: 18px">Add One Minor Defects</button>
+                    <button type="button" class="btn btn-primary" onclick="addOneDefects('interiorDryMajorTable','interiorDryMajorItemNo','interiorDryMajorImgRef','interiorDryMajorNotes')" style="margin-bottom: 10px;font-size: 18px">Add One Major Defects</button>
                     <table id="interiorDryMajorTable">
                         <tr>
                             <th style="color: #f44336;text-align: center;width:15%">ITEM No.</th>
@@ -824,8 +824,8 @@
                             <th style="color: #f44336;text-align: center;width:70%">DEFECTS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" id="interiorDryMajorItemNo0" title="Item No." ></td>
-                            <td><input class="form-control" id="interiorDryMajorImgRef0" title="Image Ref"></td>
+                            <td><input class="form-control" id="interiorDryMajorItemNo0" title="Item No." type="text" ></td>
+                            <td><input class="form-control" id="interiorDryMajorImgRef0" title="Image Ref" type="text"></td>
                             <td>
                                 <!--<input class="form-control" id="exteriorMaintenanceNotes0" title="DefectsNotes">-->
                                 <textarea id="interiorDryMajorNotes0" class="form-control" title="interiorDryMajorNotes" style="height: 50px"></textarea>
@@ -863,65 +863,65 @@
                         <div class="row form-group" id="InteriorWetAreaRow0">
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name0" style="margin-bottom: 0">Covering</label>-->
-                                <input id="InteriorWetAreaRow0_name0" placeholder="Floor Structure/Finish" class="form-control">
+                                <input id="InteriorWetAreaRow0_name0" placeholder="Floor Structure/Finish" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select0" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name1" style="margin-bottom: 0">Valleys</label>-->
-                                <input id="InteriorWetAreaRow0_name1" placeholder="Walls" class="form-control">
+                                <input id="InteriorWetAreaRow0_name1" placeholder="Walls" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select1" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4">
                                 <!--<label id="exteriorAreaRow0_name2" style="margin-bottom: 0">Ridges</label>-->
-                                <input id="InteriorWetAreaRow0_name2" placeholder="Ceiling" class="form-control">
+                                <input id="InteriorWetAreaRow0_name2" placeholder="Ceiling" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select2" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name3" placeholder="Electrics" class="form-control" >
+                                <input id="InteriorWetAreaRow0_name3" placeholder="Electrics" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select3" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name4" placeholder="Windows/Doors" class="form-control" >
+                                <input id="InteriorWetAreaRow0_name4" placeholder="Windows/Doors" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select4" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name5" placeholder="Cupboards/Vanity" class="form-control" >
+                                <input id="InteriorWetAreaRow0_name5" placeholder="Cupboards/Vanity" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select5" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name6" placeholder="Water Pressure" class="form-control">
+                                <input id="InteriorWetAreaRow0_name6" placeholder="Water Pressure" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select6" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name7" placeholder="Dampness" class="form-control">
+                                <input id="InteriorWetAreaRow0_name7" placeholder="Dampness" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select7" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name8" placeholder="Exhaust/Ventilation" class="form-control">
+                                <input id="InteriorWetAreaRow0_name8" placeholder="Exhaust/Ventilation" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select8" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name9" placeholder="Toilet Suite" class="form-control">
+                                <input id="InteriorWetAreaRow0_name9" placeholder="Toilet Suite" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select9" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name10" placeholder="Basin/Splashback" class="form-control">
+                                <input id="InteriorWetAreaRow0_name10" placeholder="Basin/Splashback" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select10" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name11" placeholder="Mirror" class="form-control">
+                                <input id="InteriorWetAreaRow0_name11" placeholder="Mirror" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select11" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name12" placeholder="Shower" class="form-control">
+                                <input id="InteriorWetAreaRow0_name12" placeholder="Shower" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select12" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name13" placeholder="Floor Waste" class="form-control">
+                                <input id="InteriorWetAreaRow0_name13" placeholder="Floor Waste" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select13" style="width:100%" title="AreaSelect"></select>
                             </div>
                             <div class="col-sm-4" style="margin-top: 20px">
-                                <input id="InteriorWetAreaRow0_name14" placeholder="Hand Dryer" class="form-control">
+                                <input id="InteriorWetAreaRow0_name14" placeholder="Hand Dryer" class="form-control" type="text">
                                 <select id="InteriorWetAreaRow0_select14" style="width:100%" title="AreaSelect"></select>
                             </div>
                         </div>
@@ -939,8 +939,8 @@
                             <th style="color: #f44336;text-align: center;width:30%">ACCESS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" title="Item No." id="interiorWetAccessItem0"></td>
-                            <td><input class="form-control" title="Image Ref"  id="interiorWetAccessImageRef0" onblur=""></td>
+                            <td><input class="form-control" title="Item No." id="interiorWetAccessItem0" type="text"></td>
+                            <td><input class="form-control" title="Image Ref"  id="interiorWetAccessImageRef0" onblur="" type="text"></td>
                             <td>
                                 <select id="interiorWetAccessSelect0" style="width:100%" title="interiorAccessSelect"></select>
                             </td>
@@ -949,8 +949,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><input class="form-control" title="Item No." id="interiorWetAccessItem1"></td>
-                            <td><input class="form-control" title="Image Ref" id="interiorWetAccessImageRef1" onblur=""></td>
+                            <td><input class="form-control" title="Item No." id="interiorWetAccessItem1" type="text"></td>
+                            <td><input class="form-control" title="Image Ref" id="interiorWetAccessImageRef1" onblur="" type="text"></td>
                             <td>
                                 <select id="interiorWetAccessSelect1" style="width:100%" title="interiorAccessSelect"></select>
                             </td>
@@ -969,8 +969,8 @@
                             <th style="color: #f44336;text-align: center;width:70%">DEFECTS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" id="interiorWetMinorItemNo0" title="Item No." ></td>
-                            <td><input class="form-control" id="interiorWetMinorImgRef0" title="Image Ref"></td>
+                            <td><input class="form-control" id="interiorWetMinorItemNo0" title="Item No." type="text"></td>
+                            <td><input class="form-control" id="interiorWetMinorImgRef0" title="Image Ref" type="text"></td>
                             <td>
                                 <!--<input class="form-control" id="exteriorMaintenanceNotes0" title="DefectsNotes">-->
                                 <textarea id="interiorWetMinorNotes0" class="form-control" title="interiorDryMinorNotes" style="height: 50px"></textarea>
@@ -992,7 +992,7 @@
                     </div>
                 </div>
                 <div title="Major Defects Found (XX)" style="padding: 10px;font-size: 18px">
-                    <button type="button" class="btn btn-primary" onclick="addOneDefects('interiorWetMajorTable','interiorWetMajorItemNo','interiorWetMajorImgRef','interiorWetMajorNotes')" style="margin-bottom: 10px;font-size: 18px">Add One Minor Defects</button>
+                    <button type="button" class="btn btn-primary" onclick="addOneDefects('interiorWetMajorTable','interiorWetMajorItemNo','interiorWetMajorImgRef','interiorWetMajorNotes')" style="margin-bottom: 10px;font-size: 18px">Add One Major Defects</button>
                     <table id="interiorWetMajorTable">
                         <tr>
                             <th style="color: #f44336;text-align: center;width:15%">ITEM No.</th>
@@ -1000,8 +1000,8 @@
                             <th style="color: #f44336;text-align: center;width:70%">DEFECTS NOTES</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" id="interiorWetMajorItemNo0" title="Item No." ></td>
-                            <td><input class="form-control" id="interiorWetMajorImgRef0" title="Image Ref"></td>
+                            <td><input class="form-control" id="interiorWetMajorItemNo0" title="Item No." type="text"></td>
+                            <td><input class="form-control" id="interiorWetMajorImgRef0" title="Image Ref" type="text"></td>
                             <td>
                                 <!--<input class="form-control" id="exteriorMaintenanceNotes0" title="DefectsNotes">-->
                                 <textarea id="interiorWetMajorNotes0" class="form-control" title="interiorDryMinorNotes" style="height: 50px"></textarea>

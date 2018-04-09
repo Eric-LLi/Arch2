@@ -74,14 +74,16 @@ function SaveReport()
     var data = [];
     var jsondata = '';
 
-    //$('input[type=text]').each
-    $('input').each
+    $('input[type=text]').each
+    //$('input').each
     (
       function()
       {
         //console.log(this.id);
+        //console.log(this.value);
+
         if ((this.id != "") && (this.id != undefined))
-          data.push({id: this.id, value: this.value});
+        data.push({id: this.id, value: this.value});
           //console.log(this.id);
           //console.log(this.value);
       }
@@ -100,10 +102,11 @@ function SaveReport()
     (
       function()
       {
-        if (this.id.substr(0, 30) == 'AssessmentSiteLimitationSelect')
+        // if (this.id.substr(0, 17) == 'HOWRoofVoidSelect')
+        // {
+        //   console.log(this.id + "saving");
+        // }
           //console.log(this.id);
-
-
         if ((this.id != "") && (this.id != undefined))
           data.push({id: this.id, value: this.value});
       }
@@ -258,15 +261,16 @@ $(function()
     var data = <?php if (!isset($booking["reportdata"]) || $booking["reportdata"] == "") echo "[]"; else echo $booking["reportdata"]; ?>;
     var photos = <?php if (sizeof($photos) == 0) echo "[]"; else echo json_encode($photos); ?>;
     var maxIamge = 0;
-    var countingImage = 0
-    var countingDrawing = 0
+    var countingImage = 0;
+    var countingDrawing = 0;
+    var imageNo = 0;
 
     //console.log(photos);
     //calculate the image 
     for(var i = 0; i < photos.length; ++i)
     {
       if(photos[i].tableName === 'MaintenanceImagesTable' || photos[i].tableName === 'ConstructionImagesTable' || 
-        photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName === 'DilapidationImagesTable'|| photos[i].tableName == 'CPImagesTable')
+        photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName === 'DilapidationImagesTable'|| photos[i].tableName == 'CPImagesTable'||photos[i].tableName == 'HOWImagesTable')
         {
             countingImage++;
         }
@@ -290,17 +294,17 @@ $(function()
         var url = 'photos/' + p.filename;
         //console.log(url);
         var image = document.getElementById(p.imageid);
-          console.log(p.imageid);
+          //console.log(p.imageid);
           //if the image is exited, then just need to populate the image with the src. 
         if (image)
         {
-          //console.log('have imageID');
+          console.log('have imageID');
           //console.log(imageID);
           image.style.display = 'block';
           image.alt = p.imageAltName
           //imageID.style.width = '265px';
-          console.log(p.imageid + " width is " + p.width);
-          console.log(p.imageid + " alt name is " + p.imageAltName);
+          //console.log(p.imageid + " width is " + p.width);
+          //console.log(p.imageid + " alt name is " + p.imageAltName);
           image.style.width = p.width;
           //imageID.style.height = '265px';
           image.style.height = p.imageSize;
@@ -324,7 +328,7 @@ $(function()
               removeID.style.width = p.width;
             }
           }
-          //console.log('the addID is ' + p.addid);
+          console.log('the addID is ' + p.addid);
           if ((p.addid != '') && (p.addid != null))
           {
           	var addButton = document.getElementById(p.addid);
@@ -338,11 +342,19 @@ $(function()
               addButton.style.display = 'none';
               addButton.style.width = p.width;
               var nextaddid = incString(p.addid);
-              var currentID = p.imageid.replace ( /[^\d.]/g, '' );
+              var currentID = p.imageid.replace( /[^\d.]/g, '' );
               var nextID = Number(currentID) + 1 ;
               var nextImageID = p.imageid.replace(/[0-9]/g, '') + nextID;
               var nextImage = document.getElementById(nextImageID);
               var nextAddButton = document.getElementById(nextaddid); 
+              // if(p.addid.substr(0,17) == 'HOWImageAddButton')
+              // {
+              //   console.log("need to unblock the label");
+              //   var currentID = p.imageid.replace ( /[^\d.]/g, '' );
+              //   //display the label elementment
+              //   var labelID = "HOWimageCaption" + currentID;
+              //   document.getElementById(labelID).style.display = 'block';
+              // }
               if(nextImage)
               {
                   //console.log(nextImage.src)
@@ -352,6 +364,50 @@ $(function()
                       nextAddButton.style.display = 'block';
                     } 
               }
+              else
+              {
+                //console.log('next image is not existed, it is not on property assessment or timber pest insepction report');
+                if (p.addid.substr(0, 16) == 'CPImageAddButton')
+                {
+                  //console.log('let build something');
+                  var currentID = p.imageid.replace ( /[^\d.]/g, '' );
+                  //display the label elementment
+                  var labelID = "imageCaption" + currentID;
+                  document.getElementById(labelID).style.display = 'block';
+                  //create the next image form
+                  var nextID = Number(currentID) + 1 ;
+                  //console.log("the next ID is " + nextID);
+                  var altID = Number(nextID) + 1;
+                  nextAltName = 'image ' + altID;
+                  //console.log("I am here!!! " + nextAltName);
+                  var altName = 'Image' + altID;
+                  var imageID = 'CPImage' + nextID;
+                  var textID = 'CPImageText' + nextID;
+                  var removeButtonID = 'CPImageRemoveButton' + nextID;
+                  var addButtonID = 'CPImageAddButton' + nextID;
+                  var uploadID = 'CPImageUpload' + nextID;
+                  addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
+                }
+                if(p.addid.substr(0,17) == 'HOWImageAddButton')
+                {
+                  var currentID = p.imageid.replace ( /[^\d.]/g, '' );
+                  //display the label elementment
+                  var labelID = "HOWimageCaption" + currentID;
+                  document.getElementById(labelID).style.display = 'block';
+                  var nextID = Number(currentID) + 1 ;
+                  var altID = Number(nextID) + 1;
+                  var altName = 'Image' + altID;
+                  var imageID = 'HOWImage' + nextID;
+                  var textID = 'HOWImageText' + nextID;
+                  var removeButtonID = 'HOWImageRemoveButton' + nextID;
+                  var addButtonID = 'HOWImageAddButton' + nextID;
+                  var uploadID = 'HOWImageUpload' + nextID;
+                  addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
+                    'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+
+                }
+              }
+
             }            
             //console.log('the current add id is ' + p.addid);
             //console.log('the next add id is ' + nextaddid);            
@@ -360,11 +416,11 @@ $(function()
         }
         else
         {
-          console.log(p.imageid + " corresponding image field is not extied");
+          //console.log(p.imageid + " corresponding image field is not extied");
           //console.log(p.tableName);
           if (p.tableName)
           {
-            console.log(p.tableName);
+            //console.log(p.tableName);
           	if(p.tableName === 'homeFeasibilityDrawingsTable')
           	{
               document.getElementById(p.tableName).style.display = 'block';
@@ -675,40 +731,84 @@ $(function()
                      console.log("still loading image, no worry");
                    }
                  }
-              }
-              else if (p.tableName == 'CPImagesTable')
-              {
+            }
+            else if (p.tableName == 'CPImagesTable')
+            {
                 var table = document.getElementById(p.tableName);
                 table.style.display = 'block';
-                addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                //console.log("the total number of images in this CP report are : " + countingImage);
+                //console.log(p.imageid);
+                //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
+                //if (imageNo === 0)
+                //{
+                  addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                         'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
-                $('#' + p.imageid).attr('src', url);
-                document.getElementById(p.addid).style.display = 'none';
-                document.getElementById(p.removeid).style.display = 'block';
-                document.getElementById(p.textid).style.display = 'block';
-                document.getElementById(p.imageid).style.display = 'block';
-                document.getElementById(p.imageid).style.width = '480px';
-                //get the current id from the imageID. 
-                var currentID = p.imageid.replace ( /[^\d.]/g, '' );
-                var nextID = Number(currentID) + 1 ;
-                console.log("the next ID is " + nextID);
+                  $('#' + p.imageid).attr('src', url);
+                  var givenID = p.imageid.replace ( /[^\d.]/g, '' );
+                  var labelID = "imageCaption" + givenID;
+                  document.getElementById(p.addid).style.display = 'none';
+                  document.getElementById(p.removeid).style.display = 'block';
+                  document.getElementById(p.textid).style.display = 'block';
+                  document.getElementById(p.imageid).style.display = 'block';
+                  document.getElementById(p.imageid).style.width = '480px';
+                  document.getElementById(labelID).style.display = 'block';
+                  //get the current id from the imageID.
+                  var currentID = p.imageid.replace ( /[^\d.]/g, '' );
+                  var nextID = Number(currentID) + 1 ;
+                  //console.log("the next ID is " + nextID);
+                  var altID = Number(nextID) + 1;
+                  if(nextID >= countingImage)
+                  {
+                    var altName = 'Image' + altID;
+                    console.log("I am here!!! need to create a image " + altName);
+                    var imageID = 'CPImage' + nextID;
+                    var textID = 'CPImageText' + nextID;
+                    var removeButtonID = 'CPImageRemoveButton' + nextID;
+                    var addButtonID = 'CPImageAddButton' + nextID;
+                    var uploadID = 'CPImageUpload' + nextID;
+                    addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
 
-                if (nextID === countingImage)
-                {
-                  console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                      //var newID = Number(id) + 1;
-                      var altID = Number(nextID) + 1;
-                      nextAltName = 'image ' + altID;
-                      console.log("I am here!!! " + nextAltName);
-                      var altName = 'Image' + altID;
-                      var imageID = 'CPImage' + count;
-                      var textID = 'CPImageText' + count;
-                      var removeButtonID = 'CPImageRemoveButton' + count;
-                      var addButtonID = 'CPImageAddButton' + count;
-                      var uploadID = 'CPImageUpload' + count;
-                      addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,
-                          'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
-                }
+                  }
+
+              }
+            else if (p.tableName == 'HOWImagesTable')
+            {
+                var table = document.getElementById(p.tableName);
+                table.style.display = 'block';
+                console.log("the total number of images in this HOW report are : " + countingImage);
+                //console.log(p.imageid);
+                //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
+                //if (imageNo === 0)
+                //{
+                  addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                        'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                  $('#' + p.imageid).attr('src', url);
+                  var givenID = p.imageid.replace ( /[^\d.]/g, '' );
+                  var labelID = "HOWimageCaption" + givenID;
+                  document.getElementById(p.addid).style.display = 'none';
+                  document.getElementById(p.removeid).style.display = 'block';
+                  document.getElementById(p.textid).style.display = 'block';
+                  document.getElementById(p.imageid).style.display = 'block';
+                  document.getElementById(p.imageid).style.width = '480px';
+                  document.getElementById(labelID).style.display = 'block';
+                  //get the current id from the imageID.
+                  var currentID = p.imageid.replace ( /[^\d.]/g, '' );
+                  var nextID = Number(currentID) + 1 ;
+                  console.log("the next ID is " + nextID);
+                  var altID = Number(nextID) + 1;
+                  if(nextID >= countingImage)
+                  {
+                    var altName = 'Image' + altID;
+                    console.log("I am here!!! need to create a image " + altName);
+                    var imageID = 'HOWImage' + nextID;
+                    var textID = 'HOWImageText' + nextID;
+                    var removeButtonID = 'HOWImageRemoveButton' + nextID;
+                    var addButtonID = 'HOWImageAddButton' + nextID;
+                    var uploadID = 'HOWImageUpload' + nextID;
+                    addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
+
+                  }
+
               }
           }
         }
@@ -810,9 +910,11 @@ $(function()
         (
           function(d)
           {
+            //console.log(d.id.substr(0,8));
             if (d.id.substr(0, 8) == 'EDSelect')
             {
               count_defect++;
+              //console.log("inside");
             }
             if (d.id.substr(0, 30) == 'AssessmentSiteLimitationSelect')
             {
@@ -834,6 +936,8 @@ $(function()
             }
           }
         )
+        //console.log(count_siteLimitation);
+        //console.log(count_defect);
 
         // ***** Add extra fields in reports that have dynamic fields...
         if (count_defect > 9)
@@ -871,7 +975,7 @@ $(function()
     ?>
 
 
-        <?php
+    <?php
       if (basename($_SERVER['SCRIPT_NAME']) == 'DesignConsultationReport.php')
       {
     ?>
@@ -931,6 +1035,805 @@ $(function()
       }
     ?>
 
+    <?php
+      if (basename($_SERVER['SCRIPT_NAME']) == 'CommercialPropertyReport.php')
+      {
+    ?>
+        loadSelect();
+        var count_summary = 0;
+        var count_defect = 0;
+        var count_siteArea = 0;
+        var count_siteAreaDuplicate = 0;
+        var count_siteAssessLimitation = 0;
+        var count_siteAssessMaintenance = 0;
+        var count_siteAssessMajor = 0;
+        var count_exteriorArea = 0;
+        var count_exteriorAreaDuplicate = 0;
+        var count_exteriorAreaRow0Select = 0;
+        var count_exteriorLimitation = 0;
+        var count_exteriorMaintenance = 0;
+        var count_exteriorMajor = 0;
+        var count_dryArea = 0;
+        var count_dryAreaDuplicate = 0;
+        var count_dryAreaRow0Select = 0;
+        var count_dryAreaRow1Select = 1;
+        var count_dryLimitation = 0;
+        var count_dryMaintenance = 0;
+        var count_dryMajor = 0
+        var count_wetArea = 0;
+        var count_wetAreaDuplicate = 0;
+        var count_wetAreaRow0Select = 0;
+        var count_wetLimitation = 0;
+        var count_wetMaintenance = 0;
+        var count_wetMajor = 0;
+
+
+        data.forEach
+        (
+          function(d)
+          {
+            //console.log(d.id.substr(0,8));
+            if (d.id.substr(0, 8) == 'EDSelect')
+            {
+              count_defect++;
+
+            }
+            if (d.id.substr(0, 8) == 'CSSelect')
+            {
+              count_summary++;
+            }
+            if(d.id.substr(0,12) == 'siteAreaName')
+            {
+              count_siteArea++;
+              count_siteAreaDuplicate++
+            }
+            if (d.id.substr(0, 16) == 'SiteAccessSelect')
+            {
+              count_siteAssessLimitation++;
+            }
+            if(d.id.substr(0,21) == 'siteMaintenanceItemNo')
+            {
+              count_siteAssessMaintenance++
+            }
+            if(d.id.substr(0,15) == 'siteMajorItemNo')
+            {
+              count_siteAssessMajor++
+            }
+            if(d.id.substr(0,16) == 'exteriorAreaName')
+            {
+              count_exteriorArea++;
+              count_exteriorAreaDuplicate++
+            }
+            if(d.id.substr(0,23) == 'exteriorAreaRow0_select')
+            {
+              count_exteriorAreaRow0Select++;
+              //console.log('counting');
+            }
+            if(d.id.substr(0,20) == 'exteriorAccessSelect')
+            {
+              count_exteriorLimitation++;
+            }
+            if(d.id.substr(0,25) == 'exteriorMinorDefectItemNo')
+            {
+              count_exteriorMaintenance++;
+            }
+            if(d.id.substr(0,19) == 'exteriorMajorItemNo')
+            {
+              count_exteriorMajor++;
+            }
+            if(d.id.substr(0,19) == 'InteriorDryAreaName')
+            {
+              count_dryArea++;
+              count_dryAreaDuplicate++;
+            }
+            if(d.id.substr(0,24)=='InteriorDryAreaRow0_name')
+            {
+              count_dryAreaRow0Select++;
+            }
+            if(d.id.substr(0,24)=='InteriorDryAreaRow1_name')
+            {
+              count_dryAreaRow1Select++;
+            }
+            if(d.id.substr(0,23) == 'interiorDryAccessSelect')
+            {
+              count_dryLimitation++
+            }
+            if(d.id.substr(0,22) == 'interiorDryMinorItemNo')
+            {
+              count_dryMaintenance++;
+            }
+            if(d.id.substr(0,22) == 'interiorDryMajorItemNo')
+            {
+              count_dryMajor++;
+            }
+            if(d.id.substr(0,19) == 'InteriorWetAreaName')
+            {
+              count_wetArea++;
+              count_wetAreaDuplicate++;
+            }
+            if(d.id.substr(0,26) == 'InteriorWetAreaRow0_select')
+            {
+              count_wetAreaRow0Select++;
+            }
+            if(d.id.substr(0,23) == 'interiorWetAccessSelect')
+            {
+              count_wetLimitation++;
+            }
+            if(d.id.substr(0,22) == 'interiorWetMinorItemNo')
+            {
+              count_wetMaintenance++;
+            }
+            if(d.id.substr(0,22) == 'interiorWetMajorItemNo')
+            {
+              count_wetMajor++;
+            }
+
+          }
+        )
+        // ***** Add extra fields in reports that have dynamic fields...
+        if (count_defect > 9)
+        {
+          count_defect -= 9;
+          for (var i = 0; i < count_defect; i++)
+            moreEvidentDefect();
+        }
+        if(count_siteArea > 2)
+        {
+          count_siteArea -= 2;
+          for(var i=0;i<count_siteArea;i++)
+          {
+            addOnePlace('siteArea');
+          }
+        }
+        if(count_siteAssessLimitation > 2)
+        {
+          //console.log('need to add table');
+          count_siteAssessLimitation -=2;
+          for (var i=0;i<count_siteAssessLimitation;i++)
+          {
+            addOneAccessLimitation('siteAccessLimitationsTable','siteAccessItem','siteAccessImageRef','SiteAccessSelect','siteAccessNotes');
+          }
+        }
+        if(count_siteAssessMaintenance > 1)
+        {
+          count_siteAssessMaintenance -= 1;
+          for (var i=0;i<count_siteAssessMaintenance;i++)
+          {
+            addOneDefects('siteMinorDefectsTable','siteMaintenanceItemNo','siteMaintenanceImgRef','siteMaintenanceNotes');
+          }
+        }
+        if(count_siteAssessMajor > 1)
+        {
+          count_siteAssessMajor -= 1;
+          for(var i=0;i<count_siteAssessMajor;i++)
+          {
+            addOneDefects('siteMajorDefectsTable','siteMajorItemNo','siteMajorImgRef','siteMajorNotes');
+          }
+        }
+        if(count_exteriorArea > 2)
+        {
+          count_exteriorArea -= 2;
+          for (var i=0;i<count_exteriorArea;i++)
+          {
+            addOnePlace('exteriorArea');
+          }
+        }
+        if(count_exteriorAreaRow0Select > 8)
+        {
+          count_exteriorAreaRow0Select -= 8;
+          for(var i=0;i<count_exteriorAreaRow0Select;i++)
+          {
+            addOneFeature(exteriorAreaRow0);
+          }
+        }
+        if(count_exteriorLimitation > 2)
+        {
+          count_exteriorLimitation -=2;
+          for (var i=0;i<count_exteriorLimitation;i++)
+          {
+            addOneAccessLimitation('exteriorAccessLimitationsTable','exteriorAccessItem','exteriorAccessImageRef','exteriorAccessSelect','exteriorAccessNotes')
+          }
+        }
+        if(count_exteriorMaintenance > 1)
+        {
+          count_exteriorMaintenance -= 1;
+          for (var i=0;i<count_exteriorMaintenance;i++)
+          {
+            addOneDefects('exteriorMinorDefectsTable','exteriorMinorDefectItemNo','exteriorMinorDefectImgRef','exteriorMinorDefectNotes')
+          }
+        }
+
+        if(count_exteriorMajor > 1)
+        {
+          count_exteriorMajor -= 1;
+          for(var i = 0;i<count_exteriorMajor;i++)
+          {
+            addOneDefects('exteriorMajorDefectsTable','exteriorMajorItemNo','exteriorMajorImgRef','exteriorMajorNotes');
+          }
+        }
+
+        if(count_dryArea > 2)
+        {
+          count_dryArea -= 2;
+          for (var i=0;i<count_dryArea;i++)
+          {
+            addOnePlace('InteriorDryArea');
+          }
+        }
+
+        if(count_dryAreaRow0Select > 7)
+        {
+          count_dryAreaRow0Select -= 7;
+          for(var i=0;i<count_dryAreaRow0Select;i++)
+          {
+            addOneFeature(InteriorDryAreaRow0);
+          }
+        }
+        if(count_dryAreaRow1Select > 4)
+        {
+          count_dryAreaRow1Select -= 4;
+          for(var i=0;i<count_dryAreaRow0Select;i++)
+          {
+            addOneFeature(InteriorDryAreaRow1);
+          }
+        }
+        if(count_dryLimitation > 2)
+        {
+          count_dryLimitation -= 2;
+          for(var i=0;i<count_dryLimitation;i++)
+          {
+            addOneAccessLimitation('interiorDryAccessLimitationsTable','interiorDryAccessItem','interiorDryAccessImageRef','interiorDryAccessSelect','interiorDryAccessNotes');
+          }
+        }
+        if(count_dryMaintenance > 1)
+        {
+          count_dryMaintenance -= 1;
+          for(var i=0;i<count_dryMaintenance;i++)
+          {
+            addOneDefects('interiorDryMinorTable','interiorDryMinorItemNo','interiorDryMinorImgRef','interiorDryMinorNotes');
+          }
+        }
+        if(count_dryMajor > 1)
+        {
+          count_dryMajor -= 1;
+          for (var i=0;i<count_dryMajor;i++)
+          {
+            addOneDefects('interiorDryMajorTable','interiorDryMajorItemNo','interiorDryMajorImgRef','interiorDryMajorNotes');
+          }
+        }
+        if(count_wetArea > 1)
+        {
+          count_wetArea -= 1;
+          for (var i =0;i<count_wetArea;i++)
+          {
+            addOnePlace('InteriorWetArea');
+          }
+        }
+        if(count_wetAreaRow0Select > 15)
+        {
+          count_wetAreaRow0Select -= 15;
+          for(var i = 0;i<count_wetAreaRow0Select;i++)
+          {
+            addOneFeature(InteriorWetAreaRow0);
+          }
+        }
+        if(count_wetLimitation > 2)
+        {
+          count_wetLimitation -= 2;
+          for(var i=0;i<count_wetLimitation;i++)
+          {
+            addOneAccessLimitation('interiorWetAccessLimitationsTable','interiorWetAccessItem','interiorWetAccessImageRef','interiorWetAccessSelect','interiorWetAccessNotes')
+          }
+        }
+        if(count_wetMaintenance > 1)
+        {
+          count_wetMaintenance -= 1;
+          for(var i=0;i<count_wetMaintenance;i++)
+          {
+            addOneDefects('interiorWetMinorTable','interiorWetMinorItemNo','interiorWetMinorImgRef','interiorWetMinorNotes');
+          }
+        }
+        if(count_wetMajor > 1)
+        {
+          count_wetMajor -= 1;
+          for (var i=0;i<count_wetMajor;i++)
+          {
+            addOneDefects('interiorWetMajorTable','interiorWetMajorItemNo','interiorWetMajorImgRef','interiorWetMajorNotes');
+          }
+        }
+
+        if (count_summary > 10)
+        {
+          count_summary -= 10;
+          for (var i = 0; i < count_summary; i++)
+            moreConstructionSummary();
+        }
+
+        //**** loop the data again, for the dynamic feature filed under each DIVRow */
+        data.forEach
+        (
+          function(d)
+          {
+            for(var i = 0; i<count_siteAreaDuplicate;i++)
+            {
+              var rowNumber = i;
+              var siteAreaRow;
+              var row = 'siteAreaRow' + rowNumber;
+                //console.log(row);
+              var matchName = 'siteAreaRow' + rowNumber + '_select';
+                //console.log(matchName);
+              if(d.id.substr(0,19) == matchName)
+              {
+                var currentID = d.id.substr(19);
+                if(currentID > 5)
+                {
+                    //console.log("need to do something");
+                  var div = document.getElementById(row);
+                  addOneFeature(div);
+                }
+              }
+            }
+            for(var i = 0; i<count_exteriorAreaDuplicate-1;i++)
+            {
+              var rowNumber = i+1;
+              var siteAreaRow;
+              var row = 'exteriorAreaRow' + rowNumber;
+                //console.log(row);
+              var matchName = 'exteriorAreaRow' + rowNumber + '_select';
+                //console.log(matchName);
+              if(d.id.substr(0,23) == matchName)
+              {
+                //console.log(d.id);
+                var currentID = d.id.substr(23);
+                //console.log(currentID);
+                if(currentID > 5)
+                {
+                    //console.log("need to do something");
+                  var div = document.getElementById(row);
+                  addOneFeature(div);
+                }
+              }
+            }
+            for(var i = 0; i< count_dryAreaDuplicate - 2;i++)
+            {
+              var rowNumber = i+2;
+              var siteAreaRow;
+              var row = 'InteriorDryAreaRow' + rowNumber;
+                //console.log(row);
+              var matchName = 'InteriorDryAreaRow' + rowNumber + '_select';
+                //console.log(matchName);
+              if(d.id.substr(0,26) == matchName)
+              {
+                //console.log(d.id);
+                var currentID = d.id.substr(26);
+                //console.log(currentID);
+                if(currentID > 5)
+                {
+                    //console.log("need to do something");
+                  var div = document.getElementById(row);
+                  addOneFeature(div);
+                }
+              }
+            }
+            for(var i = 0; i < count_wetAreaDuplicate - 1;i++)
+            {
+              var rowNumber = i+1;
+              var siteAreaRow;
+              var row = 'InteriorWetAreaRow' + rowNumber;
+                //console.log(row);
+              var matchName = 'InteriorWetAreaRow' + rowNumber + '_select';
+                //console.log(matchName);
+              if(d.id.substr(0,26) == matchName)
+              {
+                //console.log(d.id);
+                var currentID = d.id.substr(26);
+                //console.log(currentID);
+                if(currentID > 5)
+                {
+                    //console.log("need to do something");
+                  var div = document.getElementById(row);
+                  addOneFeature(div);
+                }
+              }
+            }
+          }
+        )
+    <?php
+      }
+    ?>
+
+    <?php
+      if (basename($_SERVER['SCRIPT_NAME']) == 'HOWReport.php')
+      {
+    ?>
+        loadSelect();
+        var count_summary = 0;
+        var count_site = 0;
+        var count_building = 0;
+        var count_subFloor = 0;
+        var count_roofVoid = 0;
+        var count_outBuilding = 0;
+        var count_services = 0;
+        var count_entry = 0;
+        var count_stair = 0;
+        var count_living = 0;
+        var count_lounge = 0;
+        var count_kitchen = 0;
+        var count_family = 0;
+        var count_dining = 0;
+        var count_bedroom1 = 0;
+        var count_bedroom2 = 0;
+        var count_bedroom3 = 0;
+        var count_bedroom4 = 0;
+        var count_study = 0
+        var count_retreat = 0;
+        var count_wc = 0;
+        var count_bathroom1 = 0;
+        var count_bathroom2 = 0;
+        var count_bathroom3 = 0;
+        var count_bathroom4 = 0;
+        var count_laundry = 0;
+        var count_internalServices = 0;
+        var count_defects = 0;
+        var count_acccess = 0;
+
+        data.forEach
+        (
+          function(d)
+          {
+            if(d.id.substr(0,13) == 'HOWSiteSelect')
+            {
+              count_site++;
+            }
+            if(d.id.substr(0,17) == 'HOWBuildingSelect')
+            {
+              count_building++
+            }
+            if(d.id.substr(0,17) == 'HOWSubFloorSelect')
+            {
+              count_subFloor++;
+            }
+            if(d.id.substr(0,17) == 'HOWRoofVoidSelect')
+            {
+              count_roofVoid++;
+            }
+            if(d.id.substr(0,19) == 'HOWOutBuildingPlace')
+            {
+              count_outBuilding++;
+            }
+            if(d.id.substr(0,17) == 'HOWServicesSelect')
+            {
+              count_services++;
+            }
+            if(d.id.substr(0,23) == 'HOWInternal_EntrySelect')
+            {
+              count_entry++;
+            }
+            if(d.id.substr(0,23) == 'HOWInternal_StairSelect')
+            {
+              count_stair++;
+            }
+            if(d.id.substr(0,29) == 'HOWInternal_LivingFrontSelect')
+            {
+              count_living++;
+            }
+            if(d.id.substr(0,24) == 'HOWInternal_LoungeSelect')
+            {
+              count_lounge++;
+            }
+            if(d.id.substr(0,25) == 'HOWInternal_KitchenSelect')
+            {
+              count_kitchen++;
+            }
+            if(d.id.substr(0,24) == 'HOWInternal_FamilySelect')
+            {
+              count_family++;
+            }
+            if(d.id.substr(0,24) == 'HOWInternal_DiningSelect')
+            {
+              count_dining++;
+            }
+            if(d.id.substr(0,26) == 'HOWInternal_Bedroom1Select')
+            {
+              count_bedroom1++
+            }
+            if(d.id.substr(0,26) == 'HOWInternal_Bedroom2Select')
+            {
+              count_bedroom2++
+            }
+            if(d.id.substr(0,26) == 'HOWInternal_Bedroom3Select')
+            {
+              count_bedroom3++
+            }
+            if(d.id.substr(0,26) == 'HOWInternal_Bedroom4Select')
+            {
+              count_bedroom4++
+            }
+            if(d.id.substr(0,23) == 'HOWInternal_StudySelect')
+            {
+              count_study++;
+            }
+            if(d.id.substr(0,25) == 'HOWInternal_RetreatSelect')
+            {
+              count_retreat++
+            }
+            if(d.id.substr(0,27) == 'HOWInternalService_WCSelect')
+            {
+              count_wc++;
+            }
+            if(d.id.substr(0,34) == 'HOWInternalService_Bathroom1Select')
+            {
+              count_bathroom1++;
+            }
+            if(d.id.substr(0,34) == 'HOWInternalService_Bathroom2Select')
+            {
+              count_bathroom2++;
+            }
+            if(d.id.substr(0,34) == 'HOWInternalService_Bathroom3Select')
+            {
+              count_bathroom3++;
+            }
+            if(d.id.substr(0,34) == 'HOWInternalService_Bathroom4Select')
+            {
+              count_bathroom4++;
+            }
+            if(d.id.substr(0,32) == 'HOWInternalService_LaundrySelect')
+            {
+              count_laundry++;
+            }
+            if(d.id.substr(0,32) == 'HOWInternalService_ServiceSelect')
+            {
+              count_internalServices++;
+            }
+            if(d.id.substr(0,13) == 'HOWDefectItem')
+            {
+              count_defects++;
+            }
+            if(d.id.substr(0,13) == 'HOWAccessItem')
+            {
+              count_acccess++;
+            }
+
+          }
+        )
+        //console.log("the number of rows in roof void are : " + count_roofVoid);
+        //console.log("the  number of rows in out building are : " + count_outBuilding);
+        // ***** Add extra fields in reports that have dynamic fields...
+        if (count_summary > 10)
+        {
+          count_summary -= 10;
+          for (var i = 0; i < count_summary; i++)
+            moreConstructionSummary();
+        }
+        if(count_site > 10)
+        {
+          count_site -= 10;
+          for(var i=0;i<count_site;i++)
+          {
+            createOneCell('HOWSiteTable','HOWSiteName','HOWSiteSelect','HOWSiteNote');
+          }
+        }
+        if(count_building > 18)
+        {
+          count_building -= 18;
+          for(var i=0;i<count_building;i++)
+          {
+            createOneCell('HOWBuildingExteriorTable','HOWBuildingName','HOWBuildingSelect','HOWBuildingNote');
+          }
+        }
+        if(count_subFloor > 7)
+        {
+          count_subFloor -= 7;
+          for(var i=0;i<count_subFloor;i++)
+          {
+            createOneCell('HOWSubFloorTable','HOWSubFloorName','HOWSubFloorSelect','HOWSubFloorNote');
+          }
+        }
+        if(count_roofVoid > 6)
+        {
+          count_roofVoid -= 6;
+          for(var i=0;i<count_roofVoid;i++)
+          {
+            createOneCell('HOWRoofVoidTable','HOWRoofVoidName','HOWRoofVoidSelect','HOWRoofVoidNote');
+          }
+        }
+        //console.log("the newly create rows are " + (count_outBuilding/16 -3));
+        if(count_outBuilding > 0)
+        {
+          count_outBuilding = (count_outBuilding/16 -3) - 1;
+          for(var i=0;i<count_outBuilding;i++)
+          {
+            createOneOutBuildingSpaceCell();
+            //console.log("create " + i + 'times');
+          }
+        }
+        if(count_services > 4)
+        {
+          count_services -= 4;
+          for(var i=0;i<count_services;i++)
+          {
+            createOneCell('HOWServicesTable','HOWServiceName','HOWServicesSelect','HOWServiceNote');
+          }
+        }
+        if(count_entry > 11)
+        {
+          count_entry -= 11;
+          for(var i=0;i<count_entry;i++)
+          {
+            createOneCell('HOWInternal_Entry_Table','HOWInternal_EntryName','HOWInternal_EntrySelect','HOWInternal_EntryNote');
+          }
+        }
+        if(count_stair > 11)
+        {
+          count_stair -= 11;
+          for(var i=0;i<count_stair;i++)
+          {
+            createOneCell('HOWInternal_Stair_Table','HOWInternal_StairName','HOWInternal_StairSelect','HOWInternal_StairNote');
+          }
+        }
+        if(count_living > 11)
+        {
+          count_living -= 11;
+          for(var i=0;i<count_living;i++)
+          {
+            createOneCell('HOWInternal_LivingFront_Table','HOWInternal_LivingFrontName','HOWInternal_LivingFrontSelect','HOWInternal_LivingFrontNote');
+          }
+        }
+        if(count_lounge > 11)
+        {
+          count_lounge -= 11;
+          for(var i=0;i<count_lounge;i++)
+          {
+            createOneCell('HOWInternal_Lounge_Table','HOWInternal_LoungeName','HOWInternal_LoungeSelect','HOWInternal_LoungeNote');
+          }
+        }
+        if(count_kitchen > 17)
+        {
+          count_kitchen -= 17;
+          for(var i=0;i<count_kitchen;i++)
+          {
+            createOneCell('HOWInternal_Kitchen_Table','HOWInternal_KitchenName','HOWInternal_KitchenSelect','HOWInternal_KitchenNote');
+          }
+        }
+        if(count_family > 11)
+        {
+          count_family -= 11;
+          for(var i=0;i<count_family;i++)
+          {
+            createOneCell('HOWInternal_Family_Table','HOWInternal_FamilyName','HOWInternal_FamilySelect','HOWInternal_FamilyNote');
+          }
+        }
+        if(count_dining > 11)
+        {
+          count_dining -= 11;
+          for(var i=0;i<count_dining;i++)
+          {
+            createOneCell('HOWInternal_Dining_Table','HOWInternal_DiningName','HOWInternal_DiningSelect','HOWInternal_DiningNote');
+          }
+        }
+        if(count_bedroom1 > 11)
+        {
+          count_bedroom1 -= 11;
+          for(var i=0;i<count_bedroom1;i++)
+          {
+            createOneCell('HOWInternal_Bedroom1_Table','HOWInternal_Bedroom1Name','HOWInternal_Bedroom1Select','HOWInternal_Bedroom1Note');
+          }
+        }
+        if(count_bedroom2 > 11)
+        {
+          count_bedroom2 -= 11;
+          for(var i=0;i<count_bedroom2;i++)
+          {
+            createOneCell('HOWInternal_Bedroom2_Table','HOWInternal_Bedroom2Name','HOWInternal_Bedroom2Select','HOWInternal_Bedroom2Note');
+          }
+        }
+        if(count_bedroom3 > 11)
+        {
+          count_bedroom3 -= 11;
+          for(var i=0;i<count_bedroom3;i++)
+          {
+            createOneCell('HOWInternal_Bedroom3_Table','HOWInternal_Bedroom3Name','HOWInternal_Bedroom3Select','HOWInternal_Bedroom3Note');
+          }
+        }
+        if(count_bedroom4 > 11)
+        {
+          count_bedroom4 -= 11;
+          for(var i=0;i<count_bedroom4;i++)
+          {
+            createOneCell('HOWInternal_Bedroom4_Table','HOWInternal_Bedroom4Name','HOWInternal_Bedroom4Select','HOWInternal_Bedroom4Note');
+          }
+        }
+        if(count_study > 11)
+        {
+          count_study -= 11;
+          for(var i=0;i<count_study;i++)
+          {
+            createOneCell('HOWInternal_Study_Table','HOWInternal_StudyName','HOWInternal_StudySelect','HOWInternal_StudyNote');
+          }
+        }
+        if(count_retreat > 11)
+        {
+          count_retreat -= 11;
+          for(var i=0;i<count_retreat;i++)
+          {
+            createOneCell('HOWInternal_Retreat_Table','HOWInternal_RetreatName','HOWInternal_RetreatSelect','HOWInternal_RetreatNote');
+          }
+        }
+        if(count_wc > 15)
+        {
+          count_wc -= 15;
+          for(var i=0;i<count_wc;i++)
+          {
+            createOneCell('HOWInternalService_WC_Table','HOWInternalService_WCName','HOWInternalService_WCSelect','HOWInternalService_WCNote');
+          }
+        }
+        if(count_bathroom1 > 16)
+        {
+          count_bathroom1 -= 16;
+          for(var i=0;i<count_bathroom1;i++)
+          {
+            createOneCell('HOWInternalService_Bathroom1_Table','HOWInternalService_Bathroom1Name','HOWInternalService_Bathroom1Select','HOWInternalService_Bathroom1Note');
+          }
+        }
+        if(count_bathroom2 > 16)
+        {
+          count_bathroom2 -= 16;
+          for(var i=0;i<count_bathroom1;i++)
+          {
+            createOneCell('HOWInternalService_Bathroom2_Table','HOWInternalService_Bathroom2Name','HOWInternalService_Bathroom2Select','HOWInternalService_Bathroom2Note');
+          }
+        }
+        if(count_bathroom3 > 16)
+        {
+          count_bathroom3 -= 16;
+          for(var i=0;i<count_bathroom3;i++)
+          {
+            createOneCell('HOWInternalService_Bathroom3_Table','HOWInternalService_Bathroom3Name','HOWInternalService_Bathroom3Select','HOWInternalService_Bathroom3Note');
+          }
+        }
+        if(count_bathroom4 > 16)
+        {
+          count_bathroom4 -= 16;
+          for(var i=0;i<count_bathroom4;i++)
+          {
+            createOneCell('HOWInternalService_Bathroom4_Table','HOWInternalService_Bathroom4Name','HOWInternalService_Bathroom4Select','HOWInternalService_Bathroom4Note');
+          }
+        }
+        if(count_laundry > 14)
+        {
+          count_laundry -= 14;
+          for(var i=0;i<count_laundry;i++)
+          {
+            createOneCell('HOWInternalService_Laundry_Table','HOWInternalService_LaundryName','HOWInternalService_LaundrySelect','HOWInternalService_LaundryNote');
+          }
+        }
+        if(count_internalServices > 6)
+        {
+          count_internalServices -= 6;
+          for(var i=0;i<count_internalServices;i++)
+          {
+            createOneCell('HOWInternalService_Service_Table','HOWInternalService_ServiceName','HOWInternalService_ServiceSelect','HOWInternalService_ServiceNote');
+          }
+        }
+        if(count_defects > 2)
+        {
+          count_defects -= 2;
+          for (var i=0;i<count_defects;i++)
+          {
+            moreDefects();
+          }
+        }
+        if(count_acccess > 2)
+        {
+          count_acccess -= 2;
+          for(var i=0;i<count_acccess;i++)
+          {
+            moreAccessLimitation();
+          }
+        }
+    <?php
+      }
+    ?>
 
     // ***** Finally, populate with data...
     // Blast through ALL elements previously saved..,

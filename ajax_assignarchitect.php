@@ -82,7 +82,7 @@
                     "usersmodified_id=$userid " .
                     "where " .
                     "id=$bookingcode";
-        error_log($dbupdate);
+        //error_log($dbupdate);
         if ($dbresult = SharedQuery($dbupdate, $dblink))
         {
           $rc = 0;
@@ -163,6 +163,8 @@
                       "            left join users u2 on (b2.users_id=u2.id) " .
                       "where " .
                       "b1.id=$bookingcode";
+
+          //error_log($dbselect);
           if ($dbresult = SharedQuery($dbselect, $dblink))
           {
             if ($numrows = SharedNumRows($dbresult))
@@ -170,6 +172,7 @@
               $booking = null;
               while ($dbrow = SharedFetchArray($dbresult))
                 $booking = $dbrow;
+                //error_log($booking['archemail']);
 
               // Let customer know...
               if ($booking['custemail'] != "")

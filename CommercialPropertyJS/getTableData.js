@@ -23,12 +23,12 @@ function getClientDetailsTable() {
                     {
                         text: 'Name',
                         style: 'tableBoldTextAlignLeft',
-                        border: [false, true, false, true]
+                        border: [false, true, true, true]
 
                     },
                     {
                         text: getIt('CP_ClientName'),
-                        fontSize: 10,
+                        fontSize: 9,
                         colSpan:3,
                         border: [false, true, false, true]
                     }
@@ -41,7 +41,7 @@ function getClientDetailsTable() {
                     },
                     {
                         text: getIt('CP_ClientPhone'),
-                        fontSize: 10
+                        fontSize: 9
                     },
                     {
                         text: 'Booking No',
@@ -49,7 +49,7 @@ function getClientDetailsTable() {
                     },
                     {
                         text: getIt('CP_BookingNo'),
-                        fontSize: 10,
+                        fontSize: 9,
                         border: [true, true, false, true]
                     }
                 ]
@@ -86,7 +86,7 @@ function getAssessmentDetailsTable() {
                     {
                         text: getIt('CP_Address'),
                         colSpan: 5,
-                        fontSize: 10,
+                        fontSize: 9,
                         border: [true, true, false, true]
                     },
                     {}, {}, {}, {}],
@@ -98,7 +98,7 @@ function getAssessmentDetailsTable() {
                     },
                     {
                         text: getIt('CP_Suburb'),
-                        fontSize: 10
+                        fontSize: 9
                     },
                     {
                         text: 'State',
@@ -106,7 +106,7 @@ function getAssessmentDetailsTable() {
                     },
                     {
                         text: getIt('CP_State'),
-                        fontSize: 10
+                        fontSize: 9
                     },
                     {
                         text: 'Postcode',
@@ -114,7 +114,7 @@ function getAssessmentDetailsTable() {
                     },
                     {
                         text: getIt('CP_Postcode'),
-                        fontSize: 10,
+                        fontSize: 9,
                         border: [true, true, false, true]
                     }
                 ],
@@ -669,7 +669,7 @@ function getAreaTable(areaID,nameID,rowID) {
             var placeID = rowID + i + '_name';
             var selectID = rowID + i + '_select';
             var partTable = createExInteriorPartialTable(input,featureNumber,placeID,selectID);
-            console.log(partTable);
+            //console.log(partTable);
             data = data.concat(partTable);
         }
 
@@ -1399,8 +1399,28 @@ function getImages()
 {
     var data = [];
     var tableBody;
+    var finalImageNumber = 0;
+    var supposedImageNumber = 0;
     var totalImageNumber = $('#CPImagesDIV').find('> form').length;
-    console.log("The total number of images: " + totalImageNumber);
+    console.log("The total number of forms are: " + totalImageNumber);
+
+    if(totalImageNumber != 0)
+    {
+        var lastImage = document.getElementById('CPImagesDIV').lastElementChild.lastChild.firstChild;
+        //console.log(lastImage);
+        supposedImageNumber = lastImage.id.replace( /[^\d.]/g, '' );//this is the image number based on the id of last image on the form
+        console.log("The supposed number of images based on id is " + supposedImageNumber);
+    }
+
+    if(totalImageNumber > supposedImageNumber)
+    {
+        finalImageNumber = totalImageNumber;
+    }
+    else
+    {
+        finalImageNumber = supposedImageNumber;
+    }
+
 
     if (document.getElementById('CPImagesTable').style.display != 'none')
     {
@@ -1427,7 +1447,7 @@ function getImages()
         ];
         data.push(secondRow);
     
-        for (var i=0;i<totalImageNumber;i=i+2)
+        for (var i=0;i<finalImageNumber;i=i+2)
         {
             var n = i + 1;
             var firstImageID = 'CPImage' + i;
@@ -1456,6 +1476,14 @@ function getImages()
                 widths: ['*','*'],
                 headerRows: 2,
                 body: data
+            },
+            layout: {
+                hLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+                },
+                vLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                }
             },
             margin:[0,5,0,10]
         };

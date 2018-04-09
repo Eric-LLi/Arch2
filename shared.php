@@ -14,6 +14,8 @@
   $gConfig['smtp-host'] = "mail.adtalkserver.net";
 
   $gConfig['adminemail'] = "office@archicentreaustralia.com.au";
+  //$gConfig['adminemail'] = "M0410898213@126.com";
+  $gConfig['ccemail'] = "emily92308@126.com";
   //$gConfig['adminemail'] = "tim@adtalk.com.au";
   //$gConfig['adminemail'] = "mitchamrumpus@gmail.com";
 
@@ -39,9 +41,9 @@
     "Home Feasibility",
     "Renovation Feasibility",
     "Residential Home Warranty Report",
-    //"Commercial Property Assessment Report",
+    "Commercial Property Assessment Report",
     //"Commercial Dilapidation Survey",
-		//"Residential Home Access & Services Report"
+		"Residential Home Access & Services Report"
   ];
 
   
@@ -66,7 +68,7 @@
     "HomeFeasibilityReport.php",
     "RenovationFeasibilityReport.php",
     "HOWReport.php",
-    //"CommercialPropertyAssessmentReport.php",
+    "CommercialPropertyReport.php",
     //"CommercialDilapidationSurvey.php",
 		
 		"HomeAccessReport.php",

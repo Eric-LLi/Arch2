@@ -7,6 +7,10 @@
  * */
 function generateHOWPDF(mode) {
     resetTotalImagesCaptions();
+    if (mode == 'save')
+    {
+        $('#savingPDFAlert').show('fade');
+    }
     var isMobile = {
         Android: function() {
             return navigator.userAgent.match(/Android/i);
@@ -648,8 +652,7 @@ function generateHOWPDF(mode) {
                         margin:[3,30,3,0],
                         alignment:'center'
                     }
-                ],
-                pageBreak: 'after'
+                ]
             }
 
         ],
@@ -775,7 +778,7 @@ function generateHOWPDF(mode) {
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
         pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
             var base64 = encodedString;
-            $('#savingPDFAlert').show('fade');
+            //$('#savingPDFAlert').show('fade');
             doSavePDF(base64);
             //console.log(base64);
         });

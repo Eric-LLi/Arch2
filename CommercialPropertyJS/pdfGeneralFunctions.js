@@ -627,7 +627,7 @@ function getCoverImage(id) {
     var myWidth = myImage.width;
 
     if (myWidth == 0) {
-        console.log('not cover');
+        //console.log('not cover');
         imageSection = {
             text: "",
             width: 0,
@@ -636,10 +636,10 @@ function getCoverImage(id) {
     }
     else
     {
-        console.log('has cover');
+        //console.log('has cover');
         if (checkImage(id) >= 0)
         {
-            console.log('reload');
+           // console.log('reload');
             var canvas = document.createElement("canvas");
             canvas.width = myImage.naturalWidth;
             canvas.height = myImage.naturalHeight;
@@ -654,7 +654,7 @@ function getCoverImage(id) {
             }
         }
         else{
-            console.log('just upload');
+           // console.log('just upload');
             imageSection = {
                 image: myImage.src,
                 height: 100,
@@ -693,7 +693,7 @@ function getPhoto(id)
             //console.log("this id does have image display, but need to check the src");
             if (checkImage(id) >= 0)
             {
-                console.log('src is reload');
+                //console.log('src is reload');
                 var canvas = document.createElement("canvas");
                 canvas.width = myImage.naturalWidth;
                 canvas.height = myImage.naturalHeight;
@@ -711,7 +711,7 @@ function getPhoto(id)
             }
             else
             {
-                console.log('src is just upload');
+                //console.log('src is just upload');
                 //console.log(myImage.width);
                 //console.log(myImage.style.width);
                 imageSection = {
@@ -746,12 +746,13 @@ function getImageText(id){
     var textInput = document.getElementById(id);
     var selectedID = String(id);
     currentID = selectedID.replace ( /[^\d.]/g, '' );
-    console.log("the id " + id);
+   // console.log("the id " + id);
+    var imageNo = Number(currentID)+1;
     var imageID = "CPImage" + currentID;
 
     var image = document.getElementById(imageID);
 
-    console.log("the corresponding image id is " + imageID);
+    //console.log("the corresponding image id is " + imageID);
 
 
     //check if the text id exits
@@ -762,7 +763,7 @@ function getImageText(id){
         {
             description = textInput.value.trim();
 
-            var caption = 'IMG ' + totalImagesCaptions + " ";
+            var caption = 'IMG ' + imageNo + " ";
             //console.log(caption);
             result = {
                 text:
@@ -803,7 +804,7 @@ function getImageText(id){
     }
     else
     {
-        console.log('there is no corresponding text block for this id ' + id);
+        //console.log('there is no corresponding text block for this id ' + id);
         result = {
             text:"",
             // fillColor: '#FFFFFF',
@@ -812,5 +813,25 @@ function getImageText(id){
             alignment: 'center'
         }
     }
+    return result;
+}
+
+
+/**
+ * Get image Stack
+ */
+function getImageStack()
+{
+    //check wheter there is images, the able is visisble.
+    //if have, return the full stack, otherwise, a empty string is fine.
+    result;
+    result = {
+        stack:[
+            getImages()
+        ],
+        pageBreak:'after'
+    };
+
+
     return result;
 }

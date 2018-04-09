@@ -388,7 +388,7 @@ function getReportAuthorisation()
 
     if (state == 'VIC')
     {
-        console.log("need to show the signature");
+        //console.log("need to show the signature");
         result = {
             table:{
                 widths: ['*', '*'],
@@ -436,7 +436,7 @@ function getReportAuthorisation()
     }
     else
     {
-        console.log('return nothing');
+        //console.log('return nothing');
         result = {
             text:''
         }
@@ -746,7 +746,7 @@ function getSiteTable()
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWSiteTable').rows.length;
-    console.log(rowCount);
+    //console.log(rowCount);
 
     var firstRow = [
         {
@@ -866,7 +866,7 @@ function getBuildingExteriorTable()
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWBuildingExteriorTable').rows.length;
-    console.log(rowCount);
+    //console.log(rowCount);
 
     var firstRow = [
         {
@@ -985,7 +985,7 @@ function getSubFloorTable()
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWSubFloorTable').rows.length;
-    console.log(rowCount);
+    //console.log(rowCount);
 
     var firstRow = [
         {
@@ -1104,7 +1104,7 @@ function getRoofVoidTable()
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWRoofVoidTable').rows.length;
-    console.log(rowCount);
+    //console.log(rowCount);
 
     var firstRow = [
         {
@@ -1228,8 +1228,8 @@ function getOutBuildingTable()
     var rowCount = document.getElementById('HOWOutBuildingTable').rows.length;
     var colCount = document.getElementById('HOWOutBuildingTable').rows[0].cells.length;
 
-    console.log('The row in HOWOutBuildingTable is ' + rowCount);
-    console.log('The column in HOWOutBuildingTable is ' + colCount);
+    //console.log('The row in HOWOutBuildingTable is ' + rowCount);
+    //console.log('The column in HOWOutBuildingTable is ' + colCount);
     var firstRow = [];
     var secondRow = [];
 
@@ -1298,7 +1298,7 @@ function getOutBuildingTable()
             {
                 place = document.getElementById('HOWOutBuildingPlace' + placeID).textContent;
             }
-            console.log(place);
+           // console.log(place);
 
             cell1 = {
                 text:place,
@@ -1426,7 +1426,7 @@ function getServicesTable()
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWServicesTable').rows.length;
-    console.log(rowCount);
+    //console.log(rowCount);
 
     var firstRow = [
         {
@@ -1619,10 +1619,7 @@ function getLivingBedroomTable()
     var retreatTable = createInternalOnePartTable('RETREAT (UPPER)',retreatTableCount,'HOWInternal_RetreatName','HOWInternal_RetreatSelect','HOWInternal_RetreatNote',10);
     data = data.concat(retreatTable);
     //console.log(retreatTable);
-
-
-
-    console.log(data);
+    //console.log(data);
 
     tableBody = {
         table: {
@@ -1754,6 +1751,7 @@ function createInternalOnePartTable(cellText,rowCount,placeID,selectID,noteID,fi
                 note = document.getElementById(noteID + a);
             }
 
+
             if (place != null)
             {
                 if (a > fixedLastID)
@@ -1764,8 +1762,7 @@ function createInternalOnePartTable(cellText,rowCount,placeID,selectID,noteID,fi
                 cell1 = {
                     text:place,
                     bold:true,
-                    style: 'tableText',
-                    noWrap: true
+                    style: 'tableText'
                 };
             }
             else
@@ -1778,6 +1775,10 @@ function createInternalOnePartTable(cellText,rowCount,placeID,selectID,noteID,fi
                 if (a > fixedLastID)
                 {
                     select = select.value;
+                    if(select = 'Choose an item')
+                    {
+                        select = '';
+                    }
                 }
                 cell2 = {
                     text:select,
@@ -1970,11 +1971,28 @@ function getImagesTable()
     var result;
     var data = [];
     var tableBody;
+    var finalImageNumber = 0;
+    var supposedImageNumber = 0;
     var totalImageNumber = $('#HOWImagesDIV').find('> form').length;
-    console.log("the current total image number is: " + totalImageNumber);
     var fullAddress = document.getElementById('inspection_address').value.trim() + " " + document.getElementById('inspection_suburb').value.trim();
 
+    //console.log("The total number of forms are: " + totalImageNumber);
+    if(totalImageNumber != 0)
+    {
+        var lastImage = document.getElementById('HOWImagesDIV').lastElementChild.lastChild.firstChild;
+        supposedImageNumber = lastImage.id.replace( /[^\d.]/g, '' );//this is the image number based on the id of last image on the form
+        //console.log("The supposed number of images based on id is " + supposedImageNumber);
+    }
 
+
+    if(totalImageNumber > supposedImageNumber)
+    {
+        finalImageNumber = totalImageNumber;
+    }
+    else
+    {
+        finalImageNumber = supposedImageNumber;
+    }
 
     var firstRow = [
         {
@@ -1996,7 +2014,7 @@ function getImagesTable()
     ];
     data.push(secondRow);
 
-    for(i=0;i<totalImageNumber;i=i+2)
+    for(i=0;i<finalImageNumber;i=i+2)
     {
 
         var n = i + 1;

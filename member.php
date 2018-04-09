@@ -1025,7 +1025,7 @@
                 var estateagentcontact = $('#fldNewBookingEstateAgentContact').textbox('getValue');
                 var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                 var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
-                console.log(custemail);
+                //console.log(custemail);
 
                 if (!_.isBlank(reportid))
                 {
@@ -1592,9 +1592,59 @@
                       var response = JSON.parse(result);
 
                       if (response.rc == 0)
+                      {
                         doRefreshBookings();
+                        noty({text: response.msg, type: 'success', timeout: 3000});
+                      }
                       else
+                      {
                         noty({text: response.msg, type: 'error', timeout: 10000});
+                      }
+
+                    }
+                  );
+                }
+              }
+            );
+          }
+        ))
+        noty({text: 'Please select a booking to remove', type: 'warning', timeout: 4000});
+    }
+    function doCancelBooking()
+    {
+      if (!doGridGetSelectedRowData
+        (
+          'divBookingsG',
+          function(row, index)
+          {
+            doPromptOkCancel
+            (
+              'Cancel booking ' + row.bookingcode + '?',
+              function(result)
+              {
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_cancelbooking.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
+
+                      if (response.rc == 0)
+                      {
+                        doRefreshBookings();
+                        noty({text: response.msg, type: 'success', timeout: 3000});
+                      }
+                      else
+                      {
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                      }
+
                     }
                   );
                 }
@@ -2219,7 +2269,7 @@
           remoteSort: false,
           multiSort: true,
           rowStyler: function(index,row){
-                    if (row.dateexpired != null){
+                    if (row.datecancelled != null){
                         return 'background-color:#6293BB;color:#fff;font-weight:bold;';
                     }
                 },
@@ -2274,7 +2324,7 @@
               {title: 'By',             rowspan: 2, field: 'usercreatedid',     width: 200, align: 'left',   resizable: true, sortable: true, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return row.usercreatedfirstname + ' ' + row.usercreatedlastname;}},
               {title: 'Modified',       rowspan: 2, field: 'datemodified',      width: 150, align: 'right',  resizable: true, sortable: true},
               {title: 'By',             rowspan: 2, field: 'usermodifiedid',    width: 200, align: 'left',   resizable: true, sortable: true, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return (_.isNull(row.usermodifiedfirstname)) ? '' : row.usermodifiedfirstname + ' ' + row.usermodifiedlastname;}},
-              {title: 'Cancelld Date',       rowspan: 2, field: 'dateexpired',      width: 150, align: 'right',  resizable: true, sortable: true},
+              {title: 'Cancelld Date',       rowspan: 2, field: 'datecancelled',      width: 150, align: 'right',  resizable: true, sortable: true},
             ],
             [
               {title: 'Report',                     field: 'reportid',          width: 150, align: 'left',   resizable: true, formatter: function(value, row) {return doGetStringFromIdInObjArray(reports, value);}},
@@ -2592,7 +2642,8 @@
     <?php
         }
       ?>
-      <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
+      <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
+      <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
       <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>
     </div>
   </div>

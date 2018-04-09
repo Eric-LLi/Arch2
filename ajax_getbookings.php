@@ -67,7 +67,7 @@
                   "b1.emailcount," .
                   "b1.lastemailed," .
                   "b1.datecompleted," .
-                  "b1.dateexpired," .
+                  "b1.datecancelled,".
                   "b1.dateapproved," .
                   "b1.datepaid," .
 

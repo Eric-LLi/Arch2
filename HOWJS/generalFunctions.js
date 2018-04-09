@@ -26,10 +26,11 @@ function getIt(id) {
 
     result = document.getElementById(id).value.trim();
 
-    // if (result == 'Choose an item')
-    // {
-    //     result = '';
-    // }
+    if (result == 'Choose an item')
+    {
+
+        result = '';
+    }
     return result;
 }
 
@@ -385,7 +386,7 @@ function displayCoverImage(id) {
     var myImage = document.getElementById(id);
     var myWidth = myImage.width;
     if (myWidth == 0) {
-        console.log('not cover');
+        //console.log('not cover');
         imageSection = {
             text: "",
             width: 0,
@@ -394,10 +395,10 @@ function displayCoverImage(id) {
     }
     else
     {
-        console.log('has cover');
+        //console.log('has cover');
         if (checkImage(id) >= 0)
         {
-            console.log('reload');
+            //console.log('reload');
             var canvas = document.createElement("canvas");
             canvas.width = myImage.naturalWidth;
             canvas.height = myImage.naturalHeight;
@@ -412,7 +413,7 @@ function displayCoverImage(id) {
             }
         }
         else{
-            console.log('just upload');
+            //console.log('just upload');
             imageSection = {
                 image: myImage.src,
                 height: 150,
@@ -441,7 +442,7 @@ function splitTextArea(id)
         var paragraphTrim = newText.trim();
         var paragraphs = paragraphTrim.split("\n");
         var length = paragraphs.length;
-        console.log(length);
+        //console.log(length);
 
         for (var i = 0; i < length; i++) {
             var text = {
@@ -485,7 +486,7 @@ function getCoverImage(id) {
     var myWidth = myImage.width;
 
     if (myWidth == 0) {
-        console.log('not cover');
+       // console.log('not cover');
         imageSection = {
             text: "",
             width: 0,
@@ -494,10 +495,10 @@ function getCoverImage(id) {
     } 
     else 
     {
-        console.log('has cover');
+        //console.log('has cover');
         if (checkImage(id) >= 0)
         {
-            console.log('reload');
+           // console.log('reload');
             var canvas = document.createElement("canvas");
             canvas.width = myImage.naturalWidth;
             canvas.height = myImage.naturalHeight;
@@ -512,7 +513,7 @@ function getCoverImage(id) {
             }
         }
         else{
-            console.log('just upload');
+            //console.log('just upload');
             imageSection = {
                 image: myImage.src,
                 height: 100,
@@ -538,7 +539,7 @@ function getPhoto(id)
     if (myImage)
     {
         //image id exists, check whether there is a image on display based on the width, 0 --> no
-        if(myImage.style.width == '0px')
+        if(myImage.style.display == 'none')
         {
             //console.log("this id exist but does not have image display");
             imageSection = {
@@ -551,7 +552,7 @@ function getPhoto(id)
             //console.log("this id does have image display, but need to check the src");
             if (checkImage(id) >= 0)
             {
-                console.log('src is reload');
+                //console.log('src is reload');
                 var canvas = document.createElement("canvas");
                 canvas.width = myImage.naturalWidth;
                 canvas.height = myImage.naturalHeight;
@@ -568,7 +569,7 @@ function getPhoto(id)
             }
             else
             {
-                console.log('src is just upload');
+                //console.log('src is just upload');
                 // console.log(myImage.width);
                 // console.log(myImage.style.width);
                 imageSection = {
@@ -603,12 +604,12 @@ function getImageText(id){
     var textInput = document.getElementById(id);
     var selectedID = String(id);
     currentID = selectedID.replace ( /[^\d.]/g, '' );
-    console.log("the id " + id);
+    //console.log("the id " + id);
+    var imageNo = Number(currentID)+1;
     var imageID = "HOWImage" + currentID;
-
     var image = document.getElementById(imageID);
 
-    console.log("the corresponding image id is " + imageID);
+    //console.log("the corresponding image id is " + imageID);
 
 
     //check if the text id exits
@@ -619,8 +620,8 @@ function getImageText(id){
         {
             description = textInput.value.trim();
 
-            var caption = 'No. ' + totalImagesCaptions + "   ";
-            console.log(caption);
+            var caption = 'No. ' + imageNo + "   ";
+           // console.log(caption);
             result = {
                 text:[caption, {text:description,alignment: 'center'}],
                 //text:caption,
@@ -645,7 +646,7 @@ function getImageText(id){
     }
     else
     {
-        console.log('there is no corresponding text block for this id ' + id);
+        //console.log('there is no corresponding text block for this id ' + id);
         result = {
             text:"",
             // fillColor: '#FFFFFF',
@@ -664,21 +665,21 @@ function getDrawings(id1, id2) {
     var myImage = document.getElementById(id1);
     if (myImage)
     {
-        console.log(myImage.style.display);
+        //console.log(myImage.style.display);
         //has image, check whether it is from database or just upload
         if(myImage.style.display == 'none')
         {
-            console.log("this id exist but does not have drawing display");
+            //console.log("this id exist but does not have drawing display");
             imageSection = {
                 text:''
             }
         }
         else
         {
-            console.log("this id does have drawing display, but need to check the src");
+            //console.log("this id does have drawing display, but need to check the src");
             if (checkImage(id1) >= 0)
             {
-                console.log('src is reload');
+                //console.log('src is reload');
                 var canvas = document.createElement("canvas");
                 canvas.width = myImage.naturalWidth;
                 canvas.height = myImage.naturalHeight;
@@ -716,7 +717,7 @@ function getDrawings(id1, id2) {
             }
             else
             {
-                console.log('src is just upload');
+                //console.log('src is just upload');
                 // console.log(myImage.width);
                 // console.log(myImage.style.width);
                 imageSection = {
@@ -752,7 +753,7 @@ function getDrawings(id1, id2) {
     else
     {
         //no image at all
-        console.log('no upload images at all');
+        //console.log('no upload images at all');
         imageSection = {
             text:""
         }

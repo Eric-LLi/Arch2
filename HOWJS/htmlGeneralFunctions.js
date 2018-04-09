@@ -401,7 +401,7 @@ function createOneCell(tableID,name,select,textAreaName)
 
     var table = document.getElementById(tableID);
     var rowCount = table.rows.length;
-    console.log(rowCount);
+    //console.log(rowCount);
 
     var row = table.insertRow(rowCount);
     var cell1 = row.insertCell(0);
@@ -413,6 +413,7 @@ function createOneCell(tableID,name,select,textAreaName)
     var nameInput = document.createElement('INPUT');
     nameInput.setAttribute('class','form-control');
     nameInput.setAttribute('title','name');
+    nameInput.setAttribute('type','text');
     //nameInput.setAttribute('placeholder','enter cost name');
     //nameInput.id = 'HOWSiteName' + rowCount;
     nameInput.id = name + rowCount;
@@ -483,6 +484,7 @@ function createOneOutBuildingSpaceCell()
             var nameInput = document.createElement('INPUT');
             nameInput.setAttribute('class','form-control');
             nameInput.setAttribute('title','name');
+            nameInput.setAttribute('type','text');
             nameInput.id = 'HOWOutBuildingPlace' + (rowCount - 1);
             th.appendChild(nameInput);
             row.appendChild(th);
@@ -554,6 +556,7 @@ function moreDefects() {
     var nameInput = document.createElement('INPUT');
     nameInput.setAttribute('class','form-control');
     nameInput.setAttribute('title','itemNo');
+    nameInput.setAttribute('type','text');
     nameInput.id = 'HOWDefectItem' + id;
     cell1.appendChild(nameInput);
 
@@ -574,7 +577,7 @@ function moreDefects() {
 
 function moreAccessLimitation()
 {
-    console.log('your are in');
+    //console.log('your are in');
     var table = document.getElementById('HOWAccessTable');
     var rowCount = table.rows.length;
 
@@ -588,6 +591,7 @@ function moreAccessLimitation()
     var nameInput = document.createElement('INPUT');
     nameInput.setAttribute('class','form-control');
     nameInput.setAttribute('title','itemNO');
+    nameInput.setAttribute('type','text');
     nameInput.id = 'HOWAccessItem' + id;
     cell1.appendChild(nameInput);
 
@@ -613,7 +617,7 @@ $('#HOWUploadImages').change(function(){
     table.style.display = 'block';
     var count = this.files.length;
     var imageFile = this.files;
-    console.log(count);
+    //console.log(count);
 
     for (var i = 0; i<count;i++)
         {
@@ -631,11 +635,12 @@ $('#HOWUploadImages').change(function(){
                     var removeButtonID = 'HOWImageRemoveButton' + ii;
                     var addButtonID = 'HOWImageAddButton' + ii;
                     var uploadID = 'HOWImageUpload' + ii;
+                    var labelID = "HOWimageCaption" + ii;
 
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
                     //addDrawing();
                     addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,
-                        'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '485px', '485px');
+                        'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '485px');
 
                     loadImage.parseMetaData(imageFile[ii], function (data) {
                         //console.log('I am in loadImage function');
@@ -647,6 +652,7 @@ $('#HOWUploadImages').change(function(){
                         var removeButton = document.getElementById(removeButtonID);
                         var description  = document.getElementById(textID);
                         var addButton = document.getElementById(addButtonID);
+                        var label = document.getElementById(labelID);
                         //if exif data available, update orientation
                         if (data.exif) {
                             orientation = data.exif.get('Orientation');
@@ -664,6 +670,7 @@ $('#HOWUploadImages').change(function(){
                                 image.style.display = 'block';
                                 image.style.width = '480px';
                                 description.style.width = '480px';
+                                label.style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
@@ -708,6 +715,7 @@ function removeOneHOWImage(click_id)
     var removeButtonID = 'HOWImageRemoveButton' + id;
     var addButtonID = 'HOWImageAddButton' + id;
     var descriptionID = 'HOWImageText' + id;
+    var labelID = "HOWimageCaption" + id;
 
 
     var imageSelect = '#' + imageID;
@@ -716,11 +724,13 @@ function removeOneHOWImage(click_id)
     var button = document.getElementById(removeButtonID);
     var addButton = document.getElementById(addButtonID);
     var description = document.getElementById(descriptionID);
+    var label = document.getElementById(labelID);
 
     button.style.display = 'none';
     addButton.style.display = 'block';
     description.value = "";
     description.style.display = 'none';
+    label.style.display = 'none';
     //image.style.width = '0px';
     image.style.display = 'none';
     doRemovePhoto(imageID);
@@ -728,7 +738,7 @@ function removeOneHOWImage(click_id)
 
 function addOneHOWImage(click_id)
 {
-    console.log(click_id);
+    //console.log(click_id);
 
     var id;
     var selectedID = String(click_id);
@@ -740,6 +750,7 @@ function addOneHOWImage(click_id)
     var removeButtonID = 'HOWImageRemoveButton' + id;
     var addButtonID = 'HOWImageAddButton' + id;
     var uploadID = 'HOWImageUpload' + id;
+    var labelID = "HOWimageCaption" + id;
     // console.log(uploadID);
     var x = document.getElementById(uploadID);
     x.click();
@@ -758,6 +769,7 @@ function addOneHOWImage(click_id)
                 var removeButton = document.getElementById(removeButtonID);
                 var description  = document.getElementById(textID);
                 var addButton = document.getElementById(addButtonID);
+                var label = document.getElementById(labelID);
                 //if exif data available, update orientation
                 if (data.exif) {
                     orientation = data.exif.get('Orientation');
@@ -773,11 +785,11 @@ function addOneHOWImage(click_id)
                         description.style.display = 'block';
                         image.style.display = 'block';
                         image.style.width = '480px';
+                        label.style.display = 'block';
                         // image.style.height = '250px';
                         var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                         //console.log(file);
                         doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'HOWImagesTable',altName,'HOWImagesDIV',uploadID,'removeOneHOWImage(this.id)','addOneHOWImage(this.id)','480px','480px');
-
                     },
                     {
                         canvas: true,
@@ -790,16 +802,17 @@ function addOneHOWImage(click_id)
         }
     });
 
-        var newID = Number(id) + 1;
-        var altID = Number(id) + 2;
-        nextAltName = 'drawing  ' + altID;
-        console.log("I am here!!! need another image element ,the next id  " + newID);
-        var nextImageID = 'HOWImage' + newID;
-        var nextTextID = 'HOWImageText' + newID;
-        var nextRemoveButtonID = 'HOWImageRemoveButton' + newID;
-        var nextAddButtonID = 'HOWImageAddButton' + newID;
-        var nextUploadID = 'HOWImageUpload' + newID;
-        addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+    var lastImage = document.getElementById('HOWImagesDIV').lastElementChild.lastChild.firstChild;
+    var newID = Number(lastImage.id.replace( /[^\d.]/g, '' ))+1;
+    var altID = Number(newID) + 1;
+    nextAltName = 'drawing  ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+    var nextImageID = 'HOWImage' + newID;
+    var nextTextID = 'HOWImageText' + newID;
+    var nextRemoveButtonID = 'HOWImageRemoveButton' + newID;
+    var nextAddButtonID = 'HOWImageAddButton' + newID;
+    var nextUploadID = 'HOWImageUpload' + newID;
+    addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
             'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
 
 
@@ -819,10 +832,12 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     var container2 = document.createElement("div");
     var container3 = document.createElement("div");
     var container4 = document.createElement("div");
+    var container5 = document.createElement("div");
     container1.setAttribute("class", "col-sm");
     container2.setAttribute("class", "col-sm");
     container3.setAttribute("class", "col-sm");
     container4.setAttribute("class", "col-sm");
+    container5.setAttribute("class", "col-sm");
 
     //crate an image area
     var img = document.createElement('img');
@@ -834,6 +849,21 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     img.style.width = width;
     img.style.height = imageSize;
     img.style.paddingTop = '10px';
+
+    //create an lable
+    container2.style.textAlign = 'center';
+    var label = document.createElement('label');
+    //label.className = "Label";
+    label.style.width = imageSize;
+    label.style.height = "15px";
+    var givenID = imageID.replace ( /[^\d.]/g, '' );
+    var labelID = "HOWimageCaption" + givenID;
+    label.id = labelID;
+    //console.log("the id " + givenID);
+    var imageNo = Number(givenID)+1;
+    label.textContent = "IMG " + imageNo;
+    label.setAttribute("class","figurecaption");
+    label.style.display = 'none';
 
     //create an input for the text
     var textInput = document.createElement('INPUT');
@@ -847,6 +877,7 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     //create an input for the remove button
     var removeButton = document.createElement('INPUT');
     removeButton.setAttribute("type", "button");
+
     removeButton.setAttribute("value", "Remove");
     removeButton.setAttribute("onclick", removeFunction);
     removeButton.id = removeButtonID;
@@ -888,11 +919,13 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     form.appendChild(container2);
     form.appendChild(container3);
     form.appendChild(container4);
+    form.appendChild(container5);
     container1.appendChild(img);
-    container2.appendChild(textInput);
-    container3.appendChild(removeButton);
+    container2.appendChild(label);
+    container3.appendChild(textInput);
+    container4.appendChild(removeButton);
     container4.appendChild(addButton);
-    container4.appendChild(uploadFile);
+    container5.appendChild(uploadFile);
 }
 
 function addRecommendations(labelID,selectID)

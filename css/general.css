@@ -167,4 +167,9 @@ td, th {
     right:30px;
 }
 
-
+.figurecaption{
+    font-variant: small-caps;
+    font-family: Arial;
+    font-weight: bold;
+    color: #bb3333;
+}

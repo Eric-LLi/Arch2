@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
     <?php require_once("saveloaddata.php"); ?>
 </head>
-<body onload="loadSelect()">
+<body>
 <!--Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">ArchiCentre Task</a>
@@ -52,7 +52,7 @@
     <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
         <strong>Saving PDF. Please don't close this page. It will take a while</strong>
     </div>
-    <h2 class="content-head text-center firstH1">Home Warranty Inspection Report</h2>
+    <h2 class="content-head text-center firstH1" style="font-size: 2rem">Home Warranty Inspection Report</h2>
     <b>NOTICE TO PURCHASERS</b>
     <br>
     <p>
@@ -79,7 +79,7 @@
 </div>
 <!--<div style="margin:20px 0 10px 0;"></div>-->
 <div class="container" style="background-color: white">
-    <div class="easyui-tabs" style="width:100%;height:600px;" data-options="tabWidth:250">
+    <div class="easyui-tabs" style="width:100%;" data-options="tabWidth:250">
         <div title="Booking Information" style="padding:10px;font-size: 18px" >
             <div class="easyui-tabs" data-options="fit:true,plain:true" style="width:inherit;height:500px">
                 <div title="OWNERS" style="padding:10px;font-size: 18px">
@@ -292,7 +292,7 @@
                         </div>
                     </form>
                 </div>
-            </div>0
+            </div>
         </div>
         <div title="Inspection Summary" style="padding:10px;font-size: 18px">
             <div class="container">
@@ -628,7 +628,7 @@
             </table>
         </div>
         <div title="ROOF VOID" style="padding:10px;font-size: 18px">
-            <button type="button" class="btn btn-primary" onclick="createOneCell('HOWRoofVoidTable','HOWRoofVoidName','HOWSubRoofVoidSelect','HOWRoofVoidNote')" style="margin-bottom: 10px">Add One Place</button>
+            <button type="button" class="btn btn-primary" onclick="createOneCell('HOWRoofVoidTable','HOWRoofVoidName','HOWRoofVoidSelect','HOWRoofVoidNote')" style="margin-bottom: 10px">Add One Place</button>
             <table id="HOWRoofVoidTable">
                 <tr>
                     <th style="text-align: left" id="HOWRoofVoidName0">Structure</th>
@@ -840,7 +840,7 @@
             </div>
         </div>
         <div title="Services" style="padding:10px;font-size: 18px">
-            <button type="button" class="btn btn-primary" onclick="createOneCell('HOWServicesTable','HOWServiceName','HOWServiceSelect','HOWServiceNote')" style="margin-bottom: 10px;">Add One Services</button>
+            <button type="button" class="btn btn-primary" onclick="createOneCell('HOWServicesTable','HOWServiceName','HOWServicesSelect','HOWServiceNote')" style="margin-bottom: 10px;">Add One Services</button>
             <table id="HOWServicesTable">
                 <tr>
                     <th style="text-align: left" id="HOWServiceName0">Hot Water System</th>
@@ -2494,12 +2494,12 @@
                         <th style="color: #f44336;text-align: center">It is recommended that purchasers obtain their own report on the condition of the building</th>
                     </tr>
                     <tr>
-                        <td><input class="form-control"  title="itemNo" id="HOWDefectItem0"></td>
+                        <td><input class="form-control"  title="itemNo" id="HOWDefectItem0" type="text"></td>
                         <td><textarea style="height: 60px;" class="form-control" title="description" id="HOWDefectDescription0" ></textarea></td>
                         <!--<td><input class="form-control"  title="description" id="HOWDefectDescription0" ></td>-->
                     </tr>
                     <tr>
-                        <td><input class="form-control"   title="itemNo" id="HOWDefectItem1"></td>
+                        <td><input class="form-control"   title="itemNo" id="HOWDefectItem1" type="text"></td>
                         <td><textarea style="height: 60px;" class="form-control" title="description" id="HOWDefectDescription1" ></textarea></td>
                         <!--<td><input class="form-control" title="description"  id="HOWDefectDescription1"></td>-->
                     </tr>
@@ -2514,12 +2514,12 @@
                     <th style="color: #f44336;text-align: center">The following access limitations were encountered during the property inspection:</th>
                 </tr>
                 <tr>
-                    <td><input class="form-control"  title="itemNO" id="HOWAccessItem0"></td>
+                    <td><input class="form-control"  title="itemNO" id="HOWAccessItem0" type="text"></td>
                     <td><textarea class="form-control" style="height: 60px"  title="description" id="HOWAccessDescription0" ></textarea></td>
                     <!--<td><input class="form-control"  title="description" id="HOWAccessDescription0" ></td>-->
                 </tr>
                 <tr>
-                    <td><input class="form-control"  title="itemNO" id="HOWAccessItem1"></td>
+                    <td><input class="form-control"  title="itemNO" id="HOWAccessItem1" type="text"></td>
                     <td><textarea class="form-control" style="height: 60px"  title="description" id="HOWAccessDescription1" ></textarea></td>
                     <!--<td><input class="form-control" title="description"  id="HOWAccessDescription1"></td>-->
                 </tr>

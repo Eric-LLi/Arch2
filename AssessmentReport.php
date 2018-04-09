@@ -618,7 +618,7 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <input id="204" placeholder="Put others here..." class="form-control gray">
+                    <input id="204" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="205" style="width:100%" title="Other Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -638,7 +638,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="206" placeholder="Put others here..." class="form-control gray">
+                    <input id="206" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="207" style="width:100%" title="Other Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -658,7 +658,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="208" placeholder="Put others here..." class="form-control gray">
+                    <input id="208" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="209" style="width:100%" title="Other Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -746,7 +746,7 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <input id="214" placeholder="Put others here..." class="form-control gray">
+                    <input id="214" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="215" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -766,7 +766,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="216" placeholder="Put others here..." class="form-control gray">
+                    <input id="216" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="217" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -786,7 +786,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="218" placeholder="Put others here..." class="form-control gray">
+                    <input id="218" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="219" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -815,7 +815,7 @@
     <div id="SiteGardenShed" style="display:none;padding: 0">
         <div class="row form-group">
             <div class="col-sm form-group">
-                <input id="220" placeholder="Garage / Shed #3" class="form-control" type="text">
+                <input id="220" placeholder="Garage / Shed #3" class="form-control" type="text" type="text">
                 <div class="row form-group">
                     <div class="col-sm">
                         <label>Structure/Walls</label>
@@ -880,7 +880,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <input id="224" placeholder="Put others here..." class="form-control gray">
+                        <input id="224" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="225" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -900,7 +900,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="226" placeholder="Put others here..." class="form-control gray">
+                        <input id="226" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="227" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -920,7 +920,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="228" placeholder="Put others here..." class="form-control gray">
+                        <input id="228" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="229" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1007,7 +1007,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <input id="234" placeholder="Put others here..." class="form-control gray">
+                        <input id="234" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="235" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1027,7 +1027,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="236" placeholder="Put others here..." class="form-control gray">
+                        <input id="236" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="237" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1047,7 +1047,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="238" placeholder="Put others here..." class="form-control gray">
+                        <input id="238" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="239" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1136,7 +1136,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <input id="244" placeholder="Put others here..." class="form-control gray">
+                        <input id="244" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="245" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1156,7 +1156,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="246" placeholder="Put others here..." class="form-control gray">
+                        <input id="246" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="247" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1176,7 +1176,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="248" placeholder="Put others here..." class="form-control gray">
+                        <input id="248" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="249" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1263,7 +1263,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <input id="254" placeholder="Put others here..." class="form-control gray">
+                        <input id="254" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="255" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1283,7 +1283,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="256" placeholder="Put others here..." class="form-control gray">
+                        <input id="256" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="257" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1303,7 +1303,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="258" placeholder="Put others here..." class="form-control gray">
+                        <input id="258" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="259" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1398,7 +1398,7 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <input id="264" placeholder="Put others here..." class="form-control gray">
+                    <input id="264" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="265" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -1418,7 +1418,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="266" placeholder="Put others here..." class="form-control gray">
+                    <input id="266" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="267" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -1438,7 +1438,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="268" placeholder="Put others here..." class="form-control gray">
+                    <input id="268" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="269" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -1525,7 +1525,7 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <input id="274" placeholder="Put others here..." class="form-control gray">
+                    <input id="274" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="275" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -1545,7 +1545,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="276" placeholder="Put others here..." class="form-control gray">
+                    <input id="276" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="277" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -1565,7 +1565,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="278" placeholder="Put others here..." class="form-control gray">
+                    <input id="278" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="279" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -1659,7 +1659,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <input id="284" placeholder="Put others here..." class="form-control gray">
+                        <input id="284" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="285" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1679,7 +1679,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="286" placeholder="Put others here..." class="form-control gray">
+                        <input id="286" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="287" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1699,7 +1699,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="288" placeholder="Put others here..." class="form-control gray">
+                        <input id="288" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="289" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1721,7 +1721,7 @@
                 </div>
             </div>
             <div class="col-sm form-group">
-                <input id="290" placeholder="Boundary B" class="form-control" type="text">
+                <input id="290" placeholder="Boundary B" class="form-control" type="text" type="text">
                 <div class="row form-group">
                     <div class="col-sm">
                         <label>Fences/Retaining</label>
@@ -1786,7 +1786,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <input id="294" placeholder="Put others here..." class="form-control gray">
+                        <input id="294" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="295" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1806,7 +1806,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="296" placeholder="Put others here..." class="form-control gray">
+                        <input id="296" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="297" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1826,7 +1826,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="298" placeholder="Put others here..." class="form-control gray">
+                        <input id="298" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="299" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1915,7 +1915,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <input id="304" placeholder="Put others here..." class="form-control gray">
+                        <input id="304" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="305" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1935,7 +1935,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="306" placeholder="Put others here..." class="form-control gray">
+                        <input id="306" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="307" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -1955,7 +1955,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="308" placeholder="Put others here..." class="form-control gray">
+                        <input id="308" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="309" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -2042,7 +2042,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <input id="314" placeholder="Put others here..." class="form-control gray">
+                        <input id="314" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="315" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -2062,7 +2062,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="316" placeholder="Put others here..." class="form-control gray">
+                        <input id="316" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="317" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -2082,7 +2082,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <input id="318" placeholder="Put others here..." class="form-control gray">
+                        <input id="318" placeholder="Put others here..." class="form-control gray" type="text">
                         <select id="319" style="width:100%" title="Select">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="✔">✔</option>
@@ -2311,7 +2311,7 @@
                 <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentSiteMajorRecommendations','AssessmentSiteMajorSelect')" style="margin-top: 10px">Add</button>
             </td>
             <td>
-                <input id="assessmentSiteMajorRecommendations" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
+                <input id="assessmentSiteMajorRecommendations" type="text" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
                 <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentSiteMajorRecommendations')" style="margin-top:10px">Clear</button>
             </td>
         </tr>
@@ -2410,7 +2410,7 @@
                 <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentSiteMinorRecommendations','AssessmentSiteMinorSelect')" style="margin-top: 10px">Add</button>
             </td>
             <td>
-                <input id="assessmentSiteMinorRecommendations" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
+                <input id="assessmentSiteMinorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
                 <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentSiteMinorRecommendations')" style="margin-top:10px">Clear</button>
             </td>
         </tr>
@@ -2434,7 +2434,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="2000" placeholder="Roof" class="form-control"></div>
+            <div class="col-sm-3"><input id="2000" placeholder="Roof" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -2604,7 +2604,7 @@
 
         <div class="row">
             <div class="col-sm">
-                <input id="338" placeholder="Put others here..." class="form-control gray">
+                <input id="338" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="339" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -2624,7 +2624,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="339a" placeholder="Put others here..." class="form-control gray">
+                <input id="339a" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="339b" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -2644,7 +2644,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="339c" placeholder="Put others here..." class="form-control gray">
+                <input id="339c" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="339d" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -2664,7 +2664,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="339e" placeholder="Put others here..." class="form-control gray">
+                <input id="339e" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="339f" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -2688,7 +2688,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="2001" placeholder="Roof Space" class="form-control"></div>
+            <div class="col-sm-3"><input id="2001" placeholder="Roof Space" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -2796,7 +2796,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="345" placeholder="Put others here..." class="form-control gray">
+                <input id="345" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="346" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -2816,7 +2816,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="347" placeholder="Put others here..." class="form-control gray">
+                <input id="347" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="348" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -2836,7 +2836,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="349" placeholder="Put others here..." class="form-control gray">
+                <input id="349" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="349a" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -2860,7 +2860,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="2002" placeholder="Sub-Floor" class="form-control"></div>
+            <div class="col-sm-3"><input id="2002" placeholder="Sub-Floor" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -2989,7 +2989,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="356" placeholder="Put others here..." class="form-control gray">
+                <input id="356" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="357" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3009,7 +3009,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="358" placeholder="Put others here..." class="form-control gray">
+                <input id="358" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="359" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3035,7 +3035,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="2003" placeholder="Wall (Front)" class="form-control"></div>
+            <div class="col-sm-3"><input id="2003" placeholder="Wall (Front)" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -3099,7 +3099,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="3000" placeholder="Other" class="form-control">
+                <input id="3000" placeholder="Other" class="form-control" type="text">
                 <select id="3001" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3181,7 +3181,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="3002" placeholder="Other" class="form-control">
+                <input id="3002" placeholder="Other" class="form-control" type="text">
                 <select id="3003" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3205,7 +3205,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="2004" placeholder="Wall (Rear)" class="form-control"></div>
+            <div class="col-sm-3"><input id="2004" placeholder="Wall (Rear)" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -3269,7 +3269,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="3004" placeholder="Other" class="form-control">
+                <input id="3004" placeholder="Other" class="form-control" type="text">
                 <select id="3005" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3351,7 +3351,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="3006" placeholder="Other" class="form-control">
+                <input id="3006" placeholder="Other" class="form-control" type="text">
                 <select id="3007" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3375,7 +3375,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="2005" placeholder="Wall (Left)" class="form-control"></div>
+            <div class="col-sm-3"><input id="2005" placeholder="Wall (Left)" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -3439,7 +3439,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="3008" placeholder="Other" class="form-control">
+                <input id="3008" placeholder="Other" class="form-control" type="text">
                 <select id="3009" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3521,7 +3521,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="3010" placeholder="Other" class="form-control">
+                <input id="3010" placeholder="Other" class="form-control" type="text">
                 <select id="3011" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3545,7 +3545,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="2006" placeholder="Wall (Right)" class="form-control"></div>
+            <div class="col-sm-3"><input id="2006" placeholder="Wall (Right)" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -3609,7 +3609,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="3012" placeholder="Other" class="form-control">
+                <input id="3012" placeholder="Other" class="form-control" type="text">
                 <select id="3013" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3691,7 +3691,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="3014" placeholder="Other" class="form-control">
+                <input id="3014" placeholder="Other" class="form-control" type="text">
                 <select id="3015" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -3722,7 +3722,7 @@
     <div id="PropertyExteriorWall" style="display: none">
         <div class="form-group">
             <div class="row form-group">
-                <div class="col-sm-3"><input id="2007" placeholder="Wall #1" class="form-control"></div> <!--old id: ExteriorWall1-->
+                <div class="col-sm-3"><input id="2007" placeholder="Wall #1" class="form-control" type="text"></div> <!--old id: ExteriorWall1-->
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -3786,7 +3786,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="3016" placeholder="Other" class="form-control">
+                    <input id="3016" placeholder="Other" class="form-control" type="text">
                     <select id="3017" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -3868,7 +3868,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="3018" placeholder="Other" class="form-control">
+                    <input id="3018" placeholder="Other" class="form-control" type="text">
                     <select id="3019" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -3892,7 +3892,7 @@
         </div>
         <div class="form-group">
             <div class="row form-group">
-                <div class="col-sm-3"><input id="2008" placeholder="Wall #2" class="form-control"></div> <!--old id: ExteriorWall2-->
+                <div class="col-sm-3"><input id="2008" placeholder="Wall #2" class="form-control" type="text"></div> <!--old id: ExteriorWall2-->
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -3956,7 +3956,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="3020" placeholder="Other" class="form-control">
+                    <input id="3020" placeholder="Other" class="form-control" type="text">
                     <select id="3021" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -4038,7 +4038,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="3022" placeholder="Other" class="form-control">
+                    <input id="3022" placeholder="Other" class="form-control" type="text">
                     <select id="3023" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -4062,7 +4062,7 @@
         </div>
         <div class="form-group">
             <div class="row form-group">
-                <div class="col-sm-3"><input id="2009" placeholder="Wall #3" class="form-control"></div> <!--id:ExteriorWall3-->
+                <div class="col-sm-3"><input id="2009" placeholder="Wall #3" class="form-control" type="text"></div> <!--id:ExteriorWall3-->
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -4126,7 +4126,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="3024" placeholder="Other" class="form-control">
+                    <input id="3024" placeholder="Other" class="form-control" type="text">
                     <select id="3025" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -4208,7 +4208,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="3026" placeholder="Other" class="form-control">
+                    <input id="3026" placeholder="Other" class="form-control" type="text">
                     <select id="3027" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -4232,7 +4232,7 @@
         </div>
         <div class="form-group">
             <div class="row form-group">
-                <div class="col-sm-3"><input id="2010" placeholder="Wall #4" class="form-control"></div> <!--old id: ExteriorWall4-->
+                <div class="col-sm-3"><input id="2010" placeholder="Wall #4" class="form-control" type="text"></div> <!--old id: ExteriorWall4-->
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -4296,7 +4296,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="3028" placeholder="Other" class="form-control">
+                    <input id="3028" placeholder="Other" class="form-control" type="text">
                     <select id="3029" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -4378,7 +4378,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="3030" placeholder="Other" class="form-control">
+                    <input id="3030" placeholder="Other" class="form-control" type="text">
                     <select id="3031" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -4408,7 +4408,7 @@
     </div>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="Verandas1" placeholder="Veranda #1" class="form-control"></div>
+            <div class="col-sm-3"><input id="Verandas1" placeholder="Veranda #1" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -4556,7 +4556,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="447" placeholder="Put others here..." class="form-control gray">
+                <input id="447" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="448" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -4581,7 +4581,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="Verandas2" placeholder="Veranda #2" class="form-control"></div>
+            <div class="col-sm-3"><input id="Verandas2" placeholder="Veranda #2" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -4729,7 +4729,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="457" placeholder="Put others here..." class="form-control gray">
+                <input id="457" placeholder="Put others here..." class="form-control gray" type="text">
                 <select id="458" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -4759,7 +4759,7 @@
     <div id="PropertyExteriorVerandas" style="display: none;padding: 0">
         <div class="form-group">
             <div class="row form-group">
-                <div class="col-sm-3"><input id="Verandas3" placeholder="Veranda #3" class="form-control"></div>
+                <div class="col-sm-3"><input id="Verandas3" placeholder="Veranda #3" class="form-control" type="text"></div>
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -4907,7 +4907,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="467" placeholder="Put others here..." class="form-control gray">
+                    <input id="467" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="468" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -4931,7 +4931,7 @@
         </div>
         <div class="form-group">
             <div class="row form-group">
-                <div class="col-sm-3"><input id="Verandas4" placeholder="Veranda #4" class="form-control"></div>
+                <div class="col-sm-3"><input id="Verandas4" placeholder="Veranda #4" class="form-control" type="text"></div>
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -5078,7 +5078,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="477" placeholder="Put others here..." class="form-control gray">
+                    <input id="477" placeholder="Put others here..." class="form-control gray" type="text">
                     <select id="478" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -5108,11 +5108,11 @@
     </div>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="ExteriorOther1" placeholder="Other..." class="form-control"></div>
+            <div class="col-sm-3"><input id="ExteriorOther1" placeholder="Other..." class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <input id="500" placeholder="Type" class="form-control"><br>
+                <input id="500" placeholder="Type" class="form-control" type="text"><br>
                 <select id="501" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5132,7 +5132,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="502" placeholder="Type" class="form-control"><br>
+                <input id="502" placeholder="Type" class="form-control" type="text"><br>
                 <select id="503" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5152,7 +5152,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="504" placeholder="Type" class="form-control"><br>
+                <input id="504" placeholder="Type" class="form-control" type="text"><br>
                 <select id="505" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5174,7 +5174,7 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <input id="506" placeholder="Type" class="form-control"><br>
+                <input id="506" placeholder="Type" class="form-control" type="text"><br>
                 <select id="507" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5194,7 +5194,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="508" placeholder="Type" class="form-control"><br>
+                <input id="508" placeholder="Type" class="form-control" type="text"><br>
                 <select id="509" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5214,7 +5214,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="510" placeholder="Type" class="form-control"><br>
+                <input id="510" placeholder="Type" class="form-control" type="text"><br>
                 <select id="511" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5238,11 +5238,11 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="ExteriorOther2" placeholder="Other..." class="form-control"></div>
+            <div class="col-sm-3"><input id="ExteriorOther2" placeholder="Other..." class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <input id="520" placeholder="Type" class="form-control"><br>
+                <input id="520" placeholder="Type" class="form-control" type="text"><br>
                 <select id="521" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5262,7 +5262,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="522" placeholder="Type" class="form-control"><br>
+                <input id="522" placeholder="Type" class="form-control" type="text"><br>
                 <select id="523" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5282,7 +5282,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="524" placeholder="Type" class="form-control"><br>
+                <input id="524" placeholder="Type" class="form-control" type="text"><br>
                 <select id="525" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5304,7 +5304,7 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <input id="526" placeholder="Type" class="form-control"><br>
+                <input id="526" placeholder="Type" class="form-control" type="text"><br>
                 <select id="527" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5324,7 +5324,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="528" placeholder="Type" class="form-control"><br>
+                <input id="528" placeholder="Type" class="form-control" type="text"><br>
                 <select id="529" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5344,7 +5344,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="530" placeholder="Type" class="form-control"><br>
+                <input id="530" placeholder="Type" class="form-control" type="text"><br>
                 <select id="531" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5634,7 +5634,7 @@
                 <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentPropertyExteriorMajorRecommendations','AssessmentPropertyExteriorMajorSelect')" style="margin-top: 10px">Add</button>
             </td>
             <td>
-                <input id="assessmentPropertyExteriorMajorRecommendations" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
+                <input id="assessmentPropertyExteriorMajorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
                 <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentPropertyExteriorMajorRecommendations')" style="margin-top:10px">Clear</button>
             </td>
         </tr>
@@ -5733,7 +5733,7 @@
                 <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentPropertyExteriorMinorRecommendations','AssessmentPropertyExteriorMinorSelect')" style="margin-top: 10px">Add</button>
             </td>
             <td>
-                <input id="assessmentPropertyExteriorMinorRecommendations" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
+                <input id="assessmentPropertyExteriorMinorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
                 <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentPropertyExteriorMinorRecommendations')" style="margin-top:10px">Clear</button>
             </td>
         </tr>
@@ -5758,7 +5758,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="600" placeholder="Entry/Passage" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="600" placeholder="Entry/Passage" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -5904,7 +5904,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="608" placeholder="Other" class="form-control"><br>
+                <input id="608" placeholder="Other" class="form-control" type="text"><br>
                 <select id="609" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -5928,7 +5928,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="610" placeholder="Living/Dining" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="610" placeholder="Living/Dining" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -6074,7 +6074,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="618" placeholder="Other" class="form-control"><br>
+                <input id="618" placeholder="Other" class="form-control" type="text"><br>
                 <select id="619" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -6104,7 +6104,7 @@
     <div id="LivingAreaRooms" style="display: none;padding: 0">
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-3 form-group"><input id="620" placeholder="Study / Office" class="form-control">
+                <div class="col-sm-3 form-group"><input id="620" placeholder="Study / Office" class="form-control" type="text">
                 </div>
             </div>
             <div class="row form-group">
@@ -6251,7 +6251,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="628" placeholder="Other" class="form-control"><br>
+                    <input id="628" placeholder="Other" class="form-control" type="text"><br>
                     <select id="629" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -6275,7 +6275,7 @@
         <hr>
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-3 form-group"><input id="630" placeholder="Other Room #1" class="form-control"></div>
+                <div class="col-sm-3 form-group"><input id="630" placeholder="Other Room #1" class="form-control" type="text"></div>
             </div>
             <div class="row form-group">
                 <div class="col-sm">
@@ -6421,7 +6421,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="638" placeholder="Other" class="form-control"><br>
+                    <input id="638" placeholder="Other" class="form-control" type="text"><br>
                     <select id="639" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -6445,7 +6445,7 @@
         <hr>
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-3 form-group"><input id="640" placeholder="Other Room #2" class="form-control"></div>
+                <div class="col-sm-3 form-group"><input id="640" placeholder="Other Room #2" class="form-control" type="text"></div>
             </div>
             <div class="row form-group">
                 <div class="col-sm">
@@ -6591,7 +6591,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="648" placeholder="Other" class="form-control"><br>
+                    <input id="648" placeholder="Other" class="form-control" type="text"><br>
                     <select id="649" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -6615,7 +6615,7 @@
         <hr>
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-3 form-group"><input id="650" placeholder="Other Room #3" class="form-control"></div>
+                <div class="col-sm-3 form-group"><input id="650" placeholder="Other Room #3" class="form-control" type="text"></div>
             </div>
             <div class="row form-group">
                 <div class="col-sm">
@@ -6761,7 +6761,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="658" placeholder="Other" class="form-control"><br>
+                    <input id="658" placeholder="Other" class="form-control" type="text"><br>
                     <select id="659" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -6785,7 +6785,7 @@
         <hr>
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-3 form-group"><input id="660" placeholder="Other Room #4" class="form-control"></div>
+                <div class="col-sm-3 form-group"><input id="660" placeholder="Other Room #4" class="form-control" type="text"></div>
             </div>
             <div class="row form-group">
                 <div class="col-sm">
@@ -6931,7 +6931,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="668" placeholder="Other" class="form-control"><br>
+                    <input id="668" placeholder="Other" class="form-control" type="text"><br>
                     <select id="669" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -6960,7 +6960,7 @@
     </div>
     <div class="form-group" id="LivingAreaStair1">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="670" placeholder="Stairs" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="670" placeholder="Stairs" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -7053,7 +7053,7 @@
 
     <div class="form-group" id="LivingAreaStair2" style="display: none">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="675" placeholder="Optional stair" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="675" placeholder="Optional stair" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -7147,7 +7147,7 @@
 
     <div class="form-group" id="LivingAreaKitchen1">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="700" placeholder="Kitchen" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="700" placeholder="Kitchen" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -7417,7 +7417,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="714" placeholder="Other" class="form-control"><br>
+                <input id="714" placeholder="Other" class="form-control" type="text"><br>
                 <select id="715" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -7437,7 +7437,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="716" placeholder="Other" class="form-control"><br>
+                <input id="716" placeholder="Other" class="form-control" type="text"><br>
                 <select id="717" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -7457,7 +7457,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="718" placeholder="Other" class="form-control"><br>
+                <input id="718" placeholder="Other" class="form-control" type="text"><br>
                 <select id="719" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -7487,7 +7487,7 @@
 
     <div class="form-group" id="LivingAreaKitchen2" style="display: none">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="800" placeholder="Kitchen #1" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="800" placeholder="Kitchen #1" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -7757,7 +7757,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="814" placeholder="Other" class="form-control"><br>
+                <input id="814" placeholder="Other" class="form-control" type="text"><br>
                 <select id="815" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -7777,7 +7777,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="816" placeholder="Other" class="form-control"><br>
+                <input id="816" placeholder="Other" class="form-control" type="text"><br>
                 <select id="817" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -7797,7 +7797,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="818" placeholder="Other" class="form-control"><br>
+                <input id="818" placeholder="Other" class="form-control" type="text"><br>
                 <select id="819" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -7985,7 +7985,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="850" placeholder="Bedroom #1" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="850" placeholder="Bedroom #1" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -8131,7 +8131,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="858" placeholder="Others" class="form-control gray">
+                <input id="858" placeholder="Others" class="form-control gray" type="text">
                 <select id="859" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -8163,7 +8163,7 @@
 <div class="container" id="BedroomAreasMoreRooms" style="display: none">
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="860" placeholder="Bedroom #2" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="860" placeholder="Bedroom #2" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -8309,7 +8309,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="868" placeholder="Others" class="form-control gray">
+                <input id="868" placeholder="Others" class="form-control gray" type="text">
                 <select id="869" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -8333,7 +8333,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="870" placeholder="Bedroom #3" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="870" placeholder="Bedroom #3" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -8479,7 +8479,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="878" placeholder="Others" class="form-control gray">
+                <input id="878" placeholder="Others" class="form-control gray" type="text">
                 <select id="879" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -8503,7 +8503,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="880" placeholder="Bedroom #4" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="880" placeholder="Bedroom #4" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -8649,7 +8649,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="888" placeholder="Others" class="form-control gray">
+                <input id="888" placeholder="Others" class="form-control gray" type="text">
                 <select id="889" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -8673,7 +8673,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="890" placeholder="Bedroom #5" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="890" placeholder="Bedroom #5" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -8819,7 +8819,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="898" placeholder="Others" class="form-control gray">
+                <input id="898" placeholder="Others" class="form-control gray" type="text">
                 <select id="899" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -8843,7 +8843,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="900" placeholder="Bedroom #6" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="900" placeholder="Bedroom #6" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -8989,7 +8989,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="908" placeholder="Others" class="form-control gray">
+                <input id="908" placeholder="Others" class="form-control gray" type="text">
                 <select id="909" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -9288,7 +9288,7 @@
                 <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentPropertyInteriorMajorRecommendations','AssessmentPropertyInteriorMajorSelect')" style="margin-top: 10px">Add</button>
             </td>
             <td>
-                <input id="assessmentPropertyInteriorMajorRecommendations" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
+                <input id="assessmentPropertyInteriorMajorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
                 <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentPropertyInteriorMajorRecommendations')" style="margin-top:10px">Clear</button>
             </td>
         </tr>
@@ -9387,7 +9387,7 @@
                 <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentPropertyInteriorMinorRecommendations','AssessmentPropertyInteriorMinorSelect')" style="margin-top: 10px">Add</button>
             </td>
             <td>
-                <input id="assessmentPropertyInteriorMinorRecommendations" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
+                <input id="assessmentPropertyInteriorMinorRecommendations" type="text" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
                 <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentPropertyInteriorMinorRecommendations')" style="margin-top:10px">Clear</button>
             </td>
         </tr>
@@ -9412,7 +9412,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1000" placeholder="Bathroom #1" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1000" placeholder="Bathroom #1" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -9702,7 +9702,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1015" placeholder="Others" class="form-control gray">
+                <input id="1015" placeholder="Others" class="form-control gray" type="text">
                 <select id="1016" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -9722,7 +9722,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1017" placeholder="Others" class="form-control gray">
+                <input id="1017" placeholder="Others" class="form-control gray" type="text">
                 <select id="1018" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -9745,7 +9745,7 @@
     </div>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1020" placeholder="Bathroom #2" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1020" placeholder="Bathroom #2" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -10036,7 +10036,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1035" placeholder="Others" class="form-control gray">
+                <input id="1035" placeholder="Others" class="form-control gray" type="text">
                 <select id="1036" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -10056,7 +10056,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1037" placeholder="Others" class="form-control gray">
+                <input id="1037" placeholder="Others" class="form-control gray" type="text">
                 <select id="1038" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -10087,7 +10087,7 @@
 <div class="container" style="display: none" id="ServiceAreaBathRooms">
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1040" placeholder="Bathroom #3" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1040" placeholder="Bathroom #3" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -10378,7 +10378,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1055" placeholder="Others" class="form-control gray">
+                <input id="1055" placeholder="Others" class="form-control gray" type="text">
                 <select id="1056" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -10398,7 +10398,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1057" placeholder="Others" class="form-control gray">
+                <input id="1057" placeholder="Others" class="form-control gray" type="text">
                 <select id="1058" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -10422,7 +10422,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1060" placeholder="Bathroom #4" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1060" placeholder="Bathroom #4" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -10713,7 +10713,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1075" placeholder="Others" class="form-control gray">
+                <input id="1075" placeholder="Others" class="form-control gray" type="text">
                 <select id="1076" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -10733,7 +10733,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1077" placeholder="Others" class="form-control gray">
+                <input id="1077" placeholder="Others" class="form-control gray" type="text">
                 <select id="1078" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -10757,7 +10757,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1080" placeholder="Bathroom #5" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1080" placeholder="Bathroom #5" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -11048,7 +11048,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1095" placeholder="Others" class="form-control gray">
+                <input id="1095" placeholder="Others" class="form-control gray" type="text">
                 <select id="1096" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -11068,7 +11068,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1097" placeholder="Others" class="form-control gray">
+                <input id="1097" placeholder="Others" class="form-control gray" type="text">
                 <select id="1098" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -11092,7 +11092,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1100" placeholder="Bathroom #6" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1100" placeholder="Bathroom #6" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -11383,7 +11383,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1115" placeholder="Others" class="form-control gray">
+                <input id="1115" placeholder="Others" class="form-control gray" type="text">
                 <select id="1116" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -11403,7 +11403,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1117" placeholder="Others" class="form-control gray">
+                <input id="1117" placeholder="Others" class="form-control gray" type="text">
                 <select id="1118" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -11435,7 +11435,7 @@
 <div class="container">
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1200" placeholder="Laundry #1" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1200" placeholder="Laundry #1" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -11645,7 +11645,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1211" placeholder="Others" class="form-control gray">
+                <input id="1211" placeholder="Others" class="form-control gray" type="text">
                 <select id="1212" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -11665,7 +11665,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1213" placeholder="Others" class="form-control gray">
+                <input id="1213" placeholder="Others" class="form-control gray" type="text">
                 <select id="1214" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -11698,7 +11698,7 @@
 <div class="container" id="ServiceAreaMoreLaundry" style="display: none;">
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1220" placeholder="Laundry #2" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1220" placeholder="Laundry #2" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -11908,7 +11908,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1231" placeholder="Others" class="form-control gray">
+                <input id="1231" placeholder="Others" class="form-control gray" type="text">
                 <select id="1232" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -11928,7 +11928,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1233" placeholder="Others" class="form-control gray">
+                <input id="1233" placeholder="Others" class="form-control gray" type="text">
                 <select id="1234" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -11961,7 +11961,7 @@
 <div class="container">
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1300" placeholder="Powder Room #1" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1300" placeholder="Powder Room #1" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -12211,7 +12211,7 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <input id="1313" placeholder="Others" class="form-control gray">
+                <input id="1313" placeholder="Others" class="form-control gray" type="text">
                 <select id="1314" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12231,7 +12231,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1315" placeholder="Others" class="form-control gray">
+                <input id="1315" placeholder="Others" class="form-control gray" type="text">
                 <select id="1316" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12251,7 +12251,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1317" placeholder="Others" class="form-control gray">
+                <input id="1317" placeholder="Others" class="form-control gray" type="text">
                 <select id="1318" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12271,7 +12271,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1319" placeholder="Others" class="form-control gray">
+                <input id="1319" placeholder="Others" class="form-control gray" type="text">
                 <select id="1319a" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12303,7 +12303,7 @@
 <div class="container" id="ServiceAreaMorePowderRooms" style="display: none;">
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1320" placeholder="Powder Room #2" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1320" placeholder="Powder Room #2" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -12553,7 +12553,7 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <input id="1333" placeholder="Others" class="form-control gray">
+                <input id="1333" placeholder="Others" class="form-control gray" type="text">
                 <select id="1334" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12573,7 +12573,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1335" placeholder="Others" class="form-control gray">
+                <input id="1335" placeholder="Others" class="form-control gray" type="text">
                 <select id="1336" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12593,7 +12593,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1337" placeholder="Others" class="form-control gray">
+                <input id="1337" placeholder="Others" class="form-control gray" type="text">
                 <select id="1338" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12613,7 +12613,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1339" placeholder="Others" class="form-control gray">
+                <input id="1339" placeholder="Others" class="form-control gray" type="text">
                 <select id="1339a" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12636,7 +12636,7 @@
     </div>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1340" placeholder="Powder Room #3" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1340" placeholder="Powder Room #3" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -12886,7 +12886,7 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <input id="1353" placeholder="Others" class="form-control gray">
+                <input id="1353" placeholder="Others" class="form-control gray" type="text">
                 <select id="1354" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12906,7 +12906,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1355" placeholder="Others" class="form-control gray">
+                <input id="1355" placeholder="Others" class="form-control gray" type="text">
                 <select id="1356" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12926,7 +12926,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1357" placeholder="Others" class="form-control gray">
+                <input id="1357" placeholder="Others" class="form-control gray" type="text">
                 <select id="1358" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12946,7 +12946,7 @@
                 </select>
             </div>
             <div class="col-sm">
-                <input id="1359" placeholder="Others" class="form-control gray">
+                <input id="1359" placeholder="Others" class="form-control gray" type="text">
                 <select id="1359a" style="width:100%" title="Select">
                     <optgroup label="No Visible Significant Defect">
                         <option value="✔">✔</option>
@@ -12979,7 +12979,7 @@
     <hr>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-3 form-group"><input id="1400" placeholder="Services" class="form-control"></div>
+            <div class="col-sm-3 form-group"><input id="1400" placeholder="Services" class="form-control" type="text"></div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
@@ -13087,7 +13087,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="1406" placeholder="Type" class="form-control"><br>
+                    <input id="1406" placeholder="Type" class="form-control" type="text"><br>
                     <select id="1407" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -13107,7 +13107,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="1408" placeholder="Type" class="form-control"><br>
+                    <input id="1408" placeholder="Type" class="form-control" type="text"><br>
                     <select id="1409" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -13127,7 +13127,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="1410" placeholder="Type" class="form-control"><br>
+                    <input id="1410" placeholder="Type" class="form-control" type="text"><br>
                     <select id="1411" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -13149,7 +13149,7 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <input id="1412" placeholder="Type" class="form-control"><br>
+                    <input id="1412" placeholder="Type" class="form-control" type="text"><br>
                     <select id="1413" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -13169,7 +13169,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="1414" placeholder="Type" class="form-control"><br>
+                    <input id="1414" placeholder="Type" class="form-control" type="text"><br>
                     <select id="1415" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -13189,7 +13189,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="1416" placeholder="Type" class="form-control"><br>
+                    <input id="1416" placeholder="Type" class="form-control" type="text"><br>
                     <select id="1417" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -13209,7 +13209,7 @@
                     </select>
                 </div>
                 <div class="col-sm">
-                    <input id="1418" placeholder="Type" class="form-control"><br>
+                    <input id="1418" placeholder="Type" class="form-control" type="text"><br>
                     <select id="1419" style="width:100%" title="Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="✔">✔</option>
@@ -13439,7 +13439,7 @@
                 <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentServiceMajorRecommendations','AssessmentServiceMajorSelect')" style="margin-top: 10px">Add</button>
             </td>
             <td>
-                <input id="assessmentServiceMajorRecommendations" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
+                <input id="assessmentServiceMajorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
                 <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentServiceMajorRecommendations')" style="margin-top:10px">Clear</button>
             </td>
         </tr>
@@ -13538,7 +13538,7 @@
                 <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentServiceMinorRecommendations','AssessmentServiceMinorSelect')" style="margin-top: 10px">Add</button>
             </td>
             <td>
-                <input id="assessmentServiceMinorRecommendations" readonly placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
+                <input id="assessmentServiceMinorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here" title="recommendations" style="width: 100%;border: 0;"/>
                 <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentServiceMinorRecommendations')" style="margin-top:10px">Clear</button>
             </td>
         </tr>

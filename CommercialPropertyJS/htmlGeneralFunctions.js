@@ -4,10 +4,10 @@
 
 
 
-$(document).ready(function(){
-    //alert("ok");
-    loadSelect();
-});
+// $(document).ready(function(){
+//     //alert("ok");
+//     loadSelect();
+// });
 
 /**
  * load the select option
@@ -270,6 +270,7 @@ function moreEvidentDefect()
     var name = document.createElement('INPUT');
     name.setAttribute('class','form-control');
     name.setAttribute('title','name');
+    name.setAttribute('type','text');
     name.style.marginBottom = 0;
     name.id = 'EDName' + newID;
     smallDIV.appendChild(name);
@@ -301,7 +302,7 @@ function addOneAccessLimitation(tableID,itemID,refID,selectID,noteID)
 {
     //console.log('your are in');
     var table = document.getElementById(tableID);
-    console.log(tableID);
+    //console.log(tableID);
     var rowCount = table.rows.length;
     var id = rowCount - 1;
     var row = table.insertRow(rowCount);
@@ -315,6 +316,7 @@ function addOneAccessLimitation(tableID,itemID,refID,selectID,noteID)
     var itemInput = document.createElement('INPUT');
     itemInput.setAttribute('class','form-control');
     itemInput.setAttribute('title','name');
+    itemInput.setAttribute('type','text');
     //nameInput.setAttribute('placeholder','enter cost name');
     itemInput.id = itemID + id;
     cell1.appendChild(itemInput);
@@ -323,6 +325,7 @@ function addOneAccessLimitation(tableID,itemID,refID,selectID,noteID)
     var refInput = document.createElement('INPUT');
     refInput.setAttribute('class','form-control');
     refInput.setAttribute('title','name');
+    refInput.setAttribute('type','text');
     // lowInput.setAttribute('value','$');
     //lowInput.setAttribute('onblur','calculateRenovationLow()');
     refInput.id = refID + id;
@@ -444,7 +447,7 @@ function addOnePlace(bigDivID)
 
 function moreAreaRoom()
 {
-    console.log("want to add one more room");
+    //console.log("want to add one more room");
     var div = document.getElementById('SiteAreaDiv');
     var divNumber = $('#SiteAreaDiv').find('> div').length;
     //console.log(divNumber);
@@ -524,6 +527,7 @@ function moreAreaRoom()
 
 function createDefaultFeature(nameID,selectID,rowDIV)
 {
+    //console.log(rowDIV);
     var div = document.createElement('div');
     div.setAttribute('class','col-sm-4');
     div.style.marginTop = '20px';
@@ -535,6 +539,7 @@ function createDefaultFeature(nameID,selectID,rowDIV)
     input.id = nameID;
     input.setAttribute('class','form-control');
     input.setAttribute('placeholder','feature');
+    input.setAttribute('type','text');
     input.style.fontSize = '18px';
     div.appendChild(input);
 
@@ -560,6 +565,7 @@ function createDefaultFeature(nameID,selectID,rowDIV)
     }
 
     div.appendChild(selectList);
+    //console.log(rowDIV);
     rowDIV.appendChild(div);
 
 }
@@ -575,15 +581,15 @@ function addOneFeature(id)
 
     var nameID = basicID + "_name" + divNumber;
     var selectID = basicID + "_select" + divNumber;
-    console.log(nameID);
-    console.log(selectID);
+    //console.log(nameID);
+    //console.log(selectID);
     createDefaultFeature(nameID,selectID,id);
 
 }
 
 function addOneDefects(tableID,itemID,imageRefID,noteID)
 {
-    console.log('your are in');
+    //console.log('your are in');
     var table = document.getElementById(tableID);
     var rowCount = table.rows.length;
     var id = rowCount - 1;
@@ -596,18 +602,20 @@ function addOneDefects(tableID,itemID,imageRefID,noteID)
     var nameInput = document.createElement('INPUT');
     nameInput.setAttribute('class','form-control');
     nameInput.setAttribute('title','name');
+    nameInput.setAttribute('type','text');
     //nameInput.setAttribute('placeholder','enter cost name');
     nameInput.id = itemID + id;
     cell1.appendChild(nameInput);
 
-    //create an low cost input for the cell2
-    var lowInput = document.createElement('INPUT');
-    lowInput.setAttribute('class','form-control');
-    lowInput.setAttribute('title','name');
+    //create an image ref input for the cell2
+    var imageRef = document.createElement('INPUT');
+    imageRef.setAttribute('class','form-control');
+    imageRef.setAttribute('title','name');
+    imageRef.setAttribute('type','text');
     // lowInput.setAttribute('value','$');
     //lowInput.setAttribute('onblur','calculateRenovationLow()');
-    lowInput.id = imageRefID + id;
-    cell2.appendChild(lowInput);
+    imageRef.id = imageRefID + id;
+    cell2.appendChild(imageRef);
 
 
     var generalNotes = document.createElement('textarea');
@@ -630,7 +638,7 @@ $('#CPUploadImages').change(function(){
     table.style.display = 'block';
     var count = this.files.length;
     var imageFile = this.files;
-    console.log(count);
+   // console.log(count);
 
     for (var i = 0; i<count;i++)
     {
@@ -648,6 +656,8 @@ $('#CPUploadImages').change(function(){
                 var removeButtonID = 'CPImageRemoveButton' + ii;
                 var addButtonID = 'CPImageAddButton' + ii;
                 var uploadID = 'CPImageUpload' + ii;
+                var labelID = "imageCaption" + ii;
+                //ImageNo
 
                 //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
                 //addDrawing();
@@ -664,6 +674,7 @@ $('#CPUploadImages').change(function(){
                     var removeButton = document.getElementById(removeButtonID);
                     var description  = document.getElementById(textID);
                     var addButton = document.getElementById(addButtonID);
+                    var label = document.getElementById(labelID);
                     //if exif data available, update orientation
                     if (data.exif) {
                         orientation = data.exif.get('Orientation');
@@ -681,6 +692,7 @@ $('#CPUploadImages').change(function(){
                             image.style.display = 'block';
                             image.style.width = '480px';
                             description.style.width = '480px';
+                            label.style.display = 'block';
                             // image.style.height = '250px';
                             var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                             //console.log(file);
@@ -725,6 +737,7 @@ function removeOneCPImage(click_id)
     var removeButtonID = 'CPImageRemoveButton' + id;
     var addButtonID = 'CPImageAddButton' + id;
     var descriptionID = 'CPImageText' + id;
+    var labelID = "imageCaption" + id;
 
 
     var imageSelect = '#' + imageID;
@@ -733,11 +746,13 @@ function removeOneCPImage(click_id)
     var button = document.getElementById(removeButtonID);
     var addButton = document.getElementById(addButtonID);
     var description = document.getElementById(descriptionID);
+    var label = document.getElementById(labelID);
 
     button.style.display = 'none';
     addButton.style.display = 'block';
     description.value = "";
     description.style.display = 'none';
+    label.style.display = 'none';
     //image.style.width = '0px';
     image.style.display = 'none';
     doRemovePhoto(imageID);
@@ -745,7 +760,7 @@ function removeOneCPImage(click_id)
 
 function addOneCPImage(click_id)
 {
-    console.log(click_id);
+    //console.log(click_id);
 
     var id;
     var selectedID = String(click_id);
@@ -757,6 +772,7 @@ function addOneCPImage(click_id)
     var removeButtonID = 'CPImageRemoveButton' + id;
     var addButtonID = 'CPImageAddButton' + id;
     var uploadID = 'CPImageUpload' + id;
+    var labelID = "imageCaption" + id;
     // console.log(uploadID);
     var x = document.getElementById(uploadID);
     x.click();
@@ -775,6 +791,7 @@ function addOneCPImage(click_id)
                 var removeButton = document.getElementById(removeButtonID);
                 var description  = document.getElementById(textID);
                 var addButton = document.getElementById(addButtonID);
+                var label = document.getElementById(labelID);
                 //if exif data available, update orientation
                 if (data.exif) {
                     orientation = data.exif.get('Orientation');
@@ -790,11 +807,11 @@ function addOneCPImage(click_id)
                         description.style.display = 'block';
                         image.style.display = 'block';
                         image.style.width = '480px';
+                        label.style.display = 'block';
                         // image.style.height = '250px';
                         var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                         //console.log(file);
                         doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'CPImagesTable',altName,'CPImagesDIV',uploadID,'removeCPHOWImage(this.id)','addOneCPImage(this.id)','480px','480px');
-
                     },
                     {
                         canvas: true,
@@ -807,10 +824,12 @@ function addOneCPImage(click_id)
         }
     });
 
-    var newID = $('#CPImagesDIV').find('> form').length;
-    var altID = $('#CPImagesDIV').find('> form').length + 1;
+
+    var lastImage = document.getElementById('CPImagesDIV').lastElementChild.lastChild.firstChild;
+    var newID = Number(lastImage.id.replace( /[^\d.]/g, '' ))+1;
+    var altID = Number(newID) + 1;
     nextAltName = 'Image  ' + altID;
-    console.log("I am here!!! need another image element ,the next id  " + newID);
+    //console.log("I am here!!! need another image element ,the next id  " + newID);
     var nextImageID = 'CPImage' + newID;
     var nextTextID = 'CPImageText' + newID;
     var nextRemoveButtonID = 'CPImageRemoveButton' + newID;
@@ -829,6 +848,7 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
 
     //var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
+    form.className = "Image";
     // console.log(form);
     //form.setAttribute("class","divForm");
     //need four dividends in a form
@@ -836,10 +856,14 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     var container2 = document.createElement("div");
     var container3 = document.createElement("div");
     var container4 = document.createElement("div");
+    var container5 = document.createElement("div");
+
     container1.setAttribute("class", "col-sm");
     container2.setAttribute("class", "col-sm");
     container3.setAttribute("class", "col-sm");
     container4.setAttribute("class", "col-sm");
+    container5.setAttribute("class", "col-sm");
+
 
     //crate an image area
     var img = document.createElement('img');
@@ -851,10 +875,28 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     img.style.width = width;
     img.style.height = imageSize;
     img.style.paddingTop = '10px';
+    img.title = "Image";
+
+    //create an lable
+    container2.style.textAlign = 'center';
+    var label = document.createElement('label');
+    //label.className = "Label";
+    label.style.width = imageSize;
+    label.style.height = "15px";
+    var givenID = imageID.replace ( /[^\d.]/g, '' );
+    var labelID = "imageCaption" + givenID;
+    label.id = labelID;
+    //console.log("the id " + givenID);
+    var imageNo = Number(givenID)+1;
+    label.textContent = "IMG " + imageNo;
+    label.setAttribute("class","figurecaption");
+    label.style.display = 'none';
+
 
     //create an input for the text
     var textInput = document.createElement('INPUT');
-    textInput.setAttribute("type", "text");
+    textInput.type = 'text';
+    // textInput.setAttribute("type", "text");
     textInput.style.width = imageSize;
     textInput.style.marginLeft = '10px';
     textInput.style.height = "10px";
@@ -905,11 +947,13 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     form.appendChild(container2);
     form.appendChild(container3);
     form.appendChild(container4);
+    form.appendChild(container5);
     container1.appendChild(img);
-    container2.appendChild(textInput);
-    container3.appendChild(removeButton);
+    container2.appendChild(label);
+    container3.appendChild(textInput);
+    container4.appendChild(removeButton);
     container4.appendChild(addButton);
-    container4.appendChild(uploadFile);
+    container5.appendChild(uploadFile);
 }
 
 
