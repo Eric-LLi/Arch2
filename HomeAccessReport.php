@@ -3,47 +3,71 @@ require_once("loadbooking.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Home Access & Service Report</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-              integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<head>
+    <title>Home Access & Service Report</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Customized CSS -->
-        <link rel="stylesheet" href="css/general.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-        <!--  Import JQuery  -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <!-- Customized CSS -->
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/viewPDF.css">
 
-        <!--  Import pdfMake  -->
-        <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
-        <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
+    <!--  Import JQuery  -->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <!--Easy UI -->
-        <script src="js/easyui/jquery.easyui.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
-        <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 
-        <?php require_once("saveloaddata.php"); ?>
-    </head>
-    <body>
-        <!--Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">ArchiCentre Task</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
+    <!--  Import pdfMake  -->
+    <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
+    <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
+
+    <!--Easy UI -->
+    <script src="js/easyui/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
+
+    <?php require_once("saveloaddata.php"); ?>
+</head>
+
+<body>
+    <!--Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">ArchiCentre Task</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-        </nav>
+    </nav>
 
+    <!--Title-->
+    <div class="container">
+        <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
+            <strong>Saving PDF. Please don't close this page. It will take a while</strong>
+
+            <!--Title-->
+            <div class="container">
+                <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
+                    <strong>Saving PDF. Please don't close this page. It will take a while</strong>
+                </div>
+                <h1 class="content-head text-center firstH1">Home Access & Services Report</h1>
+                <br>
+                <p>
+                    This Report provides independent advice from a registered architect about home access & services matters as they relate to your dwelling.
+                </p>
+
+<<<<<<< HEAD
         <!--Title-->
         <div class="container">
             <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
                 <strong>Saving PDF. Please don't close this page. It will take a while</strong>
+=======
+>>>>>>> 2d98132dc9f5cbe4070446bb3205ad28d5db35ea
             </div>
             <h1 class="content-head text-center firstH1">Home Access & Services Report</h1>
             <br>
@@ -224,7 +248,7 @@ require_once("loadbooking.php");
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td  class="align-middle">
+                                            <td class="align-middle">
                                                 Please state the number of DESIGNS
                                             </td>
                                             <td class="align-middle">
@@ -598,7 +622,7 @@ require_once("loadbooking.php");
                             </table>
                         </div>
                         <div title="Repairs & Mainentance Check" style="padding:10px;font-size: 18px">
-                            <table id="Table_RMCheck_S"  class="table table-bordered" style="table-layout:fixed">
+                            <table id="Table_RMCheck_S" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <td>
                                         <strong>Structure</strong>
@@ -640,7 +664,7 @@ require_once("loadbooking.php");
                                     </td>
                                 </tr>
                             </table>
-                            <table id="Table_RMCheck_O"  class="table table-bordered" style="table-layout:fixed">
+                            <table id="Table_RMCheck_O" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <td>
                                         <strong>Other</strong>
@@ -713,7 +737,7 @@ require_once("loadbooking.php");
                                         </select>
                                     </td>
                                     <td>
-                                        Hot Water System  - HWS*
+                                        Hot Water System - HWS*
                                     </td>
                                     <td>
                                         <select class="form-control" id="Check_HotwaterSystem">
@@ -725,9 +749,7 @@ require_once("loadbooking.php");
                             <table class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <td colspan="4">
-                                        <strong>NOTES:</strong><br>
-                                        1	* Gravity fed HWS’s are generally unsuitable for hand held showers<br>
-                                        2	Access restrictions
+                                        <strong>NOTES:</strong><br> 1 * Gravity fed HWS’s are generally unsuitable for hand held showers<br> 2 Access restrictions
                                     </td>
                                 </tr>
                             </table>
@@ -886,7 +908,7 @@ require_once("loadbooking.php");
                             </table>
                         </div>
                         <div title="Field Notes" style="padding:10px;font-size: 18px">
-                            <table  class="table table-bordered" style="table-layout:fixed">
+                            <table class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <td>
                                         In Attendance During Assessment
@@ -998,7 +1020,7 @@ require_once("loadbooking.php");
                             </table>
                         </div>
                         <div title="Repair & Maintenance" style="padding:10px;font-size: 18px">
-                            <table id="M_SolutionTable"  class="table table-bordered" style="table-layout:fixed">
+                            <table id="M_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <th colspan="5">
                                         <p class="text-center bg-danger">
@@ -1109,7 +1131,7 @@ require_once("loadbooking.php");
 
                 <!--First Tap Attachment-->
                 <div title="Attachment" style="padding: 10px;font-size: 18px">
-                    <div class="container" style="margin-top: 20px" >
+                    <div class="container" style="margin-top: 20px">
                         <div class="row">
                             <div class="col-sm-4">
                                 <label>Property Management Guide</label>
@@ -1192,7 +1214,7 @@ require_once("loadbooking.php");
 
                             <div class="col-sm-4">
                                 <label>Cost Guide</label>
-                                <select  id='costGuide' style="width:100%" title="Home Safety Checklist">
+                                <select id='costGuide' style="width:100%" title="Home Safety Checklist">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
                                     </optgroup>
@@ -1208,11 +1230,10 @@ require_once("loadbooking.php");
                 <!--First Tap Photo-->
                 <div title="Photo" style="padding: 10px;font-size: 18px">
                     <div class="container">
-                        <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton"
-                               onclick="CPUploadImages()" style="white-space: normal; width: 15%">
+                        <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton" onclick="CPUploadImages()" style="white-space: normal; width: 15%">
                         <input type="file" id="CPUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </div>
-                    <div class="container" style = "margin-top:10px">
+                    <div class="container" style="margin-top:10px">
                         <table id="CPImagesTable" style="display: none">
                             <tr>
                                 <th>
@@ -1224,12 +1245,36 @@ require_once("loadbooking.php");
                         <br>
                     </div>
                 </div>
+
+                <!--First Tap Photo-->
+                <div title="XXXXxX" style="padding: 10px;font-size: 18px">
+                    <button id="upload-button" class="btn btn-primary">Select PDF</button>
+                    <input type="file" id="file-to-upload" accept="application/pdf" />
+
+                    <div id="pdf-main-container">
+                        <div id="pdf-loader">Loading document ...</div>
+                        <div id="pdf-contents">
+                            <div id="pdf-meta">
+                                <div id="pdf-buttons">
+                                    <button id="pdf-prev">Previous</button>
+                                    <button id="pdf-next">Next</button>
+                                </div>
+                                <div id="page-count-container">Page
+                                    <div id="pdf-current-page"></div> of
+                                    <div id="pdf-total-pages"></div>
+                                </div>
+                            </div>
+                            <canvas id="pdf-canvas" width="400"></canvas>
+                            <div id="page-loader">Loading page ...</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!--Action Buttons-->
         <!--        <div class="container" style="text-align:center;">-->
-        <table class="table table-bordered">
+        <table>
             <tr>
                 <?php
                 if (!$isuserlink)
@@ -1237,35 +1282,34 @@ require_once("loadbooking.php");
                     if (SharedIsAdmin())
                     {
                 ?>
-                <td class="text-center">
-                    <button onclick="SaveReport()" type="button" class="btn btn-primary save" style="position:static;">Save</button>
+                    <td class="text-center" style="border:none;">
+                        <button onclick="SaveReport()" type="button" class="btn btn-primary save" style="position:static;">Save</button>
 
-                    <button onclick="generateCommercialPropertyPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+                        <button onclick="generateCommercialPropertyPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
 
-                    <button onclick="generateCommercialPropertyPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
-                </td>
-                <?php
+                        <button onclick="generateCommercialPropertyPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+                    </td>
+                    <?php
                     }
                     else
                     {
                         if (!$iscompleted)
                         {
                 ?>
-                <td>
-                    <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-                    <?php
+                        <td>
+                            <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
+                            <?php
                         }
                     ?>
-                    <button onclick="generateCommercialPropertyPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
-                </td>
-                <?php
+                                <button onclick="generateCommercialPropertyPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+                        </td>
+                        <?php
                     }
                 }
                 ?>
             </tr>
         </table>
         <!--        </div>-->
-
 
         <!--Scripts-->
         <!--<script src="js/images.js"></script>-->
@@ -1283,5 +1327,11 @@ require_once("loadbooking.php");
 
         <!--Table Data-->
         <!--            <script src="HomeAccessJS/getTableData.js"></script>-->
-    </body>
+
+        <!--view PDF srcipt-->
+        <script src="HomeAccessJS/pdf.js"></script>
+        <script src="HomeAccessJS/pdf.worker.js"></script>
+    </div>
+</body>
+
 </html>
