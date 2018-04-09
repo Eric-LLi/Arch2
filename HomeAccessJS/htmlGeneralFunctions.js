@@ -609,7 +609,7 @@ var C_count = 1,
 
         var text = "<select id=\"" + newCateSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Choose an item</option></select>";
 
-        if(btn_id!== "E")
+        if (btn_id !== "E")
             newTd1.innerHTML = text;
         else
             newTd1.innerHTML = "Enenrgy Efficiency";
@@ -710,12 +710,11 @@ var tradeClear = function (tid) {
 };
 
 
-function CPUploadImages()
-{
+function CPUploadImages() {
     document.getElementById('CPUploadImages').click();
 }
 
-$('#CPUploadImages').change(function(){
+$('#CPUploadImages').change(function () {
     $("#CPImagesDIV").empty();
     var table = document.getElementById("CPImagesTable");
     table.style.display = 'block';
@@ -723,15 +722,12 @@ $('#CPUploadImages').change(function(){
     var imageFile = this.files;
     //console.log(count);
 
-    for (var i = 0; i<count;i++)
-    {
+    for (var i = 0; i < count; i++) {
         try {
             //noinspection ExceptionCaughtLocallyJS
             throw i
-        }
-        catch (ii) {
-            setTimeout(function ()
-                       {
+        } catch (ii) {
+            setTimeout(function () {
                 var nameID = ii + 1;
                 var altName = 'Image ' + nameID;
                 var imageID = 'CPImage' + ii;
@@ -742,8 +738,8 @@ $('#CPUploadImages').change(function(){
 
                 //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
                 //addDrawing();
-                addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,
-                                 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
+                    'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
 
                 loadImage.parseMetaData(imageFile[ii], function (data) {
                     //console.log('I am in loadImage function');
@@ -753,7 +749,7 @@ $('#CPUploadImages').change(function(){
                     var imageType = imageFile[ii].type;
                     var image = document.getElementById(imageID);
                     var removeButton = document.getElementById(removeButtonID);
-                    var description  = document.getElementById(textID);
+                    var description = document.getElementById(textID);
                     var addButton = document.getElementById(addButtonID);
                     //if exif data available, update orientation
                     if (data.exif) {
@@ -762,7 +758,7 @@ $('#CPUploadImages').change(function(){
                     var loadingImage = loadImage(imageFile[ii], function (canvas) {
                         var base64data = canvas.toDataURL(imageType);
                         //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                        image.setAttribute('src',base64data);
+                        image.setAttribute('src', base64data);
                         //$(selectionImage).attr('src',base64data);
                         removeButton.style.display = 'block';
                         removeButton.style.width = '480px';
@@ -773,45 +769,45 @@ $('#CPUploadImages').change(function(){
                         image.style.width = '480px';
                         description.style.width = '480px';
                         // image.style.height = '250px';
-                        var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                        var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
+                            type: imageType,
+                            lastModified: date.getTime()
+                        });
                         //console.log(file);
-                        doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'CPImagesTable',altName,'CPImagesDIV',uploadID,'removeOneCPImage(this.id)','addOneCPImage(this.id)','480px','480px');
+                        doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'CPImagesTable', altName, 'CPImagesDIV', uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '480px');
 
-                    },
-                                                 {
+                    }, {
                         canvas: true,
                         orientation: orientation,
-                        maxWidth:1500,
-                        maxHeight:1200
-                    }
-                                                );
+                        maxWidth: 1500,
+                        maxHeight: 1200
+                    });
                 });
 
             }, 200);
         }
     }
-    setTimeout(function(){
+    setTimeout(function () {
         //addDrawing();
-        var altID= count + 1;
+        var altID = count + 1;
         var altName = 'Image' + altID;
         var imageID = 'CPImage' + count;
         var textID = 'CPImageText' + count;
         var removeButtonID = 'CPImageRemoveButton' + count;
         var addButtonID = 'CPImageAddButton' + count;
         var uploadID = 'CPImageUpload' + count;
-        addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,
-                         'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+        addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
+            'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
 
-    },400)
+    }, 400)
 
 
 
 });
 
-function removeOneCPImage(click_id)
-{
+function removeOneCPImage(click_id) {
     var selectedID = String(click_id);
-    var id = selectedID.replace ( /[^\d.]/g, '' );
+    var id = selectedID.replace(/[^\d.]/g, '');
     var imageID = 'CPImage' + id;
     var removeButtonID = 'CPImageRemoveButton' + id;
     var addButtonID = 'CPImageAddButton' + id;
@@ -834,13 +830,12 @@ function removeOneCPImage(click_id)
     doRemovePhoto(imageID);
 }
 
-function addOneCPImage(click_id)
-{
+function addOneCPImage(click_id) {
     console.log(click_id);
 
     var id;
     var selectedID = String(click_id);
-    id = selectedID.replace ( /[^\d.]/g, '' );
+    id = selectedID.replace(/[^\d.]/g, '');
     var nameID = Number(id) + 1;
     var altName = 'Image ' + nameID;
     var imageID = 'CPImage' + id;
@@ -851,7 +846,7 @@ function addOneCPImage(click_id)
     console.log(uploadID);
     var x = document.getElementById(uploadID);
     x.click();
-    x.addEventListener('change',function(){
+    x.addEventListener('change', function () {
         if (this.files && this.files[0]) {
             var imageFile = this.files[0];
             //load the image src to the current imageID.
@@ -864,7 +859,7 @@ function addOneCPImage(click_id)
                 var imageType = imageFile.type;
                 var image = document.getElementById(imageID);
                 var removeButton = document.getElementById(removeButtonID);
-                var description  = document.getElementById(textID);
+                var description = document.getElementById(textID);
                 var addButton = document.getElementById(addButtonID);
                 //if exif data available, update orientation
                 if (data.exif) {
@@ -873,7 +868,7 @@ function addOneCPImage(click_id)
                 var loadingImage = loadImage(imageFile, function (canvas) {
                     var base64data = canvas.toDataURL(imageType);
                     //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                    image.setAttribute('src',base64data);
+                    image.setAttribute('src', base64data);
                     //$(selectionImage).attr('src',base64data);
                     removeButton.style.display = 'block';
                     removeButton.style.width = '480px';
@@ -882,18 +877,19 @@ function addOneCPImage(click_id)
                     image.style.display = 'block';
                     image.style.width = '480px';
                     // image.style.height = '250px';
-                    var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                    var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
+                        type: imageType,
+                        lastModified: date.getTime()
+                    });
                     //console.log(file);
-                    doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'CPImagesTable',altName,'CPImagesDIV',uploadID,'removeCPHOWImage(this.id)','addOneCPImage(this.id)','480px','480px');
+                    doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'CPImagesTable', altName, 'CPImagesDIV', uploadID, 'removeCPHOWImage(this.id)', 'addOneCPImage(this.id)', '480px', '480px');
 
-                },
-                                             {
+                }, {
                     canvas: true,
                     orientation: orientation,
-                    maxWidth:1500,
-                    maxHeight:1200
-                }
-                                            );
+                    maxWidth: 1500,
+                    maxHeight: 1200
+                });
             });
         }
     });
@@ -908,13 +904,13 @@ function addOneCPImage(click_id)
     var nextAddButtonID = 'CPImageAddButton' + newID;
     var nextUploadID = 'CPImageUpload' + newID;
     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                     'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
+        'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
 
 
 }
 
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
-function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
+function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize, width) {
     var BigContainer = document.getElementById('CPImagesDIV');
 
     //var BigContainer = document.getElementById(divID);
@@ -999,9 +995,9 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
 }
 
 //Source from http://www.blogjava.net/jidebingfeng/articles/406171.html
-function convertBase64UrlToBlob(urlData,type){
+function convertBase64UrlToBlob(urlData, type) {
 
-    var bytes = window.atob(urlData.split(',')[1]);        //remove url, convert to byte
+    var bytes = window.atob(urlData.split(',')[1]); //remove url, convert to byte
 
     //deal with anomaly, change the ASCI code less than = 0 to great than zero
     var ab = new ArrayBuffer(bytes.length);
@@ -1010,8 +1006,118 @@ function convertBase64UrlToBlob(urlData,type){
         ia[i] = bytes.charCodeAt(i);
     }
 
-    return new Blob( [ab] , {type : type});
+    return new Blob([ab], {
+        type: type
+    });
 }
+
+var __PDF_DOC,
+    __CURRENT_PAGE,
+    __TOTAL_PAGES,
+    __PAGE_RENDERING_IN_PROGRESS = 0,
+    __CANVAS = $('#pdf-canvas').get(0),
+    __CANVAS_CTX = __CANVAS.getContext('2d');
+
+function showPDF(pdf_url) {
+    $("#pdf-loader").show();
+
+    PDFJS.getDocument({
+        url: pdf_url
+    }).then(function (pdf_doc) {
+        __PDF_DOC = pdf_doc;
+        __TOTAL_PAGES = __PDF_DOC.numPages;
+
+        // Hide the pdf loader and show pdf container in HTML
+        $("#pdf-loader").hide();
+        $("#pdf-contents").show();
+        $("#pdf-total-pages").text(__TOTAL_PAGES);
+
+        // Show the first page
+        showPage(1);
+    }).catch(function (error) {
+        // If error re-show the upload button
+        $("#pdf-loader").hide();
+        $("#upload-button").show();
+
+        alert(error.message);
+    });;
+}
+
+function showPage(page_no) {
+    __PAGE_RENDERING_IN_PROGRESS = 1;
+    __CURRENT_PAGE = page_no;
+
+    // Disable Prev & Next buttons while page is being loaded
+    $("#pdf-next, #pdf-prev").attr('disabled', 'disabled');
+
+    // While page is being rendered hide the canvas and show a loading message
+    $("#pdf-canvas").hide();
+    $("#page-loader").show();
+
+    // Update current page in HTML
+    $("#pdf-current-page").text(page_no);
+
+    // Fetch the page
+    __PDF_DOC.getPage(page_no).then(function (page) {
+        // As the canvas is of a fixed width we need to set the scale of the viewport accordingly
+        var scale_required = __CANVAS.width / page.getViewport(1).width;
+
+        // Get viewport of the page at required scale
+        var viewport = page.getViewport(scale_required);
+
+        // Set canvas height
+        __CANVAS.height = viewport.height;
+
+        var renderContext = {
+            canvasContext: __CANVAS_CTX,
+            viewport: viewport
+        };
+
+        // Render the page contents in the canvas
+        page.render(renderContext).then(function () {
+            __PAGE_RENDERING_IN_PROGRESS = 0;
+
+            // Re-enable Prev & Next buttons
+            $("#pdf-next, #pdf-prev").removeAttr('disabled');
+
+            // Show the canvas and hide the page loader
+            $("#pdf-canvas").show();
+            $("#page-loader").hide();
+        });
+    });
+}
+
+// Upon click this should should trigger click on the #file-to-upload file input element
+// This is better than showing the not-good-looking file input element
+$("#upload-button").on('click', function () {
+    $("#file-to-upload").trigger('click');
+});
+
+// When user chooses a PDF file
+$("#file-to-upload").on('change', function () {
+    // Validate whether PDF
+    if (['application/pdf'].indexOf($("#file-to-upload").get(0).files[0].type) == -1) {
+        alert('Error : Not a PDF');
+        return;
+    }
+
+    $("#upload-button").hide();
+
+    // Send the object url of the pdf
+    showPDF(URL.createObjectURL($("#file-to-upload").get(0).files[0]));
+});
+
+// Previous page of the PDF
+$("#pdf-prev").on('click', function () {
+    if (__CURRENT_PAGE != 1)
+        showPage(--__CURRENT_PAGE);
+});
+
+// Next page of the PDF
+$("#pdf-next").on('click', function () {
+    if (__CURRENT_PAGE != __TOTAL_PAGES)
+        showPage(++__CURRENT_PAGE);
+});
 
 $(document).ready(function () {
     "use strict";
