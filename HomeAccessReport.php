@@ -15,7 +15,6 @@ require_once("loadbooking.php");
 
         <!-- Customized CSS -->
         <link rel="stylesheet" href="css/general.css">
-        <link href="css/bootstrap-imageupload.css" rel="stylesheet">
 
         <!--  Import JQuery  -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -1213,7 +1212,6 @@ require_once("loadbooking.php");
                         <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton"
                                onclick="CPUploadImages()" style="white-space: normal; width: 15%">
                         <input type="file" id="CPUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
-
                     </div>
                     <div class="container" style = "margin-top:10px">
                         <table id="CPImagesTable" style="display: none">
@@ -1221,79 +1219,55 @@ require_once("loadbooking.php");
                                 <th>
                                     <div class="row form-group" id="CPImagesDIV">
                                     </div>
-
                                 </th>
                             </tr>
                         </table>
                         <br>
                     </div>
                 </div>
-                <!--
-<div title="Attachments" id="Attachments" style="padding: 10px;font-size: 18px">
-<form>
-<table class="table-bordered">
-<tr>
-<th colspan="6" style="color:red">
-ITEM
-</th>
-</tr>
-<tr>
-<td>
-<label><input type="checkbox" value="P_Guide">
-Property Maintenance Guide
-</label>
-</td>
-<td>
-<label><input type="checkbox" value="C_Masonry">
-Cracking in Masonry
-</label>
-</td>
-<td>
-<label><input type="checkbox" value="T_Dampness">
-Treatment of Dampness
-</label>
-</td>
-</tr>
-<tr>
-<td>
-<label><input type="checkbox" value="Warning">
-Health & Safety Warning
-</label>
-</td>
-<td>
-<label><input type="checkbox" value="R_Guttering">
-Roofing & Guttering
-</label>
-</td>
-<td>
-<label><input type="checkbox" value="H_Checklist">
-Home Safety Checklist
-</label>
-</td>
-</tr>
-<tr>
-<td>
-<label><input type="checkbox" value="T_Borers">
-Termites & Borers
-</label>
-</td>
-<td>
-<label><input type="checkbox" value="R_Stumping">
-Re-stumping
-</label>
-</td>
-<td>
-<label><input type="checkbox" value="C_Guide">
-Cost Guide
-</label>
-</td>
-</tr>
-</table>
-</form>
-</div>
--->
             </div>
         </div>
+
+        <!--Action Buttons-->
+        <!--        <div class="container" style="text-align:center;">-->
+        <table class="table table-bordered">
+            <tr>
+                <?php
+                if (!$isuserlink)
+                {
+                    if (SharedIsAdmin())
+                    {
+                ?>
+                <td class="text-center">
+                    <button onclick="SaveReport()" type="button" class="btn btn-primary save" style="position:static;">Save</button>
+
+                    <button onclick="generateCommercialPropertyPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+
+                    <button onclick="generateCommercialPropertyPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+                </td>
+                <?php
+                    }
+                    else
+                    {
+                        if (!$iscompleted)
+                        {
+                ?>
+                <td>
+                    <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
+                    <?php
+                        }
+                    ?>
+                    <button onclick="generateCommercialPropertyPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+                </td>
+                <?php
+                    }
+                }
+                ?>
+            </tr>
+        </table>
+        <!--        </div>-->
+
+
         <!--Scripts-->
         <!--<script src="js/images.js"></script>-->
         <script src="js/loadImageJS/load-image.all.min.js"></script>
