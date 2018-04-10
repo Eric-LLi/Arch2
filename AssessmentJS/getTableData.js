@@ -44,7 +44,7 @@ function getGarage() {
                     text: 'Structure/Walls',
                     style: 'tableText'
                 }, {
-                    text: StructureCheck,
+                    text: structureCheck,
                     noWrap: true,
                     style: 'tableText'
                 }, {
