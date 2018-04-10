@@ -1,6 +1,6 @@
 #upload-button {
     width: 150px;
-    display: block;
+    /*    display: block;*/
     margin: 20px auto;
 }
 
@@ -46,8 +46,8 @@
 #pdf-total-pages {
     display: inline;
 }
-
-#pdf-canvas {
+/*#pdf-canvas*/
+#pdf-contents canvas {
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
 }
@@ -59,4 +59,8 @@
     display: none;
     color: #999999;
     font-size: 13px;
+}
+#remove-btn {
+    float: left;
+    display: none;
 }

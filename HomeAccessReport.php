@@ -1248,25 +1248,16 @@ require_once("loadbooking.php");
                     </div>
 
                     <!--First Tap Photo-->
-                    <div title="XXXXxX" style="padding: 10px;font-size: 18px">
+                    <div title="Sketches" style="padding: 10px;font-size: 18px">
                         <button id="upload-button" class="btn btn-primary">Select PDF</button>
                         <input type="file" id="file-to-upload" accept="application/pdf" />
-
                         <div id="pdf-main-container">
-                            <div id="pdf-loader">Loading document ...</div>
                             <div id="pdf-contents">
-                                <div id="pdf-meta">
-                                    <div id="pdf-buttons">
-                                        <button id="pdf-prev">Previous</button>
-                                        <button id="pdf-next">Next</button>
-                                    </div>
-                                    <div id="page-count-container">Page
-                                        <div id="pdf-current-page"></div> of
-                                        <div id="pdf-total-pages"></div>
-                                    </div>
-                                </div>
                                 <canvas id="pdf-canvas" width="400"></canvas>
-                                <div id="page-loader">Loading page ...</div>
+                            </div>
+                            <div id="pdf-saveToimage">
+                                <a id="btn_Save" href="#"></a>
+<!--                                <button id="btn_Save" type="button" class="btn btn-dark" disabled>Save</button>-->
                             </div>
                         </div>
                     </div>
