@@ -1088,7 +1088,7 @@ function showPage(page_no) {
     // While page is being rendered hide the canvas and show a loading message
     $("#page-loader").show();
 
-    //123
+
     // Fetch the page
     __PDF_DOC.getPage(page_no).then(function (page) {
         // As the canvas is of a fixed width we need to set the scale of the viewport accordingly
