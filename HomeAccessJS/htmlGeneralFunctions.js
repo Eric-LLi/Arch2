@@ -1014,23 +1014,8 @@ function convertBase64UrlToBlob(urlData, type) {
 var __PDF_DOC,
     __CANVAS = $('#pdf-canvas').get(0),
     __CANVAS_CTX = __CANVAS.getContext('2d');
-
-//Create new cavans to display more than one PDF
-//function createPDFcontainer(count){
-//
-//    for(var i=1;i<count;i++){
-//
-//        var cav = document.getElementById("pdf-contents"),
-//            pdfViewer = document.createElement("canvas");
-//
-//        pdfViewer.setAttribute("id","canvas" + i);
-//        pdfViewer.setAttribute("width","400");
-//        cav.appendChild(pdfViewer);
-//
-//    }
-//}
-
 function showPDF(pdf_url) {
+    $("#pdf-loader").show();
 
     PDFJS.getDocument({
         url: pdf_url
@@ -1047,12 +1032,61 @@ function showPDF(pdf_url) {
         // If error re-show the upload button
         $("#pdf-loader").hide();
         alert(error.message);
-    });;
+    });
 }
+
+//<img id="0_IMG" width="200" height="300"><br>
+//<button id="0_imgDelete" type="button" class="btn btn-danger" onclick="deleteImg(this.id);">Remove</button>
+
+var imageCount = 0;
+function addImgBtn(){
+    //Create element
+    var imgElement = document.createElement("img"),
+        btnElement = document.createElement("button"),
+        container = document.createElement("div"),
+        tr = document.getElementById("pdf-contents"),
+        containerID = imageCount + "_DIV",
+        imgID = imageCount + "_IMG",
+        btnID = imageCount + "_btnDel";
+
+    container.setAttribute("id",containerID);
+
+    imgElement.setAttribute("id",imgID);
+    imgElement.setAttribute("src","");
+
+    btnElement.setAttribute("id",btnID);
+    btnElement.setAttribute("type","button");
+    btnElement.setAttribute("class","btn btn-danger");
+    btnElement.setAttribute("onclick","deleteImg(this.id)");
+    btnElement.innerHTML = "Remove";
+
+    tr.appendChild(container);
+    document.getElementById(containerID).appendChild(imgElement);
+    document.getElementById(containerID).appendChild(document.createElement("br"));
+    document.getElementById(containerID).appendChild(btnElement);
+
+    imageCount++;
+
+    var combine = [imgID,btnID];
+    return combine;
+}
+
+//image delete button onclick event
+// bid = button ID
+var deleteImg = function (bid){
+    var containerID = bid.substring(0,1) + "_DIV",
+        //Get container element
+        container = document.getElementById(containerID);
+
+    //Delete element
+    $(container).remove();
+
+//    imageCount--;
+};
 
 function showPage(page_no) {
     // While page is being rendered hide the canvas and show a loading message
-    $("#pdf-canvas").hide();
+    $("#page-loader").show();
 
     // Fetch the page
     __PDF_DOC.getPage(page_no).then(function (page) {
@@ -1072,14 +1106,19 @@ function showPage(page_no) {
 
         // Render the page contents in the canvas
         page.render(renderContext).then(function () {
-            //            console.log(__CANVAS.toDataURL());
-            // Show the canvas and hide the page loader
-            //            $("#pdf-canvas").show();
-            $("#btn_Save").text("Save");
-            $("#btn_Save").on('click',function(){
+            var imgbtnID = addImgBtn();
 
-                //                $(this).attr('href', __CANVAS.toDataURL()).attr('download', 'page.png');
-            });
+            $("#page-loader").hide();
+
+            //img ID
+            $("#"+imgbtnID[0]).show();
+
+            //delete button ID
+            $("#"+imgbtnID[1]).show();
+
+            var img64Code = __CANVAS.toDataURL();
+            //show image
+            $("#"+imgbtnID[0]).attr("src",img64Code);
         });
     });
 }
@@ -1099,9 +1138,6 @@ $("#file-to-upload").on('change', function () {
         return;
     }
 
-    //$("#upload-button").hide();
-
-    //    createPDFcontainer(uploadFile.files.length);
     for (var i = 0; i< uploadFile.files.length;i++){
         // Send the object url of the pdf
         if(i!==0){
@@ -1110,7 +1146,6 @@ $("#file-to-upload").on('change', function () {
         }
         showPDF(URL.createObjectURL(uploadFile.files[i]));
     }
-
 });
 
 $(document).ready(function () {
@@ -1127,6 +1162,4 @@ $(document).ready(function () {
     button_HealthCheckAdd();
     button_RepairsCheckAdd();
     button_EnergyCheckAdd();
-
-
 });

@@ -1252,13 +1252,11 @@ require_once("loadbooking.php");
                         <button id="upload-button" class="btn btn-primary">Select PDF</button>
                         <input type="file" id="file-to-upload" accept="application/pdf" />
                         <div id="pdf-main-container">
+                            <div id="pdf-loader">Loading document ...</div>
                             <div id="pdf-contents">
-                                <canvas id="pdf-canvas" width="400"></canvas>
+                                <canvas id="pdf-canvas"></canvas>
                             </div>
-                            <div id="pdf-saveToimage">
-                                <a id="btn_Save" href="#"></a>
-<!--                                <button id="btn_Save" type="button" class="btn btn-dark" disabled>Save</button>-->
-                            </div>
+                            <div id="page-loader">Loading page ...</div>
                         </div>
                     </div>
                 </div>
