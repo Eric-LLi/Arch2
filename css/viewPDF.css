@@ -9,7 +9,7 @@
 }
 
 #pdf-main-container {
-    width: 400px;
+/*    width: 400px;*/
     margin: 20px auto;
 }
 
@@ -50,8 +50,27 @@
 #pdf-contents canvas {
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
+    display: none;
 }
+#pdf-contents button{
+    margin-top: 5px;
+    display: none;
+}
+#pdf-contents img{
+    display: none;
+    width: 200px;
+    height: 300px;
+}
+#pdf-contents div{
+    float: left;
+    display: inline;
+}
+#img_table td {
+    /*    text-align: center;*/
+    border: inherit;
 
+    /*    vertical-align: middle;*/
+}
 #page-loader {
     height: 100px;
     line-height: 100px;
@@ -59,8 +78,4 @@
     display: none;
     color: #999999;
     font-size: 13px;
-}
-#remove-btn {
-    float: left;
-    display: none;
 }
