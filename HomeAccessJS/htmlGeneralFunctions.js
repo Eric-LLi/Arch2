@@ -739,7 +739,7 @@ $('#CPUploadImages').change(function () {
                 //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
                 //addDrawing();
                 addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                                 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+                    'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
 
                 loadImage.parseMetaData(imageFile[ii], function (data) {
 
@@ -797,7 +797,7 @@ $('#CPUploadImages').change(function () {
         var addButtonID = 'CPImageAddButton' + count;
         var uploadID = 'CPImageUpload' + count;
         addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                         'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+            'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
 
     }, 400)
 
@@ -904,7 +904,7 @@ function addOneCPImage(click_id) {
     var nextAddButtonID = 'CPImageAddButton' + newID;
     var nextUploadID = 'CPImageUpload' + newID;
     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                     'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
+        'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
 
 
 }
@@ -1014,6 +1014,7 @@ function convertBase64UrlToBlob(urlData, type) {
 var __PDF_DOC,
     __CANVAS = $('#pdf-canvas').get(0),
     __CANVAS_CTX = __CANVAS.getContext('2d');
+
 function showPDF(pdf_url) {
     $("#pdf-loader").show();
 
@@ -1039,49 +1040,62 @@ function showPDF(pdf_url) {
 //<button id="0_imgDelete" type="button" class="btn btn-danger" onclick="deleteImg(this.id);">Remove</button>
 
 var imageCount = 0;
-function addImgBtn(){
+
+function addImgBtn() {
     //Create element
     var imgElement = document.createElement("img"),
         btnElement = document.createElement("button"),
         container = document.createElement("div"),
+        caption = document.createElement("input"),
+
         tr = document.getElementById("pdf-contents"),
+        captionID = imageCount + "_Cap",
         containerID = imageCount + "_DIV",
         imgID = imageCount + "_IMG",
         btnID = imageCount + "_btnDel";
 
-    container.setAttribute("id",containerID);
 
-    imgElement.setAttribute("id",imgID);
-    imgElement.setAttribute("src","");
+    container.setAttribute("id", containerID);
 
-    btnElement.setAttribute("id",btnID);
-    btnElement.setAttribute("type","button");
-    btnElement.setAttribute("class","btn btn-danger");
-    btnElement.setAttribute("onclick","deleteImg(this.id)");
+    caption.setAttribute("id", captionID);
+    caption.setAttribute("type", "text");
+    caption.setAttribute("class", "form-control");
+    caption.setAttribute("placeholder", "Caption");
+
+    imgElement.setAttribute("id", imgID);
+    imgElement.setAttribute("src", "");
+
+    btnElement.setAttribute("id", btnID);
+    btnElement.setAttribute("type", "button");
+    btnElement.setAttribute("class", "btn btn-danger");
+    btnElement.setAttribute("onclick", "deleteImg(this.id)");
     btnElement.innerHTML = "Remove";
 
     tr.appendChild(container);
     document.getElementById(containerID).appendChild(imgElement);
     document.getElementById(containerID).appendChild(document.createElement("br"));
+    document.getElementById(containerID).appendChild(caption);
     document.getElementById(containerID).appendChild(btnElement);
 
     imageCount++;
 
-    var combine = [imgID,btnID];
+    var combine = [imgID, btnID];
     return combine;
 }
 
 //image delete button onclick event
 // bid = button ID
-var deleteImg = function (bid){
-    var containerID = bid.substring(0,1) + "_DIV",
+var deleteImg = function (bid) {
+    var imageID = bid.substring(0, 1) + "_IMG",
+        containerID = bid.substring(0, 1) + "_DIV",
         //Get container element
         container = document.getElementById(containerID);
 
     //Delete element
     $(container).remove();
 
-//    imageCount--;
+    doRemovePhoto(imageID);
+    //    imageCount--;
 };
 
 function showPage(page_no) {
@@ -1112,14 +1126,25 @@ function showPage(page_no) {
             $("#page-loader").hide();
 
             //img ID
-            $("#"+imgbtnID[0]).show();
+            $("#" + imgbtnID[0]).show();
 
             //delete button ID
-            $("#"+imgbtnID[1]).show();
+            $("#" + imgbtnID[1]).show();
 
             var img64Code = __CANVAS.toDataURL();
             //show image
-            $("#"+imgbtnID[0]).attr("src",img64Code);
+            $("#" + imgbtnID[0]).attr("src", img64Code);
+
+            var fileName = uploadPDFfile[0].name;
+            fileName = fileName.replace(".pdf", ".png");
+            var fileType = "image/png",
+                file = new File([convertBase64UrlToBlob(img64Code, fileType)], fileName, {
+                    type: fileType,
+                    lastModified: uploadPDFfile[0].lastModifiedDate
+                });
+
+            //upload to database
+            doUploadFile(file, imgbtnID[0], "", "", "", "", "", "", "", "", "", "", "");
         });
     });
 }
@@ -1130,22 +1155,23 @@ $("#upload-button").on('click', function () {
     $("#file-to-upload").trigger('click');
 });
 
+var uploadPDFfile;
 // When user chooses a PDF file
 $("#file-to-upload").on('change', function () {
     // Validate whether PDF
-    var uploadFile = $("#file-to-upload").get(0);
-    if (['application/pdf'].indexOf(uploadFile.files[0].type) == -1) {
+    uploadPDFfile = $("#file-to-upload").get(0).files;
+    if (['application/pdf'].indexOf(uploadPDFfile[0].type) == -1) {
         alert('Error : Not a PDF');
         return;
     }
 
-    for (var i = 0; i< uploadFile.files.length;i++){
+    for (var i = 0; i < uploadPDFfile.length; i++) {
         // Send the object url of the pdf
-        if(i!==0){
+        if (i !== 0) {
             __CANVAS = $('#canvas' + i).get(0);
             __CANVAS_CTX = __CANVAS.getContext('2d');
         }
-        showPDF(URL.createObjectURL(uploadFile.files[i]));
+        showPDF(URL.createObjectURL(uploadPDFfile[i]));
     }
 });
 
