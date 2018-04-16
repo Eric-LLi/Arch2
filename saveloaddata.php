@@ -261,13 +261,13 @@
                 countingImage++;
             }
         }
-        console.log('the current number of images ' + countingImage);
+        //        console.log('the current number of images ' + countingImage);
         for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName === 'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable') {
+            if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName === 'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable' || photos[i].tableName === 'pdf-contents') {
                 countingDrawing++;
             }
         }
-        //console.log('the current number of drawing ' + countingDrawing);
+        console.log('the current number of drawing ' + countingDrawing);
         // Any photos?
         //console.log(photos.length);
         photos.forEach(
@@ -276,10 +276,10 @@
                 var url = 'photos/' + p.filename;
                 //console.log(url);
                 var image = document.getElementById(p.imageid);
-                //console.log(p.imageid);
+                console.log("Image Name: " + p.filename);
                 //if the image is exited, then just need to populate the image with the src.
                 if (image) {
-                    console.log('have imageID');
+                    console.log('1111111have imageID');
                     //console.log(imageID);
                     image.style.display = 'block';
                     image.alt = p.imageAltName
@@ -295,7 +295,6 @@
                         var textID = document.getElementById(p.textid);
                         textID.style.display = 'block';
                         textID.style.width = p.width
-
                     }
 
                     if ((p.removeid != '') && (p.removeid != null)) {
@@ -385,7 +384,7 @@
                     }
                 } else {
                     //console.log(p.imageid + " corresponding image field is not extied");
-                    //console.log(p.tableName);
+                    console.log("2222222Table Name: " + p.tableName);
                     if (p.tableName) {
                         //console.log(p.tableName);
                         if (p.tableName === 'homeFeasibilityDrawingsTable') {
@@ -651,7 +650,7 @@
                                     console.log("still loading image, no worry");
                                 }
                             }
-                        } else if (p.tableName == 'CPImagesTable') {
+                        } else if (p.tableName === 'CPImagesTable') {
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             //console.log("the total number of images in this CP report are : " + countingImage);
@@ -687,7 +686,7 @@
 
                             }
 
-                        } else if (p.tableName == 'HOWImagesTable') {
+                        } else if (p.tableName === 'HOWImagesTable') {
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             console.log("the total number of images in this HOW report are : " + countingImage);
@@ -720,8 +719,24 @@
                                 var addButtonID = 'HOWImageAddButton' + nextID;
                                 var uploadID = 'HOWImageUpload' + nextID;
                                 addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
-
                             }
+                        } else if (p.tableName === "pdf-contents") {
+                            //[img ID, deltebuttonID, caption ID, container ID]
+                            console.log("Beofre Img Count: " + imageCount);
+                            var imgbtnID = addImgBtn(imageCount);
+                            imageCount++;
+                            console.log("After Img Count: " + imageCount);
+                            //Show img
+                            $("#" + imgbtnID[0]).show();
+
+                            //Show delete button
+                            $("#" + imgbtnID[1]).show();
+
+                            //Attach img
+                            console.log("Image URL: " + url);
+                            $("#" + imgbtnID[0]).attr("src", url);
+                            $("#pdf-contents").show();
+                        } else if (p.tableName === "HAImagesTable") {
 
                         }
                     }
@@ -732,9 +747,9 @@
 
         // Report specific checks...
         <?php
-      if (basename($_SERVER['SCRIPT_NAME']) == 'HomeFeasibilityReport.php')
-      {
-    ?>
+        if (basename($_SERVER['SCRIPT_NAME']) == 'HomeFeasibilityReport.php')
+        {
+        ?>
         var count_homeLow = 0;
         var count_homeinvolvepeople = 0;
         data.forEach(
@@ -762,13 +777,13 @@
                 addPeople();
         }
         <?php
-      }
-    ?>
+        }
+        ?>
 
         <?php
-      if (basename($_SERVER['SCRIPT_NAME']) == 'RenovationFeasibilityReport.php')
-      {
-    ?>
+        if (basename($_SERVER['SCRIPT_NAME']) == 'RenovationFeasibilityReport.php')
+        {
+        ?>
         var count_renovationLow = 0;
         var count_renovationInvolvePeople = 0;
         data.forEach(
@@ -796,13 +811,13 @@
                 addPeople();
         }
         <?php
-      }
-    ?>
+        }
+        ?>
 
         <?php
-      if (basename($_SERVER['SCRIPT_NAME']) == 'AssessmentReport.php')
-      {
-    ?>
+        if (basename($_SERVER['SCRIPT_NAME']) == 'AssessmentReport.php')
+        {
+        ?>
         var count_defect = 0;
         var count_siteLimitation = 0;
         var count_servicelimitation = 0;
@@ -861,14 +876,14 @@
                 addAccessLimitation('AssessmentPropertyInteriorNotesTable', 'AssessmentPropertyInteriorLimitationSelect', 'AssessmentPropertyInteriorLimitationNote');
         }
         <?php
-      }
-    ?>
+        }
+        ?>
 
 
         <?php
-      if (basename($_SERVER['SCRIPT_NAME']) == 'DesignConsultationReport.php')
-      {
-    ?>
+        if (basename($_SERVER['SCRIPT_NAME']) == 'DesignConsultationReport.php')
+        {
+        ?>
 
         var count_designconsultationinvolvepeople = 0;
         data.forEach(
@@ -887,14 +902,14 @@
                 addPeople();
         }
         <?php
-      }
-    ?>
+        }
+        ?>
 
 
         <?php
-      if (basename($_SERVER['SCRIPT_NAME']) == 'ConstructionReport.php')
-      {
-    ?>
+        if (basename($_SERVER['SCRIPT_NAME']) == 'ConstructionReport.php')
+        {
+        ?>
         var count_summary = 0;
         data.forEach(
             function(d) {
@@ -914,13 +929,13 @@
 
 
         <?php
-      }
-    ?>
+        }
+        ?>
 
         <?php
-      if (basename($_SERVER['SCRIPT_NAME']) == 'CommercialPropertyReport.php')
-      {
-    ?>
+        if (basename($_SERVER['SCRIPT_NAME']) == 'CommercialPropertyReport.php')
+        {
+        ?>
         loadSelect();
         var count_summary = 0;
         var count_defect = 0;
@@ -1241,13 +1256,13 @@
             }
         )
         <?php
-      }
-    ?>
+        }
+            ?>
 
         <?php
-      if (basename($_SERVER['SCRIPT_NAME']) == 'HOWReport.php')
-      {
-    ?>
+        if (basename($_SERVER['SCRIPT_NAME']) == 'HOWReport.php')
+        {
+            ?>
         loadSelect();
         var count_summary = 0;
         var count_site = 0;
@@ -1547,8 +1562,8 @@
             }
         }
         <?php
-      }
-    ?>
+        }
+        ?>
 
         // ***** Finally, populate with data...
         // Blast through ALL elements previously saved..,

@@ -223,64 +223,63 @@ require_once("loadbooking.php");
                 <div title="Property Summary" id="PSummary" style="padding:10px;font-size: 18px">
                     <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
                         <div title="Check Home Accessment" style="padding:10px;font-size: 18px">
-                            <form>
-                                <div class="form-group">
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <td colspan="3" style="padding-bottom:0px;">
-                                                <label style="color:red">PLEASE COMPLETE FOR ALL HOME SERVICES ASSESSMENTS</label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle">
-                                                Has the H&ampS CHECKLIST been completed?
-                                            </td>
-                                            <td class="align-middle">
-                                                <select class="form-control" id="HA_sel1" style="width:100%">
-                                                        <option value="-1">Choose</option>
-                                                        <option value="YES">YES</option>
-                                                        <option value="NO">NO</option>
-                                                    </select>
-                                            </td>
-                                            <td>
-                                                <label>If “NO” please state reason why not completed: </label><br>
-                                                <textarea class="form-control" id="HA_NocompleteComment"> </textarea>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle">
-                                                Please state the number of DESIGNS
-                                            </td>
-                                            <td class="align-middle">
-                                                <select class="form-control" id="HA_sel2" style="width:100%">
-                                                        <option value="-1">Choose</option>
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                    </select>
-                                            </td>
-                                            <td>
-                                                Please indicate design submitted:
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                            <input type="checkbox" class="form-check-input" value="Ramp"> Ramp
-                                                        </label>
-                                                    <label class="form-check-label">
-                                                            <input type="checkbox" class="form-check-input" value="Bathroom Modification"> Bathroom Modification
-                                                        </label>
-                                                    <label class="form-check-label">
-                                                            <input type="checkbox" class="form-check-input" value="Platform Steps"> Platform Steps
-                                                        </label>
-                                                    <label class="form-check-label">
-                                                            <input type="checkbox" class="form-check-input" value="Other"> Other
-                                                        </label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </form>
+                            <div class="form-group">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="3" style="padding-bottom:0px;">
+                                            <label style="color:red">PLEASE COMPLETE FOR ALL HOME SERVICES ASSESSMENTS</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">
+                                            Has the H&ampS CHECKLIST been completed?
+                                        </td>
+                                        <td class="align-middle">
+                                            <select class="form-control" id="HA_sel1" style="width:100%">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="YES">YES</option>
+                                                    <option value="NO">NO</option>
+                                                </select>
+                                        </td>
+                                        <td>
+                                            <label>If “NO” please state reason why not completed: </label><br>
+                                            <textarea class="form-control" id="HA_NocompleteComment"> </textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">
+                                            Please state the number of DESIGNS
+                                        </td>
+                                        <td class="align-middle">
+                                            <select class="form-control" id="HA_sel2" style="width:100%">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                        </td>
+                                        <td>
+                                            Please indicate design submitted:
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="checkBox_1">
+                                                        <input id="checkBox_1" type="checkbox" class="form-check-input" value="Ramp"> Ramp
+                                                    </label>
+                                                <label class="form-check-label" for="checkBox_2">
+                                                        <input id="checkBox_2" type="checkbox" class="form-check-input" value="Bathroom_Modification"> Bathroom_Modification
+                                                    </label>
+                                                <label class="form-check-label" for="checkBox_3">
+                                                        <input id="checkBox_3" type="checkbox" class="form-check-input" value="Platform_Steps"> Platform_Steps
+                                                    </label>
+                                                <label class="form-check-label" for="checkBox_4">
+                                                        <input id="checkBox_4" type="checkbox" class="form-check-input" value="Other"> Other
+                                                    </label>
+                                            </div>
+                                            <input type="text" class="form-control" id="CA_indicateText" disabled>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                         <div title="Construction Summary" style="padding:10px;font-size: 18px">
                             <form>
@@ -476,6 +475,20 @@ require_once("loadbooking.php");
                                             </td>
                                         </tr>
                                     </table>
+
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td style="color:red;"><strong>Key</strong></td>
+                                            <td>√</td>
+                                            <td>No visible Fault</td>
+                                            <td>X</td>
+                                            <td>Maintenance Item</td>
+                                            <td>XX</td>
+                                            <td>Serious Fault</td>
+                                            <td>--</td>
+                                            <td>Not Applicable</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </form>
                         </div>
@@ -620,6 +633,19 @@ require_once("loadbooking.php");
                                     </td>
                                 </tr>
                             </table>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td style="color:red;"><strong>Key</strong></td>
+                                    <td>√</td>
+                                    <td>No visible Fault</td>
+                                    <td>X</td>
+                                    <td>Maintenance Item</td>
+                                    <td>XX</td>
+                                    <td>Serious Fault</td>
+                                    <td>--</td>
+                                    <td>Not Applicable</td>
+                                </tr>
+                            </table>
                         </div>
                         <div title="Repairs & Mainentance Check" style="padding:10px;font-size: 18px">
                             <table id="Table_RMCheck_S" class="table table-bordered" style="table-layout:fixed">
@@ -751,6 +777,19 @@ require_once("loadbooking.php");
                                     <td colspan="4">
                                         <strong>NOTES:</strong><br> 1 * Gravity fed HWS’s are generally unsuitable for hand held showers<br> 2 Access restrictions
                                     </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td style="color:red;"><strong>Key</strong></td>
+                                    <td>√</td>
+                                    <td>No visible Fault</td>
+                                    <td>X</td>
+                                    <td>Maintenance Item</td>
+                                    <td>XX</td>
+                                    <td>Serious Fault</td>
+                                    <td>--</td>
+                                    <td>Not Applicable</td>
                                 </tr>
                             </table>
                         </div>
@@ -904,6 +943,19 @@ require_once("loadbooking.php");
                                                 <option value="-1">Choose</option>
                                             </select>
                                     </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td style="color:red;"><strong>Key</strong></td>
+                                    <td>√</td>
+                                    <td>No visible Fault</td>
+                                    <td>X</td>
+                                    <td>Maintenance Item</td>
+                                    <td>XX</td>
+                                    <td>Serious Fault</td>
+                                    <td>--</td>
+                                    <td>Not Applicable</td>
                                 </tr>
                             </table>
                         </div>
@@ -1230,14 +1282,14 @@ require_once("loadbooking.php");
                 <!--First Tap Photo-->
                 <div title="Photo" style="padding: 10px;font-size: 18px">
                     <div class="container">
-                        <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton" onclick="CPUploadImages()" style="white-space: normal; width: 15%">
-                        <input type="file" id="CPUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+                        <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton" onclick="HAUploadImages()" style="white-space: normal; width: 15%">
+                        <input type="file" id="HAUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </div>
                     <div class="container" style="margin-top:10px">
-                        <table id="CPImagesTable" style="display: none">
+                        <table id="HAImagesTable" style="display: none">
                             <tr>
                                 <th>
-                                    <div class="row form-group" id="CPImagesDIV">
+                                    <div class="row form-group" id="HAImagesDIV">
                                     </div>
                                 </th>
                             </tr>

@@ -345,6 +345,20 @@ function loadSolutionSelectData() {
     createS_Option();
 }
 
+//Save checkbox data into text for saving purpose.
+$(":checkbox").click(function () {
+
+    if ($(this).is(":checked")) {
+        $("#CA_indicateText").val($("#CA_indicateText").val() + $(this).val() + ",");
+
+    } else {
+        var text = $("#CA_indicateText").val();
+        var del = $(this).val();
+        text = text.replace(del + ",", "");
+        $("#CA_indicateText").val(text);
+    }
+})
+
 //Construction Summary Add button
 function button_ConAdd() {
     "use strict";
@@ -710,13 +724,13 @@ var tradeClear = function (tid) {
 };
 
 
-function CPUploadImages() {
-    document.getElementById('CPUploadImages').click();
+function HAUploadImages() {
+    document.getElementById('HAUploadImages').click();
 }
 
-$('#CPUploadImages').change(function () {
-    $("#CPImagesDIV").empty();
-    var table = document.getElementById("CPImagesTable");
+$('#HAUploadImages').change(function () {
+    $("#HAImagesDIV").empty();
+    var table = document.getElementById("HAImagesTable");
     table.style.display = 'block';
     var count = this.files.length;
     var imageFile = this.files;
@@ -730,16 +744,16 @@ $('#CPUploadImages').change(function () {
             setTimeout(function () {
                 var nameID = ii + 1;
                 var altName = 'Image ' + nameID;
-                var imageID = 'CPImage' + ii;
-                var textID = 'CPImageText' + ii;
-                var removeButtonID = 'CPImageRemoveButton' + ii;
-                var addButtonID = 'CPImageAddButton' + ii;
-                var uploadID = 'CPImageUpload' + ii;
+                var imageID = 'HAImage' + ii;
+                var textID = 'HAImageText' + ii;
+                var removeButtonID = 'HAImageRemoveButton' + ii;
+                var addButtonID = 'HAImageAddButton' + ii;
+                var uploadID = 'HAImageUpload' + ii;
 
                 //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
                 //addDrawing();
                 addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                    'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+                    'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '485px', '485px');
 
                 loadImage.parseMetaData(imageFile[ii], function (data) {
 
@@ -774,7 +788,7 @@ $('#CPUploadImages').change(function () {
                             lastModified: date.getTime()
                         });
 
-                        doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'CPImagesTable', altName, 'CPImagesDIV', uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '480px');
+                        doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'HAImagesTable', altName, 'HAImagesDIV', uploadID, 'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '480px', '480px');
 
                     }, {
                         canvas: true,
@@ -791,13 +805,13 @@ $('#CPUploadImages').change(function () {
         //addDrawing();
         var altID = count + 1;
         var altName = 'Image' + altID;
-        var imageID = 'CPImage' + count;
-        var textID = 'CPImageText' + count;
-        var removeButtonID = 'CPImageRemoveButton' + count;
-        var addButtonID = 'CPImageAddButton' + count;
-        var uploadID = 'CPImageUpload' + count;
+        var imageID = 'HAImage' + count;
+        var textID = 'HAImageText' + count;
+        var removeButtonID = 'HAImageRemoveButton' + count;
+        var addButtonID = 'HAImageAddButton' + count;
+        var uploadID = 'HAImageUpload' + count;
         addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-            'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+            'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '485px', '485px');
 
     }, 400)
 
@@ -805,13 +819,13 @@ $('#CPUploadImages').change(function () {
 
 });
 
-function removeOneCPImage(click_id) {
+function removeOneHAImage(click_id) {
     var selectedID = String(click_id);
     var id = selectedID.replace(/[^\d.]/g, '');
-    var imageID = 'CPImage' + id;
-    var removeButtonID = 'CPImageRemoveButton' + id;
-    var addButtonID = 'CPImageAddButton' + id;
-    var descriptionID = 'CPImageText' + id;
+    var imageID = 'HAImage' + id;
+    var removeButtonID = 'HAImageRemoveButton' + id;
+    var addButtonID = 'HAImageAddButton' + id;
+    var descriptionID = 'HAImageText' + id;
 
 
     var imageSelect = '#' + imageID;
@@ -830,7 +844,7 @@ function removeOneCPImage(click_id) {
     doRemovePhoto(imageID);
 }
 
-function addOneCPImage(click_id) {
+function addOneHAImage(click_id) {
     console.log(click_id);
 
     var id;
@@ -838,11 +852,11 @@ function addOneCPImage(click_id) {
     id = selectedID.replace(/[^\d.]/g, '');
     var nameID = Number(id) + 1;
     var altName = 'Image ' + nameID;
-    var imageID = 'CPImage' + id;
-    var textID = 'CPImageText' + id;
-    var removeButtonID = 'CPImageRemoveButton' + id;
-    var addButtonID = 'CPImageAddButton' + id;
-    var uploadID = 'CPImageUpload' + id;
+    var imageID = 'HAImage' + id;
+    var textID = 'HAImageText' + id;
+    var removeButtonID = 'HAImageRemoveButton' + id;
+    var addButtonID = 'HAImageAddButton' + id;
+    var uploadID = 'HAImageUpload' + id;
     console.log(uploadID);
     var x = document.getElementById(uploadID);
     x.click();
@@ -882,7 +896,7 @@ function addOneCPImage(click_id) {
                         lastModified: date.getTime()
                     });
                     //console.log(file);
-                    doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'CPImagesTable', altName, 'CPImagesDIV', uploadID, 'removeCPHOWImage(this.id)', 'addOneCPImage(this.id)', '480px', '480px');
+                    doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'HAImagesTable', altName, 'HAImagesDIV', uploadID, 'removeHAHOWImage(this.id)', 'addOneHAImage(this.id)', '480px', '480px');
 
                 }, {
                     canvas: true,
@@ -894,24 +908,22 @@ function addOneCPImage(click_id) {
         }
     });
 
-    var newID = $('#CPImagesDIV').find('> form').length;
-    var altID = $('#CPImagesDIV').find('> form').length + 1;
+    var newID = $('#HAImagesDIV').find('> form').length;
+    var altID = $('#HAImagesDIV').find('> form').length + 1;
     nextAltName = 'Image  ' + altID;
     console.log("I am here!!! need another image element ,the next id  " + newID);
-    var nextImageID = 'CPImage' + newID;
-    var nextTextID = 'CPImageText' + newID;
-    var nextRemoveButtonID = 'CPImageRemoveButton' + newID;
-    var nextAddButtonID = 'CPImageAddButton' + newID;
-    var nextUploadID = 'CPImageUpload' + newID;
+    var nextImageID = 'HAImage' + newID;
+    var nextTextID = 'HAImageText' + newID;
+    var nextRemoveButtonID = 'HAImageRemoveButton' + newID;
+    var nextAddButtonID = 'HAImageAddButton' + newID;
+    var nextUploadID = 'HAImageUpload' + newID;
     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-        'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
-
-
+        'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '480px', '0px');
 }
 
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
 function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize, width) {
-    var BigContainer = document.getElementById('CPImagesDIV');
+    var BigContainer = document.getElementById('HAImagesDIV');
 
     //var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
@@ -1041,7 +1053,7 @@ function showPDF(pdf_url) {
 
 var imageCount = 0;
 
-function addImgBtn() {
+function addImgBtn(id) {
     //Create element
     var imgElement = document.createElement("img"),
         btnElement = document.createElement("button"),
@@ -1077,9 +1089,9 @@ function addImgBtn() {
     document.getElementById(containerID).appendChild(caption);
     document.getElementById(containerID).appendChild(btnElement);
 
-    imageCount++;
 
-    var combine = [imgID, btnID];
+
+    var combine = [imgID, btnID, captionID, containerID];
     return combine;
 }
 
@@ -1121,7 +1133,9 @@ function showPage(page_no) {
 
         // Render the page contents in the canvas
         page.render(renderContext).then(function () {
-            var imgbtnID = addImgBtn();
+            //[img ID, deltebuttonID, caption ID, container ID]
+            var imgbtnID = addImgBtn(imageCount);
+            imageCount++;
 
             $("#page-loader").hide();
 
@@ -1132,7 +1146,7 @@ function showPage(page_no) {
             $("#" + imgbtnID[1]).show();
 
             var img64Code = __CANVAS.toDataURL();
-            //show image
+            //Attach image
             $("#" + imgbtnID[0]).attr("src", img64Code);
 
             var fileName = uploadPDFfile[0].name;
@@ -1144,7 +1158,7 @@ function showPage(page_no) {
                 });
 
             //upload to database
-            doUploadFile(file, imgbtnID[0], "", "", "", "", "", "", "", "", "", "", "");
+            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "pdf-contents", "", "", "upload-button", "deleteImg(this.id)", "addImgBtn()", "300px", "200px");
         });
     });
 }
