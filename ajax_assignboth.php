@@ -3,11 +3,19 @@
 
   global $reportTypes;
   global $userTypes;
+  global $footer; 
+  global $header;
 
   function doMacros($h, $b)
   {
     global $reportTypes;
     global $userTypes;
+
+    //Get the contents of the footer and header to the variables. 
+    $header = file_get_contents('Email_Header.html');
+    $footer = file_get_contents('Email_Footer.html'); 
+    $h = str_replace("XXX_HEADER", $header, $h);
+    $h = str_replace("XXX_FOOTER", $footer, $h);
 
     $h = str_replace("XXX_ARCHITECTNAME", $b['linked_firstname'] . ' ' . $b['linked_lastname'], $h);
     $h = str_replace("XXX_ARCHITECTPHONE", $b['linked_mobile'], $h);
@@ -190,6 +198,7 @@
               {
                 $emailtemplate = $reportconfirmemails[$booking['itype']];
                 $html = file_get_contents('email_architectallocation.html');
+                error_log($html);
                 $html = doMacros($html, $booking);
 
 		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], "Assessment/Inspection Confirmation", $html);
