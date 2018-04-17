@@ -136,41 +136,41 @@
             bookingcode: <?php echo $bookingcode; ?>
 
         };
-        $.post(
+            $.post(
             'ajax_uploadPDF.php',
             formData,
             function(result) {
-                var response = JSON.parse(result);
-                //console.log(response.passingText);
-                //console.log(response.rc)
+            var response = JSON.parse(result);
+            //console.log(response.passingText);
+            //console.log(response.rc)
 
-                if (response.rc == 0) {
-                    //$('savingPDFAlert').hide('fade');
-                    var alert = document.getElementById('savingPDFAlert');
-                    alert.style.display = 'none';
-                    noty({
-                        text: response.msg,
-                        type: 'success',
-                        timeout: 10000
-                    });
-                    // var bookingCode = response.passingText;
-                    // var baseURL = 'http://www.archicentreaustraliainspections.com/pdfreport/';
-                    // //var bookingCode = document.getElementById('customer_booking').value;
-                    // var url = baseURL + bookingCode + '.pdf';
-                    // window.open(url);
+            if (response.rc == 0) {
+            //$('savingPDFAlert').hide('fade');
+            var alert = document.getElementById('savingPDFAlert');
+            alert.style.display = 'none';
+            noty({
+            text: response.msg,
+            type: 'success',
+            timeout: 10000
+        });
+        // var bookingCode = response.passingText;
+        // var baseURL = 'http://www.archicentreaustraliainspections.com/pdfreport/';
+        // //var bookingCode = document.getElementById('customer_booking').value;
+        // var url = baseURL + bookingCode + '.pdf';
+        // window.open(url);
 
-                } else {
-                    $('savingPDFAlert').hide('fade');
-                    noty({
-                        text: response.msg,
-                        type: 'error',
-                        timeout: 10000
-                    });
-                }
+    } else {
+        $('savingPDFAlert').hide('fade');
+        noty({
+            text: response.msg,
+            type: 'error',
+            timeout: 10000
+        });
+    }
 
-            }
-        );
-        //console.log('saving pdf');
+    }
+    );
+    //console.log('saving pdf');
     }
 
     //imageSize == height
@@ -257,13 +257,13 @@
         //calculate the image
         for (var i = 0; i < photos.length; ++i) {
             if (photos[i].tableName === 'MaintenanceImagesTable' || photos[i].tableName === 'ConstructionImagesTable' ||
-                photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName === 'DilapidationImagesTable' || photos[i].tableName == 'CPImagesTable' || photos[i].tableName == 'HOWImagesTable') {
+                photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName === 'DilapidationImagesTable' || photos[i].tableName == 'CPImagesTable' || photos[i].tableName == 'HOWImagesTable' || photos[i].tableName === 'HAImagesTable') {
                 countingImage++;
             }
         }
-        //        console.log('the current number of images ' + countingImage);
+        console.log('the current number of images ' + countingImage);
         for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName === 'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable' || photos[i].tableName === 'pdf-contents') {
+            if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName === 'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable' || photos[i].tableName === 'HA_PdfContents') {
                 countingDrawing++;
             }
         }
@@ -372,7 +372,7 @@
                                     var addButtonID = 'HOWImageAddButton' + nextID;
                                     var uploadID = 'HOWImageUpload' + nextID;
                                     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                                        'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                                                     'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
 
                                 }
                             }
@@ -393,7 +393,7 @@
                             var maxIamge = 4;
                             console.log("I am in Home Feasibility Drawing Table");
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
 
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.imageid).style.display = 'block';
@@ -421,7 +421,7 @@
                                     var nextAddButtonID = 'homeDrawingAddButton' + nextID;
                                     var nextUploadID = 'homeDrawingUpload' + nextID;
                                     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
+                                                     'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
                                 } else {
                                     console.log('still running, never mind');
                                 }
@@ -436,7 +436,7 @@
                             //console.log(p.addid);
                             //document.getElementById(p.tableName).style.display = 'block';
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID, p.removeFunction,
-                                p.addFunction, p.imageSize, p.width);
+                                             p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.imageid).style.display = 'block';
                             document.getElementById(p.imageid).style.width = '100%';
@@ -465,7 +465,7 @@
                                     var nextAddButtonID = 'renovationDrawingAddButton' + nextID;
                                     var nextUploadID = 'renovationDrawingUpload' + nextID;
                                     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
+                                                     'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
                                 } else {
                                     console.log('still running, never mind');
                                 }
@@ -479,7 +479,7 @@
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -502,7 +502,7 @@
                                     var nextAddButtonID = 'AddDilapidationImageButton' + nextID;
                                     var nextUploadID = 'DilapidationUploadImage' + nextID;
                                     addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '510px', '0px');
+                                                     'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '510px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
@@ -516,7 +516,7 @@
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -539,7 +539,7 @@
                                     var nextAddButtonID = 'AddAdviceImageButton' + nextID;
                                     var nextUploadID = 'AdviceUploadImage' + nextID;
                                     addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        p.removeFunction, p.addFunction, '500px', '0px');
+                                                     p.removeFunction, p.addFunction, '500px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
@@ -550,7 +550,7 @@
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -574,7 +574,7 @@
                                     var nextAddButtonID = 'AddMaintenanceImageButton' + nextID;
                                     var nextUploadID = 'MaintenanceUploadImage' + nextID;
                                     addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        p.removeFunction, p.addFunction, '500px', '0px');
+                                                     p.removeFunction, p.addFunction, '500px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
@@ -585,7 +585,7 @@
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -610,7 +610,7 @@
                                     var nextAddButtonID = 'AddMaintenanceDrawingButton' + nextID;
                                     var nextUploadID = 'MaintenanceUploadDrawing' + nextID;
                                     addImageElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        p.removeFunction, p.addFunction, '500px', '0px');
+                                                     p.removeFunction, p.addFunction, '500px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
@@ -621,7 +621,7 @@
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -645,7 +645,7 @@
                                     var nextAddButtonID = 'AddConstructionImageButton' + nextID;
                                     var nextUploadID = 'ConstructionUploadImage' + nextID;
                                     addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        p.removeFunction, p.addFunction, '500px', '0px');
+                                                     p.removeFunction, p.addFunction, '500px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
@@ -659,7 +659,7 @@
                             //if (imageNo === 0)
                             //{
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
+                                             'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
                             $('#' + p.imageid).attr('src', url);
                             var givenID = p.imageid.replace(/[^\d.]/g, '');
                             var labelID = "imageCaption" + givenID;
@@ -695,7 +695,7 @@
                             //if (imageNo === 0)
                             //{
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                                             'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
                             $('#' + p.imageid).attr('src', url);
                             var givenID = p.imageid.replace(/[^\d.]/g, '');
                             var labelID = "HOWimageCaption" + givenID;
@@ -720,11 +720,19 @@
                                 var uploadID = 'HOWImageUpload' + nextID;
                                 addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
                             }
-                        } else if (p.tableName === "pdf-contents") {
-                            //[img ID, deltebuttonID, caption ID, container ID]
+                        }
+                        else if (p.tableName === "HA_PdfContents") {
                             console.log("Beofre Img Count: " + imageCount);
-                            var imgbtnID = addImgBtn(imageCount);
-                            imageCount++;
+                            //imgbtnID = [img ID, deltebuttonID, caption ID, container ID]
+
+                            var temp = p.imageid.split("_");
+                            console.log("TEMP: "+ temp[0]);
+
+                            if(temp[0]>imageCount)
+                                imageCount=temp[0];
+
+                            var imgbtnID = addImgBtn(temp[0]);
+
                             console.log("After Img Count: " + imageCount);
                             //Show img
                             $("#" + imgbtnID[0]).show();
@@ -735,9 +743,44 @@
                             //Attach img
                             console.log("Image URL: " + url);
                             $("#" + imgbtnID[0]).attr("src", url);
-                            $("#pdf-contents").show();
+                            $("#HA_PdfContents").show();
                         } else if (p.tableName === "HAImagesTable") {
+                            console.log("Into HAImagesTable");
+                            var table = document.getElementById(p.tableName);
 
+                            table.style.display = 'block';
+
+                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                             'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '480px', '0px');
+                            $('#' + p.imageid).attr('src', url);
+                            var givenID = p.imageid.replace(/[^\d.]/g, '');
+                            console.log("Image ID: "+p.imageid);
+                            console.log("Given ID: "+givenID);
+//                            var labelID = "imageCaption" + givenID;
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '400px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '400px';
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '400px';
+                            document.getElementById(p.imageid).style.height = '400px';
+//                            document.getElementById(labelID).style.display = 'block';
+                            //get the current id from the imageID.
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            var nextID = Number(currentID) + 1;
+                            //console.log("the next ID is " + nextID);
+                            var altID = Number(nextID) + 1;
+                            if (nextID >= countingImage) {
+                                var altName = 'HAImage' + altID;
+                                console.log("I am here!!! need to create a image " + altName);
+                                var imageID = 'HAImage' + nextID;
+                                var textID = 'HAImageText' + nextID;
+                                var removeButtonID = 'HAImageRemoveButton' + nextID;
+                                var addButtonID = 'HAImageAddButton' + nextID;
+                                var uploadID = 'HAImageUpload' + nextID;
+                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '0');
+                            }
                         }
                     }
                 }

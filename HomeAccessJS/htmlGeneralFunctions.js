@@ -345,19 +345,43 @@ function loadSolutionSelectData() {
     createS_Option();
 }
 
+
+//Check CA_indicateText to match checkbox.
+function checkIndiTextValue(){
+    if($("#CA_indicateText").val()!==""){
+        var val = $("#CA_indicateText").val().split(",");
+        for(var i in val){
+            if(val[i]!==""){
+                switch(val[i]){
+                    case "Ramp":
+                        document.getElementById("checkBox_1").checked = true;
+                        break;
+                    case "Bathroom_Modification":
+                        document.getElementById("checkBox_2").checked = true;
+                        break;
+                    case "Platform_Steps":
+                        document.getElementById("checkBox_3").checked = true;
+                        break;
+                    case"Other":
+                        document.getElementById("checkBox_4").checked = true;
+                        break;
+                }
+            }
+        }
+    }
+}
+
 //Save checkbox data into text for saving purpose.
 $(":checkbox").click(function () {
-
     if ($(this).is(":checked")) {
         $("#CA_indicateText").val($("#CA_indicateText").val() + $(this).val() + ",");
-
     } else {
         var text = $("#CA_indicateText").val();
         var del = $(this).val();
         text = text.replace(del + ",", "");
         $("#CA_indicateText").val(text);
     }
-})
+});
 
 //Construction Summary Add button
 function button_ConAdd() {
@@ -735,7 +759,6 @@ $('#HAUploadImages').change(function () {
     var count = this.files.length;
     var imageFile = this.files;
 
-
     for (var i = 0; i < count; i++) {
         try {
             //noinspection ExceptionCaughtLocallyJS
@@ -743,7 +766,7 @@ $('#HAUploadImages').change(function () {
         } catch (ii) {
             setTimeout(function () {
                 var nameID = ii + 1;
-                var altName = 'Image ' + nameID;
+                var altName = 'HAImage ' + nameID;
                 var imageID = 'HAImage' + ii;
                 var textID = 'HAImageText' + ii;
                 var removeButtonID = 'HAImageRemoveButton' + ii;
@@ -753,7 +776,7 @@ $('#HAUploadImages').change(function () {
                 //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
                 //addDrawing();
                 addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                    'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '485px', '485px');
+                                 'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '400px');
 
                 loadImage.parseMetaData(imageFile[ii], function (data) {
 
@@ -775,21 +798,21 @@ $('#HAUploadImages').change(function () {
                         image.setAttribute('src', base64data);
                         //$(selectionImage).attr('src',base64data);
                         removeButton.style.display = 'block';
-                        removeButton.style.width = '480px';
+                        removeButton.style.width = '400px';
                         addButton.style.display = 'none';
-                        addButton.style.width = '480px';
+                        addButton.style.width = '400px';
                         description.style.display = 'block';
                         image.style.display = 'block';
-                        image.style.width = '480px';
-                        description.style.width = '480px';
+                        image.style.width = '400px';
+                        image.style.height = '400px';
+                        description.style.width = '400px';
                         // image.style.height = '250px';
                         var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
                             type: imageType,
                             lastModified: date.getTime()
                         });
 
-                        doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'HAImagesTable', altName, 'HAImagesDIV', uploadID, 'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '480px', '480px');
-
+                        doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'HAImagesTable', altName, 'HAImagesDIV', uploadID, 'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '400px');
                     }, {
                         canvas: true,
                         orientation: orientation,
@@ -797,7 +820,6 @@ $('#HAUploadImages').change(function () {
                         maxHeight: 1200
                     });
                 });
-
             }, 200);
         }
     }
@@ -811,12 +833,8 @@ $('#HAUploadImages').change(function () {
         var addButtonID = 'HAImageAddButton' + count;
         var uploadID = 'HAImageUpload' + count;
         addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-            'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '485px', '485px');
-
+                         'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '400px');
     }, 400)
-
-
-
 });
 
 function removeOneHAImage(click_id) {
@@ -826,7 +844,6 @@ function removeOneHAImage(click_id) {
     var removeButtonID = 'HAImageRemoveButton' + id;
     var addButtonID = 'HAImageAddButton' + id;
     var descriptionID = 'HAImageText' + id;
-
 
     var imageSelect = '#' + imageID;
     $(imageSelect).attr('src', '#');
@@ -885,18 +902,19 @@ function addOneHAImage(click_id) {
                     image.setAttribute('src', base64data);
                     //$(selectionImage).attr('src',base64data);
                     removeButton.style.display = 'block';
-                    removeButton.style.width = '480px';
+                    removeButton.style.width = '400px';
                     addButton.style.display = 'none';
                     description.style.display = 'block';
                     image.style.display = 'block';
-                    image.style.width = '480px';
+                    image.style.width = '400px';
+                    image.style.height = '400px';
                     // image.style.height = '250px';
                     var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
                         type: imageType,
                         lastModified: date.getTime()
                     });
                     //console.log(file);
-                    doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'HAImagesTable', altName, 'HAImagesDIV', uploadID, 'removeHAHOWImage(this.id)', 'addOneHAImage(this.id)', '480px', '480px');
+                    doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'HAImagesTable', altName, 'HAImagesDIV', uploadID, 'removeHAHOWImage(this.id)', 'addOneHAImage(this.id)', '400px', '400px');
 
                 }, {
                     canvas: true,
@@ -918,7 +936,7 @@ function addOneHAImage(click_id) {
     var nextAddButtonID = 'HAImageAddButton' + newID;
     var nextUploadID = 'HAImageUpload' + newID;
     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-        'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '480px', '0px');
+                     'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '0px');
 }
 
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
@@ -1037,7 +1055,7 @@ function showPDF(pdf_url) {
 
         // Hide the pdf loader and show pdf container in HTML
         $("#pdf-loader").hide();
-        $("#pdf-contents").show();
+        $("#HA_PdfContents").show();
 
         // Show the first page
         showPage(1);
@@ -1060,7 +1078,7 @@ function addImgBtn(id) {
         container = document.createElement("div"),
         caption = document.createElement("input"),
 
-        tr = document.getElementById("pdf-contents"),
+        tr = document.getElementById("HA_PdfContents"),
         captionID = imageCount + "_Cap",
         containerID = imageCount + "_DIV",
         imgID = imageCount + "_IMG",
@@ -1098,13 +1116,20 @@ function addImgBtn(id) {
 //image delete button onclick event
 // bid = button ID
 var deleteImg = function (bid) {
-    var imageID = bid.substring(0, 1) + "_IMG",
-        containerID = bid.substring(0, 1) + "_DIV",
+    var imageID = bid.split("_")[0] + "_IMG",
+        containerID = bid.split("_")[0] + "_DIV",
+        captionID = bid.split("_")[0] + "_Cap",
         //Get container element
         container = document.getElementById(containerID);
+    document.getElementById(captionID).value = "";
 
-    //Delete element
+
+    //Save caption text to empty.
+//    SaveReport();
+
+    //Delete whole div including img, caption and remove button.
     $(container).remove();
+
 
     doRemovePhoto(imageID);
     //    imageCount--;
@@ -1157,8 +1182,9 @@ function showPage(page_no) {
                     lastModified: uploadPDFfile[0].lastModifiedDate
                 });
 
+
             //upload to database
-            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "pdf-contents", "", "", "upload-button", "deleteImg(this.id)", "addImgBtn()", "300px", "200px");
+            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents", "", "", "upload-button", "deleteImg(this.id)", "addImgBtn()", "300px", "200px");
         });
     });
 }
@@ -1195,6 +1221,7 @@ $(document).ready(function () {
     loadPropertySelectData();
     loadSolutionSelectData();
 
+    checkIndiTextValue();
     //Property Summary add_button
     button_ConAdd();
     button_FaultAdd();

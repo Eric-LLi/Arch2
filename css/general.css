@@ -183,3 +183,7 @@ th {
     font-weight: bold;
     color: #bb3333;
 }
+
+button {
+    cursor:pointer;
+}

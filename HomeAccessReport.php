@@ -194,15 +194,15 @@ require_once("loadbooking.php");
                                 <div class="row form-group">
                                     <div class="col-sm">
                                         <label>Referred By</label><br>
-                                        <input id="HA_architectEmail" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>">
+                                        <input id="HA_architectRef" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>">
                                     </div>
                                     <div class="col-sm">
                                         <label>Email Address</label><br>
-                                        <input id="HA_architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0">
+                                        <input id="HA_architectEmail2" class="form-control" type="text" title="phone" style="margin-top: 0">
                                     </div>
                                     <div class="col-sm">
                                         <label>Phone</label><br>
-                                        <input id="HA_architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0">
+                                        <input id="HA_architectPhone2" class="form-control" type="text" title="phone" style="margin-top: 0">
                                     </div>
                                 </div>
                             </form>
@@ -1280,9 +1280,9 @@ require_once("loadbooking.php");
                 </div>
 
                 <!--First Tap Photo-->
-                <div title="Photo" style="padding: 10px;font-size: 18px">
+                <div title="Photo" style="padding: 0px,10px,10px,0px;font-size: 18px">
                     <div class="container">
-                        <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton" onclick="HAUploadImages()" style="white-space: normal; width: 15%">
+                        <input type="button" id="get_drawing" value="Upload Images" class="btn btn-primary" onclick="HAUploadImages()" style="margin:20px auto; width:150px;">
                         <input type="file" id="HAUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </div>
                     <div class="container" style="margin-top:10px">
@@ -1305,7 +1305,7 @@ require_once("loadbooking.php");
                     <input type="file" id="file-to-upload" accept="application/pdf" />
                     <div id="pdf-main-container">
                         <div id="pdf-loader">Loading document ...</div>
-                        <div id="pdf-contents">
+                        <div id="HA_PdfContents">
                             <canvas id="pdf-canvas"></canvas>
                         </div>
                         <div id="page-loader">Loading page ...</div>
