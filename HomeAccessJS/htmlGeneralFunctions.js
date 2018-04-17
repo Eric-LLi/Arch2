@@ -216,7 +216,6 @@ var E_Code = [
 
 //Add property "option"
 function createP_Option(nameid) {
-    "use strict";
     var i,
         optionID = document.getElementById(nameid),
         opt = document.createElement("option");
@@ -345,209 +344,233 @@ function loadSolutionSelectData() {
     createS_Option();
 }
 
-//Construction Summary Add button
-function button_ConAdd() {
-    "use strict";
-
-    document.getElementById("Button_ConAdd").onclick = function () {
-        var newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            table = document.getElementById("Table_CSummary"),
-            lastTr = document.getElementById("Table_CSummary").getElementsByTagName("tr")[table.rows.length - 1],
-            lastRowCount = lastTr.childElementCount;
-
-        if (lastRowCount === 2) {
-            newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-            newTd2.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-
-        } else {
-            newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-            newTd2.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
+//Check CA_indicateText to match checkbox.
+function checkIndiTextValue(){
+    if($("#CA_indicateText").val()!==""){
+        var val = $("#CA_indicateText").val().split(",");
+        for(var i in val){
+            if(val[i]!==""){
+                switch(val[i]){
+                    case "Ramp":
+                        document.getElementById("checkBox_1").checked = true;
+                        break;
+                    case "Bathroom_Modification":
+                        document.getElementById("checkBox_2").checked = true;
+                        break;
+                    case "Platform_Steps":
+                        document.getElementById("checkBox_3").checked = true;
+                        break;
+                    case"Other":
+                        document.getElementById("checkBox_4").checked = true;
+                        break;
+                }
+            }
         }
-    };
+    }
+}
+//Save checkbox data into text for saving purpose.
+$(":checkbox").click(function () {
+    if ($(this).is(":checked")) {
+        $("#CA_indicateText").val($("#CA_indicateText").val() + $(this).val() + ",");
+    } else {
+        var text = $("#CA_indicateText").val();
+        var del = $(this).val();
+        text = text.replace(del + ",", "");
+        $("#CA_indicateText").val(text);
+    }
+});
+
+
+//'Construction Summary' add button count.
+var conAdd_Count = 0;
+//'Construction Summary' Add button listening event.
+$("#Button_ConAdd").click(function (){
+    Create_ConAdd(conAdd_Count);
+    conAdd_Count++;
+});
+//'Construction Summary' Add button create.
+function Create_ConAdd(id) {
+    var newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        table = document.getElementById("Table_CSummary"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        lastRowCount = lastTr.childElementCount,
+        inputNameID = id + "_CSNewName",
+        inputValueID=id + "_CSNewValue";
+
+    newTd1.innerHTML = "<input id=\""+inputNameID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<input id=\""+inputValueID+"\" type=\"text\" class=\"form-control\"/>";
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
 }
 
-//Fault Summary Add button
-function button_FaultAdd() {
-    "use strict";
 
-    //    i = 0;
-    var newItemCount = 1;
+//'Fault Summary' add button count.
+var faultAdd_Count = 0;
+//'Fault Summary' add button listening event.
+$("#Button_FaultAdd").click(function (){
+    button_FaultAdd(faultAdd_Count);
+    faultAdd_Count++;
+});
+//'Fault Summary' Add button create.
+function button_FaultAdd(id) {
+    var table = document.getElementById("Table_FalSummary"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = document.getElementById("Table_FalSummary").getElementsByTagName("tr")[table.rows.length - 1],
+        newNameID = id + "_FSNewName",
+        newValueID = id+ "_FSNewValue",
+        lastRowCount = lastTr.childElementCount;
 
-    document.getElementById("Button_FaultAdd").onclick = function () {
+    newTd1.innerHTML = "<input id=\""+newNameID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-        var table = document.getElementById("Table_FalSummary"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = document.getElementById("Table_FalSummary").getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newFalItem_" + newItemCount,
-            lastRowCount = lastTr.childElementCount;
-
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
-
-        if (lastRowCount === 2) {
-
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-
-            //            i = 0;
-        } else {
-
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-
-            //            i = 1;
-        }
-
-        createP_Option(newItemID);
-
-        newItemCount++;
-    };
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newValueID);
 }
 
-//Health Check & Safety check Add button
-function button_HealthCheckAdd() {
-    "use strict";
 
-    var newItemCount = 1;
+//'Health Check & Safety Check' add button count.
+var HSCheckAdd_Count = 0;
+//'Health Check & Safety Check' add button listening event.
+$("#Button_HSCheckAdd").click(function (){
+    button_HealthCheckAdd(HSCheckAdd_Count);
+    HSCheckAdd_Count++;
+});
+//'Health Check & Safety check' Add button create.
+function button_HealthCheckAdd(id) {
+    var table = document.getElementById("Table_HSCheck"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        newItemName = id + "_HSCheckNewName",
+        newItemValue = id+ "_HSCheckNewValue",
+        lastRowCount = lastTr.childElementCount;
 
-    document.getElementById("Button_HSCheckAdd").onclick = function () {
+    newTd1.innerHTML = "<input id=\""+newItemName+"\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newItemValue + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-        var table = document.getElementById("Table_HSCheck"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newHSCheckItem_" + newItemCount,
-            lastRowCount = lastTr.childElementCount;
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newItemValue);
+}
+//'Repairs & Mainentance Check' Structure add button count.
+var RM_SCheckAdd_Count = 0;
+//'Repairs & Mainentance Check' Structure add button Listening event.
+$("#Button_RMCheckAdd_S").click(function () {
+    RM_SCheckAddButton(RM_SCheckAdd_Count);
+    RM_SCheckAdd_Count++;
+});
+//'Repairs & Mainentance Check' Structure add button create.
+function RM_SCheckAddButton(id){
+    var table = document.getElementById("Table_RMCheck_S"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        newNameID = id + "_RMSCheckNewName",
+        newValueID = id + "_RMSCheckValue",
+        lastRowCount = lastTr.childElementCount;
 
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
+    newTd1.innerHTML = "<input id=\"" + newNameID + "\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-        if (lastRowCount === 2) {
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newValueID);
+}
+//'Repairs & Mainentance Check' Other add button count.
+var RM_OCheckAdd_Count = 0;
+//'Repairs & Mainentance Check' Other add button Listening event.
+$("#Button_RMCheckAdd_O").click( function (){
+    RM_OCheckAddButton(RM_OCheckAdd_Count);
+    RM_OCheckAdd_Count++;
+});
+//'Repairs & Mainentance Check' Other add button create.
+function RM_OCheckAddButton(id){
+    var table = document.getElementById("Table_RMCheck_O"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        newNameID = id + "_RMOCheckNewName",
+        newValueID = id + "_RMOCheckNewValue",
+        lastRowCount = lastTr.childElementCount;
 
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-        } else {
+    newTd1.innerHTML = "<input id=\""+newNameID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-
-        createP_Option(newItemID);
-        newItemCount++;
-    };
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newValueID);
 }
 
-//Repairs Check Add button
-function button_RepairsCheckAdd() {
-    "use strict";
-    var newItemCount = 1,
-        newItemCount2 = 1;
 
-    //First add button
-    document.getElementById("Button_RMCheckAdd_S").onclick = function () {
+//'Energy & Wastage Check' Add button count.
+var EW_CheckAdd_Count = 0;
+//'Energy & Wastage Check' Add button Listening event.
+$("#Button_EWCheckAdd").click(function () {
+    button_EnergyCheckAdd(EW_CheckAdd_Count);
+    EW_CheckAdd_Count++;
+});
+//'Energy & Wastage Check' Add button create.
+function button_EnergyCheckAdd(id){
+    var table = document.getElementById("Table_EWCheck"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        newNameID = EW_CheckAdd_Count + "_EWCheckNewName",
+        newValueID = EW_CheckAdd_Count + "_EWCheckNewValue",
+        lastRowCount = lastTr.childElementCount;
 
-        var table = document.getElementById("Table_RMCheck_S"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newRMCheckSItem_" + newItemCount,
-            lastRowCount = lastTr.childElementCount;
+    newTd1.innerHTML = "<input id=\"" + newNameID + "\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
-
-        if (lastRowCount === 2) {
-
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-        } else {
-
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-
-        createP_Option(newItemID);
-        newItemCount++;
-    };
-
-    //Second add button
-    document.getElementById("Button_RMCheckAdd_O").onclick = function () {
-
-        var table = document.getElementById("Table_RMCheck_O"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newRMCheckOItem_" + newItemCount2,
-            lastRowCount = lastTr.childElementCount;
-
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
-
-        if (lastRowCount === 2) {
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-        } else {
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-
-        createP_Option(newItemID);
-        newItemCount2++;
-    };
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newValueID);
 }
-
-//Energy Check Add button
-function button_EnergyCheckAdd() {
-    "use strict";
-
-    var newItemCount = 1;
-
-    document.getElementById("Button_EWCheckAdd").onclick = function () {
-
-        var table = document.getElementById("Table_EWCheck"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newEWCheckItem_" + newItemCount,
-            lastRowCount = lastTr.childElementCount;
-
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
-
-        if (lastRowCount === 2) {
-
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-        } else {
-
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-
-        createP_Option(newItemID);
-        newItemCount++;
-    };
-}
-
 
 /*
 Count new row.
@@ -710,17 +733,16 @@ var tradeClear = function (tid) {
 };
 
 
-function CPUploadImages() {
-    document.getElementById('CPUploadImages').click();
+function HAUploadImages() {
+    document.getElementById('HAUploadImages').click();
 }
 
-$('#CPUploadImages').change(function () {
-    $("#CPImagesDIV").empty();
-    var table = document.getElementById("CPImagesTable");
+$('#HAUploadImages').change(function () {
+    $("#HAImagesDIV").empty();
+    var table = document.getElementById("HAImagesTable");
     table.style.display = 'block';
     var count = this.files.length;
     var imageFile = this.files;
-
 
     for (var i = 0; i < count; i++) {
         try {
@@ -729,17 +751,17 @@ $('#CPUploadImages').change(function () {
         } catch (ii) {
             setTimeout(function () {
                 var nameID = ii + 1;
-                var altName = 'Image ' + nameID;
-                var imageID = 'CPImage' + ii;
-                var textID = 'CPImageText' + ii;
-                var removeButtonID = 'CPImageRemoveButton' + ii;
-                var addButtonID = 'CPImageAddButton' + ii;
-                var uploadID = 'CPImageUpload' + ii;
+                var altName = 'HAImage ' + nameID;
+                var imageID = 'HAImage' + ii;
+                var textID = 'HAImageText' + ii;
+                var removeButtonID = 'HAImageRemoveButton' + ii;
+                var addButtonID = 'HAImageAddButton' + ii;
+                var uploadID = 'HAImageUpload' + ii;
 
                 //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
                 //addDrawing();
                 addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                                 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
+                                 'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '400px');
 
                 loadImage.parseMetaData(imageFile[ii], function (data) {
 
@@ -761,21 +783,21 @@ $('#CPUploadImages').change(function () {
                         image.setAttribute('src', base64data);
                         //$(selectionImage).attr('src',base64data);
                         removeButton.style.display = 'block';
-                        removeButton.style.width = '480px';
+                        removeButton.style.width = '400px';
                         addButton.style.display = 'none';
-                        addButton.style.width = '480px';
+                        addButton.style.width = '400px';
                         description.style.display = 'block';
                         image.style.display = 'block';
-                        image.style.width = '480px';
-                        description.style.width = '480px';
+                        image.style.width = '400px';
+                        image.style.height = '400px';
+                        description.style.width = '400px';
                         // image.style.height = '250px';
                         var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
                             type: imageType,
                             lastModified: date.getTime()
                         });
 
-                        doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'CPImagesTable', altName, 'CPImagesDIV', uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '480px');
-
+                        doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'HAImagesTable', altName, 'HAImagesDIV', uploadID, 'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '400px');
                     }, {
                         canvas: true,
                         orientation: orientation,
@@ -783,7 +805,6 @@ $('#CPUploadImages').change(function () {
                         maxHeight: 1200
                     });
                 });
-
             }, 200);
         }
     }
@@ -791,28 +812,23 @@ $('#CPUploadImages').change(function () {
         //addDrawing();
         var altID = count + 1;
         var altName = 'Image' + altID;
-        var imageID = 'CPImage' + count;
-        var textID = 'CPImageText' + count;
-        var removeButtonID = 'CPImageRemoveButton' + count;
-        var addButtonID = 'CPImageAddButton' + count;
-        var uploadID = 'CPImageUpload' + count;
+        var imageID = 'HAImage' + count;
+        var textID = 'HAImageText' + count;
+        var removeButtonID = 'HAImageRemoveButton' + count;
+        var addButtonID = 'HAImageAddButton' + count;
+        var uploadID = 'HAImageUpload' + count;
         addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                         'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '485px', '485px');
-
+                         'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '400px');
     }, 400)
-
-
-
 });
 
-function removeOneCPImage(click_id) {
+function removeOneHAImage(click_id) {
     var selectedID = String(click_id);
     var id = selectedID.replace(/[^\d.]/g, '');
-    var imageID = 'CPImage' + id;
-    var removeButtonID = 'CPImageRemoveButton' + id;
-    var addButtonID = 'CPImageAddButton' + id;
-    var descriptionID = 'CPImageText' + id;
-
+    var imageID = 'HAImage' + id;
+    var removeButtonID = 'HAImageRemoveButton' + id;
+    var addButtonID = 'HAImageAddButton' + id;
+    var descriptionID = 'HAImageText' + id;
 
     var imageSelect = '#' + imageID;
     $(imageSelect).attr('src', '#');
@@ -830,7 +846,7 @@ function removeOneCPImage(click_id) {
     doRemovePhoto(imageID);
 }
 
-function addOneCPImage(click_id) {
+function addOneHAImage(click_id) {
     console.log(click_id);
 
     var id;
@@ -838,11 +854,11 @@ function addOneCPImage(click_id) {
     id = selectedID.replace(/[^\d.]/g, '');
     var nameID = Number(id) + 1;
     var altName = 'Image ' + nameID;
-    var imageID = 'CPImage' + id;
-    var textID = 'CPImageText' + id;
-    var removeButtonID = 'CPImageRemoveButton' + id;
-    var addButtonID = 'CPImageAddButton' + id;
-    var uploadID = 'CPImageUpload' + id;
+    var imageID = 'HAImage' + id;
+    var textID = 'HAImageText' + id;
+    var removeButtonID = 'HAImageRemoveButton' + id;
+    var addButtonID = 'HAImageAddButton' + id;
+    var uploadID = 'HAImageUpload' + id;
     console.log(uploadID);
     var x = document.getElementById(uploadID);
     x.click();
@@ -871,18 +887,19 @@ function addOneCPImage(click_id) {
                     image.setAttribute('src', base64data);
                     //$(selectionImage).attr('src',base64data);
                     removeButton.style.display = 'block';
-                    removeButton.style.width = '480px';
+                    removeButton.style.width = '400px';
                     addButton.style.display = 'none';
                     description.style.display = 'block';
                     image.style.display = 'block';
-                    image.style.width = '480px';
+                    image.style.width = '400px';
+                    image.style.height = '400px';
                     // image.style.height = '250px';
                     var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
                         type: imageType,
                         lastModified: date.getTime()
                     });
                     //console.log(file);
-                    doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'CPImagesTable', altName, 'CPImagesDIV', uploadID, 'removeCPHOWImage(this.id)', 'addOneCPImage(this.id)', '480px', '480px');
+                    doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'HAImagesTable', altName, 'HAImagesDIV', uploadID, 'removeHAHOWImage(this.id)', 'addOneHAImage(this.id)', '400px', '400px');
 
                 }, {
                     canvas: true,
@@ -894,24 +911,22 @@ function addOneCPImage(click_id) {
         }
     });
 
-    var newID = $('#CPImagesDIV').find('> form').length;
-    var altID = $('#CPImagesDIV').find('> form').length + 1;
+    var newID = $('#HAImagesDIV').find('> form').length;
+    var altID = $('#HAImagesDIV').find('> form').length + 1;
     nextAltName = 'Image  ' + altID;
     console.log("I am here!!! need another image element ,the next id  " + newID);
-    var nextImageID = 'CPImage' + newID;
-    var nextTextID = 'CPImageText' + newID;
-    var nextRemoveButtonID = 'CPImageRemoveButton' + newID;
-    var nextAddButtonID = 'CPImageAddButton' + newID;
-    var nextUploadID = 'CPImageUpload' + newID;
+    var nextImageID = 'HAImage' + newID;
+    var nextTextID = 'HAImageText' + newID;
+    var nextRemoveButtonID = 'HAImageRemoveButton' + newID;
+    var nextAddButtonID = 'HAImageAddButton' + newID;
+    var nextUploadID = 'HAImageUpload' + newID;
     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                     'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
-
-
+                     'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '0px');
 }
 
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
 function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize, width) {
-    var BigContainer = document.getElementById('CPImagesDIV');
+    var BigContainer = document.getElementById('HAImagesDIV');
 
     //var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
@@ -1014,6 +1029,7 @@ function convertBase64UrlToBlob(urlData, type) {
 var __PDF_DOC,
     __CANVAS = $('#pdf-canvas').get(0),
     __CANVAS_CTX = __CANVAS.getContext('2d');
+
 function showPDF(pdf_url) {
     $("#pdf-loader").show();
 
@@ -1024,7 +1040,7 @@ function showPDF(pdf_url) {
 
         // Hide the pdf loader and show pdf container in HTML
         $("#pdf-loader").hide();
-        $("#pdf-contents").show();
+        $("#HA_PdfContents").show();
 
         // Show the first page
         showPage(1);
@@ -1039,49 +1055,69 @@ function showPDF(pdf_url) {
 //<button id="0_imgDelete" type="button" class="btn btn-danger" onclick="deleteImg(this.id);">Remove</button>
 
 var imageCount = 0;
-function addImgBtn(){
+
+function addImgBtn(id) {
     //Create element
     var imgElement = document.createElement("img"),
         btnElement = document.createElement("button"),
         container = document.createElement("div"),
-        tr = document.getElementById("pdf-contents"),
+        caption = document.createElement("input"),
+
+        tr = document.getElementById("HA_PdfContents"),
+        captionID = imageCount + "_Cap",
         containerID = imageCount + "_DIV",
         imgID = imageCount + "_IMG",
         btnID = imageCount + "_btnDel";
 
-    container.setAttribute("id",containerID);
 
-    imgElement.setAttribute("id",imgID);
-    imgElement.setAttribute("src","");
+    container.setAttribute("id", containerID);
 
-    btnElement.setAttribute("id",btnID);
-    btnElement.setAttribute("type","button");
-    btnElement.setAttribute("class","btn btn-danger");
-    btnElement.setAttribute("onclick","deleteImg(this.id)");
+    caption.setAttribute("id", captionID);
+    caption.setAttribute("type", "text");
+    caption.setAttribute("class", "form-control");
+    caption.setAttribute("placeholder", "Caption");
+
+    imgElement.setAttribute("id", imgID);
+    imgElement.setAttribute("src", "");
+
+    btnElement.setAttribute("id", btnID);
+    btnElement.setAttribute("type", "button");
+    btnElement.setAttribute("class", "btn btn-danger");
+    btnElement.setAttribute("onclick", "deleteImg(this.id)");
     btnElement.innerHTML = "Remove";
 
     tr.appendChild(container);
     document.getElementById(containerID).appendChild(imgElement);
     document.getElementById(containerID).appendChild(document.createElement("br"));
+    document.getElementById(containerID).appendChild(caption);
     document.getElementById(containerID).appendChild(btnElement);
 
-    imageCount++;
 
-    var combine = [imgID,btnID];
+
+    var combine = [imgID, btnID, captionID, containerID];
     return combine;
 }
 
 //image delete button onclick event
 // bid = button ID
-var deleteImg = function (bid){
-    var containerID = bid.substring(0,1) + "_DIV",
+var deleteImg = function (bid) {
+    var imageID = bid.split("_")[0] + "_IMG",
+        containerID = bid.split("_")[0] + "_DIV",
+        captionID = bid.split("_")[0] + "_Cap",
         //Get container element
         container = document.getElementById(containerID);
+    document.getElementById(captionID).value = "";
 
-    //Delete element
+
+    //Save caption text to empty.
+    //    SaveReport();
+
+    //Delete whole div including img, caption and remove button.
     $(container).remove();
 
-//    imageCount--;
+
+    doRemovePhoto(imageID);
+    //    imageCount--;
 };
 
 function showPage(page_no) {
@@ -1106,19 +1142,32 @@ function showPage(page_no) {
 
         // Render the page contents in the canvas
         page.render(renderContext).then(function () {
-            var imgbtnID = addImgBtn();
+            //[img ID, deltebuttonID, caption ID, container ID]
+            var imgbtnID = addImgBtn(imageCount);
+            imageCount++;
 
             $("#page-loader").hide();
 
             //img ID
-            $("#"+imgbtnID[0]).show();
+            $("#" + imgbtnID[0]).show();
 
             //delete button ID
-            $("#"+imgbtnID[1]).show();
+            $("#" + imgbtnID[1]).show();
 
             var img64Code = __CANVAS.toDataURL();
-            //show image
-            $("#"+imgbtnID[0]).attr("src",img64Code);
+            //Attach image
+            $("#" + imgbtnID[0]).attr("src", img64Code);
+
+            var fileName = uploadPDFfile[0].name;
+            fileName = fileName.replace(".pdf", ".png");
+            var fileType = "image/png",
+                file = new File([convertBase64UrlToBlob(img64Code, fileType)], fileName, {
+                    type: fileType,
+                    lastModified: uploadPDFfile[0].lastModifiedDate
+                });
+
+            //upload to database
+            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents", "", "", "upload-button", "deleteImg(this.id)", "addImgBtn()", "300px", "200px");
         });
     });
 }
@@ -1129,22 +1178,23 @@ $("#upload-button").on('click', function () {
     $("#file-to-upload").trigger('click');
 });
 
+var uploadPDFfile;
 // When user chooses a PDF file
 $("#file-to-upload").on('change', function () {
     // Validate whether PDF
-    var uploadFile = $("#file-to-upload").get(0);
-    if (['application/pdf'].indexOf(uploadFile.files[0].type) == -1) {
+    uploadPDFfile = $("#file-to-upload").get(0).files;
+    if (['application/pdf'].indexOf(uploadPDFfile[0].type) == -1) {
         alert('Error : Not a PDF');
         return;
     }
 
-    for (var i = 0; i< uploadFile.files.length;i++){
+    for (var i = 0; i < uploadPDFfile.length; i++) {
         // Send the object url of the pdf
-        if(i!==0){
+        if (i !== 0) {
             __CANVAS = $('#canvas' + i).get(0);
             __CANVAS_CTX = __CANVAS.getContext('2d');
         }
-        showPDF(URL.createObjectURL(uploadFile.files[i]));
+        showPDF(URL.createObjectURL(uploadPDFfile[i]));
     }
 });
 
@@ -1154,12 +1204,13 @@ $(document).ready(function () {
     loadPropertySelectData();
     loadSolutionSelectData();
 
+    checkIndiTextValue();
     //Property Summary add_button
-    button_ConAdd();
-    button_FaultAdd();
+    //    button_ConAdd();
+    //    button_FaultAdd();
 
     //Property Assessment add_button
-    button_HealthCheckAdd();
-    button_RepairsCheckAdd();
-    button_EnergyCheckAdd();
+    //    button_HealthCheckAdd();
+    //    button_RepairsCheckAdd();
+    //    button_EnergyCheckAdd();
 });

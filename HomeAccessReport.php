@@ -20,8 +20,6 @@ require_once("loadbooking.php");
         <!--  Import JQuery  -->
         <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
         <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
         <!--  Import pdfMake  -->
@@ -34,6 +32,7 @@ require_once("loadbooking.php");
         <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 
         <?php require_once("saveloaddata.php"); ?>
+
     </head>
 
     <body>
@@ -79,30 +78,29 @@ require_once("loadbooking.php");
             </div>
             <!-- Details -->
             <div class="container">
-                <div class="easyui-tabs" style="width:100%;height:auto" data-options="tabWidth:300">
-
+                <div class="easyui-tabs" style="width:100%;height:auto" data-options="tabWidth:200">
                     <!--First Tap Booking Information-->
                     <div title="Booking Information" id="BInformation" style="padding:10px;font-size: 18px">
-                        <div class="easyui-tabs" data-options="fit:true,plain:true" style="width:inherit;height:500px">
+                        <div class="easyui-tabs" data-options="fit:true,plain:true" style="width:inherit;height:500px;">
 
                             <!--Second Tap Client Details-->
                             <div title="Client Details" style="padding:10px;font-size: 18px">
-                                <form>
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <label>Name</label><br>
-                                            <input id="CP_ClientName" class="form-control" type="text" title="name" style="margin-top: 0">
-                                        </div>
-                                        <div class="col-sm">
-                                            <label>Phone</label><br>
-                                            <input id="CP_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0">
-                                        </div>
-                                        <div class="col-sm">
-                                            <label>Booking No.</label><br>
-                                            <input id="CP_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0">
-                                        </div>
+                                <!--<form>-->
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label>Name</label><br>
+                                        <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
                                     </div>
-                                </form>
+                                    <div class="col-sm">
+                                        <label>Phone</label><br>
+                                        <input id="HA_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
+                                    </div>
+                                    <div class="col-sm">
+                                        <label>Booking No.</label><br>
+                                        <input id="HA_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0" value="<?php echo $bookingcode; ?>">
+                                    </div>
+                                </div>
+                                <!--</form>-->
                             </div>
 
                             <!--Second Tap Property Details-->
@@ -111,21 +109,21 @@ require_once("loadbooking.php");
                                     <div class="row">
                                         <div class="col-sm">
                                             <label>Address of Propety</label><br>
-                                            <input id="CP_Address" class="form-control" type="text" title="address" style="margin-top: 0">
+                                            <input id="HA_Address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm">
                                             <label>Suburb</label><br>
-                                            <input id="CP_Suburb" class="form-control" type="text" title="suburb" style="margin-top: 0">
+                                            <input id="HA_Suburb" class="form-control" type="text" title="suburb" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('city'); ?>">
                                         </div>
                                         <div class="col-sm">
                                             <label>State</label><br>
-                                            <input id="CP_State" class="form-control" type="text" title="state" style="margin-top: 0">
+                                            <input id="HA_State" class="form-control" type="text" title="state" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('state'); ?>">
                                         </div>
                                         <div class="col-sm">
                                             <label>Postcode</label><br>
-                                            <input id="CP_Postcode" class="form-control" type="text" title="postcode" style="margin-top: 0">
+                                            <input id="HA_Postcode" class="form-control" type="text" title="postcode" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('postcode'); ?>">
                                         </div>
                                     </div>
                                 </form>
@@ -133,31 +131,31 @@ require_once("loadbooking.php");
                                     <div class="row form-group">
                                         <div class="col-sm">
                                             <label>Date of Assessment</label><br>
-                                            <input id="CP_DateOfAssessment" class="form-control" type="text" title="date" style="margin-top: 0">
+                                            <input id="HA_DateOfAssessment" class="form-control" type="text" title="date" style="margin-top: 0">
                                         </div>
                                         <div class="col-sm">
                                             <label>Time of Assessment</label><br>
-                                            <input id="CP_TimeOfAssessment" class="form-control" type="text" title="time" style="margin-top: 0">
+                                            <input id="HA_TimeOfAssessment" class="form-control" type="text" title="time" style="margin-top: 0">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm">
                                             <label>Existing use of Property</label><br>
-                                            <textarea id="CP_ExistingUse" class="form-control" title="use" style="margin-top: 0;height: 70px"></textarea>
+                                            <textarea id="HA_ExistingUse" class="form-control" title="use" style="margin-top: 0;height: 70px"></textarea>
                                         </div>
                                         <div class="col-sm">
                                             <label>Weather conditions</label><br>
-                                            <input id="CP_WeatherConditions" class="form-control" type="text" title="weather" style="margin-top: 0">
+                                            <input id="HA_WeatherConditions" class="form-control" type="text" title="weather" style="margin-top: 0">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm">
                                             <label>Verbal summary given to</label><br>
-                                            <input id="CP_VerbalSummary" class="form-control" type="text" title="verbal" style="margin-top: 0">
+                                            <input id="HA_VerbalSummary" class="form-control" type="text" title="verbal" style="margin-top: 0">
                                         </div>
                                         <div class="col-sm">
                                             <label>Date</label><br>
-                                            <input id="CP_Date" class="form-control" type="text" title="date" style="margin-top: 0">
+                                            <input id="HA_Date" class="form-control" type="text" title="date" style="margin-top: 0">
                                         </div>
                                     </div>
                                 </form>
@@ -169,41 +167,41 @@ require_once("loadbooking.php");
                                     <div class="row form-group">
                                         <div class="col-sm">
                                             <label>Architect</label><br>
-                                            <input id="architectName" class="form-control" type="text" title="architectName" style="margin-top: 0">
+                                            <input id="HA_architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>">
                                         </div>
                                         <div class="col-sm">
                                             <label>Registration No.</label><br>
-                                            <input id="registrationNumber" class="form-control" type="text" title="registrationNo" style="margin-top: 0">
+                                            <input id="HA_registrationNumber" class="form-control" type="text" title="registrationNo" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm">
                                             <label>Address</label><br>
-                                            <input id="architectAddress" class="form-control" type="text" title="architectAdd" style="margin-top: 0">
+                                            <input id="HA_architectAddress" class="form-control" type="text" title="architectAdd" style="margin-top: 0" value="<?php echo doNiceAddress(doNiceArrayElemAsString('archaddress1'), doNiceArrayElemAsString('archcity'), doNiceArrayElemAsString('archstate'), doNiceArrayElemAsString('archpostcode')); ?>">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm">
                                             <label>Email Address</label><br>
-                                            <input id="architectEmail" class="form-control" type="text" title="email" style="margin-top: 0">
+                                            <input id="HA_architectEmail" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archemail', false); ?>">
                                         </div>
                                         <div class="col-sm">
                                             <label>Phone</label><br>
-                                            <input id="architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0">
+                                            <input id="HA_architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archmobile', false); ?>">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm">
                                             <label>Referred By</label><br>
-                                            <input id="architectEmail" class="form-control" type="text" title="email" style="margin-top: 0">
+                                            <input id="HA_architectRef" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>">
                                         </div>
                                         <div class="col-sm">
                                             <label>Email Address</label><br>
-                                            <input id="architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0">
+                                            <input id="HA_architectEmail2" class="form-control" type="text" title="phone" style="margin-top: 0">
                                         </div>
                                         <div class="col-sm">
                                             <label>Phone</label><br>
-                                            <input id="architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0">
+                                            <input id="HA_architectPhone2" class="form-control" type="text" title="phone" style="margin-top: 0">
                                         </div>
                                     </div>
                                 </form>
@@ -213,7 +211,7 @@ require_once("loadbooking.php");
                             <div title="Details Of Advice Sought" style="padding:10px;font-size: 18px">
                                 <form>
                                     <div class="form-group">
-                                        <textarea class="form-control" rows="20" id="AdviceSought_Details" style="height:100%;"></textarea>
+                                        <textarea class="form-control" rows="20" id="HA_AdviceSought" style="height:100%;"></textarea>
                                     </div>
                                 </form>
                             </div>
@@ -224,140 +222,139 @@ require_once("loadbooking.php");
                     <div title="Property Summary" id="PSummary" style="padding:10px;font-size: 18px">
                         <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
                             <div title="Check Home Accessment" style="padding:10px;font-size: 18px">
-                                <form>
-                                    <div class="form-group">
-                                        <table class="table table-bordered">
-                                            <tr>
-                                                <td colspan="3" style="padding-bottom:0px;">
-                                                    <label style="color:red">PLEASE COMPLETE FOR ALL HOME SERVICES ASSESSMENTS</label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle">
-                                                    Has the H&ampS CHECKLIST been completed?
-                                                </td>
-                                                <td class="align-middle">
-                                                    <select class="form-control" id="sel1" style="width:100%">
-                                                        <option value="0">Choose</option>
-                                                        <option value="YES">YES</option>
-                                                        <option value="NO">NO</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <label>If “NO” please state reason why not completed: </label><br>
-                                                    <textarea class="form-control" id="comment"> </textarea>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle">
-                                                    Please state the number of DESIGNS
-                                                </td>
-                                                <td class="align-middle">
-                                                    <select class="form-control" id="sel1" style="width:100%">
-                                                        <option value="-1">Choose</option>
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    Please indicate design submitted:
-                                                    <div class="form-check">
-                                                        <label class="form-check-label">
-                                                            <input type="checkbox" class="form-check-input" value="Ramp"> Ramp
-                                                        </label>
-                                                        <label class="form-check-label">
-                                                            <input type="checkbox" class="form-check-input" value="Bathroom Modification"> Bathroom Modification
-                                                        </label>
-                                                        <label class="form-check-label">
-                                                            <input type="checkbox" class="form-check-input" value="Platform Steps"> Platform Steps
-                                                        </label>
-                                                        <label class="form-check-label">
-                                                            <input type="checkbox" class="form-check-input" value="Other"> Other
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </form>
+                                <div class="form-group">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td colspan="3" style="padding-bottom:0px;">
+                                                <label style="color:red">PLEASE COMPLETE FOR ALL HOME SERVICES ASSESSMENTS</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                Has the H&ampS CHECKLIST been completed?
+                                            </td>
+                                            <td class="align-middle">
+                                                <select class="form-control" id="HA_sel1" style="width:100%">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="YES">YES</option>
+                                                    <option value="NO">NO</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <label>If “NO” please state reason why not completed: </label><br>
+                                                <textarea class="form-control" id="HA_NocompleteComment"> </textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                Please state the number of DESIGNS
+                                            </td>
+                                            <td class="align-middle">
+                                                <select class="form-control" id="HA_sel2" style="width:100%">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                Please indicate design submitted:
+                                                <div class="form-check">
+                                                    <label class="form-check-label" for="checkBox_1">
+                                                        <input id="checkBox_1" type="checkbox" class="form-check-input" value="Ramp"> Ramp
+                                                    </label>
+                                                    <label class="form-check-label" for="checkBox_2">
+                                                        <input id="checkBox_2" type="checkbox" class="form-check-input" value="Bathroom_Modification"> Bathroom_Modification
+                                                    </label>
+                                                    <label class="form-check-label" for="checkBox_3">
+                                                        <input id="checkBox_3" type="checkbox" class="form-check-input" value="Platform_Steps"> Platform_Steps
+                                                    </label>
+                                                    <label class="form-check-label" for="checkBox_4">
+                                                        <input id="checkBox_4" type="checkbox" class="form-check-input" value="Other"> Other
+                                                    </label>
+                                                </div>
+                                                <input type="text" class="form-control" id="CA_indicateText" disabled>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                             <div title="Construction Summary" style="padding:10px;font-size: 18px">
-                                <form>
-                                    <div class="form-group">
-                                        <table id="Table_CSummary" class="table table-bordered" style="table-layout:fixed">
-                                            <tr>
-                                                <td colspan="4">
-                                                    <button type="button" class="btn btn-primary" id="Button_ConAdd">Add item</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-right:0px;">
-                                                    House Age
-                                                </td>
-                                                <td>
-                                                    <select class="form-control" id="sel1">
-                                                        <option value="-1">Choose</option>
-                                                        <option value="less25">Less than 25 years</option>
-                                                        <option value="25 to 50">25 to 50 years</option>
-                                                        <option value="50 to 70">50-70 years</option>
-                                                        <option value="75+">More than 75 years</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    Storeys
-                                                </td>
-                                                <td>
-                                                    <select class="form-control" id="sel1">
-                                                        <option value="-1">Choose</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Floor Structure
-                                                </td>
-                                                <td>
-                                                    <select class="form-control" id="sel1">
-                                                        <option value="-1">Choose</option>
-                                                        <option value="concrete">Contrete</option>
-                                                        <option value="Timber">Timber</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    Walls
-                                                </td>
-                                                <td>
-                                                    <select class="form-control" id="sel1">
-                                                        <option value="-1">Choose</option>
-                                                        <option value="wb">W/B</option>
-                                                        <option value="brick">Brick</option>
-                                                        <option value="bv">B.V.</option>
-                                                        <option value="other">Other</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Roof
-                                                </td>
-                                                <td>
-                                                    <select class="form-control" id="sel1">
-                                                        <option value="-1">Choose</option>
-                                                        <option value="tct">TCT</option>
-                                                        <option value="concrete">Concrete</option>
-                                                        <option value="sheeting">Sheeting</option>
-                                                        <option value="ac">A.C.</option>
-                                                    </select>
-                                                </td>
+                                <!--                                <form>-->
+                                <div class="form-group">
+                                    <table id="Table_CSummary" class="table table-bordered" style="table-layout:fixed">
+                                        <tr>
+                                            <td colspan="4">
+                                                <button type="button" class="btn btn-primary" id="Button_ConAdd">Add item</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-right:0px;">
+                                                House Age
+                                            </td>
+                                            <td>
+                                                <select class="form-control" id="HA_houseAge">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="less than 25">Less than 25 years</option>
+                                                    <option value="25 to 50">25 to 50 years</option>
+                                                    <option value="50 to 70">50-70 years</option>
+                                                    <option value="75+">More than 75 years</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                Storeys
+                                            </td>
+                                            <td>
+                                                <select class="form-control" id="HA_Storeys">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="One">One</option>
+                                                    <option value="Two">Two</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Floor Structure
+                                            </td>
+                                            <td>
+                                                <select class="form-control" id="HA_FlStructure">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="Concrete">Contrete</option>
+                                                    <option value="Timber">Timber</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                Walls
+                                            </td>
+                                            <td>
+                                                <select class="form-control" id="HA_Walls">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="W/B">W/B</option>
+                                                    <option value="Brick">Brick</option>
+                                                    <option value="B.V.">B.V.</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Roof
+                                            </td>
+                                            <td>
+                                                <select class="form-control" id="HA_Roof">
+                                                    <option value="-1">Choose</option>
+                                                    <option value="TCT">TCT</option>
+                                                    <option value="Concrete">Concrete</option>
+                                                    <option value="Sheeting">Sheeting</option>
+                                                    <option value="A.C.">A.C.</option>
+                                                </select>
+                                            </td>
 
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </form>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--                                </form>-->
                             </div>
                             <div title="Fault Summary" style="padding:10px;font-size: 18px">
                                 <form>
@@ -475,6 +472,20 @@ require_once("loadbooking.php");
                                                         <option value="-1">Choose</option>
                                                     </select>
                                                 </td>
+                                            </tr>
+                                        </table>
+
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td style="color:red;"><strong>Key</strong></td>
+                                                <td>√</td>
+                                                <td>No visible Fault</td>
+                                                <td>X</td>
+                                                <td>Maintenance Item</td>
+                                                <td>XX</td>
+                                                <td>Serious Fault</td>
+                                                <td>--</td>
+                                                <td>Not Applicable</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -621,6 +632,19 @@ require_once("loadbooking.php");
                                         </td>
                                     </tr>
                                 </table>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td style="color:red;"><strong>Key</strong></td>
+                                        <td>√</td>
+                                        <td>No visible Fault</td>
+                                        <td>X</td>
+                                        <td>Maintenance Item</td>
+                                        <td>XX</td>
+                                        <td>Serious Fault</td>
+                                        <td>--</td>
+                                        <td>Not Applicable</td>
+                                    </tr>
+                                </table>
                             </div>
                             <div title="Repairs & Mainentance Check" style="padding:10px;font-size: 18px">
                                 <table id="Table_RMCheck_S" class="table table-bordered" style="table-layout:fixed">
@@ -752,6 +776,19 @@ require_once("loadbooking.php");
                                         <td colspan="4">
                                             <strong>NOTES:</strong><br> 1 * Gravity fed HWS’s are generally unsuitable for hand held showers<br> 2 Access restrictions
                                         </td>
+                                    </tr>
+                                </table>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td style="color:red;"><strong>Key</strong></td>
+                                        <td>√</td>
+                                        <td>No visible Fault</td>
+                                        <td>X</td>
+                                        <td>Maintenance Item</td>
+                                        <td>XX</td>
+                                        <td>Serious Fault</td>
+                                        <td>--</td>
+                                        <td>Not Applicable</td>
                                     </tr>
                                 </table>
                             </div>
@@ -907,6 +944,19 @@ require_once("loadbooking.php");
                                         </td>
                                     </tr>
                                 </table>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td style="color:red;"><strong>Key</strong></td>
+                                        <td>√</td>
+                                        <td>No visible Fault</td>
+                                        <td>X</td>
+                                        <td>Maintenance Item</td>
+                                        <td>XX</td>
+                                        <td>Serious Fault</td>
+                                        <td>--</td>
+                                        <td>Not Applicable</td>
+                                    </tr>
+                                </table>
                             </div>
                             <div title="Field Notes" style="padding:10px;font-size: 18px">
                                 <table class="table table-bordered" style="table-layout:fixed">
@@ -966,7 +1016,7 @@ require_once("loadbooking.php");
                                 <table id="C_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                                     <tr>
                                         <th colspan="5">
-                                            <p class="text-center bg-danger">
+                                            <p class="text-center bg-danger text-white">
                                                 Urgent - within 1 month.
                                             </p>
                                         </th>
@@ -1024,7 +1074,7 @@ require_once("loadbooking.php");
                                 <table id="M_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                                     <tr>
                                         <th colspan="5">
-                                            <p class="text-center bg-danger">
+                                            <p class="text-center bg-primary text-white">
                                                 Recommended - longer term.
                                             </p>
                                         </th>
@@ -1229,16 +1279,16 @@ require_once("loadbooking.php");
                     </div>
 
                     <!--First Tap Photo-->
-                    <div title="Photo" style="padding: 10px;font-size: 18px">
+                    <div title="Photo" style="padding: 0px,10px,10px,0px;font-size: 18px">
                         <div class="container">
-                            <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton" onclick="CPUploadImages()" style="white-space: normal; width: 15%">
-                            <input type="file" id="CPUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+                            <input type="button" id="get_drawing" value="Upload Images" class="btn btn-primary" onclick="HAUploadImages()" style="margin:20px auto; width:150px;">
+                            <input type="file" id="HAUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                         </div>
                         <div class="container" style="margin-top:10px">
-                            <table id="CPImagesTable" style="display: none">
+                            <table id="HAImagesTable" style="display: none">
                                 <tr>
                                     <th>
-                                        <div class="row form-group" id="CPImagesDIV">
+                                        <div class="row form-group" id="HAImagesDIV">
                                         </div>
                                     </th>
                                 </tr>
@@ -1249,11 +1299,12 @@ require_once("loadbooking.php");
 
                     <!--First Tap Photo-->
                     <div title="Sketches" style="padding: 10px;font-size: 18px">
-                        <button id="upload-button" class="btn btn-primary">Select PDF</button>
+                        <button id="upload-button" class="btn btn-primary">Upload PDF</button>
+                        <label class="text-danger">(*.pdf only) Please upload only one PDF at a time</label>
                         <input type="file" id="file-to-upload" accept="application/pdf" />
                         <div id="pdf-main-container">
                             <div id="pdf-loader">Loading document ...</div>
-                            <div id="pdf-contents">
+                            <div id="HA_PdfContents">
                                 <canvas id="pdf-canvas"></canvas>
                             </div>
                             <div id="page-loader">Loading page ...</div>
@@ -1291,6 +1342,7 @@ require_once("loadbooking.php");
                         <?php
                             }
                         ?>
+
                         <button onclick="generateCommercialPropertyPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
                     </td>
                     <?php
@@ -1302,18 +1354,18 @@ require_once("loadbooking.php");
             <!--        </div>-->
 
             <!--Scripts-->
-            <!--<script src="js/images.js"></script>-->
+            <script src="js/images.js"></script>
             <script src="js/loadImageJS/load-image.all.min.js"></script>
 
             <!--PDF Generator-->
-            <!--            <script src="HomeAccessJS/PDFGenerator.js"></script>-->
+            <script src="HomeAccessJS/PDFGenerator.js"></script>
 
             <!--General Functions-->
             <script type="text/javascript" src="HomeAccessJS/htmlGeneralFunctions.js"></script>
-            <!--            <script src="HomeAccessJS/pdfGeneralFunctions.js"></script>-->
+            <script src="HomeAccessJS/pdfGeneralFunctions.js"></script>
 
             <!--Text-->
-            <!--            <script src="HomeAccessJS/text.js"></script>-->
+            <script src="HomeAccessJS/text.js"></script>
 
             <!--Table Data-->
             <!--            <script src="HomeAccessJS/getTableData.js"></script>-->
