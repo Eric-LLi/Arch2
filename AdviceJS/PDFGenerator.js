@@ -7,6 +7,10 @@
  * */
 function generateAdvicePDF(mode) {
     // Page start drawing from here...
+    if (mode == 'save')
+    {
+        $('#savingPDFAlert').show('fade');
+    }
     resetTotalImagesCaptions();
     var isMobile = {
         Android: function() {
@@ -664,7 +668,6 @@ function generateAdvicePDF(mode) {
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
         pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
             var base64 = encodedString;
-            $('#savingPDFAlert').show('fade');
             doSavePDF(base64);
             //console.log(base64);
         });

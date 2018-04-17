@@ -3,14 +3,23 @@
 
   global $reportTypes;
   global $userTypes;
-
+  global $footer; 
+  global $header;
+  
   function doMacros($h, $b)
   {
     global $reportTypes;
     global $userTypes;
-
+    
+    //Get the contents of the footer and header to the variables. 
+    $header = file_get_contents('Email_Header.html');
+    $footer = file_get_contents('Email_Footer.html'); 
+    $h = str_replace("XXX_HEADER", $header, $h);
+    $h = str_replace("XXX_FOOTER", $footer, $h);
+    
     $h = str_replace("XXX_ARCHITECTNAME", $b['archfirstname'] . ' ' . $b['archlastname'], $h);
     $h = str_replace("XXX_ARCHITECTPHONE", $b['archmobile'], $h);
+
 
     $h = str_replace("XXX_BOOKINGCODE", $b['bookingcode'], $h);
     $h = str_replace("XXX_CUSTFIRSTLASTNAME", $b['custfirstname'] . ' ' . $b['custlastname'], $h);
@@ -60,7 +69,8 @@
 
   $rc = -1;
   $msg = "";
-
+ 
+ 
 
 
   try
@@ -163,7 +173,7 @@
                       "            left join users u2 on (b2.users_id=u2.id) " .
                       "where " .
                       "b1.id=$bookingcode";
-
+          
           //error_log($dbselect);
           if ($dbresult = SharedQuery($dbselect, $dblink))
           {
@@ -178,6 +188,9 @@
               if ($booking['custemail'] != "")
               {
                 $emailtemplate = $reportconfirmemails[$booking['itype']];
+                // error_log('checking itype');
+                // error_log($booking['itype']);
+                // error_log($emailtemplate);
                 // $html = file_get_contents('email_architectallocation.html');
                 $html = file_get_contents($emailtemplate);
                 $html = doMacros($html, $booking);

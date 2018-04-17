@@ -1845,6 +1845,54 @@
         noty({text: 'Please select a booking', type: 'warning', timeout: 4000});
     }
 
+    function doUploadReportPDF()
+    {
+      if(!doGridGetSelectedRowData
+      (
+        'divBookingsG',
+        function(row,index)
+        {
+          //noty({text:'Select booking ' + row.bookingcode,type: 'warning', timeout: 4000});
+          $.post
+          (
+            'ajax_checkPDF.php',
+            {
+              uuid:'<?php echo $_SESSION['uuid']; ?>',
+              bookingcode: row.bookingcode
+            },
+            function(result)
+            {
+              var response = JSON.parse(result);
+              if(response.rc == 0)
+              {
+                //this booking does not have a pdf in the ./pdf directory, could upload straght away
+                noty({text:response.msg,type:'info',timeout:4000});
+                
+              }
+              else
+              {
+                //This booking has a pdf in the ./pdf drectory, need to ask permission
+                doPromptOkCancel
+                (
+                  'This booking has readly a pdf report, do you want to overwrite it?',
+                  function(result)
+                  {
+                    if (result)
+                    {
+                      noty({text:'you click ok',type:'info',timeout:4000});
+                     
+                    }
+                  }
+                );  
+                //noty({text:response.msg,type:'info',timeout:4000});
+              }
+            }
+          )
+        }
+      ))
+      noty({text: 'Please select a booking', type: 'warning', timeout: 2000});
+    }
+
     function doMemberChangePassword()
     {
       if (!doGridGetSelectedRowData
@@ -2624,6 +2672,7 @@
     <div style="margin-bottom: 5px">
       <a href="javascript:void(0)" onClick="doNewBooking()" class="easyui-linkbutton" iconCls="icon-add">New Booking</a>
       <a href="javascript:void(0)" onClick="doEditBooking()" class="easyui-linkbutton" iconCls="icon-edit">Edit Booking</a>
+      <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
       <?php
         if (SharedIsAdmin())
         {
@@ -2645,6 +2694,7 @@
       ?>
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
       <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>
+     
     </div>
   </div>
 
