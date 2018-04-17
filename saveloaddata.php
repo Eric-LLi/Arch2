@@ -55,7 +55,6 @@
         return result;
     }
 
-
     function SaveReport() {
         var data = [];
         var jsondata = '';
@@ -756,7 +755,7 @@
                             var givenID = p.imageid.replace(/[^\d.]/g, '');
                             console.log("Image ID: "+p.imageid);
                             console.log("Given ID: "+givenID);
-//                            var labelID = "imageCaption" + givenID;
+                            //                            var labelID = "imageCaption" + givenID;
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
                             document.getElementById(p.removeid).style.width = '400px';
@@ -765,7 +764,7 @@
                             document.getElementById(p.imageid).style.display = 'block';
                             document.getElementById(p.imageid).style.width = '400px';
                             document.getElementById(p.imageid).style.height = '400px';
-//                            document.getElementById(labelID).style.display = 'block';
+                            //                            document.getElementById(labelID).style.display = 'block';
                             //get the current id from the imageID.
                             var currentID = p.imageid.replace(/[^\d.]/g, '');
                             var nextID = Number(currentID) + 1;
@@ -947,7 +946,6 @@
         <?php
         }
         ?>
-
 
         <?php
         if (basename($_SERVER['SCRIPT_NAME']) == 'ConstructionReport.php')
@@ -1608,6 +1606,11 @@
         }
         ?>
 
+        <?php
+        if (basename($_SERVER['SCRIPT_NAME']) == 'HomeAccessReport.php'){
+            
+        }
+        ?>
         // ***** Finally, populate with data...
         // Blast through ALL elements previously saved..,
         data.forEach(
