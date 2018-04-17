@@ -216,7 +216,6 @@ var E_Code = [
 
 //Add property "option"
 function createP_Option(nameid) {
-    "use strict";
     var i,
         optionID = document.getElementById(nameid),
         opt = document.createElement("option");
@@ -345,7 +344,6 @@ function loadSolutionSelectData() {
     createS_Option();
 }
 
-
 //Check CA_indicateText to match checkbox.
 function checkIndiTextValue(){
     if($("#CA_indicateText").val()!==""){
@@ -370,7 +368,6 @@ function checkIndiTextValue(){
         }
     }
 }
-
 //Save checkbox data into text for saving purpose.
 $(":checkbox").click(function () {
     if ($(this).is(":checked")) {
@@ -383,209 +380,197 @@ $(":checkbox").click(function () {
     }
 });
 
-//Construction Summary Add button
-function button_ConAdd() {
-    "use strict";
 
-    document.getElementById("Button_ConAdd").onclick = function () {
-        var newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            table = document.getElementById("Table_CSummary"),
-            lastTr = document.getElementById("Table_CSummary").getElementsByTagName("tr")[table.rows.length - 1],
-            lastRowCount = lastTr.childElementCount;
+//'Construction Summary' add button count.
+var conAdd_Count = 0;
+//'Construction Summary' Add button listening event.
+$("#Button_ConAdd").click(function (){
+    Create_ConAdd(conAdd_Count);
+    conAdd_Count++;
+});
+//'Construction Summary' Add button create.
+function Create_ConAdd(id) {
+    var newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        table = document.getElementById("Table_CSummary"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        lastRowCount = lastTr.childElementCount,
+        inputNameID = id + "_CSNewName",
+        inputValueID=id + "_CSNewValue";
 
-        if (lastRowCount === 2) {
-            newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-            newTd2.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-
-        } else {
-            newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-            newTd2.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-    };
+    newTd1.innerHTML = "<input id=\""+inputNameID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<input id=\""+inputValueID+"\" type=\"text\" class=\"form-control\"/>";
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
 }
 
-//Fault Summary Add button
-function button_FaultAdd() {
-    "use strict";
 
-    //    i = 0;
-    var newItemCount = 1;
+//'Fault Summary' add button count.
+var faultAdd_Count = 0;
+//'Fault Summary' add button listening event.
+$("#Button_FaultAdd").click(function (){
+    button_FaultAdd(faultAdd_Count);
+    faultAdd_Count++;
+});
+//'Fault Summary' Add button create.
+function button_FaultAdd(id) {
+    var table = document.getElementById("Table_FalSummary"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = document.getElementById("Table_FalSummary").getElementsByTagName("tr")[table.rows.length - 1],
+        newNameID = id + "_FSNewName",
+        newValueID = id+ "_FSNewValue",
+        lastRowCount = lastTr.childElementCount;
 
-    document.getElementById("Button_FaultAdd").onclick = function () {
+    newTd1.innerHTML = "<input id=\""+newNameID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-        var table = document.getElementById("Table_FalSummary"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = document.getElementById("Table_FalSummary").getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newFalItem_" + newItemCount,
-            lastRowCount = lastTr.childElementCount;
-
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
-
-        if (lastRowCount === 2) {
-
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-
-            //            i = 0;
-        } else {
-
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-
-            //            i = 1;
-        }
-
-        createP_Option(newItemID);
-
-        newItemCount++;
-    };
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newValueID);
 }
 
-//Health Check & Safety check Add button
-function button_HealthCheckAdd() {
-    "use strict";
 
-    var newItemCount = 1;
+//'Health Check & Safety Check' add button count.
+var HSCheckAdd_Count = 0;
+//'Health Check & Safety Check' add button listening event.
+$("#Button_HSCheckAdd").click(function (){
+    button_HealthCheckAdd(HSCheckAdd_Count);
+    HSCheckAdd_Count++;
+});
+//'Health Check & Safety check' Add button create.
+function button_HealthCheckAdd(id) {
+    var table = document.getElementById("Table_HSCheck"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        newItemName = id + "_HSCheckNewName",
+        newItemValue = id+ "_HSCheckNewValue",
+        lastRowCount = lastTr.childElementCount;
 
-    document.getElementById("Button_HSCheckAdd").onclick = function () {
+    newTd1.innerHTML = "<input id=\""+newItemName+"\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newItemValue + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-        var table = document.getElementById("Table_HSCheck"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newHSCheckItem_" + newItemCount,
-            lastRowCount = lastTr.childElementCount;
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newItemValue);
+}
+//'Repairs & Mainentance Check' Structure add button count.
+var RM_SCheckAdd_Count = 0;
+//'Repairs & Mainentance Check' Structure add button Listening event.
+$("#Button_RMCheckAdd_S").click(function () {
+    RM_SCheckAddButton(RM_SCheckAdd_Count);
+    RM_SCheckAdd_Count++;
+});
+//'Repairs & Mainentance Check' Structure add button create.
+function RM_SCheckAddButton(id){
+    var table = document.getElementById("Table_RMCheck_S"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        newNameID = id + "_RMSCheckNewName",
+        newValueID = id + "_RMSCheckValue",
+        lastRowCount = lastTr.childElementCount;
 
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
+    newTd1.innerHTML = "<input id=\"" + newNameID + "\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-        if (lastRowCount === 2) {
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newValueID);
+}
+//'Repairs & Mainentance Check' Other add button count.
+var RM_OCheckAdd_Count = 0;
+//'Repairs & Mainentance Check' Other add button Listening event.
+$("#Button_RMCheckAdd_O").click( function (){
+    RM_OCheckAddButton(RM_OCheckAdd_Count);
+    RM_OCheckAdd_Count++;
+});
+//'Repairs & Mainentance Check' Other add button create.
+function RM_OCheckAddButton(id){
+    var table = document.getElementById("Table_RMCheck_O"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        newNameID = id + "_RMOCheckNewName",
+        newValueID = id + "_RMOCheckNewValue",
+        lastRowCount = lastTr.childElementCount;
 
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-        } else {
+    newTd1.innerHTML = "<input id=\""+newNameID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-
-        createP_Option(newItemID);
-        newItemCount++;
-    };
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newValueID);
 }
 
-//Repairs Check Add button
-function button_RepairsCheckAdd() {
-    "use strict";
-    var newItemCount = 1,
-        newItemCount2 = 1;
 
-    //First add button
-    document.getElementById("Button_RMCheckAdd_S").onclick = function () {
+//'Energy & Wastage Check' Add button count.
+var EW_CheckAdd_Count = 0;
+//'Energy & Wastage Check' Add button Listening event.
+$("#Button_EWCheckAdd").click(function () {
+    button_EnergyCheckAdd(EW_CheckAdd_Count);
+    EW_CheckAdd_Count++;
+});
+//'Energy & Wastage Check' Add button create.
+function button_EnergyCheckAdd(id){
+    var table = document.getElementById("Table_EWCheck"),
+        newTr = document.createElement("tr"),
+        newTd1 = document.createElement("td"),
+        newTd2 = document.createElement("td"),
+        lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
+        newNameID = EW_CheckAdd_Count + "_EWCheckNewName",
+        newValueID = EW_CheckAdd_Count + "_EWCheckNewValue",
+        lastRowCount = lastTr.childElementCount;
 
-        var table = document.getElementById("Table_RMCheck_S"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newRMCheckSItem_" + newItemCount,
-            lastRowCount = lastTr.childElementCount;
+    newTd1.innerHTML = "<input id=\"" + newNameID + "\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
-
-        if (lastRowCount === 2) {
-
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-        } else {
-
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-
-        createP_Option(newItemID);
-        newItemCount++;
-    };
-
-    //Second add button
-    document.getElementById("Button_RMCheckAdd_O").onclick = function () {
-
-        var table = document.getElementById("Table_RMCheck_O"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newRMCheckOItem_" + newItemCount2,
-            lastRowCount = lastTr.childElementCount;
-
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
-
-        if (lastRowCount === 2) {
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-        } else {
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-
-        createP_Option(newItemID);
-        newItemCount2++;
-    };
+    if (lastRowCount === 2) {
+        lastTr.appendChild(newTd1);
+        lastTr.appendChild(newTd2);
+    } else {
+        newTr.appendChild(newTd1);
+        newTr.appendChild(newTd2);
+        table.appendChild(newTr);
+    }
+    createP_Option(newValueID);
 }
-
-//Energy Check Add button
-function button_EnergyCheckAdd() {
-    "use strict";
-
-    var newItemCount = 1;
-
-    document.getElementById("Button_EWCheckAdd").onclick = function () {
-
-        var table = document.getElementById("Table_EWCheck"),
-            newTr = document.createElement("tr"),
-            newTd1 = document.createElement("td"),
-            newTd2 = document.createElement("td"),
-            lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
-            newItemID = "newEWCheckItem_" + newItemCount,
-            lastRowCount = lastTr.childElementCount;
-
-        newTd1.innerHTML = "<input type=\"text\" class=\"form-control\"/>";
-        newTd2.innerHTML = "<select id=\"" + newItemID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
-
-        if (lastRowCount === 2) {
-
-            lastTr.appendChild(newTd1);
-            lastTr.appendChild(newTd2);
-        } else {
-
-            newTr.appendChild(newTd1);
-            newTr.appendChild(newTd2);
-            table.appendChild(newTr);
-        }
-
-        createP_Option(newItemID);
-        newItemCount++;
-    };
-}
-
 
 /*
 Count new row.
@@ -1125,7 +1110,7 @@ var deleteImg = function (bid) {
 
 
     //Save caption text to empty.
-//    SaveReport();
+    //    SaveReport();
 
     //Delete whole div including img, caption and remove button.
     $(container).remove();
@@ -1138,7 +1123,6 @@ var deleteImg = function (bid) {
 function showPage(page_no) {
     // While page is being rendered hide the canvas and show a loading message
     $("#page-loader").show();
-
 
     // Fetch the page
     __PDF_DOC.getPage(page_no).then(function (page) {
@@ -1182,7 +1166,6 @@ function showPage(page_no) {
                     lastModified: uploadPDFfile[0].lastModifiedDate
                 });
 
-
             //upload to database
             doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents", "", "", "upload-button", "deleteImg(this.id)", "addImgBtn()", "300px", "200px");
         });
@@ -1223,11 +1206,11 @@ $(document).ready(function () {
 
     checkIndiTextValue();
     //Property Summary add_button
-    button_ConAdd();
-    button_FaultAdd();
+    //    button_ConAdd();
+    //    button_FaultAdd();
 
     //Property Assessment add_button
-    button_HealthCheckAdd();
-    button_RepairsCheckAdd();
-    button_EnergyCheckAdd();
+    //    button_HealthCheckAdd();
+    //    button_RepairsCheckAdd();
+    //    button_EnergyCheckAdd();
 });
