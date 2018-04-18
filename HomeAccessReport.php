@@ -78,7 +78,7 @@ require_once("loadbooking.php");
             </div>
             <!-- Details -->
             <div class="container">
-                <div class="easyui-tabs" style="width:100%;height:auto" data-options="tabWidth:200">
+                <div class="easyui-tabs" style="width:100%;height:auto" data-options="tabWidth:100">
                     <!--First Tap Booking Information-->
                     <div title="Booking Information" id="BInformation" style="padding:10px;font-size: 18px">
                         <div class="easyui-tabs" data-options="fit:true,plain:true" style="width:inherit;height:500px;">
@@ -1279,21 +1279,14 @@ require_once("loadbooking.php");
                     </div>
 
                     <!--First Tap Photo-->
-                    <div title="Photo" style="padding: 0px,10px,10px,0px;font-size: 18px">
-                        <div class="container">
-                            <input type="button" id="get_drawing" value="Upload Images" class="btn btn-primary" onclick="HAUploadImages()" style="margin:20px auto; width:150px;">
-                            <input type="file" id="HAUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
-                        </div>
-                        <div class="container" style="margin-top:10px">
-                            <table id="HAImagesTable" style="display: none">
-                                <tr>
-                                    <th>
-                                        <div class="row form-group" id="HAImagesDIV">
-                                        </div>
-                                    </th>
-                                </tr>
-                            </table>
-                            <br>
+                    <div title="Photo" style="padding: 10px;font-size: 18px">
+                        <button id="uploadImg_Btn" class="btn btn-primary">Upload Images</button>
+                        <input type="file" id="Imgs_Upload" accept="image/x-png,image/jpeg" multiple/>
+                        <div id="Img-main-container">
+                            <div id="Img-loader">Loading document ...</div>
+                            <div id="HA_ImgsContents">
+                            </div>
+                            <div id="Imgpage-loader">Loading page ...</div>
                         </div>
                     </div>
 
