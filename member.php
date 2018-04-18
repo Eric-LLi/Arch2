@@ -1866,8 +1866,8 @@
               if(response.rc == 0)
               {
                 //this booking does not have a pdf in the ./pdf directory, could upload straght away
-                noty({text:response.msg,type:'info',timeout:4000});
-                
+                //noty({text:response.msg,type:'info',timeout:4000});
+                $("#uploadPDF").click();
               }
               else
               {
@@ -1879,8 +1879,9 @@
                   {
                     if (result)
                     {
-                      noty({text:'you click ok',type:'info',timeout:4000});
-                     
+                      //noty({text:'you click ok',type:'info',timeout:4000});
+                      //$("#theUploadButton").click();
+                      $("#uploadPDF").click();
                     }
                   }
                 );  
@@ -2302,6 +2303,38 @@
         }
       );
 
+      $('#uploadPDF').change(function(){
+        document.getElementById('pdfUploadButton').click();
+        $.post(
+          'ajax_uploadExternalPDF.php',
+          {
+            fileTmpName:'<?php echo $_FILES['externalPDF']['tmp_name']; ?>',
+            fileName:'<?php echo $_FILES['externalPDF']['name'] ?>',
+            fileSize:'<?php echo $_FILES['externalPDF']['size'] ?>',
+            fileError:'<?php echo $_FILES['externalPDF']['error'] ?>',
+            fileType:'<?php echo $_FILES['externalPDF']['type'] ?>'
+          },
+          function(result)
+            {
+              var response = JSON.parse(result);
+              if(response.rc == 0)
+              {
+                //this booking does not have a pdf in the ./pdf directory, could upload straght away
+                //noty({text:response.msg,type:'info',timeout:4000});
+                console.log("ok");
+                console.log(response.msg);
+              }
+              else
+              {
+                //This booking has a pdf in the ./pdf drectory, need to ask permission
+                console.log("'sth wrong'"); 
+                console.log(response.msg);
+                //noty({text:response.msg,type:'info',timeout:4000});
+              }
+            }
+        )
+      })
+      
       $('#divBookingsG').datagrid
       (
         {
@@ -2661,7 +2694,7 @@
             }
           );
         }
-      );
+      );      
     });
   </script>
 </head>
@@ -2722,6 +2755,10 @@
     </div>
   </div>
 
+  <form enctype="multipart/form-data" id="uploadPDF_Form" method="POST" action="ajax_uploadExternalPDF.php">
+    <input type="file" id="uploadPDF" name="externalPDF" accept="application/pdf,application/vnd.ms-excel">
+    <button id="pdfUploadButton" type="submit" name="submitPDF">Submit</button>
+  </form>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Reports...                                                                                                                                                              -->
   <div id="dlgNumReporsByType" class="easyui-dialog" title="#Reports by Type" style="width: 800px; height: 600px;" data-options="resizable: false, modal: false, closable: false, closed: true">
