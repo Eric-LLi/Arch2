@@ -717,7 +717,7 @@ function getPropertyExterior(){
                 },
                 {
                     border: [true, false, true, true],
-                    text: 'Lining/Sharking',
+                    text: 'Lining/sarking',
                     style: 'tableText'
                 },
                 {
@@ -807,7 +807,7 @@ function getPropertyExterior(){
                     style: 'tableText'
                 },
                 {
-                    text: 'Lining/Sharking',
+                    text: 'Lining/sarking',
                     style: 'tableText'
                 },
                 {
@@ -957,7 +957,7 @@ function getRoofSpace() {
                             },
                             {
                                 border: [true, false, true, true],
-                                text: 'Lining/Sharking',
+                                text: 'Lining/sarking',
                                 style: 'tableText'
                             },
                             {
@@ -1052,7 +1052,7 @@ function getRoofSpace() {
                                 style: 'tableText'
                             },
                             {
-                                text: 'Lining/Sharking',
+                                text: 'Lining/sarking',
                                 style: 'tableText'
                             },
                             {
