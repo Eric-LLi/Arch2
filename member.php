@@ -1,6 +1,6 @@
 <?php
   require_once("shared.php");
-
+  //123
   if (isset($_POST['fldLogout']))
   {
     SharedLogout();
