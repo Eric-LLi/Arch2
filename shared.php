@@ -96,7 +96,7 @@
 		"email_dilapidation.html",
     "email_homefeasibility.html",
     "email_renofeasibility.html",
-    //"email_commpropertyassessment.html",
+    "email_commpropertyassessment.html",
     //"email_commdilapidation.html",
 		//"email_how.html",
     //"email_has.html",
@@ -126,7 +126,7 @@
 		"email_renofeasibility_allocate.html",
 		//"email_commpropertyassessment_allocate.html",
     //"email_commdilapidation_allocate.html",
-		//"email_how_allocate.html",
+		"email_how_allocate.html",
     //"email_has_allocate.html",
     "",
     ""
