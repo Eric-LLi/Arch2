@@ -128,7 +128,7 @@
 		"email_renofeasibility_allocate.html",
 		//"email_commpropertyassessment_allocate.html",
     //"email_commdilapidation_allocate.html",
-		//"email_how_allocate.html",
+		"email_how_allocate.html",
     //"email_has_allocate.html",
     "",
     ""
@@ -502,7 +502,7 @@
       $mail->MsgHTML($msg);
       $mail->SetFrom($from, $fromName);
       //$mail->AddBCC('archive@archicentreaustralia.com.au');
-      $mail->AddBCC('M0410898213@126.com');
+      //$mail->AddBCC('M0410898213@126.com');
 
       if (is_array($to))
       {
