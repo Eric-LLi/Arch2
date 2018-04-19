@@ -1869,25 +1869,32 @@
               {
                 //this booking does not have a pdf in the ./pdf directory, could upload straght away
                 //noty({text:response.msg,type:'info',timeout:4000});
-                $("#uploadPDF").click();
+                doPromptOkCancel
+                (
+                  'Upload a report for booking ' + row.bookingcode + ' from the local computer?',
+                  function(result)
+                  {
+                    if(result)
+                    {
+                      $("#uploadPDF").click();
+                    }
+                  }
+                );
               }
               else
               {
                 //This booking has a pdf in the ./pdf drectory, need to ask permission
                 doPromptOkCancel
                 (
-                  'This booking has readly a pdf report, do you want to overwrite it?',
+                  'Booking ' + row.bookingcode +  ' already has a pdf report, do you want to overwrite it?',
                   function(result)
                   {
                     if (result)
                     {
-                      //noty({text:'you click ok',type:'info',timeout:4000});
-                      //$("#theUploadButton").click();
                       $("#uploadPDF").click();
                     }
                   }
                 );  
-                //noty({text:response.msg,type:'info',timeout:4000});
               }
             }
           )
@@ -2677,7 +2684,7 @@
   <form enctype="multipart/form-data" id="uploadPDF_Form" method="POST" action="ajax_uploadExternalPDF.php" target="pdfUpload">
     <input type="file" id="uploadPDF" name="externalPDF" accept="application/pdf,application/vnd.ms-excel" onchange="pdfUploadInput()"/>
     <input type="text" name="bookingcode" value="" id="pdfUploadBookingcode"/>
-    <input id="pdfUploadButton" type="submit" name="submitPDF">Submit</button>
+    <input id="pdfUploadButton" type="submit" name="submitPDF"/>
   </form>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Toolbars...                                                                                                                                                              -->
