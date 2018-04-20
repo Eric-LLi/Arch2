@@ -21,7 +21,6 @@
         <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
 
         <?php require_once("saveloaddata.php"); ?>
-        <?php require_once("meta.php"); ?>
     </head>
 
     <body>
@@ -749,9 +748,8 @@
         {
     ?>
                 <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-                <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-                <!-- <button onclick="generatePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
-                <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+                <button onclick="generateConstructionPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+                <button onclick="generateConstructionPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
                 <?php
         }
         else
@@ -763,7 +761,7 @@
                     <?php
             }
     ?>
-                        <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+                        <button onclick="generateConstructionPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
                         <?php
         }
       }
@@ -779,14 +777,14 @@
         <script src="js/loadImageJS/load-image.all.min.js"></script>
 
         <!--Text File-->
-        <script src="ConstructionJS/text.js?<?php echo time(); ?>"></script>
+        <script src="ConstructionJS/text.js"></script>
         <!--PDF Generator-->
-        <script src="ConstructionJS/PDFGenerator.js?<?php echo time(); ?>"></script>
+        <script src="ConstructionJS/PDFGenerator.js"></script>
         <!--General Functions-->
-        <script src="ConstructionJS/generalFunctions.js?<?php echo time(); ?>"></script>
-        <script src="ConstructionJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
+        <script src="ConstructionJS/generalFunctions.js"></script>
+        <script src="ConstructionJS/htmlGeneralFunctions.js"></script>
         <!--Get Table's Data-->
-        <script src="ConstructionJS/getTableData.js?<?php echo time(); ?>"></script>
+        <script src="ConstructionJS/getTableData.js"></script>
     </body>
 
     </html>

@@ -5,9 +5,12 @@
 /**
  * Core function of the PDF generator
  * */
-
-function generatePDF(mode) {
+function generateAdvicePDF(mode) {
     // Page start drawing from here...
+    if (mode == 'save')
+    {
+        $('#savingPDFAlert').show('fade');
+    }
     resetTotalImagesCaptions();
     var isMobile = {
         Android: function() {

@@ -1,7 +1,5 @@
-
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript">
-
     // Increments the nuermic portion of the string...
     // e.g XYZ123 becomes XYZ124
     function incString(input) {
@@ -131,48 +129,6 @@
         );
     }
 
-    /** This is to check whether the bookingcode.pdf is exited in the server */
-    function checkPDF()
-    {
-        console.log('I am inside checking permission');
-        $.post
-        (
-            'ajax_checkPDF.php',
-            {
-                uuid:'<?php echo $_SESSION['uuid']; ?>',
-                bookingcode: <?php echo $bookingcode; ?>
-            },
-            function(result)
-            {
-                var response = JSON.parse(result);
-                if(response.rc == 0)
-                {
-                //this booking does not have a pdf in the ./pdf directory, could upload straght away
-                $('#savingPDFAlert').show();
-                // console.log("can generate pdf right away");
-                generatePDF('save');
-                }
-                else
-                {
-                    //This booking has a pdf in the ./pdf drectory, need to ask permission
-                    doPromptOkCancel
-                    (
-                        'This report already has a saved pdf report, do you want to overwrite it?',
-                        function(result)
-                        {
-                        if (result)
-                        {
-                            $('#savingPDFAlert').show('fade');
-                            // console.log("genereate the pdf anayway");
-                            generatePDF('save');
-                        }
-                        }
-                    );  
-                }
-            }
-        )
-    }   
-
     function doSavePDF(data) {
         var formData = {
             pdfBase64: data,
@@ -194,7 +150,7 @@
             noty({
             text: response.msg,
             type: 'success',
-            timeout: 4000
+            timeout: 10000
         });
         // var bookingCode = response.passingText;
         // var baseURL = 'http://www.archicentreaustraliainspections.com/pdfreport/';

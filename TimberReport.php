@@ -28,7 +28,6 @@
     <!--<script src='../node_modules/pdfmake/build/vfs_fonts.js'></script>-->
 
     <?php require_once("saveloaddata.php"); ?>
-    <?php require_once("meta.php"); ?>
 </head>
 <body>
 <!--Navigation -->
@@ -4021,9 +4020,8 @@
         {
     ?>
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-    <!-- <button onclick="generatePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
-    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <button onclick="startGeneratingTimber('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <button onclick="startGeneratingTimber('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
     <?php
         }
         else
@@ -4035,7 +4033,7 @@
     <?php
             }
     ?>
-    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <button onclick="startGeneratingTimber('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }
@@ -4064,13 +4062,13 @@
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 
 <!--Text File-->
-<script src="TimberJS/text.js?<?php echo time(); ?>"></script>
+<script src="TimberJS/text.js"></script>
 <!--PDF Generator-->
-<script src="TimberJS/PDFGenerator.js?<?php echo time(); ?>"></script>
+<script src="TimberJS/PDFGenerator.js"></script>
 <!--General Functions-->
-<script src="TimberJS/generalFunctions.js?<?php echo time(); ?>"></script>
-<script src="TimberJS/htmlGeneralFunction.js?<?php echo time(); ?>"></script>
+<script src="TimberJS/generalFunctions.js"></script>
+<script src="TimberJS/htmlGeneralFunction.js"></script>
 <!--Get Table's Data-->
-<script src="TimberJS/getTableData.js?<?php echo time(); ?>"></script>
+<script src="TimberJS/getTableData.js"></script>
 </body>
 </html>

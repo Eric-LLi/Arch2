@@ -107,9 +107,6 @@
 
           $emailtemplate = $reportemails[$booking['itype']];
           $html = file_get_contents($emailtemplate);
-          error_log("the booking itype is:");
-          error_log($booking['itype']);
-          error_log($emailtemplate);
 
            //Get the contents of the footer and header to the variables. 
           $header = file_get_contents('Email_Header.html');
@@ -120,11 +117,9 @@
           $html = str_replace("XXX_DATE", date("l jS \of F Y"), $html);
           $html = str_replace("XXX_CUSTFIRSTLASTNAME", $booking['custfirstname'] . " " . $booking['custlastname'], $html);
           $html = str_replace("XXX_CUSTADDRESS1", $booking['custaddress1'], $html);
-          error_log("***********************");
+          // error_log("***********************");
           // error_log($booking['custaddress1']);
           // error_log('custaddress1');
-          error_log("the email address is ");
-          error_log($booking['custemail']);
 
           $html = str_replace("XXX_CUSTADDRESS2", $booking['custaddress2'], $html);
           $html = str_replace("XXX_CUSTCITY", $booking['custcity'], $html);

@@ -26,7 +26,6 @@
     <!--<script src='../node_modules/pdfmake/build/vfs_fonts.js'></script>-->
 
     <?php require_once("saveloaddata.php"); ?>
-    <?php require_once("meta.php"); ?>
 </head>
 <body>
 <!--Navigation-->
@@ -385,10 +384,8 @@
         {
     ?>
             <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-            <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-            <!-- <button onclick="generatePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
-            <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
-
+            <button onclick="generateDilapidationPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+            <button onclick="generateDilapidationPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
     <?php
         }
         else
@@ -400,7 +397,7 @@
     <?php
             }
     ?>
-            <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+            <button onclick="generateDilapidationPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }
@@ -414,14 +411,14 @@
 <script src="js/images.js"></script>
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 <!--PDF Generator-->
-<script src="DilapidationJS/PDFGenerator.js?<?php echo time(); ?>"></script>
+<script src="DilapidationJS/PDFGenerator.js"></script>
 <!--General Functions-->
-<script src="DilapidationJS/generalFunctions.js?<?php echo time(); ?>"></script>
-<script src="DilapidationJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
+<script src="DilapidationJS/generalFunctions.js"></script>
+<script src="DilapidationJS/htmlGeneralFunctions.js"></script>
 <!--Text-->
-<script src="DilapidationJS/text.js?<?php echo time(); ?>"></script>
+<script src="DilapidationJS/text.js"></script>
 <!--Table Data-->
-<script src="DilapidationJS/tableData.js?<?php echo time(); ?>"></script>
+<script src="DilapidationJS/tableData.js"></script>
 
 
 <!--<script src="../JS/images.js"></script>-->
