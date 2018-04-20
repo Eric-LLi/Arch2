@@ -5,13 +5,8 @@
 /**
  * Core function of the PDF generator
  * */
-function generateCommercialPropertyPDF(mode) {
+function generatePDF(mode) {
     //reset image number and general notes paragraphs number
-    if(mode === 'save')
-    {
-        console.log('in');
-        $('#savingPDFAlert').show('fade');
-    }
     resetTotalCounting();
 
     var isMobile = {

@@ -32,6 +32,7 @@ require_once("loadbooking.php");
         <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 
         <?php require_once("saveloaddata.php"); ?>
+        <?php require_once("meta.php"); ?>
 
     </head>
 
