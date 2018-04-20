@@ -738,6 +738,7 @@ $("#uploadImg_Btn").click(function (){
 });
 var photos_count = 0;
 
+//Photos upload file
 $("#Imgs_Upload").change(function (e){
     //Store how many files user has selected.
     const totalFiles = e.currentTarget.files;
@@ -757,7 +758,7 @@ $("#Imgs_Upload").change(function (e){
 
             //Create elements for img.
             //element[imgContainerID, newImgID, imgTextID, imgRmBtnID]
-            const element = createImgs(photos_count);
+            const element = createPhoto(photos_count);
             photos_count++;
 
             //FileReader() only support new version of browser.
@@ -774,7 +775,15 @@ $("#Imgs_Upload").change(function (e){
                                 lastModified: file.lastModifiedDate
                             });
 
-//                            doUploadFile(imgFile,element[1],element[2]);
+                            if($("#HA_BookingNo").val()==="0"){
+
+                                alert("Please select order from main page. ");
+
+                                $(location).attr("href","index.php");
+
+                            }else{
+                                doUploadFile(imgFile,element[1],element[2],element[3],"","HA_ImgsContents");
+                            }
                         }
                         else{
                             console.log("NO element::" + element[1]);
@@ -793,16 +802,16 @@ $("#Imgs_Upload").change(function (e){
 });
 
 //Photos page; create html image, text, remove button and container.
-function createImgs(id){
+function createPhoto(id){
     var imgContainer = document.createElement("div"),
         newImg = document.createElement("img"),
         imgText = document.createElement("input"),
         imgRmBtn = document.createElement("button"),
         lastContainer = document.getElementById("HA_ImgsContents"),
-        imgContainerID = photos_count + "_imgContainer",
-        newImgID = photos_count + "_AddImg",
-        imgTextID = photos_count + "_imgText",
-        imgRmBtnID = photos_count + "_imgRmBtn";
+        imgContainerID = id + "_imgContainer",
+        newImgID = id + "_AddImg",
+        imgTextID = id + "_imgText",
+        imgRmBtnID = id + "_imgRmBtn";
 
     //Setting element's attribute.
     imgContainer.setAttribute("id",imgContainerID);
@@ -826,14 +835,20 @@ function createImgs(id){
     $("#"+imgRmBtnID).html("Remove");
     //Photos images remove button listerner.
     $("#"+imgRmBtnID).click(function (){
-        imagesRemoveBtn(imgContainerID);
+        imagesRemoveBtn(imgContainerID,newImgID);
     });
     return elements;
 }
 
 //Photos page; images remove button action.
-function imagesRemoveBtn(id){
-    var container = $("#"+id).remove();
+function imagesRemoveBtn(containerID,imgID){
+    if($("#HA_BookingNo").val()==="0"){
+        alert("Please select order from main page. ");
+        $(location).arrt("href","index.php");
+    }else{
+        var container = $("#"+containerID).remove();
+        doRemovePhoto(imgID);
+    }
 }
 
 var __PDF_DOC,
@@ -861,9 +876,9 @@ function showPDF(pdf_url) {
 }
 
 //Count Sketches images number.
-var imageCount = 0;
+var pdfCounts = 0;
 //Create Sketches elements to save images.
-function addImgBtn(id) {
+function createPDFImg(id) {
     //Create element
     var imgElement = document.createElement("img"),
         btnElement = document.createElement("button"),
@@ -871,10 +886,10 @@ function addImgBtn(id) {
         caption = document.createElement("input"),
 
         tr = document.getElementById("HA_PdfContents"),
-        captionID = imageCount + "_Cap",
-        containerID = imageCount + "_DIV",
-        imgID = imageCount + "_IMG",
-        btnID = imageCount + "_btnDel";
+        captionID = id + "_Cap",
+        containerID = id + "_DIV",
+        imgID = id + "_IMG",
+        btnID = id + "_btnDel";
 
 
     container.setAttribute("id", containerID);
@@ -899,8 +914,6 @@ function addImgBtn(id) {
     document.getElementById(containerID).appendChild(caption);
     document.getElementById(containerID).appendChild(btnElement);
 
-
-
     var combine = [imgID, btnID, captionID, containerID];
     return combine;
 }
@@ -922,9 +935,13 @@ var deleteImg = function (bid) {
     //Delete whole div including img, caption and remove button.
     $(container).remove();
 
-
-    doRemovePhoto(imageID);
-    //    imageCount--;
+    if($("#HA_BookingNo").val()==="0"){
+        alert("Please select order from main page. ");
+        $(location).arrt("href","index.php");
+    }else{
+        doRemovePhoto(imageID);
+        //    imageCount--;
+    }
 };
 
 function showPage(page_no) {
@@ -950,8 +967,8 @@ function showPage(page_no) {
         // Render the page contents in the canvas
         page.render(renderContext).then(function () {
             //[img ID, deltebuttonID, caption ID, container ID]
-            var imgbtnID = addImgBtn(imageCount);
-            imageCount++;
+            var imgbtnID = createPDFImg(pdfCounts);
+            pdfCounts++;
 
             $("#page-loader").hide();
 
@@ -973,8 +990,13 @@ function showPage(page_no) {
                     lastModified: uploadPDFfile[0].lastModifiedDate
                 });
 
-            //upload to database
-            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents", "", "", "upload-button", "deleteImg(this.id)", "addImgBtn()", "300px", "200px");
+            if($("#HA_BookingNo").val()==="0"){
+                alert("Please select order from main page. ");
+                $(location).arrt("href","index.php");
+            }else{
+                //upload to database
+                doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents");
+            }
         });
     });
 }
@@ -985,10 +1007,9 @@ $("#upload-button").on('click', function () {
 });
 
 var uploadPDFfile;
-// When user chooses a PDF file
-$("#file-to-upload").on('change', function () {
+$("#file-to-upload").on('change', function (e) {
     // Validate whether PDF
-    uploadPDFfile = $("#file-to-upload").get(0).files;
+    uploadPDFfile = e.currentTarget.files;
     if (['application/pdf'].indexOf(uploadPDFfile[0].type) == -1) {
         alert('Error : Not a PDF');
         return;

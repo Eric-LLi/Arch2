@@ -300,7 +300,7 @@
         //calculate the image
         for (var i = 0; i < photos.length; ++i) {
             if (photos[i].tableName === 'MaintenanceImagesTable' || photos[i].tableName === 'ConstructionImagesTable' ||
-                photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName === 'DilapidationImagesTable' || photos[i].tableName == 'CPImagesTable' || photos[i].tableName == 'HOWImagesTable' || photos[i].tableName === 'HAImagesTable') {
+                photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName === 'DilapidationImagesTable' || photos[i].tableName == 'CPImagesTable' || photos[i].tableName == 'HOWImagesTable' || photos[i].tableName === 'HA_ImgsContents') {
                 countingImage++;
             }
         }
@@ -765,18 +765,19 @@
                             }
                         }
                         else if (p.tableName === "HA_PdfContents") {
-                            console.log("Beofre Img Count: " + imageCount);
+                            console.log("Beofre pdf Count: " + pdfCounts);
                             //imgbtnID = [img ID, deltebuttonID, caption ID, container ID]
 
-                            var temp = p.imageid.split("_");
-                            console.log("TEMP: "+ temp[0]);
+                            var temp = parseInt(p.imageid.split("_")[0]);
+                            console.log("TEMP: "+ temp);
 
-                            if(temp[0]>imageCount)
-                                imageCount=temp[0];
+                            if(temp > pdfCounts)
+                                pdfCounts = temp;
 
-                            var imgbtnID = addImgBtn(temp[0]);
+                            console.log("After pdf Count: " + temp);
 
-                            console.log("After Img Count: " + imageCount);
+                            var imgbtnID = createPDFImg(temp);
+
                             //Show img
                             $("#" + imgbtnID[0]).show();
 
@@ -786,51 +787,34 @@
                             //Attach img
                             console.log("Image URL: " + url);
                             $("#" + imgbtnID[0]).attr("src", url);
-                            $("#HA_PdfContents").show();
-                        } else if (p.tableName === "HAImagesTable") {
-                            console.log("Into HAImagesTable");
-                            var table = document.getElementById(p.tableName);
+                            $("#" + p.tableName).show();
+                        } else if (p.tableName === "HA_ImgsContents") {
+                            //[imgID, btnID, captionID, containerID]
+                            console.log("IMAGE id: " + p.imageid);
+                            var temp = parseInt(p.imageid.split("_")[0]);
 
-                            table.style.display = 'block';
+                            console.log("Before Photos count :" + photos_count);
+                            console.log("temp : " + temp);
+                            if(temp > photos_count)
+                                photos_count = temp;
 
-                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '480px', '0px');
-                            $('#' + p.imageid).attr('src', url);
-                            var givenID = p.imageid.replace(/[^\d.]/g, '');
-                            console.log("Image ID: "+p.imageid);
-                            console.log("Given ID: "+givenID);
-                            //                            var labelID = "imageCaption" + givenID;
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.removeid).style.width = '400px';
-                            document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.textid).style.width = '400px';
-                            document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '400px';
-                            document.getElementById(p.imageid).style.height = '400px';
-                            //                            document.getElementById(labelID).style.display = 'block';
-                            //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            var nextID = Number(currentID) + 1;
-                            //console.log("the next ID is " + nextID);
-                            var altID = Number(nextID) + 1;
-                            if (nextID >= countingImage) {
-                                var altName = 'HAImage' + altID;
-                                console.log("I am here!!! need to create a image " + altName);
-                                var imageID = 'HAImage' + nextID;
-                                var textID = 'HAImageText' + nextID;
-                                var removeButtonID = 'HAImageRemoveButton' + nextID;
-                                var addButtonID = 'HAImageAddButton' + nextID;
-                                var uploadID = 'HAImageUpload' + nextID;
-                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHAImage(this.id)', 'addOneHAImage(this.id)', '400px', '0');
-                            }
+                            //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
+                            var elementID = createPhoto(temp);
+                            console.log("After count: " + photos_count);
+                            $("#" + elementID[1]).attr("src",url);
+                            $("#" + p.tableName).show();
                         }
                     }
                 }
             }
-
         );
 
+        if(photos_count > 0)
+            photos_count++;
+        if(pdfCounts > 0)
+            pdfCounts++;
+        console.log("Photos count: " + photos_count);
+        console.log("PDFs count: " + pdfCounts);
         // Report specific checks...
         <?php
         if (basename($_SERVER['SCRIPT_NAME']) == 'HomeFeasibilityReport.php')
@@ -1652,7 +1636,7 @@
 
         <?php
         if (basename($_SERVER['SCRIPT_NAME']) == 'HomeAccessReport.php'){
-            
+
         }
         ?>
         // ***** Finally, populate with data...
