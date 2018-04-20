@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function generateHomeFeasibilityPDF(mode) {
+function generatePDF(mode) {
     // Page start drawing from here...
 
     var isMobile = {
@@ -786,7 +786,6 @@ function generateHomeFeasibilityPDF(mode) {
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
         pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
             var base64 = encodedString;
-            $('#savingPDFAlert').show('fade');
             doSavePDF(base64);
             //console.log(base64);
         });

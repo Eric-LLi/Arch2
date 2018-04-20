@@ -25,6 +25,7 @@
     <!--<script src='../node_modules/pdfmake/build/vfs_fonts.js'></script>-->
 
     <?php require_once("saveloaddata.php"); ?>
+    <?php require_once("meta.php"); ?>
 </head>
 <body>
 <!--Navigation-->
@@ -686,8 +687,9 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
         {
     ?>
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-    <button onclick="generateRenovationFeasibilityPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-    <button onclick="generateRenovationFeasibilityPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <!-- <button onclick="generatePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
+    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
     <?php
         }
         else
@@ -699,7 +701,7 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
     <?php
             }
     ?>
-    <button onclick="generateRenovationFeasibilityPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }
@@ -716,14 +718,14 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
 <!--Image File-->
 
 <!--Text File-->
-<script src="RenovationFeasibilityJS/text.js"></script>
+<script src="RenovationFeasibilityJS/text.js?<?php echo time(); ?>"></script>
 <!--PDF Generator-->
-<script src="RenovationFeasibilityJS/PDFGenerator.js"></script>
+<script src="RenovationFeasibilityJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="RenovationFeasibilityJS/generalFunctions.js"></script>
-<script src="RenovationFeasibilityJS/htmlGeneralFunctions.js"></script>
+<script src="RenovationFeasibilityJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="RenovationFeasibilityJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--Get Table's Data-->
-<script src="RenovationFeasibilityJS/getTableData.js"></script>
+<script src="RenovationFeasibilityJS/getTableData.js?<?php echo time(); ?>"></script>
 
 
 

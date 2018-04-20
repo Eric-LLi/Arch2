@@ -26,6 +26,7 @@
     <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
     <?php require_once("saveloaddata.php"); ?>
+    <?php require_once("meta.php"); ?>
 </head>
 
 <body>
@@ -338,8 +339,10 @@
         {
     ?>
             <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-            <button onclick="generateDesignConsultationPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-            <button onclick="generateDesignConsultationPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+            <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+            <!-- <button onclick="generatePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
+            <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+
     <?php
         }
         else
@@ -351,7 +354,7 @@
     <?php
             }
     ?>
-            <button onclick="generateDesignConsultationPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+            <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }
@@ -370,16 +373,16 @@
 <!--<script src="./DesignConsultationJS/image.js"></script>-->
     
 <!--Text File-->
-<script src="DesignConsultationJS/text.js"></script>
+<script src="DesignConsultationJS/text.js?<?php echo time(); ?>"></script>
 
 <!--General Functions-->
-<script src="DesignConsultationJS/generalFunctions.js"></script>
+<script src="DesignConsultationJS/generalFunctions.js?<?php echo time(); ?>"></script>
 
 <!--PDF Generator-->
-<script src="DesignConsultationJS/PDFGenerator.js"></script>
+<script src="DesignConsultationJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 
 <!--Get Table's Data-->
-<script src="DesignConsultationJS/getTableData.js"></script>
+<script src="DesignConsultationJS/getTableData.js?<?php echo time(); ?>"></script>
 </body>
 
 </html>

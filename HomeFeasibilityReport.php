@@ -26,6 +26,7 @@
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
 
     <?php require_once("saveloaddata.php"); ?>
+    <?php require_once("meta.php"); ?>
 </head>
 <body>
 <!--Navigation-->
@@ -670,8 +671,9 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
         {
     ?>
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-    <button onclick="generateHomeFeasibilityPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-    <button onclick="generateHomeFeasibilityPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <!-- <button onclick="generatePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
+    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
     <?php
         }
         else
@@ -683,7 +685,7 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
     <?php
             }
     ?>
-    <button onclick="generateHomeFeasibilityPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }
@@ -717,14 +719,14 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 
 <!--Text File-->
-<script src="HomeFeasibilityJS/text.js"></script>
+<script src="HomeFeasibilityJS/text.js?<?php echo time(); ?>"></script>
 <!--PDF Generator-->
-<script src="HomeFeasibilityJS/PDFGenerator.js"></script>
+<script src="HomeFeasibilityJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="HomeFeasibilityJS/generalFunctions.js"></script>
-<script src="HomeFeasibilityJS/htmlGeneralFunctions.js"></script>
+<script src="HomeFeasibilityJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="HomeFeasibilityJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--Get Table's Data-->
-<script src="HomeFeasibilityJS/getTableData.js"></script>
+<script src="HomeFeasibilityJS/getTableData.js?<?php echo time(); ?>"></script>
 
 
 </body>

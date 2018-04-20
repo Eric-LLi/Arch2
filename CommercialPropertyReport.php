@@ -24,8 +24,9 @@
     <script src="js/easyui/jquery.easyui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
-
-     <?php require_once("saveloaddata.php"); ?>
+    
+    <?php require_once("saveloaddata.php"); ?>
+     
 </head>
 <!--onload="loadSelect()"-->
 <body>
@@ -1161,8 +1162,9 @@
         {
     ?>
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-    <button onclick="generateCommercialPropertyPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-    <button onclick="generateCommercialPropertyPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <!-- <button onclick="generatePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
     <?php
         }
         else
@@ -1174,7 +1176,7 @@
     <?php
             }
     ?>
-    <button onclick="generateCommercialPropertyPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }
@@ -1189,14 +1191,14 @@
 
 
 <!--PDF Generator-->
-<script src="CommercialPropertyJS/PDFGenerator.js"></script>
+<script src="CommercialPropertyJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="CommercialPropertyJS/htmlGeneralFunctions.js"></script>
-<script src="CommercialPropertyJS/pdfGeneralFunctions.js"></script>
+<script src="CommercialPropertyJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
+<script src="CommercialPropertyJS/pdfGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--Text-->
-<script src="CommercialPropertyJS/text.js"></script>
+<script src="CommercialPropertyJS/text.js?<?php echo time(); ?>"></script>
 <!--Table Data-->
-<script src="CommercialPropertyJS/getTableData.js"></script>
+<script src="CommercialPropertyJS/getTableData.js?<?php echo time(); ?>"></script>
 
 </body>
 

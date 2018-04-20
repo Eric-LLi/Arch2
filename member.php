@@ -1853,6 +1853,8 @@
         function(row,index)
         {
           //noty({text:'Select booking ' + row.bookingcode,type: 'warning', timeout: 4000});
+          //$bookingcode = row.bookingcode;
+          document.getElementById('pdfUploadBookingcode').value = row.bookingcode;
           $.post
           (
             'ajax_checkPDF.php',
@@ -1867,31 +1869,43 @@
               {
                 //this booking does not have a pdf in the ./pdf directory, could upload straght away
                 //noty({text:response.msg,type:'info',timeout:4000});
-                $("#uploadPDF").click();
+                doPromptOkCancel
+                (
+                  'Upload a report for booking ' + row.bookingcode + ' from the local computer?',
+                  function(result)
+                  {
+                    if(result)
+                    {
+                      $("#uploadPDF").click();
+                    }
+                  }
+                );
               }
               else
               {
                 //This booking has a pdf in the ./pdf drectory, need to ask permission
                 doPromptOkCancel
                 (
-                  'This booking has readly a pdf report, do you want to overwrite it?',
+                  'Booking ' + row.bookingcode +  ' already has a pdf report, do you want to overwrite it?',
                   function(result)
                   {
                     if (result)
                     {
-                      //noty({text:'you click ok',type:'info',timeout:4000});
-                      //$("#theUploadButton").click();
                       $("#uploadPDF").click();
                     }
                   }
                 );  
-                //noty({text:response.msg,type:'info',timeout:4000});
               }
             }
           )
         }
       ))
       noty({text: 'Please select a booking', type: 'warning', timeout: 2000});
+    }
+
+    function pdfUploadInput()
+    {
+      document.getElementById('pdfUploadButton').click();
     }
 
     function doMemberChangePassword()
@@ -2257,10 +2271,6 @@
 
     // ************************************************************************************************************
     // Document ready...
-    $(function()
-    {
-    });
-
     $(document).ready(function()
     {
       $.noty.defaults =
@@ -2303,37 +2313,6 @@
         }
       );
 
-      $('#uploadPDF').change(function(){
-        document.getElementById('pdfUploadButton').click();
-        $.post(
-          'ajax_uploadExternalPDF.php',
-          {
-            fileTmpName:'<?php echo $_FILES['externalPDF']['tmp_name']; ?>',
-            fileName:'<?php echo $_FILES['externalPDF']['name'] ?>',
-            fileSize:'<?php echo $_FILES['externalPDF']['size'] ?>',
-            fileError:'<?php echo $_FILES['externalPDF']['error'] ?>',
-            fileType:'<?php echo $_FILES['externalPDF']['type'] ?>'
-          },
-          function(result)
-            {
-              var response = JSON.parse(result);
-              if(response.rc == 0)
-              {
-                //this booking does not have a pdf in the ./pdf directory, could upload straght away
-                //noty({text:response.msg,type:'info',timeout:4000});
-                console.log("ok");
-                console.log(response.msg);
-              }
-              else
-              {
-                //This booking has a pdf in the ./pdf drectory, need to ask permission
-                console.log("'sth wrong'"); 
-                console.log(response.msg);
-                //noty({text:response.msg,type:'info',timeout:4000});
-              }
-            }
-        )
-      })
       
       $('#divBookingsG').datagrid
       (
@@ -2699,6 +2678,14 @@
   </script>
 </head>
 <body>
+  <!-- ********************************* ************************************************************************************************************************************-->
+  <!-- The upload external PDF button -->
+  <iframe name="pdfUpload" style="display:none" src=""></iframe>  
+  <form enctype="multipart/form-data" id="uploadPDF_Form" method="POST" action="ajax_uploadExternalPDF.php" target="pdfUpload">
+    <input type="file" id="uploadPDF" name="externalPDF" accept="application/pdf,application/vnd.ms-excel" onchange="pdfUploadInput()"/>
+    <input type="text" name="bookingcode" value="" id="pdfUploadBookingcode"/>
+    <input id="pdfUploadButton" type="submit" name="submitPDF"/>
+  </form>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Toolbars...                                                                                                                                                              -->
   <div id="tbBookings" style="height: auto; display: none">
@@ -2755,10 +2742,6 @@
     </div>
   </div>
 
-  <form enctype="multipart/form-data" id="uploadPDF_Form" method="POST" action="ajax_uploadExternalPDF.php">
-    <input type="file" id="uploadPDF" name="externalPDF" accept="application/pdf,application/vnd.ms-excel">
-    <button id="pdfUploadButton" type="submit" name="submitPDF">Submit</button>
-  </form>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Reports...                                                                                                                                                              -->
   <div id="dlgNumReporsByType" class="easyui-dialog" title="#Reports by Type" style="width: 800px; height: 600px;" data-options="resizable: false, modal: false, closable: false, closed: true">

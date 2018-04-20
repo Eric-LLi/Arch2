@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function startGeneratingTimber(mode) {
+function generatePDF(mode) {
 
     var isMobile = {
         Android: function() {
@@ -1177,7 +1177,6 @@ function startGeneratingTimber(mode) {
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
         pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
             var base64 = encodedString;
-            $('#savingPDFAlert').show('fade');
             doSavePDF(base64);
             //console.log(base64);
         });
