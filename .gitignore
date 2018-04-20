@@ -1,7 +1,7 @@
-.DS_Store
-.brackets.json
-photos/
-images/
+/.DS_Store
+/.brackets.json
+/photos/
+/images/
 /undefined
-.project
-.idea/
+/.idea/
+/.project
