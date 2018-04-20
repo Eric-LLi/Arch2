@@ -1006,7 +1006,7 @@ $("#upload-button").on('click', function () {
     $("#file-to-upload").trigger('click');
 });
 
-var uploadPDFfile;
+const uploadPDFfile;
 $("#file-to-upload").on('change', function (e) {
     // Validate whether PDF
     uploadPDFfile = e.currentTarget.files;
