@@ -2703,15 +2703,15 @@
 
 
 <!--PDF Generator-->
-<script src="HOWJS/PDFGenerator.js"></script>
+<script src="HOWJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="HOWJS/generalFunctions.js"></script>
-<script src="HOWJS/htmlGeneralFunctions.js"></script>
+<script src="HOWJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="HOWJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
 
 <!--Text-->
-<script src="HOWJS/text.js"></script>
+<script src="HOWJS/text.js?<?php echo time(); ?>"></script>
 <!--Table Data-->
-<script src="HOWJS/getTableData.js"></script>
+<script src="HOWJS/getTableData.js?<?php echo time(); ?>"></script>
 
 
 

@@ -716,14 +716,14 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
 <!--Image File-->
 
 <!--Text File-->
-<script src="RenovationFeasibilityJS/text.js"></script>
+<script src="RenovationFeasibilityJS/text.js?<?php echo time(); ?>"></script>
 <!--PDF Generator-->
-<script src="RenovationFeasibilityJS/PDFGenerator.js"></script>
+<script src="RenovationFeasibilityJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="RenovationFeasibilityJS/generalFunctions.js"></script>
-<script src="RenovationFeasibilityJS/htmlGeneralFunctions.js"></script>
+<script src="RenovationFeasibilityJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="RenovationFeasibilityJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--Get Table's Data-->
-<script src="RenovationFeasibilityJS/getTableData.js"></script>
+<script src="RenovationFeasibilityJS/getTableData.js?<?php echo time(); ?>"></script>
 
 
 
