@@ -2,7 +2,7 @@
  * Created by TengShinan on 10/10/17.
  */
 
-function generateMaintenancePDF(mode) {
+function generatePDF(mode) {
     resetTotalImagesCaptions();
     var isMobile = {
         Android: function() {
@@ -700,10 +700,8 @@ function generateMaintenancePDF(mode) {
     {
         //console.log('click');
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-        $('#savingPDFAlert').show('fade');
         pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
             //var base64 = encodedString;
-            //$('#savingPDFAlert').show('fade');
             doSavePDF(encodedString);
             //console.log(base64);
         });

@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
     <?php require_once("saveloaddata.php"); ?>
+    <?php require_once("meta.php"); ?>
 </head>
 <body>
 <!--Navigation-->
