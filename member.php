@@ -2681,7 +2681,7 @@
   <!-- ********************************* ************************************************************************************************************************************-->
   <!-- The upload external PDF button -->
   <iframe name="pdfUpload" style="display:none" src=""></iframe>  
-  <form enctype="multipart/form-data" id="uploadPDF_Form" method="POST" action="ajax_uploadExternalPDF.php" target="pdfUpload">
+  <form enctype="multipart/form-data" id="uploadPDF_Form" method="POST" action="ajax_uploadExternalPDF.php" target="pdfUpload" style="display:none">
     <input type="file" id="uploadPDF" name="externalPDF" accept="application/pdf,application/vnd.ms-excel" onchange="pdfUploadInput()"/>
     <input type="text" name="bookingcode" value="" id="pdfUploadBookingcode"/>
     <input id="pdfUploadButton" type="submit" name="submitPDF"/>
