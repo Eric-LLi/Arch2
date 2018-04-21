@@ -380,14 +380,15 @@ $(":checkbox").click(function () {
     }
 });
 
-
 //'Construction Summary' add button count.
 var conAdd_Count = 0;
+
 //'Construction Summary' Add button listening event.
 $("#Button_ConAdd").click(function (){
     Create_ConAdd(conAdd_Count);
     conAdd_Count++;
 });
+
 //'Construction Summary' Add button create.
 function Create_ConAdd(id) {
     var newTr = document.createElement("tr"),
@@ -411,7 +412,6 @@ function Create_ConAdd(id) {
     }
 }
 
-
 //'Fault Summary' add button count.
 var faultAdd_Count = 0;
 //'Fault Summary' add button listening event.
@@ -419,6 +419,7 @@ $("#Button_FaultAdd").click(function (){
     button_FaultAdd(faultAdd_Count);
     faultAdd_Count++;
 });
+
 //'Fault Summary' Add button create.
 function button_FaultAdd(id) {
     var table = document.getElementById("Table_FalSummary"),
@@ -444,14 +445,15 @@ function button_FaultAdd(id) {
     createP_Option(newValueID);
 }
 
-
 //'Health Check & Safety Check' add button count.
 var HSCheckAdd_Count = 0;
+
 //'Health Check & Safety Check' add button listening event.
 $("#Button_HSCheckAdd").click(function (){
     button_HealthCheckAdd(HSCheckAdd_Count);
     HSCheckAdd_Count++;
 });
+
 //'Health Check & Safety check' Add button create.
 function button_HealthCheckAdd(id) {
     var table = document.getElementById("Table_HSCheck"),
@@ -476,13 +478,16 @@ function button_HealthCheckAdd(id) {
     }
     createP_Option(newItemValue);
 }
+
 //'Repairs & Mainentance Check' Structure add button count.
 var RM_SCheckAdd_Count = 0;
+
 //'Repairs & Mainentance Check' Structure add button Listening event.
 $("#Button_RMCheckAdd_S").click(function () {
     RM_SCheckAddButton(RM_SCheckAdd_Count);
     RM_SCheckAdd_Count++;
 });
+
 //'Repairs & Mainentance Check' Structure add button create.
 function RM_SCheckAddButton(id){
     var table = document.getElementById("Table_RMCheck_S"),
@@ -507,13 +512,16 @@ function RM_SCheckAddButton(id){
     }
     createP_Option(newValueID);
 }
+
 //'Repairs & Mainentance Check' Other add button count.
 var RM_OCheckAdd_Count = 0;
+
 //'Repairs & Mainentance Check' Other add button Listening event.
 $("#Button_RMCheckAdd_O").click( function (){
     RM_OCheckAddButton(RM_OCheckAdd_Count);
     RM_OCheckAdd_Count++;
 });
+
 //'Repairs & Mainentance Check' Other add button create.
 function RM_OCheckAddButton(id){
     var table = document.getElementById("Table_RMCheck_O"),
@@ -539,14 +547,15 @@ function RM_OCheckAddButton(id){
     createP_Option(newValueID);
 }
 
-
 //'Energy & Wastage Check' Add button count.
 var EW_CheckAdd_Count = 0;
+
 //'Energy & Wastage Check' Add button Listening event.
 $("#Button_EWCheckAdd").click(function () {
     button_EnergyCheckAdd(EW_CheckAdd_Count);
     EW_CheckAdd_Count++;
 });
+
 //'Energy & Wastage Check' Add button create.
 function button_EnergyCheckAdd(id){
     var table = document.getElementById("Table_EWCheck"),
@@ -580,16 +589,20 @@ E means Energy Efficiency - Optional page
 */
 var C_count = 1,
     M_count = 1,
-    E_count = 1,
-    //Add_button event
-    button_AddSolutionItem = function (id) {
-        "use strict";
+    E_count = 1;
+//Add_button event
+var button_AddSolutionItem = function (id) {
+    addSolutionItem(id);
+};
 
+function addSolutionItem(id){
+    if(id.charAt(1)!=="0"){
         //Decide which button C,M or E
-        var btn_id = id.substr(0, 1),
+        var btn_id = id.charAt(0);
 
-            //Get corresponding table
-            table = document.getElementById(btn_id + "_SolutionTable"),
+        //        console.log(btn_id);
+        //Get corresponding table
+        var table = document.getElementById(btn_id + "_SolutionTable"),
             //Create new tr and td
             newTr = document.createElement("tr"),
             newTd1 = document.createElement("td"),
@@ -607,16 +620,19 @@ var C_count = 1,
                 count = C_count;
                 category = C_category;
                 code = C_Code;
+                C_count++;
                 break;
             case "M":
                 count = M_count;
                 category = M_category;
                 code = M_Code;
+                M_count++;
                 break;
             case "E":
                 count = E_count;
                 category = "";
                 code = E_Code;
+                E_count++;
                 break;
         }
 
@@ -629,13 +645,12 @@ var C_count = 1,
             newTradeCleanID = btn_id + count + "_mirrorClean",
             newCostID = btn_id + count + "_costText";
 
-
         var text = "<select id=\"" + newCateSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Choose an item</option></select>";
 
-        if (btn_id !== "E")
-            newTd1.innerHTML = text;
-        else
+        if (btn_id === "E")
             newTd1.innerHTML = "Enenrgy Efficiency";
+        else
+            newTd1.innerHTML = text;
 
         text = "<select id=\"" + newCodeSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Internal use</option></select>";
         newTd2.innerHTML = text;
@@ -662,18 +677,21 @@ var C_count = 1,
         var C_opt = document.createElement("option"),
             //Get "select" category
             selectCateID = document.getElementById(newCateSelectID),
+
             //Get 'select' code
             selectCodeID = document.getElementById(newCodeSelectID),
+
             //Get 'select' trade
             selectTradeID = document.getElementById(newTradeSelectID),
+
             i;
 
         //Load category option
         for (i = 0; i < category.length; i++) {
             //Add category name
-            C_opt.innerHTML = C_category[i];
+            C_opt.innerHTML = category[i];
             //Add category value
-            C_opt.setAttribute("value", C_category[i]);
+            C_opt.setAttribute("value", category[i]);
             //Add to html
             selectCateID.appendChild(C_opt);
 
@@ -683,8 +701,8 @@ var C_count = 1,
         //Load CODE option
         for (i = 0; i < code.length; i++) {
             C_opt = document.createElement("option");
-            C_opt.innerHTML = C_Code[i];
-            C_opt.setAttribute("value", C_Code[i]);
+            C_opt.innerHTML = code[i];
+            C_opt.setAttribute("value", code[i]);
             selectCodeID.appendChild(C_opt);
 
             C_opt = document.createElement("option");
@@ -698,23 +716,21 @@ var C_count = 1,
 
             selectTradeID.appendChild(C_opt);
         }
-        switch (btn_id) {
-            case "C":
-                C_count++;
-                break;
-            case "M":
-                M_count++;
-                break;
-            case "E":
-                E_count++;
-                break;
-        }
-    };
-
+        //        switch (btn_id) {
+        //            case "C":
+        //                C_count++;
+        //                break;
+        //            case "M":
+        //                M_count++;
+        //                break;
+        //            case "E":
+        //                E_count++;
+        //                break;
+        //        }
+    }
+}
 //Solution's trade mirror onchange
 var tradeOnchange = function (tid) {
-    "use strict";
-
     //Get corresponding select element
     var selectedValue = document.getElementById(tid).value,
         //Get mirror textarea ID
@@ -726,7 +742,6 @@ var tradeOnchange = function (tid) {
 
 //Solution's Clear textarea
 var tradeClear = function (tid) {
-    "use strict";
     var mirrorID = tid.split("_")[0] + "_mirrorText",
         mirror = document.getElementById(mirrorID);
     mirror.value = "";
@@ -1038,18 +1053,17 @@ function convertBase64UrlToBlob(urlData,type){
 }
 
 $(document).ready(function () {
-    "use strict";
 
     loadPropertySelectData();
     loadSolutionSelectData();
 
     checkIndiTextValue();
-    //Property Summary add_button
-    //    button_ConAdd();
-    //    button_FaultAdd();
 
-    //Property Assessment add_button
-    //    button_HealthCheckAdd();
-    //    button_RepairsCheckAdd();
-    //    button_EnergyCheckAdd();
+    //    if(photos_count > 0)
+    //        photos_count++;
+    //    if(pdfCounts > 0)
+    //        pdfCounts++;
+
+    console.log("Current pdfs count: " + pdfCounts);
+    console.log("Current photos count: " + photos_count);
 });

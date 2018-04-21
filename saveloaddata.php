@@ -275,10 +275,10 @@
                 var url = 'photos/' + p.filename;
                 //console.log(url);
                 var image = document.getElementById(p.imageid);
-                console.log("Image Name: " + p.filename);
+                //console.log("Image Name: " + p.filename);
                 //if the image is exited, then just need to populate the image with the src.
                 if (image) {
-                    console.log('1111111have imageID');
+                    //console.log('1111111have imageID');
                     //console.log(imageID);
                     image.style.display = 'block';
                     image.alt = p.imageAltName
@@ -381,9 +381,10 @@
                         //console.log('the next add id is ' + nextaddid);
                         // console.log('the next imageID is ' + nextImageID);
                     }
-                } else {
+                }
+                else {
                     //console.log(p.imageid + " corresponding image field is not extied");
-                    console.log("2222222Table Name: " + p.tableName);
+                    //console.log("2222222Table Name: " + p.tableName);
                     if (p.tableName) {
                         //console.log(p.tableName);
                         if (p.tableName === 'homeFeasibilityDrawingsTable') {
@@ -429,7 +430,8 @@
                                 console.log('have max drawings, no more creating');
                             }
 
-                        } else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
+                        }
+                        else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
                             var maxIamge = 4;
                             console.log("I am in renovation Feasibility Drawing Table");
                             //console.log(p.addid);
@@ -472,7 +474,8 @@
                             } else {
                                 console.log('have max images, no more creating');
                             }
-                        } else if (p.tableName === 'DilapidationImagesTable') {
+                        }
+                        else if (p.tableName === 'DilapidationImagesTable') {
 
                             var maxIamge = 60;
                             var table = document.getElementById(p.tableName);
@@ -510,7 +513,8 @@
                                 console.log("counting image is equal maxImage, no need to do anything");
                             }
 
-                        } else if (p.tableName === 'AdviceImagesTable') {
+                        }
+                        else if (p.tableName === 'AdviceImagesTable') {
                             maxIamge = 30;
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
@@ -543,7 +547,8 @@
                                     console.log("still loading image, no worry");
                                 }
                             }
-                        } else if (p.tableName === 'MaintenanceImagesTable') {
+                        }
+                        else if (p.tableName === 'MaintenanceImagesTable') {
 
                             var maxIamge = 40;
                             var table = document.getElementById(p.tableName);
@@ -579,7 +584,8 @@
                                 }
                             }
 
-                        } else if (p.tableName === 'MaintenanceDrawingsTable') {
+                        }
+                        else if (p.tableName === 'MaintenanceDrawingsTable') {
                             var maxDrawing = 6;
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
@@ -614,7 +620,8 @@
                                     console.log("still loading image, no worry");
                                 }
                             }
-                        } else if (p.tableName === 'ConstructionImagesTable') {
+                        }
+                        else if (p.tableName === 'ConstructionImagesTable') {
                             console.log("nothing happen here yet!");
                             var maxIamge = 30;
                             var table = document.getElementById(p.tableName);
@@ -649,7 +656,8 @@
                                     console.log("still loading image, no worry");
                                 }
                             }
-                        } else if (p.tableName === 'CPImagesTable') {
+                        }
+                        else if (p.tableName === 'CPImagesTable') {
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             //console.log("the total number of images in this CP report are : " + countingImage);
@@ -685,7 +693,8 @@
 
                             }
 
-                        } else if (p.tableName === 'HOWImagesTable') {
+                        }
+                        else if (p.tableName === 'HOWImagesTable') {
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             console.log("the total number of images in this HOW report are : " + countingImage);
@@ -721,16 +730,17 @@
                             }
                         }
                         else if (p.tableName === "HA_PdfContents") {
-                            console.log("Beofre pdf Count: " + pdfCounts);
+                            //console.log("Beofre pdf Count: " + pdfCounts);
                             //imgbtnID = [img ID, deltebuttonID, caption ID, container ID]
 
                             var temp = parseInt(p.imageid.split("_")[0]);
-                            console.log("TEMP: "+ temp);
+                            //console.log("TEMP: "+ temp);
 
-                            if(temp > pdfCounts)
+                            if(temp > pdfCounts){
                                 pdfCounts = temp;
-
-                            console.log("After pdf Count: " + temp);
+                                pdfCounts++;
+                            }
+                            //console.log("After pdf Count: " + temp);
 
                             var imgbtnID = createPDFImg(temp);
 
@@ -741,22 +751,24 @@
                             $("#" + imgbtnID[1]).show();
 
                             //Attach img
-                            console.log("Image URL: " + url);
+                            //console.log("Image URL: " + url);
                             $("#" + imgbtnID[0]).attr("src", url);
                             $("#" + p.tableName).show();
-                        } else if (p.tableName === "HA_ImgsContents") {
+                        }
+                        else if (p.tableName === "HA_ImgsContents") {
                             //[imgID, btnID, captionID, containerID]
-                            console.log("IMAGE id: " + p.imageid);
+                            //console.log("IMAGE id: " + p.imageid);
                             var temp = parseInt(p.imageid.split("_")[0]);
 
-                            console.log("Before Photos count :" + photos_count);
-                            console.log("temp : " + temp);
-                            if(temp > photos_count)
+                            //console.log("Before Photos count :" + photos_count);
+                            //console.log("temp : " + temp);
+                            if(temp > photos_count){
                                 photos_count = temp;
-
+                                photos_count++;
+                            }
                             //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
                             var elementID = createPhoto(temp);
-                            console.log("After count: " + photos_count);
+                            //console.log("After count: " + photos_count);
                             $("#" + elementID[1]).attr("src",url);
                             $("#" + p.tableName).show();
                         }
@@ -765,12 +777,6 @@
             }
         );
 
-        if(photos_count > 0)
-            photos_count++;
-        if(pdfCounts > 0)
-            pdfCounts++;
-        console.log("Photos count: " + photos_count);
-        console.log("PDFs count: " + pdfCounts);
         // Report specific checks...
         <?php
         if (basename($_SERVER['SCRIPT_NAME']) == 'HomeFeasibilityReport.php')
@@ -905,7 +911,6 @@
         }
         ?>
 
-
         <?php
         if (basename($_SERVER['SCRIPT_NAME']) == 'DesignConsultationReport.php')
         {
@@ -989,13 +994,11 @@
         var count_wetMaintenance = 0;
         var count_wetMajor = 0;
 
-
         data.forEach(
             function(d) {
                 //console.log(d.id.substr(0,8));
                 if (d.id.substr(0, 8) == 'EDSelect') {
                     count_defect++;
-
                 }
                 if (d.id.substr(0, 8) == 'CSSelect') {
                     count_summary++;
@@ -1065,7 +1068,6 @@
                 if (d.id.substr(0, 22) == 'interiorWetMajorItemNo') {
                     count_wetMajor++;
                 }
-
             }
         )
         // ***** Add extra fields in reports that have dynamic fields...
@@ -1592,7 +1594,101 @@
 
         <?php
         if (basename($_SERVER['SCRIPT_NAME']) == 'HomeAccessReport.php'){
+        ?>
+        data.forEach(
+            function(d) {
 
+                const elementsID = d.id.split("_");
+                var ele_number = elementsID[0];
+                var regex = new RegExp("^[a-zA-Z]");
+                try{
+
+                    if(!regex.test(ele_number))
+                    {
+                        ele_number = parseInt(elementsID[0]);
+                    }
+                }catch(err){
+                    console.log(err);
+                }
+                switch (elementsID[1]) {
+                    case "CSNewName":
+                        //assign the largest number to continue add new item.
+                        if(ele_number > conAdd_Count)
+                            conAdd_Count = ele_number;
+
+                        Create_ConAdd(ele_number);
+
+                        //Next new item id start from next number.
+                        conAdd_Count++;
+                        //console.log("conAdd_Count: " + conAdd_Count)
+                        break;
+                    case "CSNewValue":
+                        break;
+                    case "HSCheckNewName":
+                        //assign the largest number to continue add new item.
+                        if(ele_number > HSCheckAdd_Count)
+                            HSCheckAdd_Count = ele_number;
+
+                        button_HealthCheckAdd(ele_number);
+                        //Next new item id start from next number.
+                        HSCheckAdd_Count++;
+                        //console.log("HSCheckAdd_Count: " + HSCheckAdd_Count);
+                        break;
+                    case "HSCheckNewValue":
+                        break;
+                    case "FSNewName":
+                        if(ele_number > faultAdd_Count)
+                            faultAdd_Count = ele_number;
+                        button_FaultAdd(ele_number);
+                        faultAdd_Count++;
+                        break;
+                    case "FSNewValue":
+                        break;
+                    case "RMSCheckNewName":
+                        if(ele_number > RM_SCheckAdd_Count)
+                            RM_SCheckAdd_Count=ele_number;
+
+                        RM_SCheckAddButton(ele_number);
+                        RM_SCheckAdd_Count++;
+                        break;
+                    case "RMSCheckValue":
+                        break;
+                    case "RMOCheckNewName":
+                        if(ele_number > RM_OCheckAdd_Count)
+                            RM_OCheckAdd_Count = ele_number;
+
+                        RM_OCheckAddButton(ele_number);
+                        RM_OCheckAdd_Count++;
+                        break;
+                    case "RMOCheckNewValue":
+                        break;
+                    case "EWCheckNewName":
+                        if(ele_number > EW_CheckAdd_Count)
+                            EW_CheckAdd_Count = ele_number;
+
+                        button_EnergyCheckAdd(ele_number);
+                        EW_CheckAdd_Count++;
+                        break;
+                    case "EWCheckNewValue":
+                        break;
+                    case "categoty":
+                        break;
+                    case "code":
+
+                        addSolutionItem(elementsID[0]);
+                        break;
+                    case "commentText":
+                        break;
+                    case "tradeSelect":
+                        break;
+                    case "mirrorText":
+                        break;
+                    case "costText":
+                        break;
+                }
+            }
+        );
+        <?php
         }
         ?>
         // ***** Finally, populate with data...
