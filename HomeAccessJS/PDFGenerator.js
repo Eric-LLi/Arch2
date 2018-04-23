@@ -2,7 +2,7 @@
  * Created by Fafa on 21/3/18.
  */
 
-var btn_genferateHomeAccessReportPDF = function (mode){
+var btn_genferateHomeAccessReportPDF = function (mode) {
     console.log("btn_genferateHomeAccessReportPDF");
     generateHomeAccessReportPDF(mode);
 };
@@ -11,29 +11,29 @@ var btn_genferateHomeAccessReportPDF = function (mode){
 function generateHomeAccessReportPDF(mode) {
     console.log("generateHomeAccessReportPDF");
     //reset image number and general notes paragraphs number
-    if(mode === 'save'){
+    if (mode === 'save') {
         console.log('in Save');
         $('#savingPDFAlert').show('fade');
     }
     resetTotalCounting();
 
     var isMobile = {
-        Android: function() {
+        Android: function () {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function() {
+        BlackBerry: function () {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function() {
+        iOS: function () {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function() {
+        Opera: function () {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function() {
+        Windows: function () {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function() {
+        any: function () {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
@@ -41,8 +41,7 @@ function generateHomeAccessReportPDF(mode) {
     // Page start drawing from here...
     var docDefinition = {
         footer: function (currentPage, pageCount) {
-            if (currentPage === 1)
-            {
+            if (currentPage === 1) {
                 return {
                     columns: [
                         determineFrontPageFooter(mode),
@@ -51,14 +50,12 @@ function generateHomeAccessReportPDF(mode) {
                             alignment: 'right',
                             margin: [0, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
-            }
-            else
-            {
+            } else {
                 return {
                     columns: [
                         determineFooter(mode),
@@ -67,14 +64,15 @@ function generateHomeAccessReportPDF(mode) {
                             alignment: 'left',
                             margin: [10, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
             }
         },
         content: [
+
             /**
              * (1) Cover Page
              * */
@@ -85,30 +83,52 @@ function generateHomeAccessReportPDF(mode) {
             },
             giveMeHugeDraft(mode),
             {
-                getHomeAccessData().page1,
-                text:[
-                    {text: page1_2, color: 'red'},
-                    {text: page1_3, bold:true}
+                text: [
+                    {
+                        text: page1,
+                    },
+                    {
+                        text: page1_2,
+                        color: 'red'
+                    },
+                    {
+                        text: page1_3 + '\n' + page1_4,
+                        bold: true
+                    }
                 ],
-                pageBreak: 'after',
-                style: 'coverPageHeader'
+                style: 'coverPageHeader',
+                pageBreak: 'after'
             },
+
             /**
              * (2) Report Detail Page
              */
             {
-                text: "Home Access & Services Report",
+                text: page2Header,
                 style: "pageTopHeader"
+            },
+            {
+                text: page2subHeader,
+                margin: [0, 10, 0, 0]
+            },
+            {
+                table: {
+                    widths: ['*', '*', '*', '*'],
+                    body: [
+                                        [{
+                            colSpan: 4,
+                            text: 'Client Details'
+                                        }, {}, {}, {}],
+                                        ['1', '2', '3', '4'],
+                                    ]
+                }
             }
-
-
         ],
         styles: {
             coverPageHeader: {
                 fontSize: 50,
-                color: 'black',
-                italics: true,
-                margin: [20, 50, 0, 100]
+                margin: [20, 100, 0, 100],
+                italics: true
             },
             pageTopHeader: {
                 fontSize: 20,
@@ -124,26 +144,25 @@ function generateHomeAccessReportPDF(mode) {
         }
     };
 
-    if (mode === 'save'){
-        pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
+    if (mode === 'save') {
+        pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
             var base64 = encodedString;
             doSavePDF(base64);
         });
     }
     //if the mode is final or preview, open the pdf directly, depends on what device the user is using
-    else{
-        if( isMobile.any() ){
+    else {
+        if (isMobile.any()) {
             var reader = new FileReader();
 
-            pdfMake.createPdf(docDefinition).getBlob(function(blob){
-                reader.onload = function(e){
+            pdfMake.createPdf(docDefinition).getBlob(function (blob) {
+                reader.onload = function (e) {
                     //window.location.href = reader.result;
-                    window.open(reader.result,'_blank');
+                    window.open(reader.result, '_blank');
                 };
                 reader.readAsDataURL(blob);
             });
-        }
-        else{
+        } else {
             console.log("It is on pc");
             pdfMake.createPdf(docDefinition).open();
         }

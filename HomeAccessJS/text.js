@@ -1,11 +1,11 @@
 /**
  * Created by Fafa on 21/3/18.
  */
-function getHomeAccessData(){
+
     //Page One.
-    const page1 = "Archicentre";
+    const page1 = "Archicentre ";
     const page1_2 = "Australia";
-    const page1_3 ="Home Access &";
+    const page1_3 ="Home Access & ";
     const page1_4 = "Services Report";
 
     //Page two.
@@ -77,4 +77,4 @@ function getHomeAccessData(){
     const page11_11 = "If you are dissatisfied with the Report you agree to promptly give Archicentre Australia written notice specifying the matters about which you are dissatisfied and allow Archicentre Australia to attempt to resolve the matters with you within 28 days of receipt by Archicentre Australia of such written notice before taking any remedial action or incurring any costs.";
     const page11_12 = "Reference to Archicentre Australia in this Report and any other documentation includes, where the context permits, its agents and representatives authorised to act on its behalf.";
     const page11_13 = "These Terms and Conditions are in addition to and do not replace or remove any implied guarantees or warranties conferred by the Competition and Consumer Act or any other consumer protection legislation.";
-}
+
