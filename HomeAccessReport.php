@@ -60,7 +60,6 @@ require_once("loadbooking.php");
                         This Report provides independent advice from a registered architect about home access & services matters as they relate to your dwelling.
                     </p>
 
-
                     <!--Title-->
                     <div class="container">
                         <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
@@ -1318,10 +1317,8 @@ require_once("loadbooking.php");
                     ?>
                     <td class="text-center" style="border:none;">
                         <button onclick="SaveReport()" type="button" class="btn btn-primary save" style="position:static;">Save</button>
-
-                        <button onclick="generateCommercialPropertyPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-
-                        <button onclick="generateCommercialPropertyPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+                        <button onclick="btn_genferateHomeAccessReportPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+                        <button onclick="btn_genferateHomeAccessReportPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
                     </td>
                     <?php
                         }
@@ -1335,8 +1332,7 @@ require_once("loadbooking.php");
                         <?php
                             }
                         ?>
-
-                        <button onclick="generateCommercialPropertyPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+                        <button onclick="btn_genferateHomeAccessReportPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
                     </td>
                     <?php
                         }
@@ -1345,6 +1341,10 @@ require_once("loadbooking.php");
                 </tr>
             </table>
             <!--        </div>-->
+
+
+            <!--Text-->
+            <script src="HomeAccessJS/text.js"></script>
 
             <!--Scripts-->
             <script src="js/images.js"></script>
@@ -1357,11 +1357,10 @@ require_once("loadbooking.php");
             <script type="text/javascript" src="HomeAccessJS/htmlGeneralFunctions.js"></script>
             <script src="HomeAccessJS/pdfGeneralFunctions.js"></script>
 
-            <!--Text-->
-            <script src="HomeAccessJS/text.js"></script>
+
 
             <!--Table Data-->
-            <!--            <script src="HomeAccessJS/getTableData.js"></script>-->
+            <script src="HomeAccessJS/getTableData.js"></script>
 
             <!--view PDF srcipt-->
             <script src="HomeAccessJS/pdf.js"></script>
