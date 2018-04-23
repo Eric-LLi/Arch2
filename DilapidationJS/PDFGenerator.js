@@ -2,7 +2,7 @@
  * Created by TengShinan on 24/10/17.
  */
 
-function generatePDF(mode) {
+function generateDilapidationPDF(mode) {
     resetImageCounting();
 
     var isMobile = {
@@ -463,6 +463,7 @@ function generatePDF(mode) {
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
         pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
             var base64 = encodedString;
+            $('#savingPDFAlert').show('fade');
             doSavePDF(base64);
             //console.log(base64);
         });

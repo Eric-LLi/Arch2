@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function generatePDF(mode) {
+function generateConstructionPDF(mode) {
     resetImageCounting();
     var isMobile = {
         Android: function() {
@@ -712,12 +712,15 @@ function generatePDF(mode) {
     // console.log(imageNumber);
     // Open a new tab and show the PDF
     //pdfMake.createPdf(docDefinition).open();
+
+
     if (mode == 'save')
     {
         //console.log('click');
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
         pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
             var base64 = encodedString;
+            $('#savingPDFAlert').show('fade');
             doSavePDF(base64);
             //console.log(base64);
         });

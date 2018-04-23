@@ -22,7 +22,6 @@
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
 
     <?php require_once("saveloaddata.php"); ?>
-    <?php require_once("meta.php"); ?>
 </head>
 <body>
 <!--Navigation -->
@@ -417,9 +416,8 @@
         {
     ?>
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-    <!-- <button onclick="generateAdvicePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
-    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <button onclick="generateAdvicePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <button onclick="generateAdvicePDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
     <?php
         }
         else
@@ -431,7 +429,7 @@
     <?php
             }
     ?>
-    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <button onclick="generateAdvicePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }
@@ -447,14 +445,14 @@
 
 
 <!--Text File-->
-<script src="AdviceJS/text.js?<?php echo time(); ?>"></script>
+<script src="AdviceJS/text.js"></script>
 <!--PDF Generator-->
-<script src="AdviceJS/PDFGenerator.js?<?php echo time(); ?>"></script>
+<script src="AdviceJS/PDFGenerator.js"></script>
 <!--General Functions-->
-<script src="AdviceJS/generalFunctions.js?<?php echo time(); ?>"></script>
-<script src="AdviceJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
+<script src="AdviceJS/generalFunctions.js"></script>
+<script src="AdviceJS/htmlGeneralFunctions.js"></script>
 <!--Get Table's Data-->
-<script src="AdviceJS/getTableData.js?<?php echo time(); ?>"></script>
+<script src="AdviceJS/getTableData.js"></script>
 
 
 
