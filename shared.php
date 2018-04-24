@@ -82,7 +82,7 @@
     "",
     "email_prop_assess_report.html",
     "email_timberpestinspection.html",
-    "",
+    "email_combinedreports.html",
     "email_maintenance.html",
     "email_archadvice.html",
     "email_constructionqa_stage1.html",
@@ -100,8 +100,9 @@
     "email_how.html",
     "email_commpropertyassessment.html",
     //"email_commdilapidation.html",
-		//"email_how.html",
-    //"email_has.html",
+    //"email_how.html",
+    "",
+    "email_has.html",
 		"",
     ""
   ];
