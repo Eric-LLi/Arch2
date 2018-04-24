@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function startGeneratingTimber(mode) {
+function generatePDF(mode) {
 
     var isMobile = {
         Android: function() {
