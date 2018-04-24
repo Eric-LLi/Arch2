@@ -129,6 +129,47 @@
         );
     }
 
+    /** This is to check whether the bookingcode.pdf is exited in the server */
+    function checkPDF()
+    {
+        console.log('I am inside checking permission');
+        $.post
+        (
+            'ajax_checkPDF.php',
+            {
+                uuid:'<?php echo $_SESSION['uuid']; ?>',
+                bookingcode: <?php echo $bookingcode; ?>
+            },
+            function(result)
+            {
+                var response = JSON.parse(result);
+                if(response.rc == 0)
+                {
+                //this booking does not have a pdf in the ./pdf directory, could upload straght away
+                $('#savingPDFAlert').show();
+                // console.log("can generate pdf right away");
+                generatePDF('save');
+                }
+                else
+                {
+                    //This booking has a pdf in the ./pdf drectory, need to ask permission
+                    doPromptOkCancel
+                    (
+                        'This report already has a saved pdf report, do you want to overwrite it?',
+                        function(result)
+                        {
+                        if (result)
+                        {
+                            $('#savingPDFAlert').show('fade');
+                            // console.log("genereate the pdf anayway");
+                            generatePDF('save');
+                        }
+                        }
+                    );  
+                }
+            }
+        )
+    }  
     function doSavePDF(data) {
         var formData = {
             pdfBase64: data,
@@ -150,7 +191,7 @@
             noty({
             text: response.msg,
             type: 'success',
-            timeout: 10000
+            timeout: 5000
         });
         // var bookingCode = response.passingText;
         // var baseURL = 'http://www.archicentreaustraliainspections.com/pdfreport/';
@@ -163,7 +204,7 @@
         noty({
             text: response.msg,
             type: 'error',
-            timeout: 10000
+            timeout: 5000
         });
     }
 

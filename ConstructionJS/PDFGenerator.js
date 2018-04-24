@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function generateConstructionPDF(mode) {
+function generatePDF(mode) {
     resetImageCounting();
     var isMobile = {
         Android: function() {

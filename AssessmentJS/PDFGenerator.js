@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function startGenerating(mode) {
+function generatePDF(mode) {
     // Page start drawing from here...
     //noinspection JSUnusedGlobalSymbols
     resetTotalParagraphs();

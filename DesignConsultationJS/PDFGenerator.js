@@ -7,7 +7,7 @@
  * */
 
 
-function generateDesignConsultationPDF(mode) {
+function generatePDF(mode) {
     // Page start drawing from here...
 
     var isMobile = {
