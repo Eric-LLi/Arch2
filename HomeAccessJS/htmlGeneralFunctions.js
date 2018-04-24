@@ -344,10 +344,10 @@ function loadSolutionSelectData() {
     createS_Option();
 }
 
-//Check CA_indicateText to match checkbox.
+//Check HA_indicateText to match checkbox.
 function checkIndiTextValue(){
-    if($("#CA_indicateText").val()!==""){
-        var val = $("#CA_indicateText").val().split(",");
+    if($("#HA_indicateText").val()!==""){
+        var val = $("#HA_indicateText").val().split(",");
         for(var i in val){
             if(val[i]!==""){
                 switch(val[i]){
@@ -371,12 +371,12 @@ function checkIndiTextValue(){
 //Save checkbox data into text for saving purpose.
 $(":checkbox").click(function () {
     if ($(this).is(":checked")) {
-        $("#CA_indicateText").val($("#CA_indicateText").val() + $(this).val() + ",");
+        $("#HA_indicateText").val($("#HA_indicateText").val() + $(this).val() + ",");
     } else {
-        var text = $("#CA_indicateText").val();
+        var text = $("#HA_indicateText").val();
         var del = $(this).val();
         text = text.replace(del + ",", "");
-        $("#CA_indicateText").val(text);
+        $("#HA_indicateText").val(text);
     }
 });
 

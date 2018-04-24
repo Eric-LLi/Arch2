@@ -3,10 +3,10 @@
  */
 
 var btn_genferateHomeAccessReportPDF = function (mode) {
-    console.log("btn_genferateHomeAccessReportPDF");
     generateHomeAccessReportPDF(mode);
 };
 
+//generalPDF(mode)
 
 function generateHomeAccessReportPDF(mode) {
     console.log("generateHomeAccessReportPDF");
@@ -101,7 +101,7 @@ function generateHomeAccessReportPDF(mode) {
             },
 
             /**
-             * (2) Report Detail Page
+             * (2) Report Detail Page Two
              */
             {
                 text: page2Header,
@@ -112,15 +112,325 @@ function generateHomeAccessReportPDF(mode) {
                 margin: [0, 10, 0, 0]
             },
             {
+                style: 'tableContent',
                 table: {
-                    widths: ['*', '*', '*', '*'],
+                    widths: ['auto', '*', '*', '*'],
                     body: [
-                                        [{
-                            colSpan: 4,
-                            text: 'Client Details'
-                                        }, {}, {}, {}],
-                                        ['1', '2', '3', '4'],
-                                    ]
+                        [
+                            {
+                                colSpan: 4,
+                                text: $('#HA_DivClientDetails').attr('data-title'),
+                                style: 'pageSubHeader'
+                            }, {}, {}, {}
+                        ],
+                        [
+                            $('#HA_lbClientName').text(),
+                            {
+                                colSpan: 3,
+                                text: $('#HA_ClientName').val()
+                            }, {}, {}
+                        ],
+                        [
+                            $('#HA_lbClientPhone').text(),
+                            $('#HA_ClientPhone').val(),
+                            $('#HA_lbBookingNo').text(),
+                            $('#HA_BookingNo').val()
+                        ],
+                        [
+                            {
+                                colSpan: 4,
+                                text: $('#HA_DivPropertyDetails').attr('data-title'),
+                                style: 'pageSubHeader'
+                            }, {}, {}, {}
+                        ],
+                        [
+                            $('#HA_lbAddress').text(),
+                            {
+                                colSpan: 3,
+                                text: $('#HA_Address').val()
+                            }, {}, {}
+                        ],
+                        [
+                            $('#HA_lbSuburb').text(),
+                            $('#HA_Suburb').val(),
+                            $('#HA_lbState').text() + $('#HA_State').val(),
+                            $('#HA_lbPostcode').text() + $('#HA_Postcode').val()
+                        ],
+                        [
+                            $('#HA_lbDateOfAssessment').text(),
+                            $('#HA_DateOfAssessment').val(),
+                            $('#HA_lbTimeOfAssessment').text(),
+                            $('#HA_TimeOfAssessment').val()
+                        ],
+                        [
+                            $('#HA_lbExistingUse').text(),
+                            {
+                                colSpan: 3,
+                                text: $('#HA_ExistingUse').val()
+                            }, {}, {}
+                        ],
+                        [
+                            $('#HA_lbWeatherConditions').text(),
+                            {
+                                colSpan: 3,
+                                text: $('#HA_WeatherConditions').val()
+                            }, {}, {}
+                        ],
+                        [
+                            $('#HA_lbVerbalSummary').text(),
+                            $('#HA_VerbalSummary').val(),
+                            $('#HA_lbDate').text(),
+                            $('#HA_Date').val()
+                        ],
+                        [
+                            {
+                                colSpan: 4,
+                                text: $('#HA_DivArchitectDetails').attr('data-title'),
+                                style: 'pageSubHeader'
+                            }, {}, {}, {}
+                        ],
+                        [
+                            $('#HA_lbarchitectName').text(),
+                            $('#HA_architectName').val(),
+                            $('#HA_lbregistrationNumber').text(),
+                            $('#HA_registrationNumber').val()
+                        ],
+                        [
+                            $('#HA_lbarchitectAddress').text(),
+                            {
+                                colSpan: 3,
+                                text: $('#HA_architectAddress').val()
+                            }, {}, {}
+                        ],
+                        [
+                            $('#HA_lbarchitectEmail').text(),
+                            $('#HA_architectEmail').val(),
+                            $('#HA_lbarchitectPhone').text(),
+                            $('#HA_architectPhone').val(),
+                        ],
+                        [
+                            $('#HA_lbarchitectRef').text() + $('#HA_architectRef').val(),
+                            {
+                                colSpan: 2,
+                                text: $('#HA_lbarchitectEmail2').text() + $('#HA_architectEmail2').val()
+                            }, {},
+                            $('#HA_lbarchitectPhone2').text() + $('#HA_architectPhone2').val()
+                        ]
+                    ]
+                }
+            },
+            {
+                style: 'tableContent',
+                table: {
+                    widths: ['100%'],
+                    body: [
+                        [
+                            {
+                                style: 'pageSubHeader',
+                                text: $('#HA_DivDetailsSought').attr('data-title')
+                            }
+                        ],
+                        [
+                            {
+                                text: $('#HA_AdviceSought').val()
+                            }
+                        ]
+                    ]
+                }
+            },
+            {
+                text: [
+                    {
+                        text: page2_1 + "\n",
+                        alignment: 'right'
+                    },
+                    {
+                        text: page2_2
+                    }
+                ],
+                margin: [0, 100, 0, 0],
+                fontSize: 9,
+                pageBreak: 'after'
+            },
+
+            /**
+             * (3) Report Detail Page Three
+             */
+            {
+                text: page3Header,
+                style: 'pageTopHeader'
+            },
+            {
+                text: page3SubHeader,
+                style: 'pageSubHeader',
+                margin: [0, 0, 0, 10]
+            },
+            {
+                style: 'Contents',
+                stack: [
+                    {
+                        text: page3_1
+                    },
+                    {
+                        text: page3_1_2
+                    },
+                    {
+                        ul: [page3_2, page3_3],
+                        margin: [20, 0]
+                    },
+                    {
+                        text: page3_4,
+                        margin: [0, 5]
+                    },
+                    {
+                        ul: [page3_5, page3_6],
+                        margin: [20, 0]
+                    },
+                    {
+                        text: page3_7,
+                        style: 'pageSubHeader',
+                        margin: [0, 10]
+                    },
+                    {
+                        text: page3_8
+                    },
+                    {
+                        ul: [page3_9, page3_10, page3_11, page3_12, page3_13, page3_14],
+                        margin: [20, 0]
+                    },
+                    {
+                        text: page3_15,
+                        margin: [0, 5, 0, 0, ]
+                    },
+                    {
+                        ul: [page3_16, page3_17, page3_18, page3_19, page3_20, page3_21, page3_22],
+                        margin: [20, 0]
+                    },
+                    {
+                        text: page3_23,
+                        margin: [0, 5, 0, 0]
+                    },
+                    {
+                        text: page3_23_2
+                    },
+                    {
+                        text: page3_24,
+                        style: 'pageSubHeader',
+                        margin: [0, 10]
+                    },
+                    {
+                        text: page3_25
+                    },
+                    {
+                        text: page3_25_2,
+                        pageBreak: 'after'
+                    }
+                ]
+            },
+
+            /**
+             * (4) Report Detail Page Four
+             */
+            {
+                text: page4Header,
+                style: 'pageTopHeader'
+            },
+            {
+                alignment: 'center',
+                widths: ['auto', 50, '*'],
+                style: 'tableContent',
+                table: {
+                    body: [
+                        [
+                            {
+                                colSpan: 3,
+                                text: $('#HA_lbCompleteMessage').text(),
+                                color: 'red',
+                                alignment: 'left'
+                            }, {}, {}
+                        ],
+                        [
+                            {
+                                text: $('#HA_lbCompleteMessage2').text(),
+                                margin: [10, 10],
+                                alignment: 'center'
+                            },
+                            {
+                                text: $('#HA_sel1').val(),
+                                margin: [10, 10],
+                                alignment: 'center'
+                            },
+                            {
+                                text: $('#HA_lbCompleteMessage3').text() + "\n\n" + $('#HA_NocompleteComment').val(),
+                                margin: [10, 10]
+                            }
+                        ],
+                        [
+                            {
+                                text: $('#HA_lbCompleteMessage4').text(),
+                                margin: [10, 10],
+                                alignment: 'center'
+                            },
+                            {
+                                text: $('#HA_sel2').val(),
+                                margin: [10, 10],
+                                alignment: 'center'
+                            },
+                            {
+                                text: $('#HA_lbCompleteMessage5').text() + "\n\n" + $('#HA_indicateText').val(),
+                                margin: [10, 10]
+                            }
+                        ]
+                    ]
+                }
+            },
+            {
+                alignment: 'center',
+                style: 'tableContent',
+                widths: ['auto', 'auto', '*', '*', '*', '*', '*', '*', '*', '*'],
+                table: {
+                    body: [
+                        [
+                            {
+                                colSpan: 10,
+                                text: $('#HA_DivConstructionSummary').attr('data-title'),
+                                style: 'pageSubHeader',
+                                alignment: 'left'
+                            }, {}, {}, {}, {}, {}, {}, {}, {}, {}
+                        ],
+                        [
+                            {
+                                text: $('#HA_lbHouseAge').text()
+                            },
+                            {
+                                text: $('#HA_houseAge').val()
+                            },
+                            {
+                                text: $('#HA_lbStoreys').text()
+                            },
+                            {
+                                text: $('#HA_Storeys').val()
+                            },
+                            {
+                                text: $('#HA_lbFloorStructure').text()
+                            },
+                            {
+                                text: $('#HA_FlStructure').val()
+                            },
+                            {
+                                text: $('#HA_lbWalls').text()
+                            },
+                            {
+                                text: $('#HA_Walls').val()
+                            },
+                            {
+                                text: $('#HA_lbRoof').text()
+                            },
+                            {
+                                text: $('#HA_Roof').val()
+                            }
+                        ]
+                    ]
                 }
             }
         ],
@@ -133,14 +443,24 @@ function generateHomeAccessReportPDF(mode) {
             pageTopHeader: {
                 fontSize: 20,
                 color: 'red',
-                bold: true
+                bold: true,
+                margin: [0, 0, 0, 10]
             },
             pageSubHeader: {
-                fontSize: 11,
+                fontSize: 12,
                 color: 'red',
                 bold: true,
-                margin: [0, 0, 0, 2]
+                margin: [5, 5, 0, 5]
             },
+            tableContent: {
+                fontSize: 10,
+                bold: true,
+                margin: [0, 0, 0, 30]
+            },
+            Contents: {
+                fontSize: 10
+            }
+
         }
     };
 
