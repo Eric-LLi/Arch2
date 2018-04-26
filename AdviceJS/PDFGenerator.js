@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function generateAdvicePDF(mode) {
+function generatePDF(mode) {
     // Page start drawing from here...
     if (mode == 'save')
     {

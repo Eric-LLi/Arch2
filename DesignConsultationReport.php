@@ -25,7 +25,9 @@
     <!--  Import pdfMake  -->
     <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
+
     <?php require_once("saveloaddata.php"); ?>
+    <?php require_once("meta.php"); ?>
 </head>
 
 <body>
@@ -338,8 +340,8 @@
         {
     ?>
             <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-            <button onclick="generateDesignConsultationPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-            <button onclick="generateDesignConsultationPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+            <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+            <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
     <?php
         }
         else
@@ -351,7 +353,7 @@
     <?php
             }
     ?>
-            <button onclick="generateDesignConsultationPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+            <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }

@@ -2,7 +2,7 @@
  * Created by TengShinan on 10/10/17.
  */
 
-function generateMaintenancePDF(mode) {
+function generatePDF(mode) {
     resetTotalImagesCaptions();
     var isMobile = {
         Android: function() {

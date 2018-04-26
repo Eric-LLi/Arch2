@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function generateHomeFeasibilityPDF(mode) {
+function generatePDF(mode) {
     // Page start drawing from here...
 
     var isMobile = {

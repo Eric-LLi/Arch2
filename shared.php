@@ -2,10 +2,10 @@
   require_once("class.phpmailer.php");
 
   $gConfig['dbname'] = "arch";
-  // $gConfig['dbserver'] = "localhost:3306";
-  // $gConfig['dbport'] = 3306;
-  $gConfig['dbserver'] = "localhost:8889";
-  $gConfig['dbport'] = 8889;
+  $gConfig['dbserver'] = "localhost:3306";
+  $gConfig['dbport'] = 3306;
+  // $gConfig['dbserver'] = "localhost:8889";
+  // $gConfig['dbport'] = 8889;
   $gConfig['dbusername'] = "arch";
   $gConfig['dbpwd'] = "lmi$$";
   $gConfig['dberrormsg'] = "";
@@ -14,6 +14,7 @@
   $gConfig['smtp-host'] = "mail.adtalkserver.net";
 
   $gConfig['adminemail'] = "office@archicentreaustralia.com.au";
+  $gConfig['bccemail'] = "archive@archicentreaustralia.com.au";
   //$gConfig['adminemail'] = "M0410898213@126.com";
   $gConfig['ccemail'] = "emily92308@126.com";
   //$gConfig['adminemail'] = "tim@adtalk.com.au";
@@ -81,7 +82,7 @@
     "",
     "email_prop_assess_report.html",
     "email_timberpestinspection.html",
-    "",
+    "email_combinedreports.html",
     "email_maintenance.html",
     "email_archadvice.html",
     "email_constructionqa_stage1.html",
@@ -96,10 +97,12 @@
 		"email_dilapidation.html",
     "email_homefeasibility.html",
     "email_renofeasibility.html",
+    "email_how.html",
     "email_commpropertyassessment.html",
     //"email_commdilapidation.html",
-		//"email_how.html",
-    //"email_has.html",
+    //"email_how.html",
+    "",
+    "email_has.html",
 		"",
     ""
   ];
@@ -481,6 +484,11 @@
   function SharedSendHtmlMail($from, $fromName, $to, $toName, $subject, $msg, $cc = "", $ccName = "", $attachment = "")
   {
     $rc = false;
+    error_log("sending email");
+    error_log("from ");
+    error_log($from);
+    error_log("to");
+    error_log($to);
     try
     {
       global $gConfig;
@@ -494,6 +502,8 @@
       $mail->IsSMTP();
       $mail->MsgHTML($msg);
       $mail->SetFrom($from, $fromName);
+      //$mail->AddBCC('archive@archicentreaustralia.com.au');
+      //$mail->AddBCC('M0410898213@126.com');
 
       if (is_array($to))
       {
