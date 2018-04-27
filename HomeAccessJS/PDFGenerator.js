@@ -211,7 +211,7 @@ function generateHomeAccessReportPDF(mode) {
                             , $('#HA_architectEmail').val()
                             , $('#HA_lbarchitectPhone').text()
                             , $('#HA_architectPhone').val()
-                        , ]
+                            , ]
                         , [
                             $('#HA_lbarchitectRef').text() + $('#HA_architectRef').val()
                             , {
@@ -347,13 +347,13 @@ function generateHomeAccessReportPDF(mode) {
                     headerRows: 1,
                     widths: ['*', 'auto', '*'],
                     body: [
-                            [
+                        [
                             {
                                 colSpan: 3,
                                 text: $('#HA_lbCompleteMessage').text(),
                                 color: 'red',
                                 alignment: 'left'
-                                }, {}, {}], [
+                            }, {}, {}], [
                             {
                                 text: $('#HA_lbCompleteMessage2').text(),
                                 },
@@ -364,20 +364,20 @@ function generateHomeAccessReportPDF(mode) {
                                 text: $('#HA_lbCompleteMessage3').text() + "\n\n" + $('#HA_NocompleteComment').val(),
                                 }
                             ],
-                            [
+                        [
                             {
                                 text: $('#HA_lbCompleteMessage4').text(),
-                                },
+                            },
                             {
                                 text: $('#HA_sel2').val(),
-                                },
+                            },
                             {
                                 text: $('#HA_lbCompleteMessage5').text() + "\n\n" + $('#HA_indicateText').val(),
-                                }
-                            ]
-                            ]
+                            }
+                        ]
+                    ]
                 }
-                },
+            },
             {
                 style: 'tableContent',
                 table: {
@@ -385,11 +385,11 @@ function generateHomeAccessReportPDF(mode) {
                     widths: ['auto', 'auto', '*', '*', '*', '*', '*', '*', '*', '*'],
                     body: csData
                 }
-                },
+            },
             {
 
             }
-                ],
+        ],
         styles: {
             coverPageHeader: {
                 fontSize: 50,
