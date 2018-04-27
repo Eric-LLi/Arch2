@@ -1,212 +1,171 @@
 <?php
 require_once("loadbooking.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <title>Home Access & Service Report</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <title>Home Access & Service Report</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <!-- Customized CSS -->
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/viewPDF.css">
+        <!--  Import JQuery  -->
+        <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <!--  Import pdfMake  -->
+        <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
+        <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
+        <!--Easy UI -->
+        <script src="js/easyui/jquery.easyui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css"> </head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-    <!-- Customized CSS -->
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/viewPDF.css">
-
-    <!--  Import JQuery  -->
-    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-
-    <!--  Import pdfMake  -->
-    <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
-    <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
-
-    <!--Easy UI -->
-    <script src="js/easyui/jquery.easyui.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
-
-
-
-</head>
-
-<body>
-    <!--Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ArchiCentre Task</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    </nav>
-
-    <!--Title-->
-    <div class="container">
-        <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
-            <strong>Saving PDF. Please don't close this page. It will take a while</strong>
-
-            <!--Title-->
-            <div class="container">
-                <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
-                    <strong>Saving PDF. Please don't close this page. It will take a while</strong>
-                </div>
-                <h1 class="content-head text-center firstH1">Home Access & Services Report</h1>
-                <br>
-                <p>
-                    This Report provides independent advice from a registered architect about home access & services matters as they relate to your dwelling.
-                </p>
-
-                <!--Title-->
-                <div class="container">
-                    <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
-                        <strong>Saving PDF. Please don't close this page. It will take a while</strong>
-
-
-                    </div>
-                    <h1 class="content-head text-center firstH1">Home Access & Services Report</h1>
-                    <br>
-                    <p>
-                        This Report provides independent advice from a registered architect about home access & services matters as they relate to your dwelling.
-                    </p>
-                </div>
-            </div>
+    <body>
+        <!--Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a class="navbar-brand" href="#">ArchiCentre Task</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        </nav>
+        <!--Title-->
+        <div class="container">
+            <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse"> <strong>Saving PDF. Please don't close this page. It will take a while</strong> </div>
+            <h2 class="content-head text-center firstH1" style="font-size: 2rem">Home Acces & Services Report</h2>
+            <br>
+            <p>This Report provides independent advice from a registered architect about home access & services matters as they relate to your dwelling.</p>
         </div>
         <!-- Details -->
         <div class="container">
-            <div class="easyui-tabs" style="width:100%;height:auto" data-options="tabWidth:100">
+            <div class="easyui-tabs" style="width:100%;height:auto" data-options="tabWidth:200">
                 <!--First Tap Booking Information-->
                 <div title="Booking Information" id="BInformation" style="padding:10px;font-size: 18px">
                     <div class="easyui-tabs" data-options="fit:true,plain:true" style="width:inherit;height:500px;">
-
                         <!--Second Tap Client Details-->
                         <div id="HA_DivClientDetails" title="Client Details" data-title="Client Details" style="padding:10px;font-size: 18px">
                             <!--<form>-->
                             <div class="row">
                                 <div class="col-sm">
-                                    <label id="HA_lbClientName">Name: </label><br>
-                                    <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
-                                </div>
+                                    <label id="HA_lbClientName">Name: </label>
+                                    <br>
+                                    <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>"> </div>
                                 <div class="col-sm">
-                                    <label id="HA_lbClientPhone">Phone: </label><br>
-                                    <input id="HA_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
-                                </div>
+                                    <label id="HA_lbClientPhone">Phone: </label>
+                                    <br>
+                                    <input id="HA_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>"> </div>
                                 <div class="col-sm">
-                                    <label id="HA_lbBookingNo">Booking No. : </label><br>
-                                    <input id="HA_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0" value="<?php echo $bookingcode; ?>">
-                                </div>
+                                    <label id="HA_lbBookingNo">Booking No. : </label>
+                                    <br>
+                                    <input id="HA_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0" value="<?php echo $bookingcode; ?>"> </div>
                             </div>
                             <!--</form>-->
                         </div>
-
                         <!--Second Tap Property Details-->
                         <div id="HA_DivPropertyDetails" title="Property Details" data-title="Property Details" style="padding:10px; font-size: 18px">
                             <form>
                                 <div class="row">
                                     <div class="col-sm">
-                                        <label id="HA_lbAddress">Address of Propety: </label><br>
-                                        <input id="HA_Address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
-                                    </div>
+                                        <label id="HA_lbAddress">Address of Propety: </label>
+                                        <br>
+                                        <input id="HA_Address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>"> </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-sm">
-                                        <label id="HA_lbSuburb">Suburb: </label><br>
-                                        <input id="HA_Suburb" class="form-control" type="text" title="suburb" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('city'); ?>">
-                                    </div>
+                                        <label id="HA_lbSuburb">Suburb: </label>
+                                        <br>
+                                        <input id="HA_Suburb" class="form-control" type="text" title="suburb" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('city'); ?>"> </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbState">State: </label><br>
-                                        <input id="HA_State" class="form-control" type="text" title="state" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('state'); ?>">
-                                    </div>
+                                        <label id="HA_lbState">State: </label>
+                                        <br>
+                                        <input id="HA_State" class="form-control" type="text" title="state" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('state'); ?>"> </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbPostcode">Postcode: </label><br>
-                                        <input id="HA_Postcode" class="form-control" type="text" title="postcode" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('postcode'); ?>">
-                                    </div>
+                                        <label id="HA_lbPostcode">Postcode: </label>
+                                        <br>
+                                        <input id="HA_Postcode" class="form-control" type="text" title="postcode" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('postcode'); ?>"> </div>
                                 </div>
                             </form>
                             <form>
                                 <div class="row form-group">
                                     <div class="col-sm">
-                                        <label id="HA_lbDateOfAssessment">Date of Assessment: </label><br>
-                                        <input id="HA_DateOfAssessment" class="form-control" type="text" title="date" style="margin-top: 0">
-                                    </div>
+                                        <label id="HA_lbDateOfAssessment">Date of Assessment: </label>
+                                        <br>
+                                        <input id="HA_DateOfAssessment" class="form-control" type="text" title="date" style="margin-top: 0"> </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbTimeOfAssessment">Time of Assessment: </label><br>
-                                        <input id="HA_TimeOfAssessment" class="form-control" type="text" title="time" style="margin-top: 0">
-                                    </div>
+                                        <label id="HA_lbTimeOfAssessment">Time of Assessment: </label>
+                                        <br>
+                                        <input id="HA_TimeOfAssessment" class="form-control" type="text" title="time" style="margin-top: 0"> </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-sm">
-                                        <label id="HA_lbExistingUse">Existing use of Property: </label><br>
+                                        <label id="HA_lbExistingUse">Existing use of Property: </label>
+                                        <br>
                                         <textarea id="HA_ExistingUse" class="form-control" title="use" style="margin-top: 0;height: 70px"></textarea>
                                     </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbWeatherConditions">Weather conditions: </label><br>
-                                        <input id="HA_WeatherConditions" class="form-control" type="text" title="weather" style="margin-top: 0">
-                                    </div>
+                                        <label id="HA_lbWeatherConditions">Weather conditions: </label>
+                                        <br>
+                                        <input id="HA_WeatherConditions" class="form-control" type="text" title="weather" style="margin-top: 0"> </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
-                                        <label id="HA_lbVerbalSummary">Verbal summary given to: </label><br>
-                                        <input id="HA_VerbalSummary" class="form-control" type="text" title="verbal" style="margin-top: 0">
-                                    </div>
+                                        <label id="HA_lbVerbalSummary">Verbal summary given to: </label>
+                                        <br>
+                                        <input id="HA_VerbalSummary" class="form-control" type="text" title="verbal" style="margin-top: 0"> </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbDate">Date: </label><br>
-                                        <input id="HA_Date" class="form-control" type="text" title="date" style="margin-top: 0">
-                                    </div>
+                                        <label id="HA_lbDate">Date: </label>
+                                        <br>
+                                        <input id="HA_Date" class="form-control" type="text" title="date" style="margin-top: 0"> </div>
                                 </div>
                             </form>
                         </div>
-
                         <!--Second Tap Architect Details-->
                         <div id="HA_DivArchitectDetails" title="Architect Details" data-title="Architect Details" style="padding:10px;font-size: 18px">
                             <form>
                                 <div class="row form-group">
                                     <div class="col-sm">
-                                        <label id="HA_lbarchitectName">Architect: </label><br>
-                                        <input id="HA_architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>">
-
-                                    </div>
+                                        <label id="HA_lbarchitectName">Architect: </label>
+                                        <br>
+                                        <input id="HA_architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>"> </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbregistrationNumber">Registration No. : </label><br>
-                                        <input id="HA_registrationNumber" class="form-control" type="text" title="registrationNo" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>">
-                                    </div>
+                                        <label id="HA_lbregistrationNumber">Registration No. : </label>
+                                        <br>
+                                        <input id="HA_registrationNumber" class="form-control" type="text" title="registrationNo" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>"> </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
-                                        <label id="HA_lbarchitectAddress">Address: </label><br>
-                                        <input id="HA_architectAddress" class="form-control" type="text" title="architectAdd" style="margin-top: 0" value="<?php echo doNiceAddress(doNiceArrayElemAsString('archaddress1'), doNiceArrayElemAsString('archcity'), doNiceArrayElemAsString('archstate'), doNiceArrayElemAsString('archpostcode')); ?>">
-                                    </div>
+                                        <label id="HA_lbarchitectAddress">Address: </label>
+                                        <br>
+                                        <input id="HA_architectAddress" class="form-control" type="text" title="architectAdd" style="margin-top: 0" value="<?php echo doNiceAddress(doNiceArrayElemAsString('archaddress1'), doNiceArrayElemAsString('archcity'), doNiceArrayElemAsString('archstate'), doNiceArrayElemAsString('archpostcode')); ?>"> </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-sm">
-                                        <label id="HA_lbarchitectEmail">Email Address: </label><br>
-                                        <input id="HA_architectEmail" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archemail', false); ?>">
-                                    </div>
+                                        <label id="HA_lbarchitectEmail">Email Address: </label>
+                                        <br>
+                                        <input id="HA_architectEmail" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archemail', false); ?>"> </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbarchitectPhone">Phone: </label><br>
-                                        <input id="HA_architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archmobile', false); ?>">
-                                    </div>
+                                        <label id="HA_lbarchitectPhone">Phone: </label>
+                                        <br>
+                                        <input id="HA_architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archmobile', false); ?>"> </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-sm">
-                                        <label id="HA_lbarchitectRef">Referred By: </label><br>
-                                        <input id="HA_architectRef" class="form-control" type="text" title="email" style="margin-top: 0" value="">
-                                    </div>
+                                        <label id="HA_lbarchitectRef">Referred By: </label>
+                                        <br>
+                                        <input id="HA_architectRef" class="form-control" type="text" title="email" style="margin-top: 0" value=""> </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbarchitectEmail2">Email Address: </label><br>
-                                        <input id="HA_architectEmail2" class="form-control" type="text" title="phone" style="margin-top: 0">
-                                    </div>
+                                        <label id="HA_lbarchitectEmail2">Email Address: </label>
+                                        <br>
+                                        <input id="HA_architectEmail2" class="form-control" type="text" title="phone" style="margin-top: 0"> </div>
                                     <div class="col-sm">
-                                        <label id="HA_lbarchitectPhone2">Phone: </label><br>
-                                        <input id="HA_architectPhone2" class="form-control" type="text" title="phone" style="margin-top: 0">
-                                    </div>
+                                        <label id="HA_lbarchitectPhone2">Phone: </label>
+                                        <br>
+                                        <input id="HA_architectPhone2" class="form-control" type="text" title="phone" style="margin-top: 0"> </div>
                                 </div>
                             </form>
                         </div>
-
                         <!--Second Tap Details Of Advice Sought-->
                         <div id="HA_DivDetailsSought" title="Details Of Advice Sought" data-title="Details Of Advice Sought" style="padding:10px;font-size: 18px">
                             <form>
@@ -217,7 +176,6 @@ require_once("loadbooking.php");
                         </div>
                     </div>
                 </div>
-
                 <!--First Tap Property Summary-->
                 <div title="Property Summary" id="PSummary" style="padding:10px;font-size: 18px">
                     <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
@@ -235,47 +193,43 @@ require_once("loadbooking.php");
                                         </td>
                                         <td class="align-middle">
                                             <select class="form-control" id="HA_sel1" style="width:100%">
-                                                    <option value="-1">Choose</option>
-                                                    <option value="YES">YES</option>
-                                                    <option value="NO">NO</option>
-                                                </select>
+                                                <option value="-1">Choose</option>
+                                                <option value="YES">YES</option>
+                                                <option value="NO">NO</option>
+                                            </select>
                                         </td>
                                         <td>
-                                            <label id="HA_lbCompleteMessage3">If “NO” please state reason why not completed: </label><br>
+                                            <label id="HA_lbCompleteMessage3">If “NO” please state reason why not completed: </label>
+                                            <br>
                                             <textarea class="form-control" id="HA_NocompleteComment"> </textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="align-middle">
-                                            <lable id="HA_lbCompleteMessage4">Please state the number of DESIGNS</lable>
+                                            <label id="HA_lbCompleteMessage4">Please state the number of DESIGNS</label>
                                         </td>
                                         <td class="align-middle">
                                             <select class="form-control" id="HA_sel2" style="width:100%">
-                                                    <option value="-1">Choose</option>
-                                                    <option value="0">0</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                </select>
+                                                <option value="-1">Choose</option>
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
                                         </td>
                                         <td>
-                                            <lable id="HA_lbCompleteMessage5">Please indicate design submitted: </lable>
+                                            <label id="HA_lbCompleteMessage5">Please indicate design submitted: </label>
                                             <div class="form-check">
                                                 <label class="form-check-label" for="checkBox_1">
-                                                        <input id="checkBox_1" type="checkbox" class="form-check-input" value="Ramp"> Ramp
-                                                    </label>
+                                                    <input id="checkBox_1" type="checkbox" class="form-check-input" value="Ramp"> Ramp </label>
                                                 <label class="form-check-label" for="checkBox_2">
-                                                        <input id="checkBox_2" type="checkbox" class="form-check-input" value="Bathroom_Modification"> Bathroom_Modification
-                                                    </label>
+                                                    <input id="checkBox_2" type="checkbox" class="form-check-input" value="Bathroom_Modification"> Bathroom_Modification </label>
                                                 <label class="form-check-label" for="checkBox_3">
-                                                        <input id="checkBox_3" type="checkbox" class="form-check-input" value="Platform_Steps"> Platform_Steps
-                                                    </label>
+                                                    <input id="checkBox_3" type="checkbox" class="form-check-input" value="Platform_Steps"> Platform_Steps </label>
                                                 <label class="form-check-label" for="checkBox_4">
-                                                        <input id="checkBox_4" type="checkbox" class="form-check-input" value="Other"> Other
-                                                    </label>
+                                                    <input id="checkBox_4" type="checkbox" class="form-check-input" value="Other"> Other </label>
                                             </div>
-                                            <input type="text" class="form-control" id="HA_indicateText" disabled>
-                                        </td>
+                                            <input type="text" class="form-control" id="HA_indicateText" disabled> </td>
                                     </tr>
                                 </table>
                             </div>
@@ -290,52 +244,66 @@ require_once("loadbooking.php");
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding-right:0px;"><label id="HA_lbHouseAge">House Age</label></td>
-                                        <td><select class="form-control" id="HA_houseAge">
-                                                    <option value="-1">Choose</option>
-                                                    <option value="less than 25">Less than 25 years</option>
-                                                    <option value="25 to 50">25 to 50 years</option>
-                                                    <option value="50 to 70">50-70 years</option>
-                                                    <option value="75+">More than 75 years</option>
-                                                </select></td>
-                                        <td><label id="HA_lbStoreys">Storeys</label></td>
-                                        <td><select class="form-control" id="HA_Storeys">
-                                                    <option value="-1">Choose</option>
-                                                    <option value="One">One</option>
-                                                    <option value="Two">Two</option>
-                                                </select></td>
+                                        <td style="padding-right:0px;">
+                                            <label id="HA_lbHouseAge">House Age</label>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" id="HA_houseAge">
+                                                <option value="-1">Choose</option>
+                                                <option value="less than 25">Less than 25 years</option>
+                                                <option value="25 to 50">25 to 50 years</option>
+                                                <option value="50 to 70">50-70 years</option>
+                                                <option value="75+">More than 75 years</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <label id="HA_lbStoreys">Storeys</label>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" id="HA_Storeys">
+                                                <option value="-1">Choose</option>
+                                                <option value="One">One</option>
+                                                <option value="Two">Two</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <lable id="HA_lbFloorStructure">Floor Structure</lable>
+                                            <label id="HA_lbFloorStructure">Floor Structure</label>
                                         </td>
-                                        <td><select class="form-control" id="HA_FlStructure">
-                                                    <option value="-1">Choose</option>
-                                                    <option value="Concrete">Contrete</option>
-                                                    <option value="Timber">Timber</option>
-                                                </select></td>
-                                        <td><label id="HA_lbWalls">Walls</label>
+                                        <td>
+                                            <select class="form-control" id="HA_FlStructure">
+                                                <option value="-1">Choose</option>
+                                                <option value="Concrete">Contrete</option>
+                                                <option value="Timber">Timber</option>
+                                            </select>
                                         </td>
-                                        <td><select class="form-control" id="HA_Walls">
-                                                    <option value="-1">Choose</option>
-                                                    <option value="W/B">W/B</option>
-                                                    <option value="Brick">Brick</option>
-                                                    <option value="B.V.">B.V.</option>
-                                                    <option value="Other">Other</option>
-                                                </select></td>
+                                        <td>
+                                            <label id="HA_lbWalls">Walls</label>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" id="HA_Walls">
+                                                <option value="-1">Choose</option>
+                                                <option value="W/B">W/B</option>
+                                                <option value="Brick">Brick</option>
+                                                <option value="B.V.">B.V.</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <lable id="HA_lbRoof">Roof</lable>
+                                            <label id="HA_lbRoof">Roof</label>
                                         </td>
-                                        <td><select class="form-control" id="HA_Roof">
-                                                    <option value="-1">Choose</option>
-                                                    <option value="TCT">TCT</option>
-                                                    <option value="Concrete">Concrete</option>
-                                                    <option value="Sheeting">Sheeting</option>
-                                                    <option value="A.C.">A.C.</option>
-                                                </select></td>
-
+                                        <td>
+                                            <select class="form-control" id="HA_Roof">
+                                                <option value="-1">Choose</option>
+                                                <option value="TCT">TCT</option>
+                                                <option value="Concrete">Concrete</option>
+                                                <option value="Sheeting">Sheeting</option>
+                                                <option value="A.C.">A.C.</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -351,115 +319,90 @@ require_once("loadbooking.php");
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                Trip & Slop
-                                            </td>
+                                            <td> Trip & Slop </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Trip">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
-                                            <td>
-                                                Cracking
-                                            </td>
+                                            <td> Cracking </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Crack">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                Fire Hazards
-                                            </td>
+                                            <td> Fire Hazards </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Fire">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
-                                            <td>
-                                                Stumps/Piers
-                                            </td>
+                                            <td> Stumps/Piers </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Stumps">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                Health Hazards
-                                            </td>
+                                            <td> Health Hazards </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Health">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
-                                            <td>
-                                                Illegal Work
-                                            </td>
+                                            <td> Illegal Work </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Illegal">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                Electrics
-                                            </td>
+                                            <td> Electrics </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Electrics">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
-                                            <td>
-                                                Timber Rot
-                                            </td>
+                                            <td> Timber Rot </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Timber">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                Security
-                                            </td>
+                                            <td> Security </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Security">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
-                                            <td>
-                                                Damp/Mould
-                                            </td>
+                                            <td> Damp/Mould </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Damp">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                Roof
-                                            </td>
+                                            <td> Roof </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Roof">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
-                                            <td>
-                                                Drainage
-                                            </td>
+                                            <td> Drainage </td>
                                             <td>
                                                 <select class="form-control" id="Fault_Drainage">
-                                                        <option value="-1">Choose</option>
-                                                    </select>
+                                                    <option value="-1">Choose</option>
+                                                </select>
                                             </td>
                                         </tr>
                                     </table>
-
                                     <table class="table table-bordered">
                                         <tr>
                                             <td style="color:red;"><strong>Key</strong></td>
@@ -477,9 +420,7 @@ require_once("loadbooking.php");
                             </form>
                         </div>
                     </div>
-
                 </div>
-
                 <!--First Tap Property Assessment-->
                 <div title="Property Assessment" id="PAssessment" style="padding:10px;font-size: 18px">
                     <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
@@ -491,129 +432,101 @@ require_once("loadbooking.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Damp / Mould / Ventilation
-                                    </td>
+                                    <td> Damp / Mould / Ventilation </td>
                                     <td>
                                         <select class="form-control" id="Check_Damp">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Glazing hazards
-                                    </td>
+                                    <td> Glazing hazards </td>
                                     <td>
                                         <select class="form-control" id="Check_GlazingHazards">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Unsanitary conditions/Squalor
-                                    </td>
+                                    <td> Unsanitary conditions/Squalor </td>
                                     <td>
                                         <select class="form-control" id="Check_Squalor">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Hoarding
-                                    </td>
+                                    <td> Hoarding </td>
                                     <td>
                                         <select class="form-control" id="Check_Hoarding">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Vermin / signs of termites & borers
-                                    </td>
+                                    <td> Vermin / signs of termites & borers </td>
                                     <td>
                                         <select class="form-control" id="Check_Vermin">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Heating
-                                    </td>
+                                    <td> Heating </td>
                                     <td>
                                         <select class="form-control" id="Check_Heating">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Flammable Risks
-                                    </td>
+                                    <td> Flammable Risks </td>
                                     <td>
                                         <select class="form-control" id="Check_FlammableRisks">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Electrical Hazards
-                                    </td>
+                                    <td> Electrical Hazards </td>
                                     <td>
                                         <select class="form-control" id="Check_ElectricalHazards">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Slip hazards
-                                    </td>
+                                    <td> Slip hazards </td>
                                     <td>
                                         <select class="form-control" id="Check_SlipHazards">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Security: effective locks front and rear / window catches
-                                    </td>
+                                    <td> Security: effective locks front and rear / window catches </td>
                                     <td>
                                         <select class="form-control" id="Check_SecurityLocks">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Trip hazards
-                                    </td>
+                                    <td> Trip hazards </td>
                                     <td>
                                         <select class="form-control" id="Check_TripHazards">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Smoke alarms (include if installed incorrectly)
-                                    </td>
+                                    <td> Smoke alarms (include if installed incorrectly) </td>
                                     <td>
                                         <select class="form-control" id="Check_SmokeAlarms">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        WC door - open able from outside
-                                    </td>
+                                    <td> WC door - open able from outside </td>
                                     <td>
                                         <select class="form-control" id="Check_WCdoor">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Other (e.g. security lights, visibility to front fence, ramp rails poor lighting)
-                                    </td>
+                                    <td> Other (e.g. security lights, visibility to front fence, ramp rails poor lighting) </td>
                                     <td>
                                         <select class="form-control" id="Check_HealthOther">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                             </table>
@@ -634,9 +547,7 @@ require_once("loadbooking.php");
                         <div title="Repairs & Mainentance Check" style="padding:10px;font-size: 18px">
                             <table id="Table_RMCheck_S" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
-                                    <td>
-                                        <strong>Structure</strong>
-                                    </td>
+                                    <td> <strong>Structure</strong> </td>
                                     <td colspan="3">
                                         <button type="button" class="btn btn-primary" id="Button_RMCheckAdd_S">Add item</button>
                                     </td>
@@ -645,122 +556,100 @@ require_once("loadbooking.php");
                                     <td>Roof</td>
                                     <td>
                                         <select class="form-control" id="Check_Roof">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                     <td>Ceiling</td>
                                     <td>
                                         <select class="form-control" id="Check_Ceiling">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Walls
-                                    </td>
+                                    <td> Walls </td>
                                     <td>
                                         <select class="form-control" id="Check_Walls">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Floor / Subfloor
-                                    </td>
+                                    <td> Floor / Subfloor </td>
                                     <td>
                                         <select class="form-control" id="Check_Floor">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                             </table>
                             <table id="Table_RMCheck_O" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
-                                    <td>
-                                        <strong>Other</strong>
-                                    </td>
+                                    <td> <strong>Other</strong> </td>
                                     <td colspan="3">
                                         <button type="button" class="btn btn-primary" id="Button_RMCheckAdd_O">Add item</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Gutters / drainage
-                                    </td>
+                                    <td> Gutters / drainage </td>
                                     <td>
                                         <select class="form-control" id="Check_Gutters">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Decks, Balconies & Pergolas
-                                    </td>
+                                    <td> Decks, Balconies & Pergolas </td>
                                     <td>
                                         <select class="form-control" id="Check_Decks">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Windows
-                                    </td>
+                                    <td> Windows </td>
                                     <td>
                                         <select class="form-control" id="Check_Windows">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Fences
-                                    </td>
+                                    <td> Fences </td>
                                     <td>
                                         <select class="form-control" id="Check_Fences">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Surfaces (e.g. painting, tiling)
-                                    </td>
+                                    <td> Surfaces (e.g. painting, tiling) </td>
                                     <td>
                                         <select class="form-control" id="Check_Surfaces">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Illegal building work
-                                    </td>
+                                    <td> Illegal building work </td>
                                     <td>
                                         <select class="form-control" id="Check_IllegalBuildingWork">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Plumbing
-                                    </td>
+                                    <td> Plumbing </td>
                                     <td>
                                         <select class="form-control" id="Check_Plumbing">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Hot Water System - HWS*
-                                    </td>
+                                    <td> Hot Water System - HWS* </td>
                                     <td>
                                         <select class="form-control" id="Check_HotwaterSystem">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                             </table>
                             <table class="table table-bordered" style="table-layout:fixed">
                                 <tr>
-                                    <td colspan="4">
-                                        <strong>NOTES:</strong><br> 1 * Gravity fed HWS’s are generally unsuitable for hand held showers<br> 2 Access restrictions
-                                    </td>
+                                    <td colspan="4"> <strong>NOTES:</strong>
+                                        <br> 1 * Gravity fed HWS’s are generally unsuitable for hand held showers
+                                        <br> 2 Access restrictions </td>
                                 </tr>
                             </table>
                             <table class="table table-bordered">
@@ -785,147 +674,115 @@ require_once("loadbooking.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Dual-Flush toilet
-                                    </td>
+                                    <td> Dual-Flush toilet </td>
                                     <td>
                                         <select class="form-control" id="Check_DualFlushToilet">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Window seals
-                                    </td>
+                                    <td> Window seals </td>
                                     <td>
                                         <select class="form-control" id="Check_WindowSeals">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Draught-proof exhaust fan
-                                    </td>
+                                    <td> Draught-proof exhaust fan </td>
                                     <td>
                                         <select class="form-control" id="Check_DraughtProofExhaustFan">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Pelmets / Curtains
-                                    </td>
+                                    <td> Pelmets / Curtains </td>
                                     <td>
                                         <select class="form-control" id="Check_Pelmets">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Low-flow shower head
-                                    </td>
+                                    <td> Low-flow shower head </td>
                                     <td>
                                         <select class="form-control" id="Check_LowFlowShowerHead">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Door seals
-                                    </td>
+                                    <td> Door seals </td>
                                     <td>
                                         <select class="form-control" id="Check_DoorSeals">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Watertight cistern
-                                    </td>
+                                    <td> Watertight cistern </td>
                                     <td>
                                         <select class="form-control" id="Check_WatertightCistern">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Electrical
-                                    </td>
+                                    <td> Electrical </td>
                                     <td>
                                         <select class="form-control" id="Check_Electrical">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Watertight taps
-                                    </td>
+                                    <td> Watertight taps </td>
                                     <td>
                                         <select class="form-control" id="Check_WatertightTaps">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Shaded west windows
-                                    </td>
+                                    <td> Shaded west windows </td>
                                     <td>
                                         <select class="form-control" id="Check_ShadedWestWindows">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Ceiling insulation
-                                    </td>
+                                    <td> Ceiling insulation </td>
                                     <td>
                                         <select class="form-control" id="Check_CeilingInsulation">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Low Energy Light Globes
-                                    </td>
+                                    <td> Low Energy Light Globes </td>
                                     <td>
                                         <select class="form-control" id="Check_LowEnergyLightGlobes">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Solar panels
-                                    </td>
+                                    <td> Solar panels </td>
                                     <td>
                                         <select class="form-control" id="Check_SolarPanels">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Solar HWS
-                                    </td>
+                                    <td> Solar HWS </td>
                                     <td>
                                         <select class="form-control" id="Check_SolarHWS">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Water tank
-                                    </td>
+                                    <td> Water tank </td>
                                     <td>
                                         <select class="form-control" id="Check_WaterTank">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
-                                    <td>
-                                        Grey water recycling system
-                                    </td>
+                                    <td> Grey water recycling system </td>
                                     <td>
                                         <select class="form-control" id="Check_GreyWaterRecyclingSystem">
-                                                <option value="-1">Choose</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                        </select>
                                     </td>
                                 </tr>
                             </table>
@@ -946,45 +803,37 @@ require_once("loadbooking.php");
                         <div title="Field Notes" style="padding:10px;font-size: 18px">
                             <table class="table table-bordered" style="table-layout:fixed">
                                 <tr>
-                                    <td>
-                                        In Attendance During Assessment
-                                    </td>
+                                    <td> In Attendance During Assessment </td>
                                     <td>
                                         <select class="form-control" id="Field_Attendance">
-                                                <option value="-1">Choose</option>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Client
-                                    </td>
+                                    <td> Client </td>
                                     <td>
                                         <select class="form-control" id="Field_Client">
-                                                <option value="-1">Choose</option>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Occupational Therapist
-                                    </td>
+                                    <td> Occupational Therapist </td>
                                     <td>
                                         <select class="form-control" id="Field_Therapist">
-                                                <option value="-1">Choose</option>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
+                                            <option value="-1">Choose</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Others
-                                    </td>
+                                    <td> Others </td>
                                     <td>
                                         <textarea class="form-control" rows="5" id="Field_Others"></textarea>
                                     </td>
@@ -993,7 +842,6 @@ require_once("loadbooking.php");
                         </div>
                     </div>
                 </div>
-
                 <!--First Tap Architect’s Solution-->
                 <div title="Architect’s Solutions" id="ASolution" style="padding:10px;font-size: 18px">
                     <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
@@ -1001,9 +849,7 @@ require_once("loadbooking.php");
                             <table id="C_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <th colspan="5">
-                                        <p class="text-center bg-danger text-white">
-                                            Urgent - within 1 month.
-                                        </p>
+                                        <p class="text-center bg-danger text-white"> Urgent - within 1 month. </p>
                                     </th>
                                 </tr>
                                 <tr>
@@ -1012,40 +858,30 @@ require_once("loadbooking.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
-                                        Category
-                                    </th>
-                                    <th>
-                                        CODE
-                                    </th>
-                                    <th>
-                                        Architect’s Comment
-                                    </th>
-                                    <th>
-                                        Trade
-                                    </th>
-                                    <th>
-                                        Cost-indicative
-                                    </th>
+                                    <th> Category </th>
+                                    <th> CODE </th>
+                                    <th> Architect’s Comment </th>
+                                    <th> Trade </th>
+                                    <th> Cost-indicative </th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <select class="form-control" id="C0_category">
-                                                <option value="-1" disabled selected>Choose an item</option>
-                                            </select>
+                                            <option value="-1" disabled selected>Choose an item</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <select class="form-control" id="C0_code">
-                                                <option value="-1" disabled selected>Internal use</option>
-                                            </select>
+                                            <option value="-1" disabled selected>Internal use</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="C0_commentText"></textarea>
                                     </td>
                                     <td>
                                         <select class="form-control" id="C0_tradeSelect" onchange="tradeOnchange(this.id);">
-                                                <option value="-1" disabled selected>--</option>
-                                            </select>
+                                            <option value="-1" disabled selected>--</option>
+                                        </select>
                                         <textarea class="form-control" id="C0_mirrorText" disabled></textarea>
                                         <button class="btn btn-danger w-100" id="C0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
@@ -1059,9 +895,7 @@ require_once("loadbooking.php");
                             <table id="M_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                                 <tr>
                                     <th colspan="5">
-                                        <p class="text-center bg-primary text-white">
-                                            Recommended - longer term.
-                                        </p>
+                                        <p class="text-center bg-primary text-white"> Recommended - longer term. </p>
                                     </th>
                                 </tr>
                                 <tr>
@@ -1070,40 +904,30 @@ require_once("loadbooking.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
-                                        Category
-                                    </th>
-                                    <th>
-                                        CODE
-                                    </th>
-                                    <th>
-                                        Architect’s Comment
-                                    </th>
-                                    <th>
-                                        Trade
-                                    </th>
-                                    <th>
-                                        Cost-indicative
-                                    </th>
+                                    <th> Category </th>
+                                    <th> CODE </th>
+                                    <th> Architect’s Comment </th>
+                                    <th> Trade </th>
+                                    <th> Cost-indicative </th>
                                 </tr>
                                 <tr>
                                     <td>
                                         <select class="form-control" id="M0_category">
-                                                <option value="-1" disabled selected>Choose an item</option>
-                                            </select>
+                                            <option value="-1" disabled selected>Choose an item</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <select class="form-control" id="M0_code">
-                                                <option value="-1" disabled selected>Internal use</option>
-                                            </select>
+                                            <option value="-1" disabled selected>Internal use</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="M0_commentText"></textarea>
                                     </td>
                                     <td>
                                         <select class="form-control" id="M0_tradeSelect" onchange="tradeOnchange(this.id);">
-                                                <option value="-1" disabled selected>--</option>
-                                            </select>
+                                            <option value="-1" disabled selected>--</option>
+                                        </select>
                                         <textarea disabled class="form-control" id="M0_mirrorText"></textarea>
                                         <button class="btn btn-danger w-100" id="M0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
@@ -1121,38 +945,26 @@ require_once("loadbooking.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
-                                        Category
-                                    </th>
-                                    <th>
-                                        CODE
-                                    </th>
-                                    <th>
-                                        Architect’s Comment
-                                    </th>
-                                    <th>
-                                        Trade
-                                    </th>
-                                    <th>
-                                        Cost-indicative
-                                    </th>
+                                    <th> Category </th>
+                                    <th> CODE </th>
+                                    <th> Architect’s Comment </th>
+                                    <th> Trade </th>
+                                    <th> Cost-indicative </th>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Enenrgy Efficiency
-                                    </td>
+                                    <td> Enenrgy Efficiency </td>
                                     <td>
                                         <select class="form-control" id="E0_code">
-                                                <option value="-1" disabled selected>Internal use</option>
-                                            </select>
+                                            <option value="-1" disabled selected>Internal use</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <textarea placeholder="In addition to preset text only..." class="form-control" id="E_commentText"></textarea>
                                     </td>
                                     <td>
                                         <select id="E0_tradeSelect" class="form-control" onchange="tradeOnchange(this.id);">
-                                                <option value="-1" disabled selected>--</option>
-                                            </select>
+                                            <option value="-1" disabled selected>--</option>
+                                        </select>
                                         <textarea disabled class="form-control" id="E0_mirrorText"></textarea>
                                         <button class="btn btn-danger w-100" id="E0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
                                     </td>
@@ -1164,7 +976,6 @@ require_once("loadbooking.php");
                         </div>
                     </div>
                 </div>
-
                 <!--First Tap Attachment-->
                 <div title="Attachment" style="padding: 10px;font-size: 18px">
                     <div class="container" style="margin-top: 20px">
@@ -1172,109 +983,104 @@ require_once("loadbooking.php");
                             <div class="col-sm-4">
                                 <label>Property Management Guide</label>
                                 <select id="propertyMaintenanceGuide" style="width:100%" title="property management guide">
-                                        <optgroup label="No Visible Significant Defect">
-                                            <option value="√">✔</option>
-                                        </optgroup>
-                                        <optgroup label="Major Defect">
-                                            <option value="NA">Not applicable, no such item</option>
-                                        </optgroup>
-                                    </select>
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
                             </div>
                             <div class="col-sm-4">
                                 <label>Cracking in Masonry</label>
                                 <select id="crackingInMasonry" style="width:100%" title="cracking in masonry">
-                                        <optgroup label="No Visible Significant Defect">
-                                            <option value="√">✔</option>
-                                        </optgroup>
-                                        <optgroup label="Major Defect">
-                                            <option value="NA">Not applicable, no such item</option>
-                                        </optgroup>
-                                    </select>
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
                             </div>
                             <div class="col-sm-4">
                                 <label>Treatment of Dampness </label>
                                 <select id="treatmentOfDampness" style="width:100%" title="treatment of dampness">
-                                        <optgroup label="No Visible Significant Defect">
-                                            <option value="√">✔</option>
-                                        </optgroup>
-                                        <optgroup label="Major Defect">
-                                            <option value="NA">Not applicable, no such item</option>
-                                        </optgroup>
-                                    </select>
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
                             </div>
                             <div class="col-sm-4">
                                 <label>Health & Safety Warning</label>
                                 <select id='healthSafetyWarning' style="width:100%" title="health and safety warning">
-                                        <optgroup label="No Visible Significant Defect">
-                                            <option value="√">✔</option>
-                                        </optgroup>
-                                        <optgroup label="Major Defect">
-                                            <option value="NA">Not applicable, no such item</option>
-                                        </optgroup>
-                                    </select>
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
                             </div>
                             <div class="col-sm-4">
                                 <label>Roofing & Guttering </label>
                                 <select id="roofingGuttering" style="width:100%" title="Roofing & Guttering">
-                                        <optgroup label="No Visible Significant Defect">
-                                            <option value="√">✔</option>
-                                        </optgroup>
-                                        <optgroup label="Major Defect">
-                                            <option value="NA">Not applicable, no such item</option>
-                                        </optgroup>
-                                    </select>
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
                             </div>
                             <div class="col-sm-4">
                                 <label>Re-stumping </label>
                                 <select id="reStumping" style="width:100%" title="Roofing & Guttering">
-                                        <optgroup label="No Visible Significant Defect">
-                                            <option value="√">✔</option>
-                                        </optgroup>
-                                        <optgroup label="Major Defect">
-                                            <option value="NA">Not applicable, no such item</option>
-                                        </optgroup>
-                                    </select>
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
                             </div>
-
                             <div class="col-sm-4">
                                 <label>Termites & Borers</label>
                                 <select id='termitesBorers' style="width:100%" title="health and safety warning">
-                                        <optgroup label="No Visible Significant Defect">
-                                            <option value="√">✔</option>
-                                        </optgroup>
-                                        <optgroup label="Major Defect">
-                                            <option value="NA">Not applicable, no such item</option>
-                                        </optgroup>
-                                    </select>
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
                             </div>
-
                             <div class="col-sm-4">
                                 <label>Cost Guide</label>
                                 <select id='costGuide' style="width:100%" title="Home Safety Checklist">
-                                        <optgroup label="No Visible Significant Defect">
-                                            <option value="√">✔</option>
-                                        </optgroup>
-                                        <optgroup label="Major Defect">
-                                            <option value="NA">Not applicable, no such item</option>
-                                        </optgroup>
-                                    </select>
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!--First Tap Photo-->
                 <div title="Photo" style="padding: 10px;font-size: 18px">
                     <button id="uploadImg_Btn" class="btn btn-primary">Upload Images</button>
                     <input type="file" id="Imgs_Upload" accept="image/x-png,image/jpeg" multiple/>
                     <div id="Img-main-container">
                         <div id="Img-loader">Loading document ...</div>
-                        <div id="HA_ImgsCA_indicateText">
-                        </div>
+                        <div id="HA_ImgsCA_indicateText"> </div>
                         <div id="Imgpage-loader">Loading page ...</div>
                     </div>
                 </div>
-
                 <!--First Tap Photo-->
                 <div title="Sketches" style="padding: 10px;font-size: 18px">
                     <button id="upload-button" class="btn btn-primary">Upload PDF</button>
@@ -1290,7 +1096,6 @@ require_once("loadbooking.php");
                 </div>
             </div>
         </div>
-
         <!--Action Buttons-->
         <!--        <div class="container" style="text-align:center;">-->
         <table>
@@ -1327,31 +1132,22 @@ require_once("loadbooking.php");
             </tr>
         </table>
         <!--        </div>-->
-
-
         <!--view PDF srcipt-->
         <script src="HomeAccessJS/pdf.js"></script>
         <script src="HomeAccessJS/pdf.worker.js"></script>
-
         <!--Text-->
         <script src="HomeAccessJS/text.js"></script>
-
         <!--Scripts-->
         <script src="js/images.js"></script>
         <script src="js/loadImageJS/load-image.all.min.js"></script>
-
         <!--General Functions-->
         <script type="text/javascript" src="HomeAccessJS/htmlGeneralFunctions.js"></script>
         <script src="HomeAccessJS/pdfGeneralFunctions.js"></script>
-
         <!--PDF Generator-->
         <script src="HomeAccessJS/PDFGenerator.js"></script>
-
         <!--Table Data-->
         <script src="HomeAccessJS/getTableData.js"></script>
-    </div>
+        <?php require_once("saveloaddata.php"); ?>
+    </body>
 
-    <?php require_once("saveloaddata.php"); ?>
-</body>
-
-</html>
+    </html>

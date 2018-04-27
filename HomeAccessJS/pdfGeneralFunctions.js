@@ -1,7 +1,6 @@
 /**
  * Created by Fafa on 21/3/18.
  */
-
 var totalImagesCaptions = 1;
 var totalGeneralNotesParagraph = 1;
 
@@ -9,7 +8,6 @@ function resetTotalCounting() {
     totalImagesCaptions = 1;
     totalGeneralNotesParagraph = 1;
 }
-
 /**
  * Determine the front page footer
  * 1st. determine it is in final or preview mode
@@ -29,16 +27,16 @@ function determineFrontPageFooter(mode) {
                                 alignment: 'left',
                                 width: 80,
                                 height: 34
-                            },
-                            {
+                            }
+                            , {
                                 text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
                                 alignment: 'left',
                                 fontSize: 7,
                                 margin: [0, 10, 0, 0],
                                 color: '#8E8B8B'
                             }
-                        ],
-                        [
+                        ]
+                        , [
                             {
                                 text: ['For further information please call Archicentre ', {
                                     text: 'Australia ',
@@ -54,8 +52,8 @@ function determineFrontPageFooter(mode) {
                                 colSpan: 2,
                                 color: '#8E8B8B'
                             }
-                        ],
-                        [
+                        ]
+                        , [
                             {
                                 text: ['or go to ', {
                                     text: 'www.archicentreaustralia.com.au',
@@ -87,8 +85,8 @@ function determineFrontPageFooter(mode) {
                                 width: 80,
                                 height: 34
                             }
-                        ],
-                        [
+                        ]
+                        , [
 
                             {
                                 text: ['For further information please call Archicentre ', {
@@ -104,8 +102,8 @@ function determineFrontPageFooter(mode) {
                                 fontSize: 7,
                                 color: '#8E8B8B'
                             }
-                        ],
-                        [
+                        ]
+                        , [
                             {
                                 text: ['or go to ', {
                                     text: 'www.archicentreaustralia.com.au',
@@ -127,7 +125,6 @@ function determineFrontPageFooter(mode) {
             return result;
         }
     }
-
     if (mode == 'preview') {
         result = {
             text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
@@ -140,7 +137,6 @@ function determineFrontPageFooter(mode) {
         return result;
     }
 }
-
 /*
  1st determine whether it is final mode or preview mode
  2md determine whether it is a NSW report if it is the final mode
@@ -161,18 +157,18 @@ function determineFooter(mode) {
                                 alignment: 'left',
                                 width: 80,
                                 height: 34
-                            },
-                            {
+                            }
+                            , {
                                 text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
                                 alignment: 'left',
                                 fontSize: 7,
                                 margin: [0, 5, 0, 0],
                                 color: '#8E8B8B'
                             }
-                        ],
-                        [
-                            '',
-                            {
+                        ]
+                        , [
+                            ''
+                            , {
                                 text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
@@ -199,8 +195,8 @@ function determineFooter(mode) {
                                 alignment: 'left',
                                 width: 80,
                                 height: 34
-                            },
-                            {
+                            }
+                            , {
                                 text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
@@ -229,7 +225,6 @@ function determineFooter(mode) {
         return result;
     }
 }
-
 /**
  * Determine draft cover page
  * */
@@ -252,11 +247,12 @@ function giveMeHugeDraft(mode) {
         return result;
     }
 }
-
 //Get All table cells data from Construction Summary
 function getTableData_CS() {
-    var data = [];
-    var row = [];
+    var data = [],
+        row = [],
+        tdCount = 1;
+
     data.push([{
         colSpan: 10,
         text: $('#HA_DivConstructionSummary').attr('data-title'),
@@ -265,67 +261,42 @@ function getTableData_CS() {
     }, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
 
     var tableTr = $('#Table_CSummary tr').get();
+
     for (var i = 1; i < tableTr.length; i++) {
         $(tableTr[i]).children().each(function () {
             var cellString = $(this).get(0).firstElementChild;
-
+            //console.log(cellString);
             switch (cellString.tagName) {
                 case 'LABEL':
-                                        console.log($(cellString).text());
+                    //                console.log($(cellString).text());
                     row.push($(cellString).text());
                     break;
                 case 'SELECT':
-                                        console.log($(cellString).val());
+                    //                console.log($(cellString).val());
+                    if (tdCount == 11) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
                     row.push($(cellString).val());
                     break;
                 case 'INPUT':
-                                        console.log($(cellString).val());
+                    //                console.log($(cellString).val());
+                    if (tdCount == 11) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
                     row.push($(cellString).val());
                     break;
             }
+            tdCount++;
         });
+    }
+    for (var i = tdCount; i < 11; i++) {
+        row.push({});
     }
     data.push(row);
     console.log(data);
     return data;
 }
-//body: [
-//   [
-//                            {
-//                                colSpan: 10,
-//                                text: $('#HA_DivConstructionSummary').attr('data-title'),
-//                                style: 'pageSubHeader',
-//                                alignment: 'left'
-//                                }, {}, {}, {}, {}, {}, {}, {}, {}, {}], [
-//                            {
-//                                text: $('#HA_lbHouseAge').text()
-//                                },
-//                            {
-//                                text: $('#HA_houseAge').val()
-//                                },
-//                            {
-//                                text: $('#HA_lbStoreys').text()
-//                                },
-//                            {
-//                                text: $('#HA_Storeys').val()
-//                                },
-//                            {
-//                                text: $('#HA_lbFloorStructure').text()
-//                                },
-//                            {
-//                                text: $('#HA_FlStructure').val()
-//                                },
-//                            {
-//                                text: $('#HA_lbWalls').text()
-//                                },
-//                            {
-//                                text: $('#HA_Walls').val()
-//                                },
-//                            {
-//                                text: $('#HA_lbRoof').text()
-//                                },
-//                            {
-//                                text: $('#HA_Roof').val()
-//                                }
-//                                ]
-//    ]

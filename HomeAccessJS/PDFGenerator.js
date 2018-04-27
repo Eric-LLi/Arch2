@@ -39,7 +39,7 @@ function generateHomeAccessReportPDF(mode) {
 
     //Get All table cells data from Construction Summary table.
     var csData = getTableData_CS();
-//    console.log(csData);
+    //    console.log(csData);
 
     // Page start drawing from here...
     var docDefinition = {
@@ -374,19 +374,21 @@ function generateHomeAccessReportPDF(mode) {
                             {
                                 text: $('#HA_lbCompleteMessage5').text() + "\n\n" + $('#HA_indicateText').val(),
                                 }
-                        ]
-                    ]
+                            ]
+                            ]
                 }
+                },
+            {
+                style: 'tableContent',
+                table: {
+                    headerRows: 1,
+                    widths: ['auto', 'auto', '*', '*', '*', '*', '*', '*', '*', '*'],
+                    body: csData
                 }
-//            {
-//                style: 'tableContent',
-//                table: {
-//                    headerRows: 1,
-//                    widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
-//                    body: csData
-//                }
-//                }
+                },
+            {
 
+            }
                 ],
         styles: {
             coverPageHeader: {
