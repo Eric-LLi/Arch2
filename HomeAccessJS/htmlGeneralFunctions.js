@@ -69,23 +69,23 @@ var getSelectID = [
 var keySelectOption = [
     {
         name: '√',
-        value: 'No visible significant defect'
+        value: 'No_visible_significant_defect'
     },
     {
         name: 'X',
-        value: 'Maintenance Item or Minor Defect'
+        value: 'Maintenance_Item_or_Minor_Defect'
     },
     {
         name: 'XX',
-        value: 'Major Defect'
+        value: 'Major_Defect'
     },
     {
         name: 'U',
-        value: 'Unknown/Inaccessible/Not tested/Not visible'
+        value: 'Unknown/Inaccessible/Not_tested/Not_visible'
     },
     {
         name: 'NA',
-        value: 'Not applicable, no such item'
+        value: 'Not_applicable,no_such_item'
     }
 ];
 
@@ -216,6 +216,7 @@ var E_Code = [
 
 //Add property "option"
 function createP_Option(nameid) {
+//    console.log("Create opiton");
     var i,
         optionID = document.getElementById(nameid),
         opt = document.createElement("option");
@@ -1058,11 +1059,6 @@ $(document).ready(function () {
     loadSolutionSelectData();
 
     checkIndiTextValue();
-
-    //    if(photos_count > 0)
-    //        photos_count++;
-    //    if(pdfCounts > 0)
-    //        pdfCounts++;
 
     console.log("Current pdfs count: " + pdfCounts);
     console.log("Current photos count: " + photos_count);

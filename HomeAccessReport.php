@@ -31,7 +31,7 @@ require_once("loadbooking.php");
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 
-    <?php require_once("saveloaddata.php"); ?>
+
 
 </head>
 
@@ -167,6 +167,7 @@ require_once("loadbooking.php");
                                     <div class="col-sm">
                                         <label id="HA_lbarchitectName">Architect: </label><br>
                                         <input id="HA_architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>">
+
                                     </div>
                                     <div class="col-sm">
                                         <label id="HA_lbregistrationNumber">Registration No. : </label><br>
@@ -192,7 +193,7 @@ require_once("loadbooking.php");
                                 <div class="row form-group">
                                     <div class="col-sm">
                                         <label id="HA_lbarchitectRef">Referred By: </label><br>
-                                        <input id="HA_architectRef" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>">
+                                        <input id="HA_architectRef" class="form-control" type="text" title="email" style="margin-top: 0" value="">
                                     </div>
                                     <div class="col-sm">
                                         <label id="HA_lbarchitectEmail2">Email Address: </label><br>
@@ -289,66 +290,51 @@ require_once("loadbooking.php");
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding-right:0px;">
-                                            <label id="HA_lbHouseAge">House Age</label>
-                                        </td>
-                                        <td>
-                                            <select class="form-control" id="HA_houseAge">
+                                        <td style="padding-right:0px;"><label id="HA_lbHouseAge">House Age</label></td>
+                                        <td><select class="form-control" id="HA_houseAge">
                                                     <option value="-1">Choose</option>
                                                     <option value="less than 25">Less than 25 years</option>
                                                     <option value="25 to 50">25 to 50 years</option>
                                                     <option value="50 to 70">50-70 years</option>
                                                     <option value="75+">More than 75 years</option>
-                                                </select>
-                                        </td>
-                                        <td>
-                                            <label id="HA_lbStoreys">Storeys</label>
-                                        </td>
-                                        <td>
-                                            <select class="form-control" id="HA_Storeys">
+                                                </select></td>
+                                        <td><label id="HA_lbStoreys">Storeys</label></td>
+                                        <td><select class="form-control" id="HA_Storeys">
                                                     <option value="-1">Choose</option>
                                                     <option value="One">One</option>
                                                     <option value="Two">Two</option>
-                                                </select>
-                                        </td>
+                                                </select></td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <lable id="HA_lbFloorStructure">Floor Structure</lable>
                                         </td>
-                                        <td>
-                                            <select class="form-control" id="HA_FlStructure">
+                                        <td><select class="form-control" id="HA_FlStructure">
                                                     <option value="-1">Choose</option>
                                                     <option value="Concrete">Contrete</option>
                                                     <option value="Timber">Timber</option>
-                                                </select>
+                                                </select></td>
+                                        <td><label id="HA_lbWalls">Walls</label>
                                         </td>
-                                        <td>
-                                            <label id="HA_lbWalls">Walls</label>
-                                        </td>
-                                        <td>
-                                            <select class="form-control" id="HA_Walls">
+                                        <td><select class="form-control" id="HA_Walls">
                                                     <option value="-1">Choose</option>
                                                     <option value="W/B">W/B</option>
                                                     <option value="Brick">Brick</option>
                                                     <option value="B.V.">B.V.</option>
                                                     <option value="Other">Other</option>
-                                                </select>
-                                        </td>
+                                                </select></td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <lable id="HA_lbRoof">Roof</lable>
                                         </td>
-                                        <td>
-                                            <select class="form-control" id="HA_Roof">
+                                        <td><select class="form-control" id="HA_Roof">
                                                     <option value="-1">Choose</option>
                                                     <option value="TCT">TCT</option>
                                                     <option value="Concrete">Concrete</option>
                                                     <option value="Sheeting">Sheeting</option>
                                                     <option value="A.C.">A.C.</option>
-                                                </select>
-                                        </td>
+                                                </select></td>
 
                                     </tr>
                                 </table>
@@ -1343,6 +1329,10 @@ require_once("loadbooking.php");
         <!--        </div>-->
 
 
+        <!--view PDF srcipt-->
+        <script src="HomeAccessJS/pdf.js"></script>
+        <script src="HomeAccessJS/pdf.worker.js"></script>
+
         <!--Text-->
         <script src="HomeAccessJS/text.js"></script>
 
@@ -1350,22 +1340,18 @@ require_once("loadbooking.php");
         <script src="js/images.js"></script>
         <script src="js/loadImageJS/load-image.all.min.js"></script>
 
-        <!--PDF Generator-->
-        <script src="HomeAccessJS/PDFGenerator.js"></script>
-
         <!--General Functions-->
         <script type="text/javascript" src="HomeAccessJS/htmlGeneralFunctions.js"></script>
         <script src="HomeAccessJS/pdfGeneralFunctions.js"></script>
 
-
+        <!--PDF Generator-->
+        <script src="HomeAccessJS/PDFGenerator.js"></script>
 
         <!--Table Data-->
         <script src="HomeAccessJS/getTableData.js"></script>
-
-        <!--view PDF srcipt-->
-        <script src="HomeAccessJS/pdf.js"></script>
-        <script src="HomeAccessJS/pdf.worker.js"></script>
     </div>
+
+    <?php require_once("saveloaddata.php"); ?>
 </body>
 
 </html>

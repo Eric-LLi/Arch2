@@ -78,11 +78,12 @@
 
         $('textarea').each(
             function() {
-                if ((this.id != "") && (this.id != undefined))
+                if ((this.id != "") && (this.id != undefined)) {
                     data.push({
                         id: this.id,
                         value: this.value
                     });
+                }
             }
         );
 
@@ -93,11 +94,14 @@
                 //   console.log(this.id + "saving");
                 // }
                 //console.log(this.id);
-                if ((this.id != "") && (this.id != undefined))
+                if ((this.id != "") && (this.id != undefined)) {
+                    if (this.id === "Fault_Trip")
+                        console.log(this.value);
                     data.push({
                         id: this.id,
                         value: this.value
                     });
+                }
             }
         );
 
@@ -130,87 +134,80 @@
     }
 
     /** This is to check whether the bookingcode.pdf is exited in the server */
-    function checkPDF()
-    {
+    function checkPDF() {
         console.log('I am inside checking permission');
-        $.post
-        (
-            'ajax_checkPDF.php',
-            {
-                uuid:'<?php echo $_SESSION['uuid']; ?>',
+        $.post(
+            'ajax_checkPDF.php', {
+                uuid: '<?php echo $_SESSION['
+                uuid ']; ?>',
                 bookingcode: <?php echo $bookingcode; ?>
             },
-            function(result)
-            {
+            function(result) {
                 var response = JSON.parse(result);
-                if(response.rc == 0)
-                {
-                //this booking does not have a pdf in the ./pdf directory, could upload straght away
-                $('#savingPDFAlert').show();
-                // console.log("can generate pdf right away");
-                generatePDF('save');
-                }
-                else
-                {
+                if (response.rc == 0) {
+                    //this booking does not have a pdf in the ./pdf directory, could upload straght away
+                    $('#savingPDFAlert').show();
+                    // console.log("can generate pdf right away");
+                    generatePDF('save');
+                } else {
                     //This booking has a pdf in the ./pdf drectory, need to ask permission
                     doPromptOkCancel
-                    (
-                        'This report already has a saved pdf report, do you want to overwrite it?',
-                        function(result)
-                        {
-                        if (result)
-                        {
-                            $('#savingPDFAlert').show('fade');
-                            // console.log("genereate the pdf anayway");
-                            generatePDF('save');
-                        }
-                        }
-                    );  
+                        (
+                            'This report already has a saved pdf report, do you want to overwrite it?',
+                            function(result) {
+                                if (result) {
+                                    $('#savingPDFAlert').show('fade');
+                                    // console.log("genereate the pdf anayway");
+                                    generatePDF('save');
+                                }
+                            }
+                        );
                 }
             }
         )
-    }  
+    }
+
     function doSavePDF(data) {
         var formData = {
             pdfBase64: data,
             bookingcode: <?php echo $bookingcode; ?>
 
         };
-            $.post(
+        $.post(
             'ajax_uploadPDF.php',
             formData,
             function(result) {
-            var response = JSON.parse(result);
-            //console.log(response.passingText);
-            //console.log(response.rc)
+                var response = JSON.parse(result);
+                //console.log(response.passingText);
+                //console.log(response.rc)
 
-            if (response.rc == 0) {
-            //$('savingPDFAlert').hide('fade');
-            var alert = document.getElementById('savingPDFAlert');
-            alert.style.display = 'none';
-            noty({
-            text: response.msg,
-            type: 'success',
-            timeout: 5000
-        });
-        // var bookingCode = response.passingText;
-        // var baseURL = 'http://www.archicentreaustraliainspections.com/pdfreport/';
-        // //var bookingCode = document.getElementById('customer_booking').value;
-        // var url = baseURL + bookingCode + '.pdf';
-        // window.open(url);
+                if (response.rc == 0) {
+                    //$('savingPDFAlert').hide('fade');
+                    var alert = document.getElementById('savingPDFAlert');
+                    alert.style.display = 'none';
+                    noty({
+                        text: response.msg,
+                        type: 'success',
+                        timeout: 5000
+                    });
+                    // var bookingCode = response.passingText;
+                    // var baseURL = 'http://www.archicentreaustraliainspections.com/pdfreport/';
+                    // //var bookingCode = document.getElementById('customer_booking').value;
+                    // var url = baseURL + bookingCode + '.pdf';
+                    // window.open(url);
 
-    } else {
-        $('savingPDFAlert').hide('fade');
-        noty({
-            text: response.msg,
-            type: 'error',
-            timeout: 5000
-        });
-    }
+                } else {
+                    $('savingPDFAlert').hide('fade');
+                    noty({
+                        text: response.msg,
+                        type: 'error',
+                        timeout: 5000
+                    });
+                }
 
-    }
-    );
-    //console.log('saving pdf');
+            }
+        );
+        //console.log('saving pdf');
     }
 
     //imageSize == height
@@ -412,7 +409,7 @@
                                     var addButtonID = 'HOWImageAddButton' + nextID;
                                     var uploadID = 'HOWImageUpload' + nextID;
                                     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                                                     'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                                        'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
 
                                 }
                             }
@@ -422,8 +419,7 @@
                         //console.log('the next add id is ' + nextaddid);
                         // console.log('the next imageID is ' + nextImageID);
                     }
-                }
-                else {
+                } else {
                     //console.log(p.imageid + " corresponding image field is not extied");
                     //console.log("2222222Table Name: " + p.tableName);
                     if (p.tableName) {
@@ -434,7 +430,7 @@
                             var maxIamge = 4;
                             console.log("I am in Home Feasibility Drawing Table");
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
 
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.imageid).style.display = 'block';
@@ -462,7 +458,7 @@
                                     var nextAddButtonID = 'homeDrawingAddButton' + nextID;
                                     var nextUploadID = 'homeDrawingUpload' + nextID;
                                     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                                     'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
+                                        'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
                                 } else {
                                     console.log('still running, never mind');
                                 }
@@ -471,14 +467,13 @@
                                 console.log('have max drawings, no more creating');
                             }
 
-                        }
-                        else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
+                        } else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
                             var maxIamge = 4;
                             console.log("I am in renovation Feasibility Drawing Table");
                             //console.log(p.addid);
                             //document.getElementById(p.tableName).style.display = 'block';
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID, p.removeFunction,
-                                             p.addFunction, p.imageSize, p.width);
+                                p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.imageid).style.display = 'block';
                             document.getElementById(p.imageid).style.width = '100%';
@@ -507,7 +502,7 @@
                                     var nextAddButtonID = 'renovationDrawingAddButton' + nextID;
                                     var nextUploadID = 'renovationDrawingUpload' + nextID;
                                     addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                                     'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
+                                        'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
                                 } else {
                                     console.log('still running, never mind');
                                 }
@@ -515,14 +510,13 @@
                             } else {
                                 console.log('have max images, no more creating');
                             }
-                        }
-                        else if (p.tableName === 'DilapidationImagesTable') {
+                        } else if (p.tableName === 'DilapidationImagesTable') {
 
                             var maxIamge = 60;
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -545,7 +539,7 @@
                                     var nextAddButtonID = 'AddDilapidationImageButton' + nextID;
                                     var nextUploadID = 'DilapidationUploadImage' + nextID;
                                     addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                                     'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '510px', '0px');
+                                        'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '510px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
@@ -554,13 +548,12 @@
                                 console.log("counting image is equal maxImage, no need to do anything");
                             }
 
-                        }
-                        else if (p.tableName === 'AdviceImagesTable') {
+                        } else if (p.tableName === 'AdviceImagesTable') {
                             maxIamge = 30;
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -583,19 +576,18 @@
                                     var nextAddButtonID = 'AddAdviceImageButton' + nextID;
                                     var nextUploadID = 'AdviceUploadImage' + nextID;
                                     addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                                     p.removeFunction, p.addFunction, '500px', '0px');
+                                        p.removeFunction, p.addFunction, '500px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
                             }
-                        }
-                        else if (p.tableName === 'MaintenanceImagesTable') {
+                        } else if (p.tableName === 'MaintenanceImagesTable') {
 
                             var maxIamge = 40;
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -619,19 +611,18 @@
                                     var nextAddButtonID = 'AddMaintenanceImageButton' + nextID;
                                     var nextUploadID = 'MaintenanceUploadImage' + nextID;
                                     addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                                     p.removeFunction, p.addFunction, '500px', '0px');
+                                        p.removeFunction, p.addFunction, '500px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
                             }
 
-                        }
-                        else if (p.tableName === 'MaintenanceDrawingsTable') {
+                        } else if (p.tableName === 'MaintenanceDrawingsTable') {
                             var maxDrawing = 6;
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -656,19 +647,18 @@
                                     var nextAddButtonID = 'AddMaintenanceDrawingButton' + nextID;
                                     var nextUploadID = 'MaintenanceUploadDrawing' + nextID;
                                     addImageElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                                     p.removeFunction, p.addFunction, '500px', '0px');
+                                        p.removeFunction, p.addFunction, '500px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
                             }
-                        }
-                        else if (p.tableName === 'ConstructionImagesTable') {
+                        } else if (p.tableName === 'ConstructionImagesTable') {
                             console.log("nothing happen here yet!");
                             var maxIamge = 30;
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
@@ -692,13 +682,12 @@
                                     var nextAddButtonID = 'AddConstructionImageButton' + nextID;
                                     var nextUploadID = 'ConstructionUploadImage' + nextID;
                                     addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                                     p.removeFunction, p.addFunction, '500px', '0px');
+                                        p.removeFunction, p.addFunction, '500px', '0px');
                                 } else {
                                     console.log("still loading image, no worry");
                                 }
                             }
-                        }
-                        else if (p.tableName === 'CPImagesTable') {
+                        } else if (p.tableName === 'CPImagesTable') {
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             //console.log("the total number of images in this CP report are : " + countingImage);
@@ -707,7 +696,7 @@
                             //if (imageNo === 0)
                             //{
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
+                                'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
                             $('#' + p.imageid).attr('src', url);
                             var givenID = p.imageid.replace(/[^\d.]/g, '');
                             var labelID = "imageCaption" + givenID;
@@ -734,8 +723,7 @@
 
                             }
 
-                        }
-                        else if (p.tableName === 'HOWImagesTable') {
+                        } else if (p.tableName === 'HOWImagesTable') {
                             var table = document.getElementById(p.tableName);
                             table.style.display = 'block';
                             console.log("the total number of images in this HOW report are : " + countingImage);
@@ -744,7 +732,7 @@
                             //if (imageNo === 0)
                             //{
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                             'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
                             $('#' + p.imageid).attr('src', url);
                             var givenID = p.imageid.replace(/[^\d.]/g, '');
                             var labelID = "HOWimageCaption" + givenID;
@@ -769,15 +757,14 @@
                                 var uploadID = 'HOWImageUpload' + nextID;
                                 addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
                             }
-                        }
-                        else if (p.tableName === "HA_PdfContents") {
+                        } else if (p.tableName === "HA_PdfContents") {
                             //console.log("Beofre pdf Count: " + pdfCounts);
                             //imgbtnID = [img ID, deltebuttonID, caption ID, container ID]
 
                             var temp = parseInt(p.imageid.split("_")[0]);
                             //console.log("TEMP: "+ temp);
 
-                            if(temp > pdfCounts){
+                            if (temp > pdfCounts) {
                                 pdfCounts = temp;
                                 pdfCounts++;
                             }
@@ -795,22 +782,21 @@
                             //console.log("Image URL: " + url);
                             $("#" + imgbtnID[0]).attr("src", url);
                             $("#" + p.tableName).show();
-                        }
-                        else if (p.tableName === "HA_ImgsContents") {
+                        } else if (p.tableName === "HA_ImgsContents") {
                             //[imgID, btnID, captionID, containerID]
                             //console.log("IMAGE id: " + p.imageid);
                             var temp = parseInt(p.imageid.split("_")[0]);
 
                             //console.log("Before Photos count :" + photos_count);
                             //console.log("temp : " + temp);
-                            if(temp > photos_count){
+                            if (temp > photos_count) {
                                 photos_count = temp;
                                 photos_count++;
                             }
                             //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
                             var elementID = createPhoto(temp);
                             //console.log("After count: " + photos_count);
-                            $("#" + elementID[1]).attr("src",url);
+                            $("#" + elementID[1]).attr("src", url);
                             $("#" + p.tableName).show();
                         }
                     }
@@ -1642,19 +1628,18 @@
                 const elementsID = d.id.split("_");
                 var ele_number = elementsID[0];
                 var regex = new RegExp("^[a-zA-Z]");
-                try{
+                try {
 
-                    if(!regex.test(ele_number))
-                    {
+                    if (!regex.test(ele_number)) {
                         ele_number = parseInt(elementsID[0]);
                     }
-                }catch(err){
+                } catch (err) {
                     console.log(err);
                 }
                 switch (elementsID[1]) {
                     case "CSNewName":
                         //assign the largest number to continue add new item.
-                        if(ele_number > conAdd_Count)
+                        if (ele_number > conAdd_Count)
                             conAdd_Count = ele_number;
 
                         Create_ConAdd(ele_number);
@@ -1667,7 +1652,7 @@
                         break;
                     case "HSCheckNewName":
                         //assign the largest number to continue add new item.
-                        if(ele_number > HSCheckAdd_Count)
+                        if (ele_number > HSCheckAdd_Count)
                             HSCheckAdd_Count = ele_number;
 
                         button_HealthCheckAdd(ele_number);
@@ -1678,7 +1663,7 @@
                     case "HSCheckNewValue":
                         break;
                     case "FSNewName":
-                        if(ele_number > faultAdd_Count)
+                        if (ele_number > faultAdd_Count)
                             faultAdd_Count = ele_number;
                         button_FaultAdd(ele_number);
                         faultAdd_Count++;
@@ -1686,8 +1671,8 @@
                     case "FSNewValue":
                         break;
                     case "RMSCheckNewName":
-                        if(ele_number > RM_SCheckAdd_Count)
-                            RM_SCheckAdd_Count=ele_number;
+                        if (ele_number > RM_SCheckAdd_Count)
+                            RM_SCheckAdd_Count = ele_number;
 
                         RM_SCheckAddButton(ele_number);
                         RM_SCheckAdd_Count++;
@@ -1695,7 +1680,7 @@
                     case "RMSCheckValue":
                         break;
                     case "RMOCheckNewName":
-                        if(ele_number > RM_OCheckAdd_Count)
+                        if (ele_number > RM_OCheckAdd_Count)
                             RM_OCheckAdd_Count = ele_number;
 
                         RM_OCheckAddButton(ele_number);
@@ -1704,9 +1689,8 @@
                     case "RMOCheckNewValue":
                         break;
                     case "EWCheckNewName":
-                        if(ele_number > EW_CheckAdd_Count)
+                        if (ele_number > EW_CheckAdd_Count)
                             EW_CheckAdd_Count = ele_number;
-
                         button_EnergyCheckAdd(ele_number);
                         EW_CheckAdd_Count++;
                         break;
@@ -1737,7 +1721,7 @@
         data.forEach(
             function(d) {
                 var fld = '#' + d.id;
-                //console.log(d.id);
+                //                console.log(d.id);
 
                 // Field exists?
                 if (!$(fld).length || (d.value == 'undefined'))
@@ -1746,7 +1730,7 @@
                 // If field already has value (probably populated from php), then leave alone if saved value is blank...
                 if (($(fld).val() == '') || (d.value != ''))
                     $(fld).val(d.value);
-                //console.log(d.value);
+                //                console.log(d.value);
             }
         );
     });
