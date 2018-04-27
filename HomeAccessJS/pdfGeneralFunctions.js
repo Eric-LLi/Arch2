@@ -269,7 +269,11 @@ function getTableData_CS() {
             switch (cellString.tagName) {
                 case 'LABEL':
                     //                console.log($(cellString).text());
-                    row.push($(cellString).text());
+                    row.push({
+                        text: $(cellString).text(),
+                        alignment: 'center',
+                        bold: true
+                    });
                     break;
                 case 'SELECT':
                     //                console.log($(cellString).val());
@@ -297,6 +301,11 @@ function getTableData_CS() {
         row.push({});
     }
     data.push(row);
-    console.log(data);
+    //console.log(data);
     return data;
+}
+
+//Get All table cells data from Fault Summary
+function getTableData_FS(){
+
 }

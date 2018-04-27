@@ -39,7 +39,8 @@ function generateHomeAccessReportPDF(mode) {
 
     //Get All table cells data from Construction Summary table.
     var csData = getTableData_CS();
-    //    console.log(csData);
+    //Get All table cells data from Fault Summary table.
+    var fsData = getTableData_FS();
 
     // Page start drawing from here...
     var docDefinition = {
@@ -336,6 +337,7 @@ function generateHomeAccessReportPDF(mode) {
             /**
              * (4) Report Detail Page Four
              */
+            //Title
             {
                 text: page4Header,
                 style: 'pageTopHeader'
@@ -378,6 +380,7 @@ function generateHomeAccessReportPDF(mode) {
                     ]
                 }
             },
+            //Constructure Summary
             {
                 style: 'tableContent',
                 table: {
@@ -385,10 +388,16 @@ function generateHomeAccessReportPDF(mode) {
                     widths: ['auto', 'auto', '*', '*', '*', '*', '*', '*', '*', '*'],
                     body: csData
                 }
-            },
-            {
-
             }
+            //Fault Summary
+//            {
+//                style: 'tableCintent',
+//                table: {
+//                    headerRows: 1,
+//                    widths: ['*', '*', '*', '*', '*', '*'],
+//                    body: fsData
+//                }
+//            }
         ],
         styles: {
             coverPageHeader: {
