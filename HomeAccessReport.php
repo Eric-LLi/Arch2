@@ -51,15 +51,18 @@ require_once("loadbooking.php");
                             <div class="col-sm">
                                 <label id="HA_lbClientName">Name: </label>
                                 <br>
-                                <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>"> </div>
+                                <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
+                            </div>
                             <div class="col-sm">
                                 <label id="HA_lbClientPhone">Phone: </label>
                                 <br>
-                                <input id="HA_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>"> </div>
+                                <input id="HA_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
+                            </div>
                             <div class="col-sm">
                                 <label id="HA_lbBookingNo">Booking No. : </label>
                                 <br>
-                                <input id="HA_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0" value="<?php echo $bookingcode; ?>"> </div>
+                                <input id="HA_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0" value="<?php echo $bookingcode; ?>">
+                            </div>
                         </div>
                         <!--</form>-->
                     </div>
@@ -70,21 +73,25 @@ require_once("loadbooking.php");
                                 <div class="col-sm">
                                     <label id="HA_lbAddress">Address of Propety: </label>
                                     <br>
-                                    <input id="HA_Address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>"> </div>
+                                    <input id="HA_Address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+                                </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-sm">
                                     <label id="HA_lbSuburb">Suburb: </label>
                                     <br>
-                                    <input id="HA_Suburb" class="form-control" type="text" title="suburb" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('city'); ?>"> </div>
+                                    <input id="HA_Suburb" class="form-control" type="text" title="suburb" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('city'); ?>">
+                                </div>
                                 <div class="col-sm">
                                     <label id="HA_lbState">State: </label>
                                     <br>
-                                    <input id="HA_State" class="form-control" type="text" title="state" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('state'); ?>"> </div>
+                                    <input id="HA_State" class="form-control" type="text" title="state" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('state'); ?>">
+                                </div>
                                 <div class="col-sm">
                                     <label id="HA_lbPostcode">Postcode: </label>
                                     <br>
-                                    <input id="HA_Postcode" class="form-control" type="text" title="postcode" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('postcode'); ?>"> </div>
+                                    <input id="HA_Postcode" class="form-control" type="text" title="postcode" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('postcode'); ?>">
+                                </div>
                             </div>
                         </form>
                         <form>
@@ -113,11 +120,13 @@ require_once("loadbooking.php");
                                 <div class="col-sm">
                                     <label id="HA_lbVerbalSummary">Verbal summary given to: </label>
                                     <br>
-                                    <input id="HA_VerbalSummary" class="form-control" type="text" title="verbal" style="margin-top: 0"> </div>
+                                    <input id="HA_VerbalSummary" class="form-control" type="text" title="verbal" style="margin-top: 0">
+                                </div>
                                 <div class="col-sm">
                                     <label id="HA_lbDate">Date: </label>
                                     <br>
-                                    <input id="HA_Date" class="form-control" type="text" title="date" style="margin-top: 0"> </div>
+                                    <input id="HA_Date" class="form-control" type="text" title="date" style="margin-top: 0">
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -128,41 +137,49 @@ require_once("loadbooking.php");
                                 <div class="col-sm">
                                     <label id="HA_lbarchitectName">Architect: </label>
                                     <br>
-                                    <input id="HA_architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>"> </div>
+                                    <input id="HA_architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>">
+                                </div>
                                 <div class="col-sm">
                                     <label id="HA_lbregistrationNumber">Registration No. : </label>
                                     <br>
-                                    <input id="HA_registrationNumber" class="form-control" type="text" title="registrationNo" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>"> </div>
+                                    <input id="HA_registrationNumber" class="form-control" type="text" title="registrationNo" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archregno'); ?>">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm">
                                     <label id="HA_lbarchitectAddress">Address: </label>
                                     <br>
-                                    <input id="HA_architectAddress" class="form-control" type="text" title="architectAdd" style="margin-top: 0" value="<?php echo doNiceAddress(doNiceArrayElemAsString('archaddress1'), doNiceArrayElemAsString('archcity'), doNiceArrayElemAsString('archstate'), doNiceArrayElemAsString('archpostcode')); ?>"> </div>
+                                    <input id="HA_architectAddress" class="form-control" type="text" title="architectAdd" style="margin-top: 0" value="<?php echo doNiceAddress(doNiceArrayElemAsString('archaddress1'), doNiceArrayElemAsString('archcity'), doNiceArrayElemAsString('archstate'), doNiceArrayElemAsString('archpostcode')); ?>">
+                                </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-sm">
                                     <label id="HA_lbarchitectEmail">Email Address: </label>
                                     <br>
-                                    <input id="HA_architectEmail" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archemail', false); ?>"> </div>
+                                    <input id="HA_architectEmail" class="form-control" type="text" title="email" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archemail', false); ?>">
+                                </div>
                                 <div class="col-sm">
                                     <label id="HA_lbarchitectPhone">Phone: </label>
                                     <br>
-                                    <input id="HA_architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archmobile', false); ?>"> </div>
+                                    <input id="HA_architectPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archmobile', false); ?>">
+                                </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-sm">
                                     <label id="HA_lbarchitectRef">Referred By: </label>
                                     <br>
-                                    <input id="HA_architectRef" class="form-control" type="text" title="email" style="margin-top: 0" value=""> </div>
+                                    <input id="HA_architectRef" class="form-control" type="text" title="email" style="margin-top: 0" value="">
+                                </div>
                                 <div class="col-sm">
                                     <label id="HA_lbarchitectEmail2">Email Address: </label>
                                     <br>
-                                    <input id="HA_architectEmail2" class="form-control" type="text" title="phone" style="margin-top: 0"> </div>
+                                    <input id="HA_architectEmail2" class="form-control" type="text" title="phone" style="margin-top: 0">
+                                </div>
                                 <div class="col-sm">
                                     <label id="HA_lbarchitectPhone2">Phone: </label>
                                     <br>
-                                    <input id="HA_architectPhone2" class="form-control" type="text" title="phone" style="margin-top: 0"> </div>
+                                    <input id="HA_architectPhone2" class="form-control" type="text" title="phone" style="margin-top: 0">
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -229,7 +246,8 @@ require_once("loadbooking.php");
                                             <label class="form-check-label" for="checkBox_4">
                                                     <input id="checkBox_4" type="checkbox" class="form-check-input" value="Other"> Other </label>
                                         </div>
-                                        <input type="text" class="form-control" id="HA_indicateText" disabled> </td>
+                                        <input type="text" class="form-control" id="HA_indicateText" disabled>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -309,8 +327,8 @@ require_once("loadbooking.php");
                         </div>
                         <!--                                </form>-->
                     </div>
-                    <div title="Fault Summary" style="padding:10px;font-size: 18px">
-                        <form>
+                    <div id="HA_DivFaultSummary" title="Fault Summary" data-title="Fault Summary" style="padding:10px;font-size: 18px">
+<!--                        <form>-->
                             <div class="form-group">
                                 <table id="Table_FalSummary" class="table table-bordered" style="table-layout:fixed">
                                     <tr>
@@ -319,13 +337,13 @@ require_once("loadbooking.php");
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td> Trip & Slop </td>
+                                        <td><label id="FS_lbFault_Trip">Trip &#38; Slop</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Trip">
                                                     <option value="-1">Choose</option>
                                                 </select>
                                         </td>
-                                        <td> Cracking </td>
+                                        <td><label id="FS_lbFault_Crack">Cracking</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Crack">
                                                     <option value="-1">Choose</option>
@@ -333,73 +351,73 @@ require_once("loadbooking.php");
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td> Fire Hazards </td>
+                                        <td><label id="FS_lbFault_Fire">Fire Hazards</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Fire">
                                                     <option value="-1">Choose</option>
                                                 </select>
                                         </td>
-                                        <td> Stumps/Piers </td>
+                                        <td><label id="FS_lbFault_Stumps">Stumps/Piers</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Stumps">
                                                     <option value="-1">Choose</option>
-                                                </select>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td> Health Hazards </td>
+                                        <td><label id="FS_lbFault_Health">Health Hazards</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Health">
                                                     <option value="-1">Choose</option>
-                                                </select>
+                                            </select>
                                         </td>
-                                        <td> Illegal Work </td>
+                                        <td><label id="FS_lbFault_Illegal">Illegal Work</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Illegal">
                                                     <option value="-1">Choose</option>
-                                                </select>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td> Electrics </td>
+                                        <td><label id="FS_lbFault_Electrics">Electrics</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Electrics">
                                                     <option value="-1">Choose</option>
                                                 </select>
                                         </td>
-                                        <td> Timber Rot </td>
+                                        <td><label id="FS_lbFault_Timber">Timber Rot</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Timber">
                                                     <option value="-1">Choose</option>
-                                                </select>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td> Security </td>
+                                        <td><label id="FS_lbFault_Security">Security</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Security">
                                                     <option value="-1">Choose</option>
-                                                </select>
+                                            </select>
                                         </td>
-                                        <td> Damp/Mould </td>
+                                        <td><label id="FS_lbFault_Damp">Damp/Mould</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Damp">
                                                     <option value="-1">Choose</option>
-                                                </select>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td> Roof </td>
+                                        <td><label id="FS_lbFault_Roof">Roof</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Roof">
                                                     <option value="-1">Choose</option>
-                                                </select>
+                                            </select>
                                         </td>
-                                        <td> Drainage </td>
+                                        <td><label id="FS_lbFault_Drainage">Drainage</label></td>
                                         <td>
                                             <select class="form-control" id="Fault_Drainage">
                                                     <option value="-1">Choose</option>
-                                                </select>
+                                            </select>
                                         </td>
                                     </tr>
                                 </table>
@@ -417,7 +435,7 @@ require_once("loadbooking.php");
                                     </tr>
                                 </table>
                             </div>
-                        </form>
+<!--                        </form>-->
                     </div>
                 </div>
             </div>

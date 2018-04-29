@@ -380,24 +380,26 @@ function generateHomeAccessReportPDF(mode) {
                     ]
                 }
             },
+
             //Constructure Summary
             {
                 style: 'tableContent',
                 table: {
                     headerRows: 1,
-                    widths: ['auto', 'auto', '*', '*', '*', '*', '*', '*', '*', '*'],
+                    widths: ['*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto'],
                     body: csData
                 }
-            }
+            },
+
             //Fault Summary
-//            {
-//                style: 'tableCintent',
-//                table: {
-//                    headerRows: 1,
-//                    widths: ['*', '*', '*', '*', '*', '*'],
-//                    body: fsData
-//                }
-//            }
+            {
+                style: 'tableCintent',
+                table: {
+                    headerRows: 1,
+                    widths: ['*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto'],
+                    body: fsData
+                }
+            }
         ],
         styles: {
             coverPageHeader: {
@@ -419,7 +421,7 @@ function generateHomeAccessReportPDF(mode) {
             },
             tableContent: {
                 fontSize: 10,
-                //                bold: true,
+                //bold: true,
                 margin: [0, 0, 0, 30]
             },
             Contents: {

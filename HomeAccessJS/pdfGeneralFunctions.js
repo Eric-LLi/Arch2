@@ -247,12 +247,13 @@ function giveMeHugeDraft(mode) {
         return result;
     }
 }
-//Get All table cells data from Construction Summary
+//Get all table cells data from Construction Summary
 function getTableData_CS() {
     var data = [],
         row = [],
         tdCount = 1;
 
+    //First push caption. span 10 column.
     data.push([{
         colSpan: 10,
         text: $('#HA_DivConstructionSummary').attr('data-title'),
@@ -260,10 +261,15 @@ function getTableData_CS() {
         alignment: 'left'
     }, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
 
+    //Get all Construction Summary table tr.
     var tableTr = $('#Table_CSummary tr').get();
 
+    //Start from 1 because the first row is caption in table.
+    //Loop all tr except first row.
     for (var i = 1; i < tableTr.length; i++) {
+        //Loop all elements in each tr.
         $(tableTr[i]).children().each(function () {
+            //Get first element in each td.
             var cellString = $(this).get(0).firstElementChild;
             //console.log(cellString);
             switch (cellString.tagName) {
@@ -277,6 +283,7 @@ function getTableData_CS() {
                     break;
                 case 'SELECT':
                     //                console.log($(cellString).val());
+                    //Each row only has 10 column. If more than 10 then create new row.
                     if (tdCount == 11) {
                         tdCount = 1;
                         data.push(row);
@@ -286,6 +293,7 @@ function getTableData_CS() {
                     break;
                 case 'INPUT':
                     //                console.log($(cellString).val());
+                    //Each row only has 10 column. If more than 10 then create new row.
                     if (tdCount == 11) {
                         tdCount = 1;
                         data.push(row);
@@ -297,15 +305,93 @@ function getTableData_CS() {
             tdCount++;
         });
     }
+    //Fill with empty colums, if the row does not have 10 columns.
     for (var i = tdCount; i < 11; i++) {
         row.push({});
     }
+
+    //Fill in last row.
     data.push(row);
     //console.log(data);
     return data;
 }
 
-//Get All table cells data from Fault Summary
-function getTableData_FS(){
+//Get all table cells data from Fault Summary
+function getTableData_FS() {
+    var data = [],
+        row = [],
+        tdCount = 1;
 
+    //First push caption. span 12 column.
+    data.push([{
+        colSpan: 12,
+        text: $('#HA_DivFaultSummary').attr('data-title'),
+        style: 'pageSubHeader',
+        alignment: 'left'
+    }, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
+
+    //Get Fault Summary table.
+    var tableTr = $('#Table_FalSummary tr');
+
+    //Start from 1 because the first row is caption in table.
+    //Loop all tr except first row.
+    for (var i = 1; i < tableTr.length; i++) {
+        //Loop all child elements in tr.
+        $(tableTr[i]).children().each(function () {
+            //Get element in td.
+            var cellString = $(this).get(0).firstElementChild;
+            //console.log(cellString);
+            switch (cellString.tagName) {
+                case 'LABEL':
+                    //                console.log($(cellString).text());
+                    //Each row only has 12 column. If more than 12 then create new row.
+                    if (tdCount == 13) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+
+                    row.push({
+                        text: $(cellString).text(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+                case 'SELECT':
+                    //                console.log($(cellString).val());
+                    //Each row only has 12 column. If more than 12 then create new row.
+                    if (tdCount == 13) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    //console.log($(cellString).find("option:selected").text());
+                    row.push($(cellString).find("option:selected").text());
+                    break;
+                case 'INPUT':
+                    //                console.log($(cellString).val());
+                    //Each row only has 12 column. If more than 12 then create new row.
+                    if (tdCount == 13) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push($(cellString).val());
+                    break;
+            }
+            tdCount++;
+        });
+    }
+    //Fill with empty colums, if the row does not have 12 columns.
+    for (var i = tdCount; i < 13; i++) {
+        row.push({});
+    }
+
+    //Fill in last row.
+    data.push(row);
+    //console.log(data);
+    return data;
 }
+
+//Get all table cells data from Health Check&Safety Check.
+
