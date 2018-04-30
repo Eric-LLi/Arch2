@@ -746,48 +746,72 @@ function getTableData_HSConcerns() {
         alignment: 'left'
     }, {}, {}, {}, {}]);
 
-    var tableTr = $('#C_SolutionTable tr');
+    var tableTr = $('#C_SolutionTable tr').get();
+    //    console.log(tableTr);
 
     //Second row. Caption
     data.push([{
-        text: tableTr.get(2).children[0].innerHTML
+        text: tableTr[2].children[0].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
     }, {
-        text: tableTr.get(2).children[1].innerHTML
+        text: tableTr[2].children[1].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
     }, {
-        text: tableTr.get(2).children[2].innerHTML
+        text: tableTr[2].children[2].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
     }, {
-        text: tableTr.get(2).children[3].innerHTML
+        text: tableTr[2].children[3].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
     }, {
-        text: tableTr.get(2).children[4].innerHTML
+        text: tableTr[2].children[4].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
     }]);
 
     //Start from third row.
     for (var i = 3; i < tableTr.length; i++) {
-        $(tableTr[i]).children().each(function () {
-            var cellElement = $(this).get(0).children;
+        //        $(tableTr[i]).children().each(function () {
+        for (var j = 0; j < $(tableTr[i]).children().length; j++) {
+            var cellElement = $(tableTr[i]).children().get(j).firstElementChild;
+            if (j == 3) {
+                cellElement = $(tableTr[i]).children().get(j).children[1];
+            }
 
-            console.log(cellElement);
             switch (cellElement.tagName) {
                 case 'SELECT':
+                    if (tdCount == 6) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
                     row.push($(cellElement).find("option:selected").text());
                     break;
                 case 'TEXTAREA':
                     //                console.log($(cellString).val());
-                    //Each row only has 4 column. If more than 4 then create new row.
-                    if (tdCount == 5) {
+                    //Each row only has 5 column. If more than 5 then create new row.
+                    if (tdCount == 6) {
                         tdCount = 1;
                         data.push(row);
                         row = [];
                     }
                     row.push({
                         text: $(cellElement).val(),
-                        alignment: 'center',
-                        bold: true
                     });
                     break;
             }
             tdCount++;
-        });
+        }
+
+        //        });
     }
     //Fill with empty colums, if the row does not have 4 columns.
     for (var i = tdCount; i < 5; i++) {
@@ -799,13 +823,166 @@ function getTableData_HSConcerns() {
     return data;
 }
 
+//Get all table ccells dat from Repair & Maintenance
+function getTableData_RepairMaintenance() {
+    var data = [],
+        row = [],
+        tdCount = 1;
+
+    //First row.
+    data.push([{
+        colSpan: 5,
+        text: $('#HA_DivRMaintenance').attr('data-title'),
+        style: 'pageSubHeader',
+        alignment: 'left'
+    }, {}, {}, {}, {}]);
+
+    var tableTr = $('#M_SolutionTable tr').get();
+    //    console.log(tableTr);
+
+    //Second row. Caption
+    data.push([{
+        text: tableTr[2].children[0].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }, {
+        text: tableTr[2].children[1].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }, {
+        text: tableTr[2].children[2].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }, {
+        text: tableTr[2].children[3].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }, {
+        text: tableTr[2].children[4].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }]);
+
+    //Start from third row.
+    for (var i = 3; i < tableTr.length; i++) {
+        //        $(tableTr[i]).children().each(function () {
+        for (var j = 0; j < $(tableTr[i]).children().length; j++) {
+            var cellElement = $(tableTr[i]).children().get(j).firstElementChild;
+            if (j == 3) {
+                cellElement = $(tableTr[i]).children().get(j).children[1];
+            }
+
+            switch (cellElement.tagName) {
+                case 'SELECT':
+                    if (tdCount == 6) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    //console.log($(cellElement));
+                    row.push($(cellElement).find("option:selected").text());
+                    break;
+                case 'TEXTAREA':
+                    //Each row only has 5 column. If more than 5 then create new row.
+                    if (tdCount == 6) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).val(),
+                    });
+                    break;
+            }
+            tdCount++;
+        }
+        //        });
+    }
+    //Fill with empty colums, if the row does not have 4 columns.
+    for (var i = tdCount; i < 5; i++) {
+        row.push({});
+    }
+    //Fill in last row.
+    data.push(row);
+    //console.log(data);
+    return data;
+}
+
+//Get all table ccells dat from Energy Efficiency
+function getTableData_EnergyEfficiency() {
+    var data = [],
+        row = [],
+        tdCount = 1;
+
+    //First row.
+    data.push([{
+        colSpan: 5,
+        text: $('#HA_DivEnergyEfficiency').attr('data-title'),
+        style: 'pageSubHeader',
+        alignment: 'left'
+    }, {}, {}, {}, {}]);
+
+    var tableTr = $('#E_SolutionTable tr'),
+        th = tableTr.children('th'),
+        td = tableTr.children('td');
+
+    //Second row. Caption
+    for (var i = 0; i < th.length; i++) {
+        row.push({
+            text: th[i].innerHTML,
+            bold: true,
+            fontSize: 12,
+            alignment: 'center'
+        });
+    }
+    //Add second row.
+    data.push(row);
+    //Initial row.
+    row = [];
+
+    //Skip first td, it is the add button.
+    for (i = 1; i < td.length; i++) {
+        switch (tdCount) {
+            case 1:
+                row.push({
+                    text: td[i].innerHTML
+                });
+                break;
+            case 2:
+                row.push({
+                    text: td.eq(i).children('select').find('option:selected').text()
+                });
+                break;
+            default:
+                row.push({
+                    text: td.eq(i).children('textarea').val()
+                });
+                break;
+        }
+        tdCount++;
+        if (tdCount == 6) {
+            //When fill in 5 column change new row.
+            data.push(row);
+            row = [];
+            tdCount = 1;
+        }
+    }
+    console.log(data);
+    return data;
+}
+
 //Create key Explaination data.
 function getKeyExplaination() {
     var data = [];
     data.push([{
         text: 'KEY',
         style: 'pageSubHeader'
-        }, '√', 'No visible Fault', 'X', 'Maintenance Item', 'XX', 'Serious Fault', '--', 'Not Applicable']);
+    }, '√', 'No visible Fault', 'X', 'Maintenance Item', 'XX', 'Serious Fault', '--', 'Not Applicable']);
 
     return data;
 }

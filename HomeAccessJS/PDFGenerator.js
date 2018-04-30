@@ -56,7 +56,10 @@ function generateHomeAccessReportPDF(mode) {
     var fieldNotesData = getTableData_FieldNotes();
     //Get all table ccells dat from Health & Safety Concerns
     var HSConcernsData = getTableData_HSConcerns();
-
+    //Get all table ccells dat from Repair & Maintenance
+    var RepairMaintenanceData = getTableData_RepairMaintenance();
+    //Get all table ccells dat from Energy Efficiency
+    var EnergyEfficiencyData = getTableData_EnergyEfficiency();
 
     // Page start drawing from here...
     var docDefinition = {
@@ -513,15 +516,31 @@ function generateHomeAccessReportPDF(mode) {
                         ]
                     ]
                 }
-            }
+            },
             //Health & Safety Concerns
-//            {
-//                style: 'tableContent',
-//                table: {
-//                    widths: ['*', '*', 150, 'auto', 150],
-//                    body: HSConcernsData
-//                }
-//            }
+            {
+                style: 'tableContent',
+                table: {
+                    widths: [100, 'auto', 150, 'auto', 150],
+                    body: HSConcernsData
+                }
+            },
+            //Repair Maintenance
+            {
+                style: 'tableContent',
+                table: {
+                    widths: [100, 'auto', 150, 'auto', 150],
+                    body: RepairMaintenanceData
+                }
+            },
+            //Energy Efficiency - Optional
+            {
+                style: 'tableContent',
+                table: {
+                    widths: [100, 'auto', 150, 'auto', 150],
+                    body: EnergyEfficiencyData
+                }
+            }
         ],
         styles: {
             coverPageHeader: {

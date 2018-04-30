@@ -864,7 +864,7 @@ require_once("loadbooking.php");
             <!--First Tap Architect’s Solution-->
             <div title="Architect’s Solutions" id="ASolution" style="padding:10px;font-size: 18px">
                 <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
-                    <div id="HA_DivHSConcerns" title="Health & Safety Concerns" data-title="Health & Safety Concerns \(Urgent - within 1 month\)" style="padding:10px;font-size: 18px">
+                    <div id="HA_DivHSConcerns" title="Health & Safety Concerns" data-title="Health & Safety Concerns (Urgent - within 1 month)" style="padding:10px;font-size: 18px">
                         <table id="C_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                             <tr>
                                 <th colspan="5">
@@ -910,7 +910,7 @@ require_once("loadbooking.php");
                             </tr>
                         </table>
                     </div>
-                    <div title="Repair & Maintenance" style="padding:10px;font-size: 18px">
+                    <div id="HA_DivRMaintenance" title="Repair & Maintenance" data-title="Repair & Maintenance (RECOMMENDED – longer term)" style="padding:10px;font-size: 18px">
                         <table id="M_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                             <tr>
                                 <th colspan="5">
@@ -925,7 +925,7 @@ require_once("loadbooking.php");
                             <tr>
                                 <th>Category</th>
                                 <th>CODE</th>
-                                <th>Architect’s Comment</th>
+                                <th>Architect’s Comment (In addition to preset text only)</th>
                                 <th>Trade</th>
                                 <th>Cost-indicative</th>
                             </tr>
@@ -941,7 +941,7 @@ require_once("loadbooking.php");
                                         </select>
                                 </td>
                                 <td>
-                                    <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="M0_commentText"></textarea>
+                                    <textarea class="form-control" rows="5" id="M0_commentText"></textarea>
                                 </td>
                                 <td>
                                     <select class="form-control" id="M0_tradeSelect" onchange="tradeOnchange(this.id);">
@@ -956,7 +956,7 @@ require_once("loadbooking.php");
                             </tr>
                         </table>
                     </div>
-                    <div title="Energy Efficiency - Optional" style="padding:10px;font-size: 18px">
+                    <div id="HA_DivEnergyEfficiency" title="Energy Efficiency - Optional" data-title="Energy Efficiency - Optional" style="padding:10px;font-size: 18px">
                         <table id="E_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                             <tr>
                                 <td colspan="5">
@@ -966,7 +966,7 @@ require_once("loadbooking.php");
                             <tr>
                                 <th>Category</th>
                                 <th>CODE</th>
-                                <th>Architect’s Comment</th>
+                                <th>Architect’s Comment (In addition to preset text only)</th>
                                 <th>Trade </th>
                                 <th>Cost-indicative</th>
                             </tr>
@@ -978,7 +978,7 @@ require_once("loadbooking.php");
                                         </select>
                                 </td>
                                 <td>
-                                    <textarea placeholder="In addition to preset text only..." class="form-control" id="E_commentText"></textarea>
+                                    <textarea class="form-control" id="E_commentText"></textarea>
                                 </td>
                                 <td>
                                     <select id="E0_tradeSelect" class="form-control" onchange="tradeOnchange(this.id);">
