@@ -12,7 +12,7 @@ var btn_genferateHomeAccessReportPDF = function (mode) {
 
 //generalPDF(mode)
 function generateHomeAccessReportPDF(mode) {
-    console.log("generateHomeAccessReportPDF");
+//    console.log("generateHomeAccessReportPDF");
     //reset image number and general notes paragraphs number
     if (mode === 'save') {
         console.log('in Save');
@@ -485,7 +485,7 @@ function generateHomeAccessReportPDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, '*', '*', 200],
+                    widths: ['*', 'auto', '*', 150],
                     body: fieldNotesData
                 }
             },
@@ -521,7 +521,7 @@ function generateHomeAccessReportPDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, 'auto', 150],
+                    widths: [100, 'auto', 150, '*', 150],
                     body: HSConcernsData
                 }
             },
@@ -529,7 +529,7 @@ function generateHomeAccessReportPDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, 'auto', 150],
+                    widths: [100, 'auto', 150, '*', 150],
                     body: RepairMaintenanceData
                 }
             },
@@ -537,7 +537,7 @@ function generateHomeAccessReportPDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, 'auto', 150],
+                    widths: [100, 'auto', 150, '*', 150],
                     body: EnergyEfficiencyData
                 }
             }

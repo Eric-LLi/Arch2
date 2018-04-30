@@ -147,6 +147,8 @@ function determineFooter(mode) {
     if (mode === 'final' || mode === 'save') {
         if (state === 'NSW') {
             result = {
+                layout: 'noBorders',
+                margin: [40, 0, 10, 0],
                 table: {
                     widths: ['auto', 350],
                     body: [
@@ -176,11 +178,8 @@ function determineFooter(mode) {
                                 color: '#8E8B8B'
                             }
                         ]
-
                     ]
-                },
-                layout: 'noBorders',
-                margin: [40, 0, 10, 0]
+                }
             };
             return result;
         } else {
@@ -213,7 +212,7 @@ function determineFooter(mode) {
             return result;
         }
     }
-    if (mode == 'preview') {
+    if (mode === 'preview') {
         result = {
             text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
             alignment: 'left',
@@ -230,7 +229,7 @@ function determineFooter(mode) {
  * */
 function giveMeHugeDraft(mode) {
     var result;
-    if (mode == 'final' || mode == 'save') {
+    if (mode === 'final' || mode === 'save') {
         result = {
             text: ''
         };
