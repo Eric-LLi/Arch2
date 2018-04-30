@@ -2,10 +2,13 @@
  * Created by Fafa on 21/3/18.
  */
 var btn_genferateHomeAccessReportPDF = function (mode) {
-    generateHomeAccessReportPDF(mode);
+    if ($("#HA_BookingNo").val() === "0") {
+        alert("Please select order from main page. ");
+        $(location).attr("href", "index.php");
+    } else {
+        generateHomeAccessReportPDF(mode);
+    }
 };
-
-
 
 //generalPDF(mode)
 function generateHomeAccessReportPDF(mode) {
@@ -37,10 +40,23 @@ function generateHomeAccessReportPDF(mode) {
         }
     };
 
-    //Get All table cells data from Construction Summary table.
+    //Get all table cells data from Construction Summary table.
     var csData = getTableData_CS();
-    //Get All table cells data from Fault Summary table.
+    //Get all table cells data from Fault Summary table.
     var fsData = getTableData_FS();
+    //Get key explaination.
+    var keyExData = getKeyExplaination();
+    //Get all table cells data from Health Check & Safety Check table.
+    var hsCheckData = getTableData_HSCheck();
+    //Get all table cells data from Health Check & Safety Check table.
+    var rmCheckData = getTableData_RMCheck();
+    //Get all table cells data from Energy & Wastage Check table.
+    var ewCheckData = getTableData_EWCheck();
+    //Get all table ccells dat from Field Notes
+    var fieldNotesData = getTableData_FieldNotes();
+    //Get all table ccells dat from Health & Safety Concerns
+    var HSConcernsData = getTableData_HSConcerns();
+
 
     // Page start drawing from here...
     var docDefinition = {
@@ -84,10 +100,9 @@ function generateHomeAccessReportPDF(mode) {
                 image: coverPageLogo,
                 width: 160,
                 height: 160
-            }
-            ,
-            giveMeHugeDraft(mode)
-            , {
+            },
+            giveMeHugeDraft(mode),
+            {
                 text: [
                     {
                         text: page1,
@@ -111,12 +126,12 @@ function generateHomeAccessReportPDF(mode) {
             {
                 text: page2Header,
                 style: "pageTopHeader"
-            }
-            , {
+            },
+            {
                 text: page2subHeader,
                 margin: [0, 10, 0, 0]
-            }
-            , {
+            },
+            {
                 style: 'tableContent',
                 table: {
                     widths: ['auto', '*', '*', '*'],
@@ -224,8 +239,8 @@ function generateHomeAccessReportPDF(mode) {
                         ]
                     ]
                 }
-            }
-            , {
+            },
+            {
                 style: 'tableContent',
                 table: {
                     widths: ['100%'],
@@ -243,8 +258,8 @@ function generateHomeAccessReportPDF(mode) {
                         ]
                     ]
                 }
-            }
-            , {
+            },
+            {
                 text: [
                     {
                         text: page2_1 + "\n",
@@ -265,13 +280,13 @@ function generateHomeAccessReportPDF(mode) {
             {
                 text: page3Header,
                 style: 'pageTopHeader'
-            }
-            , {
+            },
+            {
                 text: page3SubHeader,
                 style: 'pageSubHeader',
                 margin: [0, 0, 0, 10]
-            }
-            , {
+            },
+            {
                 style: 'Contents',
                 stack: [
                     {
@@ -380,7 +395,6 @@ function generateHomeAccessReportPDF(mode) {
                     ]
                 }
             },
-
             //Constructure Summary
             {
                 style: 'tableContent',
@@ -390,16 +404,124 @@ function generateHomeAccessReportPDF(mode) {
                     body: csData
                 }
             },
-
+            //Key Explaination
+            {
+                alignment: 'center',
+                border: [true, true, true, false],
+                table: {
+                    widths: ['*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*'],
+                    body: keyExData
+                }
+            },
             //Fault Summary
             {
-                style: 'tableCintent',
+                style: 'tableContent',
                 table: {
                     headerRows: 1,
-                    widths: ['*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto'],
+                    widths: ['*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto'],
                     body: fsData
                 }
+            },
+            //Health Check & Safety Check
+            {
+                style: 'tableContent',
+                table: {
+                    headerRows: 1,
+                    widths: ['*', 'auto', '*', 'auto'],
+                    body: hsCheckData
+                }
+            },
+            //Repair & Mainentance Check
+            {
+                style: 'tableContent',
+                margin: [0, 0],
+                table: {
+                    widths: ['*', 'auto', '*', 'auto'],
+                    body: rmCheckData
+                }
+            },
+            //Notes
+            {
+                margin: [0, 0, 0, 30],
+                table: {
+                    widths: ['*'],
+                    body: [
+                        [
+                            {
+                                border: [true, false, true, true],
+                                stack: [
+                                    {
+                                        text: 'NOTES:',
+                                        bold: true,
+                                        fontSize: 12
+                                    },
+                                    {
+                                        fontSize: 10,
+                                        margin: [20, 0],
+                                        ol: [
+                                            '\t* Gravity fed HWS’s are generally unsuitable for hand held showers',
+                                            '\tAccess restrictions'
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            //Energy & Wastage Check
+            {
+                style: 'tableContent',
+                table: {
+                    widths: ['*', 'auto', '*', 'auto'],
+                    body: ewCheckData
+                }
+
+            },
+            //Field Notes
+            {
+                style: 'tableContent',
+                table: {
+                    widths: [100, '*', '*', 200],
+                    body: fieldNotesData
+                }
+            },
+            //Reminder
+            {
+                pageBreak: 'after',
+                fontSize: 10,
+                color: '#CC0000',
+                bold: true,
+                fillColor: '#CCCCCC',
+                layout: {
+                    hLineColor: '#CC0000',
+                    vLineColor: '#CC0000'
+                },
+                table: {
+                    widths: ['*'],
+                    body: [
+                        [
+                            {
+                                text: [
+                                   page6 + '\n\n', {
+                                        text: page6_2,
+                                        decoration: 'underline'
+                                    },
+                                    ' ' + page6_2_2 + '\n\n', page6_3
+                               ]
+                           }
+                        ]
+                    ]
+                }
             }
+            //Health & Safety Concerns
+//            {
+//                style: 'tableContent',
+//                table: {
+//                    widths: ['*', '*', 150, 'auto', 150],
+//                    body: HSConcernsData
+//                }
+//            }
         ],
         styles: {
             coverPageHeader: {

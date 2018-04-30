@@ -49,10 +49,11 @@ const page3_25_2 = "The architect can only access the reasonably and safely acce
 //Page four.
 const page4Header = "Home Access & Services";
 
-//Page Seven.
-const page7 = "**Please note that the above Checklists are a summary of your assessment.  These provide vital information to you and your service provider(s)..";
-const page7_2 = "**Only information correctly shown in the tables BELOW will be included in the Client’s Report along with relevant Design Sketches provided. Please do not write “As Above”";
-const page7_3 = "**Refer to the Shortcut menus for Item Codes, Categories and suggested costs for the 3 tables \(i.e. 1 month, 6 months & Optional\)";
+//Page Six.
+const page6 = "**Please note that the above Checklists are a summary of your assessment.  These provide vital information to you and your service provider(s)..";
+const page6_2 = "**Only information correctly shown in the tables BELOW will be included in the Client’s Report along with relevant Design Sketches provided."
+const page6_2_2 = "Please do not write “As Above”";
+const page6_3 = "**Refer to the Shortcut menus for Item Codes, Categories and suggested costs for the 3 tables \(i.e. 1 month, 6 months & Optional\)";
 
 //Page ten.
 const page10_Header = "Attachments";

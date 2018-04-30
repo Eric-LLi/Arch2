@@ -328,121 +328,121 @@ require_once("loadbooking.php");
                         <!--                                </form>-->
                     </div>
                     <div id="HA_DivFaultSummary" title="Fault Summary" data-title="Fault Summary" style="padding:10px;font-size: 18px">
-<!--                        <form>-->
-                            <div class="form-group">
-                                <table id="Table_FalSummary" class="table table-bordered" style="table-layout:fixed">
-                                    <tr>
-                                        <td colspan="4">
-                                            <button type="button" class="btn btn-primary" id="Button_FaultAdd">Add item</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label id="FS_lbFault_Trip">Trip &#38; Slop</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Trip">
+                        <!--                        <form>-->
+                        <div class="form-group">
+                            <table id="Table_FalSummary" class="table table-bordered" style="table-layout:fixed">
+                                <tr>
+                                    <td colspan="4">
+                                        <button type="button" class="btn btn-primary" id="Button_FaultAdd">Add item</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label id="FS_lbFault_Trip">Trip &#38; Slop</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Trip">
                                                     <option value="-1">Choose</option>
                                                 </select>
-                                        </td>
-                                        <td><label id="FS_lbFault_Crack">Cracking</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Crack">
+                                    </td>
+                                    <td><label id="FS_lbFault_Crack">Cracking</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Crack">
                                                     <option value="-1">Choose</option>
                                                 </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label id="FS_lbFault_Fire">Fire Hazards</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Fire">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label id="FS_lbFault_Fire">Fire Hazards</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Fire">
                                                     <option value="-1">Choose</option>
                                                 </select>
-                                        </td>
-                                        <td><label id="FS_lbFault_Stumps">Stumps/Piers</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Stumps">
+                                    </td>
+                                    <td><label id="FS_lbFault_Stumps">Stumps/Piers</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Stumps">
                                                     <option value="-1">Choose</option>
                                             </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label id="FS_lbFault_Health">Health Hazards</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Health">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label id="FS_lbFault_Health">Health Hazards</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Health">
                                                     <option value="-1">Choose</option>
                                             </select>
-                                        </td>
-                                        <td><label id="FS_lbFault_Illegal">Illegal Work</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Illegal">
+                                    </td>
+                                    <td><label id="FS_lbFault_Illegal">Illegal Work</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Illegal">
                                                     <option value="-1">Choose</option>
                                             </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label id="FS_lbFault_Electrics">Electrics</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Electrics">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label id="FS_lbFault_Electrics">Electrics</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Electrics">
                                                     <option value="-1">Choose</option>
                                                 </select>
-                                        </td>
-                                        <td><label id="FS_lbFault_Timber">Timber Rot</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Timber">
+                                    </td>
+                                    <td><label id="FS_lbFault_Timber">Timber Rot</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Timber">
                                                     <option value="-1">Choose</option>
                                             </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label id="FS_lbFault_Security">Security</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Security">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label id="FS_lbFault_Security">Security</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Security">
                                                     <option value="-1">Choose</option>
                                             </select>
-                                        </td>
-                                        <td><label id="FS_lbFault_Damp">Damp/Mould</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Damp">
+                                    </td>
+                                    <td><label id="FS_lbFault_Damp">Damp/Mould</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Damp">
                                                     <option value="-1">Choose</option>
                                             </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label id="FS_lbFault_Roof">Roof</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Roof">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label id="FS_lbFault_Roof">Roof</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Roof">
                                                     <option value="-1">Choose</option>
                                             </select>
-                                        </td>
-                                        <td><label id="FS_lbFault_Drainage">Drainage</label></td>
-                                        <td>
-                                            <select class="form-control" id="Fault_Drainage">
+                                    </td>
+                                    <td><label id="FS_lbFault_Drainage">Drainage</label></td>
+                                    <td>
+                                        <select class="form-control" id="Fault_Drainage">
                                                     <option value="-1">Choose</option>
                                             </select>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <td style="color:red;"><strong>Key</strong></td>
-                                        <td>√</td>
-                                        <td>No visible Fault</td>
-                                        <td>X</td>
-                                        <td>Maintenance Item</td>
-                                        <td>XX</td>
-                                        <td>Serious Fault</td>
-                                        <td>--</td>
-                                        <td>Not Applicable</td>
-                                    </tr>
-                                </table>
-                            </div>
-<!--                        </form>-->
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td style="color:red;"><strong>Key</strong></td>
+                                    <td>√</td>
+                                    <td>No visible Fault</td>
+                                    <td>X</td>
+                                    <td>Maintenance Item</td>
+                                    <td>XX</td>
+                                    <td>Serious Fault</td>
+                                    <td>--</td>
+                                    <td>Not Applicable</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--                        </form>-->
                     </div>
                 </div>
             </div>
             <!--First Tap Property Assessment-->
             <div title="Property Assessment" id="PAssessment" style="padding:10px;font-size: 18px">
                 <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
-                    <div title="Health Check & Safety Check" style="padding:10px;font-size: 18px">
+                    <div id="HA_DivHSCheck" title="Health Check & Safety Check" data-title="Health Check & Safety Check" style="padding:10px;font-size: 18px">
                         <table id="Table_HSCheck" class="table table-bordered" style="table-layout:fixed">
                             <tr>
                                 <td colspan="4">
@@ -450,13 +450,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Damp / Mould / Ventilation </td>
+                                <td><label id="HS_lbCheck_Damp">Damp / Mould / Ventilation</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Damp">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Glazing hazards </td>
+                                <td><label id="HS_lbCheck_GlazingHazards">Glazing hazards</label></td>
                                 <td>
                                     <select class="form-control" id="Check_GlazingHazards">
                                             <option value="-1">Choose</option>
@@ -464,13 +464,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Unsanitary conditions/Squalor </td>
+                                <td><label id="HS_lbCheck_Squalor">Unsanitary conditions/Squalor</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Squalor">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Hoarding </td>
+                                <td><label id="HS_lbCheck_Hoarding">Hoarding</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Hoarding">
                                             <option value="-1">Choose</option>
@@ -478,13 +478,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Vermin / signs of termites & borers </td>
+                                <td><label id="HS_lbCheck_Vermin">Vermin / signs of termites &#38; borers</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Vermin">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Heating </td>
+                                <td><label id="HS_lbCheck_Heating">Heating</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Heating">
                                             <option value="-1">Choose</option>
@@ -492,13 +492,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Flammable Risks </td>
+                                <td><label id="HS_lbCheck_FlammableRisks">Flammable Risks</label></td>
                                 <td>
                                     <select class="form-control" id="Check_FlammableRisks">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Electrical Hazards </td>
+                                <td><label id="HS_lbCheck_ElectricalHazards">Electrical Hazards</label></td>
                                 <td>
                                     <select class="form-control" id="Check_ElectricalHazards">
                                             <option value="-1">Choose</option>
@@ -506,13 +506,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Slip hazards </td>
+                                <td><label id="HS_lbCheck_SlipHazards">Slip hazards</label></td>
                                 <td>
                                     <select class="form-control" id="Check_SlipHazards">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Security: effective locks front and rear / window catches </td>
+                                <td><label id="HS_lbCheck_SecurityLocks">Security: effective locks front and rear / window catches</label></td>
                                 <td>
                                     <select class="form-control" id="Check_SecurityLocks">
                                             <option value="-1">Choose</option>
@@ -520,13 +520,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Trip hazards </td>
+                                <td><label id="HS_lbCheck_TripHazards">Trip hazards</label></td>
                                 <td>
                                     <select class="form-control" id="Check_TripHazards">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Smoke alarms (include if installed incorrectly) </td>
+                                <td><label id="HS_lbCheck_SmokeAlarms">Smoke alarms (include if installed incorrectly)</label></td>
                                 <td>
                                     <select class="form-control" id="Check_SmokeAlarms">
                                             <option value="-1">Choose</option>
@@ -534,13 +534,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> WC door - open able from outside </td>
+                                <td><label id="HS_lbCheck_WCdoor">WC door - open able from outside</label></td>
                                 <td>
                                     <select class="form-control" id="Check_WCdoor">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Other (e.g. security lights, visibility to front fence, ramp rails poor lighting) </td>
+                                <td><label id="HS_lbCheck_HealthOther">Other (e.g. security lights, visibility to front fence, ramp rails poor lighting)</label></td>
                                 <td>
                                     <select class="form-control" id="Check_HealthOther">
                                             <option value="-1">Choose</option>
@@ -562,22 +562,22 @@ require_once("loadbooking.php");
                             </tr>
                         </table>
                     </div>
-                    <div title="Repairs & Mainentance Check" style="padding:10px;font-size: 18px">
+                    <div id="HA_DivRMCheck" title="Repairs & Mainentance Check" data-title="Repairs & Mainentance Check" style="padding:10px;font-size: 18px">
                         <table id="Table_RMCheck_S" class="table table-bordered" style="table-layout:fixed">
                             <tr>
-                                <td> <strong>Structure</strong> </td>
+                                <td><strong id="Strong_RMStructure">Structure</strong></td>
                                 <td colspan="3">
                                     <button type="button" class="btn btn-primary" id="Button_RMCheckAdd_S">Add item</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Roof</td>
+                                <td><label id="RM_lbCheck_Roof">Roof</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Roof">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td>Ceiling</td>
+                                <td><label id="RM_lbCheck_Ceiling">Ceiling</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Ceiling">
                                             <option value="-1">Choose</option>
@@ -585,13 +585,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Walls </td>
+                                <td><label id="RM_lbCheck_Walls">Walls</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Walls">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Floor / Subfloor </td>
+                                <td><label id="RM_lbCheck_Floor">Floor / Subfloor</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Floor">
                                             <option value="-1">Choose</option>
@@ -601,73 +601,74 @@ require_once("loadbooking.php");
                         </table>
                         <table id="Table_RMCheck_O" class="table table-bordered" style="table-layout:fixed">
                             <tr>
-                                <td> <strong>Other</strong> </td>
+                                <td><strong id="Strong_RMOther">Other</strong></td>
                                 <td colspan="3">
                                     <button type="button" class="btn btn-primary" id="Button_RMCheckAdd_O">Add item</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td> Gutters / drainage </td>
+                                <td><label id="RM_lbCheck_Gutters">Gutters / drainage</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Gutters">
                                             <option value="-1">Choose</option>
-                                        </select>
+                                    </select>
                                 </td>
-                                <td> Decks, Balconies & Pergolas </td>
+                                <td><label id="RM_lbCheck_Decks">Decks, Balconies &#38; Pergolas</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Decks">
                                             <option value="-1">Choose</option>
-                                        </select>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td> Windows </td>
+                                <td><label id="RM_lbCheck_Windows">Windows</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Windows">
                                             <option value="-1">Choose</option>
-                                        </select>
+                                    </select>
                                 </td>
-                                <td> Fences </td>
+                                <td><label id="RM_lbCheck_Fences">Fences</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Fences">
                                             <option value="-1">Choose</option>
-                                        </select>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td> Surfaces (e.g. painting, tiling) </td>
+                                <td><label id="RM_lbCheck_Surfaces">Surfaces (e.g. painting, tiling)</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Surfaces">
                                             <option value="-1">Choose</option>
-                                        </select>
+                                    </select>
                                 </td>
-                                <td> Illegal building work </td>
+                                <td><label id="RM_lbCheck_IllegalBuildingWork">Illegal building work</label></td>
                                 <td>
                                     <select class="form-control" id="Check_IllegalBuildingWork">
                                             <option value="-1">Choose</option>
-                                        </select>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td> Plumbing </td>
+                                <td><label id="RM_lbCheck_Plumbing">Plumbing</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Plumbing">
                                             <option value="-1">Choose</option>
-                                        </select>
+                                    </select>
                                 </td>
-                                <td> Hot Water System - HWS* </td>
+                                <td><label id="RM_lbCheck_HotwaterSystem">Hot Water System - HWS*</label></td>
                                 <td>
                                     <select class="form-control" id="Check_HotwaterSystem">
                                             <option value="-1">Choose</option>
-                                        </select>
+                                    </select>
                                 </td>
                             </tr>
                         </table>
                         <table class="table table-bordered" style="table-layout:fixed">
                             <tr>
-                                <td colspan="4"> <strong>NOTES:</strong>
+                                <td colspan="4"><strong>NOTES:</strong>
                                     <br> 1 * Gravity fed HWS’s are generally unsuitable for hand held showers
-                                    <br> 2 Access restrictions </td>
+                                    <br> 2 Access restrictions
+                                </td>
                             </tr>
                         </table>
                         <table class="table table-bordered">
@@ -684,7 +685,7 @@ require_once("loadbooking.php");
                             </tr>
                         </table>
                     </div>
-                    <div title="Energy & Wastage Check" style="padding:10px;font-size: 18px">
+                    <div id="HA_DivEWCheck" title="Energy & Wastage Check" data-title="Energy & Wastage Check" style="padding:10px;font-size: 18px">
                         <table id="Table_EWCheck" class="table table-bordered" style="table-layout:fixed">
                             <tr>
                                 <td colspan="4">
@@ -692,13 +693,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Dual-Flush toilet </td>
+                                <td><label id="EW_lbCheck_DualFlushToilet">Dual-Flush toilet</label></td>
                                 <td>
                                     <select class="form-control" id="Check_DualFlushToilet">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Window seals </td>
+                                <td><label id="EW_lbCheck_WindowSeals">Window seals</label></td>
                                 <td>
                                     <select class="form-control" id="Check_WindowSeals">
                                             <option value="-1">Choose</option>
@@ -706,13 +707,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Draught-proof exhaust fan </td>
+                                <td><label id="EW_lbCheck_DraughtProofExhaustFan">Draught-proof exhaust fan</label></td>
                                 <td>
                                     <select class="form-control" id="Check_DraughtProofExhaustFan">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Pelmets / Curtains </td>
+                                <td><label id="EW_lbCheck_Pelmets">Pelmets / Curtains</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Pelmets">
                                             <option value="-1">Choose</option>
@@ -720,13 +721,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Low-flow shower head </td>
+                                <td><label id="EW_lbCheck_LowFlowShowerHead">Low-flow shower head</label></td>
                                 <td>
                                     <select class="form-control" id="Check_LowFlowShowerHead">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Door seals </td>
+                                <td><label id="EW_lbCheck_DoorSeals">Door seals</label></td>
                                 <td>
                                     <select class="form-control" id="Check_DoorSeals">
                                             <option value="-1">Choose</option>
@@ -734,13 +735,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Watertight cistern </td>
+                                <td><label id="EW_lbCheck_WatertightCistern">Watertight cistern</label></td>
                                 <td>
                                     <select class="form-control" id="Check_WatertightCistern">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Electrical </td>
+                                <td><label id="EW_lbCheck_Electrical">Electrical</label></td>
                                 <td>
                                     <select class="form-control" id="Check_Electrical">
                                             <option value="-1">Choose</option>
@@ -748,13 +749,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Watertight taps </td>
+                                <td><label id="EW_lbCheck_WatertightTaps">Watertight taps</label></td>
                                 <td>
                                     <select class="form-control" id="Check_WatertightTaps">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Shaded west windows </td>
+                                <td><label id="EW_lbCheck_ShadedWestWindows">Shaded west windows</label></td>
                                 <td>
                                     <select class="form-control" id="Check_ShadedWestWindows">
                                             <option value="-1">Choose</option>
@@ -762,13 +763,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Ceiling insulation </td>
+                                <td><label id="EW_lbCheck_CeilingInsulation">Ceiling insulation</label></td>
                                 <td>
                                     <select class="form-control" id="Check_CeilingInsulation">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Low Energy Light Globes </td>
+                                <td><label id="EW_lbCheck_LowEnergyLightGlobes">Low Energy Light Globes</label></td>
                                 <td>
                                     <select class="form-control" id="Check_LowEnergyLightGlobes">
                                             <option value="-1">Choose</option>
@@ -776,13 +777,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Solar panels </td>
+                                <td><label id="EW_lbCheck_SolarPanels">Solar panels</label></td>
                                 <td>
                                     <select class="form-control" id="Check_SolarPanels">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Solar HWS </td>
+                                <td><label id="EW_lbCheck_SolarHWS">Solar HWS</label></td>
                                 <td>
                                     <select class="form-control" id="Check_SolarHWS">
                                             <option value="-1">Choose</option>
@@ -790,13 +791,13 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Water tank </td>
+                                <td><label id="EW_lbCheck_WaterTank">Water tank</label></td>
                                 <td>
                                     <select class="form-control" id="Check_WaterTank">
                                             <option value="-1">Choose</option>
                                         </select>
                                 </td>
-                                <td> Grey water recycling system </td>
+                                <td><label id="EW_lbCheck_GreyWaterRecyclingSystem">Grey water recycling system</label></td>
                                 <td>
                                     <select class="form-control" id="Check_GreyWaterRecyclingSystem">
                                             <option value="-1">Choose</option>
@@ -818,10 +819,10 @@ require_once("loadbooking.php");
                             </tr>
                         </table>
                     </div>
-                    <div title="Field Notes" style="padding:10px;font-size: 18px">
-                        <table class="table table-bordered" style="table-layout:fixed">
+                    <div id="HA_DivFieldNotes" title="Field Notes" data-title="Field Notes" style="padding:10px;font-size: 18px">
+                        <table id="Table_FieldNotes" class="table table-bordered" style="table-layout:fixed">
                             <tr>
-                                <td> In Attendance During Assessment </td>
+                                <td><label id="FN_lbField_Attendance">In Attendance During Assessment</label></td>
                                 <td>
                                     <select class="form-control" id="Field_Attendance">
                                             <option value="-1">Choose</option>
@@ -831,7 +832,7 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Client </td>
+                                <td><label id="FN_lbField_Client">Client</label></td>
                                 <td>
                                     <select class="form-control" id="Field_Client">
                                             <option value="-1">Choose</option>
@@ -841,7 +842,7 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Occupational Therapist </td>
+                                <td><label id="FN_lbField_Therapist">Occupational Therapist</label></td>
                                 <td>
                                     <select class="form-control" id="Field_Therapist">
                                             <option value="-1">Choose</option>
@@ -851,7 +852,7 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <td> Others </td>
+                                <td><label id="FN_lbField_Others">Others</label></td>
                                 <td>
                                     <textarea class="form-control" rows="5" id="Field_Others"></textarea>
                                 </td>
@@ -863,11 +864,11 @@ require_once("loadbooking.php");
             <!--First Tap Architect’s Solution-->
             <div title="Architect’s Solutions" id="ASolution" style="padding:10px;font-size: 18px">
                 <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
-                    <div title="Health & Safety Concerns" style="padding:10px;font-size: 18px">
+                    <div id="HA_DivHSConcerns" title="Health & Safety Concerns" data-title="Health & Safety Concerns \(Urgent - within 1 month\)" style="padding:10px;font-size: 18px">
                         <table id="C_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                             <tr>
                                 <th colspan="5">
-                                    <p class="text-center bg-danger text-white"> Urgent - within 1 month. </p>
+                                    <p class="text-center bg-danger text-white">Urgent - within 1 month.</p>
                                 </th>
                             </tr>
                             <tr>
@@ -876,11 +877,11 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <th> Category </th>
-                                <th> CODE </th>
-                                <th> Architect’s Comment </th>
-                                <th> Trade </th>
-                                <th> Cost-indicative </th>
+                                <th>Category</th>
+                                <th>CODE</th>
+                                <th>Architect’s Comment (In addition to preset text only)</th>
+                                <th>Trade</th>
+                                <th>Cost-indicative</th>
                             </tr>
                             <tr>
                                 <td>
@@ -894,7 +895,7 @@ require_once("loadbooking.php");
                                         </select>
                                 </td>
                                 <td>
-                                    <textarea placeholder="In addition to preset text only..." class="form-control" rows="5" id="C0_commentText"></textarea>
+                                    <textarea class="form-control" rows="5" id="C0_commentText"></textarea>
                                 </td>
                                 <td>
                                     <select class="form-control" id="C0_tradeSelect" onchange="tradeOnchange(this.id);">
@@ -913,7 +914,7 @@ require_once("loadbooking.php");
                         <table id="M_SolutionTable" class="table table-bordered" style="table-layout:fixed">
                             <tr>
                                 <th colspan="5">
-                                    <p class="text-center bg-primary text-white"> Recommended - longer term. </p>
+                                    <p class="text-center bg-primary text-white">Recommended - longer term.</p>
                                 </th>
                             </tr>
                             <tr>
@@ -922,11 +923,11 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <th> Category </th>
-                                <th> CODE </th>
-                                <th> Architect’s Comment </th>
-                                <th> Trade </th>
-                                <th> Cost-indicative </th>
+                                <th>Category</th>
+                                <th>CODE</th>
+                                <th>Architect’s Comment</th>
+                                <th>Trade</th>
+                                <th>Cost-indicative</th>
                             </tr>
                             <tr>
                                 <td>
@@ -963,14 +964,14 @@ require_once("loadbooking.php");
                                 </td>
                             </tr>
                             <tr>
-                                <th> Category </th>
-                                <th> CODE </th>
-                                <th> Architect’s Comment </th>
-                                <th> Trade </th>
-                                <th> Cost-indicative </th>
+                                <th>Category</th>
+                                <th>CODE</th>
+                                <th>Architect’s Comment</th>
+                                <th>Trade </th>
+                                <th>Cost-indicative</th>
                             </tr>
                             <tr>
-                                <td> Enenrgy Efficiency </td>
+                                <td>Enenrgy Efficiency</td>
                                 <td>
                                     <select class="form-control" id="E0_code">
                                             <option value="-1" disabled selected>Internal use</option>
@@ -1021,7 +1022,7 @@ require_once("loadbooking.php");
                                 </select>
                         </div>
                         <div class="col-sm-4">
-                            <label>Treatment of Dampness </label>
+                            <label>Treatment of Dampness</label>
                             <select id="treatmentOfDampness" style="width:100%" title="treatment of dampness">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
@@ -1032,7 +1033,7 @@ require_once("loadbooking.php");
                                 </select>
                         </div>
                         <div class="col-sm-4">
-                            <label>Health & Safety Warning</label>
+                            <label>Health &#38; Safety Warning</label>
                             <select id='healthSafetyWarning' style="width:100%" title="health and safety warning">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
@@ -1043,7 +1044,7 @@ require_once("loadbooking.php");
                                 </select>
                         </div>
                         <div class="col-sm-4">
-                            <label>Roofing & Guttering </label>
+                            <label>Roofing &#38; Guttering</label>
                             <select id="roofingGuttering" style="width:100%" title="Roofing & Guttering">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
@@ -1054,7 +1055,7 @@ require_once("loadbooking.php");
                                 </select>
                         </div>
                         <div class="col-sm-4">
-                            <label>Re-stumping </label>
+                            <label>Re-stumping</label>
                             <select id="reStumping" style="width:100%" title="Roofing & Guttering">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
@@ -1065,7 +1066,7 @@ require_once("loadbooking.php");
                                 </select>
                         </div>
                         <div class="col-sm-4">
-                            <label>Termites & Borers</label>
+                            <label>Termites &#38; Borers</label>
                             <select id='termitesBorers' style="width:100%" title="health and safety warning">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>

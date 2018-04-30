@@ -247,6 +247,7 @@ function giveMeHugeDraft(mode) {
         return result;
     }
 }
+
 //Get all table cells data from Construction Summary
 function getTableData_CS() {
     var data = [],
@@ -270,13 +271,13 @@ function getTableData_CS() {
         //Loop all elements in each tr.
         $(tableTr[i]).children().each(function () {
             //Get first element in each td.
-            var cellString = $(this).get(0).firstElementChild;
+            var cellElement = $(this).get(0).firstElementChild;
             //console.log(cellString);
-            switch (cellString.tagName) {
+            switch (cellElement.tagName) {
                 case 'LABEL':
                     //                console.log($(cellString).text());
                     row.push({
-                        text: $(cellString).text(),
+                        text: $(cellElement).text(),
                         alignment: 'center',
                         bold: true
                     });
@@ -289,7 +290,10 @@ function getTableData_CS() {
                         data.push(row);
                         row = [];
                     }
-                    row.push($(cellString).val());
+                    row.push({
+                        text: $(cellElement).find("option:selected").text(),
+                        alignment: 'center'
+                    });
                     break;
                 case 'INPUT':
                     //                console.log($(cellString).val());
@@ -299,7 +303,10 @@ function getTableData_CS() {
                         data.push(row);
                         row = [];
                     }
-                    row.push($(cellString).val());
+                    row.push({
+                        text: $(cellElement).val(),
+                        alignment: 'center'
+                    });
                     break;
             }
             tdCount++;
@@ -324,11 +331,11 @@ function getTableData_FS() {
 
     //First push caption. span 12 column.
     data.push([{
-        colSpan: 12,
+        colSpan: 10,
         text: $('#HA_DivFaultSummary').attr('data-title'),
         style: 'pageSubHeader',
         alignment: 'left'
-    }, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
+    }, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
 
     //Get Fault Summary table.
     var tableTr = $('#Table_FalSummary tr');
@@ -339,54 +346,50 @@ function getTableData_FS() {
         //Loop all child elements in tr.
         $(tableTr[i]).children().each(function () {
             //Get element in td.
-            var cellString = $(this).get(0).firstElementChild;
+            var cellElement = $(this).get(0).firstElementChild;
             //console.log(cellString);
-            switch (cellString.tagName) {
+            switch (cellElement.tagName) {
                 case 'LABEL':
                     //                console.log($(cellString).text());
                     //Each row only has 12 column. If more than 12 then create new row.
-                    if (tdCount == 13) {
+                    if (tdCount == 11) {
                         tdCount = 1;
                         data.push(row);
                         row = [];
                     }
 
                     row.push({
-                        text: $(cellString).text(),
+                        text: $(cellElement).text(),
                         alignment: 'center',
                         bold: true
                     });
                     break;
                 case 'SELECT':
-                    //                console.log($(cellString).val());
-                    //Each row only has 12 column. If more than 12 then create new row.
-                    if (tdCount == 13) {
-                        tdCount = 1;
-                        data.push(row);
-                        row = [];
-                    }
                     //console.log($(cellString).find("option:selected").text());
-                    row.push($(cellString).find("option:selected").text());
+                    row.push($(cellElement).find("option:selected").text());
                     break;
                 case 'INPUT':
                     //                console.log($(cellString).val());
                     //Each row only has 12 column. If more than 12 then create new row.
-                    if (tdCount == 13) {
+                    if (tdCount == 11) {
                         tdCount = 1;
                         data.push(row);
                         row = [];
                     }
-                    row.push($(cellString).val());
+                    row.push({
+                        text: $(cellElement).val(),
+                        alignment: 'center',
+                        bold: true
+                    });
                     break;
             }
             tdCount++;
         });
     }
     //Fill with empty colums, if the row does not have 12 columns.
-    for (var i = tdCount; i < 13; i++) {
+    for (var i = tdCount; i < 11; i++) {
         row.push({});
     }
-
     //Fill in last row.
     data.push(row);
     //console.log(data);
@@ -394,4 +397,415 @@ function getTableData_FS() {
 }
 
 //Get all table cells data from Health Check&Safety Check.
+function getTableData_HSCheck() {
+    var data = [],
+        row = [],
+        tdCount = 1;
 
+    data.push([{
+        colSpan: 4,
+        text: $('#HA_DivHSCheck').attr('data-title'),
+        style: 'pageSubHeader',
+        alignment: 'left'
+    }, {}, {}, {}]);
+
+    var tableTr = $('#Table_HSCheck tr');
+    //console.log(tableTr);
+    for (var i = 1; i < tableTr.length; i++) {
+        $(tableTr[i]).children().each(function () {
+            var cellElement = $(this).get(0).firstElementChild;
+            //console.log(cellElement);
+            switch (cellElement.tagName) {
+                case 'LABEL':
+                    //                console.log($(cellString).text());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+
+                    row.push({
+                        text: $(cellElement).text(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+                case 'SELECT':
+                    row.push($(cellElement).find("option:selected").text());
+                    break;
+                case 'INPUT':
+                    //                console.log($(cellString).val());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).val(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+            }
+            tdCount++;
+        });
+    }
+    //Fill with empty colums, if the row does not have 4 columns.
+    for (var i = tdCount; i < 5; i++) {
+        row.push({});
+    }
+    //Fill in last row.
+    data.push(row);
+    //console.log(data);
+    return data;
+}
+
+//Get all table cells data from Repairs & Mainentance Check.
+function getTableData_RMCheck() {
+    var data = [],
+        row = [],
+        tdCount = 1;
+
+    //First row.
+    data.push([{
+        colSpan: 4,
+        text: $('#HA_DivRMCheck').attr('data-title'),
+        style: 'pageSubHeader',
+        alignment: 'left'
+    }, {}, {}, {}]);
+
+    //Second row.
+    data.push([{
+        colSpan: 4,
+        text: $('#Strong_RMStructure').text(),
+        bold: true,
+        fontSize: 12
+    }, {}, {}, {}]);
+
+    var tableTr = $('#Table_RMCheck_S tr');
+
+    for (var i = 1; i < tableTr.length; i++) {
+        $(tableTr[i]).children().each(function () {
+            var cellElement = $(this).get(0).firstElementChild;
+            //console.log(cellElement);
+            switch (cellElement.tagName) {
+                case 'LABEL':
+                    //                console.log($(cellString).text());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+
+                    row.push({
+                        text: $(cellElement).text(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+                case 'SELECT':
+                    //                console.log($(cellString).val());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push($(cellElement).find("option:selected").text());
+                    break;
+                case 'INPUT':
+                    //                console.log($(cellString).val());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).val(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+            }
+            tdCount++;
+        });
+    }
+    //Fill with empty colums, if the row does not have 4 columns.
+    for (var i = tdCount; i < 5; i++) {
+        row.push({});
+    }
+    //Fill in last row.
+    data.push(row);
+    //console.log(data);
+
+    data.push([{
+        colSpan: 4,
+        text: $('#Strong_RMOther').text(),
+        bold: true,
+        fontSize: 12
+    }, {}, {}, {}]);
+
+    tableTr = $('#Table_RMCheck_O tr');
+    row = [];
+    tdCount = 1;
+
+    for (i = 1; i < tableTr.length; i++) {
+        $(tableTr[i]).children().each(function () {
+            var cellElement = $(this).get(0).firstElementChild;
+            //console.log(cellElement);
+            switch (cellElement.tagName) {
+                case 'LABEL':
+                    //                console.log($(cellString).text());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).text(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+                case 'SELECT':
+                    row.push($(cellElement).find("option:selected").text());
+                    break;
+                case 'INPUT':
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).val(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+            }
+            tdCount++;
+        });
+    }
+    //Fill with empty colums, if the row does not have 4 columns.
+    for (var i = tdCount; i < 5; i++) {
+        row.push({});
+    }
+    //Fill in last row.
+    data.push(row);
+
+    return data;
+}
+
+//Get all table cells data from Energy & Wastage Check
+function getTableData_EWCheck() {
+    var data = [],
+        row = [],
+        tdCount = 1;
+
+    data.push([{
+        colSpan: 4,
+        text: $('#HA_DivEWCheck').attr('data-title'),
+        style: 'pageSubHeader',
+        alignment: 'left'
+    }, {}, {}, {}]);
+
+    var tableTr = $('#Table_EWCheck tr');
+    //console.log(tableTr);
+    for (var i = 1; i < tableTr.length; i++) {
+        $(tableTr[i]).children().each(function () {
+            var cellElement = $(this).get(0).firstElementChild;
+            //console.log(cellElement);
+            switch (cellElement.tagName) {
+                case 'LABEL':
+                    //                console.log($(cellString).text());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+
+                    row.push({
+                        text: $(cellElement).text(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+                case 'SELECT':
+                    row.push($(cellElement).find("option:selected").text());
+                    break;
+                case 'INPUT':
+                    //                console.log($(cellString).val());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).val(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+            }
+            tdCount++;
+        });
+    }
+    //Fill with empty colums, if the row does not have 4 columns.
+    for (var i = tdCount; i < 5; i++) {
+        row.push({});
+    }
+    //Fill in last row.
+    data.push(row);
+    //console.log(data);
+    return data;
+}
+
+//Get all table ccells dat from Field Notes
+function getTableData_FieldNotes() {
+    var data = [],
+        row = [],
+        tdCount = 1;
+
+    data.push([{
+        colSpan: 4,
+        text: $('#HA_DivFieldNotes').attr('data-title'),
+        style: 'pageSubHeader',
+        alignment: 'left'
+    }, {}, {}, {}]);
+
+    var tableTr = $('#Table_FieldNotes tr');
+    //console.log(tableTr);
+    for (var i = 0; i < tableTr.length; i++) {
+        $(tableTr[i]).children().each(function () {
+            var cellElement = $(this).get(0).firstElementChild;
+            //console.log(cellElement);
+            switch (cellElement.tagName) {
+                case 'LABEL':
+                    //                console.log($(cellString).text());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).text(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+                case 'SELECT':
+                    row.push($(cellElement).find("option:selected").text());
+                    break;
+                case 'TEXTAREA':
+                    //                console.log($(cellString).val());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).val(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+            }
+            tdCount++;
+        });
+    }
+    //Fill with empty colums, if the row does not have 4 columns.
+    for (var i = tdCount; i < 5; i++) {
+        row.push({});
+    }
+    //Fill in last row.
+    data.push(row);
+    //console.log(data);
+    return data;
+}
+
+//Get all table ccells dat from Health & Safety Concerns
+function getTableData_HSConcerns() {
+    var data = [],
+        row = [],
+        tdCount = 1;
+
+    //First row.
+    data.push([{
+        colSpan: 5,
+        text: $('#HA_DivHSConcerns').attr('data-title'),
+        style: 'pageSubHeader',
+        alignment: 'left'
+    }, {}, {}, {}, {}]);
+
+    var tableTr = $('#C_SolutionTable tr');
+
+    //Second row. Caption
+    data.push([{
+        text: tableTr.get(2).children[0].innerHTML
+    }, {
+        text: tableTr.get(2).children[1].innerHTML
+    }, {
+        text: tableTr.get(2).children[2].innerHTML
+    }, {
+        text: tableTr.get(2).children[3].innerHTML
+    }, {
+        text: tableTr.get(2).children[4].innerHTML
+    }]);
+
+    //Start from third row.
+    for (var i = 3; i < tableTr.length; i++) {
+        $(tableTr[i]).children().each(function () {
+            var cellElement = $(this).get(0).children;
+
+            console.log(cellElement);
+            switch (cellElement.tagName) {
+                case 'SELECT':
+                    row.push($(cellElement).find("option:selected").text());
+                    break;
+                case 'TEXTAREA':
+                    //                console.log($(cellString).val());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).val(),
+                        alignment: 'center',
+                        bold: true
+                    });
+                    break;
+            }
+            tdCount++;
+        });
+    }
+    //Fill with empty colums, if the row does not have 4 columns.
+    for (var i = tdCount; i < 5; i++) {
+        row.push({});
+    }
+    //Fill in last row.
+    data.push(row);
+    //console.log(data);
+    return data;
+}
+
+//Create key Explaination data.
+function getKeyExplaination() {
+    var data = [];
+    data.push([{
+        text: 'KEY',
+        style: 'pageSubHeader'
+        }, '√', 'No visible Fault', 'X', 'Maintenance Item', 'XX', 'Serious Fault', '--', 'Not Applicable']);
+
+    return data;
+}
