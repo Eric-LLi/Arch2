@@ -637,6 +637,7 @@ function generateHomeAccessReportPDF(mode) {
             },
             //images and pdfs
             {
+                layout: 'noBorders',
                 table: {
                     widths: ['*', '*'],
                     body: imagesPDFData

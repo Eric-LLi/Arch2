@@ -247,6 +247,88 @@ function giveMeHugeDraft(mode) {
     }
 }
 
+//Get all images and pdfs.
+function getImagePDF() {
+    var data = [],
+        row = [],
+        tdCount = 1,
+        imgContent = $('#HA_ImgsContents div'),
+        pdfContent = $('#HA_PdfContents div'),
+        img, imgSrc;
+
+    for (var i = 0; i < imgContent.length; i++) {
+        img = imgContent.eq(i).children('img');
+
+        if (img.attr('src').includes("photos/"))
+            imgSrc = convertImgToBase64(img.get(0));
+        else {
+            imgSrc = img.attr('src');
+        }
+        row.push({
+            stack: [
+                {
+                    image: imgSrc,
+                    width: 150,
+                    height: 150
+                },
+                {
+                    text: $(imgContent.eq(i).children('input')).val()
+                }
+            ]
+        });
+//        console.log($(imgContent.eq(i).children('input')).val());
+        tdCount++;
+        if (tdCount === 3) {
+            data.push(row);
+            tdCount = 1;
+            row = [];
+        }
+    }
+    if (tdCount === 2) {
+        row.push({});
+        data.push(row);
+    }
+
+    //    console.log(data);
+    row = [];
+    if (tdCount !== 1)
+        tdCount = 1;
+    for (i = 0; i < pdfContent.length; i++) {
+        img = pdfContent.eq(i).children('img');
+
+        if (img.attr('src').includes("photos/"))
+            imgSrc = convertImgToBase64(img.get(0));
+        else {
+            imgSrc = img.attr('src');
+        }
+
+        row.push({
+            stack: [
+                {
+                    image: imgSrc,
+                    width: 150,
+                    height: 150
+                },
+                {
+                    text: $(pdfContent.eq(i).children('input')).val()
+                }
+            ]
+        });
+        tdCount++;
+        if (tdCount === 3) {
+            data.push(row);
+            tdCount = 1;
+            row = [];
+        }
+    }
+    if (tdCount === 2) {
+        row.push({});
+        data.push(row);
+    }
+//    console.log(data);
+    return data;
+}
+
 //Get all table cells data from Construction Summary
 function getTableData_CS() {
     var data = [],
@@ -1010,71 +1092,7 @@ function getTableData_Attachments() {
     return data;
 }
 
-//Get all images and pdfs.
-function getImagePDF() {
-    var data = [],
-        row = [],
-        tdCount = 1,
-        imgContent = $('#HA_ImgsContents div'),
-        pdfContent = $('#HA_PdfContents div'),
-        imgSrc;
 
-    for (var i = 0; i < imgContent.length; i++) {
-        //        console.log(convertImgToBase64(imgContent.eq(i).children('img').get(0)));
-
-        imgSrc = imgContent.eq(i).children('img').attr('src');
-        if (imgSrc.indexOf("photos/"))
-            imgSrc = convertImgToBase64(imgSrc);
-        row.push({
-            //            text: '123',
-            stack: [
-                {
-                    image: imgSrc,
-                    width: 150,
-                    height: 150
-                },
-                $(imgContent.eq(i).children('input').val())
-            ]
-
-        });
-        tdCount++;
-        if (tdCount === 3) {
-            data.push(row);
-            tdCount = 1;
-            row = [];
-        }
-    }
-    if (tdCount === 2) {
-        row.push({});
-    }
-    data.push(row);
-    row = [];
-    if (tdCount !== 1)
-        tdCount = 1;
-    for (i = 0; i < pdfContent.length; i++) {
-        row.push({
-            //            text: '456',
-            image: convertImgToBase64(pdfContent.eq(i).children('img').get(0)),
-            width: 150,
-            height: 150
-        });
-        tdCount++;
-
-        if (tdCount === 3) {
-            data.push(row);
-            tdCount = 1;
-            row = [];
-        }
-    }
-    if (tdCount === 2) {
-        row.push({});
-    }
-    if (tdCount !== 1)
-        data.push(row);
-
-    console.log(data);
-    return data;
-}
 
 function convertImgToBase64(img) {
     var canvas = document.createElement("canvas");
