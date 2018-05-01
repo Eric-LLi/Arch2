@@ -996,12 +996,14 @@ require_once("loadbooking.php");
                 </div>
             </div>
             <!--First Tap Attachment-->
-            <div title="Attachment" style="padding: 10px;font-size: 18px">
-                <div class="container" style="margin-top: 20px">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label>Property Management Guide</label>
-                            <select id="propertyMaintenanceGuide" style="width:100%" title="property management guide">
+            <div id="HA_DivAttachments" title="Attachments" data-title="Attachments" style="padding: 10px;font-size: 18px">
+                <!--                <div class="container" style="margin-top: 20px">-->
+                <!--                    <div class="row">-->
+                <!--                        <div class="col-sm-4">-->
+                <table id="Table_attachments" class="table table-bordered" style="table-layout:fixed">
+                    <tr>
+                        <td><label>Property Maintenance Guide</label>
+                            <select id="propertyMaintenanceGuide" style="width:100%" title="Property Maintenance Guide">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
                                     </optgroup>
@@ -1009,10 +1011,21 @@ require_once("loadbooking.php");
                                         <option value="NA">Not applicable, no such item</option>
                                     </optgroup>
                                 </select>
-                        </div>
-                        <div class="col-sm-4">
+                        </td>
+                        <td>
+                            <label>Home Safety Checklist</label>
+                            <select id="homeSafetyCheckList" style="width:100%" title="Home Safety Checklist">
+                                    <optgroup label="No Visible Significant Defect">
+                                        <option value="√">✔</option>
+                                    </optgroup>
+                                    <optgroup label="Major Defect">
+                                        <option value="NA">Not applicable, no such item</option>
+                                    </optgroup>
+                                </select>
+                        </td>
+                        <td>
                             <label>Cracking in Masonry</label>
-                            <select id="crackingInMasonry" style="width:100%" title="cracking in masonry">
+                            <select id="crackingInMasonry" style="width:100%" title="Cracking in Masonry">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
                                     </optgroup>
@@ -1020,10 +1033,12 @@ require_once("loadbooking.php");
                                         <option value="NA">Not applicable, no such item</option>
                                     </optgroup>
                                 </select>
-                        </div>
-                        <div class="col-sm-4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <label>Treatment of Dampness</label>
-                            <select id="treatmentOfDampness" style="width:100%" title="treatment of dampness">
+                            <select id="treatmentOfDampness" style="width:100%" title="Treatment of Dampness">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
                                     </optgroup>
@@ -1031,10 +1046,10 @@ require_once("loadbooking.php");
                                         <option value="NA">Not applicable, no such item</option>
                                     </optgroup>
                                 </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>Health &#38; Safety Warning</label>
-                            <select id='healthSafetyWarning' style="width:100%" title="health and safety warning">
+                        </td>
+                        <td>
+                            <label>Health &amp; Safety Warning</label>
+                            <select id='healthSafetyWarning' style="width:100%" title="Health & Safety Warning">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
                                     </optgroup>
@@ -1042,9 +1057,9 @@ require_once("loadbooking.php");
                                         <option value="NA">Not applicable, no such item</option>
                                     </optgroup>
                                 </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>Roofing &#38; Guttering</label>
+                        </td>
+                        <td>
+                            <label>Roofing &amp; Guttering</label>
                             <select id="roofingGuttering" style="width:100%" title="Roofing & Guttering">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
@@ -1053,10 +1068,12 @@ require_once("loadbooking.php");
                                         <option value="NA">Not applicable, no such item</option>
                                     </optgroup>
                                 </select>
-                        </div>
-                        <div class="col-sm-4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <label>Re-stumping</label>
-                            <select id="reStumping" style="width:100%" title="Roofing & Guttering">
+                            <select id="reStumping" style="width:100%" title="Re-stumping">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
                                     </optgroup>
@@ -1064,10 +1081,10 @@ require_once("loadbooking.php");
                                         <option value="NA">Not applicable, no such item</option>
                                     </optgroup>
                                 </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>Termites &#38; Borers</label>
-                            <select id='termitesBorers' style="width:100%" title="health and safety warning">
+                        </td>
+                        <td>
+                            <label>Termites &amp; Borers</label>
+                            <select id='termitesBorers' style="width:100%" title="Termites & Borers">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
                                     </optgroup>
@@ -1075,10 +1092,10 @@ require_once("loadbooking.php");
                                         <option value="NA">Not applicable, no such item</option>
                                     </optgroup>
                                 </select>
-                        </div>
-                        <div class="col-sm-4">
+                        </td>
+                        <td>
                             <label>Cost Guide</label>
-                            <select id='costGuide' style="width:100%" title="Home Safety Checklist">
+                            <select id='costGuide' style="width:100%" title="Cost Guide">
                                     <optgroup label="No Visible Significant Defect">
                                         <option value="√">✔</option>
                                     </optgroup>
@@ -1086,9 +1103,10 @@ require_once("loadbooking.php");
                                         <option value="NA">Not applicable, no such item</option>
                                     </optgroup>
                                 </select>
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                    </tr>
+                </table>
+
             </div>
             <!--First Tap Photo-->
             <div title="Photo" style="padding: 10px;font-size: 18px">
@@ -1096,7 +1114,8 @@ require_once("loadbooking.php");
                 <input type="file" id="Imgs_Upload" accept="image/x-png,image/jpeg" multiple/>
                 <div id="Img-main-container">
                     <div id="Img-loader">Loading document ...</div>
-                    <div id="HA_ImgsCA_indicateText"> </div>
+                    <div id="HA_ImgsContents"></div>
+<!--                    HA_ImgsContents HA_ImgsCA_indicateText-->
                     <div id="Imgpage-loader">Loading page ...</div>
                 </div>
             </div>

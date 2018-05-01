@@ -764,7 +764,7 @@
                             var temp = parseInt(p.imageid.split("_")[0]);
                             //console.log("TEMP: "+ temp);
 
-                            if (temp > pdfCounts) {
+                            if (temp >= pdfCounts) {
                                 pdfCounts = temp;
                                 pdfCounts++;
                             }
@@ -787,15 +787,15 @@
                             //console.log("IMAGE id: " + p.imageid);
                             var temp = parseInt(p.imageid.split("_")[0]);
 
-                            //console.log("Before Photos count :" + photos_count);
-                            //console.log("temp : " + temp);
-                            if (temp > photos_count) {
+                            //                            console.log("Before Photos count :" + photos_count);
+                            //                            console.log("temp : " + temp);
+                            if (temp >= photos_count) {
                                 photos_count = temp;
                                 photos_count++;
                             }
                             //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
                             var elementID = createPhoto(temp);
-                            //console.log("After count: " + photos_count);
+                            //                            console.log("After count: " + photos_count);
                             $("#" + elementID[1]).attr("src", url);
                             $("#" + p.tableName).show();
                         }

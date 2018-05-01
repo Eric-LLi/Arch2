@@ -12,7 +12,7 @@ var btn_genferateHomeAccessReportPDF = function (mode) {
 
 //generalPDF(mode)
 function generateHomeAccessReportPDF(mode) {
-//    console.log("generateHomeAccessReportPDF");
+    //    console.log("generateHomeAccessReportPDF");
     //reset image number and general notes paragraphs number
     if (mode === 'save') {
         console.log('in Save');
@@ -52,14 +52,18 @@ function generateHomeAccessReportPDF(mode) {
     var rmCheckData = getTableData_RMCheck();
     //Get all table cells data from Energy & Wastage Check table.
     var ewCheckData = getTableData_EWCheck();
-    //Get all table ccells dat from Field Notes
+    //Get all table cells data from Field Notes.
     var fieldNotesData = getTableData_FieldNotes();
-    //Get all table ccells dat from Health & Safety Concerns
+    //Get all table cells data from Health & Safety Concerns.
     var HSConcernsData = getTableData_HSConcerns();
-    //Get all table ccells dat from Repair & Maintenance
+    //Get all table cells data from Repair & Maintenance.
     var RepairMaintenanceData = getTableData_RepairMaintenance();
-    //Get all table ccells dat from Energy Efficiency
+    //Get all table cells data from Energy Efficiency.
     var EnergyEfficiencyData = getTableData_EnergyEfficiency();
+    //Get all table cells data from Attachments.
+    var AttachmentsData = getTableData_Attachments();
+    //Get all images and pdfs.
+    var imagesPDFData = getImagePDF();
 
     // Page start drawing from here...
     var docDefinition = {
@@ -506,13 +510,13 @@ function generateHomeAccessReportPDF(mode) {
                         [
                             {
                                 text: [
-                                   page6 + '\n\n', {
+                                    page6 + '\n\n', {
                                         text: page6_2,
                                         decoration: 'underline'
                                     },
                                     ' ' + page6_2_2 + '\n\n', page6_3
-                               ]
-                           }
+                                ]
+                            }
                         ]
                     ]
                 }
@@ -539,6 +543,103 @@ function generateHomeAccessReportPDF(mode) {
                 table: {
                     widths: [100, 'auto', 150, '*', 150],
                     body: EnergyEfficiencyData
+                }
+            },
+            //Attachments
+            {
+                text: $('#HA_DivAttachments').attr('data-title'),
+                style: 'pageTopHeader'
+            },
+            {
+                style: 'Contents',
+                margin: [0, 0, 0, 10],
+                text: [
+                    {
+                        text: page10_2
+                    },
+                    {
+                        text: page10_2_2,
+                        decoration: 'underline',
+                        color: 'blue'
+                    },
+                    {
+                        text: page10_2_3,
+
+                    }
+                ]
+            },
+            {
+                style: 'tableContent',
+                table: {
+                    widths: [130, '*', 130, '*', 130, '*'],
+                    body: AttachmentsData
+                }
+            },
+
+            //Definitions
+            {
+                text: page10_Header2,
+                style: 'pageTopHeader'
+            },
+            {
+                pageBreak: 'after',
+                style: 'Contents',
+                columns: [
+                    {
+                        text: page10_3,
+                        width: '*'
+                    }, {
+                        text: page10_4,
+                        width: '*'
+                    }
+                ]
+            },
+
+            //Terms & Conditions
+            {
+                text: page11Header,
+                style: 'pageTopHeader'
+            },
+            {
+                pageBreak: 'after',
+                style: 'Contents',
+                columns: [
+                    {
+                        width: 250,
+                        stack: [
+                            page11_body,
+                            {
+                                margin: [20, 0, 0, 0],
+                                ol: [
+                                    page11_1, page11_2, page11_3, page11_4, page11_5, page11_6, page11_7
+                                ]
+                            }
+                        ]
+                    }, {
+                        width: '*',
+                        stack: [
+                            {
+                                margin: [40, 0, 0, 0],
+                                start: 8,
+                                ol: [
+                                    page11_8, page11_9, page11_10, page11_11, page11_12, page11_13
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+
+            //Sketches & Photos
+            {
+                text: page12,
+                style: 'pageTopHeader'
+            },
+            //images and pdfs
+            {
+                table: {
+                    widths: ['*', '*'],
+                    body: imagesPDFData
                 }
             }
         ],

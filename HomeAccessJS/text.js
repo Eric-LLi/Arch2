@@ -57,7 +57,9 @@ const page6_3 = "**Refer to the Shortcut menus for Item Codes, Categories and su
 
 //Page ten.
 const page10_Header = "Attachments";
-const page10_2 = "The following selected attachments are an important part of this Report. These can be downloaded from the Archicentre Australia Supplementary Documents page http://www.archicentreaustralia.com.au/report_downloads/ or by referring to the Report cover email for downloading instructions. If you have difficulty downloading the following ticked attachments, please contact Archicentre Australia on 1300 13 45 13 immediately.";
+const page10_2 = "The following selected attachments are an important part of this Report. These can be downloaded from the Archicentre Australia Supplementary Documents page ";
+const page10_2_2 = "http://www.archicentreaustralia.com.au/report_downloads/ ";
+const page10_2_3 = "or by referring to the Report cover email for downloading instructions. If you have difficulty downloading the following ticked attachments, please contact Archicentre Australia on 1300 13 45 13 immediately.";
 const page10_Header2 = "Definitions";
 const page10_3 = "Reasonably and Safely Accessible – Accessible areas which can be accessed by a 3.6 metre ladder or those which have at least 600mm unimpeded vertical and horizontal clearance without the removal of any fixed or unfixed furniture, fittings, stored items, cladding or lining materials, plants or soil. Archicentre Australia Architects are unable to access areas where there is a risk of damage to the property.";
 const page10_4 = "The extent of accessible areas will be determined by the inspector at the time of the assessment.  The architect is unable to access areas higher than 3.0 m above ground level unless secure ladder access is available and fall prevention devices or barriers are present. Workplace Health and Safety access conditions apply subject to relevant State and Territory regulations.";
@@ -78,3 +80,4 @@ const page11_10 = "The Report and its appendices and attachments, as issued by A
 const page11_11 = "If you are dissatisfied with the Report you agree to promptly give Archicentre Australia written notice specifying the matters about which you are dissatisfied and allow Archicentre Australia to attempt to resolve the matters with you within 28 days of receipt by Archicentre Australia of such written notice before taking any remedial action or incurring any costs.";
 const page11_12 = "Reference to Archicentre Australia in this Report and any other documentation includes, where the context permits, its agents and representatives authorised to act on its behalf.";
 const page11_13 = "These Terms and Conditions are in addition to and do not replace or remove any implied guarantees or warranties conferred by the Competition and Consumer Act or any other consumer protection legislation.";
+const page12 = "Attachments: Sketches & Photos."

@@ -971,7 +971,7 @@ function getTableData_EnergyEfficiency() {
             tdCount = 1;
         }
     }
-    console.log(data);
+    //    console.log(data);
     return data;
 }
 
@@ -984,4 +984,105 @@ function getKeyExplaination() {
     }, '√', 'No visible Fault', 'X', 'Maintenance Item', 'XX', 'Serious Fault', '--', 'Not Applicable']);
 
     return data;
+}
+
+//Get all table cells data from Attachments.
+function getTableData_Attachments() {
+    var data = [],
+        row = [],
+        tdCount = 1;
+
+    var tableTd = $('#Table_attachments td');
+
+    for (var i = 0; i < tableTd.length; i++) {
+        row.push({
+            text: tableTd.eq(i).children('select').attr('title')
+        }, {
+            text: (tableTd.eq(i).children('select').val() === '√') ? '√' : ''
+        });
+        tdCount++;
+        if (tdCount === 4) {
+            data.push(row);
+            tdCount = 1;
+            row = [];
+        }
+    }
+    return data;
+}
+
+//Get all images and pdfs.
+function getImagePDF() {
+    var data = [],
+        row = [],
+        tdCount = 1,
+        imgContent = $('#HA_ImgsContents div'),
+        pdfContent = $('#HA_PdfContents div'),
+        imgSrc;
+
+    for (var i = 0; i < imgContent.length; i++) {
+        //        console.log(convertImgToBase64(imgContent.eq(i).children('img').get(0)));
+
+        imgSrc = imgContent.eq(i).children('img').attr('src');
+        if (imgSrc.indexOf("photos/"))
+            imgSrc = convertImgToBase64(imgSrc);
+        row.push({
+            //            text: '123',
+            stack: [
+                {
+                    image: imgSrc,
+                    width: 150,
+                    height: 150
+                },
+                $(imgContent.eq(i).children('input').val())
+            ]
+
+        });
+        tdCount++;
+        if (tdCount === 3) {
+            data.push(row);
+            tdCount = 1;
+            row = [];
+        }
+    }
+    if (tdCount === 2) {
+        row.push({});
+    }
+    data.push(row);
+    row = [];
+    if (tdCount !== 1)
+        tdCount = 1;
+    for (i = 0; i < pdfContent.length; i++) {
+        row.push({
+            //            text: '456',
+            image: convertImgToBase64(pdfContent.eq(i).children('img').get(0)),
+            width: 150,
+            height: 150
+        });
+        tdCount++;
+
+        if (tdCount === 3) {
+            data.push(row);
+            tdCount = 1;
+            row = [];
+        }
+    }
+    if (tdCount === 2) {
+        row.push({});
+    }
+    if (tdCount !== 1)
+        data.push(row);
+
+    console.log(data);
+    return data;
+}
+
+function convertImgToBase64(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var src = canvas.toDataURL("image/png");
+
+    return src;
 }
