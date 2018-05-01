@@ -256,77 +256,87 @@ function getImagePDF() {
         pdfContent = $('#HA_PdfContents div'),
         img, imgSrc;
 
-    for (var i = 0; i < imgContent.length; i++) {
-        img = imgContent.eq(i).children('img');
+    if (imgContent.length > 0) {
+        //        imgContent = $('#HA_ImgsContents div');
+        for (var i = 0; i < imgContent.length; i++) {
+            img = imgContent.eq(i).children('img');
 
-        if (img.attr('src').includes("photos/"))
-            imgSrc = convertImgToBase64(img.get(0));
-        else {
-            imgSrc = img.attr('src');
-        }
-        row.push({
-            stack: [
-                {
-                    image: imgSrc,
-                    width: 150,
-                    height: 150
+            if (img.attr('src').includes("photos/"))
+                imgSrc = convertImgToBase64(img.get(0));
+            else {
+                imgSrc = img.attr('src');
+            }
+            row.push({
+                stack: [
+                    {
+                        image: imgSrc,
+                        width: 150,
+                        height: 150
                 },
-                {
-                    text: $(imgContent.eq(i).children('input')).val()
+                    {
+                        text: $(imgContent.eq(i).children('input')).val()
                 }
             ]
-        });
-//        console.log($(imgContent.eq(i).children('input')).val());
-        tdCount++;
-        if (tdCount === 3) {
+            });
+            //        console.log($(imgContent.eq(i).children('input')).val());
+            tdCount++;
+            if (tdCount === 3) {
+                data.push(row);
+                tdCount = 1;
+                row = [];
+            }
+        }
+        if (tdCount === 2) {
+            row.push({});
             data.push(row);
-            tdCount = 1;
-            row = [];
         }
     }
-    if (tdCount === 2) {
-        row.push({});
-        data.push(row);
-    }
-
     //    console.log(data);
-    row = [];
-    if (tdCount !== 1)
-        tdCount = 1;
-    for (i = 0; i < pdfContent.length; i++) {
-        img = pdfContent.eq(i).children('img');
+    if (pdfContent.length > 0) {
+        //        pdfContent = $('#HA_PdfContents div');
+        //        row = [];
+        if (tdCount !== 1)
+            tdCount = 1;
+        for (i = 0; i < pdfContent.length; i++) {
+            img = pdfContent.eq(i).children('img');
 
-        if (img.attr('src').includes("photos/"))
-            imgSrc = convertImgToBase64(img.get(0));
-        else {
-            imgSrc = img.attr('src');
-        }
+            if (img.attr('src').includes("photos/"))
+                imgSrc = convertImgToBase64(img.get(0));
+            else {
+                imgSrc = img.attr('src');
+            }
 
-        row.push({
-            stack: [
-                {
-                    image: imgSrc,
-                    width: 150,
-                    height: 150
+            row.push({
+                stack: [
+                    {
+                        image: imgSrc,
+                        width: 150,
+                        height: 150
                 },
-                {
-                    text: $(pdfContent.eq(i).children('input')).val()
+                    {
+                        text: $(pdfContent.eq(i).children('input')).val()
                 }
             ]
-        });
-        tdCount++;
-        if (tdCount === 3) {
-            data.push(row);
-            tdCount = 1;
-            row = [];
+            });
+            tdCount++;
+            if (tdCount === 3) {
+                data.push(row);
+                tdCount = 1;
+                row = [];
+            }
         }
+        if (tdCount === 2) {
+            row.push({});
+            data.push(row);
+        }
+        //    console.log(data);
+
     }
-    if (tdCount === 2) {
-        row.push({});
-        data.push(row);
+    if (imgContent.length > 0 || pdfContent.length > 0)
+        return data;
+    else {
+        return [{}, {}];
     }
-//    console.log(data);
-    return data;
 }
 
 //Get all table cells data from Construction Summary
@@ -1091,8 +1101,6 @@ function getTableData_Attachments() {
     }
     return data;
 }
-
-
 
 function convertImgToBase64(img) {
     var canvas = document.createElement("canvas");

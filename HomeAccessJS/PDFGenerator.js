@@ -63,6 +63,12 @@ function generateHomeAccessReportPDF(mode) {
     //Get all table cells data from Attachments.
     var AttachmentsData = getTableData_Attachments();
     //Get all images and pdfs.
+    //    var imagesPDFData = [{
+    //        text: '123'
+    //    }, {
+    //        text: '456'
+    //    }];
+
     var imagesPDFData = getImagePDF();
 
     // Page start drawing from here...
