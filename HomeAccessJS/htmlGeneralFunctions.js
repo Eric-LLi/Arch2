@@ -345,8 +345,9 @@ function loadSolutionSelectData() {
     createS_Option();
 }
 
-//Check HA_indicateText to match checkbox.
+//Check Home Accessment. Check HA_indicateText to match checkbox.
 function checkIndiTextValue() {
+    console.log($("#HA_indicateText").val());
     if ($("#HA_indicateText").val() !== "") {
         var val = $("#HA_indicateText").val().split(",");
         for (var i in val) {
@@ -370,13 +371,15 @@ function checkIndiTextValue() {
     }
 }
 //Save checkbox data into text for saving purpose.
-$(":checkbox").click(function () {
+//:checkbox
+$("#PSummary input[type=checkbox]").click(function () {
     if ($(this).is(":checked")) {
-        $("#HA_indicateText").val($("#HA_indicateText").val() + $(this).val() + ",");
+        $("#HA_indicateText").val($("#HA_indicateText").val().trim() + "  " + $(this).val());
     } else {
         var text = $("#HA_indicateText").val();
         var del = $(this).val();
-        text = text.replace(del + ",", "");
+        text = text.replace(new RegExp(del, 'g'), "").trim();
+        console.log(text);
         $("#HA_indicateText").val(text);
     }
 });
@@ -1061,9 +1064,6 @@ $(document).ready(function () {
 
     loadPropertySelectData();
     loadSolutionSelectData();
-
-    checkIndiTextValue();
-
-    console.log("Current pdfs count: " + pdfCounts);
-    console.log("Current photos count: " + photos_count);
+    //    console.log("Current pdfs count: " + pdfCounts);
+    //    console.log("Current photos count: " + photos_count);
 });
