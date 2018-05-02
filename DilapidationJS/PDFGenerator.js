@@ -2,7 +2,7 @@
  * Created by TengShinan on 24/10/17.
  */
 
-function generateDilapidationPDF(mode) {
+function generatePDF(mode) {
     resetImageCounting();
 
     var isMobile = {

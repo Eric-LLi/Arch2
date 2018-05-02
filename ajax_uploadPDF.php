@@ -42,7 +42,9 @@
            while ($dbrow = SharedFetchArray($dbresult))
              $booking = $dbrow;
              $html = file_get_contents('email_pdfToAdmin.html');
-             error_log("in save pdf the booking code should be: " + $bookingcode);
+             error_log("in save pdf the booking code should be: ");
+             error_log($bookingcode);
+            
                $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
                error_log($link);
               $html = str_replace("XXX_LINKREPORT", $link, $html);
@@ -50,7 +52,8 @@
 
          }
        }
-
+       error_log($gConfig['adminemail']);
+       error_log($bookingcode);
        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $gConfig['adminemail'], 'Officer', 'Booking code ' . $bookingcode . " PDF", $html);
        fclose($file);
 

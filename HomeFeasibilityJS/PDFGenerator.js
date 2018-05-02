@@ -5,7 +5,7 @@
 /**
  * Core function of the PDF generator
  * */
-function generateHomeFeasibilityPDF(mode) {
+function generatePDF(mode) {
     // Page start drawing from here...
 
     var isMobile = {
@@ -29,7 +29,8 @@ function generateHomeFeasibilityPDF(mode) {
         }
     };
 
-    var docDefinition = {
+    var docDefinition = 
+    {
         footer: function (currentPage, pageCount) {
             if (currentPage === 1)
             {
@@ -779,7 +780,7 @@ function generateHomeFeasibilityPDF(mode) {
     // Open a new tab and show the PDF
     //pdfMake.createPdf(docDefinition).open();
 
-     if (mode == 'save')
+    if (mode == 'save')
     {
         //console.log('click');
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);

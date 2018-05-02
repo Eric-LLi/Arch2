@@ -2,10 +2,10 @@
   require_once("class.phpmailer.php");
 
   $gConfig['dbname'] = "arch";
-  //$gConfig['dbserver'] = "localhost:3306";
-  //$gConfig['dbport'] = 3306;
-  $gConfig['dbserver'] = "localhost:8889";
-  $gConfig['dbport'] = 8889;
+  $gConfig['dbserver'] = "localhost:3306";
+  $gConfig['dbport'] = 3306;
+  // $gConfig['dbserver'] = "localhost:8889";
+  // $gConfig['dbport'] = 8889;
   $gConfig['dbusername'] = "arch";
   $gConfig['dbpwd'] = "lmi$$";
   $gConfig['dberrormsg'] = "";

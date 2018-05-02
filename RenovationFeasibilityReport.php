@@ -25,6 +25,7 @@
     <!--<script src='../node_modules/pdfmake/build/vfs_fonts.js'></script>-->
 
     <?php require_once("saveloaddata.php"); ?>
+    <?php require_once("meta.php"); ?>
 </head>
 <body>
 <!--Navigation-->
@@ -686,8 +687,8 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
         {
     ?>
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-    <button onclick="generateRenovationFeasibilityPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-    <button onclick="generateRenovationFeasibilityPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
     <?php
         }
         else
@@ -699,7 +700,7 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
     <?php
             }
     ?>
-    <button onclick="generateRenovationFeasibilityPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }

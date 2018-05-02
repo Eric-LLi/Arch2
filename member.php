@@ -1,6 +1,6 @@
 <?php
   require_once("shared.php");
-
+  //123
   if (isset($_POST['fldLogout']))
   {
     SharedLogout();
@@ -1845,6 +1845,71 @@
         noty({text: 'Please select a booking', type: 'warning', timeout: 4000});
     }
 
+    function doUploadReportPDF()
+    {
+      if(!doGridGetSelectedRowData
+      (
+        'divBookingsG',
+        function(row,index)
+        {
+          //noty({text:'Select booking ' + row.bookingcode,type: 'warning', timeout: 4000});
+          document.getElementById('pdfUploadBookingcode').value = row.bookingcode;
+          $.post
+          (
+            'ajax_checkPDF.php',
+            {
+              uuid:'<?php echo $_SESSION['uuid']; ?>',
+              bookingcode: row.bookingcode
+            },
+            function(result)
+            {
+              var response = JSON.parse(result);
+              if(response.rc == 0)
+              {
+                //this booking does not have a pdf in the ./pdf directory, could upload straght away
+                //noty({text:response.msg,type:'info',timeout:4000});
+                doPromptOkCancel
+                (
+                  'Upload a report for booking ' + row.bookingcode + ' from the local computer?',
+                  function(result)
+                  {
+                    if(result)
+                    {
+                      $("#uploadPDF").click();
+                    }
+                  }
+                );
+              }
+              else
+              {
+                //This booking has a pdf in the ./pdf drectory, need to ask permission
+                doPromptOkCancel
+                (
+                  'Booking ' + row.bookingcode +  ' already has a pdf report, do you want to overwrite it?',
+                  function(result)
+                  {
+                    if (result)
+                    {
+                      //noty({text:'you click ok',type:'info',timeout:4000});
+                      //$("#theUploadButton").click();
+                      $("#uploadPDF").click();
+                    }
+                  }
+                );  
+                //noty({text:response.msg,type:'info',timeout:4000});
+              }
+            }
+          )
+        }
+      ))
+      noty({text: 'Please select a booking', type: 'warning', timeout: 2000});
+    }
+
+    function pdfUploadInput()
+    {
+      document.getElementById('pdfUploadButton').click();
+    }
+
     function doMemberChangePassword()
     {
       if (!doGridGetSelectedRowData
@@ -2112,7 +2177,7 @@
 
       if (_.isBlank(row.budget))
       {
-        img = '<img src="images/led/ball-black.png" width="24" height="24">';
+        img = '<img src="images/led/ball-black.png" width="20" height="20">';
         tooltip = 'Agreed price has not been set';
       }
       else if (!_.isNull(row.lastemailed))
@@ -2127,17 +2192,17 @@
       }
       else if (!_.isNull(row.dateapproved))
       {
-        img = '<img src="images/led/ball-green.png" width="24" height="24">';
+        img = '<img src="images/led/ball-green.png" width="20" height="20">';
         tooltip = 'Booking has been approved';
       }
       else if (!_.isNull(row.datecompleted))
       {
-        img =  '<img src="images/led/ball-lightblue.png" width="24" height="24">';
+        img =  '<img src="images/led/ball-lightblue.png" width="20" height="20">';
         tooltip = 'Booking has been completed';
       }
       else if (!_.isNull(row.datepaid))
       {
-        img = '<img src="images/led/ball-orange.png" width="24" height="24">';
+        img = '<img src="images/led/ball-orange.png" width="20" height="20">';
         tooltip = 'Booking has been paid';
       }
 
@@ -2158,9 +2223,9 @@
         var lnk = '';
 
         if (row.itype == itype_inspector)
-          img = '<img src="images/find_user.png" width="24" height="24">';
+          img = '<img src="images/find_user.png" width="20" height="20">';
         else
-          img = '<img src="images/brunette.png" width="24" height="24">';
+          img = '<img src="images/brunette.png" width="20" height="20">';
 
         lnk = '<a href="#" title="Assigned to ' + row.archfirstname + ' ' + row.archlastname + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
         return lnk;
@@ -2181,22 +2246,22 @@
 
       if (row.itype == itype_architect)
       {
-        img = '<img src="images/brunette.png" width="24" height="24">';
+        img = '<img src="images/brunette.png" width="20" height="20">';
         typename = 'Architect';
       }
       else if (row.itype == itype_inspector)
       {
-        img = '<img src="images/find_user.png" width="24" height="24">';
+        img = '<img src="images/find_user.png" width="20" height="20">';
         typename = 'Inspector';
       }
       else if (row.itype == itype_admin)
       {
-        img = '<img src="images/realtor.png" width="24" height="24">';
+        img = '<img src="images/realtor.png" width="20" height="20">';
         typename = 'Administrator';
       }
       else
       {
-        img = '<img src="images/somebody.png" width="24" height="24">';
+        img = '<img src="images/somebody.png" width="20" height="20">';
         typename = 'User';
       }
 
@@ -2208,9 +2273,6 @@
 
     // ************************************************************************************************************
     // Document ready...
-    $(function()
-    {
-    });
 
     $(document).ready(function()
     {
@@ -2268,13 +2330,13 @@
           sortOrder: 'desc',
           remoteSort: false,
           multiSort: true,
-          rowStyler: function(index,row){
-                    if (row.datecancelled != null){
-                        return 'background-color:#6293BB;color:#fff;font-weight:bold;';
-                    }
-                },
-          // rownumbers: true,
-          // pagination: true,
+          autoRowHeight: false,
+          rowStyler: function(index,row)
+          {
+            if (row.datecancelled != null)
+              return 'background-color:#6293BB;color:#fff;font-weight:bold;';           
+          },
+
           loader: function(param, success, error)
           {
             success({total: cache_bookings.length, rows: cache_bookings});
@@ -2324,7 +2386,7 @@
               {title: 'By',             rowspan: 2, field: 'usercreatedid',     width: 200, align: 'left',   resizable: true, sortable: true, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return row.usercreatedfirstname + ' ' + row.usercreatedlastname;}},
               {title: 'Modified',       rowspan: 2, field: 'datemodified',      width: 150, align: 'right',  resizable: true, sortable: true},
               {title: 'By',             rowspan: 2, field: 'usermodifiedid',    width: 200, align: 'left',   resizable: true, sortable: true, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return (_.isNull(row.usermodifiedfirstname)) ? '' : row.usermodifiedfirstname + ' ' + row.usermodifiedlastname;}},
-              {title: 'Cancelld Date',       rowspan: 2, field: 'datecancelled',      width: 150, align: 'right',  resizable: true, sortable: true},
+              {title: 'Cancelld Date',  rowspan: 2, field: 'datecancelled',      width: 150, align: 'right',  resizable: true, sortable: true},
             ],
             [
               {title: 'Report',                     field: 'reportid',          width: 150, align: 'left',   resizable: true, formatter: function(value, row) {return doGetStringFromIdInObjArray(reports, value);}},
@@ -2378,70 +2440,71 @@
               index,
               function(row, index)
               {
+                r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
                 switch (parseInt(row.reportid))
                 {
                   case 1:
-                    $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 2:
-                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 3:
-                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 4:
-                    $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 5:
-                    $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 6:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
 									case 7:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
 									case 8:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
 									case 9:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
 									case 10:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
 									case 11:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
 									case 12:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
 									case 13:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
 									case 14:
-                    $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;		
                   case 15:
-                    $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 16:
-                    $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 17:
-                    $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 18:
-                    $.redirect('HOWReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   case 19:
-                    $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                   //case 20:
-                    //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     //break;
                   case 21:
-                    $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                     break;
                 }
               }
@@ -2464,6 +2527,7 @@
           sortOrder: 'asc',
           remoteSort: false,
           multiSort: true,
+          autoRowHeight: false,
           loader: function(param, success, error)
           {
             success({total: cache_members.length, rows: cache_members});
@@ -2613,17 +2677,26 @@
             }
           );
         }
-      );
+      );      
     });
   </script>
 </head>
 <body>
+  <!-- ********************************* ************************************************************************************************************************************-->
+  <!-- The upload external PDF button -->
+  <iframe name="pdfUpload" style="display:none" src=""></iframe>  
+  <form enctype="multipart/form-data" id="uploadPDF_Form" method="POST" action="ajax_uploadExternalPDF.php" target="pdfUpload" style="display:none">
+    <input type="file" id="uploadPDF" name="externalPDF" accept="application/pdf,application/vnd.ms-excel" onchange="pdfUploadInput()"/>
+    <input type="text" name="bookingcode" value="" id="pdfUploadBookingcode"/>
+    <input id="pdfUploadButton" type="submit" name="submitPDF"/>
+  </form>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Toolbars...                                                                                                                                                              -->
   <div id="tbBookings" style="height: auto; display: none">
     <div style="margin-bottom: 5px">
       <a href="javascript:void(0)" onClick="doNewBooking()" class="easyui-linkbutton" iconCls="icon-add">New Booking</a>
       <a href="javascript:void(0)" onClick="doEditBooking()" class="easyui-linkbutton" iconCls="icon-edit">Edit Booking</a>
+      <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
       <?php
         if (SharedIsAdmin())
         {
@@ -2645,6 +2718,7 @@
       ?>
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
       <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>
+     
     </div>
   </div>
 
@@ -2671,7 +2745,6 @@
       <a href="javascript:void(0)" onClick="doMemberChangePassword()" class="easyui-linkbutton" iconCls="icon-key">Change Password</a>
     </div>
   </div>
-
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Reports...                                                                                                                                                              -->
   <div id="dlgNumReporsByType" class="easyui-dialog" title="#Reports by Type" style="width: 800px; height: 600px;" data-options="resizable: false, modal: false, closable: false, closed: true">

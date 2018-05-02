@@ -1,19 +1,23 @@
-#upload-button {
+/*Upload image and Upload pdf button*/
+#upload-button, #uploadImg_Btn {
     width: 150px;
     /*    display: block;*/
-    margin: 20px auto;
+    margin: 10px auto;
 }
 
-#file-to-upload {
+/*Upload image and Upload pdf input file button*/
+#file-to-upload, #Imgs_Upload {
     display: none;
 }
 
-#pdf-main-container {
-/*    width: 400px;*/
-    margin: 20px auto;
+/*Img & PDF main container*/
+#pdf-main-container, #Img-main-container {
+    /*    width: 400px;*/
+    margin: 10px auto;
 }
 
-#pdf-loader {
+/*Img & PDF loader message*/
+#pdf-loader, #Img-loader {
     display: none;
     text-align: center;
     color: #999999;
@@ -22,56 +26,60 @@
     height: 100px;
 }
 
-#pdf-contents {
+#HA_PdfContents{
+    display: none;
+}
+#HA_ImgsContents {
     display: none;
 }
 
-#pdf-meta {
-    overflow: hidden;
-    margin: 0 0 20px 0;
-}
-
-#pdf-buttons {
-    float: left;
-}
-
-#page-count-container {
-    float: right;
-}
-
-#pdf-current-page {
-    display: inline;
-}
-
-#pdf-total-pages {
-    display: inline;
-}
-/*#pdf-canvas*/
-#pdf-contents canvas {
+#HA_PdfContents canvas {
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     display: none;
 }
-#pdf-contents button{
-    margin-top: 5px;
-    display: none;
+
+#HA_PdfContents button {
+
+    /*    display: none;*/
+
 }
-#pdf-contents img{
+#HA_ImgsContents button{
+    margin: 0px;
+}
+
+#HA_PdfContents input, #HA_ImgsContents input{
+    width: 100%;
+    margin: 0px;
+}
+#HA_ImgsContents input{
+    width: 100%;
+    margin: 0px;
+}
+#HA_PdfContents img {
     display: none;
     width: 200px;
     height: 300px;
 }
-#pdf-contents div{
+
+#HA_ImgsContents img{
+    padding: 5px;
+    width: 300px;
+    height: 250px;
+}
+
+#HA_PdfContents div, #HA_ImgsContents div {
     float: left;
     display: inline;
 }
-#img_table td {
-    /*    text-align: center;*/
-    border: inherit;
 
-    /*    vertical-align: middle;*/
+#img_table td, photo_table td {
+    text-align: center;
+    border: inherit;
 }
-#page-loader {
+
+/*Img & PDF loader message*/
+#page-loader, #Imgpage-loader {
     height: 100px;
     line-height: 100px;
     text-align: center;
