@@ -1054,20 +1054,19 @@ function showPage(page_no) {
                     lastModified: uploadPDFfile[0].lastModifiedDate
                 });
 
-            if ($("#HA_BookingNo").val() === "0") {
-                alert("Please select booking from main page. ");
-                $(location).arrt("href", "index.php");
-            } else {
-                //upload to database
-                doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents");
-            }
+            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents");
         });
     });
 }
 
 // Upon click this should should trigger click on the #file-to-upload file input element
 $("#upload-button").on('click', function () {
-    $("#file-to-upload").trigger('click');
+    if (isEmpty($("#HA_BookingNo").val())) {
+        alert("Please select booking from main page. ");
+        $(location).arrt("href", "index.php");
+    } else {
+        $("#file-to-upload").trigger('click');
+    }
 });
 
 var uploadPDFfile;

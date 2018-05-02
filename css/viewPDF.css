@@ -86,6 +86,7 @@
 #HA_PdfContents div {
     float: left;
     display: inline;
+    margin-left: 10px;
 }
 
 #HA_ImgsContents div {
