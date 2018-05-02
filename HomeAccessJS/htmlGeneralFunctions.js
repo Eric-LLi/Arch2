@@ -69,23 +69,23 @@ var getSelectID = [
 var keySelectOption = [
     {
         name: '√',
-        value: 'No visible significant defect'
+        value: 'No_visible_significant_defect'
     },
     {
         name: 'X',
-        value: 'Maintenance Item or Minor Defect'
+        value: 'Maintenance_Item_or_Minor_Defect'
     },
     {
         name: 'XX',
-        value: 'Major Defect'
+        value: 'Major_Defect'
     },
     {
         name: 'U',
-        value: 'Unknown/Inaccessible/Not tested/Not visible'
+        value: 'Unknown/Inaccessible/Not_tested/Not_visible'
     },
     {
         name: 'NA',
-        value: 'Not applicable, no such item'
+        value: 'Not_applicable,no_such_item'
     }
 ];
 
@@ -216,6 +216,7 @@ var E_Code = [
 
 //Add property "option"
 function createP_Option(nameid) {
+    //    console.log("Create opiton");
     var i,
         optionID = document.getElementById(nameid),
         opt = document.createElement("option");
@@ -344,13 +345,14 @@ function loadSolutionSelectData() {
     createS_Option();
 }
 
-//Check HA_indicateText to match checkbox.
-function checkIndiTextValue(){
-    if($("#HA_indicateText").val()!==""){
+//Check Home Accessment. Check HA_indicateText to match checkbox.
+function checkIndiTextValue() {
+    console.log($("#HA_indicateText").val());
+    if ($("#HA_indicateText").val() !== "") {
         var val = $("#HA_indicateText").val().split(",");
-        for(var i in val){
-            if(val[i]!==""){
-                switch(val[i]){
+        for (var i in val) {
+            if (val[i] !== "") {
+                switch (val[i]) {
                     case "Ramp":
                         document.getElementById("checkBox_1").checked = true;
                         break;
@@ -360,7 +362,7 @@ function checkIndiTextValue(){
                     case "Platform_Steps":
                         document.getElementById("checkBox_3").checked = true;
                         break;
-                    case"Other":
+                    case "Other":
                         document.getElementById("checkBox_4").checked = true;
                         break;
                 }
@@ -369,13 +371,15 @@ function checkIndiTextValue(){
     }
 }
 //Save checkbox data into text for saving purpose.
-$(":checkbox").click(function () {
+//:checkbox
+$("#PSummary input[type=checkbox]").click(function () {
     if ($(this).is(":checked")) {
-        $("#HA_indicateText").val($("#HA_indicateText").val() + $(this).val() + ",");
+        $("#HA_indicateText").val($("#HA_indicateText").val().trim() + "  " + $(this).val());
     } else {
         var text = $("#HA_indicateText").val();
         var del = $(this).val();
-        text = text.replace(del + ",", "");
+        text = text.replace(new RegExp(del, 'g'), "").trim();
+        console.log(text);
         $("#HA_indicateText").val(text);
     }
 });
@@ -384,7 +388,7 @@ $(":checkbox").click(function () {
 var conAdd_Count = 0;
 
 //'Construction Summary' Add button listening event.
-$("#Button_ConAdd").click(function (){
+$("#Button_ConAdd").click(function () {
     Create_ConAdd(conAdd_Count);
     conAdd_Count++;
 });
@@ -398,10 +402,10 @@ function Create_ConAdd(id) {
         lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
         lastRowCount = lastTr.childElementCount,
         inputNameID = id + "_CSNewName",
-        inputValueID=id + "_CSNewValue";
+        inputValueID = id + "_CSNewValue";
 
-    newTd1.innerHTML = "<input id=\""+inputNameID+"\" type=\"text\" class=\"form-control\"/>";
-    newTd2.innerHTML = "<input id=\""+inputValueID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd1.innerHTML = "<input id=\"" + inputNameID + "\" type=\"text\" class=\"form-control\"/>";
+    newTd2.innerHTML = "<input id=\"" + inputValueID + "\" type=\"text\" class=\"form-control\"/>";
     if (lastRowCount === 2) {
         lastTr.appendChild(newTd1);
         lastTr.appendChild(newTd2);
@@ -415,7 +419,7 @@ function Create_ConAdd(id) {
 //'Fault Summary' add button count.
 var faultAdd_Count = 0;
 //'Fault Summary' add button listening event.
-$("#Button_FaultAdd").click(function (){
+$("#Button_FaultAdd").click(function () {
     button_FaultAdd(faultAdd_Count);
     faultAdd_Count++;
 });
@@ -428,10 +432,10 @@ function button_FaultAdd(id) {
         newTd2 = document.createElement("td"),
         lastTr = document.getElementById("Table_FalSummary").getElementsByTagName("tr")[table.rows.length - 1],
         newNameID = id + "_FSNewName",
-        newValueID = id+ "_FSNewValue",
+        newValueID = id + "_FSNewValue",
         lastRowCount = lastTr.childElementCount;
 
-    newTd1.innerHTML = "<input id=\""+newNameID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd1.innerHTML = "<input id=\"" + newNameID + "\" type=\"text\" class=\"form-control\"/>";
     newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
     if (lastRowCount === 2) {
@@ -449,7 +453,7 @@ function button_FaultAdd(id) {
 var HSCheckAdd_Count = 0;
 
 //'Health Check & Safety Check' add button listening event.
-$("#Button_HSCheckAdd").click(function (){
+$("#Button_HSCheckAdd").click(function () {
     button_HealthCheckAdd(HSCheckAdd_Count);
     HSCheckAdd_Count++;
 });
@@ -462,10 +466,10 @@ function button_HealthCheckAdd(id) {
         newTd2 = document.createElement("td"),
         lastTr = table.getElementsByTagName("tr")[table.rows.length - 1],
         newItemName = id + "_HSCheckNewName",
-        newItemValue = id+ "_HSCheckNewValue",
+        newItemValue = id + "_HSCheckNewValue",
         lastRowCount = lastTr.childElementCount;
 
-    newTd1.innerHTML = "<input id=\""+newItemName+"\" type=\"text\" class=\"form-control\"/>";
+    newTd1.innerHTML = "<input id=\"" + newItemName + "\" type=\"text\" class=\"form-control\"/>";
     newTd2.innerHTML = "<select id=\"" + newItemValue + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
     if (lastRowCount === 2) {
@@ -489,7 +493,7 @@ $("#Button_RMCheckAdd_S").click(function () {
 });
 
 //'Repairs & Mainentance Check' Structure add button create.
-function RM_SCheckAddButton(id){
+function RM_SCheckAddButton(id) {
     var table = document.getElementById("Table_RMCheck_S"),
         newTr = document.createElement("tr"),
         newTd1 = document.createElement("td"),
@@ -517,13 +521,13 @@ function RM_SCheckAddButton(id){
 var RM_OCheckAdd_Count = 0;
 
 //'Repairs & Mainentance Check' Other add button Listening event.
-$("#Button_RMCheckAdd_O").click( function (){
+$("#Button_RMCheckAdd_O").click(function () {
     RM_OCheckAddButton(RM_OCheckAdd_Count);
     RM_OCheckAdd_Count++;
 });
 
 //'Repairs & Mainentance Check' Other add button create.
-function RM_OCheckAddButton(id){
+function RM_OCheckAddButton(id) {
     var table = document.getElementById("Table_RMCheck_O"),
         newTr = document.createElement("tr"),
         newTd1 = document.createElement("td"),
@@ -533,7 +537,7 @@ function RM_OCheckAddButton(id){
         newValueID = id + "_RMOCheckNewValue",
         lastRowCount = lastTr.childElementCount;
 
-    newTd1.innerHTML = "<input id=\""+newNameID+"\" type=\"text\" class=\"form-control\"/>";
+    newTd1.innerHTML = "<input id=\"" + newNameID + "\" type=\"text\" class=\"form-control\"/>";
     newTd2.innerHTML = "<select id=\"" + newValueID + "\" class=\"form-control\"><option value=\"-1\">Choose</option></select>";
 
     if (lastRowCount === 2) {
@@ -557,7 +561,7 @@ $("#Button_EWCheckAdd").click(function () {
 });
 
 //'Energy & Wastage Check' Add button create.
-function button_EnergyCheckAdd(id){
+function button_EnergyCheckAdd(id) {
     var table = document.getElementById("Table_EWCheck"),
         newTr = document.createElement("tr"),
         newTd1 = document.createElement("td"),
@@ -595,8 +599,8 @@ var button_AddSolutionItem = function (id) {
     addSolutionItem(id);
 };
 
-function addSolutionItem(id){
-    if(id.charAt(1)!=="0"){
+function addSolutionItem(id) {
+    if (id.charAt(1) !== "0") {
         //Decide which button C,M or E
         var btn_id = id.charAt(0);
 
@@ -748,19 +752,25 @@ var tradeClear = function (tid) {
 };
 
 //Upload photos button to trigger input file.
-$("#uploadImg_Btn").click(function (){
+$("#uploadImg_Btn").click(function () {
     $("#Imgs_Upload").trigger("click");
 });
 var photos_count = 0;
 
 //Photos upload file
-$("#Imgs_Upload").change(function (e){
+$("#Imgs_Upload").change(function (e) {
+    if ($("#HA_BookingNo").val() === "0") {
+        alert("Please select booking from main page. ");
+        $(location).attr("href", "index.php");
+        return;
+    }
+
     //Store how many files user has selected.
     const totalFiles = e.currentTarget.files;
-    console.log("File number: "+ totalFiles.length);
+    //    console.log("File number: " + totalFiles.length);
 
     //Only action when user has selected file.
-    if(totalFiles.length>0){
+    if (totalFiles.length > 0) {
         //Show load document message.
         $("#Img-loader").show();
 
@@ -777,47 +787,80 @@ $("#Imgs_Upload").change(function (e){
             photos_count++;
 
             //FileReader() only support new version of browser.
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                var code = reader.result;
-                if(code!==null){
-                    setTimeout(function(){
-                        if(("#"+element[1]).length>0){
-                            $("#"+element[1]).attr("src",code);
+            //Read the file and convert to an image element.
+            //            var imgFile = document.createElement('img');
 
-                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                                type: file.type,
-                                lastModified: file.lastModifiedDate
-                            });
 
-                            if($("#HA_BookingNo").val()==="0"){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                //                imgFile.src = e.target.result
+                var data = e.target.result
+                var image = new Image();
+                image.onload = function () {
+                    var width = image.width;
+                    var height = image.height;
 
-                                alert("Please select order from main page. ");
+                    var code = resizeImage_Canvas(image).toDataURL("image/png");
 
-                                $(location).attr("href","index.php");
+                    if (!isEmpty(code)) {
+                        $("#" + element[1]).attr("src", code);
 
-                            }else{
-                                doUploadFile(imgFile,element[1],element[2],element[3],"","HA_ImgsContents");
-                            }
-                        }
-                        else{
-                            console.log("NO element::" + element[1]);
-                        }
-                    },30);
-                }
-                else{
-                    console.log("No code for image!!");
-                }
-            }
+                        var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                            type: file.type,
+                            lastModified: file.lastModifiedDate
+                        });
+
+                        doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
+
+                        $("#Imgpage-loader").hide();
+                        $("#HA_ImgsContents").show();
+                    }
+                };
+                image.src = data;
+            };
             reader.readAsDataURL(file);
+            //            const reader = new FileReader();
+            //            reader.onload = (e) => {
+            //                var code = reader.result;
+            //                if (code !== null) {
+            //                    setTimeout(function () {
+            //                        if (("#" + element[1]).length > 0) {
+            //                            $("#" + element[1]).attr("src", code);
+            //
+            //                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+            //                                type: file.type,
+            //                                lastModified: file.lastModifiedDate
+            //                            });
+            //
+            //                            if ($("#HA_BookingNo").val() === "0") {
+            //
+            //                                alert("Please select booking from main page. ");
+            //
+            //                                $(location).attr("href", "index.php");
+            //
+            //                            } else {
+            //                                doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
+            //                            }
+            //                        } else {
+            //                            console.log("NO element::" + element[1]);
+            //                        }
+            //                    }, 30);
+            //                } else {
+            //                    console.log("No code for image!!");
+            //                }
+            //            }
+            //            reader.readAsDataURL(file);
+            //                        });
+
+
+            //                });
+            //            }
+            //        }
         })
-        $("#Imgpage-loader").hide();
-        $("#HA_ImgsContents").show();
     }
 });
-
 //Photos page; create html image, text, remove button and container.
-function createPhoto(id){
+function createPhoto(id) {
     var imgContainer = document.createElement("div"),
         newImg = document.createElement("img"),
         imgText = document.createElement("input"),
@@ -829,16 +872,19 @@ function createPhoto(id){
         imgRmBtnID = id + "_imgRmBtn";
 
     //Setting element's attribute.
-    imgContainer.setAttribute("id",imgContainerID);
+    imgContainer.setAttribute("id", imgContainerID);
 
-    newImg.setAttribute("id",newImgID);
+    newImg.setAttribute("id", newImgID);
+    //    newImg.setAttribute("width", 200);
+    //    newImg.setAttribute("height", 200);
 
     imgText.setAttribute("id", imgTextID);
     imgText.setAttribute("type", "text");
     imgText.setAttribute("class", "form-control");
+    //    imgText.setAttribute("size", 200);
 
-    imgRmBtn.setAttribute("id",imgRmBtnID);
-    imgRmBtn.setAttribute("class","btn btn-danger");
+    imgRmBtn.setAttribute("id", imgRmBtnID);
+    imgRmBtn.setAttribute("class", "btn btn-danger");
 
     lastContainer.appendChild(imgContainer);
     document.getElementById(imgContainerID).appendChild(newImg);
@@ -847,21 +893,21 @@ function createPhoto(id){
 
     var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID];
 
-    $("#"+imgRmBtnID).html("Remove");
+    $("#" + imgRmBtnID).html("Remove");
     //Photos images remove button listerner.
-    $("#"+imgRmBtnID).click(function (){
-        imagesRemoveBtn(imgContainerID,newImgID);
+    $("#" + imgRmBtnID).click(function () {
+        imagesRemoveBtn(imgContainerID, newImgID);
     });
     return elements;
 }
 
 //Photos page; images remove button action.
-function imagesRemoveBtn(containerID,imgID){
-    if($("#HA_BookingNo").val()==="0"){
-        alert("Please select order from main page. ");
-        $(location).arrt("href","index.php");
-    }else{
-        var container = $("#"+containerID).remove();
+function imagesRemoveBtn(containerID, imgID) {
+    if ($("#HA_BookingNo").val() === "0") {
+        alert("Please select booking from main page. ");
+        $(location).arrt("href", "index.php");
+    } else {
+        var container = $("#" + containerID).remove();
         doRemovePhoto(imgID);
     }
 }
@@ -869,6 +915,7 @@ function imagesRemoveBtn(containerID,imgID){
 var __PDF_DOC,
     __CANVAS = $('#pdf-canvas').get(0),
     __CANVAS_CTX = __CANVAS.getContext('2d');
+
 function showPDF(pdf_url) {
     $("#pdf-loader").show();
 
@@ -912,7 +959,7 @@ function createPDFImg(id) {
     caption.setAttribute("id", captionID);
     caption.setAttribute("type", "text");
     caption.setAttribute("class", "form-control");
-    caption.setAttribute("placeholder", "Caption");
+    //caption.setAttribute("placeholder", "Caption");
 
     imgElement.setAttribute("id", imgID);
     imgElement.setAttribute("src", "");
@@ -950,10 +997,10 @@ var deleteImg = function (bid) {
     //Delete whole div including img, caption and remove button.
     $(container).remove();
 
-    if($("#HA_BookingNo").val()==="0"){
-        alert("Please select order from main page. ");
-        $(location).arrt("href","index.php");
-    }else{
+    if ($("#HA_BookingNo").val() === "0") {
+        alert("Please select booking from main page. ");
+        $(location).arrt("href", "index.php");
+    } else {
         doRemovePhoto(imageID);
         //    imageCount--;
     }
@@ -966,13 +1013,15 @@ function showPage(page_no) {
     // Fetch the page
     __PDF_DOC.getPage(page_no).then(function (page) {
         // As the canvas is of a fixed width we need to set the scale of the viewport accordingly
-        var scale_required = __CANVAS.width / page.getViewport(1).width;
+        //        var scale_required = __CANVAS.width / page.getViewport(1).width;
 
         // Get viewport of the page at required scale
-        var viewport = page.getViewport(scale_required);
+        //        var viewport = page.getViewport(scale_required);
+        var viewport = page.getViewport(0.8);
 
         // Set canvas height
         __CANVAS.height = viewport.height;
+        __CANVAS.width = viewport.width;
 
         var renderContext = {
             canvasContext: __CANVAS_CTX,
@@ -1005,20 +1054,19 @@ function showPage(page_no) {
                     lastModified: uploadPDFfile[0].lastModifiedDate
                 });
 
-            if($("#HA_BookingNo").val()==="0"){
-                alert("Please select order from main page. ");
-                $(location).arrt("href","index.php");
-            }else{
-                //upload to database
-                doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents");
-            }
+            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents");
         });
     });
 }
 
 // Upon click this should should trigger click on the #file-to-upload file input element
 $("#upload-button").on('click', function () {
-    $("#file-to-upload").trigger('click');
+    if (isEmpty($("#HA_BookingNo").val())) {
+        alert("Please select booking from main page. ");
+        $(location).arrt("href", "index.php");
+    } else {
+        $("#file-to-upload").trigger('click');
+    }
 });
 
 var uploadPDFfile;
@@ -1041,29 +1089,78 @@ $("#file-to-upload").on('change', function (e) {
 });
 
 //Source from http://www.blogjava.net/jidebingfeng/articles/406171.html
-function convertBase64UrlToBlob(urlData,type){
-    var bytes = window.atob(urlData.split(',')[1]);        //remove url, convert to byte
+function convertBase64UrlToBlob(urlData, type) {
+    var bytes = window.atob(urlData.split(',')[1]); //remove url, convert to byte
     //deal with anomaly, change the ASCI code less than = 0 to great than zero
     var ab = new ArrayBuffer(bytes.length);
     var ia = new Uint8Array(ab);
     for (var i = 0; i < bytes.length; i++) {
         ia[i] = bytes.charCodeAt(i);
     }
-    return new Blob( [ab] , {type : type});
+    return new Blob([ab], {
+        type: type
+    });
+}
+
+//Resize an image
+function resizeImage_Canvas(img) {
+    var MAX_WIDTH = 480,
+        MAX_HEIGHT = 360,
+        width = img.width,
+        height = img.height,
+        canvas = document.createElement('canvas');
+
+    if (width > height) {
+        if (width > MAX_WIDTH) {
+            //height *= MAX_WIDTH / width;
+            //width = MAX_WIDTH;
+            height = 360;
+            width = 480;
+        }
+    } else {
+        if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            //height = MAX_HEIGHT;
+            height = 360;
+
+        }
+    }
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+
+    return canvas;
+}
+
+//Check empty.
+function isEmpty(val) {
+    switch (typeof val) {
+        case 'undefined':
+            return true;
+        case 'string':
+            if (val.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+            break;
+        case 'boolean':
+            if (!val) return true;
+            break;
+        case 'number':
+            if (0 === val || isNaN(val)) return true;
+            break;
+        case 'object':
+            if (null === val || val.length === 0) return true;
+            for (var i in val) {
+                return false;
+            }
+            return true;
+    }
+    return false;
 }
 
 $(document).ready(function () {
 
     loadPropertySelectData();
     loadSolutionSelectData();
-
-    checkIndiTextValue();
-
-    //    if(photos_count > 0)
-    //        photos_count++;
-    //    if(pdfCounts > 0)
-    //        pdfCounts++;
-
-    console.log("Current pdfs count: " + pdfCounts);
-    console.log("Current photos count: " + photos_count);
+    //    console.log("Current pdfs count: " + pdfCounts);
+    //    console.log("Current photos count: " + photos_count);
 });
