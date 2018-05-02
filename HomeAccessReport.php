@@ -1148,6 +1148,7 @@ require_once("loadbooking.php");
                     <button onclick="SaveReport()" type="button" class="btn btn-primary save" style="position:static;">Save</button>
                     <button onclick="btn_genferateHomeAccessReportPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
                     <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+                    <button onclick="btn_genferateHomeAccessReportPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
                 </td>
                 <?php
                     }

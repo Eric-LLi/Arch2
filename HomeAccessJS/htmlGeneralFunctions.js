@@ -759,9 +759,15 @@ var photos_count = 0;
 
 //Photos upload file
 $("#Imgs_Upload").change(function (e) {
+    if ($("#HA_BookingNo").val() === "0") {
+        alert("Please select booking from main page. ");
+        $(location).attr("href", "index.php");
+        return;
+    }
+
     //Store how many files user has selected.
     const totalFiles = e.currentTarget.files;
-    console.log("File number: " + totalFiles.length);
+    //    console.log("File number: " + totalFiles.length);
 
     //Only action when user has selected file.
     if (totalFiles.length > 0) {
@@ -781,43 +787,78 @@ $("#Imgs_Upload").change(function (e) {
             photos_count++;
 
             //FileReader() only support new version of browser.
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                var code = reader.result;
-                if (code !== null) {
-                    setTimeout(function () {
-                        if (("#" + element[1]).length > 0) {
-                            $("#" + element[1]).attr("src", code);
+            //Read the file and convert to an image element.
+            //            var imgFile = document.createElement('img');
 
-                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                                type: file.type,
-                                lastModified: file.lastModifiedDate
-                            });
 
-                            if ($("#HA_BookingNo").val() === "0") {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                //                imgFile.src = e.target.result
+                var data = e.target.result
+                var image = new Image();
+                image.onload = function () {
+                    var width = image.width;
+                    var height = image.height;
 
-                                alert("Please select booking from main page. ");
+                    var code = resizeImage_Canvas(image).toDataURL("image/png");
 
-                                $(location).attr("href", "index.php");
+                    if (!isEmpty(code)) {
+                        $("#" + element[1]).attr("src", code);
 
-                            } else {
-                                doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
-                            }
-                        } else {
-                            console.log("NO element::" + element[1]);
-                        }
-                    }, 30);
-                } else {
-                    console.log("No code for image!!");
-                }
-            }
+                        var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                            type: file.type,
+                            lastModified: file.lastModifiedDate
+                        });
+
+                        doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
+
+                        $("#Imgpage-loader").hide();
+                        $("#HA_ImgsContents").show();
+                    }
+                };
+                image.src = data;
+            };
             reader.readAsDataURL(file);
+            //            const reader = new FileReader();
+            //            reader.onload = (e) => {
+            //                var code = reader.result;
+            //                if (code !== null) {
+            //                    setTimeout(function () {
+            //                        if (("#" + element[1]).length > 0) {
+            //                            $("#" + element[1]).attr("src", code);
+            //
+            //                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+            //                                type: file.type,
+            //                                lastModified: file.lastModifiedDate
+            //                            });
+            //
+            //                            if ($("#HA_BookingNo").val() === "0") {
+            //
+            //                                alert("Please select booking from main page. ");
+            //
+            //                                $(location).attr("href", "index.php");
+            //
+            //                            } else {
+            //                                doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
+            //                            }
+            //                        } else {
+            //                            console.log("NO element::" + element[1]);
+            //                        }
+            //                    }, 30);
+            //                } else {
+            //                    console.log("No code for image!!");
+            //                }
+            //            }
+            //            reader.readAsDataURL(file);
+            //                        });
+
+
+            //                });
+            //            }
+            //        }
         })
-        $("#Imgpage-loader").hide();
-        $("#HA_ImgsContents").show();
     }
 });
-
 //Photos page; create html image, text, remove button and container.
 function createPhoto(id) {
     var imgContainer = document.createElement("div"),
@@ -918,7 +959,7 @@ function createPDFImg(id) {
     caption.setAttribute("id", captionID);
     caption.setAttribute("type", "text");
     caption.setAttribute("class", "form-control");
-    caption.setAttribute("placeholder", "Caption");
+    //caption.setAttribute("placeholder", "Caption");
 
     imgElement.setAttribute("id", imgID);
     imgElement.setAttribute("src", "");
@@ -972,13 +1013,15 @@ function showPage(page_no) {
     // Fetch the page
     __PDF_DOC.getPage(page_no).then(function (page) {
         // As the canvas is of a fixed width we need to set the scale of the viewport accordingly
-        var scale_required = __CANVAS.width / page.getViewport(1).width;
+        //        var scale_required = __CANVAS.width / page.getViewport(1).width;
 
         // Get viewport of the page at required scale
-        var viewport = page.getViewport(scale_required);
+        //        var viewport = page.getViewport(scale_required);
+        var viewport = page.getViewport(0.8);
 
         // Set canvas height
         __CANVAS.height = viewport.height;
+        __CANVAS.width = viewport.width;
 
         var renderContext = {
             canvasContext: __CANVAS_CTX,
@@ -1058,6 +1101,61 @@ function convertBase64UrlToBlob(urlData, type) {
     return new Blob([ab], {
         type: type
     });
+}
+
+//Resize an image
+function resizeImage_Canvas(img) {
+    var MAX_WIDTH = 480,
+        MAX_HEIGHT = 360,
+        width = img.width,
+        height = img.height,
+        canvas = document.createElement('canvas');
+
+    if (width > height) {
+        if (width > MAX_WIDTH) {
+            //height *= MAX_WIDTH / width;
+            //width = MAX_WIDTH;
+            height = 360;
+            width = 480;
+        }
+    } else {
+        if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            //height = MAX_HEIGHT;
+            height = 360;
+
+        }
+    }
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+
+    return canvas;
+}
+
+//Check empty.
+function isEmpty(val) {
+    switch (typeof val) {
+        case 'undefined':
+            return true;
+        case 'string':
+            if (val.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+            break;
+        case 'boolean':
+            if (!val) return true;
+            break;
+        case 'number':
+            if (0 === val || isNaN(val)) return true;
+            break;
+        case 'object':
+            if (null === val || val.length === 0) return true;
+            for (var i in val) {
+                return false;
+            }
+            return true;
+    }
+    return false;
 }
 
 $(document).ready(function () {

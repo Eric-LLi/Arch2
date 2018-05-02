@@ -53,40 +53,48 @@
 }
 
 #HA_PdfContents button {
-
+    margin: 5px 0px 0px 0px;
     /*    display: none;*/
 }
 
 #HA_ImgsContents button {
-    margin: 0px;
+    margin: 5px 0px 0px 0px;
 }
 
 #HA_PdfContents input {
     width: 100%;
-    margin: 0px;
+    margin: 5px 0px 0px 0px;
 }
 
 #HA_ImgsContents input {
     width: 100%;
-    margin: 0px;
+    margin: 5px 0px 0px 0px;
 }
 
 #HA_PdfContents img {
     display: none;
-    width: 200px;
-    height: 300px;
+    /*    width: 595px;*/
+    /*    height: 842px;*/
 }
 
 #HA_ImgsContents img {
-    padding: 5px;
-    width: 300px;
-    height: 250px;
+    /*    padding: 5px;*/
+    /*    width: 480px;*/
+    /*    height: 360px;*/
 }
 
-#HA_PdfContents div,
+#HA_PdfContents div {
+    float: left;
+    display: inline;
+}
+
 #HA_ImgsContents div {
     float: left;
     display: inline;
+    margin-left: 20px;
+    text-align: center;
+    width: 500px;
+    height: 500px;
 }
 
 #img_table td,

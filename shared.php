@@ -13,11 +13,11 @@
   $gConfig['smtp-password'] = "adtalk\$\$00";
   $gConfig['smtp-host'] = "mail.adtalkserver.net";
 
-  $gConfig['adminemail'] = "office@archicentreaustralia.com.au";
+  //$gConfig['adminemail'] = "office@archicentreaustralia.com.au";
   $gConfig['bccemail'] = "archive@archicentreaustralia.com.au";
   //$gConfig['adminemail'] = "M0410898213@126.com";
   $gConfig['ccemail'] = "emily92308@126.com";
-  //$gConfig['adminemail'] = "tim@adtalk.com.au";
+  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
   //$gConfig['adminemail'] = "mitchamrumpus@gmail.com";
 
   $reportTypes =
@@ -47,7 +47,7 @@
 		"Residential Home Access & Services Report"
   ];
 
-  
+
   $reportfiles =
   [
     "",
@@ -71,12 +71,12 @@
     "HOWReport.php",
     "CommercialPropertyReport.php",
     //"CommercialDilapidationSurvey.php",
-		
+
 		"HomeAccessReport.php",
     "",
     ""
   ];
-  //this is for email customer when the booking is finsihed with the download link 
+  //this is for email customer when the booking is finsihed with the download link
   $reportemails =
   [
     "",
@@ -106,7 +106,7 @@
 		"",
     ""
   ];
-  // this is for the inspector allocation. 
+  // this is for the inspector allocation.
   $reportconfirmemails =
   [
     "",
@@ -134,7 +134,7 @@
     "",
     ""
   ];
-  $userTypes = 
+  $userTypes =
   [
     "",
     "architects",
