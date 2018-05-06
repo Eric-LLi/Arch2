@@ -12,6 +12,8 @@ function generatePDF(mode) {
         $('#savingPDFAlert').show('fade');
     }
     resetTotalImagesCaptions();
+    var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isMobile = {
         Android: function() {
             return navigator.userAgent.match(/Android/i);
@@ -678,19 +680,29 @@ function generatePDF(mode) {
     {
         if( isMobile.any() )
         {
-            var reader = new FileReader();
+            if (isSafari && iOS) 
+            {
+                //alert("You are using Safari on iOS!");
+                pdfMake.createPdf(docDefinition).open();
+            }
+            else
+            {
+                //alert("You are not using Safari on iOS!");
+                var reader = new FileReader();
 
-            pdfMake.createPdf(docDefinition).getBlob(function(blob){
-                reader.onload = function(e){
-                    //window.location.href = reader.result;
-                    window.open(reader.result,'_blank');
-                };
-                reader.readAsDataURL(blob);
-            });
+                pdfMake.createPdf(docDefinition).getBlob(function(blob){
+                    reader.onload = function(e){
+                        //window.location.href = reader.result;
+                        window.open(reader.result,'_blank');
+                    };
+                    reader.readAsDataURL(blob);
+                });
+            }
         }
         else
         {
             console.log("It is on pc");
+            //alert("You are using a PC");
             pdfMake.createPdf(docDefinition).open();
         }
         //pdfMake.createPdf(docDefinition).open();

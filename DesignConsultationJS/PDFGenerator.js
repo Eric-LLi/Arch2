@@ -9,6 +9,8 @@
 
 function generatePDF(mode) {
     // Page start drawing from here...
+    var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
     var isMobile = {
         Android: function() {
@@ -655,35 +657,28 @@ function generatePDF(mode) {
     {
         if( isMobile.any() )
         {
-            // var document = pdfMake.createPdf(docDefinition);
-            // document.download();
+            if (isSafari && iOS) 
+            {
+                //alert("You are using Safari on iOS!");
+                pdfMake.createPdf(docDefinition).open();
+            }
+            else
+            {
+                var reader = new FileReader();
 
-            // pdfMake.createPdf(docDefinition).getBlob(function(blob){
-            //     var file = new Blob(blob, {type: 'application/pdf'});
-            //     var fileURL = URL.createObjectURL(file);
-            //     window.open(fileURL);
-            //
-            // });
-
-            // pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
-            //     window.open(encodedString);
-            // });
-            var reader = new FileReader();
-
-            pdfMake.createPdf(docDefinition).getBlob(function(blob){
-                // window.URL = window.URL || window.webkitURL;
-                // var url = window.URL.createObjectURL(blob);
-                // window.open(url);
-                reader.onload = function(e){
-                    //window.location.href = reader.result;
-                    window.open(reader.result,'_blank');
-                };
-                reader.readAsDataURL(blob);
-                // reader.readAsDataURL(blob);
-                // window.open(blob);
-            });
-
-
+                pdfMake.createPdf(docDefinition).getBlob(function(blob){
+                    // window.URL = window.URL || window.webkitURL;
+                    // var url = window.URL.createObjectURL(blob);
+                    // window.open(url);
+                    reader.onload = function(e){
+                        //window.location.href = reader.result;
+                        window.open(reader.result,'_blank');
+                    };
+                    reader.readAsDataURL(blob);
+                    // reader.readAsDataURL(blob);
+                    // window.open(blob);
+                });
+            }
         }
         else
         {
