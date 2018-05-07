@@ -1,5 +1,6 @@
 /**
- * Created by TengShinan on 24/10/17.
+ * Created by Fafa on 24/10/17.
+ * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  */
 
 function generatePDF(mode) {
