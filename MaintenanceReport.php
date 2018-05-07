@@ -586,13 +586,13 @@
 <script src="js/images.js"></script>
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 
-<script src="MaintenanceJS/text.js"></script>
+<script src="MaintenanceJS/text.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="MaintenanceJS/generalFunctions.js"></script>
-<script src="MaintenanceJS/htmlGeneralFunctions.js"></script>
+<script src="MaintenanceJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="MaintenanceJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--PDF Generator-->
-<script src="MaintenanceJS/PDFGenerator.js"></script>
-<script src="MaintenanceJS/getTables.js"></script>
+<script src="MaintenanceJS/PDFGenerator.js?<?php echo time(); ?>"></script>
+<script src="MaintenanceJS/getTables.js?<?php echo time(); ?>"></script>
 
 </body>
 </html>

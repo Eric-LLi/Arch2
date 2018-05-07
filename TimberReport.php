@@ -4063,13 +4063,13 @@
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 
 <!--Text File-->
-<script src="TimberJS/text.js"></script>
+<script src="TimberJS/text.js?<?php echo time(); ?>"></script>
 <!--PDF Generator-->
-<script src="TimberJS/PDFGenerator.js"></script>
+<script src="TimberJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="TimberJS/generalFunctions.js"></script>
-<script src="TimberJS/htmlGeneralFunction.js"></script>
+<script src="TimberJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="TimberJS/htmlGeneralFunction.js?<?php echo time(); ?>"></script>
 <!--Get Table's Data-->
-<script src="TimberJS/getTableData.js"></script>
+<script src="TimberJS/getTableData.js?<?php echo time(); ?>"></script>
 </body>
 </html>

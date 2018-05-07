@@ -412,14 +412,14 @@
 <script src="js/images.js"></script>
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 <!--PDF Generator-->
-<script src="DilapidationJS/PDFGenerator.js"></script>
+<script src="DilapidationJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="DilapidationJS/generalFunctions.js"></script>
-<script src="DilapidationJS/htmlGeneralFunctions.js"></script>
+<script src="DilapidationJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="DilapidationJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--Text-->
-<script src="DilapidationJS/text.js"></script>
+<script src="DilapidationJS/text.js?<?php echo time(); ?>"></script>
 <!--Table Data-->
-<script src="DilapidationJS/tableData.js"></script>
+<script src="DilapidationJS/tableData.js?<?php echo time(); ?>"></script>
 
 
 <!--<script src="../JS/images.js"></script>-->
