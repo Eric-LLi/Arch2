@@ -4,6 +4,7 @@
 
 /**
  * Core function of the PDF generator
+ * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  * */
 function generatePDF(mode) {
     // Page start drawing from here...

@@ -2781,8 +2781,8 @@
         if (SharedIsAdmin())
         {
       ?>
-          <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
           <a href="javascript:void(0)" onClick="doMarkPaid()" class="easyui-linkbutton" iconCls="icon-payment">Paid</a>
+          <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
           <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Redo</a>
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
