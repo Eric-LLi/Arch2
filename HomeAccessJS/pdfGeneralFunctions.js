@@ -247,98 +247,6 @@ function giveMeHugeDraft(mode) {
     }
 }
 
-//Get all images and pdfs.
-function getImagePDF() {
-    var data = [],
-        row = [],
-        tdCount = 1,
-        imgContent = $('#HA_ImgsContents div'),
-        pdfContent = $('#HA_PdfContents div'),
-        img, imgSrc;
-
-    if (imgContent.length > 0) {
-        //        imgContent = $('#HA_ImgsContents div');
-        for (var i = 0; i < imgContent.length; i++) {
-            img = imgContent.eq(i).children('img');
-
-            if (img.attr('src').includes("photos/"))
-                imgSrc = convertImgToBase64(img.get(0));
-            else {
-                imgSrc = img.attr('src');
-            }
-            row.push({
-                stack: [
-                    {
-                        image: imgSrc,
-                        width: 150,
-                        height: 150
-                },
-                    {
-                        text: $(imgContent.eq(i).children('input')).val()
-                }
-            ]
-            });
-            //        console.log($(imgContent.eq(i).children('input')).val());
-            tdCount++;
-            if (tdCount === 3) {
-                data.push(row);
-                tdCount = 1;
-                row = [];
-            }
-        }
-        if (tdCount === 2) {
-            row.push({});
-            data.push(row);
-        }
-    }
-    //    console.log(data);
-    if (pdfContent.length > 0) {
-        //        pdfContent = $('#HA_PdfContents div');
-        //        row = [];
-        if (tdCount !== 1)
-            tdCount = 1;
-        for (i = 0; i < pdfContent.length; i++) {
-            img = pdfContent.eq(i).children('img');
-
-            if (img.attr('src').includes("photos/"))
-                imgSrc = convertImgToBase64(img.get(0));
-            else {
-                imgSrc = img.attr('src');
-            }
-
-            row.push({
-                stack: [
-                    {
-                        image: imgSrc,
-                        width: 150,
-                        height: 150
-                },
-                    {
-                        text: $(pdfContent.eq(i).children('input')).val()
-                }
-            ]
-            });
-            tdCount++;
-            if (tdCount === 3) {
-                data.push(row);
-                tdCount = 1;
-                row = [];
-            }
-        }
-        if (tdCount === 2) {
-            row.push({});
-            data.push(row);
-        }
-        //    console.log(data);
-
-    }
-    if (imgContent.length > 0 || pdfContent.length > 0)
-        return data;
-    else {
-        return [{}, {}];
-    }
-}
-
 //Get all table cells data from Construction Summary
 function getTableData_CS() {
     var data = [],
@@ -1102,6 +1010,119 @@ function getTableData_Attachments() {
     return data;
 }
 
+//Get photo images.
+function getPhotoImgs() {
+    var data = [],
+        row = [],
+        divCount = 1,
+        imgContainer, imgSrc;
+
+    var divContainers = $('#HA_ImgsContents div');
+    //    console.log(divContainers);
+
+    //Insert header
+    row.push({
+        text: "Photos",
+        style: 'pageTopHeader',
+
+    }, {});
+    data.push(row);
+    row = [];
+
+    if (isEmpty(divContainers.length)) {
+        row.push({}, {});
+        data.push(row);
+        console.log(data);
+        return data;
+    } else {
+        for (var i = 0; i < divContainers.length; i++) {
+            imgContainer = divContainers.eq(i).children('img');
+
+            if (imgContainer.attr('src').includes("photos/"))
+                imgSrc = convertImgToBase64(imgContainer.get(0));
+            else {
+                imgSrc = imgContainer.attr('src');
+            }
+            row.push({
+                stack: [
+                    {
+                        image: imgSrc,
+                        width: 250,
+                        height: 187,
+                        margin: [0, 80, 0, 0]
+                    },
+                    {
+                        text: $(divContainers.eq(i).children('input')).val()
+                    }
+                ]
+            });
+            divCount++;
+            if (divCount === 3) {
+                data.push(row);
+                row = [];
+                divCount = 1;
+            }
+        }
+        if (divCount === 2) {
+            row.push({});
+            data.push(row);
+        }
+        console.log(data);
+        return data;
+    }
+}
+
+//Get sketch images.
+function getSketchImgs() {
+    var data = [],
+        row = [],
+        imgContainer, imgSrc;
+
+    var divContainers = $('#HA_PdfContents div');
+    //    console.log(divContainers);
+
+    //Insert header
+    row.push({
+        text: "Sketchs",
+        style: 'pageTopHeader',
+
+    });
+    data.push(row);
+    row = [];
+
+    if (isEmpty(divContainers.length)) {
+        row.push({});
+        data.push(row);
+        console.log(data);
+        return data;
+
+    } else {
+        for (var i = 0; i < divContainers.length; i++) {
+            imgContainer = divContainers.eq(i).children('img');
+
+            if (imgContainer.attr('src').includes("photos/"))
+                imgSrc = convertImgToBase64(imgContainer.get(0));
+            else {
+                imgSrc = imgContainer.attr('src');
+            }
+            row.push({
+                stack: [
+                    {
+                        image: imgSrc
+                    },
+                    {
+                        text: $(divContainers.eq(i).children('input')).val()
+                    }
+                ]
+            });
+            data.push(row);
+            row = [];
+        }
+        return data;
+    }
+}
+
+//Conver img element to an base64 code.
 function convertImgToBase64(img) {
     var canvas = document.createElement("canvas");
     canvas.width = img.naturalWidth;

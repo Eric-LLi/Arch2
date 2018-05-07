@@ -26,6 +26,7 @@ require_once("loadbooking.php");
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css"> </head>
 
+
 <body>
     <!--Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a class="navbar-brand" href="#">ArchiCentre Task</a>
@@ -995,6 +996,31 @@ require_once("loadbooking.php");
                     </div>
                 </div>
             </div>
+
+            <!--First Tap Photo-->
+            <div id="HA_DIVPhotos" title="Photos" data-title="Photos" style="padding: 10px;font-size: 18px">
+                <button id="uploadImg_Btn" class="btn btn-primary">Upload Images</button>
+                <input type="file" id="Imgs_Upload" accept="image/x-png,image/jpeg" multiple/>
+                <div id="Img-main-container">
+                    <div id="Img-loader">Loading document ...</div>
+                    <div id="HA_ImgsContents"></div>
+                    <!--                    HA_ImgsContents HA_ImgsCA_indicateText-->
+                    <div id="Imgpage-loader">Loading page ...</div>
+                </div>
+            </div>
+            <!--First Tap Photo-->
+            <div id="HA_DIVSketchs" title="Sketches" data-title="Sketches" style="padding: 10px;font-size: 18px">
+                <button id="upload-button" class="btn btn-primary">Upload PDF</button>
+                <label class="text-danger">(*.pdf only) Please upload only one PDF at a time</label>
+                <input type="file" id="file-to-upload" accept="application/pdf" />
+                <div id="pdf-main-container">
+                    <div id="pdf-loader">Loading document ...</div>
+                    <div id="HA_PdfContents">
+                        <canvas id="pdf-canvas"></canvas>
+                    </div>
+                    <div id="page-loader">Loading page ...</div>
+                </div>
+            </div>
             <!--First Tap Attachment-->
             <div id="HA_DivAttachments" title="Attachments" data-title="Attachments" style="padding: 10px;font-size: 18px">
                 <!--                <div class="container" style="margin-top: 20px">-->
@@ -1108,30 +1134,6 @@ require_once("loadbooking.php");
                 </table>
 
             </div>
-            <!--First Tap Photo-->
-            <div title="Photo" style="padding: 10px;font-size: 18px">
-                <button id="uploadImg_Btn" class="btn btn-primary">Upload Images</button>
-                <input type="file" id="Imgs_Upload" accept="image/x-png,image/jpeg" multiple/>
-                <div id="Img-main-container">
-                    <div id="Img-loader">Loading document ...</div>
-                    <div id="HA_ImgsContents"></div>
-<!--                    HA_ImgsContents HA_ImgsCA_indicateText-->
-                    <div id="Imgpage-loader">Loading page ...</div>
-                </div>
-            </div>
-            <!--First Tap Photo-->
-            <div title="Sketches" style="padding: 10px;font-size: 18px">
-                <button id="upload-button" class="btn btn-primary">Upload PDF</button>
-                <label class="text-danger">(*.pdf only) Please upload only one PDF at a time</label>
-                <input type="file" id="file-to-upload" accept="application/pdf" />
-                <div id="pdf-main-container">
-                    <div id="pdf-loader">Loading document ...</div>
-                    <div id="HA_PdfContents">
-                        <canvas id="pdf-canvas"></canvas>
-                    </div>
-                    <div id="page-loader">Loading page ...</div>
-                </div>
-            </div>
         </div>
     </div>
     <!--Action Buttons-->
@@ -1145,10 +1147,9 @@ require_once("loadbooking.php");
                     {
                 ?>
                 <td class="text-center" style="border:none;">
-                    <button onclick="SaveReport()" type="button" class="btn btn-primary save" style="position:static;">Save</button>
+                    <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
                     <button onclick="btn_genferateHomeAccessReportPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
                     <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
-                    <button onclick="btn_genferateHomeAccessReportPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
                 </td>
                 <?php
                     }
