@@ -446,14 +446,14 @@
 
 
 <!--Text File-->
-<script src="AdviceJS/text.js"></script>
+<script src="AdviceJS/text.js?<?php echo time(); ?>"></script>
 <!--PDF Generator-->
-<script src="AdviceJS/PDFGenerator.js"></script>
+<script src="AdviceJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="AdviceJS/generalFunctions.js"></script>
-<script src="AdviceJS/htmlGeneralFunctions.js"></script>
+<script src="AdviceJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="AdviceJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--Get Table's Data-->
-<script src="AdviceJS/getTableData.js"></script>
+<script src="AdviceJS/getTableData.js?<?php echo time(); ?>"></script>
 
 
 
