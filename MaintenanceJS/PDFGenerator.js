@@ -1,9 +1,12 @@
 /**
- * Created by TengShinan on 10/10/17.
+ * Created by TengShinan,Fafa on 10/10/17.
+ * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  */
 
 function generatePDF(mode) {
     resetTotalImagesCaptions();
+    var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isMobile = {
         Android: function() {
             return navigator.userAgent.match(/Android/i);
@@ -715,15 +718,24 @@ function generatePDF(mode) {
     {
         if( isMobile.any() )
         {
-            var reader = new FileReader();
+            if (isSafari && iOS) 
+            {
+                //alert("You are using Safari on iOS!");
+                pdfMake.createPdf(docDefinition).open();
+            }
+            else
+            {
+                var reader = new FileReader();
 
-            pdfMake.createPdf(docDefinition).getBlob(function(blob){
-                reader.onload = function(e){
-                    //window.location.href = reader.result;
-                    window.open(reader.result,'_blank');
-                };
-                reader.readAsDataURL(blob);
-            });
+                pdfMake.createPdf(docDefinition).getBlob(function(blob){
+                    reader.onload = function(e){
+                        //window.location.href = reader.result;
+                        window.open(reader.result,'_blank');
+                    };
+                    reader.readAsDataURL(blob);
+                });
+            }
+           
         }
         else
         {

@@ -4023,7 +4023,6 @@
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
     <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
     <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
-    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
         else
@@ -4064,13 +4063,13 @@
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 
 <!--Text File-->
-<script src="TimberJS/text.js"></script>
+<script src="TimberJS/text.js?<?php echo time(); ?>"></script>
 <!--PDF Generator-->
-<script src="TimberJS/PDFGenerator.js"></script>
+<script src="TimberJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="TimberJS/generalFunctions.js"></script>
-<script src="TimberJS/htmlGeneralFunction.js"></script>
+<script src="TimberJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="TimberJS/htmlGeneralFunction.js?<?php echo time(); ?>"></script>
 <!--Get Table's Data-->
-<script src="TimberJS/getTableData.js"></script>
+<script src="TimberJS/getTableData.js?<?php echo time(); ?>"></script>
 </body>
 </html>

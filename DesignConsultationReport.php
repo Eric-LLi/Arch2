@@ -372,16 +372,16 @@
 <!--<script src="./DesignConsultationJS/image.js"></script>-->
     
 <!--Text File-->
-<script src="DesignConsultationJS/text.js"></script>
+<script src="DesignConsultationJS/text.js?<?php echo time(); ?>"></script>
 
 <!--General Functions-->
-<script src="DesignConsultationJS/generalFunctions.js"></script>
+<script src="DesignConsultationJS/generalFunctions.js?<?php echo time(); ?>"></script>
 
 <!--PDF Generator-->
-<script src="DesignConsultationJS/PDFGenerator.js"></script>
+<script src="DesignConsultationJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 
 <!--Get Table's Data-->
-<script src="DesignConsultationJS/getTableData.js"></script>
+<script src="DesignConsultationJS/getTableData.js?<?php echo time(); ?>"></script>
 </body>
 
 </html>

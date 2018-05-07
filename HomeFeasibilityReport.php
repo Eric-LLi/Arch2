@@ -718,14 +718,14 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 
 <!--Text File-->
-<script src="HomeFeasibilityJS/text.js"></script>
+<script src="HomeFeasibilityJS/text.js?<?php echo time(); ?>"></script>
 <!--PDF Generator-->
-<script src="HomeFeasibilityJS/PDFGenerator.js"></script>
+<script src="HomeFeasibilityJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="HomeFeasibilityJS/generalFunctions.js"></script>
-<script src="HomeFeasibilityJS/htmlGeneralFunctions.js"></script>
+<script src="HomeFeasibilityJS/generalFunctions.js?<?php echo time(); ?>"></script>
+<script src="HomeFeasibilityJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--Get Table's Data-->
-<script src="HomeFeasibilityJS/getTableData.js"></script>
+<script src="HomeFeasibilityJS/getTableData.js?<?php echo time(); ?>"></script>
 
 
 </body>

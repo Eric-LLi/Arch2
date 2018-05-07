@@ -2126,6 +2126,86 @@
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
     }
 
+
+    function doOpenReport()
+    {
+      if (!doGridGetSelectedRowData
+      (
+        'divBookingsG',
+        function(row, index)
+              {
+                switch (parseInt(row.reportid))
+                {
+                  case 1:
+                    $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  case 2:
+                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  case 3:
+                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  case 4:
+                    $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  case 5:
+                    $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  case 6:
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+									case 7:
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+									case 8:
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+									case 9:
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+									case 10:
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+									case 11:
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+									case 12:
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+									case 13:
+                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+									case 14:
+                    $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;		
+                  case 15:
+                    $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  case 16:
+                    $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  case 17:
+                    $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  case 18:
+                    $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                    break;
+                  case 19:
+                    $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                  //case 20:
+                    //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                    //break;
+                  case 21:
+                    $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                    break;
+                }
+              }
+      ))
+        noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
+    }
+
+
     function doEmailCustomer()
     {
       if (!doGridGetSelectedRowData
@@ -2696,21 +2776,23 @@
     <div style="margin-bottom: 5px">
       <a href="javascript:void(0)" onClick="doNewBooking()" class="easyui-linkbutton" iconCls="icon-add">New Booking</a>
       <a href="javascript:void(0)" onClick="doEditBooking()" class="easyui-linkbutton" iconCls="icon-edit">Edit Booking</a>
-      <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
+      <a href="javascript:void(0)" onClick="doOpenReport()" class="easyui-linkbutton" iconCls="icon-edit">Open Report</a>
       <?php
         if (SharedIsAdmin())
         {
       ?>
+          <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
           <a href="javascript:void(0)" onClick="doMarkPaid()" class="easyui-linkbutton" iconCls="icon-payment">Paid</a>
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
           <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Redo</a>
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
           <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Customer</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
+          <a href="javascript:void(0)" onClick="doOpenReport()" class="easyui-linkbutton" iconCls="icon-ok">Open Report</a>
       <?php
         }
         else
-        {
+        { 
         ?>
           <a href="javascript:void(0)" onClick="doMarkCompleted()" class="easyui-linkbutton" iconCls="icon-orderform">Completed</a>
     <?php

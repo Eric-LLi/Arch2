@@ -1189,14 +1189,14 @@
 
 
 <!--PDF Generator-->
-<script src="CommercialPropertyJS/PDFGenerator.js"></script>
+<script src="CommercialPropertyJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <!--General Functions-->
-<script src="CommercialPropertyJS/htmlGeneralFunctions.js"></script>
-<script src="CommercialPropertyJS/pdfGeneralFunctions.js"></script>
+<script src="CommercialPropertyJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
+<script src="CommercialPropertyJS/pdfGeneralFunctions.js?<?php echo time(); ?>"></script>
 <!--Text-->
-<script src="CommercialPropertyJS/text.js"></script>
+<script src="CommercialPropertyJS/text.js?<?php echo time(); ?>"></script>
 <!--Table Data-->
-<script src="CommercialPropertyJS/getTableData.js"></script>
+<script src="CommercialPropertyJS/getTableData.js?<?php echo time(); ?>"></script>
 
 </body>
 

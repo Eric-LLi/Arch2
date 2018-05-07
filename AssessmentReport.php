@@ -13745,10 +13745,10 @@
 <!--<script src="../JS/removeImages.js"></script>-->
 <script src="js/images.js"></script>
 <script src="js/loadImageJS/load-image.all.min.js"></script>
-<script src="AssessmentJS/htmlGeneralFunctions.js"></script>
-<script src="AssessmentJS/pdfGeneralFunctions.js"></script>
-<script src="AssessmentJS/text.js"></script>
-<script src="AssessmentJS/PDFGenerator.js"></script>
-<script src="AssessmentJS/getTableData.js"></script>
+<script src="AssessmentJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
+<script src="AssessmentJS/pdfGeneralFunctions.js?<?php echo time(); ?>"></script>
+<script src="AssessmentJS/text.js?<?php echo time(); ?>"></script>
+<script src="AssessmentJS/PDFGenerator.js?<?php echo time(); ?>"></script>
+<script src="AssessmentJS/getTableData.js?<?php echo time(); ?>"></script>
 </body>
 </html>

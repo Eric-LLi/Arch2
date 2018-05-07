@@ -97,7 +97,7 @@ function getAssessmentDetailsTable() {
                     border: [true, true, false, true]
                 }],
                 [{
-                    text: 'Date of Inspection',
+                    text: 'Date of Assessment',
                     style: 'tableBoldTextAlignLeft',
                     border: [false, true, true, true]
                 }, {
@@ -105,7 +105,7 @@ function getAssessmentDetailsTable() {
                     fontSize: 9,
                     colSpan: 2
                 }, {}, {
-                    text: 'Time of Inspection',
+                    text: 'Time of Assessment',
                     style: 'tableBoldTextAlignLeft'
                 }, {
                     text: getIt('timeOfAssessment'),
@@ -166,7 +166,7 @@ function getAssessorDetailsTable() {
             widths: [61, '*', 80, '*'],
             body: [
                 [{
-                    text: 'ASSESSOR DETAILS',
+                    text: 'ARCHITECT DETAILS',
                     style: 'tableHeader',
                     colSpan: 4,
                     border: [false, false, false, true]

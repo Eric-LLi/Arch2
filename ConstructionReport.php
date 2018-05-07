@@ -778,14 +778,14 @@
         <script src="js/loadImageJS/load-image.all.min.js"></script>
 
         <!--Text File-->
-        <script src="ConstructionJS/text.js"></script>
+        <script src="ConstructionJS/text.js?<?php echo time(); ?>"></script>
         <!--PDF Generator-->
-        <script src="ConstructionJS/PDFGenerator.js"></script>
+        <script src="ConstructionJS/PDFGenerator.js?<?php echo time(); ?>"></script>
         <!--General Functions-->
-        <script src="ConstructionJS/generalFunctions.js"></script>
-        <script src="ConstructionJS/htmlGeneralFunctions.js"></script>
+        <script src="ConstructionJS/generalFunctions.js?<?php echo time(); ?>"></script>
+        <script src="ConstructionJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
         <!--Get Table's Data-->
-        <script src="ConstructionJS/getTableData.js"></script>
+        <script src="ConstructionJS/getTableData.js?<?php echo time(); ?>"></script>
     </body>
 
     </html>
