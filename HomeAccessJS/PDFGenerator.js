@@ -6,12 +6,12 @@ var btn_genferateHomeAccessReportPDF = function (mode) {
         alert("Please select order from main page. ");
         $(location).attr("href", "index.php");
     } else {
-        generateHomeAccessReportPDF(mode);
+        generatePDF(mode);
     }
 };
 
 //generalPDF(mode)
-function generateHomeAccessReportPDF(mode) {
+function generatePDF(mode) {
     //    console.log("generateHomeAccessReportPDF");
     //reset image number and general notes paragraphs number
     if (mode === 'save') {
@@ -62,14 +62,11 @@ function generateHomeAccessReportPDF(mode) {
     var EnergyEfficiencyData = getTableData_EnergyEfficiency();
     //Get all table cells data from Attachments.
     var AttachmentsData = getTableData_Attachments();
-    //Get all images and pdfs.
-    //    var imagesPDFData = [{
-    //        text: '123'
-    //    }, {
-    //        text: '456'
-    //    }];
-
-    var imagesPDFData = getImagePDF();
+    //Get photos
+    var getPhotoImgsData = getPhotoImgs();
+    //Get PDFs
+    var getSketchImgsData = getSketchImgs();
+    //    var imagesPDFData = getImagePDF();
 
     // Page start drawing from here...
     var docDefinition = {
@@ -140,6 +137,7 @@ function generateHomeAccessReportPDF(mode) {
                 text: page2Header,
                 style: "pageTopHeader"
             },
+            giveMeHugeDraft(mode),
             {
                 text: page2subHeader,
                 margin: [0, 10, 0, 0]
@@ -275,8 +273,7 @@ function generateHomeAccessReportPDF(mode) {
             {
                 text: [
                     {
-                        text: page2_1 + "\n",
-                        alignment: 'right'
+                        text: page2_1 + "\n"
                     }
                     , {
                         text: page2_2
@@ -294,6 +291,7 @@ function generateHomeAccessReportPDF(mode) {
                 text: page3Header,
                 style: 'pageTopHeader'
             },
+            giveMeHugeDraft(mode),
             {
                 text: page3SubHeader,
                 style: 'pageSubHeader',
@@ -370,6 +368,7 @@ function generateHomeAccessReportPDF(mode) {
                 text: page4Header,
                 style: 'pageTopHeader'
             },
+            giveMeHugeDraft(mode),
             {
                 style: 'tableContent',
                 alignment: 'center',
@@ -417,15 +416,6 @@ function generateHomeAccessReportPDF(mode) {
                     body: csData
                 }
             },
-            //Key Explaination
-            {
-                alignment: 'center',
-                border: [true, true, true, false],
-                table: {
-                    widths: ['*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*'],
-                    body: keyExData
-                }
-            },
             //Fault Summary
             {
                 style: 'tableContent',
@@ -455,6 +445,7 @@ function generateHomeAccessReportPDF(mode) {
             },
             //Notes
             {
+                pageBreak: 'after',
                 margin: [0, 0, 0, 30],
                 table: {
                     widths: ['*'],
@@ -482,6 +473,11 @@ function generateHomeAccessReportPDF(mode) {
                     ]
                 }
             },
+
+            /**
+             * (5) Report Detail Page five
+             */
+            giveMeHugeDraft(mode),
             //Energy & Wastage Check
             {
                 style: 'tableContent',
@@ -490,6 +486,15 @@ function generateHomeAccessReportPDF(mode) {
                     body: ewCheckData
                 }
 
+            },
+            //Key Explaination
+            {
+                alignment: 'center',
+                style: 'tableContent',
+                table: {
+                    widths: ['*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto', '*'],
+                    body: keyExData
+                }
             },
             //Field Notes
             {
@@ -527,6 +532,11 @@ function generateHomeAccessReportPDF(mode) {
                     ]
                 }
             },
+
+            /**
+             * (6) Report Detail Page six
+             */
+            giveMeHugeDraft(mode),
             //Health & Safety Concerns
             {
                 style: 'tableContent',
@@ -537,12 +547,18 @@ function generateHomeAccessReportPDF(mode) {
             },
             //Repair Maintenance
             {
+                pageBreak: 'after',
                 style: 'tableContent',
                 table: {
                     widths: [100, 'auto', 150, '*', 150],
                     body: RepairMaintenanceData
                 }
             },
+
+            /**
+             * (7) Report Detail Page seven
+             */
+            giveMeHugeDraft(mode),
             //Energy Efficiency - Optional
             {
                 style: 'tableContent',
@@ -581,7 +597,6 @@ function generateHomeAccessReportPDF(mode) {
                     body: AttachmentsData
                 }
             },
-
             //Definitions
             {
                 text: page10_Header2,
@@ -601,6 +616,10 @@ function generateHomeAccessReportPDF(mode) {
                 ]
             },
 
+            /**
+             * (8) Report Detail Page eight
+             */
+            giveMeHugeDraft(mode),
             //Terms & Conditions
             {
                 text: page11Header,
@@ -636,17 +655,42 @@ function generateHomeAccessReportPDF(mode) {
                 ]
             },
 
-            //Sketches & Photos
+            /**
+             * (9) Report Detail Page night
+             */
+            giveMeHugeDraft(mode),
+//            //Photos title
+//            {
+//                text: $('#HA_DIVPhotos').attr('data-title'),
+//                style: 'pageTopHeader'
+//            },
+            //Photos
             {
-                text: page12,
-                style: 'pageTopHeader'
+                layout: 'noBorders',
+                pageBreak: 'after',
+                table: {
+                    widths: [250, 250],
+                    headerRows: 1,
+                    body: getPhotoImgsData
+                }
             },
-            //images and pdfs
+
+            /**
+             * (10) Report Detail Page ten
+             */
+            giveMeHugeDraft(mode),
+//            //Sketch title
+//            {
+//                text: $('#HA_DIVSketchs').attr('data-title'),
+//                style: 'pageTopHeader'
+//            },
+            //Sketch imgs
             {
                 layout: 'noBorders',
                 table: {
-                    widths: ['*', '*'],
-                    body: imagesPDFData
+                    widths: [500],
+                    headerRows: 1,
+                    body: getSketchImgsData
                 }
             }
         ],
