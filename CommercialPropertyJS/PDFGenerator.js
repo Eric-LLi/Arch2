@@ -6,30 +6,30 @@
  * Core function of the PDF generator
  * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  * */
+
 function generatePDF(mode) {
     //reset image number and general notes paragraphs number
-   
     resetTotalCounting();
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
     var isMobile = {
-        Android: function() {
+        Android: function () {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function() {
+        BlackBerry: function () {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function() {
+        iOS: function () {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function() {
+        Opera: function () {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function() {
+        Windows: function () {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function() {
+        any: function () {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
@@ -37,8 +37,7 @@ function generatePDF(mode) {
 
     var docDefinition = {
         footer: function (currentPage, pageCount) {
-            if (currentPage === 1)
-            {
+            if (currentPage === 1) {
                 return {
                     columns: [
                         determineFrontPageFooter(mode),
@@ -47,14 +46,12 @@ function generatePDF(mode) {
                             alignment: 'right',
                             margin: [0, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
-            }
-            else
-            {
+            } else {
                 return {
                     columns: [
                         determineFooter(mode),
@@ -63,8 +60,8 @@ function generatePDF(mode) {
                             alignment: 'left',
                             margin: [10, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
@@ -87,20 +84,20 @@ function generatePDF(mode) {
                         },
                         giveMeHugeDraft(mode),
                         {
-                            text:[
+                            text: [
                                 'Archicentre ',
                                 {
-                                    text:'Australia \n',
+                                    text: 'Australia \n',
                                     color: 'red'
                                 },
                                 {
-                                    text:'Property \nAssessment \n',
-                                    bold:true
+                                    text: 'Property \nAssessment \n',
+                                    bold: true
                                 },
                                 'Report\n',
                                 {
-                                    text:'- Commercial, Industrial & Institutional',
-                                    fontSize:22
+                                    text: '- Commercial, Industrial & Institutional',
+                                    fontSize: 22
                                 }
                             ],
                             style: 'coverPageHeader'
@@ -172,30 +169,30 @@ function generatePDF(mode) {
              * (2) Report Detail Page
              */
             {
-                stack:[
+                stack: [
                     giveMeHugeDraft(mode),
                     {
 
-                        text:[
+                        text: [
                             {
-                                text:'Property Assessment Report',
+                                text: 'Property Assessment Report',
                                 color: 'red'
                             },
                             {
-                                text:' - Commercial Industrial & Institutional',
-                                bold:false,
-                                fontSize:12,
-                                color:'black'
+                                text: ' - Commercial Industrial & Institutional',
+                                bold: false,
+                                fontSize: 12,
+                                color: 'black'
                             }
                         ],
-                        style:'pageTopHeader',
-                        margin:[0,5,0,10]
+                        style: 'pageTopHeader',
+                        margin: [0, 5, 0, 10]
 
                     },
                     {
-                        text:PropertyAssessmentReport,
-                        fontSize:10,
-                        margin:[0,5,0,20]
+                        text: PropertyAssessmentReport,
+                        fontSize: 10,
+                        margin: [0, 5, 0, 20]
                     },
                     getClientDetailsTable(),
                     getAssessmentDetailsTable(),
@@ -230,122 +227,122 @@ function generatePDF(mode) {
                     {
                         text: 'The Scope of Assessment',
                         style: 'pageTopHeader',
-                        margin:[0,5,0,0]
+                        margin: [0, 5, 0, 0]
                     },
                     {
-                        alignment:'justify',
-                        columns:[
+                        alignment: 'justify',
+                        columns: [
                             {
-                                stack:[
+                                stack: [
                                     {
-                                        text:ScopeOfAssessment1,
-                                        style:'colText'
+                                        text: ScopeOfAssessment1,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:ScopeOfAssessment2,
-                                        style:'colText'
+                                        text: ScopeOfAssessment2,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:ScopeOfAssessment3,
-                                        style:'colText'
+                                        text: ScopeOfAssessment3,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:ScopeOfAssessment4,
-                                        style:'colText'
+                                        text: ScopeOfAssessment4,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:ScopeOfAssessment5,
-                                        style:'colText'
+                                        text: ScopeOfAssessment5,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:ScopeOfAssessment6,
-                                        style:'colText'
+                                        text: ScopeOfAssessment6,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:ScopeOfAssessment7,
-                                        style:'colText'
+                                        text: ScopeOfAssessment7,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:ScopeOfAssessment8,
-                                        style:'colText'
+                                        text: ScopeOfAssessment8,
+                                        style: 'colText'
                                     }
                                 ]
                             },
                             {
-                                stack:[
+                                stack: [
                                     {
-                                        text:ScopeOfAssessment9,
-                                        style:'colText'
+                                        text: ScopeOfAssessment9,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:'What is included in this report',
+                                        text: 'What is included in this report',
                                         style: 'pageSubHeader'
                                     },
                                     {
                                         ul: [
                                             {
                                                 text: ReportIncluded1,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportIncluded2,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportIncluded3,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportIncluded4,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportIncluded5,
-                                                style:'colText'
+                                                style: 'colText'
                                             }
                                         ]
                                     },
                                     {
-                                        text:'What is not included in this report',
+                                        text: 'What is not included in this report',
                                         style: 'pageSubHeader'
                                     },
                                     {
-                                        text:ReportNotRecorded0,
-                                        style:'colText'
+                                        text: ReportNotRecorded0,
+                                        style: 'colText'
                                     },
                                     {
                                         ul: [
                                             {
                                                 text: ReportNotRecorded1,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportNotRecorded2,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportNotRecorded3,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportNotRecorded4,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportNotRecorded5,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportNotRecorded6,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportNotRecorded7,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: ReportNotRecorded8,
-                                                style:'colText'
+                                                style: 'colText'
                                             }
                                         ]
                                     }
@@ -361,16 +358,16 @@ function generatePDF(mode) {
              * (4) Attachment
              */
             {
-                stack:[
+                stack: [
                     {
                         text: 'Attachment',
                         style: 'pageTopHeader',
-                        margin:[0,5,0,5]
+                        margin: [0, 5, 0, 5]
                     },
                     {
-                        text:[
+                        text: [
                             {
-                                text:Attachments1,
+                                text: Attachments1,
                                 style: 'tableText'
                             },
                             {
@@ -379,12 +376,12 @@ function generatePDF(mode) {
                                 color: 'red',
                                 decoration: "underline",
                                 style: 'tableText',
-                                margin:[0,0,0,5]
+                                margin: [0, 0, 0, 5]
                             },
                             {
-                                text:Attachments2,
+                                text: Attachments2,
                                 style: 'tableText',
-                                margin:[0,5,0,10]
+                                margin: [0, 5, 0, 10]
                             }
                         ]
                     },
@@ -392,63 +389,63 @@ function generatePDF(mode) {
                     {
                         text: 'General Advice',
                         style: 'pageTopHeader',
-                        margin:[0,10,0,5]
+                        margin: [0, 10, 0, 5]
                     },
                     {
-                        alignment:'justify',
-                        columns:[
+                        alignment: 'justify',
+                        columns: [
                             {
-                                stack:[
+                                stack: [
                                     {
                                         ul: [
                                             {
                                                 text: GeneralAdvice1,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: GeneralAdvice2,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: GeneralAdvice3,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: GeneralAdvice4,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: GeneralAdvice5,
-                                                style:'colText'
+                                                style: 'colText'
                                             }
                                         ]
                                     }
                                 ]
                             },
                             {
-                                stack:[
+                                stack: [
                                     {
                                         ul: [
                                             {
                                                 text: GeneralAdvice6,
-                                                style:'colText'
+                                                style: 'colText'
                                             },
                                             {
                                                 text: GeneralAdvice7,
-                                                style:'colText'
+                                                style: 'colText'
                                             }
                                         ]
                                     },
                                     {
-                                        text:'For Strata, Stratum and Company Title Properties',
-                                        fontSize:10,
-                                        bold:true,
-                                        color:'black',
-                                        margin:[0,20,0,5]
+                                        text: 'For Strata, Stratum and Company Title Properties',
+                                        fontSize: 10,
+                                        bold: true,
+                                        color: 'black',
+                                        margin: [0, 20, 0, 5]
                                     },
                                     {
-                                        text:GeneralAdvice8,
-                                        style:'colText'
+                                        text: GeneralAdvice8,
+                                        style: 'colText'
                                     }
                                 ]
                             }
@@ -467,121 +464,119 @@ function generatePDF(mode) {
                     {
                         text: 'Terms & Conditions',
                         style: 'pageTopHeader',
-                        margin:[0,5,0,0]
+                        margin: [0, 5, 0, 0]
                     },
 
                     {
-                        alignment:'justify',
-                        columns:[
+                        alignment: 'justify',
+                        columns: [
                             {
-                                stack:[
+                                stack: [
                                     {
-                                        text:Conditions1,
-                                        style:'colText'
+                                        text: Conditions1,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:Conditions2,
-                                        style:'colText'
+                                        text: Conditions2,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:Conditions3,
-                                        style:'colText'
+                                        text: Conditions3,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:Conditions4,
-                                        style:'colText'
+                                        text: Conditions4,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:Conditions5,
-                                        italics:true,
-                                        style:'colText'
+                                        text: Conditions5,
+                                        italics: true,
+                                        style: 'colText'
                                     },
                                     {
-                                        ol:
-                                        [
+                                        ol: [
                                             {
                                                 text: ConditionsNumber1,
-                                                style:'colText',
-                                                margin:[5,0,0,0]
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
                                             },
                                             {
                                                 text: ConditionsNumber2,
-                                                style:'colText',
-                                                margin:[5,0,0,0]
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
                                             },
                                             {
                                                 text: ConditionsNumber3,
-                                                style:'colText',
-                                                margin:[5,0,0,0]
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
                                             },
                                             {
                                                 text: ConditionsNumber4,
-                                                style:'colText',
-                                                margin:[5,0,0,0]
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
                                             }
                                         ],
-                                        fontSize:10
+                                        fontSize: 10
                                     }
                                 ]
                             },
                             {
-                                stack:[
+                                stack: [
                                     {
                                         start: 4,
-                                        ol:
-                                            [
-                                                {
-                                                    text: ConditionsNumber4,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber5,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber6,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber7,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber8,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber9,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber10,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber11,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber12,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                },
-                                                {
-                                                    text: ConditionsNumber13,
-                                                    style:'colText',
-                                                    margin:[5,0,0,0]
-                                                }
-                                            ],
-                                        fontSize:10
+                                        ol: [
+                                            {
+                                                text: ConditionsNumber4,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber5,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber6,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber7,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber8,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber9,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber10,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber11,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber12,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            },
+                                            {
+                                                text: ConditionsNumber13,
+                                                style: 'colText',
+                                                margin: [5, 0, 0, 0]
+                                            }
+                                        ],
+                                        fontSize: 10
                                     }
                                 ]
                             }
@@ -596,11 +591,11 @@ function generatePDF(mode) {
              * (6) Defect Definitions
              */
             {
-                stack:[
+                stack: [
                     {
                         text: 'Defect Definitions',
                         style: 'pageTopHeader',
-                        margin:[0,5,0,0]
+                        margin: [0, 5, 0, 0]
                     },
                     {
                         table: {
@@ -617,63 +612,63 @@ function generatePDF(mode) {
                                 [
                                     {
                                         text: 'Minor Defect/ Maintenance Item',
-                                        fontSize:10,
-                                        bold:true
+                                        fontSize: 10,
+                                        bold: true
                                     },
                                     {
-                                        text:MinorDefect,
-                                        fontSize:10
+                                        text: MinorDefect,
+                                        fontSize: 10
                                     }
                                 ],
                                 [
                                     {
                                         text: 'Major Defect',
-                                        fontSize:10,
-                                        bold:true
+                                        fontSize: 10,
+                                        bold: true
                                     },
                                     {
-                                        stack:[
+                                        stack: [
                                             {
-                                                text:MajorDefect,
-                                                fontSize:10
+                                                text: MajorDefect,
+                                                fontSize: 10
                                             },
                                             {
-                                                ul:[
+                                                ul: [
                                                     {
-                                                        text:[
+                                                        text: [
                                                             MajorDefectBullet1,
                                                             {
-                                                                text:'or',
+                                                                text: 'or',
                                                                 decoration: "underline"
                                                             },
                                                             {
-                                                                text:','
+                                                                text: ','
                                                             }
                                                         ],
-                                                        fontSize:10,
-                                                        margin:[0,2,0,2]
+                                                        fontSize: 10,
+                                                        margin: [0, 2, 0, 2]
                                                     },
                                                     {
-                                                        text:[
+                                                        text: [
                                                             MajorDefectBullet2,
                                                             {
-                                                                text:'or',
+                                                                text: 'or',
                                                                 decoration: "underline"
                                                             },
                                                             {
-                                                                text:','
+                                                                text: ','
                                                             }
                                                         ],
-                                                        fontSize:10,
-                                                        margin:[0,2,0,2]
+                                                        fontSize: 10,
+                                                        margin: [0, 2, 0, 2]
                                                     },
                                                     {
                                                         text: MajorDefectBullet3,
-                                                        fontSize:10,
-                                                        margin:[0,2,0,2]
+                                                        fontSize: 10,
+                                                        margin: [0, 2, 0, 2]
                                                     }
                                                 ],
-                                                margin:[5,2,0,3]
+                                                margin: [5, 2, 0, 3]
 
                                             }
                                         ]
@@ -684,57 +679,57 @@ function generatePDF(mode) {
                                 [
                                     {
                                         text: 'Serious Structural Defect',
-                                        fontSize:10,
-                                        bold:true
+                                        fontSize: 10,
+                                        bold: true
                                     },
                                     {
-                                        stack:[
+                                        stack: [
                                             {
-                                                text:SeriousDefect1,
-                                                fontSize:10
+                                                text: SeriousDefect1,
+                                                fontSize: 10
                                             },
                                             {
-                                                ul:[
+                                                ul: [
                                                     {
-                                                        text:[
+                                                        text: [
                                                             SeriousDefectBullet1,
                                                             {
-                                                                text:'or',
+                                                                text: 'or',
                                                                 decoration: "underline"
                                                             },
                                                             {
-                                                                text:','
+                                                                text: ','
                                                             }
                                                         ],
-                                                        fontSize:10,
-                                                        margin:[0,2,0,2]
+                                                        fontSize: 10,
+                                                        margin: [0, 2, 0, 2]
                                                     },
                                                     {
-                                                        text:[
+                                                        text: [
                                                             SeriousDefectBullet2,
                                                             {
-                                                                text:'or',
+                                                                text: 'or',
                                                                 decoration: "underline"
                                                             },
                                                             {
-                                                                text:','
+                                                                text: ','
                                                             }
                                                         ],
-                                                        fontSize:10,
-                                                        margin:[0,2,0,2]
+                                                        fontSize: 10,
+                                                        margin: [0, 2, 0, 2]
                                                     },
                                                     {
                                                         text: SeriousDefectBullet3,
-                                                        fontSize:10,
-                                                        margin:[0,2,0,2]
+                                                        fontSize: 10,
+                                                        margin: [0, 2, 0, 2]
                                                     }
                                                 ],
-                                                margin:[5,2,0,3]
+                                                margin: [5, 2, 0, 3]
 
                                             },
                                             {
-                                                text:SeriousDefect2,
-                                                fontSize:10
+                                                text: SeriousDefect2,
+                                                fontSize: 10
                                             }
                                         ]
 
@@ -742,45 +737,45 @@ function generatePDF(mode) {
                                 ]
                             ]
                         },
-                        margin:[0,10,0,20]
+                        margin: [0, 10, 0, 20]
                     },
                     {
-                        text:'Assessment Access',
+                        text: 'Assessment Access',
                         style: 'pageTopHeader',
-                        margin:[0,5,0,0]
+                        margin: [0, 5, 0, 0]
                     },
                     {
-                        alignment:'justify',
-                        columns:[
+                        alignment: 'justify',
+                        columns: [
                             {
-                                stack:[
+                                stack: [
                                     {
-                                        text:AssessmentAccess1,
-                                        style:'colText'
+                                        text: AssessmentAccess1,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:AssessmentAccess2,
-                                        style:'colText'
+                                        text: AssessmentAccess2,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:AssessmentAccess3,
-                                        style:'colText'
+                                        text: AssessmentAccess3,
+                                        style: 'colText'
                                     }
                                 ]
                             },
                             {
-                                stack:[
+                                stack: [
                                     {
-                                        text:AssessmentAccess4,
-                                        style:'colText'
+                                        text: AssessmentAccess4,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:AssessmentAccess5,
-                                        style:'colText'
+                                        text: AssessmentAccess5,
+                                        style: 'colText'
                                     },
                                     {
-                                        text:AssessmentAccess6,
-                                        style:'colText'
+                                        text: AssessmentAccess6,
+                                        style: 'colText'
                                     }
                                 ]
                             }
@@ -796,98 +791,98 @@ function generatePDF(mode) {
              * (7) Property Assessment Summary
              */
             {
-                stack:[
+                stack: [
                     {
                         text: 'Your Property Assessment Summary',
                         style: 'pageTopHeader',
-                        margin:[0,5,0,5]
+                        margin: [0, 5, 0, 5]
                     },
                     {
-                        text:PropertyAssessmentSummary,
-                        fontSize:10,
-                        margin:[0,10,0,10]
+                        text: PropertyAssessmentSummary,
+                        fontSize: 10,
+                        margin: [0, 10, 0, 10]
                     },
                     {
-                        text:'Summary of the Condition of the Property:',
-                        style:'secondHeader'
+                        text: 'Summary of the Condition of the Property:',
+                        style: 'secondHeader'
                     },
                     {
-                        table:{
-                            widths:[400,'*'],
-                            body:[
+                        table: {
+                            widths: [400, '*'],
+                            body: [
                                 [
                                     {
-                                        text:'Apparent condition of the building respect to its age',
-                                        style:'thirdHeader'
+                                        text: 'Apparent condition of the building respect to its age',
+                                        style: 'thirdHeader'
                                     },
                                     {
-                                        text:getIt('conditionOfBuilding'),
-                                        fontSize:10
+                                        text: getIt('conditionOfBuilding'),
+                                        fontSize: 10
                                     }
                                 ]
                             ]
                         },
-                        margin:[0,3,0,10]
+                        margin: [0, 3, 0, 10]
                     },
                     {
-                        text:'Major Defects:',
-                        style:'secondHeader'
+                        text: 'Major Defects:',
+                        style: 'secondHeader'
                     },
                     {
-                        table:{
-                            widths:[400,'*'],
-                            body:[
+                        table: {
+                            widths: [400, '*'],
+                            body: [
                                 [
                                     {
-                                        text:'Are there any Major Defects evident?',
-                                        style:'thirdHeader'
+                                        text: 'Are there any Major Defects evident?',
+                                        style: 'thirdHeader'
                                     },
                                     {
-                                        text:getIt('majorDefects'),
-                                        fontSize:10
+                                        text: getIt('majorDefects'),
+                                        fontSize: 10
                                     }
                                 ]
                             ]
                         },
-                        margin:[0,3,0,10]
+                        margin: [0, 3, 0, 10]
                     },
                     {
-                        text:'Serious Structural Defects:',
-                        style:'secondHeader'
+                        text: 'Serious Structural Defects:',
+                        style: 'secondHeader'
                     },
                     {
-                        table:{
-                            widths:[400,'*'],
-                            body:[
+                        table: {
+                            widths: [400, '*'],
+                            body: [
                                 [
                                     {
-                                        text:'Are there any Serious Structural Defects evident?',
-                                        style:'thirdHeader'
+                                        text: 'Are there any Serious Structural Defects evident?',
+                                        style: 'thirdHeader'
                                     },
                                     {
-                                        text:getIt('seriousDefects'),
-                                        fontSize:10
+                                        text: getIt('seriousDefects'),
+                                        fontSize: 10
                                     }
                                 ]
                             ]
                         },
-                        margin:[0,3,0,10]
+                        margin: [0, 3, 0, 10]
                     },
                     {
-                        text:'Evident Defect Summary',
-                        style:'secondHeader'
+                        text: 'Evident Defect Summary',
+                        style: 'secondHeader'
                     },
                     getKeyTable(),
                     getEvidentDefectTable(),
                     getAssessmentSummary()
                 ],
-                pageBreak:'after'
+                pageBreak: 'after'
             },
             /**
              * (8) Property Assessment Notes & Site
              */
             {
-                stack:[
+                stack: [
                     {
                         text: 'Property Assessment Notes',
                         style: 'pageTopHeader'
@@ -905,42 +900,42 @@ function generatePDF(mode) {
                     {
                         text: 'Site',
                         style: 'pageTopHeader',
-                        margin:[0,20,0,10]
+                        margin: [0, 20, 0, 10]
                     },
                     {
                         text: 'Key',
                         style: 'thirdHeader',
-                        margin:[0,2,0,0]
+                        margin: [0, 2, 0, 0]
                     },
                     getKeyTable(),
                     getSiteAreaTable(),
-                    getAccessLimitationTable('siteAccessLimitationsTable','siteAccessItem','siteAccessImageRef','SiteAccessSelect','siteAccessNotes'),
-                    getMinorDefectsTable('siteMinorDefectsTable','siteMaintenanceItemNo','siteMaintenanceImgRef','siteMaintenanceNotes','siteMinorRecommendationText'),
-                    getMajorDefectsTable('siteMajorDefectsTable','siteMajorItemNo','siteMajorImgRef','siteMajorNotes','siteMajorRecommendationText'),
+                    getAccessLimitationTable('siteAccessLimitationsTable', 'siteAccessItem', 'siteAccessImageRef', 'SiteAccessSelect', 'siteAccessNotes'),
+                    getMinorDefectsTable('siteMinorDefectsTable', 'siteMaintenanceItemNo', 'siteMaintenanceImgRef', 'siteMaintenanceNotes', 'siteMinorRecommendationText'),
+                    getMajorDefectsTable('siteMajorDefectsTable', 'siteMajorItemNo', 'siteMajorImgRef', 'siteMajorNotes', 'siteMajorRecommendationText'),
                     getGeneralNotes('siteGeneralNotes')
                 ],
-                pageBreak:'after'
+                pageBreak: 'after'
             },
             /**
              * (9) Property Exterior
              */
             {
-                stack:[
+                stack: [
                     {
                         text: 'Property Exterior',
                         style: 'pageTopHeader',
-                        margin:[0,20,0,10]
+                        margin: [0, 20, 0, 10]
                     },
                     {
                         text: 'Key',
                         style: 'thirdHeader',
-                        margin:[0,2,0,0]
+                        margin: [0, 2, 0, 0]
                     },
                     getKeyTable(),
-                    getAreaTable('exteriorArea','exteriorAreaName','exteriorAreaRow'),
-                    getAccessLimitationTable('exteriorAccessLimitationsTable','exteriorAccessItem','exteriorAccessImageRef','exteriorAccessSelect','exteriorAccessNotes'),
-                    getMinorDefectsTable('exteriorMinorDefectsTable','exteriorMinorDefectItemNo','exteriorMinorDefectImgRef','exteriorMinorDefectNotes','exteriorMinorRecommendationText'),
-                    getMajorDefectsTable('exteriorMajorDefectsTable','exteriorMajorItemNo','exteriorMajorImgRef','exteriorMajorNotes','exteriorMajorRecommendationText'),
+                    getAreaTable('exteriorArea', 'exteriorAreaName', 'exteriorAreaRow'),
+                    getAccessLimitationTable('exteriorAccessLimitationsTable', 'exteriorAccessItem', 'exteriorAccessImageRef', 'exteriorAccessSelect', 'exteriorAccessNotes'),
+                    getMinorDefectsTable('exteriorMinorDefectsTable', 'exteriorMinorDefectItemNo', 'exteriorMinorDefectImgRef', 'exteriorMinorDefectNotes', 'exteriorMinorRecommendationText'),
+                    getMajorDefectsTable('exteriorMajorDefectsTable', 'exteriorMajorItemNo', 'exteriorMajorImgRef', 'exteriorMajorNotes', 'exteriorMajorRecommendationText'),
                     getGeneralNotes('exteriorGeneralNotes')
 
                     // getSiteAreaTable(),
@@ -949,61 +944,61 @@ function generatePDF(mode) {
                     // getMajorDefectsTable(),
                     // getGeneralNotes()
                 ],
-                pageBreak:'after'
+                pageBreak: 'after'
             },
             /**
              * (10) Property Interior - Dry Areas
              */
             {
-                stack:[
+                stack: [
                     {
                         text: 'Property Interior – Dry Areas',
                         style: 'pageTopHeader',
-                        margin:[0,20,0,10]
+                        margin: [0, 20, 0, 10]
                     },
                     {
                         text: 'Key',
                         style: 'thirdHeader',
-                        margin:[0,2,0,0]
+                        margin: [0, 2, 0, 0]
                     },
                     getKeyTable(),
-                    getAreaTable('InteriorDryArea','InteriorDryAreaName','InteriorDryAreaRow'),
-                    getAccessLimitationTable('interiorDryAccessLimitationsTable','interiorDryAccessItem','interiorDryAccessImageRef','interiorDryAccessSelect','interiorDryAccessNotes'),
-                    getMinorDefectsTable('interiorDryMinorTable','interiorDryMinorItemNo','interiorDryMinorImgRef','interiorDryMinorNotes','interiorDryMinorRecommendationText'),
-                    getMajorDefectsTable('interiorDryMajorTable','interiorDryMajorItemNo','interiorDryMajorImgRef','interiorDryMajorNotes','interiorDryMajorRecommendationText'),
+                    getAreaTable('InteriorDryArea', 'InteriorDryAreaName', 'InteriorDryAreaRow'),
+                    getAccessLimitationTable('interiorDryAccessLimitationsTable', 'interiorDryAccessItem', 'interiorDryAccessImageRef', 'interiorDryAccessSelect', 'interiorDryAccessNotes'),
+                    getMinorDefectsTable('interiorDryMinorTable', 'interiorDryMinorItemNo', 'interiorDryMinorImgRef', 'interiorDryMinorNotes', 'interiorDryMinorRecommendationText'),
+                    getMajorDefectsTable('interiorDryMajorTable', 'interiorDryMajorItemNo', 'interiorDryMajorImgRef', 'interiorDryMajorNotes', 'interiorDryMajorRecommendationText'),
                     getGeneralNotes('interiorDryGeneralNotes')
                 ],
-                pageBreak:'after'
+                pageBreak: 'after'
             },
             /**
              * (11) Property Interior - Wet Areas
              */
             {
-                stack:[
+                stack: [
                     {
                         text: 'Property Interior – Service (wet) Areas',
                         style: 'pageTopHeader',
-                        margin:[0,20,0,10]
+                        margin: [0, 20, 0, 10]
                     },
                     {
                         text: 'Key',
                         style: 'thirdHeader',
-                        margin:[0,2,0,0]
+                        margin: [0, 2, 0, 0]
                     },
                     getKeyTable(),
-                    getAreaTable('InteriorWetArea','InteriorWetAreaName','InteriorWetAreaRow'),
-                    getAccessLimitationTable('interiorWetAccessLimitationsTable','interiorWetAccessItem','interiorWetAccessImageRef','interiorWetAccessSelect','interiorWetAccessNotes'),
-                    getMinorDefectsTable('interiorWetMinorTable','interiorWetMinorItemNo','interiorWetMinorImgRef','interiorWetMinorNotes','interiorWetMinorRecommendationText'),
-                    getMajorDefectsTable('interiorWetMajorTable','interiorWetMajorItemNo','interiorWetMajorImgRef','interiorWetMajorNotes','interiorWetMajorRecommendationText'),
+                    getAreaTable('InteriorWetArea', 'InteriorWetAreaName', 'InteriorWetAreaRow'),
+                    getAccessLimitationTable('interiorWetAccessLimitationsTable', 'interiorWetAccessItem', 'interiorWetAccessImageRef', 'interiorWetAccessSelect', 'interiorWetAccessNotes'),
+                    getMinorDefectsTable('interiorWetMinorTable', 'interiorWetMinorItemNo', 'interiorWetMinorImgRef', 'interiorWetMinorNotes', 'interiorWetMinorRecommendationText'),
+                    getMajorDefectsTable('interiorWetMajorTable', 'interiorWetMajorItemNo', 'interiorWetMajorImgRef', 'interiorWetMajorNotes', 'interiorWetMajorRecommendationText'),
                     getGeneralNotes('interiorWetMajorGeneralNotes')
                 ],
-                pageBreak:'after'
+                pageBreak: 'after'
             },
             /**
              * Photographs
              */
             {
-                stack:[
+                stack: [
                     getImages()
                 ]
             }
@@ -1031,7 +1026,7 @@ function generatePDF(mode) {
             },
             colText: {
                 fontSize: 10,
-                margin:[0,2,0,2]
+                margin: [0, 2, 0, 2]
             },
             secondHeader: {
                 fontSize: 14,
@@ -1136,11 +1131,11 @@ function generatePDF(mode) {
         }
     };
     // Open a new tab and show the PDF
-    if (mode == 'save')
-    {
-        console.log('click');
+
+    if (mode == 'save') {
+        //console.log('click');
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-        pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
+        pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
             var base64 = encodedString;
             $('#savingPDFAlert').show('fade');
             doSavePDF(base64);
@@ -1149,31 +1144,24 @@ function generatePDF(mode) {
 
     }
     //if the mode is final or preview, open the pdf directly, depends on what device the user is using
-    else
-    {
-        if( isMobile.any() )
-        {
-            if (isSafari && iOS) 
-            {
+    else {
+        if (isMobile.any()) {
+            if (isSafari && iOS) {
                 //alert("You are using Safari on iOS!");
                 pdfMake.createPdf(docDefinition).open();
-            }
-            else
-            {
+            } else {
                 var reader = new FileReader();
 
-                pdfMake.createPdf(docDefinition).getBlob(function(blob){
-                    reader.onload = function(e){
+                pdfMake.createPdf(docDefinition).getBlob(function (blob) {
+                    reader.onload = function (e) {
                         //window.location.href = reader.result;
-                        window.open(reader.result,'_blank');
+                        window.open(reader.result, '_blank');
                     };
                     reader.readAsDataURL(blob);
                 });
             }
-          
-        }
-        else
-        {
+
+        } else {
             console.log("It is on pc");
             pdfMake.createPdf(docDefinition).open();
         }

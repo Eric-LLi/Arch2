@@ -40,6 +40,10 @@ input[type=text]:focus {
     border: 3px solid #555;
 }
 
+input[type=file] {
+    display: none;
+}
+
 hr {
     clear: both;
     display: block;
@@ -185,5 +189,5 @@ th {
 }
 
 button {
-    cursor:pointer;
+    cursor: pointer;
 }

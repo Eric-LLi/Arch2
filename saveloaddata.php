@@ -408,10 +408,8 @@
                                     var uploadID = 'HOWImageUpload' + nextID;
                                     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
                                         'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
-
                                 }
                             }
-
                         }
                         //console.log('the current add id is ' + p.addid);
                         //console.log('the next add id is ' + nextaddid);
@@ -686,40 +684,56 @@
                                 }
                             }
                         } else if (p.tableName === 'CPImagesTable') {
-                            var table = document.getElementById(p.tableName);
-                            table.style.display = 'block';
-                            //console.log("the total number of images in this CP report are : " + countingImage);
-                            //console.log(p.imageid);
-                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
-                            //if (imageNo === 0)
-                            //{
-                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
-                            $('#' + p.imageid).attr('src', url);
-                            var givenID = p.imageid.replace(/[^\d.]/g, '');
-                            var labelID = "imageCaption" + givenID;
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '480px';
-                            document.getElementById(labelID).style.display = 'block';
-                            //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            var nextID = Number(currentID) + 1;
-                            //console.log("the next ID is " + nextID);
-                            var altID = Number(nextID) + 1;
-                            if (nextID >= countingImage) {
-                                var altName = 'Image' + altID;
-                                console.log("I am here!!! need to create a image " + altName);
-                                var imageID = 'CPImage' + nextID;
-                                var textID = 'CPImageText' + nextID;
-                                var removeButtonID = 'CPImageRemoveButton' + nextID;
-                                var addButtonID = 'CPImageAddButton' + nextID;
-                                var uploadID = 'CPImageUpload' + nextID;
-                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
+                            //                            var table = document.getElementById(p.tableName);
+                            //                            table.style.display = 'block';
+                            //                            //console.log("the total number of images in this CP report are : " + countingImage);
+                            //                            //console.log(p.imageid);
+                            //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
+                            //                            //if (imageNo === 0)
+                            //                            //{
+                            //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                            //                                'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
+                            //                            $('#' + p.imageid).attr('src', url);
+                            //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
+                            //                            var labelID = "imageCaption" + givenID;
+                            //                            document.getElementById(p.addid).style.display = 'none';
+                            //                            document.getElementById(p.removeid).style.display = 'block';
+                            //                            document.getElementById(p.textid).style.display = 'block';
+                            //                            document.getElementById(p.imageid).style.display = 'block';
+                            //                            document.getElementById(p.imageid).style.width = '480px';
+                            //                            document.getElementById(labelID).style.display = 'block';
+                            //                            //get the current id from the imageID.
+                            //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //                            var nextID = Number(currentID) + 1;
+                            //                            //console.log("the next ID is " + nextID);
+                            //                            var altID = Number(nextID) + 1;
+                            //                            if (nextID >= countingImage) {
+                            //                                var altName = 'Image' + altID;
+                            //                                console.log("I am here!!! need to create a image " + altName);
+                            //                                var imageID = 'CPImage' + nextID;
+                            //                                var textID = 'CPImageText' + nextID;
+                            //                                var removeButtonID = 'CPImageRemoveButton' + nextID;
+                            //                                var addButtonID = 'CPImageAddButton' + nextID;
+                            //                                var uploadID = 'CPImageUpload' + nextID;
+                            //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
+                            //
+                            //                            }
 
+                            //[imgID, btnID, captionID, containerID,labelID]
+                            //console.log("IMAGE id: " + p.imageid);
+                            //                            var temp = parseInt(p.imageid.split("_")[0]);
+                            var temp = p.imageid.replace("CPImage", "");
+                            //                            console.log("Before Photos count :" + photos_count);
+                            //                            console.log("temp : " + temp);
+                            if (temp >= photos_count) {
+                                photos_count = temp;
+                                photos_count++;
                             }
+                            //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
+                            var elementID = createPhoto(temp);
+                            //                            console.log("After count: " + photos_count);
+                            $("#" + elementID[1]).attr("src", url);
+                            $("#" + p.tableName).show();
 
                         } else if (p.tableName === 'HOWImagesTable') {
                             var table = document.getElementById(p.tableName);
