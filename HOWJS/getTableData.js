@@ -32,7 +32,7 @@ function getOwnerDetailsTable() {
                         fontSize: 9,
                         colSpan: 5
                     },
-                    {}, {}, {},{}
+                    {}, {}, {}, {}
                 ],
                 [
                     {
@@ -48,7 +48,7 @@ function getOwnerDetailsTable() {
                     },
                     {}, {},
                     {
-                        text:'Booking',
+                        text: 'Booking',
                         style: 'tableBoldTextAlignLeft',
                         border: [false, true, true, true]
                     },
@@ -112,7 +112,7 @@ function getOwnerDetailsTable() {
                 ]
             ]
         },
-        margin:[0,5,0,10]
+        margin: [0, 5, 0, 10]
     };
     return result;
 }
@@ -151,12 +151,12 @@ function getInspectionDetailsTable() {
                     },
                     {}, {},
                     {
-                        text:'Lot No:',
+                        text: 'Lot No:',
                         style: 'tableBoldTextAlignLeft',
                         border: [false, true, true, true]
                     },
                     {
-                        text:getIt('inspection_lotNo'),
+                        text: getIt('inspection_lotNo'),
                         style: 'tableBoldTextAlignLeft',
                         border: [false, true, false, true]
                     }
@@ -208,7 +208,7 @@ function getInspectionDetailsTable() {
                     {
                         text: getIt('inspection_dateOfReport'),
                         fontSize: 9,
-                        colSpan:2,
+                        colSpan: 2,
                         border: [true, true, false, true]
                     },
                     {}
@@ -245,24 +245,24 @@ function getInspectionDetailsTable() {
                 ],
                 [
                     {
-                        text:'Weather Conditions:',
+                        text: 'Weather Conditions:',
                         style: 'tableBoldTextAlignLeft',
                         border: [false, true, true, true]
                     },
                     {
-                        text:getIt('inspection_weatherCondition'),
+                        text: getIt('inspection_weatherCondition'),
                         colSpan: 5,
                         fontSize: 9,
                         border: [true, true, false, true]
                     },
-                    {},{},{},{}
+                    {}, {}, {}, {}
                 ],
                 [
                     {
                         text: 'Authorised Building Documents sighted:',
                         style: 'tableBoldTextAlignLeft',
                         border: [false, true, true, true],
-                        colSpan:2
+                        colSpan: 2
                     },
                     {},
                     {
@@ -271,14 +271,14 @@ function getInspectionDetailsTable() {
                         border: [true, true, true, true]
                     },
                     {
-                        text:'Stamped Date:',
+                        text: 'Stamped Date:',
                         style: 'tableBoldTextAlignLeft',
                         border: [false, true, true, true]
                     },
                     {
-                        text:getIt('inspection_stampedDate'),
+                        text: getIt('inspection_stampedDate'),
                         fontSize: 9,
-                        colSpan:2,
+                        colSpan: 2,
                         border: [true, true, false, true]
                     },
                     {}
@@ -297,14 +297,14 @@ function getInspectionDetailsTable() {
                         text: InspectionDetails,
                         colSpan: 6,
                         fontSize: 11,
-                        bold:true,
+                        bold: true,
                         border: [false, true, false, true]
                     },
                     {}, {}, {}, {}
                 ]
             ]
         },
-        margin:[0,5,0,10]
+        margin: [0, 5, 0, 10]
     };
     return result;
 }
@@ -338,11 +338,11 @@ function getInspectorDetailsTable() {
                         fontSize: 9
                     },
                     {
-                        text:'Registration No',
+                        text: 'Registration No',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('inspector_registrationNumber'),
+                        text: getIt('inspector_registrationNumber'),
                         fontSize: 9,
                         border: [true, true, false, true]
                     }
@@ -369,7 +369,7 @@ function getInspectorDetailsTable() {
                 ]
             ]
         },
-        margin:[0,5,0,10]
+        margin: [0, 5, 0, 10]
     };
     return result;
 }
@@ -380,19 +380,17 @@ function getInspectorDetailsTable() {
  * If the property state is in VIC, return data
  * If it is not in the VIC, return blank
  */
-function getReportAuthorisation()
-{
+function getReportAuthorisation() {
     var result;
 
     var state = document.getElementById('inspection_state').value;
 
-    if (state == 'VIC')
-    {
+    if (state == 'VIC') {
         //console.log("need to show the signature");
         result = {
-            table:{
+            table: {
                 widths: ['*', '*'],
-                body:[
+                body: [
                     [
                         {
                             text: 'REPORT AUTHORISATION (For Victoria only)',
@@ -404,41 +402,39 @@ function getReportAuthorisation()
                     ],
                     [
                         {
-                            text:getIt('inspection_signature'),
+                            text: getIt('inspection_signature'),
                             border: [false, true, false, true],
-                            fontSize:9
+                            fontSize: 9
                         },
                         {
-                            text:getIt('inspection_blockPrintName'),
+                            text: getIt('inspection_blockPrintName'),
                             border: [false, true, false, true],
-                            fontSize:9
+                            fontSize: 9
                         }
                     ],
                     [
                         {
-                            text:'(Signature)',
+                            text: '(Signature)',
                             border: [false, true, false, true],
-                            fontSize:9,
+                            fontSize: 9,
                             alignment: 'center'
                         },
                         {
-                            text:'(BLOCK PRINT NAME)',
+                            text: '(BLOCK PRINT NAME)',
                             border: [false, true, false, true],
-                            fontSize:9
+                            fontSize: 9
                         }
 
                     ]
                 ]
 
             },
-            margin:[0,5,0,10]
+            margin: [0, 5, 0, 10]
         }
-    }
-    else
-    {
+    } else {
         //console.log('return nothing');
         result = {
-            text:''
+            text: ''
         }
     }
 
@@ -449,8 +445,7 @@ function getReportAuthorisation()
 /**
  * Get extent of work done by owner builder
  */
-function getDoneWork()
-{
+function getDoneWork() {
     var result;
     result = {
         table: {
@@ -476,11 +471,11 @@ function getDoneWork()
                         fontSize: 9
                     },
                     {
-                        text:'Renovations and/or extensions?',
+                        text: 'Renovations and/or extensions?',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('inspection_renovationOrExtension'),
+                        text: getIt('inspection_renovationOrExtension'),
                         fontSize: 9,
                         border: [true, true, false, true]
                     }
@@ -490,18 +485,18 @@ function getDoneWork()
                         text: 'Extent of Renovation and/or Extension Work where relevant (brief description)',
                         border: [false, true, false, true],
                         style: 'tableBoldTextAlignLeft',
-                        colSpan:4
+                        colSpan: 4
                     },
-                    {},{},{}
+                    {}, {}, {}
                 ],
                 [
                     {
                         text: getIt('inspection_renovationDescription'),
                         border: [false, true, false, true],
-                        fontSize:9,
-                        colSpan:4
+                        fontSize: 9,
+                        colSpan: 4
                     },
-                    {},{},{}
+                    {}, {}, {}
                 ],
                 [
                     {
@@ -510,12 +505,12 @@ function getDoneWork()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('inspection_extentOfWork'),
+                        text: getIt('inspection_extentOfWork'),
                         fontSize: 9,
-                        colSpan:3,
+                        colSpan: 3,
                         border: [true, true, false, true]
                     },
-                    {},{}
+                    {}, {}
                 ]
 
             ]
@@ -525,10 +520,9 @@ function getDoneWork()
 }
 
 /**
-  * Get inspection summary
+ * Get inspection summary
  */
-function getInspectionSummary()
-{
+function getInspectionSummary() {
     var result;
     result = {
         table: {
@@ -559,7 +553,7 @@ function getInspectionSummary()
                     {
                         text: getIt('inspection_summary'),
                         border: [false, true, false, true],
-                        colSpan:2,
+                        colSpan: 2,
                         fontSize: 9
                     },
                     {}
@@ -573,8 +567,7 @@ function getInspectionSummary()
 /**
  * Get Descriptive Summary of Work done by Owner-Builder
  */
-function getDescriptiveSummary()
-{
+function getDescriptiveSummary() {
     var result;
     result = {
         table: {
@@ -600,11 +593,11 @@ function getDescriptiveSummary()
                         fontSize: 9
                     },
                     {
-                        text:'Floors',
+                        text: 'Floors',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('summary_floors'),
+                        text: getIt('summary_floors'),
                         fontSize: 9,
                         border: [true, true, false, true]
                     }
@@ -731,7 +724,7 @@ function getDescriptiveSummary()
                 ]
             ]
         },
-        margin:[0,5,0,10]
+        margin: [0, 5, 0, 10]
     };
     return result;
 }
@@ -741,8 +734,7 @@ function getDescriptiveSummary()
  * Originally has 10 places to display
  * If more than 10 places, need to add it dynamically
  */
-function getSiteTable()
-{
+function getSiteTable() {
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWSiteTable').rows.length;
@@ -750,93 +742,75 @@ function getSiteTable()
 
     var firstRow = [
         {
-            text:'SITE',
-            colSpan:9,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'SITE',
+            colSpan: 9,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
-        {},{},{},{},{},{},{},{}
+        {}, {}, {}, {}, {}, {}, {}, {}
     ];
     data.push(firstRow);
 
-    for (var i = 0; i<rowCount;i=i+3)
-    {
+    for (var i = 0; i < rowCount; i = i + 3) {
         var newRow = [];
-        for (var a = i; a<i+3;a++)
-        {
+        for (var a = i; a < i + 3; a++) {
             var place;
             var select;
             var note;
             var cell1;
             var cell2;
             var cell3;
-            if (a <= 9)
-            {
+            if (a <= 9) {
                 place = document.getElementById('HOWSiteName' + a).textContent;
                 select = getIt('HOWSiteSelect' + a);
                 note = getIt('HOWSiteNote' + a);
-            }
-            else
-            {
+            } else {
                 place = document.getElementById('HOWSiteName' + a);
                 select = document.getElementById('HOWSiteSelect' + a);
                 note = document.getElementById('HOWSiteNote' + a);
             }
 
-            if (place != null)
-            {
-                if (a > 9)
-                {
+            if (place != null) {
+                if (a > 9) {
                     place = place.value;
                 }
 
-                if (place == 'Stormwater Drains' || place == 'Gas Supply' || place == 'Electricity Supply' || place == 'Water Supply' || place == 'Sewerage System')
-                {
+                if (place == 'Stormwater Drains' || place == 'Gas Supply' || place == 'Electricity Supply' || place == 'Water Supply' || place == 'Sewerage System') {
                     place = place + '*';
                 }
 
                 cell1 = {
-                    text:place,
-                    bold:true,
+                    text: place,
+                    bold: true,
                     style: 'tableText',
                     noWrap: true
                 };
-            }
-            else
-            {
+            } else {
                 cell1 = ''
             }
 
-            if (select != null)
-            {
-                if (a > 9)
-                {
+            if (select != null) {
+                if (a > 9) {
                     select = select.value;
                 }
                 cell2 = {
-                    text:select,
+                    text: select,
                     style: 'tableText',
-                    alignment:'center'
+                    alignment: 'center'
                 };
-            }
-            else
-            {
+            } else {
                 cell2 = ''
             }
 
-            if (note != null)
-            {
-                if (a > 9)
-                {
+            if (note != null) {
+                if (a > 9) {
                     note = note.value;
                 }
                 cell3 = {
-                    text:note,
+                    text: note,
                     style: 'tableText'
                 };
-            }
-            else
-            {
+            } else {
                 cell3 = ''
             }
 
@@ -849,10 +823,10 @@ function getSiteTable()
 
     tableBody = {
         table: {
-            widths:['auto','auto','*','auto','auto','*','auto','auto','*'],
+            widths: ['auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
 
     return tableBody;
@@ -861,8 +835,7 @@ function getSiteTable()
 /**
  * Get Building exterior data
  */
-function getBuildingExteriorTable()
-{
+function getBuildingExteriorTable() {
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWBuildingExteriorTable').rows.length;
@@ -870,34 +843,29 @@ function getBuildingExteriorTable()
 
     var firstRow = [
         {
-            text:'BUILDING EXTERIOR',
-            colSpan:9,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'BUILDING EXTERIOR',
+            colSpan: 9,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
-        {},{},{},{},{},{},{},{}
+        {}, {}, {}, {}, {}, {}, {}, {}
     ];
     data.push(firstRow);
 
-    for (var i = 0; i<rowCount;i=i+3)
-    {
+    for (var i = 0; i < rowCount; i = i + 3) {
         var newRow = [];
-        for (var a = i; a<i+3;a++)
-        {
+        for (var a = i; a < i + 3; a++) {
             var place;
             var select;
             var note;
             var cell1;
             var cell2;
             var cell3;
-            if (a <= 17)
-            {
+            if (a <= 17) {
                 place = document.getElementById('HOWBuildingName' + a).textContent;
                 select = getIt('HOWBuildingSelect' + a);
                 note = getIt('HOWBuildingNote' + a);
-            }
-            else
-            {
+            } else {
                 place = document.getElementById('HOWBuildingName' + a);
                 select = document.getElementById('HOWBuildingSelect' + a);
                 note = document.getElementById('HOWBuildingNote' + a);
@@ -905,56 +873,44 @@ function getBuildingExteriorTable()
 
             //to determine whether the id is existed in the html. because it is loop, it is possible loop to the id that is not created
             //in the html yet.
-            if (place != null)
-            {
+            if (place != null) {
                 //if the id is existed, to determine, whether the id is created dynamically or is already there.
                 // if it is already there, use place straight away, otherwise, use its value instead.
-                if (a > 17)
-                {
+                if (a > 17) {
                     place = place.value;
                 }
                 cell1 = {
-                    text:place,
-                    bold:true,
+                    text: place,
+                    bold: true,
                     style: 'tableText',
                     noWrap: true
                 };
-            }
-            else
-            {
+            } else {
                 cell1 = ''
             }
 
-            if (select != null)
-            {
-                if (a > 17)
-                {
+            if (select != null) {
+                if (a > 17) {
                     select = select.value;
                 }
                 cell2 = {
-                    text:select,
+                    text: select,
                     style: 'tableText',
-                    alignment:'center'
+                    alignment: 'center'
                 };
-            }
-            else
-            {
+            } else {
                 cell2 = ''
             }
 
-            if (note != null)
-            {
-                if (a > 17)
-                {
+            if (note != null) {
+                if (a > 17) {
                     note = note.value;
                 }
                 cell3 = {
-                    text:note,
+                    text: note,
                     style: 'tableText'
                 };
-            }
-            else
-            {
+            } else {
                 cell3 = ''
             }
 
@@ -967,10 +923,10 @@ function getBuildingExteriorTable()
 
     tableBody = {
         table: {
-            widths:['auto','auto','*','auto','auto','*','auto','auto','*'],
+            widths: ['auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
 
     return tableBody;
@@ -980,8 +936,7 @@ function getBuildingExteriorTable()
 /**
  * Get Sub-floor data
  */
-function getSubFloorTable()
-{
+function getSubFloorTable() {
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWSubFloorTable').rows.length;
@@ -989,34 +944,29 @@ function getSubFloorTable()
 
     var firstRow = [
         {
-            text:'SUB-FLOOR',
-            colSpan:9,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'SUB-FLOOR',
+            colSpan: 9,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
-        {},{},{},{},{},{},{},{}
+        {}, {}, {}, {}, {}, {}, {}, {}
     ];
     data.push(firstRow);
 
-    for (var i = 0; i<rowCount;i=i+3)
-    {
+    for (var i = 0; i < rowCount; i = i + 3) {
         var newRow = [];
-        for (var a = i; a<i+3;a++)
-        {
+        for (var a = i; a < i + 3; a++) {
             var place;
             var select;
             var note;
             var cell1;
             var cell2;
             var cell3;
-            if (a <= 6)
-            {
+            if (a <= 6) {
                 place = document.getElementById('HOWSubFloorName' + a).textContent;
                 select = getIt('HOWSubFloorSelect' + a);
                 note = getIt('HOWSubFloorNote' + a);
-            }
-            else
-            {
+            } else {
                 place = document.getElementById('HOWSubFloorName' + a);
                 select = document.getElementById('HOWSubFloorSelect' + a);
                 note = document.getElementById('HOWSubFloorNote' + a);
@@ -1024,56 +974,44 @@ function getSubFloorTable()
 
             //to determine whether the id is existed in the html. because it is loop, it is possible loop to the id that is not created
             //in the html yet.
-            if (place != null)
-            {
+            if (place != null) {
                 //if the id is existed, to determine, whether the id is created dynamically or is already there.
                 // if it is already there, use place straight away, otherwise, use its value instead.
-                if (a > 6)
-                {
+                if (a > 6) {
                     place = place.value;
                 }
                 cell1 = {
-                    text:place,
-                    bold:true,
+                    text: place,
+                    bold: true,
                     style: 'tableText',
                     noWrap: true
                 };
-            }
-            else
-            {
+            } else {
                 cell1 = ''
             }
 
-            if (select != null)
-            {
-                if (a > 6)
-                {
+            if (select != null) {
+                if (a > 6) {
                     select = select.value;
                 }
                 cell2 = {
-                    text:select,
+                    text: select,
                     style: 'tableText',
-                    alignment:'center'
+                    alignment: 'center'
                 };
-            }
-            else
-            {
+            } else {
                 cell2 = ''
             }
 
-            if (note != null)
-            {
-                if (a > 6)
-                {
+            if (note != null) {
+                if (a > 6) {
                     note = note.value;
                 }
                 cell3 = {
-                    text:note,
+                    text: note,
                     style: 'tableText'
                 };
-            }
-            else
-            {
+            } else {
                 cell3 = ''
             }
 
@@ -1086,10 +1024,10 @@ function getSubFloorTable()
 
     tableBody = {
         table: {
-            widths:['auto','auto','*','auto','auto','*','auto','auto','*'],
+            widths: ['auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
 
     return tableBody;
@@ -1099,8 +1037,7 @@ function getSubFloorTable()
 /**
  * Get Roof Void Data
  */
-function getRoofVoidTable()
-{
+function getRoofVoidTable() {
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWRoofVoidTable').rows.length;
@@ -1108,34 +1045,29 @@ function getRoofVoidTable()
 
     var firstRow = [
         {
-            text:'ROOF VOID',
-            colSpan:9,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'ROOF VOID',
+            colSpan: 9,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
-        {},{},{},{},{},{},{},{}
+        {}, {}, {}, {}, {}, {}, {}, {}
     ];
     data.push(firstRow);
 
-    for (var i = 0; i<rowCount;i=i+3)
-    {
+    for (var i = 0; i < rowCount; i = i + 3) {
         var newRow = [];
-        for (var a = i; a<i+3;a++)
-        {
+        for (var a = i; a < i + 3; a++) {
             var place;
             var select;
             var note;
             var cell1;
             var cell2;
             var cell3;
-            if (a <= 5)
-            {
+            if (a <= 5) {
                 place = document.getElementById('HOWRoofVoidName' + a).textContent;
                 select = getIt('HOWRoofVoidSelect' + a);
                 note = getIt('HOWRoofVoidNote' + a);
-            }
-            else
-            {
+            } else {
                 place = document.getElementById('HOWRoofVoidName' + a);
                 select = document.getElementById('HOWRoofVoidSelect' + a);
                 note = document.getElementById('HOWRoofVoidNote' + a);
@@ -1143,56 +1075,44 @@ function getRoofVoidTable()
 
             //to determine whether the id is existed in the html. because it is loop, it is possible loop to the id that is not created
             //in the html yet.
-            if (place != null)
-            {
+            if (place != null) {
                 //if the id is existed, to determine, whether the id is created dynamically or is already there.
                 // if it is already there, use place straight away, otherwise, use its value instead.
-                if (a > 5)
-                {
+                if (a > 5) {
                     place = place.value;
                 }
                 cell1 = {
-                    text:place,
-                    bold:true,
+                    text: place,
+                    bold: true,
                     style: 'tableText',
                     noWrap: true
                 };
-            }
-            else
-            {
+            } else {
                 cell1 = ''
             }
 
-            if (select != null)
-            {
-                if (a > 5)
-                {
+            if (select != null) {
+                if (a > 5) {
                     select = select.value;
                 }
                 cell2 = {
-                    text:select,
+                    text: select,
                     style: 'tableText',
-                    alignment:'center'
+                    alignment: 'center'
                 };
-            }
-            else
-            {
+            } else {
                 cell2 = ''
             }
 
-            if (note != null)
-            {
-                if (a > 5)
-                {
+            if (note != null) {
+                if (a > 5) {
                     note = note.value;
                 }
                 cell3 = {
-                    text:note,
+                    text: note,
                     style: 'tableText'
                 };
-            }
-            else
-            {
+            } else {
                 cell3 = ''
             }
 
@@ -1205,10 +1125,10 @@ function getRoofVoidTable()
 
     tableBody = {
         table: {
-            widths:['auto','auto','*','auto','auto','*','auto','auto','*'],
+            widths: ['auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
 
     return tableBody;
@@ -1220,8 +1140,7 @@ function getRoofVoidTable()
  * the number of rows in the html equal the number of columns in the pdf table
  * the number of columns in the html equals to the number of the rows in the pdf table
  */
-function getOutBuildingTable()
-{
+function getOutBuildingTable() {
     var data = [];
     var width = [];
     var tableBody;
@@ -1234,23 +1153,19 @@ function getOutBuildingTable()
     var secondRow = [];
 
     //Set upt the first row
-    for (var i = 0;i<rowCount*2;i++)
-    {
+    for (var i = 0; i < rowCount * 2; i++) {
 
         var cell;
-        if (i == 0)
-        {
+        if (i == 0) {
             cell = {
 
-                text:'OUT BUILDINGS & ATTACHED STRUCTURES',
-                colSpan:rowCount*2,
-                style:'tableBoldTextAlignLeft',
-                color:'red'
+                text: 'OUT BUILDINGS & ATTACHED STRUCTURES',
+                colSpan: rowCount * 2,
+                style: 'tableBoldTextAlignLeft',
+                color: 'red'
             }
 
-        }
-        else
-        {
+        } else {
             cell = {};
         }
 
@@ -1265,45 +1180,38 @@ function getOutBuildingTable()
      * use rowCount to loop, each loop, create two cell in the second row in the pdf table
      * each row represents two cells
      */
-    for (var i = 0; i<rowCount;i++)
-    {
+    for (var i = 0; i < rowCount; i++) {
         var cell1;
         var cell2;
 
-        if (i == 0)
-        {
+        if (i == 0) {
             cell1 = {
 
-                text:'Element',
-                style:'tableBoldTextAlignLeft',
-                color:'red'
+                text: 'Element',
+                style: 'tableBoldTextAlignLeft',
+                color: 'red'
             };
             cell2 = {
-                text:'Space',
-                style:'tableBoldTextAlignLeft',
-                color:'red'
+                text: 'Space',
+                style: 'tableBoldTextAlignLeft',
+                color: 'red'
             };
 
 
-        }
-        else
-        {
+        } else {
             var placeID = i - 1;
             var place = '';
-            if (i > 3)
-            {
+            if (i > 3) {
                 place = document.getElementById('HOWOutBuildingPlace' + placeID).value;
-            }
-            else
-            {
+            } else {
                 place = document.getElementById('HOWOutBuildingPlace' + placeID).textContent;
             }
-           // console.log(place);
+            // console.log(place);
 
             cell1 = {
-                text:place,
-                bold:true,
-                colSpan:2,
+                text: place,
+                bold: true,
+                colSpan: 2,
                 style: 'tableText',
                 noWrap: true
             };
@@ -1324,8 +1232,7 @@ function getOutBuildingTable()
      * use the number of columns to determine the rows in the pdf table
      * then use the number of rows to determine the number of cells in each each in the pdf table.
      */
-    for (var i = 0;i<colCount-1;i++)
-    {
+    for (var i = 0; i < colCount - 1; i++) {
         var newRow = [];
 
         /**
@@ -1338,10 +1245,10 @@ function getOutBuildingTable()
          */
         var element = document.getElementById('HOWOutBuildingElement' + i).textContent;
         var cell1 = {
-            text:element,
-            colSpan:2,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: element,
+            colSpan: 2,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         };
         var cell2 = {};
         newRow.push(cell1);
@@ -1349,8 +1256,7 @@ function getOutBuildingTable()
 
         //Start the loop to extract all the data from the html that is dynamically.
         //each row == two cells in the pdf table
-        for (var b = 0; b<rowCount-1;b++)
-        {
+        for (var b = 0; b < rowCount - 1; b++) {
             var cell1;
             var cell2;
             var baseName = 'HOWOutBuildingPlace';
@@ -1359,14 +1265,14 @@ function getOutBuildingTable()
             var selectID = baseName + b + 'Select' + i;
             var textID = baseName + b + 'Text' + i;
             cell1 = {
-                text:getIt(selectID),
-                bold:true,
+                text: getIt(selectID),
+                bold: true,
                 style: 'tableText',
                 noWrap: true
             };
             cell2 = {
-                text:getIt(textID),
-                bold:true,
+                text: getIt(textID),
+                bold: true,
                 style: 'tableText',
                 noWrap: true
             };
@@ -1380,23 +1286,16 @@ function getOutBuildingTable()
     }
 
     //Set up the width
-    for (var i = 0 ; i<rowCount*2;i++)
-    {
+    for (var i = 0; i < rowCount * 2; i++) {
         var cell;
 
-        if (i > 1)
-        {
-            if (isOdd(i) == 1 )
-            {
+        if (i > 1) {
+            if (isOdd(i) == 1) {
                 cell = '*';
+            } else {
+                cell = 10;
             }
-            else
-            {
-                cell = 10 ;
-            }
-        }
-        else
-        {
+        } else {
             cell = 'auto';
         }
 
@@ -1408,10 +1307,10 @@ function getOutBuildingTable()
 
     tableBody = {
         table: {
-            widths:width,
+            widths: width,
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
     //console.log(tableBody);
 
@@ -1421,8 +1320,7 @@ function getOutBuildingTable()
 /*
     Get Services Data
  */
-function getServicesTable()
-{
+function getServicesTable() {
     var data = [];
     var tableBody;
     var rowCount = document.getElementById('HOWServicesTable').rows.length;
@@ -1430,41 +1328,36 @@ function getServicesTable()
 
     var firstRow = [
         {
-            text:[
+            text: [
                 'SERVICES',
                 {
-                    text:'#',
-                    fontSize:8
+                    text: '#',
+                    fontSize: 8
                 }
 
             ],
-            colSpan:9,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            colSpan: 9,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
-        {},{},{},{},{},{},{},{}
+        {}, {}, {}, {}, {}, {}, {}, {}
     ];
     data.push(firstRow);
 
-    for (var i = 0; i<rowCount;i=i+3)
-    {
+    for (var i = 0; i < rowCount; i = i + 3) {
         var newRow = [];
-        for (var a = i; a<i+3;a++)
-        {
+        for (var a = i; a < i + 3; a++) {
             var place;
             var select;
             var note;
             var cell1;
             var cell2;
             var cell3;
-            if (a <= 3)
-            {
+            if (a <= 3) {
                 place = document.getElementById('HOWServiceName' + a).textContent;
                 select = getIt('HOWServicesSelect' + a);
                 note = getIt('HOWServiceNote' + a);
-            }
-            else
-            {
+            } else {
                 place = document.getElementById('HOWServiceName' + a);
                 select = document.getElementById('HOWServicesSelect' + a);
                 note = document.getElementById('HOWServiceNote' + a);
@@ -1472,61 +1365,48 @@ function getServicesTable()
 
             //to determine whether the id is existed in the html. because it is loop, it is possible loop to the id that is not created
             //in the html yet.
-            if (place != null)
-            {
+            if (place != null) {
                 //if the id is existed, to determine, whether the id is created dynamically or is already there.
                 // if it is already there, use place straight away, otherwise, use its value instead.
-                if (a > 3)
-                {
+                if (a > 3) {
                     place = place.value;
                 }
 
-                if (place == 'Hot Water System' || place == 'Smoke Detectors' || place == 'Switchboard')
-                {
+                if (place == 'Hot Water System' || place == 'Smoke Detectors' || place == 'Switchboard') {
                     place = place + '*';
                 }
                 cell1 = {
-                    text:place,
-                    bold:true,
+                    text: place,
+                    bold: true,
                     style: 'tableText',
                     noWrap: true
                 };
-            }
-            else
-            {
+            } else {
                 cell1 = ''
             }
 
-            if (select != null)
-            {
-                if (a > 3)
-                {
+            if (select != null) {
+                if (a > 3) {
                     select = select.value;
                 }
                 cell2 = {
-                    text:select,
+                    text: select,
                     style: 'tableText',
-                    alignment:'center'
+                    alignment: 'center'
                 };
-            }
-            else
-            {
+            } else {
                 cell2 = ''
             }
 
-            if (note != null)
-            {
-                if (a > 3)
-                {
+            if (note != null) {
+                if (a > 3) {
                     note = note.value;
                 }
                 cell3 = {
-                    text:note,
+                    text: note,
                     style: 'tableText'
                 };
-            }
-            else
-            {
+            } else {
                 cell3 = ''
             }
 
@@ -1539,10 +1419,10 @@ function getServicesTable()
 
     tableBody = {
         table: {
-            widths:['auto','auto','*','auto','auto','*','auto','auto','*'],
+            widths: ['auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
 
     return tableBody;
@@ -1552,8 +1432,7 @@ function getServicesTable()
 /**
  * Get the Internal Living & Bedroom Data
  */
-function getLivingBedroomTable()
-{
+function getLivingBedroomTable() {
     var data = [];
     var tableBody;
     var entryTableRowCount = document.getElementById('HOWInternal_Entry_Table').rows.length;
@@ -1572,61 +1451,61 @@ function getLivingBedroomTable()
 
     var firstRow = [
         {
-            text:'INTERNAL LIVING & BEDROOM',
-            colSpan:10,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'INTERNAL LIVING & BEDROOM',
+            colSpan: 10,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
-        {},{},{},{},{},{},{},{},{}
+        {}, {}, {}, {}, {}, {}, {}, {}, {}
     ];
     data.push(firstRow);
 
-    var entryTable = createInternalOnePartTable('ENTRY & PASSAGE',entryTableRowCount,'HOWInternal_EntryName','HOWInternal_EntrySelect','HOWInternal_EntryNote',10);
+    var entryTable = createInternalOnePartTable('ENTRY & PASSAGE', entryTableRowCount, 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote', 10);
     data = data.concat(entryTable);
 
-    var stairTable = createInternalOnePartTable('STAIR',stairTableRowCount,'HOWInternal_StairName','HOWInternal_StairSelect','HOWInternal_StairNote',10);
+    var stairTable = createInternalOnePartTable('STAIR', stairTableRowCount, 'HOWInternal_StairName', 'HOWInternal_StairSelect', 'HOWInternal_StairNote', 10);
     data = data.concat(stairTable);
 
 
-    var livingTable = createInternalOnePartTable('LIVING (CENTRAL)',livingFrontTableRowCount,'HOWInternal_LivingFrontName','HOWInternal_LivingFrontSelect','HOWInternal_LivingFrontNote',10);
+    var livingTable = createInternalOnePartTable('LIVING (CENTRAL)', livingFrontTableRowCount, 'HOWInternal_LivingFrontName', 'HOWInternal_LivingFrontSelect', 'HOWInternal_LivingFrontNote', 10);
     data = data.concat(livingTable);
 
-    var kitchenTable = createInternalOnePartTable('KITCHEN + PANTRY',kitchenTableRowCount,'HOWInternal_KitchenName','HOWInternal_KitchenSelect','HOWInternal_KitchenNote',16);
+    var kitchenTable = createInternalOnePartTable('KITCHEN + PANTRY', kitchenTableRowCount, 'HOWInternal_KitchenName', 'HOWInternal_KitchenSelect', 'HOWInternal_KitchenNote', 16);
     data = data.concat(kitchenTable);
 
 
-    var familyTable = createInternalOnePartTable('FAMILY',familyTableRowCount,'HOWInternal_FamilyName','HOWInternal_FamilySelect','HOWInternal_FamilyNote',10);
+    var familyTable = createInternalOnePartTable('FAMILY', familyTableRowCount, 'HOWInternal_FamilyName', 'HOWInternal_FamilySelect', 'HOWInternal_FamilyNote', 10);
     data = data.concat(familyTable);
 
-    var diningTable = createInternalOnePartTable('DINING',diningTableRowCount,'HOWInternal_DiningName','HOWInternal_DiningSelect','HOWInternal_DiningNote',10);
+    var diningTable = createInternalOnePartTable('DINING', diningTableRowCount, 'HOWInternal_DiningName', 'HOWInternal_DiningSelect', 'HOWInternal_DiningNote', 10);
     data = data.concat(diningTable);
 
-    var bedroom1Table = createInternalOnePartTable('BEDROOM 1',bedroom1TableRowCount,'HOWInternal_Bedroom1Name','HOWInternal_Bedroom1Select','HOWInternal_Bedroom1Note',10);
+    var bedroom1Table = createInternalOnePartTable('BEDROOM 1', bedroom1TableRowCount, 'HOWInternal_Bedroom1Name', 'HOWInternal_Bedroom1Select', 'HOWInternal_Bedroom1Note', 10);
     data = data.concat(bedroom1Table);
 
-    var bedroom2Table = createInternalOnePartTable('BEDROOM 2',bedroom2TableRowCount,'HOWInternal_Bedroom2Name','HOWInternal_Bedroom2Select','HOWInternal_Bedroom2Note',10);
+    var bedroom2Table = createInternalOnePartTable('BEDROOM 2', bedroom2TableRowCount, 'HOWInternal_Bedroom2Name', 'HOWInternal_Bedroom2Select', 'HOWInternal_Bedroom2Note', 10);
     data = data.concat(bedroom2Table);
 
-    var bedroom3Table = createInternalOnePartTable('BEDROOM 3',bedroom3TableRowCount,'HOWInternal_Bedroom3Name','HOWInternal_Bedroom3Select','HOWInternal_Bedroom3Note',10);
+    var bedroom3Table = createInternalOnePartTable('BEDROOM 3', bedroom3TableRowCount, 'HOWInternal_Bedroom3Name', 'HOWInternal_Bedroom3Select', 'HOWInternal_Bedroom3Note', 10);
     data = data.concat(bedroom3Table);
 
-    var bedroom4Table = createInternalOnePartTable('BEDROOM 4',bedroom4TableRowCount,'HOWInternal_Bedroom4Name','HOWInternal_Bedroom4Select','HOWInternal_Bedroom4Note',10);
+    var bedroom4Table = createInternalOnePartTable('BEDROOM 4', bedroom4TableRowCount, 'HOWInternal_Bedroom4Name', 'HOWInternal_Bedroom4Select', 'HOWInternal_Bedroom4Note', 10);
     data = data.concat(bedroom4Table);
 
-    var studyTable = createInternalOnePartTable('STUDY',studyTableCount,'HOWInternal_StudyName','HOWInternal_StudySelect','HOWInternal_StudyNote',10);
+    var studyTable = createInternalOnePartTable('STUDY', studyTableCount, 'HOWInternal_StudyName', 'HOWInternal_StudySelect', 'HOWInternal_StudyNote', 10);
     data = data.concat(studyTable);
 
-    var retreatTable = createInternalOnePartTable('RETREAT (UPPER)',retreatTableCount,'HOWInternal_RetreatName','HOWInternal_RetreatSelect','HOWInternal_RetreatNote',10);
+    var retreatTable = createInternalOnePartTable('RETREAT (UPPER)', retreatTableCount, 'HOWInternal_RetreatName', 'HOWInternal_RetreatSelect', 'HOWInternal_RetreatNote', 10);
     data = data.concat(retreatTable);
     //console.log(retreatTable);
     //console.log(data);
 
     tableBody = {
         table: {
-            widths:['*','auto','auto','*','auto','auto','*','auto','auto','*'],
+            widths: ['*', 'auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
     //console.log(tableBody);
 
@@ -1634,8 +1513,7 @@ function getLivingBedroomTable()
 }
 
 
-function getInternalServiceTable()
-{
+function getInternalServiceTable() {
     var data = [];
     var tableBody;
     var WCTableRowCount = document.getElementById('HOWInternalService_WC_Table').rows.length;
@@ -1648,44 +1526,44 @@ function getInternalServiceTable()
 
     var firstRow = [
         {
-            text:'INTERNAL SERVICE (WET) AREAS',
-            colSpan:10,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'INTERNAL SERVICE (WET) AREAS',
+            colSpan: 10,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
-        {},{},{},{},{},{},{},{},{}
+        {}, {}, {}, {}, {}, {}, {}, {}, {}
     ];
     data.push(firstRow);
 
-    var WCTable = createInternalOnePartTable('WC/ POWDER ROOM',WCTableRowCount,'HOWInternalService_WCName','HOWInternalService_WCSelect','HOWInternalService_WCNote',14);
+    var WCTable = createInternalOnePartTable('WC/ POWDER ROOM', WCTableRowCount, 'HOWInternalService_WCName', 'HOWInternalService_WCSelect', 'HOWInternalService_WCNote', 14);
     data = data.concat(WCTable);
 
 
-    var bathroom1Table = createInternalOnePartTable('BATHROOM',bathroom1TableRowCount,'HOWInternalService_Bathroom1Name','HOWInternalService_Bathroom1Select','HOWInternalService_Bathroom1Note',15);
+    var bathroom1Table = createInternalOnePartTable('BATHROOM', bathroom1TableRowCount, 'HOWInternalService_Bathroom1Name', 'HOWInternalService_Bathroom1Select', 'HOWInternalService_Bathroom1Note', 15);
     data = data.concat(bathroom1Table);
 
-    var bathroom2Table = createInternalOnePartTable('BATHROOM',bathroom2TableRowCount,'HOWInternalService_Bathroom2Name','HOWInternalService_Bathroom2Select','HOWInternalService_Bathroom2Note',15);
+    var bathroom2Table = createInternalOnePartTable('BATHROOM', bathroom2TableRowCount, 'HOWInternalService_Bathroom2Name', 'HOWInternalService_Bathroom2Select', 'HOWInternalService_Bathroom2Note', 15);
     data = data.concat(bathroom2Table);
 
-    var bathroom3Table = createInternalOnePartTable('BATHROOM ENSUITE',bathroom3TableRowCount,'HOWInternalService_Bathroom3Name','HOWInternalService_Bathroom3Select','HOWInternalService_Bathroom3Note',15);
+    var bathroom3Table = createInternalOnePartTable('BATHROOM ENSUITE', bathroom3TableRowCount, 'HOWInternalService_Bathroom3Name', 'HOWInternalService_Bathroom3Select', 'HOWInternalService_Bathroom3Note', 15);
     data = data.concat(bathroom3Table);
 
-    var bathroom4Table = createInternalOnePartTable('BATHROOM ENSUITE',bathroom4TableRowCount,'HOWInternalService_Bathroom4Name','HOWInternalService_Bathroom4Select','HOWInternalService_Bathroom4Note',15);
+    var bathroom4Table = createInternalOnePartTable('BATHROOM ENSUITE', bathroom4TableRowCount, 'HOWInternalService_Bathroom4Name', 'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note', 15);
     data = data.concat(bathroom4Table);
 
-    var laundryTable = createInternalOnePartTable('LAUNDRY',laundryTableRowCount,'HOWInternalService_LaundryName','HOWInternalService_LaundrySelect','HOWInternalService_LaundryNote',13);
+    var laundryTable = createInternalOnePartTable('LAUNDRY', laundryTableRowCount, 'HOWInternalService_LaundryName', 'HOWInternalService_LaundrySelect', 'HOWInternalService_LaundryNote', 13);
     data = data.concat(laundryTable);
 
-    var servicesTable = createInternalOnePartTable('SERVICES',servicesTableRowCount,'HOWInternalService_ServiceName','HOWInternalService_ServiceSelect','HOWInternalService_ServiceNote',5);
+    var servicesTable = createInternalOnePartTable('SERVICES', servicesTableRowCount, 'HOWInternalService_ServiceName', 'HOWInternalService_ServiceSelect', 'HOWInternalService_ServiceNote', 5);
     data = data.concat(servicesTable);
 
 
     tableBody = {
         table: {
-            widths:['*','auto','auto','*','auto','auto','*','auto','auto','*'],
+            widths: ['*', 'auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
 
     return tableBody;
@@ -1696,38 +1574,32 @@ function getInternalServiceTable()
  * Use the parameters to create rows for the big table. one place at one time. return an Array [].
  * then this array will be pushed into the whole table
  */
-function createInternalOnePartTable(cellText,rowCount,placeID,selectID,noteID,fixedLastID)
-{
+function createInternalOnePartTable(cellText, rowCount, placeID, selectID, noteID, fixedLastID) {
     var partOfTable = [];
-    var rowSpanNumber = Math.ceil(rowCount/3);
+    var rowSpanNumber = Math.ceil(rowCount / 3);
 
-    for (var i = 0; i<rowCount;i=i+3)
-    {
+    for (var i = 0; i < rowCount; i = i + 3) {
         var newRow = [];
 
         //create the first cell in the row. if this is the first row, then write the name, row span. if it is not the
         // first row, then create empty cell will be enough.
-        if (i == 0)
-        {
+        if (i == 0) {
             var cell0 = {
-                text:cellText,
-                rowSpan:rowSpanNumber,
-                style:'tableBoldTextAlignLeft',
-                color:'black',
-                alignment:'center'
+                text: cellText,
+                rowSpan: rowSpanNumber,
+                style: 'tableBoldTextAlignLeft',
+                color: 'black',
+                alignment: 'center'
             };
             newRow.push(cell0);
-        }
-        else
-        {
+        } else {
             var cell0 = {};
             newRow.push(cell0);
         }
 
         //Create the cells in the row, each loop create three cells. it is possible, in some loops, the id is null, will
         //return '' instead
-        for (var a = i; a<i+3;a++)
-        {
+        for (var a = i; a < i + 3; a++) {
             var place;
             var select;
             var note;
@@ -1735,75 +1607,59 @@ function createInternalOnePartTable(cellText,rowCount,placeID,selectID,noteID,fi
             var cell2;
             var cell3;
 
-            if (a <= fixedLastID)
-            {
+            if (a <= fixedLastID) {
                 //console.log(placeID + a);
                 place = document.getElementById(placeID + a).textContent;
                 //console.log(place);
                 //console.log(selectID + a);
                 select = getIt(selectID + a);
                 note = getIt(noteID + a);
-            }
-            else
-            {
+            } else {
                 place = document.getElementById(placeID + a);
                 select = document.getElementById(selectID + a);
                 note = document.getElementById(noteID + a);
             }
 
 
-            if (place != null)
-            {
-                if (a > fixedLastID)
-                {
+            if (place != null) {
+                if (a > fixedLastID) {
                     place = place.value;
                 }
 
                 cell1 = {
-                    text:place,
-                    bold:true,
+                    text: place,
+                    bold: true,
                     style: 'tableText'
                 };
-            }
-            else
-            {
+            } else {
                 cell1 = ''
             }
 
-            if (select != null)
-            {
-                if (a > fixedLastID)
-                {
+            if (select != null) {
+                if (a > fixedLastID) {
                     select = select.value;
-                    if(select = 'Choose an item')
-                    {
+                    if (select = 'Choose an item') {
                         select = '';
                     }
                 }
                 cell2 = {
-                    text:select,
+                    text: select,
                     style: 'tableText',
-                    alignment:'center'
+                    alignment: 'center'
                 };
-            }
-            else
-            {
+            } else {
                 cell2 = ''
             }
 
-            if (note != null)
-            {
-                if (a > fixedLastID)
-                {
+            if (note != null) {
+                if (a > fixedLastID) {
                     note = note.value;
                 }
                 cell3 = {
-                    text:note,
+                    text: note,
                     style: 'tableText'
                 };
-            }
-            else
-            {
+            } else {
                 cell3 = ''
             }
 
@@ -1822,8 +1678,7 @@ function createInternalOnePartTable(cellText,rowCount,placeID,selectID,noteID,fi
 /**
  * Get the Defects and Incomplete Table
  */
-function getDefectIncompleteTable()
-{
+function getDefectIncompleteTable() {
     var data = [];
     var defectTableRowCount = document.getElementById('HOWDefectsTable').rows.length;
     var tableBody;
@@ -1831,10 +1686,10 @@ function getDefectIncompleteTable()
 
     var firstRow = [
         {
-            text:'DEFECTS AND INCOMPLETE WORK EVIDENT AT TIME OF INSPECTION',
-            colSpan:2,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'DEFECTS AND INCOMPLETE WORK EVIDENT AT TIME OF INSPECTION',
+            colSpan: 2,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
         {}
     ];
@@ -1842,21 +1697,20 @@ function getDefectIncompleteTable()
 
     var secondRow = [
         {
-            text:'Item No',
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'Item No',
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
         {
-            text:'It is recommended that purchasers obtain their own report on the condition of the building',
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'It is recommended that purchasers obtain their own report on the condition of the building',
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         }
     ];
     data.push(secondRow);
 
     //Set up the dynamic table base on the input
-    for (var i = 0; i<defectTableRowCount-1;i++)
-    {
+    for (var i = 0; i < defectTableRowCount - 1; i++) {
         var itemID = 'HOWDefectItem' + i;
         var descriptionID = 'HOWDefectDescription' + i;
         var newRow = [
@@ -1865,7 +1719,7 @@ function getDefectIncompleteTable()
                 style: 'tableText'
             },
             {
-                text:getIt(descriptionID),
+                text: getIt(descriptionID),
                 style: 'tableText'
             }
         ];
@@ -1880,10 +1734,10 @@ function getDefectIncompleteTable()
 
     tableBody = {
         table: {
-            widths:['auto','*'],
+            widths: ['auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
 
     return tableBody;
@@ -1892,8 +1746,7 @@ function getDefectIncompleteTable()
 /**
  * Get the Access Limitation Table
  */
-function getAccessLimitationTable()
-{
+function getAccessLimitationTable() {
     var data = [];
     var tableBody;
 
@@ -1902,10 +1755,10 @@ function getAccessLimitationTable()
 
     var firstRow = [
         {
-            text:'ACCESS lIMITATIONS',
-            colSpan:2,
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'ACCESS lIMITATIONS',
+            colSpan: 2,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
         {}
     ];
@@ -1913,21 +1766,20 @@ function getAccessLimitationTable()
 
     var secondRow = [
         {
-            text:'Item No',
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'Item No',
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         },
         {
-            text:'The following access limitations were encountered during the property inspection:',
-            style:'tableBoldTextAlignLeft',
-            color:'red'
+            text: 'The following access limitations were encountered during the property inspection:',
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
         }
     ];
     data.push(secondRow);
 
 
-    for (var i = 0; i<accessTableRowCount-1;i++)
-    {
+    for (var i = 0; i < accessTableRowCount - 1; i++) {
         var itemID = 'HOWAccessItem' + i;
         var descriptionID = 'HOWAccessDescription' + i;
         var newRow = [
@@ -1936,11 +1788,11 @@ function getAccessLimitationTable()
                 style: 'tableText'
             },
             {
-                text:getIt(descriptionID),
+                text: getIt(descriptionID),
                 style: 'tableText'
             }
         ];
-       // console.log(newRow);
+        // console.log(newRow);
         data.push(newRow);
 
     }
@@ -1949,10 +1801,10 @@ function getAccessLimitationTable()
 
     tableBody = {
         table: {
-            widths:['auto','*'],
+            widths: ['auto', '*'],
             body: data
         },
-        margin:[0,5,0,5]
+        margin: [0, 5, 0, 5]
     };
 
     return tableBody;
@@ -1966,94 +1818,186 @@ function getAccessLimitationTable()
 /*
  get Images
  */
-function getImagesTable()
-{
-    var result;
-    var data = [];
-    var tableBody;
-    var finalImageNumber = 0;
-    var supposedImageNumber = 0;
-    var totalImageNumber = $('#HOWImagesDIV').find('> form').length;
+function getImagesTable() {
+    //    var result;
+    var data = [],
+        row = [],
+        tableBody, divCount = 1;
+    //    var finalImageNumber = 0;
+    //    var supposedImageNumber = 0;
+    var totalContainers = $("#HOWImagesTable").children('div');
     var fullAddress = document.getElementById('inspection_address').value.trim() + " " + document.getElementById('inspection_suburb').value.trim();
 
-    //console.log("The total number of forms are: " + totalImageNumber);
-    if(totalImageNumber != 0)
-    {
-        var lastImage = document.getElementById('HOWImagesDIV').lastElementChild.lastChild.firstChild;
-        supposedImageNumber = lastImage.id.replace( /[^\d.]/g, '' );//this is the image number based on the id of last image on the form
-        //console.log("The supposed number of images based on id is " + supposedImageNumber);
-    }
-
-
-    if(totalImageNumber > supposedImageNumber)
-    {
-        finalImageNumber = totalImageNumber;
-    }
-    else
-    {
-        finalImageNumber = supposedImageNumber;
-    }
-
-    var firstRow = [
-        {
-            text:"Photographs",
-            style:'pageTopHeader',
-            margin: [0, 0, 0, 5],
-            colSpan:2
-        },{}
-    ];
-    data.push(firstRow);
-
-    var secondRow = [
-        {
-            text:'Address: ' + fullAddress,
+    if (isEmpty(totalContainers.length)) {
+        tableBody = {
+            layout: 'noBorders',
+            table: {
+                body: [
+                    [
+                        {
+                            text: "Photographs",
+                            style: 'pageTopHeader',
+                            margin: [0, 0, 0, 5]
+                        }
+                    ]
+                ]
+            }
+        }
+    } else {
+        row.push({
+            text: "Photographs",
+            style: 'pageTopHeader',
+            margin: [0, 0, 0, 5]
+        }, {});
+        data.push(row);
+        row = [];
+        row.push({
+            text: 'Address: ' + fullAddress,
             style: 'tableBoldTextAlignLeft',
-            margin: [0, 0, 0, 10],
-            colSpan:2
-        },{}
-    ];
-    data.push(secondRow);
+            margin: [0, 0, 0, 10]
+        }, {});
+        data.push(row);
+        row = [];
 
-    for(i=0;i<finalImageNumber;i=i+2)
-    {
+        for (var i = 0; i < totalContainers.length; i++) {
+            var img = totalContainers.eq(i).children('img').get(0),
+                imgSrc = totalContainers.eq(i).children('img').attr('src'),
+                imgLabel = totalContainers.eq(i).children('label').text(),
+                imgText = totalContainers.eq(i).children('input').val(),
+                width = 0,
+                height = 0;
 
-        var n = i + 1;
-        var firstImageID = 'HOWImage' + i;
-        var secondImageID = 'HOWImage' + n;
-        var firstTextID = 'HOWImageText' + i;
-        var secondTextID = 'HOWImageText' + n;
+            if (imgSrc.includes("photos/") > 0) {
+                imgSrc = convertImgToBase64(img);
+            }
 
+            if (img.width >= img.height) {
+                width = 250;
+                height = 187;
+            } else {
+                width = img.width * 187 / img.height;
+                height = 187;
+            }
 
-        var imageRow =
-            [
-                getPhoto(firstImageID),
-                getPhoto(secondImageID)
-
-            ];
-        var textRow = [
-            getImageText(firstTextID),
-            getImageText(secondTextID)
-
-        ];
-        data.push(imageRow);
-        data.push(textRow);
-    }
-
-    tableBody = {
-        table: {
-            headerRows: 2,
-            body: data
-        },
-        layout: {
-            hLineColor: function (i, node) {
-                return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
-            },
-            vLineColor: function (i, node) {
-                return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+            row.push({
+                stack: [
+                    {
+                        image: imgSrc,
+                        width: width,
+                        height: height,
+                        margin: [0, 80, 0, 0],
+                        alignment: 'center'
+                    },
+                    {
+                        text: imgLabel,
+                        margin: [0, 5],
+                        alignment: 'center'
+                    },
+                    {
+                        text: imgText
+                    }
+                ]
+            })
+            divCount++;
+            if (divCount === 3) {
+                data.push(row);
+                row = [];
+                divCount = 1;
             }
         }
 
-    };
+        if (divCount == 2) {
+            row.push({});
+            data.push(row);
+        }
+        tableBody = {
+            layout: 'noBorders',
+            table: {
+                widths: [250, 250],
+                headerRows: 2,
+                body: data
+            }
+        }
+    }
+    //
+    //    //console.log("The total number of forms are: " + totalImageNumber);
+    //    if(totalImageNumber != 0)
+    //    {
+    //        var lastImage = document.getElementById('HOWImagesDIV').lastElementChild.lastChild.firstChild;
+    //        supposedImageNumber = lastImage.id.replace( /[^\d.]/g, '' );//this is the image number based on the id of last image on the form
+    //        //console.log("The supposed number of images based on id is " + supposedImageNumber);
+    //    }
+    //
+    //
+    //    if(totalImageNumber > supposedImageNumber)
+    //    {
+    //        finalImageNumber = totalImageNumber;
+    //    }
+    //    else
+    //    {
+    //        finalImageNumber = supposedImageNumber;
+    //    }
+    //
+    //    var firstRow = [
+    //        {
+    //            text:"Photographs",
+    //            style:'pageTopHeader',
+    //            margin: [0, 0, 0, 5],
+    //            colSpan:2
+    //        },{}
+    //    ];
+    //    data.push(firstRow);
+    //
+    //    var secondRow = [
+    //        {
+    //            text:'Address: ' + fullAddress,
+    //            style: 'tableBoldTextAlignLeft',
+    //            margin: [0, 0, 0, 10],
+    //            colSpan:2
+    //        },{}
+    //    ];
+    //    data.push(secondRow);
+    //
+    //    for(i=0;i<finalImageNumber;i=i+2)
+    //    {
+    //
+    //        var n = i + 1;
+    //        var firstImageID = 'HOWImage' + i;
+    //        var secondImageID = 'HOWImage' + n;
+    //        var firstTextID = 'HOWImageText' + i;
+    //        var secondTextID = 'HOWImageText' + n;
+    //
+    //
+    //        var imageRow =
+    //            [
+    //                getPhoto(firstImageID),
+    //                getPhoto(secondImageID)
+    //
+    //            ];
+    //        var textRow = [
+    //            getImageText(firstTextID),
+    //            getImageText(secondTextID)
+    //
+    //        ];
+    //        data.push(imageRow);
+    //        data.push(textRow);
+    //    }
+    //
+    //    tableBody = {
+    //        table: {
+    //            headerRows: 2,
+    //            body: data
+    //        },
+    //        layout: {
+    //            hLineColor: function (i, node) {
+    //                return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+    //            },
+    //            vLineColor: function (i, node) {
+    //                return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+    //            }
+    //        }
+    //
+    //    };
 
     return tableBody;
 }
@@ -2093,24 +2037,24 @@ function getAttachmentTable() {
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('propertyMaintenanceGuide').value,
-                        fontSize:9
+                        text: document.getElementById('propertyMaintenanceGuide').value,
+                        fontSize: 9
                     },
                     {
                         text: 'Cracking in Masonry',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('crackingInMasonry').value,
-                        fontSize:9
+                        text: document.getElementById('crackingInMasonry').value,
+                        fontSize: 9
                     },
                     {
                         text: 'Treatment of Dampness',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('treatmentOfDampness').value,
-                        fontSize:9
+                        text: document.getElementById('treatmentOfDampness').value,
+                        fontSize: 9
                     }
                 ],
                 [
@@ -2119,24 +2063,24 @@ function getAttachmentTable() {
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('healthSafetyWarning').value,
-                        fontSize:9
+                        text: document.getElementById('healthSafetyWarning').value,
+                        fontSize: 9
                     },
                     {
                         text: 'Roofing & Guttering',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('roofingGuttering').value,
-                        fontSize:9
+                        text: document.getElementById('roofingGuttering').value,
+                        fontSize: 9
                     },
                     {
                         text: 'Home Safety Checklist',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('homeSafetyChecklist').value,
-                        fontSize:9
+                        text: document.getElementById('homeSafetyChecklist').value,
+                        fontSize: 9
                     }
                 ],
                 [
@@ -2145,24 +2089,24 @@ function getAttachmentTable() {
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('termitesBorers').value,
-                        fontSize:9
+                        text: document.getElementById('termitesBorers').value,
+                        fontSize: 9
                     },
                     {
                         text: 'Re-stumping',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('reStumping').value,
-                        fontSize:9
+                        text: document.getElementById('reStumping').value,
+                        fontSize: 9
                     },
                     {
                         text: 'Cost Guide',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:document.getElementById('costGuide').value,
-                        fontSize:9
+                        text: document.getElementById('costGuide').value,
+                        fontSize: 9
                     }
                 ]
             ]
@@ -2172,4 +2116,13 @@ function getAttachmentTable() {
     return result;
 }
 
+function convertImgToBase64(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var src = canvas.toDataURL("image/png");
 
+    return src;
+}

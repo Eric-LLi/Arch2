@@ -15,6 +15,7 @@
     <?php require_once("meta.php"); ?>
     <!-- Customized CSS -->
     <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/viewPDF.css">
     <!--  Import JQuery  -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
@@ -2468,12 +2469,15 @@
             </div>
         </div>
         <div title="IMAGES" style="padding:10px;font-size: 18px">
+<!--
             <div class="container">
                 <input type="button" id="get_drawing" value="Upload Images" class="uploadImageButton"
                        onclick="HOWUploadImages()" style="white-space: normal; width: 15%">
                 <input type="file" id="HOWUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
 
             </div>
+-->
+<!--
             <div class="container">
                 <table id="HOWImagesTable" style="display: none">
                     <tr>
@@ -2486,6 +2490,12 @@
                 </table>
                 <br>
             </div>
+-->
+            <button id="HOW_uploadImg_Btn" class="btn btn-primary">Upload Images</button>
+                    <input type="file" id="HOW_ImgsUpload" accept="image/x-png,image/jpeg" multiple/>
+                    <div id="Img-main-container">
+                        <div id="HOWImagesTable"></div>
+                    </div>
         </div>
         <div title="Defects and Incomplete Work" style="padding:10px;font-size: 18px">
                 <button type="button" class="btn btn-primary" onclick="moreDefects()">Add One Item</button>
