@@ -2,12 +2,12 @@
 
 #upload-button,
 #uploadImg_Btn,
-#CP_uploadImg_Btn {
+#CP_uploadImg_Btn,
+#HOW_uploadImg_Btn {
     width: 150px;
     /*    display: block;*/
     margin: 10px auto;
 }
-
 
 /*Upload image and Upload pdf input file button*/
 
@@ -51,8 +51,10 @@
 */
 
 #HA_PdfContents canvas {
+    /*
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
+*/
     display: none;
 }
 
@@ -62,7 +64,8 @@
 }
 
 #HA_ImgsContents button,
-#CPImagesTable button {
+#CPImagesTable button,
+#HOWImagesTable button {
     margin: 5px 0px 0px 0px;
 }
 
@@ -72,12 +75,14 @@
 }
 
 #HA_ImgsContents input,
-#CPImagesTable input {
+#CPImagesTable input,
+#HOWImagesTable input {
     width: 100%;
     margin: 5px 0px 0px 0px;
 }
 
-#CPImagesTable label {
+#CPImagesTable label,
+#HOWImagesTable label {
     margin: 0;
 }
 
@@ -100,7 +105,8 @@
 }
 
 #HA_ImgsContents div,
-#CPImagesTable div {
+#CPImagesTable div,
+#HOWImagesTable div {
     float: left;
     display: inline;
     margin-left: 20px;
