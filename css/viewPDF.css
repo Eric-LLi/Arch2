@@ -1,18 +1,22 @@
 /*Upload image and Upload pdf button*/
 
 #upload-button,
-#uploadImg_Btn {
+#uploadImg_Btn,
+#CP_uploadImg_Btn {
     width: 150px;
     /*    display: block;*/
     margin: 10px auto;
 }
 
+
 /*Upload image and Upload pdf input file button*/
 
+/*
 #file-to-upload,
 #Imgs_Upload {
     display: none;
 }
+*/
 
 /*Img & PDF main container*/
 
@@ -57,7 +61,8 @@
     /*    display: none;*/
 }
 
-#HA_ImgsContents button {
+#HA_ImgsContents button,
+#CPImagesTable button {
     margin: 5px 0px 0px 0px;
 }
 
@@ -66,9 +71,14 @@
     margin: 5px 0px 0px 0px;
 }
 
-#HA_ImgsContents input {
+#HA_ImgsContents input,
+#CPImagesTable input {
     width: 100%;
     margin: 5px 0px 0px 0px;
+}
+
+#CPImagesTable label {
+    margin: 0;
 }
 
 #HA_PdfContents img {
@@ -89,7 +99,8 @@
     margin-left: 10px;
 }
 
-#HA_ImgsContents div {
+#HA_ImgsContents div,
+#CPImagesTable div {
     float: left;
     display: inline;
     margin-left: 20px;
@@ -98,11 +109,13 @@
     height: 500px;
 }
 
+/*
 #img_table td,
 #photo_table td {
     text-align: center;
     border: inherit;
 }
+*/
 
 /*Img & PDF loader message*/
 
