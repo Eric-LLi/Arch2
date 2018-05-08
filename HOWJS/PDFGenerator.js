@@ -6,7 +6,7 @@
  * Core function of the PDF generator
  * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  * */
-function generateHOWPDF(mode) {
+function generatePDF(mode) {
     resetTotalImagesCaptions();
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -181,6 +181,7 @@ function generateHOWPDF(mode) {
              */
             {
                 stack:[
+                    giveMeHugeDraft(mode),
                     {
                         text:'\nHome Warranty Inspection Report',
                         style:'pageTopHeader',
@@ -277,12 +278,14 @@ function generateHOWPDF(mode) {
              */
             {
                 stack:[
+                    giveMeHugeDraft(mode),
                     getLivingBedroomTable()
                 ],
                 pageBreak: 'after'
             },
             {
                 stack:[
+                    giveMeHugeDraft(mode),
                     getInternalServiceTable()
                 ],
                 pageBreak: 'after'
@@ -292,6 +295,7 @@ function generateHOWPDF(mode) {
              */
             {
                 stack: [
+                    giveMeHugeDraft(mode),
                     makeAGap(),
                     getImagesTable()
                 ],
@@ -302,6 +306,7 @@ function generateHOWPDF(mode) {
              */
             {
                 stack:[
+                    giveMeHugeDraft(mode),
                     {
                         text:'Defects and Incomplete Work',
                         style:'pageTopHeader',
@@ -316,6 +321,7 @@ function generateHOWPDF(mode) {
              */
             {
                 stack:[
+                    giveMeHugeDraft(mode),
                     {
                         text:'Access',
                         style:'pageTopHeader',
@@ -355,6 +361,7 @@ function generateHOWPDF(mode) {
              * */
             {
                 stack: [
+                    giveMeHugeDraft(mode),
                     {
                         text: 'Home Warranty Inspection Report',
                         style: 'pageTopHeader'
@@ -509,6 +516,7 @@ function generateHOWPDF(mode) {
 
             {
                 stack: [
+                    giveMeHugeDraft(mode),
                     {
                         text: 'Archicentre Australia Terms & Conditions',
                         style: 'pageTopHeader'
