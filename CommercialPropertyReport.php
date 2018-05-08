@@ -1174,8 +1174,8 @@ onclick="CPUploadImages()" style="white-space: normal; width: 15%">
     <br>
     <br>
     <?php
-      if (!$isuserlink)
-      {
+    if (!$isuserlink)
+    {
         if (SharedIsAdmin())
         {
     ?>
@@ -1186,20 +1186,19 @@ onclick="CPUploadImages()" style="white-space: normal; width: 15%">
         }
         else
         {
-          if (!$iscompleted)
-          {
-            ?>
+            if (!$iscompleted)
+            {
+        ?>
                 <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-                <?php
-                    }
-            ?>
-                    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
-                    <?php
-                }
+            <?php
             }
-
             ?>
-                        <br><br><br><br>
+                <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+                <?php
+        }
+    }
+    ?>
+    <br><br><br><br>
     </div>
 
 
