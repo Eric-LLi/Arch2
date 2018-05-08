@@ -1186,21 +1186,20 @@ onclick="CPUploadImages()" style="white-space: normal; width: 15%">
         }
         else
         {
-          if (!$iscompleted)
-          {
-            ?>
-                <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-                <?php
-                    }
-            ?>
-                    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
-                    <?php
-                }
+            if (!$iscompleted)
+            {
+    ?>
+    <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
+    <?php
             }
-
-            ?>
-                        <br><br><br><br>
-    </div>
+    ?>
+    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <?php
+        }
+      }
+    ?>
+    <br><br><br><br>
+</div>
 
 
     <!--Scripts-->
