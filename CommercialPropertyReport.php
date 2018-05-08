@@ -14,6 +14,7 @@ require_once("loadbooking.php");
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <?php require_once("meta.php"); ?>
 
+
     <!-- Customized CSS -->
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/viewPDF.css">
@@ -22,17 +23,20 @@ require_once("loadbooking.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 -->
+
     <!--  Import pdfMake  -->
     <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
     <!--Easy UI -->
+
 <!--
     <script src="js/easyui/jquery.easyui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 -->
 
-    <?php require_once("saveloaddata.php"); ?>
+     <?php require_once("saveloaddata.php"); ?>
+   
 </head>
 <!--onload="loadSelect()"-->
 
@@ -1163,26 +1167,27 @@ onclick="CPUploadImages()" style="white-space: normal; width: 15%">
 
 
 
-    <!--Action Buttons-->
-    <div class="container" style="text-align:center">
-        <br>
-        <br>
-        <br>
-        <?php
-            if (!$isuserlink)
-            {
-                if (SharedIsAdmin())
-                {
-            ?>
-            <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-            <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-            <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
-            <?php
-                }
-                else
-                {
-                    if (!$iscompleted)
-                    {
+
+<!--Action Buttons-->
+<div class="container" style="text-align:center">
+    <br>
+    <br>
+    <br>
+    <?php
+      if (!$isuserlink)
+      {
+        if (SharedIsAdmin())
+        {
+    ?>
+    <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
+    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <?php
+        }
+        else
+        {
+          if (!$iscompleted)
+          {
             ?>
                 <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
                 <?php
@@ -1192,6 +1197,7 @@ onclick="CPUploadImages()" style="white-space: normal; width: 15%">
                     <?php
                 }
             }
+
             ?>
                         <br><br><br><br>
     </div>

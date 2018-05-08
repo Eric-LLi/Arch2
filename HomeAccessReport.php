@@ -11,21 +11,22 @@ require_once("loadbooking.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <?php require_once("meta.php"); ?>
     <!-- Customized CSS -->
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/viewPDF.css">
     <!--  Import JQuery  -->
     <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
     <!--  Import pdfMake  -->
     <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
     <!--Easy UI -->
-    <script src="js/easyui/jquery.easyui.min.js"></script>
+    <!-- <script src="js/easyui/jquery.easyui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css"> </head>
-
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css"> </head> -->
+    <?php require_once("saveloaddata.php"); ?>
 
 <body>
     <!--Navigation-->

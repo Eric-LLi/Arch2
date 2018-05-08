@@ -12,19 +12,21 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <?php require_once("meta.php"); ?>
     <!-- Customized CSS -->
     <link rel="stylesheet" href="css/general.css">
     <!--  Import JQuery  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
     <!--  Import pdfMake  -->
     <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
     <!--Easy UI -->
-    <script src="js/easyui/jquery.easyui.min.js"></script>
+    <!-- <script src="js/easyui/jquery.easyui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css"> -->
     <?php require_once("saveloaddata.php"); ?>
+    
 </head>
 <body>
 <!--Navigation-->
@@ -2675,8 +2677,10 @@
         {
     ?>
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-    <button onclick="generateHOWPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-    <button onclick="generateHOWPDF('save')" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+
     <?php
         }
         else
@@ -2688,7 +2692,7 @@
     <?php
             }
     ?>
-    <button onclick="generateHOWPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
     <?php
         }
       }
