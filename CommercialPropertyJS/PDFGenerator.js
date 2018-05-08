@@ -6,12 +6,13 @@
  * Core function of the PDF generator
  * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  * */
-function generateCommercialPropertyPDF(mode) {
+//generateCommercialPropertyPDF
+function generatePDF(mode) {
     //reset image number and general notes paragraphs number
-    if (mode === 'save') {
-        console.log('in');
-        $('#savingPDFAlert').show('fade');
-    }
+//    if (mode === 'save') {
+     //        console.log('in');
+     //        $('#savingPDFAlert').show('fade');
+     //    }
     resetTotalCounting();
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
