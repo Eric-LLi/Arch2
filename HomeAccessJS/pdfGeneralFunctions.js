@@ -1049,7 +1049,8 @@ function getPhotoImgs() {
                         image: imgSrc,
                         width: 250,
                         height: 187,
-                        margin: [0, 80, 0, 0]
+                        margin: [0, 80, 0, 0],
+                        alignment: 'center'
                     },
                     {
                         text: $(divContainers.eq(i).children('input')).val()
@@ -1108,7 +1109,8 @@ function getSketchImgs() {
             row.push({
                 stack: [
                     {
-                        image: imgSrc
+                        image: imgSrc,
+                        alignment: 'center'
                     },
                     {
                         text: $(divContainers.eq(i).children('input')).val()
