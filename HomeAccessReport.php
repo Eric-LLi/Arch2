@@ -1138,41 +1138,37 @@ require_once("loadbooking.php");
         </div>
     </div>
     <!--Action Buttons-->
-    <!--        <div class="container" style="text-align:center;">-->
-    <table>
-        <tr>
-            <?php
-                if (!$isuserlink)
-                {
-                    if (SharedIsAdmin())
-                    {
-                ?>
-                <td class="text-center" style="border:none;">
-                    <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-                    <button onclick="btn_genferateHomeAccessReportPDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-                    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
-                </td>
-                <?php
-                    }
-                    else
-                    {
-                        if (!$iscompleted)
-                        {
-                ?>
-                    <td>
-                        <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
-                        <?php
-                        }
-                    ?>
-                            <button onclick="btn_genferateHomeAccessReportPDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
-                    </td>
-                    <?php
-                    }
-                }
-                ?>
-        </tr>
-    </table>
-    <!--        </div>-->
+<div class="container" style="text-align:center">
+    <br>
+    <br>
+    <br>
+    <?php
+      if (!$isuserlink)
+      {
+        if (SharedIsAdmin())
+        {
+    ?>
+    <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
+    <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
+    <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+    <?php
+        }
+        else
+        {
+            if (!$iscompleted)
+            {
+    ?>
+    <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
+    <?php
+            }
+    ?>
+    <button onclick="generatePDF('preview')" type="button" class="btn btn-primary">Preview PDF</button>
+    <?php
+        }
+      }
+    ?>
+    <br><br><br><br>
+</div>
     <!--view PDF srcipt-->
     <script src="HomeAccessJS/pdf.js"></script>
     <script src="HomeAccessJS/pdf.worker.js"></script>
