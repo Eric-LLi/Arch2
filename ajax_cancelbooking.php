@@ -3,6 +3,8 @@
 
   $rc = -1;
   $msg = "";
+  global $footer; 
+  global $header;
 
   try
   {
@@ -10,6 +12,8 @@
     {
       $uuid = $_POST['uuid'];
       $bookingcode = $_POST['bookingcode'];
+      $header = file_get_contents('Email_Header.html');
+      $footer = file_get_contents('Email_Footer.html'); 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $linkBookingID = '';
       $bookings_id = '';
@@ -113,6 +117,8 @@
                 $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
                 $html = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html);
                 $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
+                $html = str_replace("XXX_HEADER", $header, $html);
+                $html = str_replace("XXX_FOOTER", $footer, $html);
                 SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], "Booking Cancellation Notification", $html);
               }
 
@@ -135,6 +141,8 @@
                   $html2 = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . ' ' . $booking['archlastname'], $html2);
                   $html2 = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html2);
                   $html2 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html2);
+                  $html2 = str_replace("XXX_HEADER", $header, $html2);
+                  $html2 = str_replace("XXX_FOOTER", $footer, $html2);
                   SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], "Booking Cancellation Notification", $html2);
                   
                   //Insepctor Notification
@@ -142,6 +150,8 @@
                   $html1 = str_replace("XXX_ARCHITECTNAME", $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], $html1);
                   $html1 = str_replace("XXX_BOOKINGCODE", $booking['linked_bookingcode'], $html1);//the timber report has its own booking code
                   $html1 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['linked_itype']], $html1);
+                  $html1 = str_replace("XXX_HEADER", $header, $html1);
+                  $html1 = str_replace("XXX_FOOTER", $footer, $html1);
                   SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_archemail'], $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], "Booking Cancellation Notification", $html1);
                 }
                 else if($booking["bookings_id"] != "")//select the timber report in the comibined reports, the booking will have the bookings_id for its linked property assessment report. 
@@ -249,6 +259,8 @@
                       $html2 = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . ' ' . $booking['archlastname'], $html2);
                       $html2 = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html2);
                       $html2 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html2);
+                      $html2 = str_replace("XXX_HEADER", $header, $html2);
+                      $html2 = str_replace("XXX_FOOTER", $footer, $html2);
                       SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], "Booking Cancellation Notification", $html2);
 
                       //notify the architect
@@ -256,6 +268,8 @@
                       $html1 = str_replace("XXX_ARCHITECTNAME", $booking2['archfirstname'] . ' ' . $booking2['archlastname'], $html1);
                       $html1 = str_replace("XXX_BOOKINGCODE", $booking2['bookingcode'], $html1);
                       $html1 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking2['itype']], $html1);
+                      $html1 = str_replace("XXX_HEADER", $header, $html1);
+                      $html1 = str_replace("XXX_FOOTER", $footer, $html1);
                       SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking2['archemail'], $booking2['archfirstname'] . ' ' . $booking2['archlastname'], "Booking Cancellation Notification", $html1);
                     }
                   }
@@ -269,6 +283,8 @@
                   $html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . ' ' . $booking['archlastname'], $html);
                   $html = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html);
                   $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
+                  $html = str_replace("XXX_HEADER", $header, $html);
+                  $html = str_replace("XXX_FOOTER", $footer, $html);
                   SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], "Booking Cancellation Notification", $html);
                 }
                 
