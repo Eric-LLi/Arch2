@@ -1617,39 +1617,115 @@
           'divBookingsG',
           function(row, index)
           {
-            doPromptOkCancel
-            (
-              'Cancel booking ' + row.bookingcode + '?',
-              function(result)
-              {
-                if (result)
+            if (row.reportid == 3)
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + ' and' +row.linkedbookingcode + ' ?',
+                function(result)
                 {
-                  $.post
-                  (
-                    'ajax_cancelbooking.php',
-                    {
-                      uuid: '<?php echo $_SESSION['uuid']; ?>',
-                      bookingcode: row.bookingcode
-                    },
-                    function(result)
-                    {
-                      var response = JSON.parse(result);
-
-                      if (response.rc == 0)
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
                       {
-                        doRefreshBookings();
-                        noty({text: response.msg, type: 'success', timeout: 3000});
-                      }
-                      else
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
                       {
-                        noty({text: response.msg, type: 'error', timeout: 10000});
-                      }
+                        var response = JSON.parse(result);
 
-                    }
-                  );
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
                 }
-              }
-            );
+              );
+            }
+            else if (row.linked_bookingcode != null)
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            else
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + '?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            
           }
         ))
         noty({text: 'Please select a booking to remove', type: 'warning', timeout: 4000});

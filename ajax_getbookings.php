@@ -77,6 +77,9 @@
                   "b1.userscreated_id usercreatedid," .
                   "b1.usersmodified_id usermdifiedid," .
 
+                  // Linked booking fro combined reports... (if any)
+                  "b2.id linked_bookingcode," .
+
                   "u1.firstname usercreatedfirstname," .
                   "u1.lastname usercreatedlastname," .
 
@@ -93,6 +96,7 @@
                   "from " .
                   "bookings b1 left join users u1 on (b1.userscreated_id=u1.id) " .
                   "            left join users u2 on (b1.usersmodified_id=u2.id) " .
+                  "            left join bookings b2 on (b1.id=b2.bookings_id) " .
                   "            left join users u3 on (b1.users_id=u3.id) " .
                   //"where " .
                   // "b1.dateexpired is null " .
