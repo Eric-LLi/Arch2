@@ -2874,7 +2874,7 @@
         }
       ?>
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
-      <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>
+<!--      <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>-->
      
     </div>
   </div>
