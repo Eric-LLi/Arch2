@@ -121,13 +121,16 @@
         <td>XXX_INSPECTION</td>
       </tr>
       <tr>
-        <td colspan="6" bgcolor="Silver">Notes</td>
-        <script>
-          if (XXX_NOTES == null) {
-            document.getElementById("note").innerHTML = "None";
-          }
-        </script>
-      </tr>
+				<td colspan="6" bgcolor="Silver">Notes</td>
+			</tr>
+			<tr>
+				<td colspan="6" id="note">XXX_NOTES</td>
+				<script>
+					if (XXX_NOTES == null) {
+						document.getElementById("note").innerHTML = "None";
+					}
+				</script>
+			</tr>
     </table>
 
     <p>&nbsp;</p>

@@ -198,7 +198,7 @@
               {
                 $emailtemplate = $reportconfirmemails[$booking['itype']];
                 $html = file_get_contents('email_architectallocation.html');
-                error_log($html);
+                //error_log($html);
                 $html = doMacros($html, $booking);
 
 		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], "Assessment/Inspection Confirmation", $html);

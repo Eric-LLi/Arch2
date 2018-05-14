@@ -44,7 +44,8 @@
     "Residential Home Warranty Report",
     "Commercial Property Assessment Report",
     //"Commercial Dilapidation Survey",
-		"Residential Home Access & Services Report"
+    "",
+		"Home Access & Services Report"
   ];
 
 
@@ -71,8 +72,8 @@
     "HOWReport.php",
     "CommercialPropertyReport.php",
     //"CommercialDilapidationSurvey.php",
-
-		"HomeAccessReport.php",
+    "",
+    "HomeAccessReport.php",
     "",
     ""
   ];
@@ -129,8 +130,10 @@
 		"email_renofeasibility_allocate.html",
 		//"email_commpropertyassessment_allocate.html",
     //"email_commdilapidation_allocate.html",
-		"email_how_allocate.html",
-    //"email_has_allocate.html",
+    "email_how_allocate.html",
+    "email_commericalproperty_allocate.html",
+    "",
+    "email_has_allocate.html",
     "",
     ""
   ];

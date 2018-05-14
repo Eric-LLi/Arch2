@@ -1617,39 +1617,115 @@
           'divBookingsG',
           function(row, index)
           {
-            doPromptOkCancel
-            (
-              'Cancel booking ' + row.bookingcode + '?',
-              function(result)
-              {
-                if (result)
+            if (row.reportid == 3)
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + ' and' +row.linkedbookingcode + ' ?',
+                function(result)
                 {
-                  $.post
-                  (
-                    'ajax_cancelbooking.php',
-                    {
-                      uuid: '<?php echo $_SESSION['uuid']; ?>',
-                      bookingcode: row.bookingcode
-                    },
-                    function(result)
-                    {
-                      var response = JSON.parse(result);
-
-                      if (response.rc == 0)
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
                       {
-                        doRefreshBookings();
-                        noty({text: response.msg, type: 'success', timeout: 3000});
-                      }
-                      else
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
                       {
-                        noty({text: response.msg, type: 'error', timeout: 10000});
-                      }
+                        var response = JSON.parse(result);
 
-                    }
-                  );
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
                 }
-              }
-            );
+              );
+            }
+            else if (row.linked_bookingcode != null)
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            else
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + '?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            
           }
         ))
         noty({text: 'Please select a booking to remove', type: 'warning', timeout: 4000});
@@ -2784,7 +2860,7 @@
           <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
           <a href="javascript:void(0)" onClick="doMarkPaid()" class="easyui-linkbutton" iconCls="icon-payment">Paid</a>
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
-          <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Redo</a>
+          <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Architect Reedit</a>
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
           <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Customer</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
