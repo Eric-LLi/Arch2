@@ -244,6 +244,15 @@
             },
             success: function(result) {
                 var response = JSON.parse(result);
+                if (response.rc == 0)
+                {
+                    console.log('successful');
+                } 
+                else
+                {
+                    console.log('something wrong');
+                }
+                //break down the response message. 
             },
             error: function(error) {
                 //console.log('Error...');

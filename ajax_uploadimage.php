@@ -41,7 +41,7 @@
 
           // Remove any previous photo in this "bucket" (image field)...
           $dbupdate = "update photos set dateexpired=CURRENT_TIMESTAMP where bookings_id=$bookingcode and imageid=" . SharedNullOrQuoted($imageid, 50, $dblink);
-          error_log($dbupdate);
+          //error_log($dbupdate);
           SharedQuery($dbupdate, $dblink);
 
           $dbinsert = "insert into photos " .
@@ -84,7 +84,7 @@
                       SharedNullOrQuoted($imageSize, 50, $dblink) . "," .
                       SharedNullOrQuoted($width, 50, $dblink) . 
                       ")";
-          error_log($dbinsert);
+          //error_log($dbinsert);
           SharedQuery($dbinsert, $dblink);
         }
 
