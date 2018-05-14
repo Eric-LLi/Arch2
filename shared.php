@@ -8,6 +8,8 @@
    $gConfig['dbport'] = 8889;
   $gConfig['dbusername'] = "arch";
   $gConfig['dbpwd'] = "lmi$$";
+//  $gConfig['dbusername'] = "root";
+//  $gConfig['dbpwd'] = "root";
   $gConfig['dberrormsg'] = "";
   $gConfig['smtp-user'] = "noreply@adtalk.services";
   $gConfig['smtp-password'] = "adtalk\$\$00";
