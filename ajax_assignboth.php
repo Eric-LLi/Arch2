@@ -1,6 +1,6 @@
 <?php
   require_once("shared.php");
-
+//  include 'ChromePhp.php';
   global $reportTypes;
   global $userTypes;
   global $footer; 
@@ -21,7 +21,10 @@
     $h = str_replace("XXX_ARCHITECTPHONE", $b['linked_mobile'], $h);
 
     $h = str_replace("XXX_BOOKINGCODE", $b['linked_bookingcode'], $h);
-    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['linked_bookingcode'], $h);
+//      ChromePhp::log($b);
+//      error_log($b);
+//    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['linked_bookingcode'], $h);
+    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['bookingcode'], $h);
     $h = str_replace("XXX_CUSTFIRSTLASTNAME", $b['custfirstname'] . ' ' . $b['custlastname'], $h);
     $h = str_replace("XXX_CUSTFIRSTNAME", $b['custfirstname'], $h);
     $h = str_replace("XXX_CUSTADDRESS1", $b['custaddress1'], $h);
@@ -102,6 +105,9 @@
 
         $dbresult1 = SharedQuery($dbupdate1, $dblink);
         $dbresult2 = SharedQuery($dbupdate2, $dblink);
+
+
+
 
         if ($dbresult1 && $dbresult2)
         {
@@ -185,6 +191,7 @@
                       "            left join users u2 on (b2.users_id=u2.id) " .
                       "where " .
                       "b1.id=$bookingcode";
+
           if ($dbresult = SharedQuery($dbselect, $dblink))
           {
             if ($numrows = SharedNumRows($dbresult))
@@ -192,7 +199,8 @@
               $booking = null;
               while ($dbrow = SharedFetchArray($dbresult))
                 $booking = $dbrow;
-
+//                error_log($booking);
+//                ChromePhp::log($booking);
               // Let customer know...
               if ($booking['custemail'] != "")
               {
