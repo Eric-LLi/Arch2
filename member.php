@@ -2321,6 +2321,36 @@
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
     }
 
+    function doBookingEmailStatusAsImage(row)
+    {
+       // Account for footer row...
+       if (_.isUndefined(row.reportid) || _.isNull(row.reportid))
+        return '';
+
+      var img = '';
+      var tooltip = '';
+      var lnk = '';
+      
+      if (!_.isNull(row.lastemailed))
+      {
+        var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
+        img = '<img src="images/led/ball-yellow.png" width="20" height="20">';
+        tooltip = 'Customer has been emailed ';
+        if (row.emailcount == 1)
+          tooltip += ' on ' + lastemailed;
+        else
+          tooltip += row.emailcount + ' times, the last being on ' + lastemailed;
+      }
+      else
+      {
+        img = '';
+        tooltip = '';
+      }
+
+      lnk = '<a href="#" title="' + tooltip + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
+      return lnk;
+    }
+
     function doBookingStatusAsImage(row)
     {
       // Account for footer row...
@@ -2336,16 +2366,16 @@
         img = '<img src="images/led/ball-black.png" width="20" height="20">';
         tooltip = 'Agreed price has not been set';
       }
-      else if (!_.isNull(row.lastemailed))
-      {
-        var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
-        img = '<img src="images/led/ball-yellow.png" width="24" height="24">';
-        tooltip = 'Customer has been emailed ';
-        if (row.emailcount == 1)
-          tooltip += ' on ' + lastemailed;
-        else
-          tooltip += row.emailcount + ' times, the last being on ' + lastemailed;
-      }
+      // else if (!_.isNull(row.lastemailed))
+      // {
+      //   var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
+      //   img = '<img src="images/led/ball-yellow.png" width="24" height="24">';
+      //   tooltip = 'Customer has been emailed ';
+      //   if (row.emailcount == 1)
+      //     tooltip += ' on ' + lastemailed;
+      //   else
+      //     tooltip += row.emailcount + ' times, the last being on ' + lastemailed;
+      // }
       else if (!_.isNull(row.dateapproved))
       {
         img = '<img src="images/led/ball-green.png" width="20" height="20">';
@@ -2518,7 +2548,8 @@
           frozenColumns:
           [
             [
-              {title: 'Status',         rowspan: 2, field: 'status',            width: 50,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingStatusAsImage(row);}},
+              {title: 'Booking Status',         rowspan: 2, field: 'status',    width: 85,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingStatusAsImage(row);}},
+              {title: 'Email Status',         rowspan: 2, field: 'emailstatus', width: 80,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingEmailStatusAsImage(row);}},
               {title: 'Assigned',       rowspan: 2, field: 'assigned',          width: 50,  align: 'center', resizable: false, formatter: function(value, row, index) {return doBookingAssignedImage(row);}},
               {title: 'Booking Code',   rowspan: 2, field: 'bookingcode',       width: 100, align: 'left',   resizable: true, sortable: true, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}},
               {title: 'Linked Booking', rowspan: 2, field: 'linkedbookingcode', width: 100, align: 'left',   resizable: true, sortable: true, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}}
