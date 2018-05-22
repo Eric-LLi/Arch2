@@ -3,7 +3,7 @@
 //  include 'ChromePhp.php';
   global $reportTypes;
   global $userTypes;
-  global $footer; 
+  global $footer;
   global $header;
 
   function doMacros($h, $b)
@@ -11,9 +11,9 @@
     global $reportTypes;
     global $userTypes;
 
-    //Get the contents of the footer and header to the variables. 
+    //Get the contents of the footer and header to the variables.
     $header = file_get_contents('Email_Header.html');
-    $footer = file_get_contents('Email_Footer.html'); 
+    $footer = file_get_contents('Email_Footer.html');
     $h = str_replace("XXX_HEADER", $header, $h);
     $h = str_replace("XXX_FOOTER", $footer, $h);
 
@@ -209,7 +209,7 @@
                 //error_log($html);
                 $html = doMacros($html, $booking);
 
-		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], "Assessment/Inspection Confirmation", $html);
+		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
               }
 
               // Let architect/inspector know... (arch is the linked entries)...
@@ -221,12 +221,12 @@
                   // Inspector notification...
                   $html1 = file_get_contents('email_comboinspectornotification.html');
                   $html1 = doMacros($html1, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], "Timber Inspection Confirmation", $html1);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Timber Inspection Confirmation", $html1);
 
                   // Architect notification...
                   $html2 = file_get_contents('email_comboarchitectnotification.html');
                   $html2 = doMacros($html2, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_email'], $booking['linked_firstname'] . ' ' . $booking['linked_lastname'], "Assessment Report Confirmation", $html2);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_email'], $booking['linked_firstname'] . ' ' . $booking['linked_lastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment Report Confirmation", $html2);
                 }
               }
             }

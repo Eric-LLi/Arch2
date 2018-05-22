@@ -185,21 +185,22 @@ function moreEvidentDefect()
 /**
  * Check if Summary of the Condition of the Property selects the [Other] option - BetterTENG 
  * */
-function checkIfOther() {
-    if (document.getElementById('conditionOfBuilding').value == 'Other') {
-        document.getElementById('XiaoKe').style.display = 'block';
-        flag = true;
-        return 'otherSelected';
-    }
-    if (flag) {
-        if (document.getElementById('conditionOfBuilding').value != 'Other') {
-            document.getElementById('XiaoKe').style.display = 'none';
-            flag = false;
-            return 'otherNotSelected';
-        }
-    }
-    return 'normalCondition';
-}
+
+//function checkIfOther() {
+//    if (document.getElementById('conditionOfBuilding').value == 'Other') {
+//        document.getElementById('XiaoKe').style.display = 'block';
+//        flag = true;
+//        return 'otherSelected';
+//    }
+//    if (flag) {
+//        if (document.getElementById('conditionOfBuilding').value != 'Other') {
+//            document.getElementById('XiaoKe').style.display = 'none';
+//            flag = false;
+//            return 'otherNotSelected';
+//        }
+//    }
+//    return 'normalCondition';
+//}
 
 
 /**

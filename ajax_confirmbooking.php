@@ -101,7 +101,7 @@
                 $html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . " " . $booking['archlastname'], $html);
                 $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
 
-                SharedSendHtmlMail($gConfig['adminemail'], "Web Booking", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], "Howdy", $html);
+                SharedSendHtmlMail($gConfig['adminemail'], "Web Booking", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Howdy", $html);
               }
             }
           }
