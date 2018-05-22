@@ -11,21 +11,20 @@ var flag = false;
  * @param noteIDName
  * create access limitation dynamically
  */
-function addAccessLimitation(tableID,selectIDName,noteIDName)
-{
+function addAccessLimitation(tableID, selectIDName, noteIDName) {
     // console.log(tableID);
     var table = document.getElementById(tableID);
     var rowCount = table.rows.length;
     var id = rowCount - 9;
     // console.log(id);
-    var row = table.insertRow(id+1);
+    var row = table.insertRow(id + 1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
 
 
     //create limitation select options for cell 1
-    var limitationOption = ["Reasonably Accessible","Partially Accessible - Obstructed","Partially Accessible - Inspection Safety Hazard",
-        "Not Accessible - Obstructed","Not Accessible - Inspection Safety Hazard"];
+    var limitationOption = ["Reasonably Accessible", "Partially Accessible - Obstructed", "Partially Accessible - Inspection Safety Hazard",
+        "Not Accessible - Obstructed", "Not Accessible - Inspection Safety Hazard"];
     var selectList = document.createElement("select");
     selectList.id = selectIDName + id;
 
@@ -41,30 +40,27 @@ function addAccessLimitation(tableID,selectIDName,noteIDName)
 
     //create the limitation notes for cell2
     var textArea = document.createElement('textarea');
-    textArea.setAttribute('class','form-control');
-    textArea.setAttribute('title','limitationNotes');
+    textArea.setAttribute('class', 'form-control');
+    textArea.setAttribute('title', 'limitationNotes');
     textArea.id = noteIDName + id;
     cell2.appendChild(textArea);
 
 }
 
 
-function addRecommendations(labelID,selectID)
-{
+function addRecommendations(labelID, selectID) {
     var label = document.getElementById(labelID);
     label.value += document.getElementById(selectID).value + ' ';
 }
 
-function clearRecommendation(labelID)
-{
+function clearRecommendation(labelID) {
     var label = document.getElementById(labelID);
     label.value = "";
     label.placeholder = "Recommendations will be displayed here";
 }
 
 
-function moreEvidentDefect()
-{
+function moreEvidentDefect() {
 
     var newEDIDNumber;
     var newEDID;
@@ -77,8 +73,7 @@ function moreEvidentDefect()
     //console.log(lastRowID);
     var nestDivNumber = document.getElementById(lastRowID).childElementCount;
     //console.log(nestDivNumber);
-    if (nestDivNumber === 3)
-    {
+    if (nestDivNumber === 3) {
         //need to create a new big DIV and a small div contain the label and select option
         var emptyLine = document.createElement('br');
         div.appendChild(emptyLine);
@@ -102,7 +97,7 @@ function moreEvidentDefect()
         var name = document.createElement('INPUT');
         name.setAttribute('class', 'form-control');
         name.setAttribute('title', 'name');
-        name.setAttribute('type','text');
+        name.setAttribute('type', 'text');
 
         name.id = 'EDName' + newEDIDNumber;
         newDiv.appendChild(name);
@@ -131,9 +126,7 @@ function moreEvidentDefect()
         newDiv.appendChild(selectList);
 
 
-    }
-    else
-    {
+    } else {
         //just create a new small div and append to the last existing
 
         var lastDivRow = document.getElementById(lastRowID);
@@ -148,7 +141,7 @@ function moreEvidentDefect()
         var name = document.createElement('INPUT');
         name.setAttribute('class', 'form-control');
         name.setAttribute('title', 'name');
-        name.setAttribute('type','text');
+        name.setAttribute('type', 'text');
 
         name.id = 'EDName' + newEDIDNumber;
         newDiv.appendChild(name);
@@ -183,24 +176,41 @@ function moreEvidentDefect()
 
 
 /**
- * Check if Summary of the Condition of the Property selects the [Other] option - BetterTENG 
+ * Check if Summary of the Condition of the Property selects the [Other] option - BetterTENG
+
  * */
 
-//function checkIfOther() {
-//    if (document.getElementById('conditionOfBuilding').value == 'Other') {
-//        document.getElementById('XiaoKe').style.display = 'block';
-//        flag = true;
-//        return 'otherSelected';
-//    }
-//    if (flag) {
-//        if (document.getElementById('conditionOfBuilding').value != 'Other') {
-//            document.getElementById('XiaoKe').style.display = 'none';
-//            flag = false;
-//            return 'otherNotSelected';
-//        }
-//    }
-//    return 'normalCondition';
-//}
+//Check if summary of the condition of the propery has selected 'othier' show the text area.
+function checkReloadOther() {
+    if ($("#conditionOfBuilding").val() === "Other") {
+        $("#XiaoKe").show();
+    } else {
+        $("#XiaoKe").hide();
+    }
+}
+
+function checkIfOther() {
+    console.log($("#conditionOfBuilding").val());
+    if ($("#conditionOfBuilding").val() === "Other") {
+        $("#XiaoKe").show();
+    } else {
+        $("#XiaoKe").hide();
+    }
+    //
+    //    if (document.getElementById('conditionOfBuilding').value == 'Other') {
+    //        document.getElementById('XiaoKe').style.display = 'block';
+    //        flag = true;
+    //        return 'otherSelected';
+    //    }
+    //    if (flag) {
+    //        if (document.getElementById('conditionOfBuilding').value != 'Other') {
+    //            document.getElementById('XiaoKe').style.display = 'none';
+    //            flag = false;
+    //            return 'otherNotSelected';
+    //        }
+    //    }
+    //    return 'normalCondition';
+}
 
 
 /**
@@ -213,8 +223,7 @@ function moreSiteGardenBoundaries() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide";
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add More Boundaries";
     }
@@ -228,8 +237,7 @@ function moreSiteGardenSheds() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide";
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add More Garage or Sheds";
     }
@@ -242,8 +250,7 @@ function morePropertyExteriorWall() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add More Wall"
     }
@@ -256,8 +263,7 @@ function morePropertyExteriorVerandas() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add More Verandahs"
     }
@@ -265,14 +271,13 @@ function morePropertyExteriorVerandas() {
 }
 
 function moreLivingAreaRooms() {
-//    alert("you click add more rooms button LivingAreaRooms moreLivingAreaRoomButton")
+    //    alert("you click add more rooms button LivingAreaRooms moreLivingAreaRoomButton")
     var div = document.getElementById('LivingAreaRooms');
     var button = document.getElementById('moreLivingAreaRoomButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add More Rooms"
     }
@@ -285,8 +290,7 @@ function moreLivingAreaStair() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add One Stair"
     }
@@ -299,8 +303,7 @@ function moreLivingAreaKitchen() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add One Kitchen"
     }
@@ -312,8 +315,7 @@ function moreBedrooms() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add More Bedrooms"
     }
@@ -325,8 +327,7 @@ function moreBathrooms() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add More Bathroom"
     }
@@ -340,8 +341,7 @@ function morePowderRooms() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add More Powder Rooms"
     }
@@ -353,8 +353,7 @@ function moreLaundry() {
     if (div.style.display === 'none') {
         div.style.display = 'block';
         button.innerHTML = "Hide"
-    }
-    else {
+    } else {
         div.style.display = 'none';
         button.innerHTML = "Add One Laundry"
     }
@@ -365,12 +364,12 @@ function moreLaundry() {
  */
 
 
-function AssessmentCoverImage(){
+function AssessmentCoverImage() {
     document.getElementById('AssessmentUploadCoverImage').click();
 }
-$("#AssessmentUploadCoverImage").change(function(){
+$("#AssessmentUploadCoverImage").change(function () {
 
-    if(this.files && this.files[0]) {
+    if (this.files && this.files[0]) {
         var imageFile = this.files[0];
         var imageType = imageFile.type;
         var imageName = imageFile.name;
@@ -387,33 +386,34 @@ $("#AssessmentUploadCoverImage").change(function(){
                 orientation = data.exif.get('Orientation');
             }
             var loadingImage = loadImage(imageFile, function (canvas) {
-                    var base64data = canvas.toDataURL(imageType);
-                    //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                    image.setAttribute('src',base64data);
-                    removeButton.style.display = 'block';
-                    //removeButton.style.width = '100%';
-                    image.alt = 'Cover Image';
-                    image.style.display = 'block';
-                    image.style.width = '100%';
-                    image.style.height = '100%';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    //console.log(file);
-                    doUploadFile(file,'AssessmentCoverImage', '', 'AssessmentCoverImageRemoveButton', '','','cover image','','','','','100%','100%');
+                var base64data = canvas.toDataURL(imageType);
+                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                image.setAttribute('src', base64data);
+                removeButton.style.display = 'block';
+                //removeButton.style.width = '100%';
+                image.alt = 'Cover Image';
+                image.style.display = 'block';
+                image.style.width = '100%';
+                image.style.height = '100%';
+                var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                    type: imageType,
+                    lastModified: date.getTime()
+                });
+                //console.log(file);
+                doUploadFile(file, 'AssessmentCoverImage', '', 'AssessmentCoverImageRemoveButton', '', '', 'cover image', '', '', '', '', '100%', '100%');
 
-                },
-                {
-                    canvas: true,
-                    orientation: orientation,
-                    maxWidth:1300,
-                    maxHeight:1000
-                }
-            );
+            }, {
+                canvas: true,
+                orientation: orientation,
+                maxWidth: 1300,
+                maxHeight: 1000
+            });
         });
     }
 
 });
 
-function RemoveAssessmentCoverImage(){
+function RemoveAssessmentCoverImage() {
     //RemoveCoverImage('AssessmentCoverImage','AssessmentCoverImageRemoveButton');
     var imageSelect = '#' + 'AssessmentCoverImage';
     $(imageSelect).attr('src', '#');
@@ -455,23 +455,19 @@ function RemoveAssessmentCoverImage(){
 // }
 
 //Only upload one image per time
-function readOneImageURL(input, imageID0, addButtonID, removeButtonID, textID, imageSize,nextAddButtonID) {
+function readOneImageURL(input, imageID0, addButtonID, removeButtonID, textID, imageSize, nextAddButtonID) {
     if (input.files && input.files[0]) {
         var imageFile = input.files[0];
         var imageType = imageFile.type;
         var imageName = imageFile.name;
         var date = new Date();
 
-        if (nextAddButtonID != "")
-        {
+        if (nextAddButtonID != "") {
             var nextAddButton = document.getElementById(nextAddButtonID);
-            if (nextAddButton.style.display == 'none')
-            {
+            if (nextAddButton.style.display == 'none') {
                 console.log('button is hidden, need to activate it');
                 nextAddButton.style.display = 'block';
-            }
-            else
-            {
+            } else {
                 console.log('no need to activate');
             }
         }
@@ -490,29 +486,31 @@ function readOneImageURL(input, imageID0, addButtonID, removeButtonID, textID, i
             if (data.exif) {
                 orientation = data.exif.get('Orientation');
             }
-            var loadingImage = loadImage(imageFile, function(canvas) {
-                    //here's the base64 data result
-                    var base64data = canvas.toDataURL('image/jpeg');
-                    //here's example to show it as on imae preview
-                    var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                    $(image).attr('src', base64data);
-                    button.style.display = 'none';
-                    removeButton.style.display = 'block';
-                    imageID.style.display = 'block';
-                    imageID.style.width = imageSize;
-                    imageID.style.height = imageSize;
-                    description.style.display = 'block';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID0, textID, removeButtonID, addButtonID,'','','','','','',imageSize,imageSize);
-                }, {
-                    //should be set to canvas : true to activate auto fix orientation
-                    canvas: true,
-                    orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
+            var loadingImage = loadImage(imageFile, function (canvas) {
+                //here's the base64 data result
+                var base64data = canvas.toDataURL('image/jpeg');
+                //here's example to show it as on imae preview
+                var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                $(image).attr('src', base64data);
+                button.style.display = 'none';
+                removeButton.style.display = 'block';
+                imageID.style.display = 'block';
+                imageID.style.width = imageSize;
+                imageID.style.height = imageSize;
+                description.style.display = 'block';
+                var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                    type: imageType,
+                    lastModified: date.getTime()
+                });
+                doUploadFile(file, imageID0, textID, removeButtonID, addButtonID, '', '', '', '', '', '', imageSize, imageSize);
+            }, {
+                //should be set to canvas : true to activate auto fix orientation
+                canvas: true,
+                orientation: orientation,
+                maxWidth: 1000,
+                maxHeight: 850
 
-                }
-            );
+            });
         });
     }
 }
@@ -538,9 +536,9 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
 
     if (input.files && input.files[0]) {
         //Clear all the images if the user select a new one.
-        document.getElementById(imageID0).setAttribute('src','#');
-        document.getElementById(imageID1).setAttribute('src','#');
-        document.getElementById(imageID2).setAttribute('src','#');
+        document.getElementById(imageID0).setAttribute('src', '#');
+        document.getElementById(imageID1).setAttribute('src', '#');
+        document.getElementById(imageID2).setAttribute('src', '#');
         //Hide all the remove buttons first if the user select a new image.
         document.getElementById(removeButton0).style.display = 'none';
         document.getElementById(removeButton1).style.display = 'none';
@@ -560,95 +558,103 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
             if (data.exif) {
                 orientation = data.exif.get('Orientation');
             }
-            var loadingImage = loadImage(imageFile, function(canvas) {
-                    //here's the base64 data result
-                    var base64data = canvas.toDataURL('image/jpeg');
-                    //here's example to show it as on imae preview
-                    // var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                    var image = '#' + imageID0;
-                    $(image).attr('src', base64data);
-                    var image = document.getElementById(imageID0);
-                    var description = document.getElementById(text0);
-                    var button = document.getElementById(removeButton0);
-                    image.style.width = '265px';
-                    image.style.height = '265px';
-                    image.style.display = 'block';
-                    description.style.display = 'block';
-                    button.style.display = 'block';
-                    addButton0.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID0, text0, removeButton0, addButtonID0,'','','','','','','265px','265px');
-                }, {
-                    //should be set to canvas : true to activate auto fix orientation
-                    canvas: true,
-                    orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
-                }
-            );
+            var loadingImage = loadImage(imageFile, function (canvas) {
+                //here's the base64 data result
+                var base64data = canvas.toDataURL('image/jpeg');
+                //here's example to show it as on imae preview
+                // var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                var image = '#' + imageID0;
+                $(image).attr('src', base64data);
+                var image = document.getElementById(imageID0);
+                var description = document.getElementById(text0);
+                var button = document.getElementById(removeButton0);
+                image.style.width = '265px';
+                image.style.height = '265px';
+                image.style.display = 'block';
+                description.style.display = 'block';
+                button.style.display = 'block';
+                addButton0.style.display = 'none';
+                var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                    type: imageType,
+                    lastModified: date.getTime()
+                });
+                doUploadFile(file, imageID0, text0, removeButton0, addButtonID0, '', '', '', '', '', '', '265px', '265px');
+            }, {
+                //should be set to canvas : true to activate auto fix orientation
+                canvas: true,
+                orientation: orientation,
+                maxWidth: 1000,
+                maxHeight: 850
+            });
             //doUploadFile(input.files[0],imageID0, text0, removeButton0, addButtonID0,'','','','','','','265px','265px');
         });
     }
 
 
-    setTimeout(function(){ if (input.files && input.files[1]) {
-        var imageFile = input.files[1];
-        var imageType = imageFile.type;
-        var imageName = imageFile.name;
-        loadImage.parseMetaData(imageFile, function (data) {
-            console.log("i am in loadImage function");
-            var orientation = 0;
-            //if exif data available, update orientation
-            if (data.exif) {
-                orientation = data.exif.get('Orientation');
-            }
-            var loadingImage = loadImage(
-                input.files[1],
-                function(canvas) {
-                    //here's the base64 data result
-                    var base64data = canvas.toDataURL('image/jpeg');
-                    //here's example to show it as on image preview
-                    var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                    var image = '#' + imageID1;
-                    $(image).attr('src', base64data);
-                    var image = document.getElementById(imageID1);
-                    var description = document.getElementById(text1);
-                    var button = document.getElementById(removeButton1);
-                    image.style.width = '265px';
-                    image.style.height = '265px';
-                    image.style.display = 'block';
-                    description.style.display = 'block';
-                    button.style.display = 'block';
-                    addButton1.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-                }, {
-                    //should be set to canvas : true to activate auto fix orientation
-                    canvas: true,
-                    orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
-
+    setTimeout(function () {
+        if (input.files && input.files[1]) {
+            var imageFile = input.files[1];
+            var imageType = imageFile.type;
+            var imageName = imageFile.name;
+            loadImage.parseMetaData(imageFile, function (data) {
+                console.log("i am in loadImage function");
+                var orientation = 0;
+                //if exif data available, update orientation
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
                 }
-            );
-            //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-            //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-        });
+                var loadingImage = loadImage(
+                    input.files[1],
+                    function (canvas) {
+                        //here's the base64 data result
+                        var base64data = canvas.toDataURL('image/jpeg');
+                        //here's example to show it as on image preview
+                        var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                        var image = '#' + imageID1;
+                        $(image).attr('src', base64data);
+                        var image = document.getElementById(imageID1);
+                        var description = document.getElementById(text1);
+                        var button = document.getElementById(removeButton1);
+                        image.style.width = '265px';
+                        image.style.height = '265px';
+                        image.style.display = 'block';
+                        description.style.display = 'block';
+                        button.style.display = 'block';
+                        addButton1.style.display = 'none';
+                        var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                            type: imageType,
+                            lastModified: date.getTime()
+                        });
+                        doUploadFile(file, imageID1, text1, removeButton1, addButtonID1, '', '', '', '', '', '', '265px', '265px');
+                    }, {
+                        //should be set to canvas : true to activate auto fix orientation
+                        canvas: true,
+                        orientation: orientation,
+                        maxWidth: 1000,
+                        maxHeight: 850
 
-    }},100);
+                    }
+                );
+                //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+                //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+            });
 
-    setTimeout(function(){ if (input.files && input.files[2]) {
-        var imageFile = input.files[2];
-        var imageType = imageFile.type;
-        var imageName = imageFile.name;
-        loadImage.parseMetaData(imageFile, function (data) {
-            console.log("i am in loadImage function");
-            var orientation = 0;
-            //if exif data available, update orientation
-            if (data.exif) {
-                orientation = data.exif.get('Orientation');
-            }
-            var loadingImage = loadImage(input.files[2], function(canvas) {
+        }
+    }, 100);
+
+    setTimeout(function () {
+        if (input.files && input.files[2]) {
+            var imageFile = input.files[2];
+            var imageType = imageFile.type;
+            var imageName = imageFile.name;
+            loadImage.parseMetaData(imageFile, function (data) {
+                console.log("i am in loadImage function");
+                var orientation = 0;
+                //if exif data available, update orientation
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
+                var loadingImage = loadImage(input.files[2], function (canvas) {
                     //here's the base64 data result
                     var base64data = canvas.toDataURL('image/jpeg');
                     //here's example to show it as on imae preview
@@ -664,22 +670,25 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
                     description.style.display = 'block';
                     button.style.display = 'block';
                     addButton2.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
+                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                        type: imageType,
+                        lastModified: date.getTime()
+                    });
+                    doUploadFile(file, imageID2, text2, removeButton2, addButtonID2, '', '', '', '', '', '', '265px', '265px');
 
                 }, {
                     //should be set to canvas : true to activate auto fix orientation
                     canvas: true,
                     orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
+                    maxWidth: 1000,
+                    maxHeight: 850
 
-                }
-            );
-            //doUploadFile(input.files[2],imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
-            //doUploadFile(loadingImage,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
-        });
-    } },120);
+                });
+                //doUploadFile(input.files[2],imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
+                //doUploadFile(loadingImage,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
+            });
+        }
+    }, 120);
 
 
 
@@ -688,7 +697,7 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
 //upload max 6 images
 function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButtonID3, addButtonID4, addButtonID5, imageID0, imageID1, imageID2, imageID3, imageID4, imageID5, text0, text1, text2, text3, text4, text5, removeButton0, removeButton1, removeButton2, removeButton3, removeButton4, removeButton5) {
     var count = input.files.length;
-     var date = new Date();
+    var date = new Date();
     console.log(count);
     //check if the number of images are more than six
     if (count > 6) {
@@ -703,12 +712,12 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
 
     if (input.files && input.files[0]) {
         //Clear all the images if the user select a new one.
-        document.getElementById(imageID0).setAttribute('src','#');
-        document.getElementById(imageID1).setAttribute('src','#');
-        document.getElementById(imageID2).setAttribute('src','#');
-        document.getElementById(imageID3).setAttribute('src','#');
-        document.getElementById(imageID4).setAttribute('src','#');
-        document.getElementById(imageID5).setAttribute('src','#');
+        document.getElementById(imageID0).setAttribute('src', '#');
+        document.getElementById(imageID1).setAttribute('src', '#');
+        document.getElementById(imageID2).setAttribute('src', '#');
+        document.getElementById(imageID3).setAttribute('src', '#');
+        document.getElementById(imageID4).setAttribute('src', '#');
+        document.getElementById(imageID5).setAttribute('src', '#');
         //Display the add button if the user select a new one.
         addButton0.style.display = 'block';
         addButton1.style.display = 'block';
@@ -733,49 +742,52 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
             if (data.exif) {
                 orientation = data.exif.get('Orientation');
             }
-            var loadingImage = loadImage(imageFile, function(canvas) {
-                    //here's the base64 data result
-                    var base64data = canvas.toDataURL('image/jpeg');
-                    //here's example to show it as on imae preview
-                    // var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                    var image = '#' + imageID0;
-                    $(image).attr('src', base64data);
-                    var image = document.getElementById(imageID0);
-                    var description = document.getElementById(text0);
-                    var button = document.getElementById(removeButton0);
-                    image.style.width = '265px';
-                    image.style.height = '265px';
-                    image.style.display = 'block';
-                    description.style.display = 'block';
-                    button.style.display = 'block';
-                    addButton0.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID0, text0, removeButton0, addButtonID0,'','','','','','','265px','265px');
-                }, {
-                    //should be set to canvas : true to activate auto fix orientation
-                    canvas: true,
-                    orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
-                }
-            );
+            var loadingImage = loadImage(imageFile, function (canvas) {
+                //here's the base64 data result
+                var base64data = canvas.toDataURL('image/jpeg');
+                //here's example to show it as on imae preview
+                // var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                var image = '#' + imageID0;
+                $(image).attr('src', base64data);
+                var image = document.getElementById(imageID0);
+                var description = document.getElementById(text0);
+                var button = document.getElementById(removeButton0);
+                image.style.width = '265px';
+                image.style.height = '265px';
+                image.style.display = 'block';
+                description.style.display = 'block';
+                button.style.display = 'block';
+                addButton0.style.display = 'none';
+                var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                    type: imageType,
+                    lastModified: date.getTime()
+                });
+                doUploadFile(file, imageID0, text0, removeButton0, addButtonID0, '', '', '', '', '', '', '265px', '265px');
+            }, {
+                //should be set to canvas : true to activate auto fix orientation
+                canvas: true,
+                orientation: orientation,
+                maxWidth: 1000,
+                maxHeight: 850
+            });
             //doUploadFile(input.files[0],imageID0, text0, removeButton0, addButtonID0,'','','','','','','265px','265px');
         });
     }
 
 
-    setTimeout(function(){if (input.files && input.files[1]) {
-        var imageFile = input.files[1];
-        var imageType = imageFile.type;
-        var imageName = imageFile.name;
-        loadImage.parseMetaData(imageFile, function (data) {
-            console.log("i am in loadImage function");
-            var orientation = 0;
-            //if exif data available, update orientation
-            if (data.exif) {
-                orientation = data.exif.get('Orientation');
-            }
-            var loadingImage = loadImage(imageFile, function(canvas) {
+    setTimeout(function () {
+        if (input.files && input.files[1]) {
+            var imageFile = input.files[1];
+            var imageType = imageFile.type;
+            var imageName = imageFile.name;
+            loadImage.parseMetaData(imageFile, function (data) {
+                console.log("i am in loadImage function");
+                var orientation = 0;
+                //if exif data available, update orientation
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
+                var loadingImage = loadImage(imageFile, function (canvas) {
                     //here's the base64 data result
                     var base64data = canvas.toDataURL('image/jpeg');
                     //here's example to show it as on image preview
@@ -791,34 +803,38 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                     description.style.display = 'block';
                     button.style.display = 'block';
                     addButton1.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                        type: imageType,
+                        lastModified: date.getTime()
+                    });
+                    doUploadFile(file, imageID1, text1, removeButton1, addButtonID1, '', '', '', '', '', '', '265px', '265px');
                 }, {
                     //should be set to canvas : true to activate auto fix orientation
                     canvas: true,
                     orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
+                    maxWidth: 1000,
+                    maxHeight: 850
 
+                });
+                //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+                //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+            });
+
+        }
+    }, 100);
+    setTimeout(function () {
+        if (input.files && input.files[2]) {
+            var imageFile = input.files[2];
+            var imageType = imageFile.type;
+            var imageName = imageFile.name;
+            loadImage.parseMetaData(imageFile, function (data) {
+                console.log("i am in loadImage function");
+                var orientation = 0;
+                //if exif data available, update orientation
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
                 }
-            );
-            //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-            //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-        });
-
-    }},100);
-    setTimeout(function(){if (input.files && input.files[2]) {
-        var imageFile = input.files[2];
-        var imageType = imageFile.type;
-        var imageName = imageFile.name;
-        loadImage.parseMetaData(imageFile, function (data) {
-            console.log("i am in loadImage function");
-            var orientation = 0;
-            //if exif data available, update orientation
-            if (data.exif) {
-                orientation = data.exif.get('Orientation');
-            }
-            var loadingImage = loadImage(imageFile, function(canvas) {
+                var loadingImage = loadImage(imageFile, function (canvas) {
                     //here's the base64 data result
                     var base64data = canvas.toDataURL('image/jpeg');
                     //here's example to show it as on imae preview
@@ -834,34 +850,38 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                     description.style.display = 'block';
                     button.style.display = 'block';
                     addButton2.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
+                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                        type: imageType,
+                        lastModified: date.getTime()
+                    });
+                    doUploadFile(file, imageID2, text2, removeButton2, addButtonID2, '', '', '', '', '', '', '265px', '265px');
 
                 }, {
                     //should be set to canvas : true to activate auto fix orientation
                     canvas: true,
                     orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
+                    maxWidth: 1000,
+                    maxHeight: 850
 
+                });
+                //doUploadFile(input.files[2],imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
+                //doUploadFile(loadingImage,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
+            });
+        }
+    }, 110);
+    setTimeout(function () {
+        if (input.files && input.files[3]) {
+            var imageFile = input.files[3];
+            var imageType = imageFile.type;
+            var imageName = imageFile.name;
+            loadImage.parseMetaData(imageFile, function (data) {
+                console.log("i am in loadImage function");
+                var orientation = 0;
+                //if exif data available, update orientation
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
                 }
-            );
-            //doUploadFile(input.files[2],imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
-            //doUploadFile(loadingImage,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
-        });
-    }},110);
-    setTimeout(function(){if (input.files && input.files[3]) {
-        var imageFile = input.files[3];
-        var imageType = imageFile.type;
-        var imageName = imageFile.name;
-        loadImage.parseMetaData(imageFile, function (data) {
-            console.log("i am in loadImage function");
-            var orientation = 0;
-            //if exif data available, update orientation
-            if (data.exif) {
-                orientation = data.exif.get('Orientation');
-            }
-            var loadingImage = loadImage(imageFile, function(canvas) {
+                var loadingImage = loadImage(imageFile, function (canvas) {
                     //here's the base64 data result
                     var base64data = canvas.toDataURL('image/jpeg');
                     //here's example to show it as on image preview
@@ -877,34 +897,38 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                     description.style.display = 'block';
                     button.style.display = 'block';
                     addButton3.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID3, text3, removeButton3, addButtonID3,'','','','','','','265px','265px');
+                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                        type: imageType,
+                        lastModified: date.getTime()
+                    });
+                    doUploadFile(file, imageID3, text3, removeButton3, addButtonID3, '', '', '', '', '', '', '265px', '265px');
                 }, {
                     //should be set to canvas : true to activate auto fix orientation
                     canvas: true,
                     orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
+                    maxWidth: 1000,
+                    maxHeight: 850
 
+                });
+                //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+                //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+            });
+
+        }
+    }, 120);
+    setTimeout(function () {
+        if (input.files && input.files[4]) {
+            var imageFile = input.files[4];
+            var imageType = imageFile.type;
+            var imageName = imageFile.name;
+            loadImage.parseMetaData(imageFile, function (data) {
+                console.log("i am in loadImage function");
+                var orientation = 0;
+                //if exif data available, update orientation
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
                 }
-            );
-            //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-            //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-        });
-
-    }},120);
-    setTimeout(function(){if (input.files && input.files[4]) {
-        var imageFile = input.files[4];
-        var imageType = imageFile.type;
-        var imageName = imageFile.name;
-        loadImage.parseMetaData(imageFile, function (data) {
-            console.log("i am in loadImage function");
-            var orientation = 0;
-            //if exif data available, update orientation
-            if (data.exif) {
-                orientation = data.exif.get('Orientation');
-            }
-            var loadingImage = loadImage(imageFile, function(canvas) {
+                var loadingImage = loadImage(imageFile, function (canvas) {
                     //here's the base64 data result
                     var base64data = canvas.toDataURL('image/jpeg');
                     //here's example to show it as on image preview
@@ -920,34 +944,38 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                     description.style.display = 'block';
                     button.style.display = 'block';
                     addButton4.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID4, text4, removeButton4, addButtonID4,'','','','','','','265px','265px');
+                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                        type: imageType,
+                        lastModified: date.getTime()
+                    });
+                    doUploadFile(file, imageID4, text4, removeButton4, addButtonID4, '', '', '', '', '', '', '265px', '265px');
                 }, {
                     //should be set to canvas : true to activate auto fix orientation
                     canvas: true,
                     orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
+                    maxWidth: 1000,
+                    maxHeight: 850
 
+                });
+                //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+                //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+            });
+
+        }
+    }, 130);
+    setTimeout(function () {
+        if (input.files && input.files[5]) {
+            var imageFile = input.files[5];
+            var imageType = imageFile.type;
+            var imageName = imageFile.name;
+            loadImage.parseMetaData(imageFile, function (data) {
+                console.log("i am in loadImage function");
+                var orientation = 0;
+                //if exif data available, update orientation
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
                 }
-            );
-            //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-            //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-        });
-
-    }},130);
-    setTimeout(function(){if (input.files && input.files[5]) {
-        var imageFile = input.files[5];
-        var imageType = imageFile.type;
-        var imageName = imageFile.name;
-        loadImage.parseMetaData(imageFile, function (data) {
-            console.log("i am in loadImage function");
-            var orientation = 0;
-            //if exif data available, update orientation
-            if (data.exif) {
-                orientation = data.exif.get('Orientation');
-            }
-            var loadingImage = loadImage(imageFile, function(canvas) {
+                var loadingImage = loadImage(imageFile, function (canvas) {
                     //here's the base64 data result
                     var base64data = canvas.toDataURL('image/jpeg');
                     //here's example to show it as on image preview
@@ -963,22 +991,25 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                     description.style.display = 'block';
                     button.style.display = 'block';
                     addButton5.style.display = 'none';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    doUploadFile(file,imageID5, text5, removeButton5, addButtonID5,'','','','','','','265px','265px');
+                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                        type: imageType,
+                        lastModified: date.getTime()
+                    });
+                    doUploadFile(file, imageID5, text5, removeButton5, addButtonID5, '', '', '', '', '', '', '265px', '265px');
                 }, {
                     //should be set to canvas : true to activate auto fix orientation
                     canvas: true,
                     orientation: orientation,
-                    maxWidth:1000,
-                    maxHeight:850
+                    maxWidth: 1000,
+                    maxHeight: 850
 
-                }
-            );
-            //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-            //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
-        });
+                });
+                //doUploadFile(input.files[1],imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+                //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
+            });
 
-    }},140);
+        }
+    }, 140);
 
 }
 
@@ -997,7 +1028,7 @@ function RemoveImage(imageID0, removeButtonID, addButtonID) {
 
 
 
-function AssessmentSiteUploadImages(){
+function AssessmentSiteUploadImages() {
     document.getElementById('AssessmentSiteUploadImages').click();
 }
 
@@ -1041,88 +1072,88 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
 
 //Assessment - Site and Garden, upload one image per time
 $("#AssessmentSiteUploadImage0").change(function () {
-    readOneImageURL(this, 'AssessmentSiteImage0', 'AddAssessmentSiteImageButton0', 'AssessmentSiteRemoveButton0', 'AssessmentSiteImageText0', '265px','AddAssessmentSiteImageButton1');
+    readOneImageURL(this, 'AssessmentSiteImage0', 'AddAssessmentSiteImageButton0', 'AssessmentSiteRemoveButton0', 'AssessmentSiteImageText0', '265px', 'AddAssessmentSiteImageButton1');
 });
 
 $("#AssessmentSiteUploadImage1").change(function () {
-    readOneImageURL(this, 'AssessmentSiteImage1', 'AddAssessmentSiteImageButton1', 'AssessmentSiteRemoveButton1', 'AssessmentSiteImageText1', '265px','AddAssessmentSiteImageButton2');
+    readOneImageURL(this, 'AssessmentSiteImage1', 'AddAssessmentSiteImageButton1', 'AssessmentSiteRemoveButton1', 'AssessmentSiteImageText1', '265px', 'AddAssessmentSiteImageButton2');
 });
 
 $("#AssessmentSiteUploadImage2").change(function () {
-    readOneImageURL(this, 'AssessmentSiteImage2', 'AddAssessmentSiteImageButton2', 'AssessmentSiteRemoveButton2', 'AssessmentSiteImageText2', '265px','');
+    readOneImageURL(this, 'AssessmentSiteImage2', 'AddAssessmentSiteImageButton2', 'AssessmentSiteRemoveButton2', 'AssessmentSiteImageText2', '265px', '');
 });
 
 
 //Assessment - Exterior, upload one image per time
 $("#AssessmentExteriorUploadImage0").change(function () {
-    readOneImageURL(this, 'AssessmentExteriorImage0', 'AddAssessmentExteriorImageButton0', 'AssessmentExteriorRemoveButton0', 'AssessmentExteriorImageText0', '265px','AddAssessmentExteriorImageButton1');
+    readOneImageURL(this, 'AssessmentExteriorImage0', 'AddAssessmentExteriorImageButton0', 'AssessmentExteriorRemoveButton0', 'AssessmentExteriorImageText0', '265px', 'AddAssessmentExteriorImageButton1');
 });
 $("#AssessmentExteriorUploadImage1").change(function () {
-    readOneImageURL(this, 'AssessmentExteriorImage1', 'AddAssessmentExteriorImageButton1', 'AssessmentExteriorRemoveButton1', 'AssessmentExteriorImageText1', '265px','AddAssessmentExteriorImageButton2');
+    readOneImageURL(this, 'AssessmentExteriorImage1', 'AddAssessmentExteriorImageButton1', 'AssessmentExteriorRemoveButton1', 'AssessmentExteriorImageText1', '265px', 'AddAssessmentExteriorImageButton2');
 });
 $("#AssessmentExteriorUploadImage2").change(function () {
-    readOneImageURL(this, 'AssessmentExteriorImage2', 'AddAssessmentExteriorImageButton2', 'AssessmentExteriorRemoveButton2', 'AssessmentExteriorImageText2', '265px','AddAssessmentExteriorImageButton3');
+    readOneImageURL(this, 'AssessmentExteriorImage2', 'AddAssessmentExteriorImageButton2', 'AssessmentExteriorRemoveButton2', 'AssessmentExteriorImageText2', '265px', 'AddAssessmentExteriorImageButton3');
 });
 $("#AssessmentExteriorUploadImage3").change(function () {
-    readOneImageURL(this, 'AssessmentExteriorImage3', 'AddAssessmentExteriorImageButton3', 'AssessmentExteriorRemoveButton3', 'AssessmentExteriorImageText3', '265px','AddAssessmentExteriorImageButton4');
+    readOneImageURL(this, 'AssessmentExteriorImage3', 'AddAssessmentExteriorImageButton3', 'AssessmentExteriorRemoveButton3', 'AssessmentExteriorImageText3', '265px', 'AddAssessmentExteriorImageButton4');
 });
 $("#AssessmentExteriorUploadImage4").change(function () {
-    readOneImageURL(this, 'AssessmentExteriorImage4', 'AddAssessmentExteriorImageButton4', 'AssessmentExteriorRemoveButton4', 'AssessmentExteriorImageText4', '265px','AddAssessmentExteriorImageButton5');
+    readOneImageURL(this, 'AssessmentExteriorImage4', 'AddAssessmentExteriorImageButton4', 'AssessmentExteriorRemoveButton4', 'AssessmentExteriorImageText4', '265px', 'AddAssessmentExteriorImageButton5');
 });
 $("#AssessmentExteriorUploadImage5").change(function () {
-    readOneImageURL(this, 'AssessmentExteriorImage5', 'AddAssessmentExteriorImageButton5', 'AssessmentExteriorRemoveButton5', 'AssessmentExteriorImageText5', '265px','');
+    readOneImageURL(this, 'AssessmentExteriorImage5', 'AddAssessmentExteriorImageButton5', 'AssessmentExteriorRemoveButton5', 'AssessmentExteriorImageText5', '265px', '');
 });
 
 //Assessment - Interior Living Room, upload one image per time
 
 $("#AssessmentInteriorLivingUploadImage0").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorLivingImage0', 'AddAssessmentInteriorLivingImageButton0', 'AssessmentInteriorLivingRemoveButton0', 'AssessmentInteriorLivingImageText0', '265px','AddAssessmentInteriorLivingImageButton1');
+    readOneImageURL(this, 'AssessmentInteriorLivingImage0', 'AddAssessmentInteriorLivingImageButton0', 'AssessmentInteriorLivingRemoveButton0', 'AssessmentInteriorLivingImageText0', '265px', 'AddAssessmentInteriorLivingImageButton1');
 });
 $("#AssessmentInteriorLivingUploadImage1").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorLivingImage1', 'AddAssessmentInteriorLivingImageButton1', 'AssessmentInteriorLivingRemoveButton1', 'AssessmentInteriorLivingImageText1', '265px','AddAssessmentInteriorLivingImageButton2');
+    readOneImageURL(this, 'AssessmentInteriorLivingImage1', 'AddAssessmentInteriorLivingImageButton1', 'AssessmentInteriorLivingRemoveButton1', 'AssessmentInteriorLivingImageText1', '265px', 'AddAssessmentInteriorLivingImageButton2');
 });
 $("#AssessmentInteriorLivingUploadImage2").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorLivingImage2', 'AddAssessmentInteriorLivingImageButton2', 'AssessmentInteriorLivingRemoveButton2', 'AssessmentInteriorLivingImageText2', '265px','AddAssessmentInteriorLivingImageButton3');
+    readOneImageURL(this, 'AssessmentInteriorLivingImage2', 'AddAssessmentInteriorLivingImageButton2', 'AssessmentInteriorLivingRemoveButton2', 'AssessmentInteriorLivingImageText2', '265px', 'AddAssessmentInteriorLivingImageButton3');
 });
 $("#AssessmentInteriorLivingUploadImage3").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorLivingImage3', 'AddAssessmentInteriorLivingImageButton3', 'AssessmentInteriorLivingRemoveButton3', 'AssessmentInteriorLivingImageText3', '265px','AddAssessmentInteriorLivingImageButton4');
+    readOneImageURL(this, 'AssessmentInteriorLivingImage3', 'AddAssessmentInteriorLivingImageButton3', 'AssessmentInteriorLivingRemoveButton3', 'AssessmentInteriorLivingImageText3', '265px', 'AddAssessmentInteriorLivingImageButton4');
 });
 $("#AssessmentInteriorLivingUploadImage4").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorLivingImage4', 'AddAssessmentInteriorLivingImageButton4', 'AssessmentInteriorLivingRemoveButton4', 'AssessmentInteriorLivingImageText4', '265px','AddAssessmentInteriorLivingImageButton5');
+    readOneImageURL(this, 'AssessmentInteriorLivingImage4', 'AddAssessmentInteriorLivingImageButton4', 'AssessmentInteriorLivingRemoveButton4', 'AssessmentInteriorLivingImageText4', '265px', 'AddAssessmentInteriorLivingImageButton5');
 });
 $("#AssessmentInteriorLivingUploadImage5").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorLivingImage5', 'AddAssessmentInteriorLivingImageButton5', 'AssessmentInteriorLivingRemoveButton5', 'AssessmentInteriorLivingImageText5', '265px','');
+    readOneImageURL(this, 'AssessmentInteriorLivingImage5', 'AddAssessmentInteriorLivingImageButton5', 'AssessmentInteriorLivingRemoveButton5', 'AssessmentInteriorLivingImageText5', '265px', '');
 });
 
 //Assessment - Interior Bedroom, upload one image per time
 $("#AssessmentInteriorBedroomUploadImage0").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorBedroomImage0', 'AddAssessmentInteriorBedroomImageButton0', 'AssessmentInteriorBedroomRemoveButton0', 'AssessmentInteriorBedroomImageText0', '265px','AddAssessmentInteriorBedroomImageButton1');
+    readOneImageURL(this, 'AssessmentInteriorBedroomImage0', 'AddAssessmentInteriorBedroomImageButton0', 'AssessmentInteriorBedroomRemoveButton0', 'AssessmentInteriorBedroomImageText0', '265px', 'AddAssessmentInteriorBedroomImageButton1');
 });
 $("#AssessmentInteriorBedroomUploadImage1").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorBedroomImage1', 'AddAssessmentInteriorBedroomImageButton1', 'AssessmentInteriorBedroomRemoveButton1', 'AssessmentInteriorBedroomImageText1', '265px','AddAssessmentInteriorBedroomImageButton2');
+    readOneImageURL(this, 'AssessmentInteriorBedroomImage1', 'AddAssessmentInteriorBedroomImageButton1', 'AssessmentInteriorBedroomRemoveButton1', 'AssessmentInteriorBedroomImageText1', '265px', 'AddAssessmentInteriorBedroomImageButton2');
 });
 $("#AssessmentInteriorBedroomUploadImage2").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorBedroomImage2', 'AddAssessmentInteriorBedroomImageButton2', 'AssessmentInteriorBedroomRemoveButton2', 'AssessmentInteriorBedroomImageText2', '265px','AddAssessmentInteriorBedroomImageButton3');
+    readOneImageURL(this, 'AssessmentInteriorBedroomImage2', 'AddAssessmentInteriorBedroomImageButton2', 'AssessmentInteriorBedroomRemoveButton2', 'AssessmentInteriorBedroomImageText2', '265px', 'AddAssessmentInteriorBedroomImageButton3');
 });
 $("#AssessmentInteriorBedroomUploadImage3").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorBedroomImage3', 'AddAssessmentInteriorBedroomImageButton3', 'AssessmentInteriorBedroomRemoveButton3', 'AssessmentInteriorBedroomImageText3', '265px','AddAssessmentInteriorBedroomImageButton4');
+    readOneImageURL(this, 'AssessmentInteriorBedroomImage3', 'AddAssessmentInteriorBedroomImageButton3', 'AssessmentInteriorBedroomRemoveButton3', 'AssessmentInteriorBedroomImageText3', '265px', 'AddAssessmentInteriorBedroomImageButton4');
 });
 $("#AssessmentInteriorBedroomUploadImage4").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorBedroomImage4', 'AddAssessmentInteriorBedroomImageButton4', 'AssessmentInteriorBedroomRemoveButton4', 'AssessmentInteriorBedroomImageText4', '265px','AddAssessmentInteriorBedroomImageButton5');
+    readOneImageURL(this, 'AssessmentInteriorBedroomImage4', 'AddAssessmentInteriorBedroomImageButton4', 'AssessmentInteriorBedroomRemoveButton4', 'AssessmentInteriorBedroomImageText4', '265px', 'AddAssessmentInteriorBedroomImageButton5');
 });
 $("#AssessmentInteriorBedroomUploadImage5").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorBedroomImage5', 'AddAssessmentInteriorBedroomImageButton5', 'AssessmentInteriorBedroomRemoveButton5', 'AssessmentInteriorBedroomImageText5', '265px','');
+    readOneImageURL(this, 'AssessmentInteriorBedroomImage5', 'AddAssessmentInteriorBedroomImageButton5', 'AssessmentInteriorBedroomRemoveButton5', 'AssessmentInteriorBedroomImageText5', '265px', '');
 });
 
 //Assessment - Interior Service, upload one image per time
 $("#AssessmentInteriorServiceUploadImage0").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorServiceImage0', 'AddAssessmentInteriorServiceImageButton0', 'AssessmentInteriorServiceRemoveButton0', 'AssessmentInteriorServiceImageText0', '265px','AddAssessmentInteriorServiceImageButton1');
+    readOneImageURL(this, 'AssessmentInteriorServiceImage0', 'AddAssessmentInteriorServiceImageButton0', 'AssessmentInteriorServiceRemoveButton0', 'AssessmentInteriorServiceImageText0', '265px', 'AddAssessmentInteriorServiceImageButton1');
 });
 $("#AssessmentInteriorServiceUploadImage1").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorServiceImage1', 'AddAssessmentInteriorServiceImageButton1', 'AssessmentInteriorServiceRemoveButton1', 'AssessmentInteriorServiceImageText1', '265px','AddAssessmentInteriorServiceImageButton2');
+    readOneImageURL(this, 'AssessmentInteriorServiceImage1', 'AddAssessmentInteriorServiceImageButton1', 'AssessmentInteriorServiceRemoveButton1', 'AssessmentInteriorServiceImageText1', '265px', 'AddAssessmentInteriorServiceImageButton2');
 });
 $("#AssessmentInteriorServiceUploadImage2").change(function () {
-    readOneImageURL(this, 'AssessmentInteriorServiceImage2', 'AddAssessmentInteriorServiceImageButton2', 'AssessmentInteriorServiceRemoveButton2', 'AssessmentInteriorServiceImageText2', '265px','');
+    readOneImageURL(this, 'AssessmentInteriorServiceImage2', 'AddAssessmentInteriorServiceImageButton2', 'AssessmentInteriorServiceRemoveButton2', 'AssessmentInteriorServiceImageText2', '265px', '');
 });
 
 function AddAssessmentSiteImage0() {
@@ -1324,9 +1355,9 @@ function RemoveAssessmentInteriorServiceImage2() {
 
 
 //Source from http://www.blogjava.net/jidebingfeng/articles/406171.html
-function convertBase64UrlToBlob(urlData,type){
+function convertBase64UrlToBlob(urlData, type) {
 
-    var bytes=window.atob(urlData.split(',')[1]);        //remove url, convert to byte
+    var bytes = window.atob(urlData.split(',')[1]); //remove url, convert to byte
 
     //deal with anomaly, change the ASCI code less than = 0 to great than zero
     var ab = new ArrayBuffer(bytes.length);
@@ -1335,5 +1366,11 @@ function convertBase64UrlToBlob(urlData,type){
         ia[i] = bytes.charCodeAt(i);
     }
 
-    return new Blob( [ab] , {type : type});
+    return new Blob([ab], {
+        type: type
+    });
 }
+
+$(document).ready(function () {
+    checkReloadOther();
+})
