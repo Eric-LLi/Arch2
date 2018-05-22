@@ -6,6 +6,7 @@
   $passingText = "";
   $files = [];
   $booking = Array();
+global $reportTypes;
 
   try
   {
@@ -28,7 +29,7 @@
        //$msg = 'Loading PDF';
        $passingText = $bookingcode;
 
-       $dbselect = "select b1.code bc from " .
+       $dbselect = "select b1.code bc, b1.itype from " .
       "bookings b1 left join users u1 on (b1.users_id=u1.id) " .
       "            left join bookings b2 on (b1.id=b2.bookings_id) " .
       "            left join users u2 on (b2.users_id=u2.id) " .
@@ -54,7 +55,7 @@
        }
        error_log($gConfig['adminemail']);
        error_log($bookingcode);
-       SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $gConfig['adminemail'], 'Officer', 'Booking code ' . $bookingcode . " PDF", $html);
+       SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $gConfig['adminemail'], 'Officer',  $bookingcode . " - " . $reportTypes[$booking['itype']] . " PDF", $html);
        fclose($file);
 
        // $emailtemplate = $reportconfirmemails[$booking['itype']];

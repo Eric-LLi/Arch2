@@ -90,7 +90,7 @@
 
         //SharedSendHtmlMail(gConfig['adminemail'], "Web Enquiry", $email, $firstname . ' ' . $lastname, "Online Booking Request", $body);
         // SharedSendHtmlMail($email, $firstname . ' ' . $lastname, $gConfig['adminemail'], "Archicentre Membership", "Your new Archicentre Australia member account", $body);
-        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Membership",$email, $firstname . ' ' . $lastname,  "Your new Archicentre Australia member account", $body);
+        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Membership",$email, $firstname . ' ' . $lastname,  $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Your new Archicentre Australia member account", $body);
       }
       else
         $msg = "Error processing new member please try again...";

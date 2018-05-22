@@ -45,7 +45,7 @@
             <!--<a class="nav-link" href="#">Welcome XXXXX@XXX.COM</a>-->
             <!--<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>-->
         <!--</form>-->
-    <!--</div>-->
+    </div>
 </nav>
 <!--Title-->
 <div class="container">
@@ -274,10 +274,16 @@
                 <div class="form-group col-sm">
                     <label>Apparent condition of the building with respect to its age:</label>
                     <select onchange="checkIfOther()" id="conditionOfBuilding" name="conditionOfBuilding" style="padding-left: 16px" title="select">
+<!--
                         <option value="Well maintained">Well maintained</option>
                         <option value="Reasonably maintained">Reasonably maintained</option>
                         <option value="Poorly maintained">Poorly maintained</option>
                         <option value="Other">Other</option>
+-->
+                        <option value="Untested/New">Untested/New</option>
+                        <option value="Reasonably Maintained">Reasonably Maintained</option>
+                        <option value="Fair">Fair</option>
+                        <option value="Poorly Maintained">Poorly Maintained</option>
                     </select>
                 </div>
             </div>
@@ -4409,7 +4415,7 @@
     </div>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="Verandas1" placeholder="Veranda #1" class="form-control" type="text"></div>
+            <div class="col-sm-3"><input id="Verandas1" placeholder="Verandah #1" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -4582,7 +4588,7 @@
     <hr>
     <div class="form-group">
         <div class="row form-group">
-            <div class="col-sm-3"><input id="Verandas2" placeholder="Veranda #2" class="form-control" type="text"></div>
+            <div class="col-sm-3"><input id="Verandas2" placeholder="Verandah #2" class="form-control" type="text"></div>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -4760,7 +4766,7 @@
     <div id="PropertyExteriorVerandas" style="display: none;padding: 0">
         <div class="form-group">
             <div class="row form-group">
-                <div class="col-sm-3"><input id="Verandas3" placeholder="Veranda #3" class="form-control" type="text"></div>
+                <div class="col-sm-3"><input id="Verandas3" placeholder="Verandah #3" class="form-control" type="text"></div>
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -4932,7 +4938,7 @@
         </div>
         <div class="form-group">
             <div class="row form-group">
-                <div class="col-sm-3"><input id="Verandas4" placeholder="Veranda #4" class="form-control" type="text"></div>
+                <div class="col-sm-3"><input id="Verandas4" placeholder="Verandah #4" class="form-control" type="text"></div>
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -5103,7 +5109,7 @@
         </div>
     </div>
     <div style="text-align: center">
-        <button onclick="morePropertyExteriorVerandas()" id="morePropertyExteriorVerandasButton" type="button" class="btn btn-info">Add More Verandas
+        <button onclick="morePropertyExteriorVerandas()" id="morePropertyExteriorVerandasButton" type="button" class="btn btn-info">Add More Verandahs
         </button>
         <br><br>
     </div>

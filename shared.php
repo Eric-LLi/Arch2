@@ -17,7 +17,8 @@
   $gConfig['bccemail'] = "archive@archicentreaustralia.com.au";
   //$gConfig['adminemail'] = "M0410898213@126.com";
   $gConfig['ccemail'] = "emily92308@126.com";
-  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
+//  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
+$gConfig['adminemail'] = "weidear.luv@gmail.com";
   //$gConfig['adminemail'] = "mitchamrumpus@gmail.com";
 
   $reportTypes =
@@ -28,7 +29,7 @@
     //"Combined Timber Pest Inspection Report",
     "Property and Timber Pest",
     "Maintenance Advice",
-    "Architect\"s Advice",
+    "Architect's Advice",
     "Construction Quality Assurance Stage 1",
 		"Construction Quality Assurance Stage 2",
 		"Construction Quality Assurance Stage 3",
