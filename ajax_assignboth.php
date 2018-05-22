@@ -226,7 +226,7 @@
                   // Architect notification...
                   $html2 = file_get_contents('email_comboarchitectnotification.html');
                   $html2 = doMacros($html2, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_email'], $booking['linked_firstname'] . ' ' . $booking['linked_lastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment Report Confirmation", $html2);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_email'], $booking['linked_firstname'] . ' ' . $booking['linked_lastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment Report Confirmation", $html2);
                 }
               }
             }
