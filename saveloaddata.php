@@ -109,7 +109,8 @@
 
         $.post(
             'ajax_savereportdata.php', {
-                uuid: '<?php echo $_SESSION['uuid']; ?>',
+                uuid: '<?php echo $_SESSION['
+                uuid ']; ?>',
                 bookingcode: <?php echo $bookingcode; ?>,
                 data: jsondata
             },
@@ -137,7 +138,8 @@
         console.log('I am inside checking permission');
         $.post(
             'ajax_checkPDF.php', {
-                uuid: '<?php echo $_SESSION['uuid']; ?>',
+                uuid: '<?php echo $_SESSION['
+                uuid ']; ?>',
                 bookingcode: <?php echo $bookingcode; ?>
             },
             function(result) {
@@ -244,12 +246,9 @@
             },
             success: function(result) {
                 var response = JSON.parse(result);
-                if (response.rc == 0)
-                {
+                if (response.rc == 0) {
                     console.log('successful');
-                } 
-                else
-                {
+                } else {
                     console.log('something wrong');
                 }
                 //break down the response message. 
@@ -745,39 +744,39 @@
                             $("#" + p.tableName).show();
 
                         } else if (p.tableName === 'HOWImagesTable') {
-//                            var table = document.getElementById(p.tableName);
-//                            table.style.display = 'block';
-//                            console.log("the total number of images in this HOW report are : " + countingImage);
-//                            //console.log(p.imageid);
-//                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
-//                            //if (imageNo === 0)
-//                            //{
-//                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-//                                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
-//                            $('#' + p.imageid).attr('src', url);
-//                            var givenID = p.imageid.replace(/[^\d.]/g, '');
-//                            var labelID = "HOWimageCaption" + givenID;
-//                            document.getElementById(p.addid).style.display = 'none';
-//                            document.getElementById(p.removeid).style.display = 'block';
-//                            document.getElementById(p.textid).style.display = 'block';
-//                            document.getElementById(p.imageid).style.display = 'block';
-//                            document.getElementById(p.imageid).style.width = '480px';
-//                            document.getElementById(labelID).style.display = 'block';
-//                            //get the current id from the imageID.
-//                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-//                            var nextID = Number(currentID) + 1;
-//                            console.log("the next ID is " + nextID);
-//                            var altID = Number(nextID) + 1;
-//                            if (nextID >= countingImage) {
-//                                var altName = 'Image' + altID;
-//                                console.log("I am here!!! need to create a image " + altName);
-//                                var imageID = 'HOWImage' + nextID;
-//                                var textID = 'HOWImageText' + nextID;
-//                                var removeButtonID = 'HOWImageRemoveButton' + nextID;
-//                                var addButtonID = 'HOWImageAddButton' + nextID;
-//                                var uploadID = 'HOWImageUpload' + nextID;
-//                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
-//                            }
+                            //                            var table = document.getElementById(p.tableName);
+                            //                            table.style.display = 'block';
+                            //                            console.log("the total number of images in this HOW report are : " + countingImage);
+                            //                            //console.log(p.imageid);
+                            //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
+                            //                            //if (imageNo === 0)
+                            //                            //{
+                            //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                            //                                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                            //                            $('#' + p.imageid).attr('src', url);
+                            //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
+                            //                            var labelID = "HOWimageCaption" + givenID;
+                            //                            document.getElementById(p.addid).style.display = 'none';
+                            //                            document.getElementById(p.removeid).style.display = 'block';
+                            //                            document.getElementById(p.textid).style.display = 'block';
+                            //                            document.getElementById(p.imageid).style.display = 'block';
+                            //                            document.getElementById(p.imageid).style.width = '480px';
+                            //                            document.getElementById(labelID).style.display = 'block';
+                            //                            //get the current id from the imageID.
+                            //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //                            var nextID = Number(currentID) + 1;
+                            //                            console.log("the next ID is " + nextID);
+                            //                            var altID = Number(nextID) + 1;
+                            //                            if (nextID >= countingImage) {
+                            //                                var altName = 'Image' + altID;
+                            //                                console.log("I am here!!! need to create a image " + altName);
+                            //                                var imageID = 'HOWImage' + nextID;
+                            //                                var textID = 'HOWImageText' + nextID;
+                            //                                var removeButtonID = 'HOWImageRemoveButton' + nextID;
+                            //                                var addButtonID = 'HOWImageAddButton' + nextID;
+                            //                                var uploadID = 'HOWImageUpload' + nextID;
+                            //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
+                            //                            }
                             var temp = p.imageid.replace("HOWImage", "");
                             //                            console.log("Before Photos count :" + photos_count);
                             //                            console.log("temp : " + temp);
