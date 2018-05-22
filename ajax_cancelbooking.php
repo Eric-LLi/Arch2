@@ -153,7 +153,7 @@ global $reportTypes;
                   $html1 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['linked_itype']], $html1);
                   $html1 = str_replace("XXX_HEADER", $header, $html1);
                   $html1 = str_replace("XXX_FOOTER", $footer, $html1);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_archemail'], $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Booking Cancellation Notification", $html1);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_archemail'], $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Booking Cancellation Notification", $html1);
                 }
                 else if($booking["bookings_id"] != "")//select the timber report in the comibined reports, the booking will have the bookings_id for its linked property assessment report. 
                 {
@@ -271,7 +271,7 @@ global $reportTypes;
                       $html1 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking2['itype']], $html1);
                       $html1 = str_replace("XXX_HEADER", $header, $html1);
                       $html1 = str_replace("XXX_FOOTER", $footer, $html1);
-                      SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking2['archemail'], $booking2['archfirstname'] . ' ' . $booking2['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Booking Cancellation Notification", $html1);
+                      SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking2['archemail'], $booking2['archfirstname'] . ' ' . $booking2['archlastname'], $booking2['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Booking Cancellation Notification", $html1);
                     }
                   }
 
