@@ -190,13 +190,14 @@ function checkReloadOther() {
 }
 
 function checkIfOther() {
-    console.log($("#conditionOfBuilding").val());
+    //    console.log($("#conditionOfBuilding").val());
     if ($("#conditionOfBuilding").val() === "Other") {
         $("#XiaoKe").show();
+        return 'otherSelected';
     } else {
         $("#XiaoKe").hide();
+        return 'otherNotSelected';
     }
-    //
     //    if (document.getElementById('conditionOfBuilding').value == 'Other') {
     //        document.getElementById('XiaoKe').style.display = 'block';
     //        flag = true;
@@ -209,7 +210,7 @@ function checkIfOther() {
     //            return 'otherNotSelected';
     //        }
     //    }
-    //    return 'normalCondition';
+    return 'normalCondition';
 }
 
 
