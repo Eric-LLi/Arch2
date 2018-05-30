@@ -423,6 +423,7 @@ function RemoveAssessmentCoverImage() {
 
     button.style.display = 'none';
     image.style.width = '0px';
+    image.style.display = 'none';
 
     doRemovePhoto('AssessmentCoverImage');
 }
@@ -1024,6 +1025,7 @@ function RemoveImage(imageID0, removeButtonID, addButtonID) {
     button.style.display = 'none';
     addButton.style.display = 'block';
     image.style.width = '0px';
+    image.style.display = 'none';
     doRemovePhoto(imageID0);
 }
 
