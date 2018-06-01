@@ -1884,16 +1884,16 @@ function getAssessmentEntry() {
                         text: floorCheck,
                         style: 'tableText'
                     }, {
-                        text: 'Walls',
-                        style: 'tableText'
-                    }, {
-                        text: wallsCheck,
-                        style: 'tableText'
-                    }, {
                         text: 'Ceiling',
                         style: 'tableText'
                     }, {
                         text: ceilingCheck,
+                        style: 'tableText'
+                    }, {
+                        text: 'Walls',
+                        style: 'tableText'
+                    }, {
+                        text: wallsCheck,
                         style: 'tableText'
                     }, {
                         text: 'Electrics',
@@ -1903,16 +1903,16 @@ function getAssessmentEntry() {
                         style: 'tableText'
                     }],
                     ['', {
-                        text: 'Window/Doors',
-                        style: 'tableText'
-                    }, {
-                        text: doorsCheck,
-                        style: 'tableText'
-                    }, {
                         text: 'Cupboards',
                         style: 'tableText'
                     }, {
                         text: cupboardsCheck,
+                        style: 'tableText'
+                    }, {
+                        text: 'Windows/Doors',
+                        style: 'tableText'
+                    }, {
+                        text: doorsCheck,
                         style: 'tableText'
                     }, {
                         text: 'Dampness',
@@ -2499,24 +2499,24 @@ function getAssessmentBedroom() {
         if (roomName.trim() != "") {
             //get the data
             var floor = document.getElementById(i + 1 + '').value;
-            var ceiling = document.getElementById(i + 2 + '').value;
+            var windows = document.getElementById(i + 2 + '').value;
             var walls = document.getElementById(i + 3 + '').value;
-            var electrics = document.getElementById(i + 4 + '').value;
-            var cupboards = document.getElementById(i + 5 + '').value;
-            var doors = document.getElementById(i + 6 + '').value;
-            var dampness = document.getElementById(i + 7 + '').value;
+            var robes = document.getElementById(i + 4 + '').value;
+            var ceiling = document.getElementById(i + 5 + '').value;
+            var dampness = document.getElementById(i + 6 + '').value;
+            var electrics = document.getElementById(i + 7 + '').value;
             var other1Name = document.getElementById(i + 8 + '').value;
             var other1 = document.getElementById(i + 9 + '').value;
 
 
             //check the result whether is a tick
             var floorCheck = checkTick(floor);
-            var ceilingCheck = checkTick(ceiling);
+            var windowCheck = checkTick(windows);
             var wallsCheck = checkTick(walls);
-            var electricsCheck = checkTick(electrics);
-            var cupboardsCheck = checkTick(cupboards);
-            var doorsCheck = checkTick(doors);
+            var robesCheck = checkTick(robes);
+            var ceilingCheck = checkTick(ceiling);
             var dampnessCheck = checkTick(dampness);
+            var electricsCheck = checkTick(electrics);
             other1 = checkTick(other1);
 
             //check other title
@@ -2542,6 +2542,16 @@ function getAssessmentBedroom() {
                 },
                 {
                     border: [true, false, true, true],
+                    text: 'Windows/Doors',
+                    style: 'tableText'
+                },
+                {
+                    border: [true, false, true, true],
+                    text: windowCheck,
+                    style: 'tableText'
+                },
+                {
+                    border: [true, false, true, true],
                     text: 'Walls',
                     style: 'tableText'
                 },
@@ -2552,41 +2562,23 @@ function getAssessmentBedroom() {
                 },
                 {
                     border: [true, false, true, true],
-                    text: 'Ceiling',
+                    text: 'Robes',
                     style: 'tableText'
                 },
                 {
                     border: [true, false, true, true],
-                    text: ceilingCheck,
-                    style: 'tableText'
-                },
-                {
-                    border: [true, false, true, true],
-                    text: 'Electrics',
-                    style: 'tableText'
-                },
-                {
-                    border: [true, false, true, true],
-                    text: electricsCheck,
+                    text: robesCheck,
                     style: 'tableText'
                 }
             ];
             b = [
                 '',
                 {
-                    text: 'Window/Doors',
+                    text: 'Ceiling',
                     style: 'tableText'
                 },
                 {
-                    text: doorsCheck,
-                    style: 'tableText'
-                },
-                {
-                    text: 'Cupboards',
-                    style: 'tableText'
-                },
-                {
-                    text: cupboardsCheck,
+                    text: ceilingCheck,
                     style: 'tableText'
                 },
                 {
@@ -2595,6 +2587,14 @@ function getAssessmentBedroom() {
                 },
                 {
                     text: dampnessCheck,
+                    style: 'tableText'
+                },
+                {
+                    text: 'Electrics',
+                    style: 'tableText'
+                },
+                {
+                    text: electricsCheck,
                     style: 'tableText'
                 },
                 {
