@@ -134,11 +134,11 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Date of Inspection</label><br>
+                        <label>Date of Assessment</label><br>
                         <textarea id="dateOfInspection" title="date of inspection" class="form-control"></textarea>
                     </div>
                     <div class="col-sm-6">
-                        <label>Time of Inspection</label><br>
+                        <label>Time of Assessment</label><br>
                         <textarea id="timeOfInspection" title="time" class="form-control"></textarea>
                     </div>
                 </div>
