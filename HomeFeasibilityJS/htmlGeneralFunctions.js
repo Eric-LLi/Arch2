@@ -207,6 +207,11 @@ function HomeFeasibilityUploadDrawings() {
 }
 
 $('#HomeFeasibilityUploadDrawings').change(function(){
+     var imageIDs = $("#homeFeasibilityDrawingsTable form");
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     $("#homeFeasibilityDrawingsTable").empty();
     var table = document.getElementById("homeFeasibilityDrawingsTable");
     table.style.display = 'block';

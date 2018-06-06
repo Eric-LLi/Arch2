@@ -96,6 +96,11 @@ function MaintenanceUploadImages(){
 }
 
 $('#MaintenanceUploadImages').change(function() {
+    var imageIDs = $("#MaintenancePhotographs form");
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     $("#MaintenancePhotographs").empty();
     var table = document.getElementById("MaintenanceImagesTable");
     table.style.display = 'block';
