@@ -78,6 +78,11 @@ function DilapidationUploadImage()
 
 
 $('#DilapidationUploadImages').change(function(){
+    var imageIDs = $("#DilapidationPhotographs form");
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     $("#DilapidationPhotographs").empty();
     var table = document.getElementById("DilapidationImagesTable");
     table.style.display = 'block';

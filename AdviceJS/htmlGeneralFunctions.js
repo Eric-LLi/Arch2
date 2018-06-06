@@ -86,6 +86,11 @@ function AdviceUploadImage(){
 }
 
 $('#AdviceUploadImages').change(function() {
+    var imageIDs = $("#AdvicePhotographs form");
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     $("#AdvicePhotographs").empty();
     var table = document.getElementById("AdviceImagesTable");
     table.style.display = 'block';
