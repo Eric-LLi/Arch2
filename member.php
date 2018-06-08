@@ -1,11 +1,25 @@
 <?php
   require_once("shared.php");
-  //123
+  
   if (isset($_POST['fldLogout']))
   {
     SharedLogout();
-    header("Location: index.php");
+    if (SharedIsDev())
+      header("Location: index.php");
+    else
+      header("Location: https://www.archicentreaustraliainspections.com/index.php");
     exit;
+  }
+  else
+  {
+    if (!SharedIsLoggedIn())
+    {
+      if (SharedIsDev())
+        header("Location: index.php");
+      else
+        header("Location: https://www.archicentreaustraliainspections.com/index.php");
+      exit;
+    }
   }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -3262,6 +3276,6 @@
     </div>
   </div>
   <div id="divEvents" style="display: none;"></div>
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=initMap&key=AIzaSyCcXBPESLUxA846ZL6JoUefrlclXKFv4zg" async defer></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=initMap&key=AIzaSyCcXBPESLUxA846ZL6JoUefrlclXKFv4zg" async defer></script>
 </body>
 </html>

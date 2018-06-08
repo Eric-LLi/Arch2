@@ -423,6 +423,7 @@ function RemoveAssessmentCoverImage() {
 
     button.style.display = 'none';
     image.style.width = '0px';
+    image.style.display = 'none';
 
     doRemovePhoto('AssessmentCoverImage');
 }
@@ -1024,30 +1025,59 @@ function RemoveImage(imageID0, removeButtonID, addButtonID) {
     button.style.display = 'none';
     addButton.style.display = 'block';
     image.style.width = '0px';
+    image.style.display = 'none';
     doRemovePhoto(imageID0);
 }
 
 
 
 function AssessmentSiteUploadImages() {
+    var imageIDs = $("#AccessmentSiteImages form");
+    console.log(imageIDs);
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     document.getElementById('AssessmentSiteUploadImages').click();
 }
 
 function AssessmentExteriorUploadImages() {
+    var imageIDs = $("#AccessmentExteriorImages form");
+    console.log(imageIDs);
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     document.getElementById('AssessmentExteriorUploadImages').click();
 }
 
 function AssessmentInteriorLivingUploadImages() {
-
+    var imageIDs = $("#AccessmentInteriorLivingImages form");
+    console.log(imageIDs);
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     document.getElementById('AssessmentInteriorLivingUploadImages').click();
 }
 
 function AssessmentInteriorBedroomUploadImages() {
-
+    var imageIDs = $("#AccessmentInteriorBedroomImages form");
+    console.log(imageIDs);
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     document.getElementById('AssessmentInteriorBedroomUploadImages').click();
 }
 
 function AssessmentInteriorServiceUploadImages() {
+     var imageIDs = $("#AccessmentInteriorServiceImages form");
+    console.log(imageIDs);
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     document.getElementById('AssessmentInteriorServiceUploadImages').click();
 }
 

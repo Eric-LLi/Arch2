@@ -219,7 +219,15 @@
               else if ($booking['archemail'] != "")
               {
                 //single report, only need to send one email
-                $html = file_get_contents('email_architectnotification.html');
+                if ($booking['itype'] == 2) //email to inspector only
+                {
+                  $html = file_get_contents('email_inspectornotification.html');
+                }
+                else
+                {
+                  $html = file_get_contents('email_architectnotification.html');
+                }
+                
                 $html = doMacros($html, $booking);
 
                 SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);

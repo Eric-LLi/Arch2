@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			p {
+				margin: 10 0
+			}
+		</style>
+	</head>
+
+<body>
+
+	<div style="overflow: hidden; width: 800px; font-size: 12px; font-family: Arial, Helvetica, sans-serif; color: black;">
+
+
+		<p>XXX_HEADER</p>
+
+		<p>Dear XXX_ARCHITECTNAME,</p>
+		<p>You have been allocated booking number XXX_BOOKINGCODE being XXX_REPORTTYPE, all the details as following:</p>
+
+
+		<table style="width:100%; font-size: 12px; font-family: Arial, Helvetica, sans-serif; color: black;" cellpadding="3">
+			<tr>
+				<td colspan="2" bgcolor="Silver">Customer Details</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Name: </strong>XXX_CUSTFIRSTLASTNAME</td>
+				<td>
+					<strong>Phone: </strong>XXX_CUSTPHONE</td>
+				<td>
+			</tr>
+			<tr class="bottomline">
+				<td>
+					<strong>Mobile: </strong>XXX_CUSTMOBILE</td>
+				<td>
+					<strong>Email: </strong>XXX_CUSTEMAIL</td>
+			</tr>
+			<tr>
+				<td colspan="2" bgcolor="Silver">Assessment Details</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Address: </strong>XXX_PROPADDRESS1</td>
+				<td>
+					<strong>Suburb: </strong>XXX_PROPCITY</td>
+			</tr>
+			<tr class="bottomline">
+				<td>
+					<strong>State: </strong>XXX_PROPSTATE</td>
+				<td>
+					<strong> Postcode: </strong>XXX_PROPPOSTCODE</td>
+			</tr>
+			<tr>
+				<td colspan="2" bgcolor="Silver">Real Estate Details (where relevant)</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Company: </strong>XXX_ESTATEAGENTCOMPANY</td>
+				<td>
+					<strong>Representative: </strong>XXX_ESTATEAGENTCONTACT</td>
+			</tr>
+			<tr class="bottomline">
+				<td>
+					<strong>Office Phone: </strong>XXX_ESTATEAGENTPHONE</td>
+				<td>
+					<strong>Mobile Phone: </strong>XXX_ESTATEAGENTMOBILE</td>
+			</tr>
+		</table>
+
+		<table style="width:100%; font-size: 12px; font-family: Arial, Helvetica, sans-serif; color: black;" cellpadding="3">
+			<tr>
+				<td colspan="6" bgcolor="Silver">Property Details</td>
+			</tr>
+			<tr>
+				<td bgcolor="#99FFCC" width="16%">
+					<strong>Storeys</strong>
+				</td>
+				<td width="16%">XXX_STOREYS</td>
+				<td bgcolor="#99FFCC" width="16%">
+					<strong>Outbuildings</strong>
+				</td>
+				<td width="16%">XXX_OUTBUILDINGS</td>
+				<td bgcolor="#99FFCC" width="16%">
+					<strong>Bathrooms</strong>
+				</td>
+				<td width="16%">XXX_BATHROOMS</td>
+			</tr>
+			<tr>
+				<td bgcolor="#99FFCC">
+					<strong>Bedrooms</strong>
+				</td>
+				<td>XXX_BEDROOMS</td>
+				<td bgcolor="#99FFCC">
+					<strong>Total No. of Rooms</strong>
+				</td>
+				<td>XXX_ROOMS</td>
+				<td bgcolor="#99FFCC">
+					<strong>Property Age</strong>
+				</td>
+				<td>XXX_PROPERTYAGE</td>
+			</tr>
+			<tr>
+				<td bgcolor="#99FFCC">
+					<strong>Renovation Advice</strong>
+				</td>
+				<td>XXX_ADVICE</td>
+				<td bgcolor="#99FFCC">
+					<strong>Construction</strong>
+				</td>
+				<td colspan="3">XXX_CONSTRUCTION</td>
+			</tr>
+			<tr>
+				<td colspan="6" bgcolor="Silver">Other Details</td>
+			</tr>
+			<tr>
+				<td bgcolor="#99FFCC">
+					<strong>Site Meeting</strong>
+				</td>
+				<td>XXX_SITEMEETING</td>
+				<!-- <td bgcolor="#99FFCC">
+					<strong>Commission</strong>
+				</td>
+				<td>XXX_COMMISSION</td> -->
+				<td bgcolor="#99FFCC">
+					<strong>Pest Inspection</strong>
+				</td>
+				<td>XXX_INSPECTION</td>
+			</tr>
+			<tr>
+				<td colspan="6" bgcolor="Silver">Notes</td>
+			</tr>
+			<tr>
+				<td colspan="6" id="note">XXX_NOTES</td>
+				<script>
+					if (XXX_NOTES == null) {
+						document.getElementById("note").innerHTML = "None";
+					}
+				</script>
+			</tr>
+		</table>
+
+		<p>The remaining details and the online report can be found by logging into the Archicentre Australia Online System.</p>
+
+		<p>All
+			<strong>XXX_ITYPENAME must </strong>undertake each service in accordance with respective
+			<strong>
+				<em>Archicentre Australia</em>
+			</strong> Scope of Service statements and Terms &amp; Conditions. Click
+			<a href="https://www.archicentreaustralia.com.au/resources/scope-and-terms-conditions/">here</a>. </p>
+
+		<p>
+			<strong>Please contact the customer upon receipt of this email.</strong>
+		</p>
+
+		<p>Best wishes,
+			<br/>
+		</p>
+
+		<p>
+			Archicentre
+			<font color="red">Australia</font>
+			<br />
+		</p>
+
+		<p>&nbsp;</p>
+
+		<p>XXX_FOOTER</p>
+	</div>
+</body>
+
+</html>
