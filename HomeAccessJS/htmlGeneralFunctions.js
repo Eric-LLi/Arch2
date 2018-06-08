@@ -9,7 +9,7 @@
 
 //Store all select_ID need 'KEY description'
 var getSelectID = [
-    "Fault_Trip",
+    "Fault_Trip1",
     "Fault_Crack",
     "Fault_Fire",
     "Fault_Stumps",
