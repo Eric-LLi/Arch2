@@ -13,7 +13,7 @@
     <!--<script src="js/jquery-1.12.4.min.js"></script>-->
     <!--<script src="js/jquery-1.12.4.min.js"></script>-->
      <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"

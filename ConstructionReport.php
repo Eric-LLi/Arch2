@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         <!--  Import JQuery  -->
         <script src="js/jquery-1.12.4.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
         <!-- Customized CSS -->
         <link rel="stylesheet" href="css/general.css">
         <!--  Import pdfMake  -->
