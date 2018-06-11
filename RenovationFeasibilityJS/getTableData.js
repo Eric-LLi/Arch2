@@ -102,7 +102,7 @@ function getAssessmentDetailsTable() {
                     border: [true, true, false, true]
                 }],
                 [{
-                    text: 'Date of Inspection',
+                    text: 'Date of Assessment',
                     style: 'tableBoldTextAlignLeft',
                     border: [false, true, true, true]
                 }, {
@@ -110,7 +110,7 @@ function getAssessmentDetailsTable() {
                     fontSize: 9,
                     colSpan: 2
                 }, {}, {
-                    text: 'Time of Inspection',
+                    text: 'Time of Assessment',
                     style: 'tableBoldTextAlignLeft'
                 }, {
                     text: getIt('timeOfAssessment'),
@@ -119,7 +119,7 @@ function getAssessmentDetailsTable() {
                     border: [true, true, false, true]
                 }, {}],
                 [{
-                    text: 'Proposed Use of Building',
+                    text: 'Existing Use of Building',
                     style: 'tableBoldTextAlignLeft',
                     border: [false, true, true, true]
                 }, {

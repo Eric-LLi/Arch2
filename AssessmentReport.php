@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/general.css">
         <!--  Import JQuery  -->
         <script src="js/jquery-1.12.4.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
         <!--  Import pdfMake  -->
         <!-- <script src='../node_modules/pdfmake/build/pdfmake.min.js'></script>
     <script src='../node_modules/pdfmake/build/vfs_fonts.js'></script> -->
