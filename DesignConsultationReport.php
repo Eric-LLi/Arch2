@@ -17,7 +17,7 @@
     
     <!--  Import JQuery  -->
     <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
     
     <!-- Customized CSS -->
     <link rel="stylesheet" href="css/general.css">

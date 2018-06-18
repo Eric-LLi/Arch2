@@ -65,7 +65,7 @@ function getImageText(id){
     console.log("the corresponding image id is " + imageID);
 
 
-    if (textInput)
+    if (textInput) 
     {
         if(image.style.display != 'none')
         {
@@ -424,7 +424,7 @@ function getPhoto(id)
             //console.log("this id does have image display, but need to check the src");
             if (checkImage(id) >= 0)
             {
-                ImageCounting = ImageCounting + 1;
+                //ImageCounting = ImageCounting + 1;
                 console.log('src is reload');
                 var canvas = document.createElement("canvas");
                 canvas.width = myImage.naturalWidth;
