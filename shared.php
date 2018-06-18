@@ -2,10 +2,10 @@
   require_once("class.phpmailer.php");
 
   $gConfig['dbname'] = "arch";
-//  $gConfig['dbserver'] = "localhost:3306";
-//  $gConfig['dbport'] = 3306;
-   $gConfig['dbserver'] = "localhost:8889";
-   $gConfig['dbport'] = 8889;
+ $gConfig['dbserver'] = "localhost:3306";
+ $gConfig['dbport'] = 3306;
+  //  $gConfig['dbserver'] = "localhost:8889";
+  //  $gConfig['dbport'] = 8889;
   $gConfig['dbusername'] = "arch";
   $gConfig['dbpwd'] = "lmi$$";
 //  $gConfig['dbusername'] = "root";
@@ -19,7 +19,8 @@
   $gConfig['bccemail'] = "archive@archicentreaustralia.com.au";
   //$gConfig['adminemail'] = "M0410898213@126.com";
   $gConfig['ccemail'] = "emily92308@126.com";
-  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
+//  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
+$gConfig['adminemail'] = "weidear.luv@gmail.com";
   //$gConfig['adminemail'] = "mitchamrumpus@gmail.com";
 
   $reportTypes =
@@ -30,7 +31,7 @@
     //"Combined Timber Pest Inspection Report",
     "Property and Timber Pest",
     "Maintenance Advice",
-    "Architect\"s Advice",
+    "Architect's Advice",
     "Construction Quality Assurance Stage 1",
 		"Construction Quality Assurance Stage 2",
 		"Construction Quality Assurance Stage 3",
@@ -46,7 +47,8 @@
     "Residential Home Warranty Report",
     "Commercial Property Assessment Report",
     //"Commercial Dilapidation Survey",
-		"Residential Home Access & Services Report"
+    "",
+		"Home Access & Services Report"
   ];
 
 
@@ -73,8 +75,8 @@
     "HOWReport.php",
     "CommercialPropertyReport.php",
     //"CommercialDilapidationSurvey.php",
-
-		"HomeAccessReport.php",
+    "",
+    "HomeAccessReport.php",
     "",
     ""
   ];
@@ -131,8 +133,10 @@
 		"email_renofeasibility_allocate.html",
 		//"email_commpropertyassessment_allocate.html",
     //"email_commdilapidation_allocate.html",
-		"email_how_allocate.html",
-    //"email_has_allocate.html",
+    "email_how_allocate.html",
+    "email_commericalproperty_allocate.html",
+    "",
+    "email_has_allocate.html",
     "",
     ""
   ];

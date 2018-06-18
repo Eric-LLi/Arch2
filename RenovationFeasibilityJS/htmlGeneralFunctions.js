@@ -207,6 +207,11 @@ function RenovationFeasibilityUploadDrawings() {
 }
 
 $('#RenovationFeasibilityUploadDrawings').change(function(){
+     var imageIDs = $("#RenovationFeasibilityDrawingsTable form");
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     $("#RenovationFeasibilityDrawingsTable").empty();
     var table = document.getElementById("RenovationFeasibilityDrawingsTable");
     table.style.display = 'block';

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+  <style>
+    p {
+      margin: 10 0
+    }
+  </style>
+</head>
 <body>
   <div style="overflow: hidden; width: 800px; font-size: 12px; font-family: Arial, Helvetica, sans-serif; color: black;">
 
@@ -121,16 +128,17 @@
         <td>XXX_INSPECTION</td>
       </tr>
       <tr>
-        <td colspan="6" bgcolor="Silver">Notes</td>
-        <script>
-          if (XXX_NOTES == null) {
-            document.getElementById("note").innerHTML = "None";
-          }
-        </script>
-      </tr>
+				<td colspan="6" bgcolor="Silver">Notes</td>
+			</tr>
+			<tr>
+				<td colspan="6" id="note">XXX_NOTES</td>
+				<script>
+					if (XXX_NOTES == null) {
+						document.getElementById("note").innerHTML = "None";
+					}
+				</script>
+			</tr>
     </table>
-
-    <p>&nbsp;</p>
 
     <p>Please contact XXX_COMBOINSPECTORNAME on XXX_COMBOINSPECTORMOBILE to co-ordinate a meeting at the site property.</p>
 
@@ -158,9 +166,7 @@
       <br />
     </p>
 
-
     <p>&nbsp;</p>
-
     <p>XXX_FOOTER</p>
 
   </div>

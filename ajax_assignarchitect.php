@@ -182,6 +182,7 @@
               $booking = null;
               while ($dbrow = SharedFetchArray($dbresult))
                 $booking = $dbrow;
+//                error_log($booking);
                 //error_log($booking['archemail']);
 
               // Let customer know...
@@ -195,7 +196,7 @@
                 $html = file_get_contents($emailtemplate);
                 $html = doMacros($html, $booking);
 
-		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], "Assessment/Inspection Confirmation", $html);
+		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
               }
 
               // Let architect/inspector know...
@@ -207,21 +208,29 @@
                   // Architect notification...
                   $html1 = file_get_contents('email_comboarchitectnotification.html');
                   $html1 = doMacros($html1, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], "Assessment/Inspection Confirmation", $html1);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html1);
 
                   // Inspector notification...
                   $html2 = file_get_contents('email_comboinspectornotification.html');
                   $html2 = doMacros($html2, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_archemail'], $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], "Timber Inspection Confirmation", $htm2);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_archemail'], $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Timber Inspection Confirmation", $htm2);
                 }
               }
               else if ($booking['archemail'] != "")
               {
                 //single report, only need to send one email
-                $html = file_get_contents('email_architectnotification.html');
+                if ($booking['itype'] == 2) //email to inspector only
+                {
+                  $html = file_get_contents('email_inspectornotification.html');
+                }
+                else
+                {
+                  $html = file_get_contents('email_architectnotification.html');
+                }
+                
                 $html = doMacros($html, $booking);
 
-                SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], "Assessment/Inspection Confirmation", $html);
+                SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
               }
             }
           }

@@ -1,11 +1,25 @@
 <?php
   require_once("shared.php");
-  //123
+  
   if (isset($_POST['fldLogout']))
   {
     SharedLogout();
-    header("Location: index.php");
+    if (SharedIsDev())
+      header("Location: index.php");
+    else
+      header("Location: https://www.archicentreaustraliainspections.com/index.php");
     exit;
+  }
+  else
+  {
+    if (!SharedIsLoggedIn())
+    {
+      if (SharedIsDev())
+        header("Location: index.php");
+      else
+        header("Location: https://www.archicentreaustraliainspections.com/index.php");
+      exit;
+    }
   }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -1617,39 +1631,115 @@
           'divBookingsG',
           function(row, index)
           {
-            doPromptOkCancel
-            (
-              'Cancel booking ' + row.bookingcode + '?',
-              function(result)
-              {
-                if (result)
+            if (row.reportid == 3)
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + ' and' +row.linkedbookingcode + ' ?',
+                function(result)
                 {
-                  $.post
-                  (
-                    'ajax_cancelbooking.php',
-                    {
-                      uuid: '<?php echo $_SESSION['uuid']; ?>',
-                      bookingcode: row.bookingcode
-                    },
-                    function(result)
-                    {
-                      var response = JSON.parse(result);
-
-                      if (response.rc == 0)
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
                       {
-                        doRefreshBookings();
-                        noty({text: response.msg, type: 'success', timeout: 3000});
-                      }
-                      else
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
                       {
-                        noty({text: response.msg, type: 'error', timeout: 10000});
-                      }
+                        var response = JSON.parse(result);
 
-                    }
-                  );
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
                 }
-              }
-            );
+              );
+            }
+            else if (row.linked_bookingcode != null)
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            else
+            {
+              doPromptOkCancel
+              (
+                'Cancel booking ' + row.bookingcode + '?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            
           }
         ))
         noty({text: 'Please select a booking to remove', type: 'warning', timeout: 4000});
@@ -2245,6 +2335,36 @@
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
     }
 
+    function doBookingEmailStatusAsImage(row)
+    {
+       // Account for footer row...
+       if (_.isUndefined(row.reportid) || _.isNull(row.reportid))
+        return '';
+
+      var img = '';
+      var tooltip = '';
+      var lnk = '';
+      
+      if (!_.isNull(row.lastemailed))
+      {
+        var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
+        img = '<img src="images/led/ball-yellow.png" width="20" height="20">';
+        tooltip = 'Customer has been emailed ';
+        if (row.emailcount == 1)
+          tooltip += ' on ' + lastemailed;
+        else
+          tooltip += row.emailcount + ' times, the last being on ' + lastemailed;
+      }
+      else
+      {
+        img = '';
+        tooltip = '';
+      }
+
+      lnk = '<a href="#" title="' + tooltip + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
+      return lnk;
+    }
+
     function doBookingStatusAsImage(row)
     {
       // Account for footer row...
@@ -2260,16 +2380,16 @@
         img = '<img src="images/led/ball-black.png" width="20" height="20">';
         tooltip = 'Agreed price has not been set';
       }
-      else if (!_.isNull(row.lastemailed))
-      {
-        var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
-        img = '<img src="images/led/ball-yellow.png" width="24" height="24">';
-        tooltip = 'Customer has been emailed ';
-        if (row.emailcount == 1)
-          tooltip += ' on ' + lastemailed;
-        else
-          tooltip += row.emailcount + ' times, the last being on ' + lastemailed;
-      }
+      // else if (!_.isNull(row.lastemailed))
+      // {
+      //   var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
+      //   img = '<img src="images/led/ball-yellow.png" width="24" height="24">';
+      //   tooltip = 'Customer has been emailed ';
+      //   if (row.emailcount == 1)
+      //     tooltip += ' on ' + lastemailed;
+      //   else
+      //     tooltip += row.emailcount + ' times, the last being on ' + lastemailed;
+      // }
       else if (!_.isNull(row.dateapproved))
       {
         img = '<img src="images/led/ball-green.png" width="20" height="20">';
@@ -2442,7 +2562,8 @@
           frozenColumns:
           [
             [
-              {title: 'Status',         rowspan: 2, field: 'status',            width: 50,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingStatusAsImage(row);}},
+              {title: 'Booking Status',         rowspan: 2, field: 'status',    width: 85,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingStatusAsImage(row);}},
+              {title: 'Email Status',         rowspan: 2, field: 'emailstatus', width: 80,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingEmailStatusAsImage(row);}},
               {title: 'Assigned',       rowspan: 2, field: 'assigned',          width: 50,  align: 'center', resizable: false, formatter: function(value, row, index) {return doBookingAssignedImage(row);}},
               {title: 'Booking Code',   rowspan: 2, field: 'bookingcode',       width: 100, align: 'left',   resizable: true, sortable: true, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}},
               {title: 'Linked Booking', rowspan: 2, field: 'linkedbookingcode', width: 100, align: 'left',   resizable: true, sortable: true, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}}
@@ -2784,7 +2905,7 @@
           <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
           <a href="javascript:void(0)" onClick="doMarkPaid()" class="easyui-linkbutton" iconCls="icon-payment">Paid</a>
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
-          <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Redo</a>
+          <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Architect Reedit</a>
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
           <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Customer</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
@@ -2798,7 +2919,7 @@
         }
       ?>
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
-      <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>
+<!--      <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>-->
      
     </div>
   </div>
@@ -3155,6 +3276,6 @@
     </div>
   </div>
   <div id="divEvents" style="display: none;"></div>
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=initMap&key=AIzaSyCcXBPESLUxA846ZL6JoUefrlclXKFv4zg" async defer></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=initMap&key=AIzaSyCcXBPESLUxA846ZL6JoUefrlclXKFv4zg" async defer></script>
 </body>
 </html>

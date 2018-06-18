@@ -13,7 +13,7 @@
     <!--<script src="js/jquery-1.12.4.min.js"></script>-->
     <!--<script src="js/jquery-1.12.4.min.js"></script>-->
      <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -26,6 +26,15 @@
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
     <!--<script src='../node_modules/pdfmake/build/pdfmake.min.js'></script>-->
     <!--<script src='../node_modules/pdfmake/build/vfs_fonts.js'></script>-->
+
+     <script type="text/javascript"> 
+        function stopRKey(evt) { 
+        var evt = (evt) ? evt : ((event) ? event : null); 
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+        if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+        } 
+        document.onkeypress = stopRKey; 
+    </script>
 
     <?php require_once("saveloaddata.php"); ?>
     <?php require_once("meta.php"); ?>

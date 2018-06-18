@@ -4,13 +4,12 @@
 
 
 
-function loadSelectOption(id)
-{
+function loadSelectOption(id) {
     var select = document.getElementById(id);
 
-    var selectOption = ["Choose an item","√",'X','--','U','IW','R','P','N'];
-    var selectValue = [" ","No Defects Evident","Defect Evident","Not Relevant","Untested",
-        "Incomplete Work","Reasonable Access","Partial Access",'Not Accessible'];
+    var selectOption = ["Choose an item", "√", 'X', '--', 'U', 'IW', 'R', 'P', 'N'];
+    var selectValue = [" ", "No Defects Evident", "Defect Evident", "Not Relevant", "Untested",
+        "Incomplete Work", "Reasonable Access", "Partial Access", 'Not Accessible'];
 
 
     //Create and append the options
@@ -19,8 +18,7 @@ function loadSelectOption(id)
         var group = document.createElement('optgroup');
         group.label = selectValue[i];
         option.text = selectOption[i];
-        if (i===0)
-        {
+        if (i === 0) {
             option.selected = true;
             option.disabled = true;
         }
@@ -32,8 +30,7 @@ function loadSelectOption(id)
 
 
 
-function loadSelect()
-{
+function loadSelect() {
     loadSelectOption('HOWSiteSelect0');
     loadSelectOption('HOWSiteSelect1');
     loadSelectOption('HOWSiteSelect2');
@@ -396,8 +393,7 @@ function loadSelect()
 
 
 
-function createOneCell(tableID,name,select,textAreaName)
-{
+function createOneCell(tableID, name, select, textAreaName) {
 
     var table = document.getElementById(tableID);
     var rowCount = table.rows.length;
@@ -411,9 +407,9 @@ function createOneCell(tableID,name,select,textAreaName)
 
     //create an name input for the cell1
     var nameInput = document.createElement('INPUT');
-    nameInput.setAttribute('class','form-control');
-    nameInput.setAttribute('title','name');
-    nameInput.setAttribute('type','text');
+    nameInput.setAttribute('class', 'form-control');
+    nameInput.setAttribute('title', 'name');
+    nameInput.setAttribute('type', 'text');
     //nameInput.setAttribute('placeholder','enter cost name');
     //nameInput.id = 'HOWSiteName' + rowCount;
     nameInput.id = name + rowCount;
@@ -423,13 +419,13 @@ function createOneCell(tableID,name,select,textAreaName)
 
     //create select option list
     var selectList = document.createElement("select");
-   // selectList.id = "HOWSiteSelect" + rowCount;
+    // selectList.id = "HOWSiteSelect" + rowCount;
     selectList.id = select + rowCount;
     selectList.style.width = "100%";
 
-    var selectOption = ["Choose an item","√",'X','--','U','IW','R','P','N'];
-    var selectValue = [" ","No Defects Evident","Defect Evident","Not Relevant","Untested",
-        "Incomplete Work","Reasonable Access","Partial Access",'Not Accessible'];
+    var selectOption = ["Choose an item", "√", 'X', '--', 'U', 'IW', 'R', 'P', 'N'];
+    var selectValue = [" ", "No Defects Evident", "Defect Evident", "Not Relevant", "Untested",
+        "Incomplete Work", "Reasonable Access", "Partial Access", 'Not Accessible'];
 
 
     //Create and append the options
@@ -438,8 +434,7 @@ function createOneCell(tableID,name,select,textAreaName)
         var group = document.createElement('optgroup');
         group.label = selectValue[i];
         option.text = selectOption[i];
-        if (i===0)
-        {
+        if (i === 0) {
             option.selected = true;
             option.disabled = true;
         }
@@ -451,8 +446,8 @@ function createOneCell(tableID,name,select,textAreaName)
 
     //create text area for notes
     var textArea = document.createElement('textarea');
-    textArea.setAttribute('class','form-control');
-    textArea.setAttribute('placeholder','Notes');
+    textArea.setAttribute('class', 'form-control');
+    textArea.setAttribute('placeholder', 'Notes');
     //textArea.id = "HOWSiteNotes" + rowCount;
     textArea.id = textAreaName + rowCount;
     textArea.style.height = '51px';
@@ -461,8 +456,7 @@ function createOneCell(tableID,name,select,textAreaName)
 }
 
 
-function createOneOutBuildingSpaceCell()
-{
+function createOneOutBuildingSpaceCell() {
     var table = document.getElementById('HOWOutBuildingTable');
     var rowCount = table.rows.length;
     var columnCount = table.rows[0].cells.length;
@@ -471,26 +465,22 @@ function createOneOutBuildingSpaceCell()
 
     var row = table.insertRow(rowCount);
 
-    for (i=0;i<columnCount;i++)
-    {
+    for (i = 0; i < columnCount; i++) {
         //console.log(columnCount);
         //console.log(i);
 
-        if (i==0)
-        {
+        if (i == 0) {
             var th = document.createElement('th');
             th.className = 'zui-sticky-col';
             th.style.height = '103px';
             var nameInput = document.createElement('INPUT');
-            nameInput.setAttribute('class','form-control');
-            nameInput.setAttribute('title','name');
-            nameInput.setAttribute('type','text');
+            nameInput.setAttribute('class', 'form-control');
+            nameInput.setAttribute('title', 'name');
+            nameInput.setAttribute('type', 'text');
             nameInput.id = 'HOWOutBuildingPlace' + (rowCount - 1);
             th.appendChild(nameInput);
             row.appendChild(th);
-        }
-        else
-        {
+        } else {
 
             var id = i - 1;
             var cell = row.insertCell(i);
@@ -498,13 +488,13 @@ function createOneOutBuildingSpaceCell()
             //create and append the 'SELECT' element
             var selectList = document.createElement("select");
             // selectList.id = "HOWSiteSelect" + rowCount;
-            selectList.id = 'HOWOutBuildingPlace' + (rowCount-1) + 'Select' + id;
+            selectList.id = 'HOWOutBuildingPlace' + (rowCount - 1) + 'Select' + id;
             selectList.style.width = "100%";
-            selectList.setAttribute('title','checkList');
+            selectList.setAttribute('title', 'checkList');
 
-            var selectOption = ["Choose an item","√",'X','--','U','IW','R','P','N'];
-            var selectValue = [" ","No Defects Evident","Defect Evident","Not Relevant","Untested",
-                "Incomplete Work","Reasonable Access","Partial Access",'Not Accessible'];
+            var selectOption = ["Choose an item", "√", 'X', '--', 'U', 'IW', 'R', 'P', 'N'];
+            var selectValue = [" ", "No Defects Evident", "Defect Evident", "Not Relevant", "Untested",
+                "Incomplete Work", "Reasonable Access", "Partial Access", 'Not Accessible'];
 
 
             //Create and append the options
@@ -513,8 +503,7 @@ function createOneOutBuildingSpaceCell()
                 var group = document.createElement('optgroup');
                 group.label = selectValue[a];
                 option.text = selectOption[a];
-                if (a===0)
-                {
+                if (a === 0) {
                     option.selected = true;
                     option.disabled = true;
                 }
@@ -526,9 +515,9 @@ function createOneOutBuildingSpaceCell()
 
             //create an name input for the cell1
             var textArea = document.createElement('textarea');
-            textArea.setAttribute('class','form-control');
-            textArea.setAttribute('placeholder','Notes');
-            textArea.id = 'HOWOutBuildingPlace' + (rowCount-1) + 'Text' + id;
+            textArea.setAttribute('class', 'form-control');
+            textArea.setAttribute('placeholder', 'Notes');
+            textArea.id = 'HOWOutBuildingPlace' + (rowCount - 1) + 'Text' + id;
             textArea.style.height = '50px';
             textArea.style.marginTop = '10px';
 
@@ -545,7 +534,7 @@ function moreDefects() {
 
     var table = document.getElementById('HOWDefectsTable');
     var rowCount = table.rows.length;
-   // var usefulRow = rowCount;
+    // var usefulRow = rowCount;
     var id = rowCount - 1;
     var row = table.insertRow(rowCount);
     var cell1 = row.insertCell(0);
@@ -554,9 +543,9 @@ function moreDefects() {
 
     //create an item number input for the cell1
     var nameInput = document.createElement('INPUT');
-    nameInput.setAttribute('class','form-control');
-    nameInput.setAttribute('title','itemNo');
-    nameInput.setAttribute('type','text');
+    nameInput.setAttribute('class', 'form-control');
+    nameInput.setAttribute('title', 'itemNo');
+    nameInput.setAttribute('type', 'text');
     nameInput.id = 'HOWDefectItem' + id;
     cell1.appendChild(nameInput);
 
@@ -564,16 +553,15 @@ function moreDefects() {
     //var descriptionInput = document.createElement('INPUT');
     var descriptionInput = document.createElement('textarea');
     descriptionInput.style.height = '60px';
-    descriptionInput.setAttribute('class','form-control');
-    descriptionInput.setAttribute('title','description');
+    descriptionInput.setAttribute('class', 'form-control');
+    descriptionInput.setAttribute('title', 'description');
     descriptionInput.id = 'HOWDefectDescription' + id;
     cell2.appendChild(descriptionInput);
 
 
 }
 
-function moreAccessLimitation()
-{
+function moreAccessLimitation() {
     //console.log('your are in');
     var table = document.getElementById('HOWAccessTable');
     var rowCount = table.rows.length;
@@ -586,9 +574,9 @@ function moreAccessLimitation()
 
     //create an item number input for the cell1
     var nameInput = document.createElement('INPUT');
-    nameInput.setAttribute('class','form-control');
-    nameInput.setAttribute('title','itemNO');
-    nameInput.setAttribute('type','text');
+    nameInput.setAttribute('class', 'form-control');
+    nameInput.setAttribute('title', 'itemNO');
+    nameInput.setAttribute('type', 'text');
     nameInput.id = 'HOWAccessItem' + id;
     cell1.appendChild(nameInput);
 
@@ -596,20 +584,18 @@ function moreAccessLimitation()
     //var descriptionInput = document.createElement('INPUT');
     var descriptionInput = document.createElement('textarea');
     descriptionInput.style.height = '60px';
-    descriptionInput.setAttribute('class','form-control');
-    descriptionInput.setAttribute('title','description');
+    descriptionInput.setAttribute('class', 'form-control');
+    descriptionInput.setAttribute('title', 'description');
     descriptionInput.id = 'HOWAccessDescription' + id;
     cell2.appendChild(descriptionInput);
 }
 
-function addRecommendations(labelID,selectID)
-{
+function addRecommendations(labelID, selectID) {
     var label = document.getElementById(labelID);
     label.value += document.getElementById(selectID).value + ' ';
 }
 
-function clearRecommendation(labelID)
-{
+function clearRecommendation(labelID) {
     var label = document.getElementById(labelID);
     label.value = "";
     label.placeholder = "Recommendations will be displayed here";
@@ -940,7 +926,7 @@ $("#HOW_uploadImg_Btn").click(function () {
     $("#HOW_ImgsUpload").trigger("click");
 });
 
-var photos_count = 0;
+var photos_count = 1;
 
 //Photos upload file
 $("#HOW_ImgsUpload").change(function (e) {
@@ -1110,9 +1096,9 @@ function isEmpty(val) {
 }
 
 //Source from http://www.blogjava.net/jidebingfeng/articles/406171.html
-function convertBase64UrlToBlob(urlData,type){
+function convertBase64UrlToBlob(urlData, type) {
 
-    var bytes = window.atob(urlData.split(',')[1]);        //remove url, convert to byte
+    var bytes = window.atob(urlData.split(',')[1]); //remove url, convert to byte
 
     //deal with anomaly, change the ASCI code less than = 0 to great than zero
     var ab = new ArrayBuffer(bytes.length);
@@ -1121,5 +1107,7 @@ function convertBase64UrlToBlob(urlData,type){
         ia[i] = bytes.charCodeAt(i);
     }
 
-    return new Blob( [ab] , {type : type});
+    return new Blob([ab], {
+        type: type
+    });
 }

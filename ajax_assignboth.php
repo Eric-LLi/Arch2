@@ -1,9 +1,9 @@
 <?php
   require_once("shared.php");
-
+//  include 'ChromePhp.php';
   global $reportTypes;
   global $userTypes;
-  global $footer; 
+  global $footer;
   global $header;
 
   function doMacros($h, $b)
@@ -11,9 +11,9 @@
     global $reportTypes;
     global $userTypes;
 
-    //Get the contents of the footer and header to the variables. 
+    //Get the contents of the footer and header to the variables.
     $header = file_get_contents('Email_Header.html');
-    $footer = file_get_contents('Email_Footer.html'); 
+    $footer = file_get_contents('Email_Footer.html');
     $h = str_replace("XXX_HEADER", $header, $h);
     $h = str_replace("XXX_FOOTER", $footer, $h);
 
@@ -21,7 +21,10 @@
     $h = str_replace("XXX_ARCHITECTPHONE", $b['linked_mobile'], $h);
 
     $h = str_replace("XXX_BOOKINGCODE", $b['linked_bookingcode'], $h);
-    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['linked_bookingcode'], $h);
+//      ChromePhp::log($b);
+//      error_log($b);
+//    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['linked_bookingcode'], $h);
+    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['bookingcode'], $h);
     $h = str_replace("XXX_CUSTFIRSTLASTNAME", $b['custfirstname'] . ' ' . $b['custlastname'], $h);
     $h = str_replace("XXX_CUSTFIRSTNAME", $b['custfirstname'], $h);
     $h = str_replace("XXX_CUSTADDRESS1", $b['custaddress1'], $h);
@@ -102,6 +105,9 @@
 
         $dbresult1 = SharedQuery($dbupdate1, $dblink);
         $dbresult2 = SharedQuery($dbupdate2, $dblink);
+
+
+
 
         if ($dbresult1 && $dbresult2)
         {
@@ -185,6 +191,7 @@
                       "            left join users u2 on (b2.users_id=u2.id) " .
                       "where " .
                       "b1.id=$bookingcode";
+
           if ($dbresult = SharedQuery($dbselect, $dblink))
           {
             if ($numrows = SharedNumRows($dbresult))
@@ -192,16 +199,17 @@
               $booking = null;
               while ($dbrow = SharedFetchArray($dbresult))
                 $booking = $dbrow;
-
+//                error_log($booking);
+//                ChromePhp::log($booking);
               // Let customer know...
               if ($booking['custemail'] != "")
               {
                 $emailtemplate = $reportconfirmemails[$booking['itype']];
                 $html = file_get_contents('email_architectallocation.html');
-                error_log($html);
+                //error_log($html);
                 $html = doMacros($html, $booking);
 
-		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], "Assessment/Inspection Confirmation", $html);
+		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
               }
 
               // Let architect/inspector know... (arch is the linked entries)...
@@ -213,12 +221,12 @@
                   // Inspector notification...
                   $html1 = file_get_contents('email_comboinspectornotification.html');
                   $html1 = doMacros($html1, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], "Timber Inspection Confirmation", $html1);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Timber Inspection Confirmation", $html1);
 
                   // Architect notification...
                   $html2 = file_get_contents('email_comboarchitectnotification.html');
                   $html2 = doMacros($html2, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_email'], $booking['linked_firstname'] . ' ' . $booking['linked_lastname'], "Assessment Report Confirmation", $html2);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_email'], $booking['linked_firstname'] . ' ' . $booking['linked_lastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment Report Confirmation", $html2);
                 }
               }
             }

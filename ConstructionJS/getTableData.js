@@ -57,7 +57,7 @@ function getAssessmentDetailsTable() {
     var result;
     result = {
         table: {
-            widths: [130, '*', 40, '*', 50, '*'],
+            widths: [120, '*', 40, '*', 50, '*'],
             body: [
                 [{
                     text: 'ASSESSMENT DETAILS',
@@ -97,7 +97,7 @@ function getAssessmentDetailsTable() {
                     border: [true, true, false, true]
                 }],
                 [{
-                    text: 'Date of Inspection',
+                    text: 'Date of Assessment',
                     style: 'tableBoldTextAlignLeft',
                     border: [false, true, true, true]
                 }, {
@@ -105,7 +105,7 @@ function getAssessmentDetailsTable() {
                     fontSize: 9,
                     colSpan: 2
                 }, {}, {
-                    text: 'Time of Inspection',
+                    text: 'Time of Assessment',
                     style: 'tableBoldTextAlignLeft'
                 }, {
                     text: getIt('timeOfInspection'),

@@ -132,6 +132,11 @@ function ConstructionUploadImages(){
 }
 
 $('#ConstructionUploadImages').change(function() {
+    var imageIDs = $("#ConstructionPhotographs form");
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
     $("#ConstructionPhotographs").empty();
     var table = document.getElementById("ConstructionImagesTable");
     table.style.display = 'block';

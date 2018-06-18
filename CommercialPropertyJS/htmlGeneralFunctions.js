@@ -958,7 +958,7 @@ $("#CP_uploadImg_Btn").click(function () {
     $("#CP_ImgsUpload").trigger("click");
 });
 
-var photos_count = 0;
+var photos_count = 1;
 
 //Photos upload file
 $("#CP_ImgsUpload").change(function (e) {

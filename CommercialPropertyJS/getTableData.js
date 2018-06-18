@@ -1404,11 +1404,13 @@ function getImages() {
                         image: imgSrc,
                         width: width,
                         height: height,
-                        margin: [0, 80, 0, 0]
+                        margin: [0, 80, 0, 0],
+                        alignment: 'center'
                     },
                     {
                         text: imgLabel,
-                        margin: [0, 5]
+                        margin: [0, 5],
+                        alignment: 'center'
                     },
                     {
                         text: imgText

@@ -13,12 +13,21 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         <!--  Import JQuery  -->
         <script src="js/jquery-1.12.4.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
         <!-- Customized CSS -->
         <link rel="stylesheet" href="css/general.css">
         <!--  Import pdfMake  -->
         <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
         <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
+        <script type="text/javascript"> 
+            function stopRKey(evt) { 
+            var evt = (evt) ? evt : ((event) ? event : null); 
+            var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+            if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+            } 
+            document.onkeypress = stopRKey; 
+        </script>
+
 
         <?php require_once("saveloaddata.php"); ?>
         <?php require_once("meta.php"); ?>
@@ -125,11 +134,11 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Date of Inspection</label><br>
+                        <label>Date of Assessment</label><br>
                         <textarea id="dateOfInspection" title="date of inspection" class="form-control"></textarea>
                     </div>
                     <div class="col-sm-6">
-                        <label>Time of Inspection</label><br>
+                        <label>Time of Assessment</label><br>
                         <textarea id="timeOfInspection" title="time" class="form-control"></textarea>
                     </div>
                 </div>
