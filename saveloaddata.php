@@ -249,7 +249,7 @@
                 if (response.rc == 0) {
                     console.log('successful');
                 } else {
-                    console.log('something wrong');
+                    //console.log('something wrong');
                 }
                 //break down the response message. 
             },

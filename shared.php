@@ -8,6 +8,8 @@
   //  $gConfig['dbport'] = 8889;
   $gConfig['dbusername'] = "arch";
   $gConfig['dbpwd'] = "lmi$$";
+//  $gConfig['dbusername'] = "root";
+//  $gConfig['dbpwd'] = "root";
   $gConfig['dberrormsg'] = "";
   $gConfig['smtp-user'] = "noreply@adtalk.services";
   $gConfig['smtp-password'] = "adtalk\$\$00";
@@ -15,10 +17,10 @@
 
   //$gConfig['adminemail'] = "office@archicentreaustralia.com.au";
   $gConfig['bccemail'] = "archive@archicentreaustralia.com.au";
-  //$gConfig['adminemail'] = "M0410898213@126.com";
+  // $gConfig['adminemail'] = "M0410898213@126.com";
   $gConfig['ccemail'] = "emily92308@126.com";
-//  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
-$gConfig['adminemail'] = "weidear.luv@gmail.com";
+  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
+// $gConfig['adminemail'] = "weidear.luv@gmail.com";
   //$gConfig['adminemail'] = "mitchamrumpus@gmail.com";
 
   $reportTypes =
