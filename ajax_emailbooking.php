@@ -159,8 +159,14 @@
 
           $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
           $html = str_replace("XXX_LINKREPORT", $link, $html);
+          // $fileName = $bookingcode."."."pdf";
+          // $fileDestination = './pdfreport/'.$fileName;
+          
+          // error_log($fileDestination);
+          // $pdf = file_get_contents($fileDestination);
 
           SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html);
+          //SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $pdf);
 
           // Now update email count and date...
           $dbupdate = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
