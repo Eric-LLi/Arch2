@@ -17,10 +17,10 @@
 
   //$gConfig['adminemail'] = "office@archicentreaustralia.com.au";
   $gConfig['bccemail'] = "archive@archicentreaustralia.com.au";
-  //$gConfig['adminemail'] = "M0410898213@126.com";
+  // $gConfig['adminemail'] = "M0410898213@126.com";
   $gConfig['ccemail'] = "emily92308@126.com";
-//  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
-$gConfig['adminemail'] = "weidear.luv@gmail.com";
+  $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
+// $gConfig['adminemail'] = "weidear.luv@gmail.com";
   //$gConfig['adminemail'] = "mitchamrumpus@gmail.com";
 
   $reportTypes =

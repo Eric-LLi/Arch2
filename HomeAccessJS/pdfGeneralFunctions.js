@@ -1049,7 +1049,7 @@ function getPhotoImgs() {
             row.push({});
             data.push(row);
         }
-        console.log(data);
+        //console.log(data);
         return data;
     }
 }
