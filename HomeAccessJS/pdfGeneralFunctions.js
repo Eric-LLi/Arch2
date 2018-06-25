@@ -21,53 +21,46 @@ function determineFrontPageFooter(mode) {
             result = {
                 table: {
                     body: [
-                        [
-                            {
-                                image: footerImage,
-                                alignment: 'left',
-                                width: 80,
-                                height: 34
-                            }
-                            , {
-                                text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
-                                alignment: 'left',
-                                fontSize: 7,
-                                margin: [0, 10, 0, 0],
-                                color: '#8E8B8B'
-                            }
-                        ]
-                        , [
-                            {
-                                text: ['For further information please call Archicentre ', {
-                                    text: 'Australia ',
-                                    color: '#E06666'
-                                }, 'on ', {
-                                    text: '1300 13 45 13',
-                                    color: '3A3333',
-                                    bold: true,
-                                    fontSize: 8
-                                }],
-                                alignment: 'left',
-                                fontSize: 7,
-                                colSpan: 2,
-                                color: '#8E8B8B'
-                            }
-                        ]
-                        , [
-                            {
-                                text: ['or go to ', {
-                                    text: 'www.archicentreaustralia.com.au',
-                                    bold: true,
-                                    color: '3A3333',
-                                    fontSize: 8
-                                }],
-                                alignment: 'left',
-                                fontSize: 7,
-                                margin: [0, -4, 0, 0],
-                                colSpan: 2,
-                                color: '#8E8B8B'
-                            }
-                        ]
+                        [{
+                            image: footerImage,
+                            alignment: 'left',
+                            width: 80,
+                            height: 34
+                        }, {
+                            text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
+                            alignment: 'left',
+                            fontSize: 7,
+                            margin: [0, 10, 0, 0],
+                            color: '#8E8B8B'
+                        }],
+                        [{
+                            text: ['For further information please call Archicentre ', {
+                                text: 'Australia ',
+                                color: '#E06666'
+                            }, 'on ', {
+                                text: '1300 13 45 13',
+                                color: '3A3333',
+                                bold: true,
+                                fontSize: 8
+                            }],
+                            alignment: 'left',
+                            fontSize: 7,
+                            colSpan: 2,
+                            color: '#8E8B8B'
+                        }],
+                        [{
+                            text: ['or go to ', {
+                                text: 'www.archicentreaustralia.com.au',
+                                bold: true,
+                                color: '3A3333',
+                                fontSize: 8
+                            }],
+                            alignment: 'left',
+                            fontSize: 7,
+                            margin: [0, -4, 0, 0],
+                            colSpan: 2,
+                            color: '#8E8B8B'
+                        }]
                     ]
                 },
                 layout: 'noBorders',
@@ -78,15 +71,13 @@ function determineFrontPageFooter(mode) {
             result = {
                 table: {
                     body: [
+                        [{
+                            image: footerImage,
+                            alignment: 'left',
+                            width: 80,
+                            height: 34
+                        }],
                         [
-                            {
-                                image: footerImage,
-                                alignment: 'left',
-                                width: 80,
-                                height: 34
-                            }
-                        ]
-                        , [
 
                             {
                                 text: ['For further information please call Archicentre ', {
@@ -102,21 +93,19 @@ function determineFrontPageFooter(mode) {
                                 fontSize: 7,
                                 color: '#8E8B8B'
                             }
-                        ]
-                        , [
-                            {
-                                text: ['or go to ', {
-                                    text: 'www.archicentreaustralia.com.au',
-                                    bold: true,
-                                    color: '3A3333',
-                                    fontSize: 8
-                                }],
-                                alignment: 'left',
-                                fontSize: 7,
-                                margin: [0, -4, 0, 0],
-                                color: '#8E8B8B'
-                            }
-                        ]
+                        ],
+                        [{
+                            text: ['or go to ', {
+                                text: 'www.archicentreaustralia.com.au',
+                                bold: true,
+                                color: '3A3333',
+                                fontSize: 8
+                            }],
+                            alignment: 'left',
+                            fontSize: 7,
+                            margin: [0, -4, 0, 0],
+                            color: '#8E8B8B'
+                        }]
                     ]
                 },
                 layout: 'noBorders',
@@ -152,25 +141,21 @@ function determineFooter(mode) {
                 table: {
                     widths: ['auto', 350],
                     body: [
+                        [{
+                            rowSpan: 2,
+                            image: footerImage,
+                            alignment: 'left',
+                            width: 80,
+                            height: 34
+                        }, {
+                            text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
+                            alignment: 'left',
+                            fontSize: 7,
+                            margin: [0, 5, 0, 0],
+                            color: '#8E8B8B'
+                        }],
                         [
-                            {
-                                rowSpan: 2,
-                                image: footerImage,
-                                alignment: 'left',
-                                width: 80,
-                                height: 34
-                            }
-                            , {
-                                text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
-                                alignment: 'left',
-                                fontSize: 7,
-                                margin: [0, 5, 0, 0],
-                                color: '#8E8B8B'
-                            }
-                        ]
-                        , [
-                            ''
-                            , {
+                            '', {
                                 text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
@@ -187,22 +172,19 @@ function determineFooter(mode) {
                 table: {
                     widths: ['auto', 350],
                     body: [
-                        [
-                            {
-                                // rowSpan:2,
-                                image: footerImage,
-                                alignment: 'left',
-                                width: 80,
-                                height: 34
-                            }
-                            , {
-                                text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
-                                alignment: 'left',
-                                fontSize: 7,
-                                margin: [0, 25, 0, 0],
-                                color: '#8E8B8B'
-                            }
-                        ]
+                        [{
+                            // rowSpan:2,
+                            image: footerImage,
+                            alignment: 'left',
+                            width: 80,
+                            height: 34
+                        }, {
+                            text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                            alignment: 'left',
+                            fontSize: 7,
+                            margin: [0, 25, 0, 0],
+                            color: '#8E8B8B'
+                        }]
 
                     ]
                 },
@@ -1044,8 +1026,7 @@ function getPhotoImgs() {
                 imgSrc = imgContainer.attr('src');
             }
             row.push({
-                stack: [
-                    {
+                stack: [{
                         image: imgSrc,
                         width: 250,
                         height: 187,
@@ -1107,8 +1088,7 @@ function getSketchImgs() {
                 imgSrc = imgContainer.attr('src');
             }
             row.push({
-                stack: [
-                    {
+                stack: [{
                         image: imgSrc,
                         alignment: 'center'
                     },
@@ -1131,7 +1111,7 @@ function convertImgToBase64(img) {
     canvas.height = img.naturalHeight;
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
-    var src = canvas.toDataURL("image/png");
-
+    // var src = canvas.toDataURL("image/png");
+    var src = canvas.toDataURL('image/jpeg', 0.1);
     return src;
 }
