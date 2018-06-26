@@ -66,8 +66,7 @@ var getSelectID = [
 ];
 
 //Store 'key description' for "select"
-var keySelectOption = [
-    {
+var keySelectOption = [{
         name: '√',
         value: 'No_visible_significant_defect'
     },
@@ -800,7 +799,7 @@ $("#Imgs_Upload").change(function (e) {
                     var width = image.width;
                     var height = image.height;
 
-                    var code = resizeImage_Canvas(image).toDataURL("image/png");
+                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg', 0.5);
 
                     if (!isEmpty(code)) {
                         $("#" + element[1]).attr("src", code);
