@@ -2,12 +2,14 @@
   require_once("class.phpmailer.php");
 
   $gConfig['dbname'] = "arch";
- $gConfig['dbserver'] = "localhost:3306";
- $gConfig['dbport'] = 3306;
-  //  $gConfig['dbserver'] = "localhost:8889";
-  //  $gConfig['dbport'] = 8889;
+//  $gConfig['dbserver'] = "localhost:3306";
+//  $gConfig['dbport'] = 3306;
+   $gConfig['dbserver'] = "localhost:8889";
+   $gConfig['dbport'] = 8889;
   $gConfig['dbusername'] = "arch";
   $gConfig['dbpwd'] = "lmi$$";
+//  $gConfig['dbusername'] = "root";
+//  $gConfig['dbpwd'] = "root";
   $gConfig['dberrormsg'] = "";
   $gConfig['smtp-user'] = "noreply@adtalk.services";
   $gConfig['smtp-password'] = "adtalk\$\$00";
