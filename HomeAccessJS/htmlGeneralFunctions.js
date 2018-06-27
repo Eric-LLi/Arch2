@@ -799,7 +799,7 @@ $("#Imgs_Upload").change(function (e) {
                     var width = image.width;
                     var height = image.height;
 
-                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg', 1);
+                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
 
                     if (!isEmpty(code)) {
                         $("#" + element[1]).attr("src", code);
@@ -900,6 +900,20 @@ function createPhoto(id) {
     return elements;
 }
 
+$("#deleteImg_Btn").click(function () {
+    var img = $("#HA_ImgsContents img");
+    if (img.length > 0) {
+        for (let i = 0; i < img.length; i++) {
+            try {
+                doRemovePhoto(img[i].id);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        
+        $("#HA_ImgsContents").empty();
+    }
+});
 //Photos page; images remove button action.
 function imagesRemoveBtn(containerID, imgID) {
     if ($("#HA_BookingNo").val() === "0") {
