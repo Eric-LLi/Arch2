@@ -20,7 +20,6 @@
   // $gConfig['adminemail'] = "M0410898213@126.com";
   $gConfig['ccemail'] = "emily92308@126.com";
   $gConfig['adminemail'] = "fafa.lai@adtalk.com.au";
-// $gConfig['adminemail'] = "weidear.luv@gmail.com";
   //$gConfig['adminemail'] = "mitchamrumpus@gmail.com";
 
   $reportTypes =
