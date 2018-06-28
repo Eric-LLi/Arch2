@@ -356,7 +356,9 @@
                         //console.log(p.addid);
                         //console.log(imageID.style.width);
                         //console.log(addButton);
-                        if (addButton) {
+                        if (addButton) 
+                        {
+                            console.log("button existed");
                             addButton.style.display = 'none';
                             addButton.style.width = p.width;
                             var nextaddid = incString(p.addid);
@@ -376,10 +378,11 @@
                             if (nextImage) {
                                 //console.log(nextImage.src)
                                 if (nextImage.src.indexOf("photos") < 0) {
-                                    //console.log('no photos');
+                                    // console.log('no photos');
                                     nextAddButton.style.display = 'block';
                                 }
-                            } else {
+                            } 
+                            else {
                                 //console.log('next image is not existed, it is not on property assessment or timber pest insepction report');
                                 if (p.addid.substr(0, 16) == 'CPImageAddButton') {
                                     //console.log('let build something');
@@ -423,7 +426,8 @@
                         //console.log('the next add id is ' + nextaddid);
                         // console.log('the next imageID is ' + nextImageID);
                     }
-                } else {
+                } 
+                else {
                     //console.log(p.imageid + " corresponding image field is not extied");
                     //console.log("2222222Table Name: " + p.tableName);
                     if (p.tableName) {
@@ -555,6 +559,10 @@
                         } else if (p.tableName === 'AdviceImagesTable') {
                             maxIamge = 30;
                             var table = document.getElementById(p.tableName);
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            var imgLabelID = "imageCaption" + currentID;
+                            var idGroup = [];
+
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                 p.removeFunction, p.addFunction, p.imageSize, p.width);
@@ -563,27 +571,44 @@
                             document.getElementById(p.removeid).style.display = 'block';
                             document.getElementById(p.textid).style.display = 'block';
                             document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            var totalContainers = $('#AdvicePhotographs').find('> form');
+                            console.log("the current form in the report is :" + totalContainers.length);
                             //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                           
+                            
+
                             var nextID = Number(currentID) + 1;
                             //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
-                            if (countingImage < maxIamge) {
-                                if (nextID === countingImage) {
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    //var newID = Number(id) + 1;
-                                    var altID = Number(nextID) + 1;
-                                    nextAltName = 'image ' + altID;
-                                    console.log("I am here!!! " + nextAltName);
-                                    var nextImageID = 'AdviceImage' + nextID;
-                                    var nextTextID = 'AdviceImageText' + nextID;
-                                    var nextRemoveButtonID = 'AdviceImageRemoveButton' + nextID;
-                                    var nextAddButtonID = 'AddAdviceImageButton' + nextID;
-                                    var nextUploadID = 'AdviceUploadImage' + nextID;
-                                    addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        p.removeFunction, p.addFunction, '500px', '0px');
-                                } else {
-                                    console.log("still loading image, no worry");
+                            
+                            if(totalContainers.length == countingImage)
+                            {                                   
+                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+                                // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                for (var i = 0; i < totalContainers.length; i++)
+                                {
+                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                    var id = Number(idStr);
+                                    idGroup.push(id);
                                 }
+                                console.log(idGroup);
+                                idGroup.sort(function(a, b){return a - b});
+                                console.log(idGroup);
+                                console.log("the last ID is" + idGroup[idGroup.length-1]);
+                                var lastID = idGroup[idGroup.length-1]
+                                var newID = Number(lastID) + 1;
+                                var altID = Number(lastID) + 2;
+                                nextAltName = 'image ' + altID;
+                                //console.log("I am here!!! need another image element ,the next id  " + newID);
+                                var nextImageID = 'AdviceImage' + newID;
+                                var nextTextID = 'AdviceImageText' + newID;
+                                var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
+                                var nextAddButtonID = 'AddAdviceImageButton' + newID;
+                                var nextUploadID = 'AdviceUploadImage' + newID;
+                                addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                                    'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+
+
                             }
                         } else if (p.tableName === 'MaintenanceImagesTable') {
 
