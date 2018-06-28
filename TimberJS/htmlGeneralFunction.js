@@ -360,32 +360,32 @@ function RemoveTimberCoverImage(){
 
 
 function TimberSummaryUploadImages() {
-     var imageIDs = $("#TimberSummaryImages form");
-    console.log(imageIDs);
-    for (var i = 0; i < imageIDs.length; i++) {
-        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-        doRemovePhoto(id);
-    }
+    //  var imageIDs = $("#TimberSummaryImages form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
     document.getElementById('TimberSummaryUploadImages').click();
 }
 
 function TimberRecommendationUploadImages() {
-     var imageIDs = $("#TimberRecommendationTable form");
-    console.log(imageIDs);
-    for (var i = 0; i < imageIDs.length; i++) {
-        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-        doRemovePhoto(id);
-    }
+    //  var imageIDs = $("#TimberRecommendationTable form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
     document.getElementById('TimberRecommendationUploadImages').click();
 }
 
 function TimberSiteUploadImages() {
-    var imageIDs = $("#TimberSiteImages form");
-    console.log(imageIDs);
-    for (var i = 0; i < imageIDs.length; i++) {
-        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-        doRemovePhoto(id);
-    }
+    // var imageIDs = $("#TimberSiteImages form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
     document.getElementById('TimberSiteUploadImages').click();
 }
 
@@ -400,32 +400,32 @@ function TimberExteriorUploadImages() {
 }
 
 function TimberInteriorUploadImages() {
-    var imageIDs = $("#TimberInteriorImages form");
-    console.log(imageIDs);
-    for (var i = 0; i < imageIDs.length; i++) {
-        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-        doRemovePhoto(id);
-    }
+    // var imageIDs = $("#TimberInteriorImages form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
     document.getElementById('TimberInteriorUploadImages').click();
 }
 
 function TimberRoofUploadImages() {
-    var imageIDs = $("#TimberRoofImages form");
-    console.log(imageIDs);
-    for (var i = 0; i < imageIDs.length; i++) {
-        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-        doRemovePhoto(id);
-    }
+    // var imageIDs = $("#TimberRoofImages form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
     document.getElementById('TimberRoofUploadImages').click();
 }
 
 function TimberSubfloorUploadImages() {
-    var imageIDs = $("#TimberSubfloorImages form");
-    console.log(imageIDs);
-    for (var i = 0; i < imageIDs.length; i++) {
-        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-        doRemovePhoto(id);
-    }
+    // var imageIDs = $("#TimberSubfloorImages form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
     document.getElementById('TimberSubfloorUploadImages').click();
 }
 
