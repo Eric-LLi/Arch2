@@ -24,7 +24,8 @@ function addAccessLimitation(tableID, selectIDName, noteIDName) {
 
     //create limitation select options for cell 1
     var limitationOption = ["Reasonably Accessible", "Partially Accessible - Obstructed", "Partially Accessible - Inspection Safety Hazard",
-        "Not Accessible - Obstructed", "Not Accessible - Inspection Safety Hazard"];
+        "Not Accessible - Obstructed", "Not Accessible - Inspection Safety Hazard"
+    ];
     var selectList = document.createElement("select");
     selectList.id = selectIDName + id;
 
@@ -109,7 +110,8 @@ function moreEvidentDefect() {
         var selectOption = ["✔", "XX", 'X', 'U', 'NA'];
         var selectOptionValue = ["√", "XX", 'X', 'U', 'NA'];
         var selectValue = ["No Visible Significant Defect", "Major Defect", "Maintenance Item or Minor Defect",
-            "Unknown / Inaccessible / Not Tested", "Not Applicable; No Such Item"];
+            "Unknown / Inaccessible / Not Tested", "Not Applicable; No Such Item"
+        ];
 
 
         //Create and append the options
@@ -153,7 +155,8 @@ function moreEvidentDefect() {
         var selectOption = ["✔", "XX", 'X', 'U', 'NA'];
         var selectOptionValue = ["√", "XX", 'X', 'U', 'NA'];
         var selectValue = ["No Visible Significant Defect", "Major Defect", "Maintenance Item or Minor Defect",
-            "Unknown / Inaccessible / Not Tested", "Not Applicable; No Such Item"];
+            "Unknown / Inaccessible / Not Tested", "Not Applicable; No Such Item"
+        ];
 
 
         //Create and append the options
@@ -549,6 +552,7 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
         addButton0.style.display = 'block';
         addButton1.style.display = 'block';
         addButton2.style.display = 'block';
+        // $("#AccessmentSiteImages form").attr(76yy"display", "");
 
         var imageFile = input.files[0];
         var imageType = imageFile.type;
@@ -565,14 +569,17 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
                 var base64data = canvas.toDataURL('image/jpeg');
                 //here's example to show it as on imae preview
                 // var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                var image = '#' + imageID0;
-                $(image).attr('src', base64data);
+                // var image = '#' + imageID0;
                 var image = document.getElementById(imageID0);
+                image.setAttribute("src", base64data);
+                // $(image).attr('src', base64data);
+                // image = document.getElementById(imageID0);
                 var description = document.getElementById(text0);
                 var button = document.getElementById(removeButton0);
                 image.style.width = '265px';
                 image.style.height = '265px';
                 image.style.display = 'block';
+
                 description.style.display = 'block';
                 button.style.display = 'block';
                 addButton0.style.display = 'none';
@@ -590,6 +597,8 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
             });
             //doUploadFile(input.files[0],imageID0, text0, removeButton0, addButtonID0,'','','','','','','265px','265px');
         });
+    } else {
+        document.getElementById(imageID0).style.display = "none";
     }
 
 
@@ -641,6 +650,8 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
+        } else {
+            document.getElementById(imageID1).style.display = "none";
         }
     }, 100);
 
@@ -689,6 +700,8 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
                 //doUploadFile(input.files[2],imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
                 //doUploadFile(loadingImage,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
             });
+        } else {
+            document.getElementById(imageID2).style.display = "none";
         }
     }, 120);
 
@@ -774,6 +787,8 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
             });
             //doUploadFile(input.files[0],imageID0, text0, removeButton0, addButtonID0,'','','','','','','265px','265px');
         });
+    }else {
+        document.getElementById(imageID0).style.display = "none";
     }
 
 
@@ -822,6 +837,8 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
+        }else {
+            document.getElementById(imageID1).style.display = "none";
         }
     }, 100);
     setTimeout(function () {
@@ -869,6 +886,8 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(input.files[2],imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
                 //doUploadFile(loadingImage,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
             });
+        }else {
+            document.getElementById(imageID2).style.display = "none";
         }
     }, 110);
     setTimeout(function () {
@@ -916,6 +935,8 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
+        }else {
+            document.getElementById(imageID3).style.display = "none";
         }
     }, 120);
     setTimeout(function () {
@@ -963,6 +984,8 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
+        }else {
+            document.getElementById(imageID4).style.display = "none";
         }
     }, 130);
     setTimeout(function () {
@@ -1010,6 +1033,8 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
+        }else {
+            document.getElementById(imageID5).style.display = "none";
         }
     }, 140);
 
@@ -1032,52 +1057,72 @@ function RemoveImage(imageID0, removeButtonID, addButtonID) {
 
 
 function AssessmentSiteUploadImages() {
-    // var imageIDs = $("#AccessmentSiteImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
+    var imageIDs = $("#AccessmentSiteImages img");
+    console.log(imageIDs);
+
+    for (var i = 0; i < imageIDs.length; i++) {
+        if (imageIDs.eq(i).attr("src") !== "#") {
+            var id = imageIDs.eq(i).attr("id");
+            console.log(id);
+            doRemovePhoto(id);
+        }
+    }
     document.getElementById('AssessmentSiteUploadImages').click();
 }
 
 function AssessmentExteriorUploadImages() {
-    // var imageIDs = $("#AccessmentExteriorImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
+    var imageIDs = $("#AccessmentExteriorImages img");
+    console.log(imageIDs);
+
+    for (var i = 0; i < imageIDs.length; i++) {
+        if (imageIDs.eq(i).attr("src") !== "#") {
+            var id = imageIDs.eq(i).attr("id");
+            console.log(id);
+            doRemovePhoto(id);
+        }
+    }
     document.getElementById('AssessmentExteriorUploadImages').click();
 }
 
 function AssessmentInteriorLivingUploadImages() {
-    // var imageIDs = $("#AccessmentInteriorLivingImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
+    var imageIDs = $("#AccessmentInteriorLivingImages img");
+    console.log(imageIDs);
+
+    for (var i = 0; i < imageIDs.length; i++) {
+        if (imageIDs.eq(i).attr("src") !== "#") {
+            var id = imageIDs.eq(i).attr("id");
+            console.log(id);
+            doRemovePhoto(id);
+        }
+    }
     document.getElementById('AssessmentInteriorLivingUploadImages').click();
 }
 
 function AssessmentInteriorBedroomUploadImages() {
-    // var imageIDs = $("#AccessmentInteriorBedroomImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
+    var imageIDs = $("#AccessmentInteriorBedroomImages img");
+    console.log(imageIDs);
+
+    for (var i = 0; i < imageIDs.length; i++) {
+        if (imageIDs.eq(i).attr("src") !== "#") {
+            var id = imageIDs.eq(i).attr("id");
+            console.log(id);
+            doRemovePhoto(id);
+        }
+    }
     document.getElementById('AssessmentInteriorBedroomUploadImages').click();
 }
 
 function AssessmentInteriorServiceUploadImages() {
-    //  var imageIDs = $("#AccessmentInteriorServiceImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
+    var imageIDs = $("#AccessmentInteriorServiceImages img");
+    console.log(imageIDs);
+
+    for (var i = 0; i < imageIDs.length; i++) {
+        if (imageIDs.eq(i).attr("src") !== "#") {
+            var id = imageIDs.eq(i).attr("id");
+            console.log(id);
+            doRemovePhoto(id);
+        }
+    }
     document.getElementById('AssessmentInteriorServiceUploadImages').click();
 }
 
