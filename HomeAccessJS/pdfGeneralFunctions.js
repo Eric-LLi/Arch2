@@ -1034,6 +1034,9 @@ function getPhotoImgs() {
                         alignment: 'center'
                     },
                     {
+                        text: $(divContainers.eq(i).children('label')).text()
+                    },
+                    {
                         text: $(divContainers.eq(i).children('input')).val()
                     }
                 ]
@@ -1112,6 +1115,6 @@ function convertImgToBase64(img) {
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
     // var src = canvas.toDataURL("image/png");
-    var src = canvas.toDataURL('image/png', 0.9);
+    var src = canvas.toDataURL('image/jpeg');
     return src;
 }

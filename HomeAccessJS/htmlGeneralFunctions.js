@@ -754,7 +754,7 @@ var tradeClear = function (tid) {
 $("#uploadImg_Btn").click(function () {
     $("#Imgs_Upload").trigger("click");
 });
-var photos_count = 0;
+var photos_count = 1;
 
 //Photos upload file
 $("#Imgs_Upload").change(function (e) {
@@ -799,7 +799,7 @@ $("#Imgs_Upload").change(function (e) {
                     var width = image.width;
                     var height = image.height;
 
-                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg', 0.5);
+                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
 
                     if (!isEmpty(code)) {
                         $("#" + element[1]).attr("src", code);
@@ -862,11 +862,13 @@ $("#Imgs_Upload").change(function (e) {
 function createPhoto(id) {
     var imgContainer = document.createElement("div"),
         newImg = document.createElement("img"),
+        imgLabel = document.createElement("label"),
         imgText = document.createElement("input"),
         imgRmBtn = document.createElement("button"),
         lastContainer = document.getElementById("HA_ImgsContents"),
         imgContainerID = id + "_imgContainer",
         newImgID = id + "_AddImg",
+        imgLabelID = "imageCaption" + id,
         imgTextID = id + "_imgText",
         imgRmBtnID = id + "_imgRmBtn";
 
@@ -876,6 +878,8 @@ function createPhoto(id) {
     newImg.setAttribute("id", newImgID);
     //    newImg.setAttribute("width", 200);
     //    newImg.setAttribute("height", 200);
+
+    imgLabel.setAttribute("id", imgLabelID);
 
     imgText.setAttribute("id", imgTextID);
     imgText.setAttribute("type", "text");
@@ -887,11 +891,14 @@ function createPhoto(id) {
 
     lastContainer.appendChild(imgContainer);
     document.getElementById(imgContainerID).appendChild(newImg);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
+    document.getElementById(imgContainerID).appendChild(imgLabel);
     document.getElementById(imgContainerID).appendChild(imgText);
     document.getElementById(imgContainerID).appendChild(imgRmBtn);
 
-    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID];
+    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID,imgLabelID];
 
+    $("#" + imgLabelID).html("IMG " + id);
     $("#" + imgRmBtnID).html("Remove");
     //Photos images remove button listerner.
     $("#" + imgRmBtnID).click(function () {
@@ -900,6 +907,20 @@ function createPhoto(id) {
     return elements;
 }
 
+$("#deleteImg_Btn").click(function () {
+    var img = $("#HA_ImgsContents img");
+    if (img.length > 0) {
+        for (let i = 0; i < img.length; i++) {
+            try {
+                doRemovePhoto(img[i].id);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        
+        $("#HA_ImgsContents").empty();
+    }
+});
 //Photos page; images remove button action.
 function imagesRemoveBtn(containerID, imgID) {
     if ($("#HA_BookingNo").val() === "0") {

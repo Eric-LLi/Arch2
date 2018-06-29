@@ -232,7 +232,7 @@
         //console.log(imageid);
         //console.log(imageAltName);
         //console.log('the width of the save image ' + width);
-        console.log('saving');
+        // console.log('saving');
 
         $.ajax({
             type: 'POST',

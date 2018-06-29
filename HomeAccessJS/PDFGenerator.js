@@ -74,8 +74,7 @@ function generatePDF(mode) {
             if (currentPage === 1) {
                 return {
                     columns: [
-                        determineFrontPageFooter(mode)
-                        , {
+                        determineFrontPageFooter(mode), {
                             text: '\nPage | ' + currentPage.toString() + ' of ' + pageCount,
                             alignment: 'right',
                             margin: [0, 0, 40, 0],
@@ -88,8 +87,7 @@ function generatePDF(mode) {
             } else {
                 return {
                     columns: [
-                        determineFooter(mode)
-                        , {
+                        determineFooter(mode), {
                             text: '\nPage | ' + currentPage.toString() + ' of ' + pageCount,
                             alignment: 'left',
                             margin: [10, 0, 40, 0],
@@ -113,19 +111,15 @@ function generatePDF(mode) {
             },
             giveMeHugeDraft(mode),
             {
-                text: [
-                    {
-                        text: page1,
-                    }
-                    , {
-                        text: page1_2,
-                        color: 'red'
-                    }
-                    , {
-                        text: page1_3 + '\n' + page1_4,
-                        bold: true
-                    }
-                ],
+                text: [{
+                    text: page1,
+                }, {
+                    text: page1_2,
+                    color: 'red'
+                }, {
+                    text: page1_3 + '\n' + page1_4,
+                    bold: true
+                }],
                 style: 'coverPageHeader',
                 pageBreak: 'after'
             },
@@ -147,105 +141,74 @@ function generatePDF(mode) {
                 table: {
                     widths: ['auto', '*', '*', '*'],
                     body: [
+                        [{
+                            colSpan: 4,
+                            text: $('#HA_DivClientDetails').attr('data-title'),
+                            style: 'pageSubHeader'
+                        }, {}, {}, {}],
                         [
-                            {
-                                colSpan: 4,
-                                text: $('#HA_DivClientDetails').attr('data-title'),
-                                style: 'pageSubHeader'
-                            }, {}, {}, {}
-                        ]
-                        , [
-                            $('#HA_lbClientName').text()
-                            , {
+                            $('#HA_lbClientName').text(), {
                                 colSpan: 3,
                                 text: $('#HA_ClientName').val()
                             }, {}, {}
-                        ]
-                        , [
-                            $('#HA_lbClientPhone').text()
-                            , $('#HA_ClientPhone').val()
-                            , $('#HA_lbBookingNo').text()
-                            , $('#HA_BookingNo').val()
-                        ]
-                        , [
-                            {
-                                colSpan: 4,
-                                text: $('#HA_DivPropertyDetails').attr('data-title'),
-                                style: 'pageSubHeader'
-                            }, {}, {}, {}
-                        ]
-                        , [
-                            $('#HA_lbAddress').text()
-                            , {
+                        ],
+                        [
+                            $('#HA_lbClientPhone').text(), $('#HA_ClientPhone').val(), $('#HA_lbBookingNo').text(), $('#HA_BookingNo').val()
+                        ],
+                        [{
+                            colSpan: 4,
+                            text: $('#HA_DivPropertyDetails').attr('data-title'),
+                            style: 'pageSubHeader'
+                        }, {}, {}, {}],
+                        [
+                            $('#HA_lbAddress').text(), {
                                 colSpan: 3,
                                 text: $('#HA_Address').val()
                             }, {}, {}
-                        ]
-                        , [
-                            $('#HA_lbSuburb').text()
-                            , $('#HA_Suburb').val()
-                            , $('#HA_lbState').text() + $('#HA_State').val()
-                            , $('#HA_lbPostcode').text() + $('#HA_Postcode').val()
-                        ]
-                        , [
-                            $('#HA_lbDateOfAssessment').text()
-                            , $('#HA_DateOfAssessment').val()
-                            , $('#HA_lbTimeOfAssessment').text()
-                            , $('#HA_TimeOfAssessment').val()
-                        ]
-                        , [
-                            $('#HA_lbExistingUse').text()
-                            , {
+                        ],
+                        [
+                            $('#HA_lbSuburb').text(), $('#HA_Suburb').val(), $('#HA_lbState').text() + $('#HA_State').val(), $('#HA_lbPostcode').text() + $('#HA_Postcode').val()
+                        ],
+                        [
+                            $('#HA_lbDateOfAssessment').text(), $('#HA_DateOfAssessment').val(), $('#HA_lbTimeOfAssessment').text(), $('#HA_TimeOfAssessment').val()
+                        ],
+                        [
+                            $('#HA_lbExistingUse').text(), {
                                 colSpan: 3,
                                 text: $('#HA_ExistingUse').val()
                             }, {}, {}
-                        ]
-                        , [
-                            $('#HA_lbWeatherConditions').text()
-                            , {
+                        ],
+                        [
+                            $('#HA_lbWeatherConditions').text(), {
                                 colSpan: 3,
                                 text: $('#HA_WeatherConditions').val()
                             }, {}, {}
-                        ]
-                        , [
-                            $('#HA_lbVerbalSummary').text()
-                            , $('#HA_VerbalSummary').val()
-                            , $('#HA_lbDate').text()
-                            , $('#HA_Date').val()
-                        ]
-                        , [
-                            {
-                                colSpan: 4,
-                                text: $('#HA_DivArchitectDetails').attr('data-title'),
-                                style: 'pageSubHeader'
-                            }, {}, {}, {}
-                        ]
-                        , [
-                            $('#HA_lbarchitectName').text()
-                            , $('#HA_architectName').val()
-                            , $('#HA_lbregistrationNumber').text()
-                            , $('#HA_registrationNumber').val()
-                        ]
-                        , [
-                            $('#HA_lbarchitectAddress').text()
-                            , {
+                        ],
+                        [
+                            $('#HA_lbVerbalSummary').text(), $('#HA_VerbalSummary').val(), $('#HA_lbDate').text(), $('#HA_Date').val()
+                        ],
+                        [{
+                            colSpan: 4,
+                            text: $('#HA_DivArchitectDetails').attr('data-title'),
+                            style: 'pageSubHeader'
+                        }, {}, {}, {}],
+                        [
+                            $('#HA_lbarchitectName').text(), $('#HA_architectName').val(), $('#HA_lbregistrationNumber').text(), $('#HA_registrationNumber').val()
+                        ],
+                        [
+                            $('#HA_lbarchitectAddress').text(), {
                                 colSpan: 3,
                                 text: $('#HA_architectAddress').val()
                             }, {}, {}
-                        ]
-                        , [
-                            $('#HA_lbarchitectEmail').text()
-                            , $('#HA_architectEmail').val()
-                            , $('#HA_lbarchitectPhone').text()
-                            , $('#HA_architectPhone').val()
-                            , ]
-                        , [
-                            $('#HA_lbarchitectRef').text() + $('#HA_architectRef').val()
-                            , {
+                        ],
+                        [
+                            $('#HA_lbarchitectEmail').text(), $('#HA_architectEmail').val(), $('#HA_lbarchitectPhone').text(), $('#HA_architectPhone').val(),
+                        ],
+                        [
+                            $('#HA_lbarchitectRef').text() + $('#HA_architectRef').val(), {
                                 colSpan: 2,
                                 text: $('#HA_lbarchitectEmail2').text() + $('#HA_architectEmail2').val()
-                            }, {}
-                            ,
+                            }, {},
                             $('#HA_lbarchitectPhone2').text() + $('#HA_architectPhone2').val()
                         ]
                     ]
@@ -256,29 +219,22 @@ function generatePDF(mode) {
                 table: {
                     widths: ['100%'],
                     body: [
-                        [
-                            {
-                                style: 'pageSubHeader',
-                                text: $('#HA_DivDetailsSought').attr('data-title')
-                            }
-                        ]
-                        , [
-                            {
-                                text: $('#HA_AdviceSought').val()
-                            }
-                        ]
+                        [{
+                            style: 'pageSubHeader',
+                            text: $('#HA_DivDetailsSought').attr('data-title')
+                        }],
+                        [{
+                            text: $('#HA_AdviceSought').val()
+                        }]
                     ]
                 }
             },
             {
-                text: [
-                    {
-                        text: page2_1 + "\n"
-                    }
-                    , {
-                        text: page2_2
-                    }
-                ],
+                text: [{
+                    text: page2_1 + "\n"
+                }, {
+                    text: page2_2
+                }],
                 margin: [0, 100, 0, 0],
                 fontSize: 9,
                 pageBreak: 'after'
@@ -299,65 +255,49 @@ function generatePDF(mode) {
             },
             {
                 style: 'Contents',
-                stack: [
-                    {
-                        text: page3_1
-                    }
-                    , {
-                        text: page3_1_2
-                    }
-                    , {
-                        ul: [page3_2, page3_3],
-                        margin: [20, 0]
-                    }
-                    , {
-                        text: page3_4,
-                        margin: [0, 5]
-                    }
-                    , {
-                        ul: [page3_5, page3_6],
-                        margin: [20, 0]
-                    }
-                    , {
-                        text: page3_7,
-                        style: 'pageSubHeader',
-                        margin: [0, 10]
-                    }
-                    , {
-                        text: page3_8
-                    }
-                    , {
-                        ul: [page3_9, page3_10, page3_11, page3_12, page3_13, page3_14],
-                        margin: [20, 0]
-                    }
-                    , {
-                        text: page3_15,
-                        margin: [0, 5, 0, 0, ]
-                    }
-                    , {
-                        ul: [page3_16, page3_17, page3_18, page3_19, page3_20, page3_21, page3_22],
-                        margin: [20, 0]
-                    }
-                    , {
-                        text: page3_23,
-                        margin: [0, 5, 0, 0]
-                    }
-                    , {
-                        text: page3_23_2
-                    }
-                    , {
-                        text: page3_24,
-                        style: 'pageSubHeader',
-                        margin: [0, 10]
-                    }
-                    , {
-                        text: page3_25
-                    }
-                    , {
-                        text: page3_25_2,
-                        pageBreak: 'after'
-                    }
-                ]
+                stack: [{
+                    text: page3_1
+                }, {
+                    text: page3_1_2
+                }, {
+                    ul: [page3_2, page3_3],
+                    margin: [20, 0]
+                }, {
+                    text: page3_4,
+                    margin: [0, 5]
+                }, {
+                    ul: [page3_5, page3_6],
+                    margin: [20, 0]
+                }, {
+                    text: page3_7,
+                    style: 'pageSubHeader',
+                    margin: [0, 10]
+                }, {
+                    text: page3_8
+                }, {
+                    ul: [page3_9, page3_10, page3_11, page3_12, page3_13, page3_14],
+                    margin: [20, 0]
+                }, {
+                    text: page3_15,
+                    margin: [0, 5, 0, 0, ]
+                }, {
+                    ul: [page3_16, page3_17, page3_18, page3_19, page3_20, page3_21, page3_22],
+                    margin: [20, 0]
+                }, {
+                    text: page3_23,
+                    margin: [0, 5, 0, 0]
+                }, {
+                    text: page3_23_2
+                }, {
+                    text: page3_24,
+                    style: 'pageSubHeader',
+                    margin: [0, 10]
+                }, {
+                    text: page3_25
+                }, {
+                    text: page3_25_2,
+                    pageBreak: 'after'
+                }]
             },
 
             /**
@@ -376,25 +316,23 @@ function generatePDF(mode) {
                     headerRows: 1,
                     widths: ['*', 'auto', '*'],
                     body: [
-                        [
-                            {
-                                colSpan: 3,
-                                text: $('#HA_lbCompleteMessage').text(),
-                                color: 'red',
-                                alignment: 'left'
-                            }, {}, {}], [
-                            {
+                        [{
+                            colSpan: 3,
+                            text: $('#HA_lbCompleteMessage').text(),
+                            color: 'red',
+                            alignment: 'left'
+                        }, {}, {}],
+                        [{
                                 text: $('#HA_lbCompleteMessage2').text(),
-                                },
+                            },
                             {
                                 text: $('#HA_sel1').val(),
-                                },
+                            },
                             {
                                 text: $('#HA_lbCompleteMessage3').text() + "\n\n" + $('#HA_NocompleteComment').val(),
-                                }
-                            ],
-                        [
-                            {
+                            }
+                        ],
+                        [{
                                 text: $('#HA_lbCompleteMessage4').text(),
                             },
                             {
@@ -450,26 +388,23 @@ function generatePDF(mode) {
                 table: {
                     widths: ['*'],
                     body: [
-                        [
-                            {
-                                border: [true, false, true, true],
-                                stack: [
-                                    {
-                                        text: 'NOTES:',
-                                        bold: true,
-                                        fontSize: 12
-                                    },
-                                    {
-                                        fontSize: 10,
-                                        margin: [20, 0],
-                                        ol: [
-                                            '\t* Gravity fed HWS’s are generally unsuitable for hand held showers',
-                                            '\tAccess restrictions'
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
+                        [{
+                            border: [true, false, true, true],
+                            stack: [{
+                                    text: 'NOTES:',
+                                    bold: true,
+                                    fontSize: 12
+                                },
+                                {
+                                    fontSize: 10,
+                                    margin: [20, 0],
+                                    ol: [
+                                        '\t* Gravity fed HWS’s are generally unsuitable for hand held showers',
+                                        '\tAccess restrictions'
+                                    ]
+                                }
+                            ]
+                        }]
                     ]
                 }
             },
@@ -518,17 +453,15 @@ function generatePDF(mode) {
                 table: {
                     widths: ['*'],
                     body: [
-                        [
-                            {
-                                text: [
-                                    page6 + '\n\n', {
-                                        text: page6_2,
-                                        decoration: 'underline'
-                                    },
-                                    ' ' + page6_2_2 + '\n\n', page6_3
-                                ]
-                            }
-                        ]
+                        [{
+                            text: [
+                                page6 + '\n\n', {
+                                    text: page6_2,
+                                    decoration: 'underline'
+                                },
+                                ' ' + page6_2_2 + '\n\n', page6_3
+                            ]
+                        }]
                     ]
                 }
             },
@@ -575,8 +508,7 @@ function generatePDF(mode) {
             {
                 style: 'Contents',
                 margin: [0, 0, 0, 10],
-                text: [
-                    {
+                text: [{
                         text: page10_2
                     },
                     {
@@ -605,15 +537,13 @@ function generatePDF(mode) {
             {
                 pageBreak: 'after',
                 style: 'Contents',
-                columns: [
-                    {
-                        text: page10_3,
-                        width: '*'
-                    }, {
-                        text: page10_4,
-                        width: '*'
-                    }
-                ]
+                columns: [{
+                    text: page10_3,
+                    width: '*'
+                }, {
+                    text: page10_4,
+                    width: '*'
+                }]
             },
 
             /**
@@ -628,42 +558,38 @@ function generatePDF(mode) {
             {
                 pageBreak: 'after',
                 style: 'Contents',
-                columns: [
-                    {
-                        width: 250,
-                        stack: [
-                            page11_body,
-                            {
-                                margin: [20, 0, 0, 0],
-                                ol: [
-                                    page11_1, page11_2, page11_3, page11_4, page11_5, page11_6, page11_7
-                                ]
-                            }
+                columns: [{
+                    width: 250,
+                    stack: [
+                        page11_body,
+                        {
+                            margin: [20, 0, 0, 0],
+                            ol: [
+                                page11_1, page11_2, page11_3, page11_4, page11_5, page11_6, page11_7
+                            ]
+                        }
+                    ]
+                }, {
+                    width: '*',
+                    stack: [{
+                        margin: [40, 0, 0, 0],
+                        start: 8,
+                        ol: [
+                            page11_8, page11_9, page11_10, page11_11, page11_12, page11_13
                         ]
-                    }, {
-                        width: '*',
-                        stack: [
-                            {
-                                margin: [40, 0, 0, 0],
-                                start: 8,
-                                ol: [
-                                    page11_8, page11_9, page11_10, page11_11, page11_12, page11_13
-                                ]
-                            }
-                        ]
-                    }
-                ]
+                    }]
+                }]
             },
 
             /**
              * (9) Report Detail Page night
              */
             giveMeHugeDraft(mode),
-//            //Photos title
-//            {
-//                text: $('#HA_DIVPhotos').attr('data-title'),
-//                style: 'pageTopHeader'
-//            },
+            //            //Photos title
+            //            {
+            //                text: $('#HA_DIVPhotos').attr('data-title'),
+            //                style: 'pageTopHeader'
+            //            },
             //Photos
             {
                 layout: 'noBorders',
@@ -679,11 +605,11 @@ function generatePDF(mode) {
              * (10) Report Detail Page ten
              */
             giveMeHugeDraft(mode),
-//            //Sketch title
-//            {
-//                text: $('#HA_DIVSketchs').attr('data-title'),
-//                style: 'pageTopHeader'
-//            },
+            //            //Sketch title
+            //            {
+            //                text: $('#HA_DIVSketchs').attr('data-title'),
+            //                style: 'pageTopHeader'
+            //            },
             //Sketch imgs
             {
                 layout: 'noBorders',
@@ -741,7 +667,7 @@ function generatePDF(mode) {
             });
         } else {
             console.log("It is on pc");
-            pdfMake.createPdf(docDefinition).open();
+            pdfMake.createPdf(docDefinition).open({}, window.open('', '_blank'));
         }
     }
 }
