@@ -594,7 +594,7 @@ function convertImgToBase64(img) {
     canvas.height = img.naturalHeight;
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
-    var src = canvas.toDataURL("image/png");
+    var src = canvas.toDataURL("image/jpeg");
 
     return src;
 }
