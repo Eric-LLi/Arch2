@@ -436,10 +436,10 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
 
     //crate an image area
     var img = document.createElement('img');
-    img.src = "#";
-    img.alt = imageAltName;
+    //img.src = "#";
+    //img.alt = imageAltName;
     img.id = imageID;
-    img.style.display = 'none';
+    //img.style.display = 'none';
     img.style.width = width;
     img.style.height = imageSize;
     img.style.paddingTop = '10px';
