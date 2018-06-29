@@ -153,6 +153,7 @@ $('#AdviceUploadImages').change(function() {
                                 description.style.display = 'block';
                                 image.style.display = 'block';
                                 image.style.width = '500px';
+                                image.style.height = '500px';
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
@@ -236,6 +237,7 @@ $('#AdviceUploadImages').change(function() {
                                 description.style.display = 'block';
                                 image.style.display = 'block';
                                 image.style.width = '500px';
+                                image.style.height = '500px';
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
@@ -341,6 +343,7 @@ function addOneAdviceImage(click_id)
                             description.style.display = 'block';
                             image.style.display = 'block';
                             image.style.width = '500px';
+                            image.style.height = '500px';
                             imageLable.style.display = 'block';
                             // image.style.height = '250px';
                             var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
@@ -440,8 +443,8 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     //img.alt = imageAltName;
     img.id = imageID;
     //img.style.display = 'none';
-    img.style.width = width;
-    img.style.height = imageSize;
+    img.style.width = '0px';
+    img.style.height = '0px';
     img.style.paddingTop = '10px';
 
     //create an input for the text
