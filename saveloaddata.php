@@ -663,8 +663,14 @@
                             
                         } else if (p.tableName === 'MaintenanceImagesTable') {
 
-                            var maxIamge = 40;
+                             maxImage = 40;
                             var table = document.getElementById(p.tableName);
+                             //get the current id from the imageID.
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
+                            var idGroup = [];
+
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                 p.removeFunction, p.addFunction, p.imageSize, p.width);
@@ -672,34 +678,51 @@
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
                             document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.imageid).style.display = 'block';
-                            //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            var nextID = Number(currentID) + 1;
-                            console.log("the next ID is " + nextID);
+                            // document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '500px';
+                            document.getElementById(p.imageid).style.height = '500px';
+                           
+                            var totalContainers = $('#MaintenancePhotographs').find('> form');
+                            //console.log("the current form in the report is :" + totalContainers.length);
                             //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
-                            if (countingImage < maxIamge) {
-                                if (nextID === countingImage) {
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    //var newID = Number(id) + 1;
-                                    var altID = Number(nextID) + 1;
-                                    nextAltName = 'image ' + altID;
-                                    console.log("I am here!!! " + nextAltName);
-                                    var nextImageID = 'MaintenanceImage' + nextID;
-                                    var nextTextID = 'MaintenanceImageText' + nextID;
-                                    var nextRemoveButtonID = 'MaintenanceRemoveButton' + nextID;
-                                    var nextAddButtonID = 'AddMaintenanceImageButton' + nextID;
-                                    var nextUploadID = 'MaintenanceUploadImage' + nextID;
-                                    addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        p.removeFunction, p.addFunction, '500px', '0px');
-                                } else {
-                                    console.log("still loading image, no worry");
+                            if(totalContainers.length == countingImage && totalContainers.length < maxImage)
+                            {                                   
+                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+                                // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                for (var i = 0; i < totalContainers.length; i++)
+                                {
+                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                    var id = Number(idStr);
+                                    idGroup.push(id);
                                 }
-                            }
+                                //console.log(idGroup);
+                                idGroup.sort(function(a, b){return a - b});
+                                //console.log(idGroup);
+                                console.log("the last ID is " + idGroup[idGroup.length-1]);
+                                var lastID = idGroup[idGroup.length-1]
+                                var newID = Number(lastID) + 1;
+                                var altID = Number(lastID) + 2;
+                                nextAltName = 'image ' + altID;
+                                //console.log("I am here!!! need another image element ,the next id  " + newID);
+                                var nextImageID = 'MaintenanceImage' + newID;
+                                var nextTextID = 'MaintenanceImageText' + newID;
+                                var nextRemoveButtonID = 'MaintenanceRemoveButton' + newID;
+                                var nextAddButtonID = 'AddMaintenanceImageButton' + newID;
+                                var nextUploadID = 'MaintenanceUploadImage' + newID;
+                                addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                                    'RemoveOneMaintenanceImage(this.id)', 'AddOneMaintenanceImage(this.id)', '500px', '0px');
 
+                            }
                         } else if (p.tableName === 'MaintenanceDrawingsTable') {
                             var maxDrawing = 6;
                             var table = document.getElementById(p.tableName);
+                             //get the current id from the imageID.
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
+                            var idGroup = [];
+
                             table.style.display = 'block';
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                 p.removeFunction, p.addFunction, p.imageSize, p.width);
@@ -707,30 +730,39 @@
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
                             document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.imageid).style.display = 'block';
-                            //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            var nextID = Number(currentID) + 1;
-                            console.log("the next ID is " + nextID);
-                            console.log("the total Drawing from the databse is: " + countingDrawing);
-                            //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
-                            if (countingDrawing < maxDrawing) {
-                                if (nextID === countingDrawing) {
-                                    console.log("have loaded all the drawings from database, and the total number of drawings has not exceed the max number need to create a add button for user to upload the next drawings");
-                                    //var newID = Number(id) + 1;
-                                    var altID = Number(nextID) + 1;
-                                    nextAltName = 'drawing ' + altID;
-                                    console.log("I am here!!! " + nextAltName);
-                                    var nextImageID = 'MaintenanceDrawing' + nextID;
-                                    var nextTextID = 'MaintenanceDrawingText' + nextID;
-                                    var nextRemoveButtonID = 'MaintenanceDrawingRemoveButton' + nextID;
-                                    var nextAddButtonID = 'AddMaintenanceDrawingButton' + nextID;
-                                    var nextUploadID = 'MaintenanceUploadDrawing' + nextID;
-                                    addImageElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        p.removeFunction, p.addFunction, '500px', '0px');
-                                } else {
-                                    console.log("still loading image, no worry");
+                            // document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '100%';
+                            document.getElementById(p.imageid).style.height = '100%';
+                           
+                            var totalContainers = $('#MaintenanceDrawings').find('> form');
+                            console.log("the current form in the report is :" + totalContainers.length);
+                            if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawings) 
+                            {
+                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+                                for (var i = 0; i < totalContainers.length; i++)
+                                {
+                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                    var id = Number(idStr);
+                                    idGroup.push(id);
                                 }
+                                console.log(idGroup);
+                                idGroup.sort(function(a, b){return a - b});
+                                console.log(idGroup);
+                                console.log("the last ID is " + idGroup[idGroup.length-1]);
+                                var lastID = idGroup[idGroup.length-1]
+                                var newID = Number(lastID) + 1;
+                                var altID = Number(lastID) + 2;
+                                nextAltName = 'image ' + altID;
+                                //console.log("I am here!!! need another image element ,the next id  " + newID);
+                                var nextImageID = 'MaintenanceDrawing' + newID;
+                                var nextTextID = 'MaintenanceDrawingText' + newID;
+                                var nextRemoveButtonID = 'MaintenanceDrawingRemoveButton' + newID;
+                                var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
+                                var nextUploadID = 'MaintenanceUploadDrawing' + newID;
+                                addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                                    'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
+
                             }
                         } else if (p.tableName === 'ConstructionImagesTable') {
                             console.log("nothing happen here yet!");
