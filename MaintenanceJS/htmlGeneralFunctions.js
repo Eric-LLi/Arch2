@@ -465,7 +465,7 @@ function RemoveOneMaintenanceImage(click_id)
 
     //update the totalConaintainers after removing one form, If remove all the images one by one, don't leave a signle 'add' button
     totalContainers = $('#MaintenancePhotographs').find('> form');
-    //console.log(totalContainers);
+    console.log(totalContainers.length);
     //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
     if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
     {
@@ -508,7 +508,7 @@ function AddOneMaintenanceDrawing(click_id)
     $("#"+uploadID).unbind().click();
     $('#'+uploadID).change(function(){
         if (this.files && this.files[0]) {
-            if(totalContainers.length < 6)
+            if(totalContainers.length <= 6)
             {
                 var imageFile = this.files[0];
                 //load the image src to the current imageID.
@@ -534,9 +534,10 @@ function AddOneMaintenanceDrawing(click_id)
                             image.setAttribute('src',base64data);
                             //$(selectionImage).attr('src',base64data);
                             removeButton.style.display = 'block';
-                            //removeButton.style.width = '500px';
+                            removeButton.style.width = '100%';
                             addButton.style.display = 'none';
                             description.style.display = 'block';
+                            description.style.width = '100%';
                             image.style.display = 'block';
                             image.style.width = '100%';
                             image.style.height = '100%';
@@ -557,12 +558,12 @@ function AddOneMaintenanceDrawing(click_id)
                 });
                 if (Number(selectedID) == Number(lastID))
                 {
-                    if(totalDrawingNumber < 6)
+                    if(totalContainers.length < 6)
                     {
                         //if the total number of image is less than 6, then need to create a new image element to allow user to upload another one.
-                        var newID = totalDrawingNumber;
-                        console.log("the newID " + newID);
-                        var altID = totalDrawingNumber + 1;
+                        console.log("you are adding an image to the last id block");
+                        var newID = Number(lastID) + 1;
+                        var altID = Number(lastID) + 2;
                         nextAltName = 'image ' + altID;
                         console.log("I am here!!! need another image element ,the next id  " + newID);
                         var nextImageID = 'MaintenanceDrawing' + newID;
@@ -571,7 +572,7 @@ function AddOneMaintenanceDrawing(click_id)
                         var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
                         var nextUploadID = 'MaintenanceUploadDrawing' + newID;
                         addDrawingElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                            'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '500px', '0px');
+                            'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px');
                     }
                 }
             }
@@ -595,7 +596,7 @@ function RemoveOneMaintenanceDrawing(click_id)
     var addButtonID = 'AddMaintenanceDrawingButton' + id;
     var textID = 'MaintenanceDrawingText' + id;
     var formID = 'imageForm' + id;
-    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    var totalContainers = $('#MaintenanceDrawings').find('> form');
     var idGroup = [];
     console.log("the current total image number is: " + totalContainers.length);
     for (var i = 0; i < totalContainers.length; i++)
@@ -627,33 +628,33 @@ function RemoveOneMaintenanceDrawing(click_id)
     doRemovePhoto(imageID);
     $('#' + formID).remove();
 
-    //has 30 images but, remove one, will no additional 'add' button, need to create one
-    if(totalContainers.length == 40 && firstRemove6th == true)
+    //has 6 drawings but, remove one, will no additional 'add' button, need to create one
+    if(totalContainers.length == 6 && firstRemove6th == true)
     {
         console.log("need to create a new add button");
         var newID = Number(lastID) + 1;
         var altID = Number(lastID) + 2;
         nextAltName = 'image ' + altID;
         //console.log("I am here!!! need another image element ,the next id  " + newID);
-        var nextImageID = 'MaintenanceImage' + newID;
-        var nextTextID = 'MaintenanceImageText' + newID;
-        var nextRemoveButtonID = 'MaintenanceRemoveButton' + newID;
-        var nextAddButtonID = 'AddMaintenanceImageButton' + newID;
-        var nextUploadID = 'MaintenanceUploadImage' + newID;
-        addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-        'RemoveOneMaintenanceDrawing(this.id)','AddOneMaintenanceDrawing(this.id)', '500px', '0px');
+        var nextImageID = 'MaintenanceDrawing' + newID;
+        var nextTextID = 'MaintenanceDrawingText' + newID;
+        var nextRemoveButtonID = 'MaintenanceDrawingRemoveButton' + newID;
+        var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
+        var nextUploadID = 'MaintenanceUploadDrawing' + newID;
+        addDrawingElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+        'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px');
         firstRemove6th = false;
     }
 
     //update the totalConaintainers after removing one form, If remove all the images one by one, don't leave a signle 'add' button
-    totalContainers = $('#MaintenancePhotographs').find('> form');
+    totalContainers = $('#MaintenanceDrawings').find('> form');
     //console.log(totalContainers);
     //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
     if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
     {
         console.log("it does not have any images, emtpy the div");
-        $("#MaintenancePhotographs").empty();
-        document.getElementById('MaintenanceImagesTable').style.display = 'none';
+        $("#MaintenanceDrawings").empty();
+        document.getElementById('MaintenanceDrawingsTable').style.display = 'none';
     }
 
 }
@@ -737,6 +738,8 @@ $('#MaintenanceUploadDrawings').change(function() {
                                 addButton.style.display = 'none';
                                 description.style.display = 'block';
                                 image.style.display = 'block';
+                                addButton.style.width = '100%';
+                                removeButton.style.width = '100%';
                                 image.style.width = '100%';
                                 image.style.height = '100%';
                                 description.style.width = '100%';
@@ -769,7 +772,7 @@ $('#MaintenanceUploadDrawings').change(function() {
             var addButtonID = 'AddMaintenanceDrawingButton' + count;
             var uploadID = 'MaintenanceUploadDrawing' + count;
             addDrawingElements(altName, 'MaintenanceDrawings', imageID, textID, removeButtonID, addButtonID, uploadID,
-                'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '500px', '0px');
+                'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px');
 
         },500)
     }
@@ -795,7 +798,7 @@ $('#MaintenanceUploadDrawings').change(function() {
 
 
                     addDrawingElements(altName, 'MaintenanceDrawings', imageID, textID, removeButtonID, addButtonID, uploadID,
-                        'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '500px', '500px');
+                        'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px');
 
                     loadImage.parseMetaData(imageFile[ii], function (data) {
                         console.log('I am in loadImage function');
@@ -824,6 +827,8 @@ $('#MaintenanceUploadDrawings').change(function() {
                                 image.style.display = 'block';
                                 image.style.width = '100%';
                                 image.style.height = '100%';
+                                addButton.style.width = '100%';
+                                removeButton.style.width = '100%';
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
@@ -951,6 +956,7 @@ function addDrawingElements(imageAltName, divID, imageID, imageTextID, removeBut
     var form = document.createElement("form");
     var form = document.createElement("form");
     form.id = "imageForm" + currentID;
+    form.style.width = '100%';
     //form.setAttribute("class","divForm");
     //need four dividends in a form
     var container1 = document.createElement("div");
@@ -1001,7 +1007,7 @@ function addDrawingElements(imageAltName, divID, imageID, imageTextID, removeBut
     addButton.setAttribute("value", "Add");
     addButton.setAttribute("onclick", addFunction);
     addButton.id = addButtonID;
-    addButton.style.width = imageSize;
+    addButton.style.width = '100%';
     addButton.style.height = "25px";
     addButton.style.display = 'block';
     addButton.style.marginTop = '20px';
