@@ -377,8 +377,8 @@ function generatePDF(mode) {
                         ],
                         style: 'tableText'
                     }
-                ],
-                pageBreak: 'after'
+                ]
+                // pageBreak: 'after'
             },
             /**
              * (5) Photos

@@ -592,23 +592,16 @@ function generatePDF(mode) {
             {
                 stack: [
                     getAdviceTable()
-                ],
-                pageBreak: 'after'
+                ]
+                //pageBreak: 'after'
             },
             /**
              * (8) Photographs
              * */
             {
                 stack: [
-                    // {
-                    //     text: 'Photographs',
-                    //     style: 'pageTopHeader'
-                    // },
-                    makeAGap(),
                     getImagesTable()
-                ],
-                pageBreak:'after'
-
+                ]
             },
             /**
              * (9) Drawings

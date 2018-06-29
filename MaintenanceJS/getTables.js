@@ -655,75 +655,127 @@ function getAdviceTable() {
 function getImagesTable()
 {
     var result;
+    var row = [];
     var data = [];
-    var tableBody;
-    var totalImageNumber = $('#MaintenancePhotographs').find('> form').length;
-    console.log("the current total image number is: " + totalImageNumber);
+    var tableBody, divCount = 1;
+    var totalContainers = $('#MaintenancePhotographs').find('> form');
     var fullAddress = document.getElementById('5').value.trim() + " " + document.getElementById('6').value.trim();
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').get(0));
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'));
+    // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
+    // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+    console.log("the current total image form is: " + totalContainers.length + ", image number need to -1, the last one is only a form, no image");
 
-
-
-    var firstRow = [
-        {
-            text:"Photographs",
-            style:'pageTopHeader',
-            margin: [0, 0, 0, 5],
-            colSpan:2
-        },{}
-    ];
-    data.push(firstRow);
-
-    var secondRow = [
-        {
-            text:'Address: ' + fullAddress,
-            style: 'tableBoldTextAlignLeft',
-            margin: [0, 0, 0, 10],
-            colSpan:2
-        },{}
-    ];
-    data.push(secondRow);
-
-    for(i=0;i<totalImageNumber;i=i+2)
-    {
-
-        var n = i + 1;
-        var firstImageID = 'MaintenanceImage' + i;
-        var secondImageID = 'MaintenanceImage' + n;
-        var firstTextID = 'MaintenanceImageText' + i;
-        var secondTextID = 'MaintenanceImageText' + n;
-
-
-        var imageRow =
-            [
-                getPhoto(firstImageID),
-                getPhoto(secondImageID)
-
-            ];
-        var textRow = [
-            getImageText(firstTextID),
-            getImageText(secondTextID)
-
-        ];
-        data.push(imageRow);
-        data.push(textRow);
+    if (totalContainers.length == 0) {
+        tableBody = {
+            text:''
+        };
     }
+    else
+    {
+        var firstRow = [
+            {
+                text:"Photographs",
+                style:'pageTopHeader',
+                margin: [0, 0, 0, 5],
+                colSpan:2
+            },{}
+        ];
+        data.push(firstRow);
 
-    tableBody = {
-        table: {
-            headerRows: 2,
-            body: data
-        },
-        layout: {
-            hLineColor: function (i, node) {
-                return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
-            },
-            vLineColor: function (i, node) {
-                return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+        var secondRow = [
+            {
+                text:'Address: ' + fullAddress,
+                style: 'tableBoldTextAlignLeft',
+                margin: [0, 0, 0, 10],
+                colSpan:2
+            },{}
+        ];
+        data.push(secondRow);
+        for (var i = 0; i < totalContainers.length; i++) 
+        {
+            var img = totalContainers.eq(i).children('div').eq(0).children('img').get(0),
+                imgSrc = totalContainers.eq(i).children('div').eq(0).children('img').attr('src'),
+                imgLabel = totalContainers.eq(i).children('div').eq(1).children('label').text(),
+                imgText = totalContainers.eq(i).children('div').eq(2).children('input').val()
+                // width = 0,
+                // height = 0;
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').attr('src'));
+                //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
+                //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+
+            //console.log(imgLabel);
+            //console.log(imgSrc);
+
+            if (typeof imgSrc  != "undefined")
+            {
+                if (imgSrc.includes("photos/") > 0) 
+                {
+                    imgSrc = convertImgToBase64(img);
+                }
+    
+                // if (img.width >= img.height) {
+                //     width = 250;
+                //     height = 187;
+                // } else {
+                //     width = img.width * 187 / img.height;
+                //     height = 187;
+                // }
+    
+                row.push({
+                    stack: [
+                        {
+                            image: imgSrc,
+                            height: 200,
+                            width: 250,
+                            margin:[10,30,0,5],
+                            alignment: 'center'
+                        },
+                        {
+                            text: imgLabel,
+                            margin: [0, 5],
+                            alignment: 'center'
+                        },
+                        {
+                            text: imgText
+                        }
+                    ]
+                })
+                divCount++;
+                //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
+                if (divCount === 3) {
+                    data.push(row);
+                    row = [];
+                    divCount = 1;
+                }
             }
+            
+        }
+        //the last row only has one cell, need to put an empty cell to this row. 
+        if (divCount == 2) {
+            //console.log("the last row only has one cell, need to put an empty cell to this row.")
+            row.push({});
+            data.push(row);
         }
 
-    };
-
+        tableBody = {
+            pageBreak: 'before',
+            layout: {
+                hLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+                },
+                vLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                }
+            },
+            table: {
+                widths: [250, 250],
+                headerRows: 2,
+                body: data
+            }
+        }
+    }
     return tableBody;
 }
 
@@ -733,71 +785,135 @@ function getImagesTable()
  */
 function getDrawingTable()
 {
-    var result;
+    var row = [];
     var data = [];
-    var tableBody;
-    var totalDrawingNumber = $('#MaintenanceDrawings').find('> form').length;
-    var forTheLoop = totalDrawingNumber - 1;
-    console.log("the current total drawing number is: " + totalDrawingNumber);
+    var tableBody, divCount = 1;
+    var totalContainers = $('#MaintenanceDrawings').find('> form');
     var fullAddress = document.getElementById('5').value.trim() + " " + document.getElementById('6').value.trim();
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').get(0));
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'));
+    // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
+    // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+    console.log("the current total image form is: " + totalContainers.length + ", image number need to -1, the last one is only a form, no image");
 
-
-
-    var firstRow = [
-        {
-            text:"Drawings",
-            style:'pageTopHeader',
-            margin: [0, 0, 0, 5]
-        }
-    ];
-    data.push(firstRow);
-
-    var secondRow = [
-        {
-            text:'Address: ' + fullAddress,
-            style: 'tableBoldTextAlignLeft',
-            margin: [0, 0, 0, 10]
-        }
-    ];
-    data.push(secondRow);
-
-
-    for(i=0;i<totalDrawingNumber;i=i+1)
-    {
-
-        var firstImageID = 'MaintenanceDrawing' + i;
-
-        var firstTextID = 'MaintenanceDrawingText' + i;
-
-        var imageRow =
-            [
-                getDrawing(firstImageID)
-            ];
-        var textRow =
-            [
-                getDrawingText(firstTextID)
-            ];
-        data.push(imageRow);
-        data.push(textRow);
+    if (totalContainers.length == 0) {
+        tableBody = {
+            text:''
+        };
     }
+    else
+    {
+        var firstRow = [
+            {
+                text:"Drawings",
+                style:'pageTopHeader',
+                margin: [0, 0, 0, 5]
+            }
+        ];
+        data.push(firstRow);
 
+        var secondRow = [
+            {
+                text:'Address: ' + fullAddress,
+                style: 'tableBoldTextAlignLeft',
+                margin: [0, 0, 0, 10]
+            }
+        ];
+        data.push(secondRow);
+        for (var i = 0; i < totalContainers.length; i++) 
+        {
+            var img = totalContainers.eq(i).children('div').eq(0).children('img').get(0),
+                imgSrc = totalContainers.eq(i).children('div').eq(0).children('img').attr('src'),
+                imgLabel = totalContainers.eq(i).children('div').eq(1).children('label').text(),
+                imgText = totalContainers.eq(i).children('div').eq(2).children('input').val()
+                // width = 0,
+                // height = 0;
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').attr('src'));
+                //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
+                //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
 
+            //console.log(imgLabel);
+            //console.log(imgSrc);
 
-    tableBody = {
-        table: {
-            headerRows: 2,
-            body: data
-        },
-        layout: {
-            hLineColor: function (i, node) {
-                return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+            if (typeof imgSrc  != "undefined")
+            {
+                if (imgSrc.includes("photos/") > 0) 
+                {
+                    imgSrc = convertImgToBase64(img);
+                }
+    
+                // if (img.width >= img.height) {
+                //     width = 250;
+                //     height = 187;
+                // } else {
+                //     width = img.width * 187 / img.height;
+                //     height = 187;
+                // }
+    
+                row.push({
+                    stack: [
+                        {
+                            image: imgSrc,
+                            width:500,
+                            height:500,
+                            margin:[10,30,0,5],
+                            alignment: 'center'
+                        },
+                        {
+                            text: imgLabel,
+                            margin: [0, 5],
+                            alignment: 'center'
+                        },
+                        {
+                            text: imgText
+                        }
+                    ]
+                })
+                divCount++;
+                //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
+                if (divCount === 2) {
+                    data.push(row);
+                    row = [];
+                    divCount = 1;
+                }
+            }
+            
+        }
+        //the last row only has one cell, need to put an empty cell to this row. 
+        // if (divCount == 2) {
+        //     //console.log("the last row only has one cell, need to put an empty cell to this row.")
+        //     row.push({});
+        //     data.push(row);
+        // }
+
+        tableBody = {
+            pageBreak: 'before',
+            layout: {
+                hLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+                },
+                vLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                }
             },
-            vLineColor: function (i, node) {
-                return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+            table: {
+                headerRows: 2,
+                body: data
             }
         }
+    }
+    return tableBody; 
+}
 
-    };
 
-    return tableBody;
+function convertImgToBase64(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var src = canvas.toDataURL("image/jpeg");
+
+    return src;
 }
