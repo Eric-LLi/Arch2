@@ -896,7 +896,7 @@ function createPhoto(id) {
     document.getElementById(imgContainerID).appendChild(imgText);
     document.getElementById(imgContainerID).appendChild(imgRmBtn);
 
-    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID,imgLabelID];
+    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID, imgLabelID];
 
     $("#" + imgLabelID).html("IMG " + id);
     $("#" + imgRmBtnID).html("Remove");
@@ -917,7 +917,7 @@ $("#deleteImg_Btn").click(function () {
                 console.log(err);
             }
         }
-        
+
         $("#HA_ImgsContents").empty();
     }
 });
@@ -958,7 +958,7 @@ function showPDF(pdf_url) {
 }
 
 //Count Sketches images number.
-var pdfCounts = 0;
+var pdfCounts = 1;
 //Create Sketches elements to save images.
 function createPDFImg(id) {
     //Create element
@@ -966,15 +966,20 @@ function createPDFImg(id) {
         btnElement = document.createElement("button"),
         container = document.createElement("div"),
         caption = document.createElement("input"),
+        label = document.createElement("label");
 
-        tr = document.getElementById("HA_PdfContents"),
+    tr = document.getElementById("HA_PdfContents"),
         captionID = id + "_Cap",
         containerID = id + "_DIV",
         imgID = id + "_IMG",
+        labelID = id + "Sketch",
         btnID = id + "_btnDel";
 
 
     container.setAttribute("id", containerID);
+
+    label.setAttribute("id", label);
+    label.innerHTML = "Sketch " + id;
 
     caption.setAttribute("id", captionID);
     caption.setAttribute("type", "text");
@@ -993,8 +998,11 @@ function createPDFImg(id) {
     tr.appendChild(container);
     document.getElementById(containerID).appendChild(imgElement);
     document.getElementById(containerID).appendChild(document.createElement("br"));
+    document.getElementById(containerID).appendChild(label);
+    document.getElementById(containerID).appendChild(document.createElement("br"));
     document.getElementById(containerID).appendChild(caption);
     document.getElementById(containerID).appendChild(btnElement);
+    
 
     var combine = [imgID, btnID, captionID, containerID];
     return combine;
