@@ -573,8 +573,9 @@
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
                             document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.imageid).style.display = 'block';
+                            // document.getElementById(p.imageid).style.display = 'block';
                             document.getElementById(imgLabelID).style.display = 'block';
+                           
                             var totalContainers = $('#AdvicePhotographs').find('> form');
                             console.log("the current form in the report is :" + totalContainers.length);
     
