@@ -112,7 +112,7 @@ $('#AdviceUploadImages').change(function() {
         alert("You can only select 30 images. It will only display the first 30 photos");
     }
 
-    if(count <= 30)
+    if(count < 30)
     {
         for (var i = 0; i<count;i++)
         {
@@ -320,7 +320,7 @@ function addOneAdviceImage(click_id)
 
             //console.log(this.files.length);
             //console.log("Hi 1");
-            if (totalContainers.length <= 30)
+            if (totalContainers.length < 30)
             {
                 //console.log("Hi 2");
                 //if the total number of image is less than 30, then need to create a new image element to allow user to upload another one.
