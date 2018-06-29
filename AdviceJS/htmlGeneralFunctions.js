@@ -271,20 +271,20 @@ $('#AdviceUploadImages').change(function() {
 function addOneAdviceImage(click_id)
 {
     var id;
-    var selectedID = String(click_id);
+    var selectedID = String(click_id).replace ( /[^\d.]/g, '' );
     var idGroup = [];
-    id = selectedID.replace ( /[^\d.]/g, '' );
-    console.log("the id " + id);
+    //id = selectedID.replace ( /[^\d.]/g, '' );
+    console.log("the selectedID " + selectedID);
     var totalContainers = $('#AdvicePhotographs').find('> form');
     console.log("the current total image number is: " + totalContainers.length);
     //console.log(totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, ''));
 
-    var imageID = 'AdviceImage' + id;
-    var textID = 'AdviceImageText' + id;
-    var removeButtonID = 'AdviceImageRemoveButton' + id;
-    var addButtonID = 'AddAdviceImageButton' + id;
-    var uploadID = 'AdviceUploadImage' + id;
-    var imgLabelID = "imageCaption" + id;
+    var imageID = 'AdviceImage' + selectedID;
+    var textID = 'AdviceImageText' + selectedID;
+    var removeButtonID = 'AdviceImageRemoveButton' + selectedID;
+    var addButtonID = 'AddAdviceImageButton' + selectedID;
+    var uploadID = 'AdviceUploadImage' + selectedID;
+    var imgLabelID = "imageCaption" + selectedID;
    
     for (var i = 0; i < totalContainers.length; i++)
     {
@@ -297,8 +297,8 @@ function addOneAdviceImage(click_id)
     //console.log(idGroup);
     //console.log("the last ID is" + idGroup[idGroup.length-1]);
     var lastID = idGroup[idGroup.length-1]
-    // console.log(uploadID);
-    var x = document.getElementById(uploadID);
+    console.log("this last id is " + lastID);
+    //var x = document.getElementById(uploadID);
     
     $("#"+uploadID).unbind().click();
     $('#'+uploadID).change(function(){
@@ -312,7 +312,7 @@ function addOneAdviceImage(click_id)
                 //console.log("Hi 2");
                 //if the total number of image is less than 30, then need to create a new image element to allow user to upload another one.
                 var imageFile = this.files[0];
-                document.getElementById(imgLabelID).style.display = 'block';
+                //document.getElementById(imgLabelID).style.display = 'block';
                
                 loadImage.parseMetaData(imageFile, function (data) {
                     //console.log('I am in loadImage function');
@@ -325,6 +325,7 @@ function addOneAdviceImage(click_id)
                     var removeButton = document.getElementById(removeButtonID);
                     var description  = document.getElementById(textID);
                     var addButton = document.getElementById(addButtonID);
+                    var imageLable = document.getElementById(imgLabelID);
                     //if exif data available, update orientation
                     if (data.exif) {
                         orientation = data.exif.get('Orientation');
@@ -340,6 +341,7 @@ function addOneAdviceImage(click_id)
                             description.style.display = 'block';
                             image.style.display = 'block';
                             image.style.width = '500px';
+                            imageLable.style.display = 'block';
                             // image.style.height = '250px';
                             var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                             //console.log(file);
@@ -355,17 +357,21 @@ function addOneAdviceImage(click_id)
                     );
                 });
 
-                var newID = Number(lastID) + 1;
-                var altID = Number(lastID) + 2;
-                nextAltName = 'image ' + altID;
-                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                var nextImageID = 'AdviceImage' + newID;
-                var nextTextID = 'AdviceImageText' + newID;
-                var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
-                var nextAddButtonID = 'AddAdviceImageButton' + newID;
-                var nextUploadID = 'AdviceUploadImage' + newID;
-                addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                    'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+                if (Number(selectedID) == Number(lastID))
+                {
+                    console.log("you are adding an image to the last id block");
+                    var newID = Number(lastID) + 1;
+                    var altID = Number(lastID) + 2;
+                    nextAltName = 'image ' + altID;
+                    //console.log("I am here!!! need another image element ,the next id  " + newID);
+                    var nextImageID = 'AdviceImage' + newID;
+                    var nextTextID = 'AdviceImageText' + newID;
+                    var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
+                    var nextAddButtonID = 'AddAdviceImageButton' + newID;
+                    var nextUploadID = 'AdviceUploadImage' + newID;
+                    addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                        'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+                }
             }
         }
     });
@@ -380,6 +386,7 @@ function RemoveOneAdviceImage(click_id)
     var removeButtonID = 'AdviceImageRemoveButton' + id;
     var addButtonID = 'AddAdviceImageButton' + id;
     var textID = 'AdviceImageText' + id;
+    var formID = 'imageForm' + id;
 
     var imageSelect = '#' + imageID;
     $(imageSelect).attr('src', '#');
@@ -396,7 +403,9 @@ function RemoveOneAdviceImage(click_id)
     image.style.display = 'none';
     inputText.value = '';
 
+    //remove the image from database, and remove the image form completely
     doRemovePhoto(imageID);
+    $('#' + formID).remove();
 
 }
 
@@ -411,7 +420,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     var currentID = imageID.replace(/[^\d.]/g, '');
     var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
-    //form.setAttribute("class","divForm");
+    form.id = "imageForm" + currentID;
     //need four dividends in a form
     var container1 = document.createElement("div");
     var container2 = document.createElement("div");
@@ -420,6 +429,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     var container5 = document.createElement("div");
     container1.setAttribute("class", "col-sm");
     container2.setAttribute("class", "col-sm");
+    container2.style.textAlign = "center";
     container3.setAttribute("class", "col-sm");
     container4.setAttribute("class", "col-sm");
     container5.setAttribute("class", "col-sm");
@@ -480,7 +490,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     var imgLabelID = "imageCaption" + currentID;
     imgLabel.setAttribute("id", imgLabelID);
     imgLabel.style.display = "none";
-    imgLabel.innerHTML = "IMG" + (Number(currentID)+1);
+    imgLabel.innerHTML = "IMG " + (Number(currentID)+1);
 
 
 

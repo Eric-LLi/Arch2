@@ -384,42 +384,43 @@
                             } 
                             else {
                                 //console.log('next image is not existed, it is not on property assessment or timber pest insepction report');
-                                if (p.addid.substr(0, 16) == 'CPImageAddButton') {
-                                    //console.log('let build something');
-                                    var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                    //display the label elementment
-                                    var labelID = "imageCaption" + currentID;
-                                    document.getElementById(labelID).style.display = 'block';
-                                    //create the next image form
-                                    var nextID = Number(currentID) + 1;
-                                    //console.log("the next ID is " + nextID);
-                                    var altID = Number(nextID) + 1;
-                                    nextAltName = 'image ' + altID;
-                                    //console.log("I am here!!! " + nextAltName);
-                                    var altName = 'Image' + altID;
-                                    var imageID = 'CPImage' + nextID;
-                                    var textID = 'CPImageText' + nextID;
-                                    var removeButtonID = 'CPImageRemoveButton' + nextID;
-                                    var addButtonID = 'CPImageAddButton' + nextID;
-                                    var uploadID = 'CPImageUpload' + nextID;
-                                    addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
-                                }
-                                if (p.addid.substr(0, 17) == 'HOWImageAddButton') {
-                                    var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                    //display the label elementment
-                                    var labelID = "HOWimageCaption" + currentID;
-                                    document.getElementById(labelID).style.display = 'block';
-                                    var nextID = Number(currentID) + 1;
-                                    var altID = Number(nextID) + 1;
-                                    var altName = 'Image' + altID;
-                                    var imageID = 'HOWImage' + nextID;
-                                    var textID = 'HOWImageText' + nextID;
-                                    var removeButtonID = 'HOWImageRemoveButton' + nextID;
-                                    var addButtonID = 'HOWImageAddButton' + nextID;
-                                    var uploadID = 'HOWImageUpload' + nextID;
-                                    addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                                        'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
-                                }
+                                // if (p.addid.substr(0, 16) == 'CPImageAddButton') {
+                                //     console.log('let build something， CP IMAGES');
+                                //     var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //     //display the label elementment
+                                //     var labelID = "imageCaption" + currentID;
+                                //     document.getElementById(labelID).style.display = 'block';
+                                //     //create the next image form
+                                //     var nextID = Number(currentID) + 1;
+                                //     //console.log("the next ID is " + nextID);
+                                //     var altID = Number(nextID) + 1;
+                                //     nextAltName = 'image ' + altID;
+                                //     //console.log("I am here!!! " + nextAltName);
+                                //     var altName = 'Image' + altID;
+                                //     var imageID = 'CPImage' + nextID;
+                                //     var textID = 'CPImageText' + nextID;
+                                //     var removeButtonID = 'CPImageRemoveButton' + nextID;
+                                //     var addButtonID = 'CPImageAddButton' + nextID;
+                                //     var uploadID = 'CPImageUpload' + nextID;
+                                //     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
+                                // }
+                                // if (p.addid.substr(0, 17) == 'HOWImageAddButton') {
+                                //     var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //     console.log('let build something， HOW REPORT');
+                                //     //display the label elementment
+                                //     var labelID = "HOWimageCaption" + currentID;
+                                //     document.getElementById(labelID).style.display = 'block';
+                                //     var nextID = Number(currentID) + 1;
+                                //     var altID = Number(nextID) + 1;
+                                //     var altName = 'Image' + altID;
+                                //     var imageID = 'HOWImage' + nextID;
+                                //     var textID = 'HOWImageText' + nextID;
+                                //     var removeButtonID = 'HOWImageRemoveButton' + nextID;
+                                //     var addButtonID = 'HOWImageAddButton' + nextID;
+                                //     var uploadID = 'HOWImageUpload' + nextID;
+                                //     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
+                                //         'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                                // }
                             }
                         }
                         //console.log('the current add id is ' + p.addid);
@@ -559,7 +560,9 @@
                         } else if (p.tableName === 'AdviceImagesTable') {
                             maxIamge = 30;
                             var table = document.getElementById(p.tableName);
+                             //get the current id from the imageID.
                             var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
                             var imgLabelID = "imageCaption" + currentID;
                             var idGroup = [];
 
@@ -574,11 +577,7 @@
                             document.getElementById(imgLabelID).style.display = 'block';
                             var totalContainers = $('#AdvicePhotographs').find('> form');
                             console.log("the current form in the report is :" + totalContainers.length);
-                            //get the current id from the imageID.
-                           
-                            
-
-                            var nextID = Number(currentID) + 1;
+    
                             //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
                             
                             if(totalContainers.length == countingImage)
@@ -594,7 +593,7 @@
                                 console.log(idGroup);
                                 idGroup.sort(function(a, b){return a - b});
                                 console.log(idGroup);
-                                console.log("the last ID is" + idGroup[idGroup.length-1]);
+                                console.log("the last ID is " + idGroup[idGroup.length-1]);
                                 var lastID = idGroup[idGroup.length-1]
                                 var newID = Number(lastID) + 1;
                                 var altID = Number(lastID) + 2;
