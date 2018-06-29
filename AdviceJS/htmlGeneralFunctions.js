@@ -92,7 +92,7 @@ function AdviceUploadImage(){
 // }
 $('#AdviceUploadImages').click(function()
 {
-    console.log(this.value);
+    //console.log(this.value);
     this.value = null;
 });
 $('#AdviceUploadImages').change(function() {
@@ -530,7 +530,6 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     uploadFile.id = uploadFileID;
     uploadFile.setAttribute("class", "inputImage");
     uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
-
     uploadFile.style.display = 'none';
 
     //create the image label for image caption number. 

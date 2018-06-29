@@ -2,12 +2,23 @@
  * Created by Fafa on 15/1/18.
  */
 
+function countWord(click_id)
+{
+    var words = document.getElementById(click_id).value;
+    var regex = /\s+/gi;
+    var wordCount = words.trim().replace(regex, ' ').split(' ').length;
+    //console.log("total word count: " + wordCount);
+    // if (wordCount >= 4)
+    // {
+    //     document.getElementById(click_id).disabled = true;
+    //     alert("you can only enter 3 words");
+    // }
+}
 
 function DilapidationCover()
 {
     document.getElementById('DilapidationUploadCoverImage').click();
 }
-
 
 
 $('#DilapidationUploadCoverImage').change(function(){
@@ -75,8 +86,11 @@ function DilapidationUploadImage()
 {
     document.getElementById('DilapidationUploadImages').click();
 }
-
-
+$('#DilapidationUploadImages').click(function()
+{
+    //console.log(this.value);
+    this.value = null;
+});
 $('#DilapidationUploadImages').change(function(){
     var imageIDs = $("#DilapidationPhotographs form");
     for (var i = 0; i < imageIDs.length; i++) {
@@ -111,6 +125,7 @@ $('#DilapidationUploadImages').change(function(){
                     var removeButtonID = 'DilapidationImageRemoveButton' + ii;
                     var addButtonID = 'AddDilapidationImageButton' + ii;
                     var uploadID = 'DilapidationUploadImage' + ii;
+                    var imgLabelID = "imageCaption" + ii;
 
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
@@ -144,7 +159,8 @@ $('#DilapidationUploadImages').change(function(){
                                 description.style.display = 'block';
                                 image.style.display = 'block';
                                 image.style.width = '500px';
-                                // image.style.height = '250px';
+                                image.style.height = '500px';
+                                document.getElementById(imgLabelID).style.display = 'block';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
                                 doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'DilapidationImagesTable',altName,'DilapidationPhotographs',uploadID,'RemoveOneDilapidationImage(this.id)','addOneDilapidationImage(this.id)','500px','500px');
@@ -153,8 +169,8 @@ $('#DilapidationUploadImages').change(function(){
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:1000,
-                                maxHeight:850
+                                maxWidth:600,
+                                maxHeight:350
                             }
                         );
                     });
@@ -193,6 +209,7 @@ $('#DilapidationUploadImages').change(function(){
                     var removeButtonID = 'DilapidationImageRemoveButton' + ii;
                     var addButtonID = 'AddDilapidationImageButton' + ii;
                     var uploadID = 'DilapidationUploadImage' + ii;
+                    var imgLabelID = "imageCaption" + ii;
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
 
@@ -225,6 +242,8 @@ $('#DilapidationUploadImages').change(function(){
                                 description.style.display = 'block';
                                 image.style.display = 'block';
                                 image.style.width = '500px';
+                                image.style.height = '500px';
+                                document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
@@ -234,8 +253,8 @@ $('#DilapidationUploadImages').change(function(){
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:1000,
-                                maxHeight:850
+                                maxWidth:600,
+                                maxHeight:350
                             }
                         );
                     });
@@ -251,8 +270,10 @@ $('#DilapidationUploadImages').change(function(){
 
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
 function addImageElements(imageAltName, divID, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
+    var currentID = imageID.replace(/[^\d.]/g, '');
     var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
+    form.id = "imageForm" + currentID;
     // console.log(form);
     //form.setAttribute("class","divForm");
     //need four dividends in a form
@@ -260,19 +281,23 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     var container2 = document.createElement("div");
     var container3 = document.createElement("div");
     var container4 = document.createElement("div");
+    var container5 = document.createElement("div");
     container1.setAttribute("class", "col-sm");
     container2.setAttribute("class", "col-sm");
+    container2.style.textAlign = "center";
     container3.setAttribute("class", "col-sm");
     container4.setAttribute("class", "col-sm");
+    container5.setAttribute("class", "col-sm");
+
 
     //crate an image area
     var img = document.createElement('img');
-    img.src = "#";
-    img.alt = imageAltName;
+    //img.src = "#";
+    //img.alt = imageAltName;
     img.id = imageID;
-    img.style.display = 'none';
-    img.style.width = width;
-    img.style.height = imageSize;
+    //img.style.display = 'none';
+    img.style.width = '0px';
+    img.style.height = '0px';
     img.style.paddingTop = '10px';
 
     //create an input for the text
@@ -312,9 +337,14 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     uploadFile.id = uploadFileID;
     uploadFile.setAttribute("class", "inputImage");
     uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
-
     uploadFile.style.display = 'none';
 
+    //create the image label for image caption number. 
+    var imgLabel = document.createElement("label");
+    var imgLabelID = "imageCaption" + currentID;
+    imgLabel.setAttribute("id", imgLabelID);
+    imgLabel.style.display = "none";
+    imgLabel.innerHTML = "IMG " + (Number(currentID)+1);
 
 
 
@@ -324,15 +354,13 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     form.appendChild(container2);
     form.appendChild(container3);
     form.appendChild(container4);
+    form.appendChild(container5);
     container1.appendChild(img);
-    container2.appendChild(textInput);
-    container3.appendChild(removeButton);
+    container2.appendChild(imgLabel);
+    container3.appendChild(textInput);
+    container4.appendChild(removeButton);
     container4.appendChild(addButton);
-    container4.appendChild(uploadFile);
-
-
-
-
+    container5.appendChild(uploadFile);
 }
 
 
@@ -348,91 +376,108 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
 //noinspection JSUnusedGlobalSymbols
 function addOneDilapidationImage(click_id)
 {
-    var id;
-    var selectedID = String(click_id);
-    id = selectedID.replace ( /[^\d.]/g, '' );
-    console.log("the id " + id);
-    var totalImageNumber = $('#DilapidationPhotographs').find('> form').length;
-    console.log(totalImageNumber);
+   
+    var selectedID = String(click_id).replace ( /[^\d.]/g, '' );
+    var idGroup = [];
+    console.log("the id " + selectedID);
+    var totalContainers = $('#DilapidationPhotographs').find('> form');
+    console.log("the current total image number is: " + totalContainers.length);
 
-    // var altID = id+1;
-    //
-    // var altName = 'image ' + id;
-    var imageID = 'DilapidationImage' + id;
-    var textID = 'DilapidationImageText' + id;
-    var removeButtonID = 'DilapidationImageRemoveButton' + id;
-    var addButtonID = 'AddDilapidationImageButton' + id;
-    var uploadID = 'DilapidationUploadImage' + id;
-    // console.log(uploadID);
-    var x = document.getElementById(uploadID);
-    x.click();
-    x.addEventListener('change',function(){
+    var imageID = 'DilapidationImage' + selectedID;
+    var textID = 'DilapidationImageText' + selectedID;
+    var removeButtonID = 'DilapidationImageRemoveButton' + selectedID;
+    var addButtonID = 'AddDilapidationImageButton' + selectedID;
+    var uploadID = 'DilapidationUploadImage' + selectedID;
+    var imgLabelID = "imageCaption" + selectedID;
+
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    //console.log("the last ID is" + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
+
+    $("#"+uploadID).unbind().click();
+   
+    $('#'+uploadID).change(function(){
 
         if (this.files && this.files[0]) {
-            var imageFile = this.files[0];
-            //load the image src to the current imageID.
-            loadImage.parseMetaData(imageFile, function (data) {
-                //console.log('I am in loadImage function');
-                var orientation = 0;
-                var date = new Date();
-                // var selectionImage = '#AdviceImage' + ii;
-                var imageName = imageFile.name;
-                var imageType = imageFile.type;
-                var image = document.getElementById(imageID);
-                var removeButton = document.getElementById(removeButtonID);
-                var description  = document.getElementById(textID);
-                var addButton = document.getElementById(addButtonID);
-                //if exif data available, update orientation
-                if (data.exif) {
-                    orientation = data.exif.get('Orientation');
-                }
-                var loadingImage = loadImage(imageFile, function (canvas) {
-                        var base64data = canvas.toDataURL(imageType);
-                        //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                        image.setAttribute('src',base64data);
-                        //$(selectionImage).attr('src',base64data);
-                        removeButton.style.display = 'block';
-                        removeButton.style.width = '500px';
-                        addButton.style.display = 'none';
-                        description.style.display = 'block';
-                        image.style.display = 'block';
-                        image.style.width = '500px';
-                        // image.style.height = '250px';
-                        var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                        //console.log(file);
-                        doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'DilapidationImagesTable',nextAltName,'DilapidationPhotographs',uploadID,'RemoveOneDilapidationImage(this.id)','addOneDilapidationImage(this.id)','500px','500px');
 
-                    },
-                    {
-                        canvas: true,
-                        orientation: orientation,
-                        maxWidth:1000,
-                        maxHeight:850
+            if (totalContainers.length <= 60)
+            {
+                var imageFile = this.files[0];
+                //load the image src to the current imageID.
+                loadImage.parseMetaData(imageFile, function (data) {
+                    //console.log('I am in loadImage function');
+                    var orientation = 0;
+                    var date = new Date();
+                    // var selectionImage = '#AdviceImage' + ii;
+                    var imageName = imageFile.name;
+                    var imageType = imageFile.type;
+                    var image = document.getElementById(imageID);
+                    var removeButton = document.getElementById(removeButtonID);
+                    var description  = document.getElementById(textID);
+                    var addButton = document.getElementById(addButtonID);
+                    var imageLable = document.getElementById(imgLabelID);
+                    //if exif data available, update orientation
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
                     }
-                );
-            });
+                    var loadingImage = loadImage(imageFile, function (canvas) {
+                            var base64data = canvas.toDataURL(imageType);
+                            //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                            image.setAttribute('src',base64data);
+                            //$(selectionImage).attr('src',base64data);
+                            removeButton.style.display = 'block';
+                            removeButton.style.width = '500px';
+                            addButton.style.display = 'none';
+                            description.style.display = 'block';
+                            image.style.display = 'block';
+                            image.style.width = '500px';
+                            image.style.height = '500px';
+                            imageLable.style.display = 'block';
+                            // image.style.height = '250px';
+                            var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                            //console.log(file);
+                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'DilapidationImagesTable',nextAltName,'DilapidationPhotographs',uploadID,'RemoveOneDilapidationImage(this.id)','addOneDilapidationImage(this.id)','500px','500px');
+
+                        },
+                        {
+                            canvas: true,
+                            orientation: orientation,
+                            maxWidth:600,
+                            maxHeight:350
+                        }
+                    );
+                });
+                if (Number(selectedID) == Number(lastID))
+                {
+                    if(totalContainers.length < 60)
+                    {
+                        console.log("you are adding an image to the last id block");
+                        var newID = Number(lastID) + 1;
+                        var altID = Number(lastID) + 2;
+                        nextAltName = 'image ' + altID;
+                        //console.log("I am here!!! need another image element ,the next id  " + newID);
+                        var nextImageID = 'DilapidationImage' + newID;
+                        var nextTextID = 'DilapidationImageText' + newID;
+                        var nextRemoveButtonID = 'DilapidationImageRemoveButton' + newID;
+                        var nextAddButtonID = 'AddDilapidationImageButton' + newID;
+                        var nextUploadID = 'DilapidationUploadImage' + newID;
+                        addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                        'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '0px');
+                    }
+                   
+                }
+            } 
         }
-
-
-        if(totalImageNumber < 60)
-        {
-            //if the total number of image is less than 40, then need to create a new image element to allow user to upload another one.
-
-            var newID = totalImageNumber;
-            var altID = totalImageNumber + 1;
-            nextAltName = 'image ' + altID;
-            console.log("I am here!!! need another image element ,the next id  " + newID);
-            var nextImageID = 'DilapidationImage' + newID;
-            var nextTextID = 'DilapidationImageText' + newID;
-            var nextRemoveButtonID = 'DilapidationImageRemoveButton' + newID;
-            var nextAddButtonID = 'AddDilapidationImageButton' + newID;
-            var nextUploadID = 'DilapidationUploadImage' + newID;
-            addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '0px');
-        }
-
     });
-
 }
 
 
@@ -444,6 +489,20 @@ function RemoveOneDilapidationImage(click_id)
     var removeButtonID = 'DilapidationImageRemoveButton' + id;
     var addButtonID = 'AddDilapidationImageButton' + id;
     var textID = 'DilapidationImageText' + id;
+    var formID = 'imageForm' + id;
+    var totalContainers = $('#DilapidationPhotographs').find('> form');
+    var idGroup = [];
+    console.log("the current total image number is: " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        //console.log(idStr);
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    idGroup.sort(function(a, b){return a - b});
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
 
     var imageSelect = '#' + imageID;
     $(imageSelect).attr('src', '#');
@@ -461,6 +520,24 @@ function RemoveOneDilapidationImage(click_id)
     inputText.value = '';
 
     doRemovePhoto(imageID);
+    $('#' + formID).remove();
+
+    //has 30 images but, remove one, will no additional 'add' button, need to create one
+    if(totalContainers.length == 60)
+    {
+        console.log("need to create a new add button");
+        var newID = Number(lastID) + 1;
+        var altID = Number(lastID) + 2;
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'DilapidationImage' + newID;
+        var nextTextID = 'DilapidationImageText' + newID;
+        var nextRemoveButtonID = 'DilapidationImageRemoveButton' + newID;
+        var nextAddButtonID = 'AddDilapidationImageButton' + newID;
+        var nextUploadID = 'DilapidationUploadImage' + newID;
+        addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+        'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '0px');
+    }
 
 }
 
