@@ -421,7 +421,7 @@ function getImagesTable()
     // console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'));
     // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
     // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
-    console.log("the current total image number is: " + totalContainers.length);
+    console.log("the current total image form is: " + totalContainers.length + ", image number need to -1, the last one is only a form, no image");
 
     var firstRow = [
         {
@@ -471,17 +471,18 @@ function getImagesTable()
                 imgText = totalContainers.eq(i).children('div').eq(2).children('input').val()
                 // width = 0,
                 // height = 0;
-                // console.log(totalContainers.eq(0).children('div').eq(0).children('img').get(0));
-                // console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'));
-                // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
-                // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').attr('src'));
+                //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
+                //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
 
             //console.log(imgLabel);
             //console.log(imgSrc);
 
-            if (imgSrc != "#")
+            if (typeof imgSrc  != "undefined")
             {
-                if (imgSrc.includes("photos/") > 0) {
+                if (imgSrc.includes("photos/") > 0) 
+                {
                     imgSrc = convertImgToBase64(img);
                 }
     
@@ -513,6 +514,7 @@ function getImagesTable()
                     ]
                 })
                 divCount++;
+                //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
                 if (divCount === 3) {
                     data.push(row);
                     row = [];
@@ -522,7 +524,9 @@ function getImagesTable()
             
         }
 
+        //the last row only has one cell, need to put an empty cell to this row. 
         if (divCount == 2) {
+            //console.log("the last row only has one cell, need to put an empty cell to this row.")
             row.push({});
             data.push(row);
         }
