@@ -232,7 +232,7 @@
         //console.log(imageid);
         //console.log(imageAltName);
         //console.log('the width of the save image ' + width);
-        // console.log('saving');
+        console.log('saving');
 
         $.ajax({
             type: 'POST',
@@ -501,7 +501,13 @@
 
                         } else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
                             var maxIamge = 4;
+                            document.getElementById(p.tableName).style.display = 'block';
                             console.log("I am in renovation Feasibility Drawing Table");
+                            var maxDrawings = 4;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
+                            var idGroup = [];
                             //console.log(p.addid);
                             //document.getElementById(p.tableName).style.display = 'block';
                             addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID, p.removeFunction,
@@ -509,38 +515,45 @@
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.imageid).style.display = 'block';
                             document.getElementById(p.imageid).style.width = '100%';
+                            document.getElementById(p.imageid).style.height = '100%';
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.addid).style.width = '100%';
                             document.getElementById(p.removeid).style.display = 'block';
                             document.getElementById(p.removeid).style.width = '100%';
                             document.getElementById(p.textid).style.display = 'block';
                             document.getElementById(p.textid).style.width = '100%';
+                            document.getElementById(imgLabelID).style.display = 'block';
                             //create the next image area base on the max image number, the current ID smaller than it, create.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            var nextID = Number(currentID) + 1;
-                            console.log("the current total number of drawings " + countingDrawing);
-                            console.log("the currentID " + currentID);
-                            console.log("the nextID " + nextID);
-                            if (countingDrawing < maxIamge) {
-                                if (nextID === countingDrawing) {
-                                    console.log("have loaded all the drawings from database, and the total number of drawings has not exceed the max number need to create a add button for user to upload the next image");
-                                    //addDrawing();
-                                    var altID = Number(nextID) + 1;
-                                    nextAltName = 'draing ' + altID;
-                                    console.log("I am here!!! " + nextAltName);
-                                    var nextImageID = 'renovationDrawing' + nextID;
-                                    var nextTextID = 'renovationDrawingText' + nextID;
-                                    var nextRemoveButtonID = 'renovationDrawingRemoveButton' + nextID;
-                                    var nextAddButtonID = 'renovationDrawingAddButton' + nextID;
-                                    var nextUploadID = 'renovationDrawingUpload' + nextID;
-                                    addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
-                                } else {
-                                    console.log('still running, never mind');
-                                }
 
-                            } else {
-                                console.log('have max images, no more creating');
+                            var totalContainers = $('#renovationFeasibilityDrawings').find('> form');
+                            console.log("the current form in the report is :" + totalContainers.length);
+
+                            if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawings) 
+                            {
+                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+                                for (var i = 0; i < totalContainers.length; i++)
+                                {
+                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                    var id = Number(idStr);
+                                    idGroup.push(id);
+                                }
+                                console.log(idGroup);
+                                idGroup.sort(function(a, b){return a - b});
+                                console.log(idGroup);
+                                console.log("the last ID is " + idGroup[idGroup.length-1]);
+                                var lastID = idGroup[idGroup.length-1]
+                                var newID = Number(lastID) + 1;
+                                var altID = Number(lastID) + 2;
+                                nextAltName = 'image ' + altID;
+                                //console.log("I am here!!! need another image element ,the next id  " + newID);
+                                var nextImageID = 'renovationDrawing' + newID;
+                                var nextTextID = 'renovationDrawingText' + newID;
+                                var nextRemoveButtonID = 'renovationDrawingRemoveButton' + newID;
+                                var nextAddButtonID = 'renovationDrawingAddButton' + newID;
+                                var nextUploadID = 'renovationDrawingUpload' + newID;
+                                addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                                    'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
+
                             }
                         } else if (p.tableName === 'DilapidationImagesTable') {
 

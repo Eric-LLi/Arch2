@@ -478,17 +478,19 @@ function generatePDF(mode) {
              */
             {
                 stack: [
-                    getDrawings('renovationDrawing0', 'renovationDrawingText0'),
-                    getDrawings('renovationDrawing1', 'renovationDrawingText1'),
-                    getDrawings('renovationDrawing2', 'renovationDrawingText2'),
-                    getDrawings('renovationDrawing3', 'renovationDrawingText3')
+                    // getDrawings('renovationDrawing0', 'renovationDrawingText0'),
+                    // getDrawings('renovationDrawing1', 'renovationDrawingText1'),
+                    // getDrawings('renovationDrawing2', 'renovationDrawingText2'),
+                    // getDrawings('renovationDrawing3', 'renovationDrawingText3')
+                    getImagesTable()
                 ],
-                pageBreak:'after'
+                //pageBreak:'after'
             },
             /**
              * (6)Attachments
              * */
             {
+                pageBreak: 'before',
                 stack:[
                     {
                         text: 'Attachment',
@@ -522,13 +524,14 @@ function generatePDF(mode) {
                         text:thankYou,
                         fontSize:9
                     }
-                ],
-                pageBreak: 'after'
+                ]
+               
             },
             // /**
             //  * (5)Terms and Conditions
             //  * */
             {
+                pageBreak: 'before',
                 stack:[
                     {
                         text: 'Terms & Conditions',
