@@ -320,7 +320,7 @@ function addOneAdviceImage(click_id)
 
             //console.log(this.files.length);
             //console.log("Hi 1");
-            if (totalContainers.length < 30)
+            if (totalContainers.length <= 30)
             {
                 //console.log("Hi 2");
                 //if the total number of image is less than 30, then need to create a new image element to allow user to upload another one.
@@ -373,18 +373,22 @@ function addOneAdviceImage(click_id)
 
                 if (Number(selectedID) == Number(lastID))
                 {
-                    console.log("you are adding an image to the last id block");
-                    var newID = Number(lastID) + 1;
-                    var altID = Number(lastID) + 2;
-                    nextAltName = 'image ' + altID;
-                    //console.log("I am here!!! need another image element ,the next id  " + newID);
-                    var nextImageID = 'AdviceImage' + newID;
-                    var nextTextID = 'AdviceImageText' + newID;
-                    var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
-                    var nextAddButtonID = 'AddAdviceImageButton' + newID;
-                    var nextUploadID = 'AdviceUploadImage' + newID;
-                    addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                        'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+                    if(totalContainers.length < 30)
+                    {
+                        console.log("you are adding an image to the last id block");
+                        var newID = Number(lastID) + 1;
+                        var altID = Number(lastID) + 2;
+                        nextAltName = 'image ' + altID;
+                        //console.log("I am here!!! need another image element ,the next id  " + newID);
+                        var nextImageID = 'AdviceImage' + newID;
+                        var nextTextID = 'AdviceImageText' + newID;
+                        var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
+                        var nextAddButtonID = 'AddAdviceImageButton' + newID;
+                        var nextUploadID = 'AdviceUploadImage' + newID;
+                        addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                            'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+                    }
+                   
                 }
             }
         }
@@ -401,6 +405,19 @@ function RemoveOneAdviceImage(click_id)
     var addButtonID = 'AddAdviceImageButton' + id;
     var textID = 'AdviceImageText' + id;
     var formID = 'imageForm' + id;
+    var totalContainers = $('#AdvicePhotographs').find('> form');
+    var idGroup = [];
+    console.log("the current total image number is: " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        //console.log(idStr);
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    idGroup.sort(function(a, b){return a - b});
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
 
     var imageSelect = '#' + imageID;
     $(imageSelect).attr('src', '#');
@@ -420,6 +437,23 @@ function RemoveOneAdviceImage(click_id)
     //remove the image from database, and remove the image form completely
     doRemovePhoto(imageID);
     $('#' + formID).remove();
+
+    //has 30 images but, remove one, will no additional 'add' button, need to create one
+    if(totalContainers.length == 30)
+    {
+        console.log("need to create a new add button");
+        var newID = Number(lastID) + 1;
+        var altID = Number(lastID) + 2;
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'AdviceImage' + newID;
+        var nextTextID = 'AdviceImageText' + newID;
+        var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
+        var nextAddButtonID = 'AddAdviceImageButton' + newID;
+        var nextUploadID = 'AdviceUploadImage' + newID;
+        addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+    }
 
 }
 

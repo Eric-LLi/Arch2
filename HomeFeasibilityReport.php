@@ -540,7 +540,13 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
     <input type="file" id="HomeFeasibilityUploadDrawings" class="inputImage" accept="image/x-png,image/jpeg" multiple>
 </div>
 <div class="container" style="margin-top: 20px">
-    <table id="homeFeasibilityDrawingsTable">
+    <table id="homeFeasibilityDrawingsTable" style="display:none">
+        <tr>
+            <th>
+                <div class="row form-group" id="homeFeasibilityDrawings">
+                </div>
+            </th>
+        </tr>
     </table>
     <br>
     <hr style="height:1px;border:none;color:#333;background-color:#333;">

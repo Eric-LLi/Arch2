@@ -206,13 +206,19 @@ function HomeFeasibilityUploadDrawings() {
     document.getElementById('HomeFeasibilityUploadDrawings').click();
 }
 
+$('#HomeFeasibilityUploadDrawings').click(function()
+{
+    //console.log(this.value);
+    this.value = null;
+});
+
 $('#HomeFeasibilityUploadDrawings').change(function(){
      var imageIDs = $("#homeFeasibilityDrawingsTable form");
     for (var i = 0; i < imageIDs.length; i++) {
         var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
         doRemovePhoto(id);
     }
-    $("#homeFeasibilityDrawingsTable").empty();
+    $("#homeFeasibilityDrawings").empty();
     var table = document.getElementById("homeFeasibilityDrawingsTable");
     table.style.display = 'block';
     var count = this.files.length;
@@ -240,6 +246,7 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
                     var removeButtonID = 'homeDrawingRemoveButton' + ii;
                     var addButtonID = 'homeDrawingAddButton' + ii;
                     var uploadID = 'homeDrawingUpload' + ii;
+                    var imgLabelID = "imageCaption" + ii;
 
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
                     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
@@ -252,7 +259,6 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
                         //console.log('I am in loadImage function');
                         var orientation = 0;
                         var date = new Date();
-                        var selectionImage = '#ConstructionImage' + ii;
                         var imageName = imageFile[ii].name;
                         var imageType = imageFile[ii].type;
                         var image = document.getElementById(imageID);
@@ -275,7 +281,9 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
                                 description.style.display = 'block';
                                 image.style.display = 'block';
                                 image.style.width = '100%';
+                                image.style.height = '100%';
                                 description.style.width = '100%';
+                                document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
@@ -327,6 +335,7 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
                     var removeButtonID = 'homeDrawingRemoveButton' + ii;
                     var addButtonID = 'homeDrawingAddButton' + ii;
                     var uploadID = 'homeDrawingUpload' + ii;
+                    var imgLabelID = "imageCaption" + ii;
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
                     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
@@ -359,6 +368,8 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
                                 description.style.display = 'block';
                                 image.style.display = 'block';
                                 image.style.width = '100%';
+                                image.style.height = '100%';
+                                document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
@@ -385,14 +396,21 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
 function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
     var table = document.getElementById('homeFeasibilityDrawingsTable');
-    var rowCount = table.rows.length;
-    console.log(rowCount);
-    var row = table.insertRow(rowCount);
-    var cell1 = row.insertCell(0);
+    table.style.display = 'block';
+    var currentID = imageID.replace(/[^\d.]/g, '');
+    var BigContainer = document.getElementById('homeFeasibilityDrawings');
+    //console.log(BigContainer);
+    // var rowCount = table.rows.length;
+    // console.log(rowCount);
+    // var row = table.insertRow(rowCount);
+    // var cell1 = row.insertCell(0);
 
 
     //var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
+    form.id = "imageForm" + currentID;
+    form.style.width = '100%';
+    //console.log(form);
     // console.log(form);
     //form.setAttribute("class","divForm");
     //need four dividends in a form
@@ -400,19 +418,22 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     var container2 = document.createElement("div");
     var container3 = document.createElement("div");
     var container4 = document.createElement("div");
+    var container5 = document.createElement("div");
     container1.setAttribute("class", "col-sm");
     container2.setAttribute("class", "col-sm");
+    container2.style.textAlign = "center";
     container3.setAttribute("class", "col-sm");
     container4.setAttribute("class", "col-sm");
+    container5.setAttribute("class", "col-sm");
 
     //crate an image area
     var img = document.createElement('img');
-    img.src = "#";
-    img.alt = imageAltName;
+    // img.src = "#";
+    // img.alt = imageAltName;
     img.id = imageID;
-    img.style.display = 'none';
-    img.style.width = width;
-    img.style.height = imageSize;
+    // img.style.display = 'none';
+    img.style.width = '0px';
+    img.style.height = '0px';
     img.style.paddingTop = '10px';
 
     //create an input for the text
@@ -441,7 +462,7 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     addButton.setAttribute("value", "Add");
     addButton.setAttribute("onclick", addFunction);
     addButton.id = addButtonID;
-    addButton.style.width = imageSize;
+    addButton.style.width = '100%';
     addButton.style.height = "25px";
     addButton.style.display = 'block';
     addButton.style.marginTop = '20px';
@@ -452,92 +473,98 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     uploadFile.id = uploadFileID;
     uploadFile.setAttribute("class", "inputImage");
     uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
-
     uploadFile.style.display = 'none';
 
-
+    //create the image label for image caption number. 
+    var imgLabel = document.createElement("label");
+    var imgLabelID = "imageCaption" + currentID;
+    imgLabel.setAttribute("id", imgLabelID);
+    imgLabel.style.display = "none";
+    imgLabel.innerHTML = "IMG " + (Number(currentID)+1);
 
 
     //put all elements into the correct container
     //BigContainer.appendChild(form);
-    cell1.appendChild(form);
+    BigContainer.appendChild(form);
     form.appendChild(container1);
     form.appendChild(container2);
     form.appendChild(container3);
     form.appendChild(container4);
+    form.appendChild(container5);
     container1.appendChild(img);
-    container2.appendChild(textInput);
-    container3.appendChild(removeButton);
+    container2.appendChild(imgLabel);
+    container3.appendChild(textInput);
+    container4.appendChild(removeButton);
     container4.appendChild(addButton);
-    container4.appendChild(uploadFile);
+    container5.appendChild(uploadFile);
 }
 
 
-function addDrawing()
-{
-    var table = document.getElementById('homeFeasibilityDrawingsTable');
-    var rowCount = table.rows.length;
-    console.log(rowCount);
-    var row = table.insertRow(rowCount);
-    var cell1 = row.insertCell(0);
+// function addDrawing()
+// {
+//     var table = document.getElementById('homeFeasibilityDrawingsTable');
+//     var rowCount = table.rows.length;
+//     console.log(rowCount);
+//     var row = table.insertRow(rowCount);
+//     var cell1 = row.insertCell(0);
 
-    var form = document.createElement('form');
+//     var form = document.createElement('form');
 
-    var img = document.createElement('img');
-    img.src = "#";
-    var imageNo  = rowCount + 1;
-    img.alt = 'Drawing' + imageNo;
-    img.id = 'homeDrawing' + rowCount;
-    img.style.width = '100%';
-    img.style.height = '100%';
-    img.style.paddingTop = '10px';
-    img.style.marginBottom = '10px';
-    img.style.display = 'none';
+//     var img = document.createElement('img');
+//     img.src = "#";
+//     var imageNo  = rowCount + 1;
+//     img.alt = 'Drawing' + imageNo;
+//     img.id = 'homeDrawing' + rowCount;
+//     img.style.width = '100%';
+//     img.style.height = '100%';
+//     img.style.paddingTop = '10px';
+//     img.style.marginBottom = '10px';
+//     img.style.display = 'none';
 
-    var nameInput = document.createElement('INPUT');
-    nameInput.setAttribute('class','form-control');
-    nameInput.setAttribute('title','name');
-    nameInput.setAttribute('type','text');
-    nameInput.id = 'homeDrawingText' + rowCount;
-    nameInput.style.marginBottom = '10px';
+//     var nameInput = document.createElement('INPUT');
+//     nameInput.setAttribute('class','form-control');
+//     nameInput.setAttribute('title','name');
+//     nameInput.setAttribute('type','text');
+//     nameInput.id = 'homeDrawingText' + rowCount;
+//     nameInput.style.marginBottom = '10px';
 
-    //create an input for the remove button
-    var removeButton = document.createElement('INPUT');
-    removeButton.setAttribute("type", "button");
-    removeButton.setAttribute("value", "Remove");
-    removeButton.setAttribute("onclick", 'removeOneHomeDrawing(this.id)');
-    removeButton.id = 'homeDrawingRemoveButton' + rowCount;
-    removeButton.style.width = '100%';
-    removeButton.style.height = "25px";
-    removeButton.style.display = "none";
+//     //create an input for the remove button
+//     var removeButton = document.createElement('INPUT');
+//     removeButton.setAttribute("type", "button");
+//     removeButton.setAttribute("value", "Remove");
+//     removeButton.setAttribute("onclick", 'removeOneHomeDrawing(this.id)');
+//     removeButton.id = 'homeDrawingRemoveButton' + rowCount;
+//     removeButton.style.width = '100%';
+//     removeButton.style.height = "25px";
+//     removeButton.style.display = "none";
 
-    //create an input for add button
-    var addButton = document.createElement('INPUT');
-    addButton.setAttribute("type", "button");
-    addButton.setAttribute("value", "Add");
-    addButton.setAttribute("onclick", 'addOneHomeDrawing(this.id)');
-    addButton.id = 'homeDrawingAddButton' + rowCount;
-    addButton.style.width = '100%';
-    addButton.style.height = "25px";
-    addButton.style.display = 'block';
+//     //create an input for add button
+//     var addButton = document.createElement('INPUT');
+//     addButton.setAttribute("type", "button");
+//     addButton.setAttribute("value", "Add");
+//     addButton.setAttribute("onclick", 'addOneHomeDrawing(this.id)');
+//     addButton.id = 'homeDrawingAddButton' + rowCount;
+//     addButton.style.width = '100%';
+//     addButton.style.height = "25px";
+//     addButton.style.display = 'block';
 
-    //create an input for file, to upload images, this is the one with upload action
-    var uploadFile = document.createElement('INPUT');
-    uploadFile.setAttribute("type", "file");
-    uploadFile.id = 'homeDrawingUpload' + rowCount;
-    uploadFile.setAttribute("class", "inputImage");
-    uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
+//     //create an input for file, to upload images, this is the one with upload action
+//     var uploadFile = document.createElement('INPUT');
+//     uploadFile.setAttribute("type", "file");
+//     uploadFile.id = 'homeDrawingUpload' + rowCount;
+//     uploadFile.setAttribute("class", "inputImage");
+//     uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
 
-    uploadFile.style.display = 'none';
+//     uploadFile.style.display = 'none';
 
-    form.appendChild(img);
-    form.appendChild(nameInput);
-    form.appendChild(removeButton);
-    form.appendChild(addButton);
-    form.appendChild(uploadFile);
-    cell1.appendChild(form);
+//     form.appendChild(img);
+//     form.appendChild(nameInput);
+//     form.appendChild(removeButton);
+//     form.appendChild(addButton);
+//     form.appendChild(uploadFile);
+//     cell1.appendChild(form);
 
-}
+// }
 
 function removeOneHomeDrawing(click_id)
 {
@@ -547,6 +574,20 @@ function removeOneHomeDrawing(click_id)
     var removeButtonID = 'homeDrawingRemoveButton' + id;
     var addButtonID = 'homeDrawingAddButton' + id;
     var descriptionID = 'homeDrawingText' + id;
+    var formID = 'imageForm' + id;
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    var idGroup = [];
+    console.log("the current total image number is: " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        console.log(idStr);
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    idGroup.sort(function(a, b){return a - b});
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
 
 
     var imageSelect = '#' + imageID;
@@ -564,106 +605,16 @@ function removeOneHomeDrawing(click_id)
     //image.style.width = '0px';
     image.style.display = 'none';
     doRemovePhoto(imageID);
-}
+    $('#' + formID).remove();
 
-function addOneHomeDrawing(click_id)
-{
-    //console.log(click_id);
-
-    var id;
-    var selectedID = String(click_id);
-    id = selectedID.replace ( /[^\d.]/g, '' );
-    var nameID = Number(id) + 1;
-    var altName = 'drawing  ' + nameID;
-    var imageID = 'homeDrawing' + id;
-    var textID = 'homeDrawingText' + id;
-    var removeButtonID = 'homeDrawingRemoveButton' + id;
-    var addButtonID = 'homeDrawingAddButton' + id;
-    var uploadID = 'homeDrawingUpload' + id;
-    // console.log(uploadID);
-    var x = document.getElementById(uploadID);
-    x.click();
-    x.addEventListener('change',function(){
-        if (this.files && this.files[0]) {
-            var imageFile = this.files[0];
-            //load the image src to the current imageID.
-            loadImage.parseMetaData(imageFile, function (data) {
-                //console.log('I am in loadImage function');
-                var orientation = 0;
-                var date = new Date();
-                // var selectionImage = '#AdviceImage' + ii;
-                var imageName = imageFile.name;
-                var imageType = imageFile.type;
-                var image = document.getElementById(imageID);
-                var removeButton = document.getElementById(removeButtonID);
-                var description  = document.getElementById(textID);
-                var addButton = document.getElementById(addButtonID);
-                //if exif data available, update orientation
-                if (data.exif) {
-                    orientation = data.exif.get('Orientation');
-                }
-                var loadingImage = loadImage(imageFile, function (canvas) {
-                        var base64data = canvas.toDataURL(imageType);
-                        //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                        image.setAttribute('src',base64data);
-                        //$(selectionImage).attr('src',base64data);
-                        removeButton.style.display = 'block';
-                        removeButton.style.width = '100%';
-                        addButton.style.display = 'none';
-                        description.style.display = 'block';
-                        image.style.display = 'block';
-                        image.style.width = '100%';
-                        // image.style.height = '250px';
-                        var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                        //console.log(file);
-                        doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'homeFeasibilityDrawingsTable',nextAltName,'',uploadID,'removeOneHomeDrawing(this.id)','addOneHomeDrawing(this.id)','500px','500px');
-
-                    },
-                    {
-                        canvas: true,
-                        orientation: orientation,
-                        maxWidth:1500,
-                        maxHeight:1200
-                    }
-                );
-            });
-        }
-        // if (this.files && this.files[0]) {
-        //     var image = '#' + imageID;
-        //     var button = document.getElementById(addButtonID);
-        //     var removeButton = document.getElementById(removeButtonID);
-        //     var drawing = document.getElementById(imageID);
-        //     //var text = document.getElementById(textID);
-        //     var reader = new FileReader();
-        //     reader.onload = function (e) {
-        //
-        //         $(image).attr('src', e.target.result);
-        //         document.getElementById(textID).style.display = 'block';
-        //         button.style.display = 'none';
-        //         removeButton.style.display = 'block';
-        //         drawing.style.display = 'block';
-        //         drawing.style.width = '100%';
-        //         drawing.style.height = '100%';
-        //
-        //     };
-        //     reader.readAsDataURL(this.files[0]);
-        //     doUploadFile(this.files[0],imageID, textID, removeButtonID, addButtonID,'homeFeasibilityDrawingsTable','','','','','','100%','100%');
-        //     console.log("use the doUploadFile successfully");
-        // }
-    });
-
-    //To see whether the total number of drawing is smaller than 4, if it is, crate a new button. --> Mainly target situation when the drawing is reloaded.
-    var table = document.getElementById('homeFeasibilityDrawingsTable');
-    var noDrawing = table.rows.length;
-    if(noDrawing < 4)
+    //has four drawing but, remove one, no additional 'add' button
+    if(totalContainers.length == 4)
     {
-
-        //addDrawing();
-
-        var newID = noDrawing;
-        var altID = noDrawing + 1;
-        nextAltName = 'drawing ' + altID;
-        console.log("I am here!!! need another drawing element ,the next id  " + newID);
+        console.log("need to create a new add button");
+        var newID = Number(lastID) + 1;
+        var altID = Number(lastID) + 2;
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
         var nextImageID = 'homeDrawing' + newID;
         var nextTextID = 'homeDrawingText' + newID;
         var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
@@ -671,9 +622,121 @@ function addOneHomeDrawing(click_id)
         var nextUploadID = 'homeDrawingUpload' + newID;
         addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
             'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-
     }
 
+}
+
+function addOneHomeDrawing(click_id)
+{
+    //console.log(click_id);
+
+    var id;
+    var selectedID = String(click_id).replace ( /[^\d.]/g, '' );
+    var idGroup = [];
+    console.log("the selectedID " + selectedID);
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    console.log("the current total image number is: " + totalContainers.length);
+    // id = selectedID.replace ( /[^\d.]/g, '' );
+    var nameID = Number(selectedID) + 1;
+    var altName = 'drawing  ' + nameID;
+    var imageID = 'homeDrawing' + selectedID;
+    var textID = 'homeDrawingText' + selectedID;
+    var removeButtonID = 'homeDrawingRemoveButton' + selectedID;
+    var addButtonID = 'homeDrawingAddButton' + selectedID;
+    var uploadID = 'homeDrawingUpload' + selectedID;
+    var imgLabelID = "imageCaption" + selectedID;
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        console.log(idStr);
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    idGroup.sort(function(a, b){return a - b});
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
+    // console.log(uploadID);
+    var x = document.getElementById(uploadID);
+    // x.click();
+    $("#"+uploadID).unbind().click();
+    $('#'+uploadID).change(function(){
+        //console.log("Hi 0");
+        if (this.files && this.files[0]) {
+
+            //console.log(this.files.length);
+            //console.log("Hi 1");
+            if (totalContainers.length <= 4)
+            {
+                //console.log("Hi 2");
+                //if the total number of image is less than 30, then need to create a new image element to allow user to upload another one.
+                var imageFile = this.files[0];
+                //document.getElementById(imgLabelID).style.display = 'block';
+               
+                loadImage.parseMetaData(imageFile, function (data) {
+                    //console.log('I am in loadImage function');
+                    var orientation = 0;
+                    var date = new Date();
+                    // var selectionImage = '#AdviceImage' + ii;
+                    var imageName = imageFile.name;
+                    var imageType = imageFile.type;
+                    var image = document.getElementById(imageID);
+                    var removeButton = document.getElementById(removeButtonID);
+                    var description  = document.getElementById(textID);
+                    var addButton = document.getElementById(addButtonID);
+                    var imageLable = document.getElementById(imgLabelID);
+                    //if exif data available, update orientation
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
+                    var loadingImage = loadImage(imageFile, function (canvas) {
+                            var base64data = canvas.toDataURL(imageType);
+                            //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                            image.setAttribute('src',base64data);
+                            //$(selectionImage).attr('src',base64data);
+                            removeButton.style.display = 'block';
+                            removeButton.style.width = '100%';
+                            addButton.style.display = 'none';
+                            description.style.display = 'block';
+                            image.style.display = 'block';
+                            image.style.width = '100%';
+                            image.style.height = '100%';
+                            imageLable.style.display = 'block';
+                            // image.style.height = '250px';
+                            var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                            //console.log(file);
+                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'homeFeasibilityDrawingsTable',nextAltName,'homeFeasibilityDrawings',uploadID,'removeOneHomeDrawing(this.id)','addOneHomeDrawing(this.id)','100%','100%');
+
+                        },
+                        {
+                            canvas: true,
+                            orientation: orientation,
+                            maxWidth:1500,
+                            maxHeight:1200
+                        }
+                    );
+                });
+                if (Number(selectedID) == Number(lastID))
+                {
+                    if (totalContainers.length < 4)
+                    {
+                        console.log("you are adding an image to the last id block");
+                        var newID = Number(lastID) + 1;
+                        var altID = Number(lastID) + 2;
+                        nextAltName = 'image ' + altID;
+                        //console.log("I am here!!! need another image element ,the next id  " + newID);
+                        var nextImageID = 'homeDrawing' + newID;
+                        var nextTextID = 'homeDrawingText' + newID;
+                        var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
+                        var nextAddButtonID = 'homeDrawingAddButton' + newID;
+                        var nextUploadID = 'homeDrawingUpload' + newID;
+                        addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                            'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
+                    }
+                   
+                }
+            }
+        }
+    });
 }
 
 
@@ -733,6 +796,7 @@ function RemoveHomeFeasibilityCover(){
     $(imageSelect).attr('src', '#');
     var image = document.getElementById('HomeFeasibilityCoverImage');
     var button = document.getElementById('HomeFeasibilityCoverImageRemoveButton');
+    
 
     button.style.display = 'none';
     image.style.width = '0px';
