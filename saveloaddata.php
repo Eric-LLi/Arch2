@@ -724,12 +724,14 @@
                             var idGroup = [];
 
                             table.style.display = 'block';
-                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                            addDrawingElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                 p.removeFunction, p.addFunction, p.imageSize, p.width);
                             $('#' + p.imageid).attr('src', url);
                             document.getElementById(p.addid).style.display = 'none';
                             document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '100%';
                             document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '100%';
                             // document.getElementById(p.imageid).style.display = 'block';
                             document.getElementById(imgLabelID).style.display = 'block';
                             document.getElementById(p.imageid).style.width = '100%';
@@ -737,7 +739,7 @@
                            
                             var totalContainers = $('#MaintenanceDrawings').find('> form');
                             console.log("the current form in the report is :" + totalContainers.length);
-                            if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawings) 
+                            if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawing) 
                             {
                                 console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
                                 for (var i = 0; i < totalContainers.length; i++)
@@ -754,14 +756,14 @@
                                 var newID = Number(lastID) + 1;
                                 var altID = Number(lastID) + 2;
                                 nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
+                                console.log("I am here!!! need another image element ,the next id  " + newID);
                                 var nextImageID = 'MaintenanceDrawing' + newID;
                                 var nextTextID = 'MaintenanceDrawingText' + newID;
                                 var nextRemoveButtonID = 'MaintenanceDrawingRemoveButton' + newID;
                                 var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
                                 var nextUploadID = 'MaintenanceUploadDrawing' + newID;
-                                addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                    'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
+                                addDrawingElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                                    'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '500px', '0px');
 
                             }
                         } else if (p.tableName === 'ConstructionImagesTable') {
