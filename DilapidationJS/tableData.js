@@ -393,484 +393,137 @@ function getAttachmentDTable() {
  * */
 function getPhotoTable() {
     var result;
-    result = {
-        table: {
-            widths: ['*', '*'],
-            headerRows:2,
-            body: [
-                [
-                    {
-                        text: 'DILAPIDATION SURVEY REPORT ',
-                        style: 'tableHeader'
-                    },
-                    ''
-                ],
-                [{
-                    text: [
+    var row = [];
+    var data = [];
+    var tableBody, divCount = 1;
+    var totalContainers = $('#DilapidationPhotographs').find('> form');
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').get(0));
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'));
+    // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
+    // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+    console.log("the current total image form is: " + totalContainers.length + ", image number need to -1, the last one is only a form, no image");
+    if (totalContainers.length == 0) {
+        tableBody = {
+            text:''
+        };
+    }
+    else
+    {
+        var firstRow = [
+            {
+                text:"DILAPIDATION SURVEY REPORT",
+                style:'tableHeader',
+                margin: [0, 0, 0, 5],
+                colSpan:2
+            },{}
+        ];
+        data.push(firstRow);
+    
+        var secondRow = [
+            {
+                text:'Address: ' + getIt('dilapidationFullAddress'),
+                style: 'tableBoldTextAlignLeft',
+                margin: [0, 0, 0, 10],
+                colSpan:2
+            },{}
+        ];
+        data.push(secondRow);
+        for (var i = 0; i < totalContainers.length; i++) 
+        {
+            var img = totalContainers.eq(i).children('div').eq(0).children('img').get(0),
+                imgSrc = totalContainers.eq(i).children('div').eq(0).children('img').attr('src'),
+                imgLabel = totalContainers.eq(i).children('div').eq(1).children('label').text(),
+                imgText = totalContainers.eq(i).children('div').eq(2).children('input').val()
+                // width = 0,
+                // height = 0;
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').attr('src'));
+                //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
+                //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+
+            //console.log(imgLabel);
+            //console.log(imgSrc);
+
+            if (typeof imgSrc  != "undefined")
+            {
+                if (imgSrc.includes("photos/") > 0) 
+                {
+                    imgSrc = convertImgToBase64(img);
+                }
+    
+                // if (img.width >= img.height) {
+                //     width = 250;
+                //     height = 187;
+                // } else {
+                //     width = img.width * 187 / img.height;
+                //     height = 187;
+                // }
+    
+                row.push({
+                    stack: [
                         {
-                            text: 'Address:  ',
-                            bold: true
+                            image: imgSrc,
+                            height: 200,
+                            width: 250,
+                            margin:[10,30,0,5],
+                            alignment: 'center'
                         },
                         {
-                            text: document.getElementById('dilapidationFullAddress').value.trim()
+                            text: imgLabel,
+                            margin: [0, 5],
+                            alignment: 'center'
+                        },
+                        {
+                            text: imgText
                         }
-                    ],
-                    style: 'tableText',
-                    colSpan: 2
-                }, {}],
-                [
-                    getPhoto('DilapidationImage0'),
-                    getPhoto('DilapidationImage1')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText0'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText1'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage2'),
-                    getPhoto('DilapidationImage3')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText2'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText3'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage4'),
-                    getPhoto('DilapidationImage5')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText4'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText5'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage6'),
-                    getPhoto('DilapidationImage7')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText6'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText7'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage8'),
-                    getPhoto('DilapidationImage9')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText8'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText9'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage10'),
-                    getPhoto('DilapidationImage11')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText10'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText11'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage12'),
-                    getPhoto('DilapidationImage13')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText12'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText13'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage14'),
-                    getPhoto('DilapidationImage15')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText14'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText15'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage16'),
-                    getPhoto('DilapidationImage17')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText16'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText17'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage18'),
-                    getPhoto('DilapidationImage19')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText18'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText19'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage20'),
-                    getPhoto('DilapidationImage21')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText20'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText21'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage22'),
-                    getPhoto('DilapidationImage23')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText22'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText23'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage24'),
-                    getPhoto('DilapidationImage25')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText24'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText25'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage26'),
-                    getPhoto('DilapidationImage27')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText26'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText27'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage28'),
-                    getPhoto('DilapidationImage29')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText28'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText29'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage30'),
-                    getPhoto('DilapidationImage31')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText30'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText31'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage32'),
-                    getPhoto('DilapidationImage33')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText32'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText33'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage34'),
-                    getPhoto('DilapidationImage35')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText34'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText35'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage36'),
-                    getPhoto('DilapidationImage37')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText36'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText37'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage38'),
-                    getPhoto('DilapidationImage39')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText38'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText39'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage40'),
-                    getPhoto('DilapidationImage41')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText40'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText41'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage42'),
-                    getPhoto('DilapidationImage43')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText42'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText43'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage44'),
-                    getPhoto('DilapidationImage45')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText44'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText45'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage46'),
-                    getPhoto('DilapidationImage47')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText46'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText47'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage48'),
-                    getPhoto('DilapidationImage49')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText48'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText49'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage50'),
-                    getPhoto('DilapidationImage51')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText50'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText51'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage52'),
-                    getPhoto('DilapidationImage53')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText52'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText53'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage54'),
-                    getPhoto('DilapidationImage55')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText54'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText55'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage56'),
-                    getPhoto('DilapidationImage57')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText56'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText57'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }],
-                [
-                    getPhoto('DilapidationImage58'),
-                    getPhoto('DilapidationImage59')
-                ],
-                [{
-                    text: getPicDes('DilapidationImageText58'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }, {
-                    text: getPicDes('DilapidationImageText59'),
-                    fontSize: 9,
-                    bold: true,
-                    alignment: 'center'
-                }]
-            ]
-        },
-        layout: 'noBorders'
-    };
-    return result;
+                    ]
+                })
+                divCount++;
+                //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
+                if (divCount === 3) {
+                    data.push(row);
+                    row = [];
+                    divCount = 1;
+                }
+            }
+            
+        }
+
+        //the last row only has one cell, need to put an empty cell to this row. 
+        if (divCount == 2) {
+            //console.log("the last row only has one cell, need to put an empty cell to this row.")
+            row.push({});
+            data.push(row);
+        }
+
+        tableBody = {
+            pageBreak: 'before',
+            layout: {
+                hLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+                },
+                vLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                }
+            },
+            table: {
+                widths: [250, 250],
+                headerRows: 2,
+                body: data
+            }
+        }
+    }
+    return tableBody;
+}
+
+
+function convertImgToBase64(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var src = canvas.toDataURL("image/jpeg");
+
+    return src;
 }
