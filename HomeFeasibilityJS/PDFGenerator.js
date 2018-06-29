@@ -444,25 +444,28 @@ function generatePDF(mode) {
                         fontSize:9
                     }
 
-                ]
+                ],
+                pageBreak:'after'
 
             },
             /*
              (6) Drawings
              */
             {
+                
                 stack: [
-                    getDrawings('homeDrawing0', 'homeDrawingText0'),
-                    getDrawings('homeDrawing1', 'homeDrawingText1'),
-                    getDrawings('homeDrawing2', 'homeDrawingText2'),
-                    getDrawings('homeDrawing3', 'homeDrawingText3')
-                ],
-                pageBreak:'after'
+                    // getDrawings('homeDrawing0', 'homeDrawingText0'),
+                    // getDrawings('homeDrawing1', 'homeDrawingText1'),
+                    // getDrawings('homeDrawing2', 'homeDrawingText2'),
+                    // getDrawings('homeDrawing3', 'homeDrawingText3')
+                    getImagesTable()
+                ]
             },
             /**
              * (6)Attachments
              * */
             {
+                pageBreak: 'before',
                 stack:[
                     {
                         text: 'Attachment',
@@ -496,12 +499,13 @@ function generatePDF(mode) {
                         fontSize:9
                     }
                 ],
-                pageBreak: 'after'
+               
             },
             // /**
             //  * (5)Terms and Conditions
             //  * */
             {
+                pageBreak: 'before',
                 stack: [
                     {
                         text: 'Terms & Conditions',

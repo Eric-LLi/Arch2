@@ -555,7 +555,13 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
 
 </div>
 <div class="container" style="margin-top: 20px">
-    <table id="RenovationFeasibilityDrawingsTable">
+    <table id="RenovationFeasibilityDrawingsTable" style="display:none">
+        <tr>
+            <th>
+                <div class="row form-group" id="renovationFeasibilityDrawings">
+                </div>
+            </th>
+        </tr>
     </table>
     <br>
     <hr style="height:1px;border:none;color:#333;background-color:#333;">
