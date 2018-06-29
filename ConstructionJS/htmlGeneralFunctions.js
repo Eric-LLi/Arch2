@@ -2,6 +2,21 @@
  * Created by Fafa on 22/1/18.
  */
 
+ var firstRemove30th = true;
+
+function countWord(click_id)
+{
+    var words = document.getElementById(click_id).value;
+    var regex = /\s+/gi;
+    var wordCount = words.trim().replace(regex, ' ').split(' ').length;
+    //console.log("total word count: " + wordCount);
+    // if (wordCount >= 4)
+    // {
+    //     document.getElementById(click_id).disabled = true;
+    //     alert("you can only enter 3 words");
+    // }
+}
+
 function startNumber(id)
 {
     if (document.getElementById(id).value === '') {
@@ -31,7 +46,7 @@ function moreConstructionSummary()
 {
     var div = document.getElementById('CSRow');
     var divNumber = $('#CSRow').find('> div').length;
-    console.log(divNumber);
+    //console.log(divNumber);
     var newDivID = 'CS' + divNumber;
     var newInputID = 'CSName' + divNumber;
     var newSelectID = 'CSSelect' + divNumber;
@@ -130,7 +145,11 @@ function RemoveConstructionCoverImage(){
 function ConstructionUploadImages(){
     document.getElementById('ConstructionUploadImages').click();
 }
-
+$('#ConstructionUploadImages').click(function()
+{
+    //console.log(this.value);
+    this.value = null;
+});
 $('#ConstructionUploadImages').change(function() {
     var imageIDs = $("#ConstructionPhotographs form");
     for (var i = 0; i < imageIDs.length; i++) {
@@ -166,6 +185,7 @@ $('#ConstructionUploadImages').change(function() {
                     var removeButtonID = 'ConstructionImageRemoveButton' + ii;
                     var addButtonID = 'AddConstructionImageButton' + ii;
                     var uploadID = 'ConstructionUploadImage' + ii;
+                    var imgLabelID = "imageCaption" + ii;
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
 
@@ -198,6 +218,8 @@ $('#ConstructionUploadImages').change(function() {
                                 description.style.display = 'block';
                                 image.style.display = 'block';
                                 image.style.width = '500px';
+                                image.style.height = '500px';
+                                document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
@@ -207,8 +229,8 @@ $('#ConstructionUploadImages').change(function() {
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:1000,
-                                maxHeight:850
+                                maxWidth:600,
+                                maxHeight:350
                             }
                         );
                     });
@@ -247,6 +269,8 @@ $('#ConstructionUploadImages').change(function() {
                     var removeButtonID = 'ConstructionImageRemoveButton' + ii;
                     var addButtonID = 'AddConstructionImageButton' + ii;
                     var uploadID = 'ConstructionUploadImage' + ii;
+                    var imgLabelID = "imageCaption" + ii;
+
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
 
@@ -254,10 +278,9 @@ $('#ConstructionUploadImages').change(function() {
                         'RemoveOneConstructionImage(this.id)', 'AddOneConstructionImage(this.id)', '500px', '500px');
 
                     loadImage.parseMetaData(imageFile[ii], function (data) {
-                        console.log('I am in loadImage function');
+                        //console.log('I am in loadImage function');
                         var orientation = 0;
                         var date = new Date();
-                        var selectionImage = '#AdviceImage' + ii;
                         var imageName = imageFile[ii].name;
                         var imageType = imageFile[ii].type;
                         var image = document.getElementById(imageID);
@@ -279,6 +302,8 @@ $('#ConstructionUploadImages').change(function() {
                                 description.style.display = 'block';
                                 image.style.display = 'block';
                                 image.style.width = '500px';
+                                image.style.height = '500px';
+                                document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
@@ -288,8 +313,8 @@ $('#ConstructionUploadImages').change(function() {
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:1000,
-                                maxHeight:850
+                                maxWidth:600,
+                                maxHeight:350
                             }
                         );
                     });
@@ -317,88 +342,107 @@ $('#ConstructionUploadImages').change(function() {
 //noinspection JSUnusedGlobalSymbols
 function AddOneConstructionImage(click_id)
 {
-    var id;
-    var selectedID = String(click_id);
-    id = selectedID.replace ( /[^\d.]/g, '' );
-    console.log("the id " + id);
-    var totalImageNumber = $('#ConstructionPhotographs').find('> form').length;
-    console.log("the current total image number is: " + totalImageNumber);
-    var imageID = 'ConstructionImage' + id;
-    var textID = 'ConstructionImageText' + id;
-    var removeButtonID = 'ConstructionImageRemoveButton' + id;
-    var addButtonID = 'AddConstructionImageButton' + id;
-    var uploadID = 'ConstructionUploadImage' + id;
+    var selectedID = String(click_id).replace ( /[^\d.]/g, '' );
+    var idGroup = [];
+    console.log("the id " + selectedID);
+    var totalContainers = $('#ConstructionPhotographs').find('> form');
+    console.log("the current total image number is: " + totalContainers.length);
+    var imageID = 'ConstructionImage' + selectedID;
+    var textID = 'ConstructionImageText' + selectedID;
+    var removeButtonID = 'ConstructionImageRemoveButton' + selectedID;
+    var addButtonID = 'AddConstructionImageButton' + selectedID;
+    var uploadID = 'ConstructionUploadImage' + selectedID;
+    var imgLabelID = "imageCaption" + selectedID;
+
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    //console.log("the last ID is" + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
+
     // console.log(uploadID);
-    var x = document.getElementById(uploadID);
-    x.click();
-    x.addEventListener('change',function(){
-
-
+    $("#"+uploadID).unbind().click();
+    $('#'+uploadID).change(function(){
         if (this.files && this.files[0]) {
-            var imageFile = this.files[0];
-            //load the image src to the current imageID.
-            loadImage.parseMetaData(imageFile, function (data) {
-                //console.log('I am in loadImage function');
-                var orientation = 0;
-                var date = new Date();
-                // var selectionImage = '#AdviceImage' + ii;
-                var imageName = imageFile.name;
-                var imageType = imageFile.type;
-                var image = document.getElementById(imageID);
-                var removeButton = document.getElementById(removeButtonID);
-                var description  = document.getElementById(textID);
-                var addButton = document.getElementById(addButtonID);
-                //if exif data available, update orientation
-                if (data.exif) {
-                    orientation = data.exif.get('Orientation');
-                }
-                var loadingImage = loadImage(imageFile, function (canvas) {
-                        var base64data = canvas.toDataURL(imageType);
-                        //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                        image.setAttribute('src',base64data);
-                        //$(selectionImage).attr('src',base64data);
-                        removeButton.style.display = 'block';
-                        removeButton.style.width = '500px';
-                        addButton.style.display = 'none';
-                        description.style.display = 'block';
-                        image.style.display = 'block';
-                        image.style.width = '500px';
-                        // image.style.height = '250px';
-                        var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                        //console.log(file);
-                        doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'ConstructionImagesTable',nextAltName,'ConstructionPhotographs',uploadID,'RemoveOneConstructionImage(this.id)','AddOneConstructionImage(this.id)','500px','500px');
-
-                    },
-                    {
-                        canvas: true,
-                        orientation: orientation,
-                        maxWidth:1000,
-                        maxHeight:850
+            if(totalContainers.length == 30)
+            {
+                console.log("add the last 30th image, need to reset the firstRemove30th");
+                firstRemove30th = true;
+            }
+            if(totalContainers.length <= 30 )
+            {
+                var imageFile = this.files[0];
+                //load the image src to the current imageID.
+                loadImage.parseMetaData(imageFile, function (data) {
+                    //console.log('I am in loadImage function');
+                    var orientation = 0;
+                    var date = new Date();
+                    // var selectionImage = '#AdviceImage' + ii;
+                    var imageName = imageFile.name;
+                    var imageType = imageFile.type;
+                    var image = document.getElementById(imageID);
+                    var removeButton = document.getElementById(removeButtonID);
+                    var description  = document.getElementById(textID);
+                    var addButton = document.getElementById(addButtonID);
+                    var imageLable = document.getElementById(imgLabelID);
+                    //if exif data available, update orientation
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
                     }
-                );
-            });
+                    var loadingImage = loadImage(imageFile, function (canvas) {
+                            var base64data = canvas.toDataURL(imageType);
+                            //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                            image.setAttribute('src',base64data);
+                            //$(selectionImage).attr('src',base64data);
+                            removeButton.style.display = 'block';
+                            removeButton.style.width = '500px';
+                            addButton.style.display = 'none';
+                            description.style.display = 'block';
+                            image.style.display = 'block';
+                            image.style.width = '500px';
+                            image.style.height = '500px';
+                            imageLable.style.display = 'block';
+                            // image.style.height = '250px';
+                            var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                            //console.log(file);
+                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'ConstructionImagesTable',nextAltName,'ConstructionPhotographs',uploadID,'RemoveOneConstructionImage(this.id)','AddOneConstructionImage(this.id)','500px','500px');
+
+                        },
+                        {
+                            canvas: true,
+                            orientation: orientation,
+                            maxWidth:600,
+                            maxHeight:350
+                        }
+                    );
+                });
+                if (Number(selectedID) == Number(lastID))
+                {
+                    if(totalContainers.length < 30)
+                    {
+                        console.log("you are adding an image to the last id block");
+                        var newID = Number(lastID) + 1;
+                        var altID = Number(lastID) + 2;
+                        nextAltName = 'image ' + altID;
+                        console.log("I am here!!! need another image element ,the next id  " + newID);
+                        var nextImageID = 'ConstructionImage' + newID;
+                        var nextTextID = 'ConstructionImageText' + newID;
+                        var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
+                        var nextAddButtonID = 'AddConstructionImageButton' + newID;
+                        var nextUploadID = 'ConstructionUploadImage' + newID;
+                        addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                            'RemoveOneConstructionImage(this.id)', 'AddOneConstructionImage(this.id)', '500px', '0px');
+                    }
+                }
+            }
         }
-
-
-        if(totalImageNumber < 30)
-        {
-            //if the total number of image is less than 40, then need to create a new image element to allow user to upload another one.
-
-            var newID = totalImageNumber;
-            var altID = totalImageNumber + 1;
-            nextAltName = 'image ' + altID;
-            console.log("I am here!!! need another image element ,the next id  " + newID);
-            var nextImageID = 'ConstructionImage' + newID;
-            var nextTextID = 'ConstructionImageText' + newID;
-            var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
-            var nextAddButtonID = 'AddConstructionImageButton' + newID;
-            var nextUploadID = 'ConstructionUploadImage' + newID;
-            addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                'RemoveOneConstructionImage(this.id)', 'AddOneConstructionImage(this.id)', '500px', '0px');
-        }
-
-
-
     });
 }
 
@@ -411,6 +455,21 @@ function RemoveOneConstructionImage(click_id)
     var removeButtonID = 'ConstructionImageRemoveButton' + id;
     var addButtonID = 'AddConstructionImageButton' + id;
     var textID = 'ConstructionImageText' + id;
+    var formID = 'imageForm' + id;
+    var totalContainers = $('#ConstructionPhotographs').find('> form');
+    var idGroup = [];
+    console.log("the current total image number is: " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        //console.log(idStr);
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    idGroup.sort(function(a, b){return a - b});
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
+
 
     var imageSelect = '#' + imageID;
     $(imageSelect).attr('src', '#');
@@ -428,6 +487,36 @@ function RemoveOneConstructionImage(click_id)
     inputText.value = '';
 
     doRemovePhoto(imageID);
+    $('#' + formID).remove();
+
+    //has 30 images but, remove one, will no additional 'add' button, need to create one
+    if(totalContainers.length == 30 && firstRemove30th == true)
+    {
+        console.log("need to create a new add button");
+        var newID = Number(lastID) + 1;
+        var altID = Number(lastID) + 2;
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'ConstructionImage' + newID;
+        var nextTextID = 'ConstructionImageText' + newID;
+        var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
+        var nextAddButtonID = 'AddConstructionImageButton' + newID;
+        var nextUploadID = 'ConstructionUploadImage' + newID;
+        addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                            'RemoveOneConstructionImage(this.id)', 'AddOneConstructionImage(this.id)', '500px', '0px');
+        firstRemove30th = false;
+    }
+
+     //update the totalConaintainers after removing one form, If remove all the images one by one, don't leave a signle 'add' button
+     totalContainers = $('#ConstructionPhotographs').find('> form');
+     //console.log(totalContainers);
+     //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
+     if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
+     {
+         console.log("it does not have any images, emtpy the div");
+         $("#ConstructionPhotographs").empty();
+         document.getElementById('ConstructionImagesTable').style.display = 'none';
+     }
 
 }
 
@@ -435,27 +524,33 @@ function RemoveOneConstructionImage(click_id)
 
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
 function addImageElements(imageAltName, divID, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
+    var currentID = imageID.replace(/[^\d.]/g, '');
     var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
+    var form = document.createElement("form");
+    form.id = "imageForm" + currentID;
     //form.setAttribute("class","divForm");
     //need four dividends in a form
     var container1 = document.createElement("div");
     var container2 = document.createElement("div");
     var container3 = document.createElement("div");
     var container4 = document.createElement("div");
+    var container5 = document.createElement("div");
     container1.setAttribute("class", "col-sm");
     container2.setAttribute("class", "col-sm");
+    container2.style.textAlign = "center";
     container3.setAttribute("class", "col-sm");
     container4.setAttribute("class", "col-sm");
+    container5.setAttribute("class", "col-sm");
 
     //crate an image area
     var img = document.createElement('img');
-    img.src = "#";
-    img.alt = imageAltName;
+    //img.src = "#";
+    //img.alt = imageAltName;
     img.id = imageID;
-    img.style.display = 'none';
-    img.style.width = width;
-    img.style.height = imageSize;
+    //img.style.display = 'none';
+    img.style.width = '0px';
+    img.style.height = '0px';
     img.style.paddingTop = '10px';
 
     //create an input for the text
@@ -495,10 +590,15 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     uploadFile.id = uploadFileID;
     uploadFile.setAttribute("class", "inputImage");
     uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
-
     uploadFile.style.display = 'none';
 
 
+     //create the image label for image caption number. 
+     var imgLabel = document.createElement("label");
+     var imgLabelID = "imageCaption" + currentID;
+     imgLabel.setAttribute("id", imgLabelID);
+     imgLabel.style.display = "none";
+     imgLabel.innerHTML = "IMG " + (Number(currentID)+1);
 
 
     //put all elements into the correct container
@@ -507,11 +607,13 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     form.appendChild(container2);
     form.appendChild(container3);
     form.appendChild(container4);
+    form.appendChild(container5);
     container1.appendChild(img);
-    container2.appendChild(textInput);
-    container3.appendChild(removeButton);
+    container2.appendChild(imgLabel);
+    container3.appendChild(textInput);
+    container4.appendChild(removeButton);
     container4.appendChild(addButton);
-    container4.appendChild(uploadFile);
+    container5.appendChild(uploadFile);
 
 }
 
