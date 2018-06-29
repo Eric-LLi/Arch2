@@ -1142,7 +1142,7 @@ require_once("loadbooking.php");
                 <div id="HA_DIVPhotos" title="Photos" data-title="Photos" style="padding: 10px;font-size: 18px">
                     <button id="uploadImg_Btn" class="btn btn-primary">Upload Images</button>
                     <input type="file" id="Imgs_Upload" accept="image/x-png,image/jpeg" multiple/>
-                    <button id="deleteImg_Btn" class="btn btn-danger">Delete all</button>
+                    <button id="deleteImg_Btn" class="btn btn-danger" style="display:none">Delete all</button>
                     <div id="Img-main-container">
                         <div id="Img-loader">Loading document ...</div>
                         <div id="HA_ImgsContents"></div>

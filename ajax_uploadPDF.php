@@ -1,7 +1,7 @@
 <?php
   require_once("shared.php");
-  require_once('ilovepdf-php/init.php');
-  use Ilovepdf\CompressTask;
+  // require_once('ilovepdf-php/init.php');
+  // use Ilovepdf\CompressTask;
 
   $rc = -1;
   $msg = "";
@@ -27,38 +27,38 @@ global $reportTypes;
      if (fwrite($file, $newFileContent) !== false)
      {
 
-     try {
+    //  try {
     //Compress pdf report.
-    $myTask = new CompressTask('project_public_487edc28f75e9b3656e75c18469d6e64_3oAhE09dddba479e009ee6c13b7ff9e12ac68', 'secret_key_bdb8176785d6b23ab15616dd3ee0d38a_fT0dSabdb8ec6df861686ab8cc3c928482a7f');
+    // $myTask = new CompressTask('project_public_487edc28f75e9b3656e75c18469d6e64_3oAhE09dddba479e009ee6c13b7ff9e12ac68', 'secret_key_bdb8176785d6b23ab15616dd3ee0d38a_fT0dSabdb8ec6df861686ab8cc3c928482a7f');
 
-    $file = $myTask->addFile($newFileName);
+    // $file = $myTask->addFile($newFileName);
 
-    $myTask->execute();
+    // $myTask->execute();
 
-    $myTask->download("./pdfreport/");
+    // $myTask->download("./pdfreport/");
     
-} catch (\Ilovepdf\Exceptions\StartException $e) {
-    echo "An error occured on start: " . $e->getMessage() . " ";
-    // Authentication errors
-} catch (\Ilovepdf\Exceptions\AuthException $e) {
-    echo "An error occured on auth: " . $e->getMessage() . " ";
-    echo implode(', ', $e->getErrors());
-    // Uploading files errors
-} catch (\Ilovepdf\Exceptions\UploadException $e) {
-    echo "An error occured on upload: " . $e->getMessage() . " ";
-    echo implode(', ', $e->getErrors());
-    // Processing files errors
-} catch (\Ilovepdf\Exceptions\ProcessException $e) {
-    echo "An error occured on process: " . $e->getMessage() . " ";
-    echo implode(', ', $e->getErrors());
-    // Downloading files errors
-} catch (\Ilovepdf\Exceptions\DownloadException $e) {
-    echo "An error occured on process: " . $e->getMessage() . " ";
-    echo implode(', ', $e->getErrors());
-    // Other errors (as connexion errors and other)
-} catch (\Exception $e) {
-    echo "An error occured: " . $e->getMessage();
-}
+// } catch (\Ilovepdf\Exceptions\StartException $e) {
+//     echo "An error occured on start: " . $e->getMessage() . " ";
+//     // Authentication errors
+// } catch (\Ilovepdf\Exceptions\AuthException $e) {
+//     echo "An error occured on auth: " . $e->getMessage() . " ";
+//     echo implode(', ', $e->getErrors());
+//     // Uploading files errors
+// } catch (\Ilovepdf\Exceptions\UploadException $e) {
+//     echo "An error occured on upload: " . $e->getMessage() . " ";
+//     echo implode(', ', $e->getErrors());
+//     // Processing files errors
+// } catch (\Ilovepdf\Exceptions\ProcessException $e) {
+//     echo "An error occured on process: " . $e->getMessage() . " ";
+//     echo implode(', ', $e->getErrors());
+//     // Downloading files errors
+// } catch (\Ilovepdf\Exceptions\DownloadException $e) {
+//     echo "An error occured on process: " . $e->getMessage() . " ";
+//     echo implode(', ', $e->getErrors());
+//     // Other errors (as connexion errors and other)
+// } catch (\Exception $e) {
+//     echo "An error occured: " . $e->getMessage();
+// }
 
        $rc = 0;
        $msg = 'Save PDF Report Successfully';

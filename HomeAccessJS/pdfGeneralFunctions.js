@@ -1034,6 +1034,9 @@ function getPhotoImgs() {
                         alignment: 'center'
                     },
                     {
+                        text: $(divContainers.eq(i).children('label')).text()
+                    },
+                    {
                         text: $(divContainers.eq(i).children('input')).val()
                     }
                 ]
