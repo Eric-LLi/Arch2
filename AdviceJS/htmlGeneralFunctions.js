@@ -82,8 +82,19 @@ $('#AdviceUploadCoverImage').change(function(){
 
 function AdviceUploadImage(){
     document.getElementById('AdviceUploadImages').click();
+    
 }
-
+// var imageInput = document.getElementById('AdviceUploadImages');
+// imageInput.onclick = function()
+// {
+//     console.log(this.value);
+//     this.value = null;
+// }
+$('#AdviceUploadImages').click(function()
+{
+    console.log(this.value);
+    this.value = null;
+});
 $('#AdviceUploadImages').change(function() {
     var imageIDs = $("#AdvicePhotographs form");
     for (var i = 0; i < imageIDs.length; i++) {
