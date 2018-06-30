@@ -587,58 +587,58 @@ function getCoverImage(id) {
 
 function displayThreeImg(id) {
     var forms = $("#" + id + " form");
-    var result = {},
-        result2 = {};
 
-    for (var i = 0; i < forms.length; i++) {
-        var img = forms.eq(i).children("div").eq(0).children("img");
-        var text = forms.eq(i).children("div").eq(1).children("input");
-        if (img.attr("src") !== "#") {
-            result = {
-                stack: [
-                    getPhoto(img.attr("id")),
-                    {
-                        text: getText(text.attr("id")),
-                        width: 160,
-                        style: 'tableText',
-                        bold: true,
-                        margin: [0, 3, 0, 0]
-                    }
-                ]
-            };
+    const result2 = {
+        stack: [
+            getPhoto(forms.eq(1).children("div").eq(0).children("img").attr("id")),
+            {
+                text: getText(forms.eq(1).children("div").eq(1).children("input").attr("id")),
+                width: 160,
+                style: 'tableText',
+                bold: true,
+                margin: [0, 3, 0, 0]
+            }
+        ],
+    };
+    const result = {
+        stack: [
+            getPhoto(forms.eq(0).children("div").eq(0).children("img").attr("id")),
+            {
+                text: getText(forms.eq(0).children("div").eq(1).children("input").attr("id")),
+                width: 160,
+                style: 'tableText',
+                bold: true,
+                margin: [0, 3, 0, 0]
+            }
+        ],
+    };
 
-            result2 = {
-                stack: [
-                    getPhoto(forms.eq(1).children("div").eq(0).children("img").attr("id")),
-                    {
-                        text: getText(forms.eq(1).children("div").eq(1).children("input").attr("id")),
-                        width: 160,
-                        style: 'tableText',
-                        bold: true,
-                        margin: [0, 3, 0, 0]
-                    }
-                ]
-            };
-            // result = {
-            //     stack: [
-            //         getPhoto(img.attr("id")),
-            //         {
-            //             text: getText(text.attr("id")),
-            //             width: 160,
-            //             style: 'tableText',
-            //             bold: true,
-            //             margin: [0, 3, 0, 0]
-            //         }
-            //     ]
-            // };
-            console.log(result);
-            Object.assign(result, result2);
-            console.log(result);
-            // 
-        }
-    }
+    
+    
+    // for (var i = 0; i < forms.length; i++) {
+    //     var img = forms.eq(i).children("div").eq(0).children("img");
+    //     var text = forms.eq(i).children("div").eq(1).children("input");
+    //     if (img.attr("src") !== "#") {
+    //         const result = {
+    //             stack: [
+    //                 getPhoto(img.attr("id")),
+    //                 {
+    //                     text: getText(text.attr("id")),
+    //                     width: 160,
+    //                     style: 'tableText',
+    //                     bold: true,
+    //                     margin: [0, 3, 0, 0]
+    //                 }
+    //             ]
+    //         };
+    //         console.log(result);
+    //         const result3 = Object.assign({}, result2, result);
+    //         console.log(result3);
+    //         // 
+    //     }
+    // }
     // console.log(result);
-    return result;
+    return result6;
 
 }
 

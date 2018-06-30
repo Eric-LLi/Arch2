@@ -535,6 +535,9 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
     var addButton2 = document.getElementById(addButtonID2);
 
 
+    document.getElementById(text0).value = document.getElementById(text1).value = document.getElementById(text2).value = "";
+    document.getElementById(text0).style.display = document.getElementById(text1).style.display = document.getElementById(text2).style.display = 'none';
+
 
 
 
@@ -552,6 +555,8 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
         addButton0.style.display = 'block';
         addButton1.style.display = 'block';
         addButton2.style.display = 'block';
+
+
         // $("#AccessmentSiteImages form").attr(76yy"display", "");
 
         var imageFile = input.files[0];
@@ -604,6 +609,8 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
 
     setTimeout(function () {
         if (input.files && input.files[1]) {
+
+
             var imageFile = input.files[1];
             var imageType = imageFile.type;
             var imageName = imageFile.name;
@@ -657,6 +664,7 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
 
     setTimeout(function () {
         if (input.files && input.files[2]) {
+
             var imageFile = input.files[2];
             var imageType = imageFile.type;
             var imageName = imageFile.name;
@@ -747,6 +755,20 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
         document.getElementById(removeButton3).style.display = 'none';
         document.getElementById(removeButton4).style.display = 'none';
         document.getElementById(removeButton5).style.display = 'none';
+
+        document.getElementById(text0).style.display = 'none';
+        document.getElementById(text1).style.display = 'none';
+        document.getElementById(text2).style.display = 'none';
+        document.getElementById(text3).style.display = 'none';
+        document.getElementById(text4).style.display = 'none';
+        document.getElementById(text5).style.display = 'none';
+
+        document.getElementById(text0).value = "";
+        document.getElementById(text1).value = "";
+        document.getElementById(text2).value = "";
+        document.getElementById(text3).value = "";
+        document.getElementById(text4).value = "";
+
         var imageFile = input.files[0];
         var imageType = imageFile.type;
         var imageName = imageFile.name;
@@ -787,7 +809,7 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
             });
             //doUploadFile(input.files[0],imageID0, text0, removeButton0, addButtonID0,'','','','','','','265px','265px');
         });
-    }else {
+    } else {
         document.getElementById(imageID0).style.display = "none";
     }
 
@@ -837,7 +859,7 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
-        }else {
+        } else {
             document.getElementById(imageID1).style.display = "none";
         }
     }, 100);
@@ -886,7 +908,7 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(input.files[2],imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
                 //doUploadFile(loadingImage,imageID2, text2, removeButton2, addButtonID2,'','','','','','','265px','265px');
             });
-        }else {
+        } else {
             document.getElementById(imageID2).style.display = "none";
         }
     }, 110);
@@ -935,7 +957,7 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
-        }else {
+        } else {
             document.getElementById(imageID3).style.display = "none";
         }
     }, 120);
@@ -984,7 +1006,7 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
-        }else {
+        } else {
             document.getElementById(imageID4).style.display = "none";
         }
     }, 130);
@@ -1033,7 +1055,7 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
                 //doUploadFile(loadingImage,imageID1, text1, removeButton1, addButtonID1,'','','','','','','265px','265px');
             });
 
-        }else {
+        } else {
             document.getElementById(imageID5).style.display = "none";
         }
     }, 140);
@@ -1041,13 +1063,19 @@ function read6ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, addButt
 }
 
 
-function RemoveImage(imageID0, removeButtonID, addButtonID) {
+function RemoveImage(imageID0, removeButtonID, addButtonID, textID = "") {
     var imageSelect = '#' + imageID0;
     $(imageSelect).attr('src', '#');
     var image = document.getElementById(imageID0);
     var button = document.getElementById(removeButtonID);
+    if (text != "") {
+        var text = document.getElementById(textID);
+        text.style.display = "none";
+        text.value = "";
+    }
     var addButton = document.getElementById(addButtonID);
     button.style.display = 'none';
+
     addButton.style.display = 'block';
     image.style.width = '0px';
     image.style.display = 'none';
@@ -1332,101 +1360,101 @@ function AddAssessmentInteriorServiceImage2() {
 
 
 function RemoveAssessmentSiteImage0() {
-    RemoveImage('AssessmentSiteImage0', 'AssessmentSiteRemoveButton0', 'AddAssessmentSiteImageButton0');
+    RemoveImage('AssessmentSiteImage0', 'AssessmentSiteRemoveButton0', 'AddAssessmentSiteImageButton0', 'AssessmentSiteImageText0');
 }
 
 function RemoveAssessmentSiteImage1() {
-    RemoveImage('AssessmentSiteImage1', 'AssessmentSiteRemoveButton1', 'AddAssessmentSiteImageButton1');
+    RemoveImage('AssessmentSiteImage1', 'AssessmentSiteRemoveButton1', 'AddAssessmentSiteImageButton1', 'AssessmentSiteImageText1');
 }
 
 function RemoveAssessmentSiteImage2() {
-    RemoveImage('AssessmentSiteImage2', 'AssessmentSiteRemoveButton2', 'AddAssessmentSiteImageButton2');
+    RemoveImage('AssessmentSiteImage2', 'AssessmentSiteRemoveButton2', 'AddAssessmentSiteImageButton2', 'AssessmentSiteImageText2');
 }
 
 
 function RemoveAssessmentExteriorImage0() {
-    RemoveImage('AssessmentExteriorImage0', 'AssessmentExteriorRemoveButton0', 'AddAssessmentExteriorImageButton0');
+    RemoveImage('AssessmentExteriorImage0', 'AssessmentExteriorRemoveButton0', 'AddAssessmentExteriorImageButton0', 'AssessmentExteriorImageText0');
 }
 
 function RemoveAssessmentExteriorImage1() {
-    RemoveImage('AssessmentExteriorImage1', 'AssessmentExteriorRemoveButton1', 'AddAssessmentExteriorImageButton1');
+    RemoveImage('AssessmentExteriorImage1', 'AssessmentExteriorRemoveButton1', 'AddAssessmentExteriorImageButton1', 'AssessmentExteriorImageText1');
 }
 
 function RemoveAssessmentExteriorImage2() {
-    RemoveImage('AssessmentExteriorImage2', 'AssessmentExteriorRemoveButton2', 'AddAssessmentExteriorImageButton2');
+    RemoveImage('AssessmentExteriorImage2', 'AssessmentExteriorRemoveButton2', 'AddAssessmentExteriorImageButton2', 'AssessmentExteriorImageText2');
 }
 
 function RemoveAssessmentExteriorImage3() {
-    RemoveImage('AssessmentExteriorImage3', 'AssessmentExteriorRemoveButton3', 'AddAssessmentExteriorImageButton3');
+    RemoveImage('AssessmentExteriorImage3', 'AssessmentExteriorRemoveButton3', 'AddAssessmentExteriorImageButton3', 'AssessmentExteriorImageText3');
 }
 
 function RemoveAssessmentExteriorImage4() {
-    RemoveImage('AssessmentExteriorImage4', 'AssessmentExteriorRemoveButton4', 'AddAssessmentExteriorImageButton4');
+    RemoveImage('AssessmentExteriorImage4', 'AssessmentExteriorRemoveButton4', 'AddAssessmentExteriorImageButton4', 'AssessmentExteriorImageText4');
 }
 
 function RemoveAssessmentExteriorImage5() {
-    RemoveImage('AssessmentExteriorImage5', 'AssessmentExteriorRemoveButton5', 'AddAssessmentExteriorImageButton5');
+    RemoveImage('AssessmentExteriorImage5', 'AssessmentExteriorRemoveButton5', 'AddAssessmentExteriorImageButton5', 'AssessmentExteriorImageText5');
 }
 
 
 function RemoveAssessmentInteriorLivingImage0() {
-    RemoveImage('AssessmentInteriorLivingImage0', 'AssessmentInteriorLivingRemoveButton0', 'AddAssessmentInteriorLivingImageButton0');
+    RemoveImage('AssessmentInteriorLivingImage0', 'AssessmentInteriorLivingRemoveButton0', 'AddAssessmentInteriorLivingImageButton0', 'AssessmentInteriorLivingImageText0');
 }
 
 function RemoveAssessmentInteriorLivingImage1() {
-    RemoveImage('AssessmentInteriorLivingImage1', 'AssessmentInteriorLivingRemoveButton1', 'AddAssessmentInteriorLivingImageButton1');
+    RemoveImage('AssessmentInteriorLivingImage1', 'AssessmentInteriorLivingRemoveButton1', 'AddAssessmentInteriorLivingImageButton1', 'AssessmentInteriorLivingImageText1');
 }
 
 function RemoveAssessmentInteriorLivingImage2() {
-    RemoveImage('AssessmentInteriorLivingImage2', 'AssessmentInteriorLivingRemoveButton2', 'AddAssessmentInteriorLivingImageButton2');
+    RemoveImage('AssessmentInteriorLivingImage2', 'AssessmentInteriorLivingRemoveButton2', 'AddAssessmentInteriorLivingImageButton2', 'AssessmentInteriorLivingImageText2');
 }
 
 function RemoveAssessmentInteriorLivingImage3() {
-    RemoveImage('AssessmentInteriorLivingImage3', 'AssessmentInteriorLivingRemoveButton3', 'AddAssessmentInteriorLivingImageButton3');
+    RemoveImage('AssessmentInteriorLivingImage3', 'AssessmentInteriorLivingRemoveButton3', 'AddAssessmentInteriorLivingImageButton3', 'AssessmentInteriorLivingImageText3');
 }
 
 function RemoveAssessmentInteriorLivingImage4() {
-    RemoveImage('AssessmentInteriorLivingImage4', 'AssessmentInteriorLivingRemoveButton4', 'AddAssessmentInteriorLivingImageButton4');
+    RemoveImage('AssessmentInteriorLivingImage4', 'AssessmentInteriorLivingRemoveButton4', 'AddAssessmentInteriorLivingImageButton4', 'AssessmentInteriorLivingImageText4');
 }
 
 function RemoveAssessmentInteriorLivingImage5() {
-    RemoveImage('AssessmentInteriorLivingImage5', 'AssessmentInteriorLivingRemoveButton5', 'AddAssessmentInteriorLivingImageButton5');
+    RemoveImage('AssessmentInteriorLivingImage5', 'AssessmentInteriorLivingRemoveButton5', 'AddAssessmentInteriorLivingImageButton5', 'AssessmentInteriorLivingImageText5');
 }
 
 function RemoveAssessmentInteriorBedroomImage0() {
-    RemoveImage('AssessmentInteriorBedroomImage0', 'AssessmentInteriorBedroomRemoveButton0', 'AddAssessmentInteriorBedroomImageButton0');
+    RemoveImage('AssessmentInteriorBedroomImage0', 'AssessmentInteriorBedroomRemoveButton0', 'AddAssessmentInteriorBedroomImageButton0', 'AssessmentInteriorBedroomImageText0');
 }
 
 function RemoveAssessmentInteriorBedroomImage1() {
-    RemoveImage('AssessmentInteriorBedroomImage1', 'AssessmentInteriorBedroomRemoveButton1', 'AddAssessmentInteriorBedroomImageButton1');
+    RemoveImage('AssessmentInteriorBedroomImage1', 'AssessmentInteriorBedroomRemoveButton1', 'AddAssessmentInteriorBedroomImageButton1', 'AssessmentInteriorBedroomImageText1');
 }
 
 function RemoveAssessmentInteriorBedroomImage2() {
-    RemoveImage('AssessmentInteriorBedroomImage2', 'AssessmentInteriorBedroomRemoveButton2', 'AddAssessmentInteriorBedroomImageButton2');
+    RemoveImage('AssessmentInteriorBedroomImage2', 'AssessmentInteriorBedroomRemoveButton2', 'AddAssessmentInteriorBedroomImageButton2', 'AssessmentInteriorBedroomImageText2');
 }
 
 function RemoveAssessmentInteriorBedroomImage3() {
-    RemoveImage('AssessmentInteriorBedroomImage3', 'AssessmentInteriorBedroomRemoveButton3', 'AddAssessmentInteriorBedroomImageButton3');
+    RemoveImage('AssessmentInteriorBedroomImage3', 'AssessmentInteriorBedroomRemoveButton3', 'AddAssessmentInteriorBedroomImageButton3', 'AssessmentInteriorBedroomImageText3');
 }
 
 function RemoveAssessmentInteriorBedroomImage4() {
-    RemoveImage('AssessmentInteriorBedroomImage4', 'AssessmentInteriorBedroomRemoveButton4', 'AddAssessmentInteriorBedroomImageButton4');
+    RemoveImage('AssessmentInteriorBedroomImage4', 'AssessmentInteriorBedroomRemoveButton4', 'AddAssessmentInteriorBedroomImageButton4', 'AssessmentInteriorBedroomImageText4');
 }
 
 function RemoveAssessmentInteriorBedroomImage5() {
-    RemoveImage('AssessmentInteriorBedroomImage5', 'AssessmentInteriorBedroomRemoveButton5', 'AddAssessmentInteriorBedroomImageButton5');
+    RemoveImage('AssessmentInteriorBedroomImage5', 'AssessmentInteriorBedroomRemoveButton5', 'AddAssessmentInteriorBedroomImageButton5', 'AssessmentInteriorBedroomImageText5');
 }
 
 function RemoveAssessmentInteriorServiceImage0() {
-    RemoveImage('AssessmentInteriorServiceImage0', 'AssessmentInteriorServiceRemoveButton0', 'AddAssessmentInteriorServiceImageButton0');
+    RemoveImage('AssessmentInteriorServiceImage0', 'AssessmentInteriorServiceRemoveButton0', 'AddAssessmentInteriorServiceImageButton0', 'AssessmentInteriorServiceImageText0');
 }
 
 function RemoveAssessmentInteriorServiceImage1() {
-    RemoveImage('AssessmentInteriorServiceImage1', 'AssessmentInteriorServiceRemoveButton1', 'AddAssessmentInteriorServiceImageButton1');
+    RemoveImage('AssessmentInteriorServiceImage1', 'AssessmentInteriorServiceRemoveButton1', 'AddAssessmentInteriorServiceImageButton1', 'AssessmentInteriorServiceImageText1');
 }
 
 function RemoveAssessmentInteriorServiceImage2() {
-    RemoveImage('AssessmentInteriorServiceImage2', 'AssessmentInteriorServiceRemoveButton2', 'AddAssessmentInteriorServiceImageButton2');
+    RemoveImage('AssessmentInteriorServiceImage2', 'AssessmentInteriorServiceRemoveButton2', 'AddAssessmentInteriorServiceImageButton2', 'AssessmentInteriorServiceImageText2');
 }
 
 

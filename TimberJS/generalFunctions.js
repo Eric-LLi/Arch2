@@ -9,7 +9,9 @@
  * */
 function makeAGap() {
     var result;
-    result = {text: ' '};
+    result = {
+        text: ' '
+    };
     return result;
 }
 
@@ -29,8 +31,7 @@ function getIt(id) {
 /*
     Get the value from the image description area
  */
-function getPicDescription(id)
-{
+function getPicDescription(id) {
     var result;
     result = document.getElementById(id).value.trim();
     return result;
@@ -65,12 +66,10 @@ function giveMeHugeDraft(mode) {
  1st determine whether it is final mode or preview mode
  2md determine whether it is a NSW report if it is the final mode
  */
-function determineFooter(mode)
-{
+function determineFooter(mode) {
     var result;
     var state = document.getElementById('state').value;
-    if (mode == 'final' || mode == 'save')
-    {
+    if (mode == 'final' || mode == 'save') {
         // if (state === 'NSW')
         // {
         //     result = {
@@ -113,37 +112,35 @@ function determineFooter(mode)
         // }
         //else
         //{
-            result = {
-                table:{
-                    widths: ['auto', 350],
-                    body:[
-                        [
-                            {
-                                // rowSpan:2,
-                                image:footerImage,
-                                alignment:'left',
-                                width:80,
-                                height:34
-                            },
-                            {
-                                text:'© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
-                                alignment:'left',
-                                fontSize:7,
-                                margin:[0,25,0,0],
-                                color:'#8E8B8B'
-                            }
-                        ]
-
+        result = {
+            table: {
+                widths: ['auto', 350],
+                body: [
+                    [{
+                            // rowSpan:2,
+                            image: footerImage,
+                            alignment: 'left',
+                            width: 80,
+                            height: 34
+                        },
+                        {
+                            text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                            alignment: 'left',
+                            fontSize: 7,
+                            margin: [0, 25, 0, 0],
+                            color: '#8E8B8B'
+                        }
                     ]
-                },
-                layout:'noBorders',
-                margin: [40, 0, 10, 0]
-            };
-            return result;
+
+                ]
+            },
+            layout: 'noBorders',
+            margin: [40, 0, 10, 0]
+        };
+        return result;
         //}
     }
-    if (mode == 'preview')
-    {
+    if (mode == 'preview') {
         result = {
             text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
             alignment: 'left',
@@ -216,42 +213,51 @@ function determineFrontPageFooter(mode) {
         // }
         // else
         // {
-            result = {
-                table:{
-                    body:[
-                        [
-                            {
-                                image:footerImage,
-                                alignment:'left',
-                                width:80,
-                                height:34
-                            }
-                        ],
-                        [
+        result = {
+            table: {
+                body: [
+                    [{
+                        image: footerImage,
+                        alignment: 'left',
+                        width: 80,
+                        height: 34
+                    }],
+                    [
 
-                            {
-                                text:['For further information please call Archicentre ', {text:'Australia ',color:'#E06666'}, 'on ',{text:'1300 13 45 13',color:'3A3333',bold:true,fontSize:8}],
-                                alignment:'left',
-                                fontSize:7,
-                                color:'#8E8B8B'
-                            }
-                        ],
-                        [
-                            {
-                                text: ['or go to ',{text:'www.archicentreaustralia.com.au',bold:true,color:'3A3333',fontSize:8}],
-                                alignment: 'left',
-                                fontSize:7,
-                                margin:[0,-4,0,0],
-                                color:'#8E8B8B'
-                            }
-                        ]
+                        {
+                            text: ['For further information please call Archicentre ', {
+                                text: 'Australia ',
+                                color: '#E06666'
+                            }, 'on ', {
+                                text: '1300 13 45 13',
+                                color: '3A3333',
+                                bold: true,
+                                fontSize: 8
+                            }],
+                            alignment: 'left',
+                            fontSize: 7,
+                            color: '#8E8B8B'
+                        }
+                    ],
+                    [{
+                        text: ['or go to ', {
+                            text: 'www.archicentreaustralia.com.au',
+                            bold: true,
+                            color: '3A3333',
+                            fontSize: 8
+                        }],
+                        alignment: 'left',
+                        fontSize: 7,
+                        margin: [0, -4, 0, 0],
+                        color: '#8E8B8B'
+                    }]
 
-                    ]
-                },
-                layout:'noBorders',
-                margin: [40, -25, 0, 0]
-            };
-            return result;
+                ]
+            },
+            layout: 'noBorders',
+            margin: [40, -25, 0, 0]
+        };
+        return result;
         //}
     }
 
@@ -280,7 +286,7 @@ function checkImage(id) {
     var image = document.getElementById(id);
     var src = image.src;
     //console.log(src.indexOf("photos"));
-    return(src.indexOf("photos"));
+    return (src.indexOf("photos"));
 }
 
 /**
@@ -298,27 +304,23 @@ function getCoverImage(id) {
             width: 0,
             height: 0
         }
-    }
-    else
-    {
+    } else {
         console.log('has cover');
-        if (checkImage(id) >= 0)
-        {
+        if (checkImage(id) >= 0) {
             console.log('reload');
             var canvas = document.createElement("canvas");
             canvas.width = myImage.naturalWidth;
             canvas.height = myImage.naturalHeight;
             var ctx = canvas.getContext("2d");
-            ctx.drawImage(myImage,0,0);
+            ctx.drawImage(myImage, 0, 0);
             var src = canvas.toDataURL("image/png");
 
             imageSection = {
-                image:src,
+                image: src,
                 height: 150,
                 width: 200
             }
-        }
-        else{
+        } else {
             console.log('just upload');
             imageSection = {
                 image: myImage.src,
@@ -331,32 +333,27 @@ function getCoverImage(id) {
     return imageSection;
 }
 
-function getPhoto(id)
-{
+function getPhoto(id) {
     var imageSection;
     var myImage = document.getElementById(id);
 
-    if (myImage.style.display === "block")
-    {
+    if (myImage.style.display === "block") {
         //has image, check whether it is from database or just upload
-        if (checkImage(id) >= 0)
-        {
+        if (checkImage(id) >= 0) {
             //console.log(id + ' reload');
             var canvas = document.createElement("canvas");
             canvas.width = myImage.naturalWidth;
             canvas.height = myImage.naturalHeight;
             var ctx = canvas.getContext("2d");
-            ctx.drawImage(myImage,0,0);
-            var src = canvas.toDataURL("image/png");
+            ctx.drawImage(myImage, 0, 0);
+            var src = canvas.toDataURL("image/jpeg");
 
             imageSection = {
-                image:src,
+                image: src,
                 height: 110,
                 width: 160
             }
-        }
-        else
-        {
+        } else {
             //console.log(id + ' just upload');
             imageSection = {
                 image: myImage.src,
@@ -364,18 +361,14 @@ function getPhoto(id)
                 width: 160
             }
         }
-    }
-    else
-    {
+    } else {
         //console.log(id + " no image at all");
         //no image at all
         imageSection = {
-            text:""
+            text: ""
         }
     }
 
     return imageSection;
 
 }
-
-
