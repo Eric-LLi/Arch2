@@ -2,6 +2,8 @@
  * Created by Fafa on 19/1/18.
  */
 
+ var firstRemove30th = true;
+
 function countWord(click_id)
 {
     var words = document.getElementById(click_id).value;
@@ -96,6 +98,7 @@ $('#AdviceUploadImages').click(function()
     this.value = null;
 });
 $('#AdviceUploadImages').change(function() {
+    firstRemove30th = true;
     var imageIDs = $("#AdvicePhotographs form");
     for (var i = 0; i < imageIDs.length; i++) {
         var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
@@ -175,8 +178,8 @@ $('#AdviceUploadImages').change(function() {
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:600,
-                                maxHeight:350
+                                maxWidth:1000,
+                                maxHeight:800
                             }
                         );
                     });
@@ -259,8 +262,8 @@ $('#AdviceUploadImages').change(function() {
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:600,
-                                maxHeight:350
+                                maxWidth:1000,
+                                maxHeight:800
                             }
                         );
                     });
@@ -317,10 +320,15 @@ function addOneAdviceImage(click_id)
     $('#'+uploadID).change(function(){
         //console.log("Hi 0");
         if (this.files && this.files[0]) {
+            if(totalContainers.length == 30)
+            {
+                console.log("add the last 30th image, need to reset the firstRemove30th");
+                firstRemove30th = true;
+            }
 
             //console.log(this.files.length);
             //console.log("Hi 1");
-            if (totalContainers.length < 30)
+            if (totalContainers.length <= 30)
             {
                 //console.log("Hi 2");
                 //if the total number of image is less than 30, then need to create a new image element to allow user to upload another one.
@@ -365,8 +373,8 @@ function addOneAdviceImage(click_id)
                         {
                             canvas: true,
                             orientation: orientation,
-                            maxWidth:600,
-                            maxHeight:350
+                            maxWidth:1000,
+                            maxHeight:800
                         }
                     );
                 });
@@ -439,7 +447,7 @@ function RemoveOneAdviceImage(click_id)
     $('#' + formID).remove();
 
     //has 30 images but, remove one, will no additional 'add' button, need to create one
-    if(totalContainers.length == 30)
+    if(totalContainers.length == 30 && firstRemove30th == true)
     {
         console.log("need to create a new add button");
         var newID = Number(lastID) + 1;
@@ -453,6 +461,17 @@ function RemoveOneAdviceImage(click_id)
         var nextUploadID = 'AdviceUploadImage' + newID;
         addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
             'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+        firstRemove30th = false;
+    }
+
+    totalContainers = $('#AdvicePhotographs').find('> form');
+    //console.log(totalContainers);
+    //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
+    if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
+    {
+        console.log("it does not have any images, emtpy the div");
+        $("#AdvicePhotographs").empty();
+        document.getElementById('AdviceImagesTable').style.display = 'none';
     }
 
 }

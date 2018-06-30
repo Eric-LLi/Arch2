@@ -1,6 +1,7 @@
 /**
  * Created by Fafa on 12/1/18.
  */
+var firstRemove4th = true;
 function formatNumber(click_id)
 {
     var val = document.getElementById(click_id).value;
@@ -213,7 +214,8 @@ $('#HomeFeasibilityUploadDrawings').click(function()
 });
 
 $('#HomeFeasibilityUploadDrawings').change(function(){
-     var imageIDs = $("#homeFeasibilityDrawingsTable form");
+    firstRemove4th == true
+    var imageIDs = $("#homeFeasibilityDrawingsTable form");
     for (var i = 0; i < imageIDs.length; i++) {
         var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
         doRemovePhoto(id);
@@ -480,7 +482,7 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     var imgLabelID = "imageCaption" + currentID;
     imgLabel.setAttribute("id", imgLabelID);
     imgLabel.style.display = "none";
-    imgLabel.innerHTML = "IMG " + (Number(currentID)+1);
+    imgLabel.innerHTML = "Drawing " + (Number(currentID)+1);
 
 
     //put all elements into the correct container
@@ -581,7 +583,7 @@ function removeOneHomeDrawing(click_id)
     for (var i = 0; i < totalContainers.length; i++)
     {
         var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-        console.log(idStr);
+       // console.log(idStr);
         var id = Number(idStr);
         idGroup.push(id);
     }
@@ -608,7 +610,7 @@ function removeOneHomeDrawing(click_id)
     $('#' + formID).remove();
 
     //has four drawing but, remove one, no additional 'add' button
-    if(totalContainers.length == 4)
+    if(totalContainers.length == 4 && firstRemove4th == true)
     {
         console.log("need to create a new add button");
         var newID = Number(lastID) + 1;
@@ -622,7 +624,19 @@ function removeOneHomeDrawing(click_id)
         var nextUploadID = 'homeDrawingUpload' + newID;
         addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
             'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
+        firstRemove4th = false;
     }
+
+     //update the totalConaintainers after removing one form, If remove all the images one by one, don't leave a signle 'add' button
+     totalContainers = $('#homeFeasibilityDrawings').find('> form');
+     //console.log(totalContainers);
+     //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
+     if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
+     {
+         console.log("it does not have any images, emtpy the div");
+         $("#homeFeasibilityDrawings").empty();
+         document.getElementById('homeFeasibilityDrawingsTable').style.display = 'none';
+     }
 
 }
 
@@ -665,6 +679,11 @@ function addOneHomeDrawing(click_id)
 
             //console.log(this.files.length);
             //console.log("Hi 1");
+            if(totalContainers.length == 4)
+            {
+                console.log("add the last 4th image, need to reset the firstRemovetth");
+                firstRemove4th = true;
+            }
             if (totalContainers.length <= 4)
             {
                 //console.log("Hi 2");

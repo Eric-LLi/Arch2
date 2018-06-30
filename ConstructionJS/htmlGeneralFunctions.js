@@ -151,6 +151,7 @@ $('#ConstructionUploadImages').click(function()
     this.value = null;
 });
 $('#ConstructionUploadImages').change(function() {
+    firstRemove30th = true;
     var imageIDs = $("#ConstructionPhotographs form");
     for (var i = 0; i < imageIDs.length; i++) {
         var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
@@ -229,8 +230,8 @@ $('#ConstructionUploadImages').change(function() {
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:600,
-                                maxHeight:350
+                                maxWidth:1000,
+                                maxHeight:800
                             }
                         );
                     });
@@ -313,8 +314,8 @@ $('#ConstructionUploadImages').change(function() {
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:600,
-                                maxHeight:350
+                                maxWidth:1000,
+                                maxHeight:800
                             }
                         );
                     });
@@ -418,8 +419,8 @@ function AddOneConstructionImage(click_id)
                         {
                             canvas: true,
                             orientation: orientation,
-                            maxWidth:600,
-                            maxHeight:350
+                            maxWidth:1000,
+                            maxHeight:800
                         }
                     );
                 });

@@ -628,7 +628,7 @@ function getConstructionSummary()
     {
         for(var i=0;i<9;i=i+3)
         {
-            console.log(i);
+            //console.log(i);
             var b = i+3;
             var row = [];
             for(var a=i;a<b;a++)

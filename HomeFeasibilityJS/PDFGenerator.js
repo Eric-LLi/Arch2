@@ -444,8 +444,8 @@ function generatePDF(mode) {
                         fontSize:9
                     }
 
-                ],
-                pageBreak:'after'
+                ]
+                //pageBreak:'after'
 
             },
             /*

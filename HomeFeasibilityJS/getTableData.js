@@ -1001,6 +1001,7 @@ function getImagesTable()
         // }
 
         tableBody = {
+            pageBreak:'before',
             layout: {
                 hLineColor: function (i, node) {
                     return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';

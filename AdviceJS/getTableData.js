@@ -412,7 +412,6 @@ function getAttachmentTable() {
  */
 function getImagesTable()
 {
-    var result;
     var row = [];
     var data = [];
     var tableBody, divCount = 1;
@@ -422,47 +421,32 @@ function getImagesTable()
     // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
     // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
     console.log("the current total image form is: " + totalContainers.length + ", image number need to -1, the last one is only a form, no image");
-
-    var firstRow = [
-        {
-            text:"ARCHITECT'S ADVICE REPORT(continued)",
-            style:'tableHeader',
-            margin: [0, 0, 0, 5],
-            colSpan:2
-        },{}
-    ];
-    data.push(firstRow);
-
-    var secondRow = [
-        {
-            text:'Address: ' + getIt('adviceAddress'),
-            style: 'tableBoldTextAlignLeft',
-            margin: [0, 0, 0, 10],
-            colSpan:2
-        },{}
-    ];
-    data.push(secondRow);
-
     if (totalContainers.length == 0) {
         tableBody = {
-            table: {
-                headerRows: 2,
-                body: data
-            },
-            layout: {
-                hLineColor: function (i, node) {
-                    return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
-                },
-                vLineColor: function (i, node) {
-                    return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
-                }
-            }
-    
+            text:''
         };
-    
     }
     else
     {
+        var firstRow = [
+            {
+                text:"ARCHITECT'S ADVICE REPORT(continued)",
+                style:'tableHeader',
+                margin: [0, 0, 0, 5],
+                colSpan:2
+            },{}
+        ];
+        data.push(firstRow);
+    
+        var secondRow = [
+            {
+                text:'Address: ' + getIt('adviceAddress'),
+                style: 'tableBoldTextAlignLeft',
+                margin: [0, 0, 0, 10],
+                colSpan:2
+            },{}
+        ];
+        data.push(secondRow);
         for (var i = 0; i < totalContainers.length; i++) 
         {
             var img = totalContainers.eq(i).children('div').eq(0).children('img').get(0),
@@ -532,6 +516,7 @@ function getImagesTable()
         }
 
         tableBody = {
+            pageBreak: 'before',
             layout: {
                 hLineColor: function (i, node) {
                     return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
@@ -547,48 +532,6 @@ function getImagesTable()
             }
         }
     }
-
-    // for(i=0;i<totalImageNumber;i=i+2)
-    // {
-
-    //     var n = i + 1;
-    //     var firstImageID = 'AdviceImage' + i;
-    //     var secondImageID = 'AdviceImage' + n;
-    //     var firstTextID = 'AdviceImageText' + i;
-    //     var secondTextID = 'AdviceImageText' + n;
-
-
-    //     var imageRow =
-    //     [
-    //         getPhoto(firstImageID),
-    //         getPhoto(secondImageID)
-
-    //     ];
-    //     var textRow = [
-    //         getImageText(firstTextID),
-    //         getImageText(secondTextID)
-
-    //     ];
-    //     data.push(imageRow);
-    //     data.push(textRow);
-    // }
-
-    // tableBody = {
-    //     table: {
-    //         headerRows: 2,
-    //         body: data
-    //     },
-    //     layout: {
-    //         hLineColor: function (i, node) {
-    //             return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
-    //         },
-    //         vLineColor: function (i, node) {
-    //             return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
-    //         }
-    //     }
-
-    // };
-
     return tableBody;
 }
 
