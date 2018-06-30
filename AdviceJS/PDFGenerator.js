@@ -531,8 +531,8 @@ function generatePDF(mode) {
                         ],
                         columnGap: 20
                     }
-                ],
-                pageBreak: 'after'
+                ]
+                //pageBreak: 'after'
 
             },
 

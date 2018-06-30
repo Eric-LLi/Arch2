@@ -523,8 +523,8 @@ function generatePDF(mode) {
                     }
 
 
-                ],
-                pageBreak: 'after'
+                ]
+                // pageBreak: 'after'
             },
 
             /*

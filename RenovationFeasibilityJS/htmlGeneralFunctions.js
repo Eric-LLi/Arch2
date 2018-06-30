@@ -2,6 +2,7 @@
  * Created by Fafa on 12/1/18.
  */
 
+firstRemove4th = true;
 
 
 function formatNumber(click_id)
@@ -213,7 +214,8 @@ $('#RenovationFeasibilityUploadDrawings').click(function()
 });
 
 $('#RenovationFeasibilityUploadDrawings').change(function(){
-     var imageIDs = $("#renovationFeasibilityDrawings form");
+    firstRemove4th = true;
+    var imageIDs = $("#renovationFeasibilityDrawings form");
     for (var i = 0; i < imageIDs.length; i++) {
         var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
         doRemovePhoto(id);
@@ -473,7 +475,7 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
      var imgLabelID = "imageCaption" + currentID;
      imgLabel.setAttribute("id", imgLabelID);
      imgLabel.style.display = "none";
-     imgLabel.innerHTML = "IMG " + (Number(currentID)+1);
+     imgLabel.innerHTML = "Drawing " + (Number(currentID)+1);
 
 
 
@@ -609,7 +611,7 @@ function removeOneRenovationDrawing(click_id)
     $('#' + formID).remove();
 
     //has four drawing but, remove one, no additional 'add' button
-    if(totalContainers.length == 4)
+    if(totalContainers.length == 4 && firstRemove4th == true)
     {
         console.log("need to create a new add button");
         var newID = Number(lastID) + 1;
@@ -623,7 +625,18 @@ function removeOneRenovationDrawing(click_id)
         var nextUploadID = 'renovationDrawingUpload' + newID;
         addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
             'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
+        firstRemove4th = false;
     }
+     //update the totalConaintainers after removing one form, If remove all the images one by one, don't leave a signle 'add' button
+     totalContainers = $('#renovationFeasibilityDrawings').find('> form');
+     //console.log(totalContainers);
+     //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
+     if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
+     {
+         console.log("it does not have any images, emtpy the div");
+         $("#renovationFeasibilityDrawings").empty();
+         document.getElementById('RenovationFeasibilityDrawingsTable').style.display = 'none';
+     }
 }
 
 function addOneRenovationDrawing(click_id)
@@ -659,6 +672,11 @@ function addOneRenovationDrawing(click_id)
     $("#"+uploadID).unbind().click();
     $('#'+uploadID).change(function(){
         if (this.files && this.files[0]) {
+            if(totalContainers.length == 4)
+            {
+                console.log("add the last 4th image, need to reset the firstRemove4th");
+                firstRemove4th = true;
+            }
             if (totalContainers.length <= 4)
             {
                 var imageFile = this.files[0];
