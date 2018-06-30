@@ -115,6 +115,7 @@ $('#MaintenanceUploadImages').click(function()
     this.value = null;
 });
 $('#MaintenanceUploadImages').change(function() {
+    firstRemove40th = true;
     var imageIDs = $("#MaintenancePhotographs form");
     for (var i = 0; i < imageIDs.length; i++) {
         var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
@@ -193,8 +194,8 @@ $('#MaintenanceUploadImages').change(function() {
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:600,
-                                maxHeight:350
+                                maxWidth:1000,
+                                maxHeight:800
                             }
                         );
                     });
@@ -277,8 +278,8 @@ $('#MaintenanceUploadImages').change(function() {
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:600,
-                                maxHeight:350
+                                maxWidth:1000,
+                                maxHeight:800
                             }
                         );
                     });
@@ -332,6 +333,11 @@ function AddOneMaintenanceImage(click_id)
     $("#"+uploadID).unbind().click();
     $('#'+uploadID).change(function(){
         if (this.files && this.files[0]) {
+            if(totalContainers.length == 40)
+            {
+                console.log("add the last 30th image, need to reset the firstRemove30th");
+                firstRemove40th = true;
+            }
             if (totalContainers.length <=40)
             {
                 var imageFile = this.files[0];
@@ -374,8 +380,8 @@ function AddOneMaintenanceImage(click_id)
                         {
                             canvas: true,
                             orientation: orientation,
-                            maxWidth:600,
-                            maxHeight:350
+                            maxWidth:1000,
+                            maxHeight:800
                         }
                     );
                 });
@@ -459,7 +465,7 @@ function RemoveOneMaintenanceImage(click_id)
         var nextAddButtonID = 'AddMaintenanceImageButton' + newID;
         var nextUploadID = 'MaintenanceUploadImage' + newID;
         addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-        'RemoveOneMaintenanceDrawing(this.id)','AddOneMaintenanceDrawing(this.id)', '500px', '0px');
+        'RemoveOneMaintenanceImage(this.id)','AddOneMaintenanceImage(this.id)', '500px', '0px');
         firstRemove40th = false;
     }
 
@@ -508,6 +514,11 @@ function AddOneMaintenanceDrawing(click_id)
     $("#"+uploadID).unbind().click();
     $('#'+uploadID).change(function(){
         if (this.files && this.files[0]) {
+            if(totalContainers.length == 6)
+            {
+                console.log("add the last 30th image, need to reset the firstRemove30th");
+                firstRemove6th = true;
+            }
             if(totalContainers.length <= 6)
             {
                 var imageFile = this.files[0];
@@ -672,6 +683,7 @@ $('#MaintenanceUploadDrawings').click(function()
 });
 
 $('#MaintenanceUploadDrawings').change(function() {
+    firstRemove6th = true;
     var imageIDs = $("#MaintenanceDrawings form");
     for (var i = 0; i < imageIDs.length; i++) {
         var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");

@@ -2,6 +2,8 @@
  * Created by Fafa on 15/1/18.
  */
 
+ var firstRemove60th = true;
+
 function countWord(click_id)
 {
     var words = document.getElementById(click_id).value;
@@ -30,7 +32,7 @@ $('#DilapidationUploadCoverImage').change(function(){
         // console.log(imageType);
         // console.log(imageName);
         loadImage.parseMetaData(imageFile, function (data) {
-            console.log('I am in loadImage function');
+            //console.log('I am in loadImage function');
             var orientation = 0;
             var image = document.getElementById('DilapidationCoverImage');
             var removeButton = document.getElementById('DilapidationCoverImageRemoveButton');
@@ -92,6 +94,7 @@ $('#DilapidationUploadImages').click(function()
     this.value = null;
 });
 $('#DilapidationUploadImages').change(function(){
+    firstRemove60th = true;
     var imageIDs = $("#DilapidationPhotographs form");
     for (var i = 0; i < imageIDs.length; i++) {
         var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
@@ -169,8 +172,8 @@ $('#DilapidationUploadImages').change(function(){
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:600,
-                                maxHeight:350
+                                maxWidth:1000,
+                                maxHeight:800
                             }
                         );
                     });
@@ -217,7 +220,7 @@ $('#DilapidationUploadImages').change(function(){
                         'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '500px');
 
                     loadImage.parseMetaData(imageFile[ii], function (data) {
-                        console.log('I am in loadImage function');
+                        //console.log('I am in loadImage function');
                         var orientation = 0;
                         var date = new Date();
                         var selectionImage = '#AdviceImage' + ii;
@@ -253,8 +256,8 @@ $('#DilapidationUploadImages').change(function(){
                             {
                                 canvas: true,
                                 orientation: orientation,
-                                maxWidth:600,
-                                maxHeight:350
+                                maxWidth:1000,
+                                maxHeight:800
                             }
                         );
                     });
@@ -409,6 +412,12 @@ function addOneDilapidationImage(click_id)
 
         if (this.files && this.files[0]) {
 
+            if(totalContainers.length == 60)
+            {
+                console.log("add the last 60 image, need to reset the firstRemove60th");
+                firstRemove60th = true;
+            }
+
             if (totalContainers.length <= 60)
             {
                 var imageFile = this.files[0];
@@ -451,8 +460,8 @@ function addOneDilapidationImage(click_id)
                         {
                             canvas: true,
                             orientation: orientation,
-                            maxWidth:600,
-                            maxHeight:350
+                            maxWidth:1000,
+                            maxHeight:800
                         }
                     );
                 });
@@ -523,7 +532,7 @@ function RemoveOneDilapidationImage(click_id)
     $('#' + formID).remove();
 
     //has 30 images but, remove one, will no additional 'add' button, need to create one
-    if(totalContainers.length == 60)
+    if(totalContainers.length == 60 && firstRemove60th == true)
     {
         console.log("need to create a new add button");
         var newID = Number(lastID) + 1;
@@ -537,6 +546,17 @@ function RemoveOneDilapidationImage(click_id)
         var nextUploadID = 'DilapidationUploadImage' + newID;
         addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
         'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '0px');
+        firstRemove60th = false;
+    }
+    //update the totalConaintainers after removing one form, If remove all the images one by one, don't leave a signle 'add' button
+    totalContainers = $('#DilapidationPhotographs').find('> form');
+    //console.log(totalContainers);
+    //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
+    if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
+    {
+        console.log("it does not have any images, emtpy the div");
+        $("#DilapidationPhotographs").empty();
+        document.getElementById('DilapidationImagesTable').style.display = 'none';
     }
 
 }
