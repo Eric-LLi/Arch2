@@ -2182,6 +2182,7 @@
                         <br>
                         <input type="button" value="Upload Image" class="uploadImageButton" onclick="AssessmentSiteUploadImages()">
                         <input type="file" id="AssessmentSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+                        <input type="file" id="AssessmentSiteSingleImage" accept="image/x-png,image/jpeg" class="inputImage">
                     </th>
                     <th class="container">
                         <div id="AccessmentSiteImagesContainer" class="row"></div>
