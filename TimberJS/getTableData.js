@@ -3018,3 +3018,138 @@ function appendOtherTypeTwo(otherId, id1, id2, id3, id4) {
 
 
 
+/*
+    get Images
+ */
+function getImagesTable(divid)
+{
+    var row = [];
+    var data = [];
+    var tableBody, divCount = 1;
+    var totalContainers = $('#'+divid).find('> form');
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').get(0));
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'));
+    // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
+    // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+    console.log("the current total image form" + divid+  " is: " + totalContainers.length + ", image number need to -1, the last one is only a form, no image");
+    if (totalContainers.length == 0) {
+        tableBody = {
+            text:''
+        };
+    }
+    else
+    {
+        // var firstRow = [
+        //     {
+        //         text:"ARCHITECT'S ADVICE REPORT(continued)",
+        //         style:'tableHeader',
+        //         margin: [0, 0, 0, 5],
+        //         colSpan:2
+        //     },{}
+        // ];
+        // data.push(firstRow);
+    
+        // var secondRow = [
+        //     {
+        //         text:'Address: ' + getIt('adviceAddress'),
+        //         style: 'tableBoldTextAlignLeft',
+        //         margin: [0, 0, 0, 10],
+        //         colSpan:2
+        //     },{}
+        // ];
+        // data.push(secondRow);
+        for (var i = 0; i < totalContainers.length; i++) 
+        {
+            var img = totalContainers.eq(i).children('div').eq(0).children('img').get(0),
+                imgSrc = totalContainers.eq(i).children('div').eq(0).children('img').attr('src'),
+                imgLabel = totalContainers.eq(i).children('div').eq(1).children('label').text(),
+                imgText = totalContainers.eq(i).children('div').eq(2).children('input').val()
+                // width = 0,
+                // height = 0;
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
+                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').attr('src'));
+                //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
+                //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+
+            //console.log(imgLabel);
+            //console.log(imgSrc);
+
+            if (typeof imgSrc  != "undefined")
+            {
+                if (imgSrc.includes("photos/") > 0) 
+                {
+                    imgSrc = convertImgToBase64(img);
+                }
+    
+                // if (img.width >= img.height) {
+                //     width = 250;
+                //     height = 187;
+                // } else {
+                //     width = img.width * 187 / img.height;
+                //     height = 187;
+                // }
+    
+                row.push({
+                    stack: [
+                        {
+                            image: imgSrc,
+                            height: 110,
+                            width: 160,
+                            margin:[5,30,0,5],
+                            alignment: 'center'
+                        },
+                        {
+                            text: imgLabel,
+                            margin: [0, 5],
+                            alignment: 'center'
+                        },
+                        {
+                            text: imgText
+                        }
+                    ]
+                })
+                divCount++;
+                //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
+                if (divCount === 4) {
+                    data.push(row);
+                    row = [];
+                    divCount = 1;
+                }
+            }
+            
+        }
+
+        //the last row only has one cell, need to put an empty cell to this row. 
+        if (divCount == 2 || divCount == 3) {
+            console.log("the last row only has one or two cell, need to put an empty cell to this row.")
+            row.push({});
+            data.push(row);
+        }
+
+        tableBody = {
+            layout: {
+                hLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+                },
+                vLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                }
+            },
+            table: {
+                body: data
+            }
+        }
+    }
+    return tableBody;
+}
+
+function convertImgToBase64(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var src = canvas.toDataURL("image/jpeg");
+
+    return src;
+}

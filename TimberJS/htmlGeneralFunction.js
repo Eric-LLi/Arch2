@@ -1,10 +1,15 @@
 //Fafa create 2018-1-15
 
 var firstRemoveTimberSummary3rd = true;
+var firstRemoveTimberSite3rd = true;
 function onload()
 {
     reorderImages('TimberSummaryPhotographs');
+    reorderImages('TimberSitePhotographs');
     automaticNumbering('TimberSummaryPhotographs');
+    automaticNumbering('TimberSitePhotographs');
+    addNewSiteImageForm();
+    addNewSummaryImageForm()
 }
 function reorderImages(divid)
 {
@@ -40,6 +45,76 @@ function automaticNumbering(divid)
         //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
         totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
     }
+}
+
+function addNewSiteImageForm()
+{
+    maxImage = 3;
+    var idGroup = [];
+
+    var totalContainers = $('#TimberSitePhotographs').find('> form');
+    console.log("the current form in the report is :" + totalContainers.length);
+    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    console.log("the last ID is " + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    var newID = Number(lastID) + 1;
+    var altID = Number(lastID) + 2;
+    if(totalContainers.length < maxImage && totalContainers.length != 0)
+    {
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'TimberSiteImage' + newID;
+        var nextTextID = 'TimberSiteImageText' + newID;
+        var nextRemoveButtonID = 'TimberSiteRemoveButton' + newID;
+        var nextAddButtonID = 'AddTimberSiteImageButton' + newID;
+        var nextUploadID = 'TimberSiteUploadImage' + newID;
+        addImageElements(nextAltName, 'TimberSitePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            'RemoveOneTimberSiteImage(this.id)', 'AddOneTimberSiteImage(this.id)', '340px', '340px','TimberSiteImageForm','TimberSiteImageCaption');
+    }
+   
+}
+
+function addNewSummaryImageForm()
+{
+    maxImage = 3;
+    var idGroup = [];
+    var totalContainers = $('#TimberSummaryPhotographs').find('> form');
+    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    console.log("the last ID is " + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    var newID = Number(lastID) + 1;
+    var altID = Number(lastID) + 2;
+    if(totalContainers.length < maxImage && totalContainers.length != 0)
+    {
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'TimberSummaryImage' + newID;
+        var nextTextID = 'TimberSummaryImageText' + newID;
+        var nextRemoveButtonID = 'TimberSummaryRemoveButton' + newID;
+        var nextAddButtonID = 'AddTimberSummaryImageButton' + newID;
+        var nextUploadID = 'TimberSummaryUploadImage' + newID;
+        addImageElements(nextAltName, 'TimberSummaryPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '340px', '340px','TimberSummaryImageForm','TimberSummaryImageCaption');
+    }
+   
 }
 
 function autoPopulateAccessNotes(restrictionID, notesID) {
@@ -178,8 +253,8 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
                 var image = document.getElementById(imageID0);
                 var description = document.getElementById(text0);
                 var button = document.getElementById(removeButton0);
-                image.style.width = '265px';
-                image.style.height = '265px';
+                image.style.width = '340px';
+                image.style.height = '340px';
                 image.style.display = 'block';
                 description.style.display = 'block';
                 button.style.display = 'block';
@@ -188,7 +263,7 @@ function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID
                     type: imageType,
                     lastModified: date.getTime()
                 });
-                doUploadFile(file, imageID0, text0, removeButton0, addButtonID0, '', '', '', '', '', '', '265px', '265px');
+                doUploadFile(file, imageID0, text0, removeButton0, addButtonID0, '', '', '', '', '', '', '340px', '340px');
             }, {
                 //should be set to canvas : true to activate auto fix orientation
                 canvas: true,
@@ -411,69 +486,6 @@ $('#TimberSummaryUploadImages').click(function()
     //console.log(this.value);
     this.value = null;
 });
-
-function TimberRecommendationUploadImages() {
-    //  var imageIDs = $("#TimberRecommendationTable form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
-    document.getElementById('TimberRecommendationUploadImages').click();
-}
-
-function TimberSiteUploadImages() {
-    // var imageIDs = $("#TimberSiteImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
-    document.getElementById('TimberSiteUploadImages').click();
-}
-
-function TimberExteriorUploadImages() {
-    var imageIDs = $("#TimberExteriorImages form");
-    console.log(imageIDs);
-    for (var i = 0; i < imageIDs.length; i++) {
-        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-        doRemovePhoto(id);
-    }
-    document.getElementById('TimberExteriorUploadImages').click();
-}
-
-function TimberInteriorUploadImages() {
-    // var imageIDs = $("#TimberInteriorImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
-    document.getElementById('TimberInteriorUploadImages').click();
-}
-
-function TimberRoofUploadImages() {
-    // var imageIDs = $("#TimberRoofImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
-    document.getElementById('TimberRoofUploadImages').click();
-}
-
-function TimberSubfloorUploadImages() {
-    // var imageIDs = $("#TimberSubfloorImages form");
-    // console.log(imageIDs);
-    // for (var i = 0; i < imageIDs.length; i++) {
-    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-    //     doRemovePhoto(id);
-    // }
-    document.getElementById('TimberSubfloorUploadImages').click();
-}
-
-
-
 $("#TimberSummaryUploadImages").change(function () {
     //read3ImagesURL(this, 'AddTimberSummaryImageButton0', 'AddTimberSummaryImageButton1', 'AddTimberSummaryImageButton2', 'TimberSummaryImage0', 'TimberSummaryImage1', 'TimberSummaryImage2', 'TimberSummaryImageText0', 'TimberSummaryImageText1', 'TimberSummaryImageText2', 'TimberSummaryRemoveButton0', 'TimberSummaryRemoveButton1', 'TimberSummaryRemoveButton2');
     firstRemoveTimberSummary3rd = true;
@@ -538,17 +550,17 @@ $("#TimberSummaryUploadImages").change(function () {
                                 image.setAttribute('src',base64data);
                                 //$(selectionImage).attr('src',base64data);
                                 removeButton.style.display = 'block';
-                                removeButton.style.width = '265px';
+                                removeButton.style.width = '340px';
                                 addButton.style.display = 'none';
                                 description.style.display = 'block';
                                 image.style.display = 'block';
-                                image.style.width = '265px';
-                                image.style.height = '265px';
+                                image.style.width = '340px';
+                                image.style.height = '340px';
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
-                                doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSummaryImagesTable',altName,'TimberSummaryPhotographs',uploadID,'RemoveOneTimberSummaryImage(this.id)','AddOneTimberSummaryImage(this.id)','265px','265px');
+                                doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSummaryImagesTable',altName,'TimberSummaryPhotographs',uploadID,'RemoveOneTimberSummaryImage(this.id)','AddOneTimberSummaryImage(this.id)','340px','340px');
 
                             },
                             {
@@ -573,7 +585,7 @@ $("#TimberSummaryUploadImages").change(function () {
             var addButtonID = 'AddTimberSummaryImageButton' + count;
             var uploadID = 'TimberSummaryUploadImage' + count;
             addImageElements(altName, 'TimberSummaryPhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
-                'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '265px', '0px','TimberSummaryImageForm','TimberSummaryImageCaption');
+                'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '340px', '0px','TimberSummaryImageForm','TimberSummaryImageCaption');
             automaticNumbering('TimberSummaryPhotographs');
 
         },1500)
@@ -601,7 +613,7 @@ $("#TimberSummaryUploadImages").change(function () {
 
 
                     addImageElements(altName, 'TimberSummaryPhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
-                        'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '265px', '265px','TimberSummaryImageForm','TimberSummaryImageCaption');
+                        'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '340px', '340px','TimberSummaryImageForm','TimberSummaryImageCaption');
 
                     loadImage.parseMetaData(imageFile[ii], function (data) {
                         //console.log('I am in loadImage function');
@@ -623,17 +635,17 @@ $("#TimberSummaryUploadImages").change(function () {
                                 image.setAttribute('src',base64data);
                                 //$(selectionImage).attr('src',base64data);
                                 removeButton.style.display = 'block';
-                                removeButton.style.width = '265px';
+                                removeButton.style.width = '340px';
                                 addButton.style.display = 'none';
                                 description.style.display = 'block';
                                 image.style.display = 'block';
-                                image.style.width = '265px';
-                                image.style.height = '265px';
+                                image.style.width = '340px';
+                                image.style.height = '340px';
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 // image.style.height = '250px';
                                 var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                                 //console.log(file);
-                               doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSummaryImagesTable',altName,'TimberSummaryPhotographs',uploadID,'RemoveOneTimberSummaryImage(this.id)','AddOneTimberSummaryImage(this.id)','265px','265px');
+                               doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSummaryImagesTable',altName,'TimberSummaryPhotographs',uploadID,'RemoveOneTimberSummaryImage(this.id)','AddOneTimberSummaryImage(this.id)','340px','340px');
 
                             },
                             {
@@ -654,12 +666,255 @@ $("#TimberSummaryUploadImages").change(function () {
         },1000)
     }
 });
+
+
+
+function TimberRecommendationUploadImages() {
+    //  var imageIDs = $("#TimberRecommendationTable form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
+    document.getElementById('TimberRecommendationUploadImages').click();
+}
+
+function TimberSiteUploadImages() {
+    document.getElementById('TimberSiteUploadImages').click();
+}
+$('#TimberSiteUploadImages').click(function()
+{
+    //console.log(this.value);
+    this.value = null;
+});
+$("#TimberSiteUploadImages").change(function () {
+    //read3ImagesURL(this, 'AddTimberSiteImageButton0', 'AddTimberSiteImageButton1', 'AddTimberSiteImageButton2', 'TimberSiteImage0', 'TimberSiteImage1', 'TimberSiteImage2', 'TimberSiteImageText0', 'TimberSiteImageText1', 'TimberSiteImageText2', 'TimberSiteRemoveButton0', 'TimberSiteRemoveButton1', 'TimberSiteRemoveButton2');
+    firstRemoveTimberSite3rd = true;
+    var imageIDs = $("#TimberSitePhotographs form");
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
+    $("#TimberSitePhotographs").empty();
+    var table = document.getElementById("TimberSiteImagesTable");
+    table.style.display = 'block';
+    var count = this.files.length;
+    var imageFile = this.files;
+    console.log(count);
+    //check the number of image
+    if (count > 3) {
+        alert("You can only select 3 images. It will only display the first 3 photos");
+    }
+
+    if(count < 3)
+    {
+        for (var i = 0; i<count;i++)
+        {
+            try {
+                //noinspection ExceptionCaughtLocallyJS
+                throw i
+            }
+            catch (ii) {
+                setTimeout(function ()
+                {
+                    var nameID = ii + 1;
+                    var altName = 'image ' + nameID;
+                    var imageID = 'TimberSiteImage' + ii;
+                    var textID = 'TimberSiteImageText' + ii;
+                    var removeButtonID = 'TimberSiteRemoveButton' + ii;
+                    var addButtonID = 'AddTimberSiteImageButton' + ii;
+                    var uploadID = 'TimberSiteUploadImage' + ii;
+                    var imgLabelID = "TimberSiteImageCaption" + ii;
+                    //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
+
+
+                    addImageElements(altName, 'TimberSitePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
+                        'RemoveOneTimberSiteImage(this.id)', 'AddOneTimberSiteImage(this.id)', '340px', '340px','TimberSiteImageForm','TimberSiteImageCaption');
+
+                    loadImage.parseMetaData(imageFile[ii], function (data) {
+                        //console.log('I am in loadImage function');
+                        var orientation = 0;
+                        var date = new Date();
+                        var imageName = imageFile[ii].name;
+                        var imageType = imageFile[ii].type;
+                        var image = document.getElementById(imageID);
+                        var removeButton = document.getElementById(removeButtonID);
+                        var description  = document.getElementById(textID);
+                        var addButton = document.getElementById(addButtonID);
+                        //if exif data available, update orientation
+                        if (data.exif) {
+                            orientation = data.exif.get('Orientation');
+                        }
+                        var loadingImage = loadImage(imageFile[ii], function (canvas) {
+                                var base64data = canvas.toDataURL(imageType);
+                                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                                image.setAttribute('src',base64data);
+                                //$(selectionImage).attr('src',base64data);
+                                removeButton.style.display = 'block';
+                                removeButton.style.width = '340px';
+                                addButton.style.display = 'none';
+                                description.style.display = 'block';
+                                image.style.display = 'block';
+                                image.style.width = '340px';
+                                image.style.height = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                // image.style.height = '250px';
+                                var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                                //console.log(file);
+                                doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSiteImagesTable',altName,'TimberSitePhotographs',uploadID,'RemoveOneTimberSiteImage(this.id)','AddOneTimberSiteImage(this.id)','340px','340px');
+
+                            },
+                            {
+                                canvas: true,
+                                orientation: orientation,
+                                maxWidth:1000,
+                                maxHeight:800
+                            }
+                        );
+                    });
+
+                }, 500);
+            }
+        }
+
+        setTimeout(function(){
+            var altID= count + 1;
+            var altName = 'Image' + altID;
+            var imageID = 'TimberSiteImage' + count;
+            var textID = 'TimberSiteImageText' + count;
+            var removeButtonID = 'TimberSiteRemoveButton' + count;
+            var addButtonID = 'AddTimberSiteImageButton' + count;
+            var uploadID = 'TimberSiteUploadImage' + count;
+            addImageElements(altName, 'TimberSitePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
+                'RemoveOneTimberSiteImage(this.id)', 'AddOneTimberSiteImage(this.id)', '340px', '0px','TimberSiteImageForm','TimberSiteImageCaption');
+            automaticNumbering('TimberSitePhotographs');
+
+        },1500)
+    }
+    else
+    {
+        for (var i = 0; i<3;i++)
+        {
+            try {
+                //noinspection ExceptionCaughtLocallyJS
+                throw i
+            }
+            catch (ii) {
+                setTimeout(function () {
+                    var nameID = ii + 1;
+                    var altName = 'image' + nameID;
+                    var imageID = 'TimberSiteImage' + ii;
+                    var textID = 'TimberSiteImageText' + ii;
+                    var removeButtonID = 'TimberSiteRemoveButton' + ii;
+                    var addButtonID = 'AddTimberSiteImageButton' + ii;
+                    var uploadID = 'TimberSiteUploadImage' + ii;
+                    var imgLabelID = "TimberSiteImageCaption" + ii;
+
+                    //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
+
+
+                    addImageElements(altName, 'TimberSitePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
+                        'RemoveOneTimberSiteImage(this.id)', 'AddOneTimberSiteImage(this.id)', '340px', '340px','TimberSiteImageForm','TimberSiteImageCaption');
+
+                    loadImage.parseMetaData(imageFile[ii], function (data) {
+                        //console.log('I am in loadImage function');
+                        var orientation = 0;
+                        var date = new Date();
+                        var imageName = imageFile[ii].name;
+                        var imageType = imageFile[ii].type;
+                        var image = document.getElementById(imageID);
+                        var removeButton = document.getElementById(removeButtonID);
+                        var description  = document.getElementById(textID);
+                        var addButton = document.getElementById(addButtonID);
+                        //if exif data available, update orientation
+                        if (data.exif) {
+                            orientation = data.exif.get('Orientation');
+                        }
+                        var loadingImage = loadImage(imageFile[ii], function (canvas) {
+                                var base64data = canvas.toDataURL(imageType);
+                                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                                image.setAttribute('src',base64data);
+                                //$(selectionImage).attr('src',base64data);
+                                removeButton.style.display = 'block';
+                                removeButton.style.width = '340px';
+                                addButton.style.display = 'none';
+                                description.style.display = 'block';
+                                image.style.display = 'block';
+                                image.style.width = '340px';
+                                image.style.height = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                // image.style.height = '250px';
+                                var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                                //console.log(file);
+                               doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSiteImagesTable',altName,'TimberSitePhotographs',uploadID,'RemoveOneTimberSiteImage(this.id)','AddOneTimberSiteImage(this.id)','340px','340px');
+
+                            },
+                            {
+                                canvas: true,
+                                orientation: orientation,
+                                maxWidth:1000,
+                                maxHeight:800
+                            }
+                        );
+                    });
+                    //f, imageid, textid, removeid, addid, table = '',imageAltName = '', divID = '', uploadID = '',removeFunction = '',addFunction = '',imageSize = '',width = ''
+                    //doUploadFile(imageFile[ii],imageID, textID, removeButtonID, addButtonID,'DilapidationImagesTable',altName,'DilapidationPhotographs',uploadID,'RemoveOneDilapidationImage(this.id)','addOneDilapidationImage(this.id)','510px','510px');
+                }, 600);
+            }
+        }
+        setTimeout(function(){
+            automaticNumbering('TimberSitePhotographs');
+        },1000)
+    }
+});
+
+function TimberExteriorUploadImages() {
+    var imageIDs = $("#TimberExteriorImages form");
+    console.log(imageIDs);
+    for (var i = 0; i < imageIDs.length; i++) {
+        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+        doRemovePhoto(id);
+    }
+    document.getElementById('TimberExteriorUploadImages').click();
+}
+
+function TimberInteriorUploadImages() {
+    // var imageIDs = $("#TimberInteriorImages form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
+    document.getElementById('TimberInteriorUploadImages').click();
+}
+
+function TimberRoofUploadImages() {
+    // var imageIDs = $("#TimberRoofImages form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
+    document.getElementById('TimberRoofUploadImages').click();
+}
+
+function TimberSubfloorUploadImages() {
+    // var imageIDs = $("#TimberSubfloorImages form");
+    // console.log(imageIDs);
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
+    //     doRemovePhoto(id);
+    // }
+    document.getElementById('TimberSubfloorUploadImages').click();
+}
+
+
+
+
 $("#TimberRecommendationUploadImages").change(function () {
     read3ImagesURL(this, 'AddTimberRecommendationImageButton0', 'AddTimberRecommendationImageButton1', 'AddTimberRecommendationImageButton2', 'TimberRecommendationImage0', 'TimberRecommendationImage1', 'TimberRecommendationImage2', 'TimberRecommendationImageText0', 'TimberRecommendationImageText1', 'TimberRecommendationImageText2', 'TimberRecommendationRemoveButton0', 'TimberRecommendationRemoveButton1', 'TimberRecommendationRemoveButton2');
 });
-$("#TimberSiteUploadImages").change(function () {
-    read3ImagesURL(this, 'AddTimberSiteImageButton0', 'AddTimberSiteImageButton1', 'AddTimberSiteImageButton2', 'TimberSiteImage0', 'TimberSiteImage1', 'TimberSiteImage2', 'TimberSiteImageText0', 'TimberSiteImageText1', 'TimberSiteImageText2', 'TimberSiteRemoveButton0', 'TimberSiteRemoveButton1', 'TimberSiteRemoveButton2');
-});
+
 $("#TimberExteriorUploadImages").change(function () {
     read3ImagesURL(this, 'AddTimberExteriorImageButton0', 'AddTimberExteriorImageButton1', 'AddTimberExteriorImageButton2', 'TimberExteriorImage0', 'TimberExteriorImage1', 'TimberExteriorImage2', 'TimberExteriorImageText0', 'TimberExteriorImageText1', 'TimberExteriorImageText2', 'TimberExteriorRemoveButton0', 'TimberExteriorRemoveButton1', 'TimberExteriorRemoveButton2');
 });
@@ -673,16 +928,6 @@ $("#TimberSubfloorUploadImages").change(function () {
     read3ImagesURL(this, 'AddTimberSubfloorImageButton0', 'AddTimberSubfloorImageButton1', 'AddTimberSubfloorImageButton2', 'TimberSubfloorImage0', 'TimberSubfloorImage1', 'TimberSubfloorImage2', 'TimberSubfloorImageText0', 'TimberSubfloorImageText1', 'TimberSubfloorImageText2', 'TimberSubfloorRemoveButton0', 'TimberSubfloorRemoveButton1', 'TimberSubfloorRemoveButton2');
 });
 
-//Timber - Summary upload one image per time
-$("#TimberSummaryUploadImage0").change(function () {
-    readOneImageURL(this, 'TimberSummaryImage0', 'AddTimberSummaryImageButton0', 'TimberSummaryRemoveButton0', 'TimberSummaryImageText0', '265px', 'AddTimberSummaryImageButton1');
-});
-$("#TimberSummaryUploadImage1").change(function () {
-    readOneImageURL(this, 'TimberSummaryImage1', 'AddTimberSummaryImageButton1', 'TimberSummaryRemoveButton1', 'TimberSummaryImageText1', '265px', 'AddTimberSummaryImageButton2');
-});
-$("#TimberSummaryUploadImage2").change(function () {
-    readOneImageURL(this, 'TimberSummaryImage2', 'AddTimberSummaryImageButton2', 'TimberSummaryRemoveButton2', 'TimberSummaryImageText2', '265px', '');
-});
 
 //Timber-Recommendation upload one image per time
 $("#TimberRecommendationUploadImage0").change(function () {
@@ -754,17 +999,6 @@ $("#TimberSubfloorUploadImage2").change(function () {
 
 
 //button trigger events Only upload one image，“add" button
-function AddTimberSummaryImage0() {
-    document.getElementById('TimberSummaryUploadImage0').click();
-}
-
-function AddTimberSummaryImage1() {
-    document.getElementById('TimberSummaryUploadImage1').click();
-}
-
-function AddTimberSummaryImage2() {
-    document.getElementById('TimberSummaryUploadImage2').click();
-}
 
 function AddTimberRecommendationImage0() {
     document.getElementById('TimberRecommendationUploadImage0').click();
@@ -839,21 +1073,6 @@ function AddTimberSubfloorImage2() {
     document.getElementById('TimberSubfloorUploadImage2').click();
 }
 
-
-
-function RemoveTimberSummaryImage0() {
-    RemoveImage('TimberSummaryImage0', 'TimberSummaryRemoveButton0', 'AddTimberSummaryImageButton0', 'TimberSummaryImageText0');
-
-}
-
-function RemoveTimberSummaryImage1() {
-    RemoveImage('TimberSummaryImage1', 'TimberSummaryRemoveButton1', 'AddTimberSummaryImageButton1', 'TimberSummaryImageText1');
-
-}
-
-function RemoveTimberSummaryImage2() {
-    RemoveImage('TimberSummaryImage2', 'TimberSummaryRemoveButton2', 'AddTimberSummaryImageButton2', 'TimberSummaryImageText2');
-}
 
 
 function RemoveTimberSiteImage0() {
@@ -1007,17 +1226,17 @@ function AddOneTimberSummaryImage(click_id)
                             image.setAttribute('src',base64data);
                             //$(selectionImage).attr('src',base64data);
                             removeButton.style.display = 'block';
-                            removeButton.style.width = '265px';
+                            removeButton.style.width = '340px';
                             addButton.style.display = 'none';
                             description.style.display = 'block';
                             image.style.display = 'block';
-                            image.style.width = '265px';
-                            image.style.height = '265px';
+                            image.style.width = '340px';
+                            image.style.height = '340px';
                             imageLable.style.display = 'block';
                             // image.style.height = '250px';
                             var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                             //console.log(file);
-                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSummaryImagesTable',nextAltName,'TimberSummaryPhotographs',uploadID,'RemoveOneTimberSummaryImage(this.id)','AddOneTimberSummaryImage(this.id)','265px','265px');
+                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSummaryImagesTable',nextAltName,'TimberSummaryPhotographs',uploadID,'RemoveOneTimberSummaryImage(this.id)','AddOneTimberSummaryImage(this.id)','340px','340px');
 
                         },
                         {
@@ -1044,7 +1263,7 @@ function AddOneTimberSummaryImage(click_id)
                         var nextAddButtonID = 'AddTimberSummaryImageButton' + newID;
                         var nextUploadID = 'TimberSummaryUploadImage' + newID;
                         addImageElements(nextAltName, 'TimberSummaryPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                            'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '265px', '0px','TimberSummaryImageForm','TimberSummaryImageCaption');
+                            'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '340px', '0px','TimberSummaryImageForm','TimberSummaryImageCaption');
                     }
                 }
             }
@@ -1124,6 +1343,190 @@ function RemoveOneTimberSummaryImage(click_id)
          document.getElementById('TimberSummaryImagesTable').style.display = 'none';
      }
      automaticNumbering('TimberSummaryPhotographs');
+
+}
+
+//noinspection JSUnusedGlobalSymbols
+function AddOneTimberSiteImage(click_id)
+{
+    var selectedID = String(click_id).replace ( /[^\d.]/g, '' );
+    var idGroup = [];
+    console.log("the id " + selectedID);
+    var totalContainers = $('#TimberSitePhotographs').find('> form');
+    console.log("the current total image number is: " + totalContainers.length);
+    var imageID = 'TimberSiteImage' + selectedID;
+    var textID = 'TimberSiteImageText' + selectedID;
+    var removeButtonID = 'TimberSiteRemoveButton' + selectedID;
+    var addButtonID = 'AddTimberSiteImageButton' + selectedID;
+    var uploadID = 'TimberSiteUploadImage' + selectedID;
+    var imgLabelID = "TimberSiteImageCaption" + selectedID;
+    nextAltName = 'image ' + selectedID;
+
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    //console.log("the last ID is" + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
+
+    // console.log(uploadID);
+    $("#"+uploadID).unbind().click();
+    $('#'+uploadID).change(function(){
+        if (this.files && this.files[0]) {
+            if(totalContainers.length == 3)
+            {
+                console.log("add the last 3rd image, need to reset the firstRemoveTimberSummary3rd");
+                firstRemoveTimberSummary3rd = true;
+            }
+            if(totalContainers.length <= 4 )
+            {
+                var imageFile = this.files[0];
+                //load the image src to the current imageID.
+                loadImage.parseMetaData(imageFile, function (data) {
+                    //console.log('I am in loadImage function');
+                    var orientation = 0;
+                    var date = new Date();
+                    // var selectionImage = '#AdviceImage' + ii;
+                    var imageName = imageFile.name;
+                    var imageType = imageFile.type;
+                    var image = document.getElementById(imageID);
+                    var removeButton = document.getElementById(removeButtonID);
+                    var description  = document.getElementById(textID);
+                    var addButton = document.getElementById(addButtonID);
+                    var imageLable = document.getElementById(imgLabelID);
+                    //if exif data available, update orientation
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
+                    var loadingImage = loadImage(imageFile, function (canvas) {
+                            var base64data = canvas.toDataURL(imageType);
+                            //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                            image.setAttribute('src',base64data);
+                            //$(selectionImage).attr('src',base64data);
+                            removeButton.style.display = 'block';
+                            removeButton.style.width = '340px';
+                            addButton.style.display = 'none';
+                            description.style.display = 'block';
+                            image.style.display = 'block';
+                            image.style.width = '340px';
+                            image.style.height = '340px';
+                            imageLable.style.display = 'block';
+                            // image.style.height = '250px';
+                            var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
+                            //console.log(file);
+                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'TimberSiteImagesTable',nextAltName,'TimberSitePhotographs',uploadID,'RemoveOneTimberSiteImage(this.id)','AddOneTimberSiteImage(this.id)','340px','340px');
+
+                        },
+                        {
+                            canvas: true,
+                            orientation: orientation,
+                            maxWidth:1000,
+                            maxHeight:800
+                        }
+                    );
+                });
+                automaticNumbering('TimberSitePhotographs');
+                if (Number(selectedID) == Number(lastID))
+                {
+                    if(totalContainers.length < 3)
+                    {
+                        console.log("you are adding an image to the last id block");
+                        var newID = Number(lastID) + 1;
+                        var altID = Number(lastID) + 2;
+                        nextAltName = 'image ' + altID;
+                        console.log("I am here!!! need another image element ,the next id  " + newID);
+                        var nextImageID = 'TimberSiteImage' + newID;
+                        var nextTextID = 'TimberSiteImageText' + newID;
+                        var nextRemoveButtonID = 'TimberSiteRemoveButton' + newID;
+                        var nextAddButtonID = 'AddTimberSiteImageButton' + newID;
+                        var nextUploadID = 'TimberSiteUploadImage' + newID;
+                        addImageElements(nextAltName, 'TimberSitePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                            'RemoveOneTimberSiteImage(this.id)', 'AddOneTimberSiteImage(this.id)', '340px', '0px','TimberSiteImageForm','TimberSiteImageCaption');
+                    }
+                }
+            }
+        }
+    });
+}
+
+//noinspection JSUnusedGlobalSymbols
+function RemoveOneTimberSiteImage(click_id)
+{
+    var selectedID = String(click_id);
+    var id = selectedID.replace ( /[^\d.]/g, '' );
+    var imageID = 'TimberSiteImage' + id;
+    var removeButtonID = 'TimberSiteRemoveButton' + id;
+    var addButtonID = 'AddTimberSiteImageButton' + id;
+    var textID = 'TimberSiteImageText' + id;
+    var formID = 'TimberSiteImageForm' + id;
+    var totalContainers = $('#TimberSitePhotographs').find('> form');
+    var idGroup = [];
+    console.log("the current total image number is: " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        //console.log(idStr);
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    idGroup.sort(function(a, b){return a - b});
+    var lastID = idGroup[idGroup.length-1]
+    console.log("this last id is " + lastID);
+
+
+    var imageSelect = '#' + imageID;
+    $(imageSelect).attr('src', '#');
+    var image = document.getElementById(imageID);
+    var button = document.getElementById(removeButtonID);
+    var addButton = document.getElementById(addButtonID);
+    var inputText = document.getElementById(textID);
+
+    button.style.display = 'none';
+    inputText.style.display = 'none';
+    addButton.style.display = 'block';
+
+    image.style.width = '0px';
+    image.style.display = 'none';
+    inputText.value = '';
+
+    doRemovePhoto(imageID);
+    $('#' + formID).remove();
+
+    //has 3 images but, remove one, will no additional 'add' button, need to create one
+    if(totalContainers.length == 3 && firstRemoveTimberSite3rd == true)
+    {
+        console.log("need to create a new add button");
+        var newID = Number(lastID) + 1;
+        var altID = Number(lastID) + 2;
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'TimberSiteImage' + newID;
+        var nextTextID = 'TimberSiteImageText' + newID;
+        var nextRemoveButtonID = 'TimberSiteRemoveButton' + newID;
+        var nextAddButtonID = 'AddTimberSiteImageButton' + newID;
+        var nextUploadID = 'TimberSiteUploadImage' + newID;
+        addImageElements(nextAltName, 'TimberSitePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                            'RemoveOneTimberSiteImage(this.id)', 'AddOneTimberSiteImage(this.id)', '340px', '0px','TimberSiteImageForm','TimberSiteImageCaption');
+        firstRemoveTimberSite3rd = false;
+    }
+
+     //update the totalConaintainers after removing one form, If remove all the images one by one, don't leave a signle 'add' button
+     totalContainers = $('#TimberSitePhotographs').find('> form');
+     //console.log(totalContainers);
+     //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
+     if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
+     {
+         console.log("it does not have any images, emtpy the div");
+         $("#TimberSitePhotographs").empty();
+         document.getElementById('TimberSiteImagesTable').style.display = 'none';
+     }
+     automaticNumbering('TimberSitePhotographs');
 
 }
 
