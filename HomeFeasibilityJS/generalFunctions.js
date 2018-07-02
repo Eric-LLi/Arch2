@@ -2,6 +2,24 @@
  * Created by Fafa Lai on 24/10/17.
  */
 
+function reorderDrawings()
+{
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    var BigContainer = document.getElementById('homeFeasibilityDrawings');
+    console.log(totalContainers);
+    for (var i=0;i<totalContainers.length;i++)
+    {
+        console.log(Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    }
+
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    console.log(totalContainers);
+}
+
 /**
  * Make a gap between the elements
  * */

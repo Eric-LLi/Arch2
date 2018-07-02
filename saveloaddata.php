@@ -628,7 +628,7 @@
                             document.getElementById(p.imageid).style.height = '500px';
                            
                             var totalContainers = $('#AdvicePhotographs').find('> form');
-                            console.log("the current form in the report is :" + totalContainers.length);
+                            //console.log("the current form in the report is :" + totalContainers.length);
     
                             //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
                             
@@ -642,9 +642,9 @@
                                     var id = Number(idStr);
                                     idGroup.push(id);
                                 }
-                                console.log(idGroup);
+                                //console.log(idGroup);
                                 idGroup.sort(function(a, b){return a - b});
-                                console.log(idGroup);
+                                //console.log(idGroup);
                                 console.log("the last ID is " + idGroup[idGroup.length-1]);
                                 var lastID = idGroup[idGroup.length-1]
                                 var newID = Number(lastID) + 1;
