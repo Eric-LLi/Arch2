@@ -2183,24 +2183,26 @@
                         <input type="button" value="Upload Image" class="uploadImageButton" onclick="AssessmentSiteUploadImages()">
                         <input type="file" id="AssessmentSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
-                    <th>
-                        <div class="row form-group">
+                    <th class="container">
+                        <div id="AccessmentSiteImagesContainer" class="row"></div>
+                    </th>
+                    <!-- <div class="row">
                             &nbsp;
-                            <form>
+                            <form class="col-sm">
                                 <div class="col-sm">
-                                    <img id="AssessmentSiteImage0" src="#" alt="Image1" style="width:265px;height:265px;display:none" />
+                                <img id="AssessmentSiteImage0" src="#" alt="Image1" style="width:265px;height:265px;display:none" />
                                 </div>
                                 <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText0" style="width:265px;height:10px;display:none">
+                                <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText0" style="width:265px;height:10px;display:none">
                                 </div>
                                 <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentSiteRemoveButton0" onclick="RemoveAssessmentSiteImage0()" style="width:265px;display:none">
-                                    <br>
+                                <input type="button" value="Remove" id="AssessmentSiteRemoveButton0" onclick="RemoveAssessmentSiteImage0()" style="width:265px;display:none">
+                                <br>
                                 </div>
                                 <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentSiteImageButton0" onclick="AddAssessmentSiteImage0()" style="width:265px;display:none">
-                                    <input type="file" id="AssessmentSiteUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
-                                    <br>
+                                <input type="button" value="Add" id="AddAssessmentSiteImageButton0" onclick="AddAssessmentSiteImage0()" style="width:265px;display:none">
+                                <input type="file" id="AssessmentSiteUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
+                                <br>
                                 </div>
                             </form>
                             <form>
@@ -2235,8 +2237,7 @@
                                     <input type="file" id="AssessmentSiteUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
                                 </div>
                             </form>
-                        </div>
-                    </th>
+                        </div> -->
                 </tr>
             </table>
         </div>

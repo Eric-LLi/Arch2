@@ -523,7 +523,7 @@ function readOneImageURL(input, imageID0, addButtonID, removeButtonID, textID, i
 //upload max 3 images
 function read3ImagesURL(input, addButtonID0, addButtonID1, addButtonID2, imageID0, imageID1, imageID2, text0, text1, text2, removeButton0, removeButton1, removeButton2) {
     var count = input.files.length;
-    var date = new Date();
+    // var date = new Date();
     //check if the selected images are more than 3
     if (count > 3) {
         alert("You can only selected three images maximum, will display the first images");
@@ -1085,16 +1085,6 @@ function RemoveImage(imageID0, removeButtonID, addButtonID, textID = "") {
 
 
 function AssessmentSiteUploadImages() {
-    var imageIDs = $("#AccessmentSiteImages img");
-    // console.log(imageIDs);
-
-    for (var i = 0; i < imageIDs.length; i++) {
-        if (imageIDs.eq(i).attr("src") !== "#") {
-            var id = imageIDs.eq(i).attr("id");
-            console.log(id);
-            doRemovePhoto(id);
-        }
-    }
     document.getElementById('AssessmentSiteUploadImages').click();
 }
 
@@ -1154,10 +1144,113 @@ function AssessmentInteriorServiceUploadImages() {
     document.getElementById('AssessmentInteriorServiceUploadImages').click();
 }
 
+function createImagesElements(lastElementID, imgID, labelID, labelValue, textID, rmBtnID, addBtnID, addFileID, formID) {
+    var form = document.createElement("form"),
+        img = document.createElement("img"),
+        text = document.createElement("input"),
+        rmBtn = document.createElement("input"),
+        addBtn = document.createElement("input"),
+        addfile = document.createElement("input"),
+        label = document.createElement("label");
+
+    form.setAttribute("id", formID);
+    form.setAttribute("class", "col");
+
+    img.setAttribute("id", imgID);
+
+    text.setAttribute("id", textID);
+    text.setAttribute("type", "text");
+    text.setAttribute("placeholder", "name");
+    text.style.width = "265px";
+
+    rmBtn.setAttribute("id", rmBtnID);
+    rmBtn.setAttribute("type", "button");
+    rmBtn.setAttribute("value", "Remove");
+
+    addBtn.setAttribute("id", addBtnID);
+    addBtn.setAttribute("type", "button");
+    addBtn.setAttribute("value", "Add");
+
+    addfile.setAttribute("id", addFileID);
+    addfile.setAttribute("type", "file");
+    addfile.setAttribute("accept", "image/x-png,image/jpeg");
+    addfile.style.display = "none";
+
+    label.setAttribute("id", labelID);
+    label.innerHTML = labelValue;
+
+    $("#" + lastElementID).append(form);
+    $("#" + formID).append(img);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(label);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(text);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(rmBtn);
+    $("#" + formID).append(addBtn);
+    $("#" + formID).append(addfile);
+
+    $("#" + rmBtnID).click(function () {
+        AddAssessmentSiteImage(formID, imgID);
+    });
+    $("#" + addFileID).click(function () {
+        AddAssessmentSiteImage(imgID);
+    });
+
+    elementID = [imgID, labelID, textID, rmBtnID, addBtnID, addFileID];
+    return elementID;
+
+
+}
 
 
 $("#AssessmentSiteUploadImages").change(function () {
-    read3ImagesURL(this, 'AddAssessmentSiteImageButton0', 'AddAssessmentSiteImageButton1', 'AddAssessmentSiteImageButton2', 'AssessmentSiteImage0', 'AssessmentSiteImage1', 'AssessmentSiteImage2', 'AssessmentSiteImageText0', 'AssessmentSiteImageText1', 'AssessmentSiteImageText2', 'AssessmentSiteRemoveButton0', 'AssessmentSiteRemoveButton1', 'AssessmentSiteRemoveButton2');
+    if (!isEmpty(this.files)) {
+        //Check exitsing images
+        var imageIDs = $("#AccessmentSiteImagesContainer form");
+
+        //Clear all images.
+        if (!isEmpty(imageIDs)) {
+            $("#AccessmentSiteImagesContainer").empty();
+        }
+
+        var allImages = this.files;
+        Object.keys(allImages).forEach(i => {
+            const file = allImages[i];
+            //Create elements
+            //[imgID, labelID, textID, rmBtnID, addBtnID, addFileID]
+            var elementID = createImagesElements("AccessmentSiteImagesContainer", "AssessmentSiteImage" + i, "label" + i, "IMG" + i, "AssessmentSiteImageText" + i, "AssessmentSiteRemoveButton" + i, "AddAssessmentSiteImageButton" + i, "AssessmentSiteUploadImage" + i, "form" + i);
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result
+                var image = new Image();
+
+                image.onload = function () {
+                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                    if (!isEmpty(code)) {
+                        $("#" + elementID[0]).attr("src", code);
+
+                        var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                            type: file.type,
+                            lastModified: file.lastModifiedDate
+                        });
+
+                        doUploadFile(imgFile, elementID[0], elementID[2], elementID[3], "", "AccessmentSiteImagesContainer");
+                    }
+                };
+                image.src = data;
+            };
+            reader.readAsDataURL(file);
+
+        });
+
+
+
+
+        // read3ImagesURL(this, 'AddAssessmentSiteImageButton0', 'AddAssessmentSiteImageButton1', 'AddAssessmentSiteImageButton2', 'AssessmentSiteImage0', 'AssessmentSiteImage1', 'AssessmentSiteImage2', 'AssessmentSiteImageText0', 'AssessmentSiteImageText1', 'AssessmentSiteImageText2', 'AssessmentSiteRemoveButton0', 'AssessmentSiteRemoveButton1', 'AssessmentSiteRemoveButton2');
+    }
+
     //  read6ImagesURL(this,'AddAssessmentSiteImageButton0','AddAssessmentSiteImageButton1','AddAssessmentSiteImageButton2','AddAssessmentSiteImageButton3','AddAssessmentSiteImageButton4','AddAssessmentSiteImageButton5','AssessmentSiteImage0','AssessmentSiteImage1','AssessmentSiteImage2','AssessmentSiteImage3','AssessmentSiteImage4','AssessmentSiteImage5','AssessmentSiteImageText0','AssessmentSiteImageText1','AssessmentSiteImageText2','AssessmentSiteImageText3','AssessmentSiteImageText4','AssessmentSiteImageText5','AssessmentSiteRemoveButton0','AssessmentSiteRemoveButton1','AssessmentSiteRemoveButton2','AssessmentSiteRemoveButton3','AssessmentSiteRemoveButton4','AssessmentSiteRemoveButton5');
 });
 $("#AssessmentExteriorUploadImages").change(function () {
