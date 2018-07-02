@@ -76,9 +76,9 @@ function moreConstructionSummary()
 
 
 function ConstructionCover(){
-    console.log('I am in');
+    //console.log('I am in');
     document.getElementById('ConstructionUploadCoverImage').click();
-    console.log("clicked");
+    //console.log("clicked");
 }
 
 
