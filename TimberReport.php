@@ -545,12 +545,12 @@
 </div>
 <!--Summary Photos-->
 <div class="container">
-    <h3 class="sectionSubHead" style="font-size: 20px">Photos</h3>
-    <div class="container">
-        <input type="button" id="get_ConstructionImage" value="Upload Images (Max 3 images)" class="uploadImageButton" onclick="TimberSummaryUploadImages()" style="white-space: normal; width: 15%">
+    <h3 class="sectionSubHead" style="font-size: 20px;margin-top:50px">Photos</h3>
+    <div class="container" style="margin-top:20px">
+        <input type="button" id="TimberSummaryAddImagesButton" value="Upload Images (Max 3 images)" class="uploadImageButton" onclick="TimberSummaryUploadImages()" style="white-space: normal; width: 15%">
         <input type="file" id="TimberSummaryUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
     </div>
-    <table id="TimberSummaryImagesTable" style="margin-top: 20px;width:100%">
+    <table id="TimberSummaryImagesTable" style="margin-top: 20px;width:100%;display:none">
         <tr>
             <th>
                 <div class="row form-group" id="TimberSummaryPhotographs">
@@ -1085,89 +1085,22 @@
 </div>
 <!--Site and Garden - Display and Add Images -->
 <div class="container">
-    <table id="TimberSiteImages">
+    <div class="container"> 
+        <input type="button" id="TimberSiteAddImagesButton" value="Upload Images (Max 3 images)" class="uploadImageButton" onclick="TimberSiteUploadImages()" style="white-space: normal; width: 15%">
+        <input type="file" id="TimberSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    </div>
+    <table id="TimberSiteImagesTable" style="margin-top: 20px;width:100%;display:none">
+
         <tr>
-            <th style="width: 20%">
-                <label>Images (max 3 images) </label>
-                <input type="button" value="Upload Image" class="uploadImageButton"
-                       onclick="TimberSiteUploadImages()">
-                <input type="file" id="TimberSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg"
-                       multiple>
-            </th>
             <th>
-                <div class="row form-group">
-                    &nbsp;
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSiteImage0" src="#" alt="Image1" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSiteImageText0"
-                                   style="width:265px;height:10px; display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSiteRemoveButton0"
-                                   onclick="RemoveTimberSiteImage0()" style="display: none ; width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSiteImageButton0"
-                                   onclick="AddTimberSiteImage0()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSiteUploadImage0" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSiteImage1" src="#" alt="Image2" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSiteImageText1"
-                                   style="width:265px;height:10px ;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSiteRemoveButton1"
-                                   onclick="RemoveTimberSiteImage1()" style="width:265px;display:none ">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSiteImageButton1"
-                                   onclick="AddTimberSiteImage1()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSiteUploadImage1" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSiteImage2" src="#" alt="Image3" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSiteImageText2"
-                                   style="width:265px;height:10px;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSiteRemoveButton2"
-                                   onclick="RemoveTimberSiteImage2()" style="display: none;width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSiteImageButton2"
-                                   onclick="AddTimberSiteImage2()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSiteUploadImage2" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-                    </form>
+                <div class="row form-group" id="TimberSitePhotographs">
                 </div>
-
             </th>
         </tr>
     </table>
     <!--<hr style="height:1px;border:none;color:#333;background-color:#333;">-->
+<hr>
+<br>
 </div>
 
 <!--Exterior of Buildings -->

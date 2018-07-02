@@ -432,51 +432,18 @@ function generatePDF(mode) {
                         margin: [0, 0, 0, 5],
                         style: 'normalText'
                     },
-                    getAccessRestrictionsTable(),
-                    //makeAGap(),
-
-                    // Inspection Summary Pictures
+                    getAccessRestrictionsTable()
+                ]
+            },
+            {
+                stack:[
+                    getImagesTable('TimberSummaryPhotographs')
+                ],
+            },
+            {
+                stack:[
                     {
-                        columns: [
-                            {
-                                stack: [
-                                    getPhoto('TimberSummaryImage0'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberSummaryImageText0'),
-                                        fontSize:9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberSummaryImage1'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberSummaryImageText1'),
-                                        fontSize:9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberSummaryImage2'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberSummaryImageText2'),
-                                        fontSize:9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17,
-                        pageBreak: 'after'
-                    },
-
-                    {
+                        pageBreak: 'before',
                         text: 'Important Notes:',
                         style: 'pageSubHeader'
                     },
@@ -539,6 +506,8 @@ function generatePDF(mode) {
                 ],
                 pageBreak: 'after'
             },
+                
+               
             /**
              * (5) Timber Pest Inspection Notes
              * */
@@ -568,53 +537,58 @@ function generatePDF(mode) {
                     getSiteAndGardenTable1l(),
                     makeAGap(),
                     getSiteAndGardenTable2(),
-                    appendOther('ECCTTPA-otherOption', 'ECCTTPA-otherChoice', 'ECCTTPA-LAE', 'ECCTTPA-RA'),
-                    makeAGap(),
-                    {
-                        columns: [
-                            {
-                                stack: [
-                                    getPhoto('TimberSiteImage0'),
-                                    {
-                                        alignment: 'center',
-                                        fontSize:9,
-                                        text: getPicDescription('TimberSiteImageText0'),
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberSiteImage1'),
-                                    {
-                                        alignment: 'center',
-                                        fontSize:9,
-                                        text: getPicDescription('TimberSiteImageText1'),
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberSiteImage2'),
-                                    {
-                                        alignment: 'center',
-                                        fontSize:9,
-                                        text: getPicDescription('TimberSiteImageText2'),
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17
-                    }
+                    appendOther('ECCTTPA-otherOption', 'ECCTTPA-otherChoice', 'ECCTTPA-LAE', 'ECCTTPA-RA')
+                    //makeAGap(),
+                    // {
+                    //     columns: [
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('TimberSiteImage0'),
+                    //                 {
+                    //                     alignment: 'center',
+                    //                     fontSize:9,
+                    //                     text: getPicDescription('TimberSiteImageText0'),
+                    //                     margin: [0, 2, 0, 0]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('TimberSiteImage1'),
+                    //                 {
+                    //                     alignment: 'center',
+                    //                     fontSize:9,
+                    //                     text: getPicDescription('TimberSiteImageText1'),
+                    //                     margin: [0, 2, 0, 0]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('TimberSiteImage2'),
+                    //                 {
+                    //                     alignment: 'center',
+                    //                     fontSize:9,
+                    //                     text: getPicDescription('TimberSiteImageText2'),
+                    //                     margin: [0, 2, 0, 0]
+                    //                 }
+                    //             ]
+                    //         }
+                    //     ],
+                    //     columnGap: 17
+                    // }
                 ],
-                pageBreak: 'after'
+            },
+            {
+                stack:[
+                    getImagesTable('TimberSitePhotographs')
+                ]
             },
             /**
              * (6) Exterior of Buildings
              * */
             {
+                pageBreak: 'before',
                 stack: [
                     {
                         text: 'Exterior of Buildings',
@@ -679,14 +653,14 @@ function generatePDF(mode) {
                         ],
                         columnGap: 17
                     }
-                ],
-
-                pageBreak: 'after'
+                ]
+                // pageBreak: 'after'
             },
             /**
              * (7) Interior of Buildings
              * */
             {
+                pageBreak: 'before',
                 stack: [
                     {
                         text: 'Interior of Building',
@@ -748,13 +722,13 @@ function generatePDF(mode) {
                         ],
                         columnGap: 17
                     }
-                ],
-                pageBreak: 'after'
+                ]
             },
             /**
              * (8) Roof Space
              * */
             {
+                pageBreak: 'before',
                 stack: [
                     {
                         text: 'Roof Space',
@@ -816,13 +790,13 @@ function generatePDF(mode) {
                         ],
                         columnGap: 17
                     }
-                ],
-                pageBreak: 'after'
+                ]
             },
             /**
              * (9) Sub-Floor Space
              * */
             {
+                pageBreak: 'before',
                 stack: [
                     {
                         text: 'Sub-Floor Space',
@@ -884,13 +858,13 @@ function generatePDF(mode) {
                         ],
                         columnGap: 17
                     }
-                ],
-                pageBreak: 'after'
+                ]
             },
             /**
              * (10) Previous Pest Treatment + Recommendations
              * */
             {
+                pageBreak: 'before',
                 stack: [
                     {
                         text: 'Previous Pest Treatment',
@@ -967,13 +941,13 @@ function generatePDF(mode) {
                     //     margin: [0, 0, 0, 6]
                     // },
                     // getAttachmentsTable()
-                ],
-                pageBreak: 'after'
+                ]
             },
             /**
              * (11) Attachment + Terms & Conditions
              * */
             {
+                pageBreak: 'before',
                 stack: [
                     {
                         text: 'Attachment',
