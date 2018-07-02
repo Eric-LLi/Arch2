@@ -295,8 +295,7 @@
         var countingImage = 0;
         var countingDrawing = 0;
         var imageNo = 0;
-        var countingTimberSummary = 0;
-        var countingTimberSite = 0;
+
 
         //console.log(photos);
         //calculate the image
@@ -312,19 +311,6 @@
                 countingDrawing++;
             }
         }
-        //console.log('the current number of drawing ' + countingDrawing);
-        for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName == 'TimberSummaryImagesTable') {
-                countingTimberSummary++;
-            }
-        }
-        console.log('the current number of timber summary images ' + countingTimberSummary);
-        for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName == 'TimberSiteImagesTable') {
-                countingTimberSite++;
-            }
-        }
-        console.log('the current number of timber site images ' + countingTimberSummary);
         // Any photos?
         //console.log(photos.length);
         photos.forEach(
@@ -998,7 +984,8 @@
                                 document.getElementById(p.textid).style.width = '340px';
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 
-                            }else if(p.tableName === "TimberSiteImagesTable")
+                            }
+                            else if(p.tableName === "TimberSiteImagesTable")
                             {
                                 console.log("I am in Timber Site Images Table");
                                 document.getElementById(p.tableName).style.display = 'block';
@@ -1011,6 +998,136 @@
 
                                 addImageElements(p.imageAltName,'TimberSitePhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                     p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSiteImageForm','TimberSiteImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                            }
+                            else if(p.tableName === "TimberExteriorImagesTable")
+                            {
+                                console.log("I am in Timber Exterior Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
+
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberExteriorImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberExteriorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberExteriorImageForm','TimberExteriorImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                            }
+                            else if(p.tableName === "TimberInteriorImagesTable")
+                            {
+                                console.log("I am in Timber Interior Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
+
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberInteriorImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberInteriorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberInteriorImageForm','TimberInteriorImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                            }
+                            else if(p.tableName === "TimberRoofImagesTable")
+                            {
+                                console.log("I am in Timber Roof Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
+
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberRoofImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberRoofPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberRoofImageForm','TimberRoofImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                            }
+                            else if(p.tableName === "TimberSubfloorImagesTable")
+                            {
+                                console.log("I am in Timber Subfloor Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
+
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberSubfloorImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberSubfloorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSubfloorImageForm','TimberSubfloorImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                            }
+                            else if(p.tableName === "TimberRecommendationImagesTable")
+                            {
+                                console.log("I am in Timber Recommendation Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
+
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberRecommendationImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberRecommendationPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberRecommendationImageForm','TimberRecommendationImageCaption');
 
                                 $('#' + p.imageid).attr('src', url);
                                 document.getElementById(p.imageid).style.display = 'block';

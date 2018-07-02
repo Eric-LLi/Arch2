@@ -3095,7 +3095,7 @@ function getImagesTable(divid)
                             image: imgSrc,
                             height: 110,
                             width: 160,
-                            margin:[5,30,0,5],
+                            margin:[5,20,0,5],
                             alignment: 'center'
                         },
                         {
