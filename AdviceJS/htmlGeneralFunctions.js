@@ -3,6 +3,50 @@
  */
 
  var firstRemove30th = true;
+ 
+ function onload()
+ {
+     reorderImages();
+     automaticNumbering();
+ }
+
+function reorderImages()
+{
+    var totalContainers = $('#AdvicePhotographs').find('> form');
+    var BigContainer = document.getElementById('AdvicePhotographs');
+    console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     console.log((totalContainers[i].id));
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    console.log(totalContainers);
+
+    $("#AdvicePhotographs").empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+       BigContainer.appendChild(totalContainers[i]);
+    }
+}
+
+
+function automaticNumbering()
+{
+    console.log("need to refresh the image number");
+    var totalContainers = $('#AdvicePhotographs').find('> form');
+    for(var i=0;i<totalContainers.length;i++)
+    {
+        //console.log(i);
+        //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
+    }
+}
+
 
 function countWord(click_id)
 {
@@ -46,7 +90,7 @@ $('#AdviceUploadCoverImage').change(function(){
         // console.log(imageType);
         // console.log(imageName);
         loadImage.parseMetaData(imageFile, function (data) {
-            console.log('I am in loadImage function');
+            //console.log('I am in loadImage function');
             var orientation = 0;
             var image = document.getElementById('AdviceCoverImage');
             var removeButton = document.getElementById('AdviceCoverImageRemoveButton');
@@ -198,6 +242,8 @@ $('#AdviceUploadImages').change(function() {
             var uploadID = 'AdviceUploadImage' + count;
             addImageElements(altName, 'AdvicePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
                 'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+            console.log("need to numbering the images");
+            automaticNumbering();
 
         },2000)
     }
@@ -226,7 +272,7 @@ $('#AdviceUploadImages').change(function() {
                         'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '500px');
 
                     loadImage.parseMetaData(imageFile[ii], function (data) {
-                        console.log('I am in loadImage function');
+                        //console.log('I am in loadImage function');
                         var orientation = 0;
                         var date = new Date();
                         var selectionImage = '#AdviceImage' + ii;
@@ -272,6 +318,11 @@ $('#AdviceUploadImages').change(function() {
                 }, 500);
             }
         }
+        setTimeout(function(){
+            automaticNumbering();
+
+        },4000)
+        
     }
 
 });
@@ -378,6 +429,7 @@ function addOneAdviceImage(click_id)
                         }
                     );
                 });
+                automaticNumbering();
 
                 if (Number(selectedID) == Number(lastID))
                 {
@@ -401,6 +453,7 @@ function addOneAdviceImage(click_id)
             }
         }
     });
+   
 }
 
 
@@ -473,6 +526,8 @@ function RemoveOneAdviceImage(click_id)
         $("#AdvicePhotographs").empty();
         document.getElementById('AdviceImagesTable').style.display = 'none';
     }
+
+    automaticNumbering();
 
 }
 
@@ -556,7 +611,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     var imgLabelID = "imageCaption" + currentID;
     imgLabel.setAttribute("id", imgLabelID);
     imgLabel.style.display = "none";
-    imgLabel.innerHTML = "IMG " + (Number(currentID)+1);
+    //imgLabel.innerHTML = "IMG " + (Number(currentID)+1);
 
 
 
