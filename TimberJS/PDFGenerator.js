@@ -614,47 +614,14 @@ function generatePDF(mode) {
                     getExteriorOfBuildingTable2(),
                     appendOther('EoB-Table2-O1', 'EoB-Table2-SLC1', 'EoB-Table2-LAE1', 'EoB-Table2-RA1'),
                     appendOther('EoB-Table2-O2', 'EoB-Table2-SLC2', 'EoB-Table2-LAE2', 'EoB-Table2-RA2'),
-                    makeAGap(),
-                    {
-                        columns: [
-                            {
-                                stack: [
-                                    getPhoto('TimberExteriorImage0'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberExteriorImageText0'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberExteriorImage1'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberExteriorImageText1'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberExteriorImage2'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberExteriorImageText2'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17
-                    }
+                    makeAGap()
                 ]
                 // pageBreak: 'after'
+            },
+            {
+                stack:[
+                    getImagesTable('TimberExteriorPhotographs')
+                ]
             },
             /**
              * (7) Interior of Buildings
@@ -683,45 +650,11 @@ function generatePDF(mode) {
                     makeAGap(),
                     getInteriorOfBuildingTable2(),
                     appendOther('IoB-O1-TITLE', 'IoB-O1-SLC', 'IoB-O1-LAE', 'IoB-O1-RA'),
-                    makeAGap(),
-                    {
-                        columns: [
-                            {
-                                stack: [
-                                    getPhoto('TimberInteriorImage0'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberInteriorImageText0'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberInteriorImage1'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberInteriorImageText1'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberInteriorImage2'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberInteriorImageText2'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17
-                    }
+                ]
+            },
+            {
+                stack:[
+                    getImagesTable('TimberInteriorPhotographs')
                 ]
             },
             /**
@@ -751,45 +684,12 @@ function generatePDF(mode) {
                     makeAGap(),
                     getRoofSpaceTable2(),
                     appendOther('RS-TABLE2-O1-TEST', 'RS-TABLE2-O1-SLC', 'RS-TABLE2-O1-LAE', 'RS-TABLE2-O1-RA'),
-                    makeAGap(),
-                    {
-                        columns: [
-                            {
-                                stack: [
-                                    getPhoto('TimberRoofImage0'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberRoofImageText0'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberRoofImage1'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberRoofImageText1'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberRoofImage2'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberRoofImageText2'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17
-                    }
+                    makeAGap()
+                ]
+            },
+            {
+                stack:[
+                    getImagesTable('TimberRoofPhotographs')
                 ]
             },
             /**
@@ -819,45 +719,12 @@ function generatePDF(mode) {
                     makeAGap(),
                     getSubFloorSpaceTable2(),
                     appendOther('SFS-TABLE2-O1-TEXT', 'SFS-TABLE2-O1-SLC', 'SFS-TABLE2-O1-LAE', 'SFS-TABLE2-O1-RA'),
-                    makeAGap(),
-                    {
-                        columns: [
-                            {
-                                stack: [
-                                    getPhoto('TimberSubfloorImage0'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberSubfloorImageText0'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberSubfloorImage1'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberSubfloorImageText1'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberSubfloorImage2'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberSubfloorImageText2'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17
-                    }
+                    makeAGap()
+                ]
+            },
+            {
+                stack:[
+                    getImagesTable('TimberSubfloorPhotographs')
                 ]
             },
             /**
@@ -881,44 +748,7 @@ function generatePDF(mode) {
                     makeAGap(),
                     getRecommendationsTable(),
                     makeAGap(),
-                    {
-                        columns: [
-                            {
-                                stack: [
-                                    getPhoto('TimberRecommendationImage0'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberRecommendationImageText0'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberRecommendationImage1'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberRecommendationImageText1'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('TimberRecommendationImage2'),
-                                    {
-                                        alignment: 'center',
-                                        text: getPicDescription('TimberRecommendationImageText2'),
-                                        fontSize: 9,
-                                        margin: [0, 2, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17
-                    }//,
+                   //,
                     // makeAGap(),
                     // {
                     //     text: 'Attachment',
@@ -941,6 +771,11 @@ function generatePDF(mode) {
                     //     margin: [0, 0, 0, 6]
                     // },
                     // getAttachmentsTable()
+                ]
+            },
+            {
+                stack:[
+                    getImagesTable('TimberRecommendationPhotographs')
                 ]
             },
             /**
