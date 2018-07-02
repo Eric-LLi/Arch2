@@ -39,7 +39,7 @@
     <?php require_once("saveloaddata.php"); ?>
     <?php require_once("meta.php"); ?>
 </head>
-<body>
+<body onload="onload()">
 <!--Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">ArchiCentre Task</a>
@@ -545,18 +545,19 @@
 </div>
 <!--Summary Photos-->
 <div class="container">
-    <hr>
     <h3 class="sectionSubHead" style="font-size: 20px">Photos</h3>
-    <table id="TimberSummaryImages" style="margin-top: 20px">
+    <div class="container">
+        <input type="button" id="get_ConstructionImage" value="Upload Images (Max 3 images)" class="uploadImageButton" onclick="TimberSummaryUploadImages()" style="white-space: normal; width: 15%">
+        <input type="file" id="TimberSummaryUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    </div>
+    <table id="TimberSummaryImagesTable" style="margin-top: 20px;width:100%">
         <tr>
-            <th style="width: 20%;font-weight: normal">
-                <label>Images (max 3 images) </label>
-                <input type="button" value="Upload Image" class="uploadImageButton"
-                       onclick="TimberSummaryUploadImages()">
-                <input type="file" id="TimberSummaryUploadImages" class="inputImage" accept="image/x-png,image/jpeg"
-                       multiple>
-            </th>
             <th>
+                <div class="row form-group" id="TimberSummaryPhotographs">
+                </div>
+            </th>
+           
+            <!-- <th>
                 <div class="row form-group">
                     &nbsp;
                     <form>
@@ -629,7 +630,7 @@
                     </form>
                 </div>
 
-            </th>
+            </th> -->
         </tr>
     </table>
     <br>

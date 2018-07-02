@@ -295,6 +295,7 @@
         var countingImage = 0;
         var countingDrawing = 0;
         var imageNo = 0;
+        var countingTimberSummary = 0;
 
         //console.log(photos);
         //calculate the image
@@ -311,6 +312,12 @@
             }
         }
         console.log('the current number of drawing ' + countingDrawing);
+        for (var i = 0; i < photos.length; ++i) {
+            if (photos[i].tableName == 'TimberSummaryImagesTable') {
+                countingTimberSummary++;
+            }
+        }
+        console.log('the current number of timber summary drawing ' + countingTimberSummary);
         // Any photos?
         //console.log(photos.length);
         photos.forEach(
@@ -958,6 +965,68 @@
                             //                            console.log("After count: " + photos_count);
                             $("#" + elementID[1]).attr("src", url);
                             $("#" + p.tableName).show();
+                        }else if(p.tableName === "TimberSummaryImagesTable")
+                        {
+                            console.log("I am in Timber Summary Images Table");
+                            document.getElementById(p.tableName).style.display = 'block';
+
+                            var maxImages = 3;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "TimberSummaryImageCaption" + currentID;
+                            var idGroup = [];
+
+                            addImageElements(p.imageAltName,'TimberSummaryPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSummaryImageForm','TimberSummaryImageCaption');
+
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '265px';
+                            document.getElementById(p.imageid).style.height = '265px';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '265px';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '265px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '265px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            
+                            var totalContainers = $('#TimberSummaryPhotographs').find('> form');
+                            console.log("the current form in the report is :" + totalContainers.length);
+
+                            //create the next image area base on the max image number, the current ID smaller than it, create.
+                            // var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            // var nextID = Number(currentID) + 1;
+                            // console.log("the current total number of drawings " + countingDrawing);
+                            // console.log("the currentID " + currentID);
+                            // console.log("the nextID " + nextID);
+                            if (totalContainers.length == countingTimberSummary && totalContainers.length < maxImages) 
+                            {
+                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+                                for (var i = 0; i < totalContainers.length; i++)
+                                {
+                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                    var id = Number(idStr);
+                                    idGroup.push(id);
+                                }
+                                //console.log(idGroup);
+                                idGroup.sort(function(a, b){return a - b});
+                                //console.log(idGroup);
+                                console.log("the last ID is " + idGroup[idGroup.length-1]);
+                                var lastID = idGroup[idGroup.length-1]
+                                var newID = Number(lastID) + 1;
+                                var altID = Number(lastID) + 2;
+                                nextAltName = 'image ' + altID;
+                                //console.log("I am here!!! need another image element ,the next id  " + newID);
+                                var nextImageID = 'TimberSummaryImage' + newID;
+                                var nextTextID = 'TimberSummaryImageText' + newID;
+                                var nextRemoveButtonID = 'TimberSummaryRemoveButton' + newID;
+                                var nextAddButtonID = 'AddTimberSummaryImageButton' + newID;
+                                var nextUploadID = 'TimberSummaryUploadImage' + newID;
+                                addImageElements(nextAltName, 'TimberSummaryPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                                    'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '265px', '265px','TimberSummaryImageForm','TimberSummaryImageCaption');
+
+                            }
                         }
                     }
                 }
