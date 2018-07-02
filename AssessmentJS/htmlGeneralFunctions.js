@@ -1086,7 +1086,7 @@ function RemoveImage(imageID0, removeButtonID, addButtonID, textID = "") {
 
 function AssessmentSiteUploadImages() {
     var imageIDs = $("#AccessmentSiteImages img");
-    console.log(imageIDs);
+    // console.log(imageIDs);
 
     for (var i = 0; i < imageIDs.length; i++) {
         if (imageIDs.eq(i).attr("src") !== "#") {

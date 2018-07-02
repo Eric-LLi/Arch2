@@ -985,49 +985,57 @@ function generatePDF(mode) {
                     getGarage(),
                     getBoundary(),
                     makeAGap(),
+                    //Display images
                     {
                         alignment: 'center',
-                        columns: [
-                            displayThreeImg("AccessmentSiteImages")
-                            // {
-                            //     stack: [
-                            //         getPhoto('AssessmentSiteImage0'),
-                            //         {
-                            //             text: getText('AssessmentSiteImageText0'),
-                            //             width: 160,
-                            //             style: 'tableText',
-                            //             bold: true,
-                            //             margin: [0, 3, 0, 0]
-                            //         }
-                            //     ]
-                            // },
-                            // {
-                            //     stack: [
-                            //         getPhoto('AssessmentSiteImage1'),
-                            //         {
-                            //             text: getText('AssessmentSiteImageText1'),
-                            //             width: 160,
-                            //             style: 'tableText',
-                            //             bold: true,
-                            //             margin: [0, 3, 0, 0]
-                            //         }
-                            //     ]
-                            // },
-                            // {
-                            //     stack: [
-                            //         getPhoto('AssessmentSiteImage2'),
-                            //         {
-                            //             text: getText('AssessmentSiteImageText2'),
-                            //             width: 160,
-                            //             style: 'tableText',
-                            //             bold: true,
-                            //             margin: [0, 3, 0, 0]
-                            //         }
-                            //     ]
-                            // }
-                        ],
-                        columnGap: 17
+                        layout: 'noBorders',
+                        table: {
+                            body: displayThreeImg("AccessmentSiteImages")
+                        }
                     },
+                    // {
+                    //     alignment: 'center',
+                    //     columns: [
+                    //         displayThreeImg("AccessmentSiteImages")
+                    //         // {
+                    //         //     stack: [
+                    //         //         getPhoto('AssessmentSiteImage0'),
+                    //         //         {
+                    //         //             text: getText('AssessmentSiteImageText0'),
+                    //         //             width: 160,
+                    //         //             style: 'tableText',
+                    //         //             bold: true,
+                    //         //             margin: [0, 3, 0, 0]
+                    //         //         }
+                    //         //     ]
+                    //         // },
+                    //         // {
+                    //         //     stack: [
+                    //         //         getPhoto('AssessmentSiteImage1'),
+                    //         //         {
+                    //         //             text: getText('AssessmentSiteImageText1'),
+                    //         //             width: 160,
+                    //         //             style: 'tableText',
+                    //         //             bold: true,
+                    //         //             margin: [0, 3, 0, 0]
+                    //         //         }
+                    //         //     ]
+                    //         // },
+                    //         // {
+                    //         //     stack: [
+                    //         //         getPhoto('AssessmentSiteImage2'),
+                    //         //         {
+                    //         //             text: getText('AssessmentSiteImageText2'),
+                    //         //             width: 160,
+                    //         //             style: 'tableText',
+                    //         //             bold: true,
+                    //         //             margin: [0, 3, 0, 0]
+                    //         //         }
+                    //         //     ]
+                    //         // }
+                    //     ],
+                    //     columnGap: 17
+                    // },
                     makeAGap(),
                     //drawAccessNotesTable('SiteGardenAccessLimitation', 'SiteGardenAccessNotes', 'MajFound', 'siteGardenLbl1', 'MainFound', 'siteGardenLbl2', 'generalNotes')
                     drawNotesTable('AssessmentSiteNotesTable', 'AssessmentSiteLimitationSelect', 'AssessmentSiteLimitationNote', 'AssessmentSiteMajorFound', 'assessmentSiteMajorRecommendations', 'AssessmentSiteMinorFound', 'assessmentSiteMinorRecommendations', 'assessmentSiteGeneralNotes')
@@ -1059,69 +1067,77 @@ function generatePDF(mode) {
                     makeAGap(),
                     {
                         alignment: 'center',
-                        columns: [{
-                            stack: [
-                                getPhoto('AssessmentExteriorImage0'),
-                                {
-                                    text: getText('AssessmentExteriorImageText0'),
-                                    width: 160,
-                                    bold: true,
-                                    style: 'tableText',
-                                    margin: [0, 3, 0, 0]
-                                },
-                                makeAGap(),
-                                getPhoto('AssessmentExteriorImage3'),
-                                {
-                                    text: getText('AssessmentExteriorImageText3'),
-                                    width: 160,
-                                    bold: true,
-                                    style: 'tableText',
-                                    margin: [0, 3, 0, 0]
-                                }
-                            ]
-                        }, {
-                            stack: [
-                                getPhoto('AssessmentExteriorImage1'),
-                                {
-                                    text: getText('AssessmentExteriorImageText1'),
-                                    width: 160,
-                                    bold: true,
-                                    style: 'tableText',
-                                    margin: [0, 3, 0, 0]
-                                },
-                                makeAGap(),
-                                getPhoto('AssessmentExteriorImage4'),
-                                {
-                                    text: getText('AssessmentExteriorImageText4'),
-                                    width: 160,
-                                    bold: true,
-                                    style: 'tableText',
-                                    margin: [0, 3, 0, 0]
-                                }
-                            ]
-                        }, {
-                            stack: [
-                                getPhoto('AssessmentExteriorImage2'),
-                                {
-                                    text: getText('AssessmentExteriorImageText2'),
-                                    width: 160,
-                                    bold: true,
-                                    style: 'tableText',
-                                    margin: [0, 3, 0, 0]
-                                },
-                                makeAGap(),
-                                getPhoto('AssessmentExteriorImage5'),
-                                {
-                                    text: getText('AssessmentExteriorImageText5'),
-                                    width: 160,
-                                    bold: true,
-                                    style: 'tableText',
-                                    margin: [0, 3, 0, 0]
-                                }
-                            ]
-                        }],
-                        columnGap: 20
+                        layout: 'noBorders',
+                        table: {
+                            body: displaySixImg("AccessmentExteriorImages")
+                        }
                     },
+
+                    // {
+                    //     alignment: 'center',
+                    //     columns: [{
+                    //         stack: [
+                    //             getPhoto('AssessmentExteriorImage0'),
+                    //             {
+                    //                 text: getText('AssessmentExteriorImageText0'),
+                    //                 width: 160,
+                    //                 bold: true,
+                    //                 style: 'tableText',
+                    //                 margin: [0, 3, 0, 0]
+                    //             },
+                    //             makeAGap(),
+                    //             getPhoto('AssessmentExteriorImage3'),
+                    //             {
+                    //                 text: getText('AssessmentExteriorImageText3'),
+                    //                 width: 160,
+                    //                 bold: true,
+                    //                 style: 'tableText',
+                    //                 margin: [0, 3, 0, 0]
+                    //             }
+                    //         ]
+                    //     }, {
+                    //         stack: [
+                    //             getPhoto('AssessmentExteriorImage1'),
+                    //             {
+                    //                 text: getText('AssessmentExteriorImageText1'),
+                    //                 width: 160,
+                    //                 bold: true,
+                    //                 style: 'tableText',
+                    //                 margin: [0, 3, 0, 0]
+                    //             },
+                    //             makeAGap(),
+                    //             getPhoto('AssessmentExteriorImage4'),
+                    //             {
+                    //                 text: getText('AssessmentExteriorImageText4'),
+                    //                 width: 160,
+                    //                 bold: true,
+                    //                 style: 'tableText',
+                    //                 margin: [0, 3, 0, 0]
+                    //             }
+                    //         ]
+                    //     }, {
+                    //         stack: [
+                    //             getPhoto('AssessmentExteriorImage2'),
+                    //             {
+                    //                 text: getText('AssessmentExteriorImageText2'),
+                    //                 width: 160,
+                    //                 bold: true,
+                    //                 style: 'tableText',
+                    //                 margin: [0, 3, 0, 0]
+                    //             },
+                    //             makeAGap(),
+                    //             getPhoto('AssessmentExteriorImage5'),
+                    //             {
+                    //                 text: getText('AssessmentExteriorImageText5'),
+                    //                 width: 160,
+                    //                 bold: true,
+                    //                 style: 'tableText',
+                    //                 margin: [0, 3, 0, 0]
+                    //             }
+                    //         ]
+                    //     }],
+                    //     columnGap: 20
+                    // },
                     makeAGap(),
                     drawNotesTable('AssessmentPropertyExteriorNotesTable', 'AssessmentPropertyExteriorLimitationSelect', 'AssessmentPropertyExteriorLimitationNote', 'AssessmentPropertyExteriorMajorFound', 'assessmentPropertyExteriorMajorRecommendations', 'AssessmentPropertyExteriorMinorFound', 'assessmentPropertyExteriorMinorRecommendations', 'assessmentPropertyExteriorGeneralNotes')
 
@@ -1151,140 +1167,154 @@ function generatePDF(mode) {
                     makeAGap(),
                     {
                         alignment: 'center',
-                        columns: [{
-                                stack: [
-                                    getPhoto('AssessmentInteriorLivingImage0'),
-                                    {
-                                        text: getText('AssessmentInteriorLivingImageText0'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    },
-                                    makeAGap(),
-                                    getPhoto('AssessmentInteriorLivingImage3'),
-                                    {
-                                        text: getText('AssessmentInteriorLivingImageText3'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('AssessmentInteriorLivingImage1'),
-                                    {
-                                        text: getText('AssessmentInteriorLivingImageText1'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    },
-                                    makeAGap(),
-                                    getPhoto('AssessmentInteriorLivingImage4'),
-                                    {
-                                        text: getText('AssessmentInteriorLivingImageText4'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('AssessmentInteriorLivingImage2'),
-                                    {
-                                        text: getText('AssessmentInteriorLivingImageText2'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    },
-                                    makeAGap(),
-                                    getPhoto('AssessmentInteriorLivingImage5'),
-                                    {
-                                        text: getText('AssessmentInteriorLivingImageText5'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17
+                        layout: 'noBorders',
+                        table: {
+                            body: displaySixImg("AccessmentInteriorLivingImages")
+                        }
                     },
                     {
                         alignment: 'center',
-                        columns: [{
-                                stack: [
-                                    getPhoto('AssessmentInteriorBedroomImage0'),
-                                    {
-                                        text: getText('AssessmentInteriorBedroomImageText0'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    },
-                                    makeAGap(),
-                                    getPhoto('AssessmentInteriorBedroomImage3'),
-                                    {
-                                        text: getText('AssessmentInteriorBedroomImageText3'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('AssessmentInteriorBedroomImage1'),
-                                    {
-                                        text: getText('AssessmentInteriorBedroomImageText1'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    },
-                                    makeAGap(),
-                                    getPhoto('AssessmentInteriorBedroomImage4'),
-                                    {
-                                        text: getText('AssessmentInteriorBedroomImageText4'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('AssessmentInteriorBedroomImage2'),
-                                    {
-                                        text: getText('AssessmentInteriorBedroomImageText2'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    },
-                                    makeAGap(),
-                                    getPhoto('AssessmentInteriorBedroomImage5'),
-                                    {
-                                        text: getText('AssessmentInteriorBedroomImageText5'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 5, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 17
+                        layout: 'noBorders',
+                        table: {
+                            body: displaySixImg("AccessmentInteriorBedroomImages")
+                        }
                     },
+                    // {
+                    //     alignment: 'center',
+                    //     columns: [{
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorLivingImage0'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorLivingImageText0'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 },
+                    //                 makeAGap(),
+                    //                 getPhoto('AssessmentInteriorLivingImage3'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorLivingImageText3'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorLivingImage1'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorLivingImageText1'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 },
+                    //                 makeAGap(),
+                    //                 getPhoto('AssessmentInteriorLivingImage4'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorLivingImageText4'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorLivingImage2'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorLivingImageText2'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 },
+                    //                 makeAGap(),
+                    //                 getPhoto('AssessmentInteriorLivingImage5'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorLivingImageText5'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 }
+                    //             ]
+                    //         }
+                    //     ],
+                    //     columnGap: 17
+                    // },
+                    // {
+                    //     alignment: 'center',
+                    //     columns: [{
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorBedroomImage0'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorBedroomImageText0'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 },
+                    //                 makeAGap(),
+                    //                 getPhoto('AssessmentInteriorBedroomImage3'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorBedroomImageText3'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorBedroomImage1'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorBedroomImageText1'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 },
+                    //                 makeAGap(),
+                    //                 getPhoto('AssessmentInteriorBedroomImage4'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorBedroomImageText4'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorBedroomImage2'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorBedroomImageText2'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 },
+                    //                 makeAGap(),
+                    //                 getPhoto('AssessmentInteriorBedroomImage5'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorBedroomImageText5'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 5, 0, 0]
+                    //                 }
+                    //             ]
+                    //         }
+                    //     ],
+                    //     columnGap: 17
+                    // },
                     makeAGap(),
                     drawNotesTable('AssessmentPropertyInteriorNotesTable', 'AssessmentPropertyInteriorLimitationSelect', 'AssessmentPropertyInteriorLimitationNote',
                         'AssessmentPropertyInteriorMajorFound', 'assessmentPropertyInteriorMajorRecommendations', 'AssessmentPropertyInteriorMinorFound',
@@ -1410,45 +1440,53 @@ function generatePDF(mode) {
                     //display images, max 3
                     {
                         alignment: 'center',
-                        columns: [{
-                                stack: [
-                                    getPhoto('AssessmentInteriorServiceImage0'),
-                                    {
-                                        text: getText('AssessmentInteriorServiceImageText0'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 3, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('AssessmentInteriorServiceImage1'),
-                                    {
-                                        text: getText('AssessmentInteriorServiceImageText1'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 3, 0, 0]
-                                    }
-                                ]
-                            },
-                            {
-                                stack: [
-                                    getPhoto('AssessmentInteriorServiceImage2'),
-                                    {
-                                        text: getText('AssessmentInteriorServiceImageText2'),
-                                        width: 160,
-                                        style: 'tableText',
-                                        bold: true,
-                                        margin: [0, 3, 0, 0]
-                                    }
-                                ]
-                            }
-                        ],
-                        columnGap: 20
+                        layout: 'noBorders',
+                        table: {
+                            body: displayThreeImg("AccessmentInteriorServiceImages")
+                        }
                     },
+
+                    // {
+                    //     alignment: 'center',
+                    //     columns: [{
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorServiceImage0'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorServiceImageText0'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 3, 0, 0]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorServiceImage1'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorServiceImageText1'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 3, 0, 0]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             stack: [
+                    //                 getPhoto('AssessmentInteriorServiceImage2'),
+                    //                 {
+                    //                     text: getText('AssessmentInteriorServiceImageText2'),
+                    //                     width: 160,
+                    //                     style: 'tableText',
+                    //                     bold: true,
+                    //                     margin: [0, 3, 0, 0]
+                    //                 }
+                    //             ]
+                    //         }
+                    //     ],
+                    //     columnGap: 20
+                    // },
                     makeAGap(),
                     drawNotesTable('AssessmentServiceNotesTable', 'AssessmentServiceLimitationSelect', 'AssessmentServiceLimitationNote',
                         'AssessmentServiceMajorFound', 'assessmentServiceMajorRecommendations', 'AssessmentServiceMinorFound',

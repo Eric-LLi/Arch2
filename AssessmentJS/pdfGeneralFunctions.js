@@ -565,7 +565,7 @@ function getCoverImage(id) {
             canvas.height = myImage.naturalHeight;
             var ctx = canvas.getContext("2d");
             ctx.drawImage(myImage, 0, 0);
-            var src = canvas.toDataURL("image/png");
+            var src = canvas.toDataURL("image/jpeg");
 
             imageSection = {
                 image: src,
@@ -588,57 +588,79 @@ function getCoverImage(id) {
 function displayThreeImg(id) {
     var forms = $("#" + id + " form");
 
-    const result2 = {
-        stack: [
-            getPhoto(forms.eq(1).children("div").eq(0).children("img").attr("id")),
-            {
-                text: getText(forms.eq(1).children("div").eq(1).children("input").attr("id")),
-                width: 160,
-                style: 'tableText',
-                bold: true,
-                margin: [0, 3, 0, 0]
-            }
-        ],
-    };
-    const result = {
-        stack: [
-            getPhoto(forms.eq(0).children("div").eq(0).children("img").attr("id")),
-            {
-                text: getText(forms.eq(0).children("div").eq(1).children("input").attr("id")),
-                width: 160,
-                style: 'tableText',
-                bold: true,
-                margin: [0, 3, 0, 0]
-            }
-        ],
-    };
+    var result = [],
+        row = [];
 
-    
-    
-    // for (var i = 0; i < forms.length; i++) {
-    //     var img = forms.eq(i).children("div").eq(0).children("img");
-    //     var text = forms.eq(i).children("div").eq(1).children("input");
-    //     if (img.attr("src") !== "#") {
-    //         const result = {
-    //             stack: [
-    //                 getPhoto(img.attr("id")),
-    //                 {
-    //                     text: getText(text.attr("id")),
-    //                     width: 160,
-    //                     style: 'tableText',
-    //                     bold: true,
-    //                     margin: [0, 3, 0, 0]
-    //                 }
-    //             ]
-    //         };
-    //         console.log(result);
-    //         const result3 = Object.assign({}, result2, result);
-    //         console.log(result3);
-    //         // 
-    //     }
-    // }
-    // console.log(result);
-    return result6;
+    for (var i = 0; i < forms.length; i++) {
+        var img = forms.eq(i).children("div").eq(0).children("img");
+        var text = forms.eq(i).children("div").eq(1).children("input");
+        if (img.attr("src") !== "#") {
+            row.push({
+                stack: [
+                    getPhoto(img.attr("id")),
+                    {
+                        text: getText(text.attr("id")),
+                        width: 160,
+                        style: 'tableText',
+                        bold: true,
+                        margin: [0, 3, 0, 0]
+                    }
+                ]
+            });
+            console.log(row);
+        }
+    }
+    if (!isEmpty(row)) {
+        result.push(row);
+    } else {
+        result.push({});
+    }
+    return result;
+
+}
+
+function displaySixImg(id) {
+    var forms = $("#" + id + " form");
+
+    var result = [],
+        row = [],
+        count = 1;
+
+    for (var i = 0; i < forms.length; i++) {
+        var img = forms.eq(i).children("div").eq(0).children("img");
+        var text = forms.eq(i).children("div").eq(1).children("input");
+        if (img.attr("src") !== "#") {
+            row.push({
+                stack: [
+                    getPhoto(img.attr("id")),
+                    {
+                        text: getText(text.attr("id")),
+                        width: 160,
+                        style: 'tableText',
+                        bold: true,
+                        margin: [0, 3, 0, 0]
+                    }
+                ]
+            });
+            if (++count == 4) {
+                result.push(row);
+                row = [];
+                count = 1;
+            }
+        }
+    }
+    if (!isEmpty(row)) {
+        var rowSize = row.length;
+        for (var i = 0; i < 3 - rowSize; i++) {
+            row.push({});
+        }
+        result.push(row);
+    }
+    if (isEmpty(result)) {
+        result.push({});
+        return result;
+    } else
+        return result;
 
 }
 
@@ -679,4 +701,28 @@ function getPhoto(id) {
 
     return imageSection;
 
+}
+
+//Check empty.
+function isEmpty(val) {
+    switch (typeof val) {
+        case 'undefined':
+            return true;
+        case 'string':
+            if (val.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+            break;
+        case 'boolean':
+            if (!val) return true;
+            break;
+        case 'number':
+            if (0 === val || isNaN(val)) return true;
+            break;
+        case 'object':
+            if (null === val || val.length === 0) return true;
+            for (var i in val) {
+                return false;
+            }
+            return true;
+    }
+    return false;
 }
