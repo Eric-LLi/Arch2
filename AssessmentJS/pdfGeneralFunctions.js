@@ -7,10 +7,10 @@ var totalParagraphs = 1;
 /**
  * Draw the key table - BetterTENG
  * */
-function resetTotalParagraphs()
-{
+function resetTotalParagraphs() {
     totalParagraphs = 1;
 }
+
 function getKeyTable() {
     var result;
     result = {
@@ -74,7 +74,9 @@ function getIt(id) {
  * */
 function makeAGap() {
     var result;
-    result = {text: ' '};
+    result = {
+        text: ' '
+    };
     return result;
 }
 
@@ -82,8 +84,7 @@ function makeAGap() {
 /**
  * Draw the Assessment NotesTable
  */
-function drawNotesTable(tableID,limitationSelectName,limitationNoteName,majorTextArea,majorRecommendationID,minorTextArea,minorRecommendationID,generalNote)
-{
+function drawNotesTable(tableID, limitationSelectName, limitationNoteName, majorTextArea, majorRecommendationID, minorTextArea, minorRecommendationID, generalNote) {
     var body = [];
     var table = document.getElementById(tableID);
     var majorRecommendation = document.getElementById(majorRecommendationID).value;
@@ -93,16 +94,15 @@ function drawNotesTable(tableID,limitationSelectName,limitationNoteName,majorTex
     var limitationNo = rowCount - 9;
     //console.log(limitationNo);
     //1. get the first row
-    var a = [
-        {
-            text:'Access Limitation',
-            style:'tableHeader'
+    var a = [{
+            text: 'Access Limitation',
+            style: 'tableHeader'
             //alignment:'center'
 
         },
         {
-            text:'Access Notes',
-            style:'tableHeader'
+            text: 'Access Notes',
+            style: 'tableHeader'
             //alignment:'center'
         }
     ];
@@ -110,22 +110,20 @@ function drawNotesTable(tableID,limitationSelectName,limitationNoteName,majorTex
 
 
     //2. get the limitation data
-    for (var i=0;i<limitationNo;i++)
-    {
+    for (var i = 0; i < limitationNo; i++) {
         //console.log(i);
         var selectID = limitationSelectName + i;
         var selectedValue = document.getElementById(selectID).value;
         //console.log(selectedValue);
         var noteID = limitationNoteName + i;
         var note = document.getElementById(noteID).value;
-        var b = [
-            {
-                text:selectedValue,
-                style:'tableText'
+        var b = [{
+                text: selectedValue,
+                style: 'tableText'
             },
             {
-                text:note,
-                style:'tableText'
+                text: note,
+                style: 'tableText'
             }
         ];
         body.push(b);
@@ -133,102 +131,87 @@ function drawNotesTable(tableID,limitationSelectName,limitationNoteName,majorTex
     }
 
     //3.get the third header--> row major founds
-    var c = [
-        {
-            text:'Major and Serious Structural Defects Found:',
-            style:'tableHeader',
+    var c = [{
+            text: 'Major and Serious Structural Defects Found:',
+            style: 'tableHeader',
             colSpan: 2
         }
 
     ];
     body.push(c);
 
-    var d = [
-        {
-            text:splitTextArea(getTextArea(majorTextArea)),
-            style:'tableText',
-            colSpan:2
-        }
-    ];
+    var d = [{
+        text: splitTextArea(getTextArea(majorTextArea)),
+        style: 'tableText',
+        colSpan: 2
+    }];
     body.push(d);
 
     //check major Recommendation value
-    if (majorRecommendation.trim() === "")
-    {
+    if (majorRecommendation.trim() === "") {
         majorRecommendation = "NA"
     }
 
-    var e = [
-        {
-            text:"Professional & Trade Recommendations:",
-            style:'tableHeader',
+    var e = [{
+            text: "Professional & Trade Recommendations:",
+            style: 'tableHeader',
             color: 'black'
 
         },
         {
-            text:majorRecommendation,
-            style:'tableText'
+            text: majorRecommendation,
+            style: 'tableText'
         }
     ];
     body.push(e);
 
 
 
-    var f = [
-        {
-            text:'Maintenance Items and Minor Defects Found:',
-            style:'tableHeader',
-            colSpan:2
-        }
-    ];
+    var f = [{
+        text: 'Maintenance Items and Minor Defects Found:',
+        style: 'tableHeader',
+        colSpan: 2
+    }];
     body.push(f);
 
-    var g = [
-        {
-            text:splitTextArea(getTextArea(minorTextArea)),
-            style:'tableText',
-            colSpan:2
-        }
-    ];
+    var g = [{
+        text: splitTextArea(getTextArea(minorTextArea)),
+        style: 'tableText',
+        colSpan: 2
+    }];
     body.push(g);
 
 
     //check minor Recommendation value
-    if (minorRecommendation.trim() === "")
-    {
+    if (minorRecommendation.trim() === "") {
         minorRecommendation = "NA"
     }
-    var h = [
-        {
-            text:"Professional & Trade Recommendations:",
-            style:'tableHeader',
+    var h = [{
+            text: "Professional & Trade Recommendations:",
+            style: 'tableHeader',
             color: 'black'
 
         },
         {
-            text:minorRecommendation,
-            style:'tableText'
+            text: minorRecommendation,
+            style: 'tableText'
         }
     ];
 
     body.push(h);
 
-    var i =[
-        {
-            text:'General Notes',
-            style:'tableHeader',
-            colSpan:2
-        }
-    ];
+    var i = [{
+        text: 'General Notes',
+        style: 'tableHeader',
+        colSpan: 2
+    }];
     body.push(i);
 
-    var j = [
-        {
-            colSpan:2,
-            text:splitTextArea(getTextArea(generalNote)),
-            style:'tableText'
-        }
-    ];
+    var j = [{
+        colSpan: 2,
+        text: splitTextArea(getTextArea(generalNote)),
+        style: 'tableText'
+    }];
     body.push(j);
 
 
@@ -254,85 +237,77 @@ function drawNotesTable(tableID,limitationSelectName,limitationNoteName,majorTex
     1st determine whether it is final mode or preview mode
     2md determine whether it is a NSW report if it is the final mode
  */
-function determineFooter(mode)
-{
+function determineFooter(mode) {
     var result;
     var state = document.getElementById('9').value;
-    if (mode == 'final' || mode == 'save' )
-    {
-        if (state === 'NSW')
-        {
+    if (mode == 'final' || mode == 'save') {
+        if (state === 'NSW') {
             result = {
-                table:{
+                table: {
                     widths: ['auto', 350],
-                    body:[
-                        [
-                            {
-                                rowSpan:2,
-                                image:footerImage,
-                                alignment:'left',
-                                width:80,
-                                height:34
+                    body: [
+                        [{
+                                rowSpan: 2,
+                                image: footerImage,
+                                alignment: 'left',
+                                width: 80,
+                                height: 34
                             },
                             {
-                                text:'\nNSW Nominated Architect B. Inwood Reg, No. 7108',
-                                alignment:'left',
-                                fontSize:7,
-                                margin:[0,5,0,0],
-                                color:'#8E8B8B'
+                                text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
+                                alignment: 'left',
+                                fontSize: 7,
+                                margin: [0, 5, 0, 0],
+                                color: '#8E8B8B'
                             }
                         ],
                         [
                             '',
                             {
-                                text:'© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
-                                alignment:'left',
-                                fontSize:7,
-                                margin:[0,0,0,0],
-                                color:'#8E8B8B'
+                                text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                                alignment: 'left',
+                                fontSize: 7,
+                                margin: [0, 0, 0, 0],
+                                color: '#8E8B8B'
                             }
                         ]
 
                     ]
                 },
-                layout:'noBorders',
+                layout: 'noBorders',
                 margin: [40, 0, 10, 0]
             };
             return result;
-        }
-        else
-        {
+        } else {
             result = {
-                table:{
+                table: {
                     widths: ['auto', 350],
-                    body:[
-                        [
-                            {
+                    body: [
+                        [{
                                 // rowSpan:2,
-                                image:footerImage,
-                                alignment:'left',
-                                width:80,
-                                height:34
+                                image: footerImage,
+                                alignment: 'left',
+                                width: 80,
+                                height: 34
                             },
                             {
-                                text:'© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
-                                alignment:'left',
-                                fontSize:7,
-                                margin:[0,25,0,0],
-                                color:'#8E8B8B'
+                                text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                                alignment: 'left',
+                                fontSize: 7,
+                                margin: [0, 25, 0, 0],
+                                color: '#8E8B8B'
                             }
                         ]
 
                     ]
                 },
-                layout:'noBorders',
+                layout: 'noBorders',
                 margin: [40, 0, 10, 0]
             };
             return result;
         }
     }
-    if (mode == 'preview')
-    {
+    if (mode == 'preview') {
         result = {
             text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
             alignment: 'left',
@@ -355,94 +330,110 @@ function determineFrontPageFooter(mode) {
     var result;
     var state = document.getElementById('9').value;
     if (mode == 'final' || mode == 'save') {
-        if (state === 'NSW')
-        {
+        if (state === 'NSW') {
             result = {
-                table:{
-                    body:[
-                        [
-                            {
-                                image:footerImage,
-                                alignment:'left',
-                                width:80,
-                                height:30
+                table: {
+                    body: [
+                        [{
+                                image: footerImage,
+                                alignment: 'left',
+                                width: 80,
+                                height: 30
                             },
                             {
-                                text:'\nNSW Nominated Architect B. Inwood Reg, No. 7108',
-                                alignment:'left',
-                                fontSize:7,
-                                margin:[0,10,0,0],
-                                color:'#8E8B8B'
+                                text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
+                                alignment: 'left',
+                                fontSize: 7,
+                                margin: [0, 10, 0, 0],
+                                color: '#8E8B8B'
                             }
                         ],
                         [
 
                             {
-                                text:['For further information please call Archicentre ', {text:'Australia ',color:'#E06666'}, 'on ',{text:'1300 13 45 13',color:'3A3333',bold:true,fontSize:8}],
-                                alignment:'left',
-                                fontSize:7,
-                                colSpan:2,
-                                color:'#8E8B8B'
+                                text: ['For further information please call Archicentre ', {
+                                    text: 'Australia ',
+                                    color: '#E06666'
+                                }, 'on ', {
+                                    text: '1300 13 45 13',
+                                    color: '3A3333',
+                                    bold: true,
+                                    fontSize: 8
+                                }],
+                                alignment: 'left',
+                                fontSize: 7,
+                                colSpan: 2,
+                                color: '#8E8B8B'
                             }
                         ],
-                        [
-                            {
-                                text: ['or go to ',{text:'www.archicentreaustralia.com.au',bold:true,color:'3A3333',fontSize:8}],
-                                alignment: 'left',
-                                fontSize:7,
-                                margin:[0,-4,0,0],
-                                colSpan:2,
-                                color:'#8E8B8B'
-                            }
-                        ]
+                        [{
+                            text: ['or go to ', {
+                                text: 'www.archicentreaustralia.com.au',
+                                bold: true,
+                                color: '3A3333',
+                                fontSize: 8
+                            }],
+                            alignment: 'left',
+                            fontSize: 7,
+                            margin: [0, -4, 0, 0],
+                            colSpan: 2,
+                            color: '#8E8B8B'
+                        }]
 
                     ]
                 },
-                layout:'noBorders',
+                layout: 'noBorders',
                 margin: [40, -25, 10, 0]
             };
             return result;
-        }
-        else
-        {
+        } else {
             result = {
-                table:{
-                    body:[
-                        [
-                            {
-                                image:footerImage,
-                                alignment:'left',
-                                width:80,
-                                height:34
-                            }
-                        ],
+                table: {
+                    body: [
+                        [{
+                            image: footerImage,
+                            alignment: 'left',
+                            width: 80,
+                            height: 34
+                        }],
                         [
 
                             {
-                                text:['For further information please call Archicentre ', {text:'Australia ',color:'#E06666'}, 'on ',{text:'1300 13 45 13',color:'3A3333',bold:true,fontSize:8}],
-                                alignment:'left',
-                                fontSize:7,
-                                color:'#8E8B8B'
+                                text: ['For further information please call Archicentre ', {
+                                    text: 'Australia ',
+                                    color: '#E06666'
+                                }, 'on ', {
+                                    text: '1300 13 45 13',
+                                    color: '3A3333',
+                                    bold: true,
+                                    fontSize: 8
+                                }],
+                                alignment: 'left',
+                                fontSize: 7,
+                                color: '#8E8B8B'
                             }
                         ],
-                        [
-                            {
-                                text: ['or go to ',{text:'www.archicentreaustralia.com.au',bold:true,color:'3A3333',fontSize:8}],
-                                alignment: 'left',
-                                fontSize:7,
-                                margin:[0,-4,0,0],
-                                color:'#8E8B8B'
-                            }
-                        ]
+                        [{
+                            text: ['or go to ', {
+                                text: 'www.archicentreaustralia.com.au',
+                                bold: true,
+                                color: '3A3333',
+                                fontSize: 8
+                            }],
+                            alignment: 'left',
+                            fontSize: 7,
+                            margin: [0, -4, 0, 0],
+                            color: '#8E8B8B'
+                        }]
 
                     ]
                 },
-                layout:'noBorders',
+                layout: 'noBorders',
                 margin: [40, -25, 10, 0]
             };
             return result;
         }
-     }
+    }
 
     if (mode == 'preview') {
         result = {
@@ -486,11 +477,9 @@ function giveMeHugeDraft(mode) {
  function to get the text content from the text area for further use
  if text area is empty, replace with 'NA'
  */
-function getTextArea(id)
-{
+function getTextArea(id) {
     var text = document.getElementById(id).value;
-    if (text.trim() == "")
-    {
+    if (text.trim() == "") {
         text = 'NA'
     }
     return text;
@@ -500,8 +489,7 @@ function getTextArea(id)
 /**
  * function to get text from input
  */
-function getText(id)
-{
+function getText(id) {
     var myText = document.getElementById(id).value.trim();
     if (myText == '') {
         myText = ''
@@ -517,11 +505,9 @@ function getText(id)
  Fafa
  */
 
-function splitTextArea(text)
-{
+function splitTextArea(text) {
     var newParagraphs = '';
-    if (text != 'NA')
-    {
+    if (text != 'NA') {
         var newText = text.replace(/(\r\n|\r|\n)+/g, '$1');
         var paragraphTrim = newText.trim();
         var paragraphs = paragraphTrim.split("\n");
@@ -535,9 +521,7 @@ function splitTextArea(text)
         totalParagraphs = totalParagraphs + paragraphs.length;
 
         return newParagraphs;
-    }
-    else
-    {
+    } else {
         return text;
     }
 }
@@ -554,7 +538,7 @@ function checkImage(id) {
     var image = document.getElementById(id);
     var src = image.src;
     //console.log(src.indexOf("photos"));
-    return(src.indexOf("photos"));
+    return (src.indexOf("photos"));
 }
 
 /**
@@ -572,27 +556,23 @@ function getCoverImage(id) {
             width: 0,
             height: 0
         }
-    }
-    else
-    {
+    } else {
         console.log('has cover');
-        if (checkImage(id) >= 0)
-        {
+        if (checkImage(id) >= 0) {
             console.log('reload');
             var canvas = document.createElement("canvas");
             canvas.width = myImage.naturalWidth;
             canvas.height = myImage.naturalHeight;
             var ctx = canvas.getContext("2d");
-            ctx.drawImage(myImage,0,0);
-            var src = canvas.toDataURL("image/png");
+            ctx.drawImage(myImage, 0, 0);
+            var src = canvas.toDataURL("image/jpeg");
 
             imageSection = {
-                image:src,
+                image: src,
                 height: 150,
                 width: 200
             }
-        }
-        else{
+        } else {
             console.log('just upload');
             imageSection = {
                 image: myImage.src,
@@ -605,32 +585,106 @@ function getCoverImage(id) {
     return imageSection;
 }
 
-function getPhoto(id)
-{
+function displayThreeImg(id) {
+    var forms = $("#" + id + " form");
+
+    var result = [],
+        row = [];
+
+    for (var i = 0; i < forms.length; i++) {
+        var img = forms.eq(i).children("div").eq(0).children("img");
+        var text = forms.eq(i).children("div").eq(1).children("input");
+        if (img.attr("src") !== "#") {
+            row.push({
+                stack: [
+                    getPhoto(img.attr("id")),
+                    {
+                        text: getText(text.attr("id")),
+                        width: 160,
+                        style: 'tableText',
+                        bold: true,
+                        margin: [0, 3, 0, 0]
+                    }
+                ]
+            });
+            console.log(row);
+        }
+    }
+    if (!isEmpty(row)) {
+        result.push(row);
+    } else {
+        result.push({});
+    }
+    return result;
+
+}
+
+function displaySixImg(id) {
+    var forms = $("#" + id + " form");
+
+    var result = [],
+        row = [],
+        count = 1;
+
+    for (var i = 0; i < forms.length; i++) {
+        var img = forms.eq(i).children("div").eq(0).children("img");
+        var text = forms.eq(i).children("div").eq(1).children("input");
+        if (img.attr("src") !== "#") {
+            row.push({
+                stack: [
+                    getPhoto(img.attr("id")),
+                    {
+                        text: getText(text.attr("id")),
+                        width: 160,
+                        style: 'tableText',
+                        bold: true,
+                        margin: [0, 3, 0, 0]
+                    }
+                ]
+            });
+            if (++count == 4) {
+                result.push(row);
+                row = [];
+                count = 1;
+            }
+        }
+    }
+    if (!isEmpty(row)) {
+        var rowSize = row.length;
+        for (var i = 0; i < 3 - rowSize; i++) {
+            row.push({});
+        }
+        result.push(row);
+    }
+    if (isEmpty(result)) {
+        result.push({});
+        return result;
+    } else
+        return result;
+
+}
+
+function getPhoto(id) {
     var imageSection;
     var myImage = document.getElementById(id);
 
-    if (myImage.style.display === "block")
-    {
+    if (myImage.style.display === "block") {
         //has image, check whether it is from database or just upload
-        if (checkImage(id) >= 0)
-        {
+        if (checkImage(id) >= 0) {
             console.log('reload');
             var canvas = document.createElement("canvas");
             canvas.width = myImage.naturalWidth;
             canvas.height = myImage.naturalHeight;
             var ctx = canvas.getContext("2d");
-            ctx.drawImage(myImage,0,0);
-            var src = canvas.toDataURL("image/png");
+            ctx.drawImage(myImage, 0, 0);
+            var src = canvas.toDataURL("image/jpeg");
 
             imageSection = {
-                image:src,
+                image: src,
                 height: 120,
                 width: 160
             }
-        }
-        else
-        {
+        } else {
             console.log('just upload');
             imageSection = {
                 image: myImage.src,
@@ -638,12 +692,10 @@ function getPhoto(id)
                 width: 160
             }
         }
-    }
-    else
-    {
+    } else {
         //no image at all
         imageSection = {
-            text:""
+            text: ""
         }
     }
 
@@ -651,4 +703,26 @@ function getPhoto(id)
 
 }
 
-
+//Check empty.
+function isEmpty(val) {
+    switch (typeof val) {
+        case 'undefined':
+            return true;
+        case 'string':
+            if (val.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+            break;
+        case 'boolean':
+            if (!val) return true;
+            break;
+        case 'number':
+            if (0 === val || isNaN(val)) return true;
+            break;
+        case 'object':
+            if (null === val || val.length === 0) return true;
+            for (var i in val) {
+                return false;
+            }
+            return true;
+    }
+    return false;
+}
