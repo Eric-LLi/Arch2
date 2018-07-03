@@ -20,7 +20,7 @@
         <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
         <!--  Import pdfMake  -->
         <!-- <script src='../node_modules/pdfmake/build/pdfmake.min.js'></script>
-    <script src='../node_modules/pdfmake/build/vfs_fonts.js'></script> -->
+        <script src='../node_modules/pdfmake/build/vfs_fonts.js'></script> -->
         <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
         <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
 
@@ -39,7 +39,7 @@
         <?php require_once("meta.php"); ?>
     </head>
 
-    <body>
+    <body onload="onload()">
         <!--Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">ArchiCentre Task</a>
