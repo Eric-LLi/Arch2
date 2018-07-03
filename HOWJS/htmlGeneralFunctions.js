@@ -709,7 +709,7 @@ $("#HOW_ImgsUpload").change(function (e) {
                         var width = image.width;
                         var height = image.height;
 
-                        var code = resizeImage_Canvas(image).toDataURL("image/png");
+                        var code = resizeImage_Canvas(image).toDataURL("image/jpeg");
 
                         if (!isEmpty(code)) {
                             $("#" + element[1]).attr("src", code);
