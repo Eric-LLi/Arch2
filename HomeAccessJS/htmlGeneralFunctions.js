@@ -213,6 +213,132 @@ var E_Code = [
     "X16"
 ];
 
+function onload()
+{
+    reorderImages();
+    reorderSketch();
+    automaticNumbering('HA_ImgsContents','IMG');
+    automaticNumbering('HA_PdfContents','Sketch');
+
+}
+
+function reorderImages()
+{
+    console.log("need to reorder the images");
+    var totalContainers = $("#HA_ImgsContents").children('div');
+    var BigContainer = document.getElementById('HA_ImgsContents');
+    //console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+    //     var imgContainerID = id + "_CPimgContainer";
+    //     var ImgID = totalContainers.eq(i).children('img').get(0).id;
+
+    //     console.log(imgContainerID);
+    //     console.log(id);
+    //     console.log(ImgID);
+    //     // console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     //console.log((totalContainers[i].id));
+    //     console.log(totalContainers.eq(i).children('button').get(0).onclick);
+    //     var imgRmBtnID = totalContainers.eq(i).children('button').get(0).id;
+    //     // $("#" + imgRmBtnID).click(function () {
+    //     //     imagesRemoveBtn(imgContainerID, newImgID);
+    //     // });
+    //     totalContainers.eq(i).children('button').get(0).onclick = function(){imagesRemoveBtn(imgContainerID, ImgID)};
+        
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    //console.log(totalContainers);
+
+    $("#HA_ImgsContents").empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+        BigContainer.appendChild(totalContainers[i]);
+        var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+        var imgContainerID = id + "_imgContainer";
+        var ImgID = totalContainers.eq(i).children('img').get(0).id;
+        // console.log(imgContainerID);
+        // console.log(id);
+        // console.log(ImgID);
+        var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
+        var removeFunction = "imagesRemoveBtn('"+imgContainerID+"', '"+ImgID+"')";
+        //console.log(removeFunction);
+        removeBtn.setAttribute("onclick", removeFunction);
+        //console.log(removeBtn);
+        
+    }
+}
+
+function reorderSketch()
+{
+    console.log("need to reorder the images");
+    var totalContainers = $("#HA_PdfContents").children('div');
+    var BigContainer = document.getElementById('HA_PdfContents');
+    //console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+    //     var imgContainerID = id + "_CPimgContainer";
+    //     var ImgID = totalContainers.eq(i).children('img').get(0).id;
+
+    //     console.log(imgContainerID);
+    //     console.log(id);
+    //     console.log(ImgID);
+    //     // console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     //console.log((totalContainers[i].id));
+    //     console.log(totalContainers.eq(i).children('button').get(0).onclick);
+    //     var imgRmBtnID = totalContainers.eq(i).children('button').get(0).id;
+    //     // $("#" + imgRmBtnID).click(function () {
+    //     //     imagesRemoveBtn(imgContainerID, newImgID);
+    //     // });
+    //     totalContainers.eq(i).children('button').get(0).onclick = function(){imagesRemoveBtn(imgContainerID, ImgID)};
+        
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    //console.log(totalContainers);
+    
+    $("#HA_PdfContents").empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+        BigContainer.appendChild(totalContainers[i]);
+        //var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+        //var imgContainerID = id + "_HOWimgContainer";
+        //var ImgID = totalContainers.eq(i).children('img').get(0).id;
+        // console.log(imgContainerID);
+        // console.log(id);
+        // console.log(ImgID);
+        //var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
+        //console.log(removeBtn);
+        //var removeFunction = "deleteImg(this.id)";
+        //console.log(removeFunction);
+        //removeBtn.setAttribute("onclick", removeFunction);
+        //console.log(removeBtn);
+        
+    }
+}
+
+function automaticNumbering(divid,title)
+{
+    console.log("need to refresh the " + title + " number");
+    var totalContainers = $("#" + divid).children('div');
+    //console.log(totalContainers.length);
+    for(var i=0;i<totalContainers.length;i++)
+    {
+        //console.log(i);
+        //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('label').get(0).innerHTML = title + " " + (i+1);
+    }
+}
+
+
 //Add property "option"
 function createP_Option(nameid) {
     //    console.log("Create opiton");
@@ -856,6 +982,10 @@ $("#Imgs_Upload").change(function (e) {
             //            }
             //        }
         })
+
+        setTimeout(function(){
+            automaticNumbering('HA_ImgsContents','IMG');
+        },1000)
     }
 });
 //Photos page; create html image, text, remove button and container.
@@ -929,6 +1059,7 @@ function imagesRemoveBtn(containerID, imgID) {
     } else {
         var container = $("#" + containerID).remove();
         doRemovePhoto(imgID);
+        automaticNumbering('HA_ImgsContents','IMG');
     }
 }
 
@@ -1025,6 +1156,7 @@ var deleteImg = function (bid) {
 
     //Delete whole div including img, caption and remove button.
     $(container).remove();
+    automaticNumbering('HA_PdfContents','Sketch');
 
     if ($("#HA_BookingNo").val() === "0") {
         alert("Please select booking from main page. ");
@@ -1115,6 +1247,12 @@ $("#file-to-upload").on('change', function (e) {
         }
         showPDF(URL.createObjectURL(uploadPDFfile[i]));
     }
+    setTimeout(function(){
+        automaticNumbering('HA_PdfContents','Sketch');
+
+    },2000)
+
+    
 });
 
 //Source from http://www.blogjava.net/jidebingfeng/articles/406171.html

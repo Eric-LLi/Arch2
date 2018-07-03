@@ -711,12 +711,6 @@ function AddOneMaintenanceDrawing(click_id)
             }
             
         }
-
-
-        
-
-
-
     });
 }
 
@@ -728,7 +722,7 @@ function RemoveOneMaintenanceDrawing(click_id)
     var removeButtonID = 'MaintenanceDrawingRemoveButton' + id;
     var addButtonID = 'AddMaintenanceDrawingButton' + id;
     var textID = 'MaintenanceDrawingText' + id;
-    var formID = 'imageForm' + id;
+    var formID = 'drawingForm' + id;
     var totalContainers = $('#MaintenanceDrawings').find('> form');
     var idGroup = [];
     console.log("the current total image number is: " + totalContainers.length);
@@ -1093,7 +1087,7 @@ function addDrawingElements(imageAltName, divID, imageID, imageTextID, removeBut
     var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
     var form = document.createElement("form");
-    form.id = "imageForm" + currentID;
+    form.id = "drawingForm" + currentID;
     form.style.width = '100%';
     //form.setAttribute("class","divForm");
     //need four dividends in a form

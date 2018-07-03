@@ -2,7 +2,86 @@
  * Created by Fafa on 22/1/18.
  */
 
- var firstRemove30th = true;
+var firstRemove30th = true;
+
+function onload()
+{
+    reorderImages();
+    automaticNumbering();
+    addNewImageForm()
+}
+
+function reorderImages()
+{
+    var totalContainers = $('#ConstructionPhotographs').find('> form');
+    var BigContainer = document.getElementById('ConstructionPhotographs');
+    console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     console.log((totalContainers[i].id));
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    console.log(totalContainers);
+
+    $("#ConstructionPhotographs").empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+       BigContainer.appendChild(totalContainers[i]);
+    }
+}
+
+
+function automaticNumbering()
+{
+    console.log("need to refresh the image number");
+    var totalContainers = $('#ConstructionPhotographs').find('> form');
+    for(var i=0;i<totalContainers.length;i++)
+    {
+        //console.log(i);
+        //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
+    }
+}
+function addNewImageForm()
+{
+    maxImage = 30;
+    var idGroup = [];
+    var totalContainers = $('#ConstructionPhotographs').find('> form');
+    console.log("the current form in the report ConstructionPhotographs is " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    console.log("the last ID is " + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    var newID = Number(lastID) + 1;
+    var altID = Number(lastID) + 2;
+    if(totalContainers.length < maxImage && totalContainers.length != 0)
+    {
+        console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'ConstructionImage' + newID;
+        var nextTextID = 'ConstructionImageText' + newID;
+        var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
+        var nextAddButtonID = 'AddConstructionImageButton' + newID;
+        var nextUploadID = 'ConstructionUploadImage' + newID;
+        addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID,
+            nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            'RemoveOneConstructionImage(this.id)',
+            'AddOneConstructionImage(this.id)', '500px', '500px');
+    }
+}
 
 function countWord(click_id)
 {
@@ -241,6 +320,7 @@ $('#ConstructionUploadImages').change(function() {
         }
 
         setTimeout(function(){
+            automaticNumbering();
             var altID= count + 1;
             var altName = 'Image' + altID;
             var imageID = 'ConstructionImage' + count;
@@ -250,7 +330,7 @@ $('#ConstructionUploadImages').change(function() {
             var uploadID = 'ConstructionUploadImage' + count;
             addImageElements(altName, 'ConstructionPhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
                 'RemoveOneConstructionImage(this.id)', 'AddOneConstructionImage(this.id)', '500px', '0px');
-
+            
         },1500)
     }
     else
@@ -324,6 +404,10 @@ $('#ConstructionUploadImages').change(function() {
                 }, 600);
             }
         }
+        setTimeout(function(){
+            automaticNumbering();
+
+        },2000)
     }
 
 });
@@ -424,6 +508,7 @@ function AddOneConstructionImage(click_id)
                         }
                     );
                 });
+                automaticNumbering();
                 if (Number(selectedID) == Number(lastID))
                 {
                     if(totalContainers.length < 30)
@@ -518,6 +603,7 @@ function RemoveOneConstructionImage(click_id)
          $("#ConstructionPhotographs").empty();
          document.getElementById('ConstructionImagesTable').style.display = 'none';
      }
+     automaticNumbering();
 
 }
 

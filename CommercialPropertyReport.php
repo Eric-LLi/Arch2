@@ -40,7 +40,7 @@ require_once("loadbooking.php");
 </head>
 <!--onload="loadSelect()"-->
 
-<body>
+<body onload="onload()">
     <!--Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">ArchiCentre Task</a>
