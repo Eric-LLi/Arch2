@@ -227,7 +227,7 @@ function reorderImages()
     console.log("need to reorder the images");
     var totalContainers = $("#HA_ImgsContents").children('div');
     var BigContainer = document.getElementById('HA_ImgsContents');
-    console.log(totalContainers);
+    //console.log(totalContainers);
     // for (var i=0;i<totalContainers.length;i++)
     // {
     //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
@@ -278,7 +278,7 @@ function reorderSketch()
     console.log("need to reorder the images");
     var totalContainers = $("#HA_PdfContents").children('div');
     var BigContainer = document.getElementById('HA_PdfContents');
-    console.log(totalContainers);
+    //console.log(totalContainers);
     // for (var i=0;i<totalContainers.length;i++)
     // {
     //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
@@ -303,7 +303,7 @@ function reorderSketch()
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
 
-    console.log(totalContainers);
+    //console.log(totalContainers);
     
     $("#HA_PdfContents").empty();
     for (var i=0;i<totalContainers.length;i++)
@@ -329,7 +329,7 @@ function automaticNumbering(divid,title)
 {
     console.log("need to refresh the " + title + " number");
     var totalContainers = $("#" + divid).children('div');
-    console.log(totalContainers.length);
+    //console.log(totalContainers.length);
     for(var i=0;i<totalContainers.length;i++)
     {
         //console.log(i);

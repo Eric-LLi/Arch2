@@ -301,23 +301,23 @@
 
         //console.log(photos);
         //calculate the image
-        for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName === 'MaintenanceImagesTable' || photos[i].tableName ===
-                'ConstructionImagesTable' ||
-                photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName ===
-                'DilapidationImagesTable' || photos[i].tableName == 'CPImagesTable' || photos[i].tableName ==
-                'HOWImagesTable' || photos[i].tableName === 'HA_ImgsContents') {
-                countingImage++;
-            }
-        }
-        //console.log('the current number of images ' + countingImage);
-        for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName ===
-                'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable' ||
-                photos[i].tableName === 'HA_PdfContents') {
-                countingDrawing++;
-            }
-        }
+        // for (var i = 0; i < photos.length; ++i) {
+        //     if (photos[i].tableName === 'MaintenanceImagesTable' || photos[i].tableName ===
+        //         'ConstructionImagesTable' ||
+        //         photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName ===
+        //         'DilapidationImagesTable' || photos[i].tableName == 'CPImagesTable' || photos[i].tableName ==
+        //         'HOWImagesTable' || photos[i].tableName === 'HA_ImgsContents') {
+        //         countingImage++;
+        //     }
+        // }
+        // //console.log('the current number of images ' + countingImage);
+        // for (var i = 0; i < photos.length; ++i) {
+        //     if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName ===
+        //         'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable' ||
+        //         photos[i].tableName === 'HA_PdfContents') {
+        //         countingDrawing++;
+        //     }
+        // }
         // Any photos?
         //console.log(photos.length);
         photos.forEach(
@@ -602,16 +602,12 @@
                             document.getElementById(p.imageid).style.height = '100%';
 
                         } else if (p.tableName === 'ConstructionImagesTable') {
-                            var maxImage = 30;
                             var table = document.getElementById(p.tableName);
                             //get the current id from the imageID.
                             var currentID = p.imageid.replace(/[^\d.]/g, '');
                             //var nextID = Number(currentID) + 1;
                             var imgLabelID = "imageCaption" + currentID;
-                            var idGroup = [];
-
                             table.style.display = 'block';
-
                             addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid,
                                 p.uploadID,
                                 p.removeFunction, p.addFunction, p.imageSize, p.width);
@@ -624,42 +620,6 @@
                             document.getElementById(p.imageid).style.width = '500px';
                             document.getElementById(p.imageid).style.height = '500px';
 
-                            var totalContainers = $('#ConstructionPhotographs').find('> form');
-
-                            if (totalContainers.length == countingImage && totalContainers.length <
-                                maxImage) {
-                                console.log(
-                                    "have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image"
-                                );
-                                // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                for (var i = 0; i < totalContainers.length; i++) {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img')
-                                        .attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                //console.log(idGroup);
-                                idGroup.sort(function (a, b) {
-                                    return a - b
-                                });
-                                //console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length - 1]);
-                                var lastID = idGroup[idGroup.length - 1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'ConstructionImage' + newID;
-                                var nextTextID = 'ConstructionImageText' + newID;
-                                var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
-                                var nextAddButtonID = 'AddConstructionImageButton' + newID;
-                                var nextUploadID = 'ConstructionUploadImage' + newID;
-                                addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID,
-                                    nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                    'RemoveOneConstructionImage(this.id)',
-                                    'AddOneConstructionImage(this.id)', '500px', '500px');
-
-                            }
                         } else if (p.tableName === 'CPImagesTable') {
                             //                            var table = document.getElementById(p.tableName);
                             //                            table.style.display = 'block';
