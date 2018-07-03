@@ -1198,8 +1198,9 @@ function AssessmentInteriorServiceUploadImages() {
     document.getElementById('AssessmentInteriorServiceUploadImages').click();
 }
 
-function createImagesElements(lastElementID, imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID) {
-    var form = document.createElement("form"),
+function createImagesElements(lastElementID, imgID, labelID = "", labelValue = "", textID, rmBtnID, addBtnID, formID) {
+    var id = imgID.split("_")[1],
+        form = document.createElement("form"),
         img = document.createElement("img"),
         text = document.createElement("input"),
         rmBtn = document.createElement("input"),
@@ -1226,8 +1227,8 @@ function createImagesElements(lastElementID, imgID, labelID, labelValue, textID,
     addBtn.setAttribute("value", "Add");
     addBtn.style.width = "165px";
 
-    label.setAttribute("id", labelID);
-    label.innerHTML = labelValue;
+    label.setAttribute("id", labelID + id);
+    label.innerHTML = "IMG_" + id;
 
     $("#" + lastElementID).append(form);
     $("#" + formID).append(img);
@@ -1240,7 +1241,7 @@ function createImagesElements(lastElementID, imgID, labelID, labelValue, textID,
     $("#" + formID).append(addBtn);
 
     addBtn.style.display = "none";
-    var element = [imgID, labelID, textID, rmBtnID, addBtnID];
+    var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID];
     $("#" + rmBtnID).click(function () {
         // DeleteImage(formID, imgID, textID);
         DeleteOneImg(element);
@@ -1284,8 +1285,8 @@ $("#AssessmentSiteUploadImages").change(function () {
             const file = allImages[i];
             var elementID = parseInt(i) + 1;
             //Create elements
-            //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentSiteImagesContainer", "AssessmentSiteImage" + elementID, "SiteGardenlabel" + elementID, "IMG" + elementID, "AssessmentSiteImageText" + elementID, "AssessmentSiteRemoveButton" + elementID, "AddAssessmentSiteImageButton" + elementID, "SiteGardonForm" + elementID);
+            //[imgID, labelID, textID, rmBtnID, addBtnID, formID]
+            var element = createImagesElements("AccessmentSiteImagesContainer", "AssessmentSiteImage_" + elementID, "SiteGardenlabel" + elementID, "IMG" + elementID, "AssessmentSiteImageText" + elementID, "AssessmentSiteRemoveButton" + elementID, "AddAssessmentSiteImageButton" + elementID, "SiteGardonForm" + elementID);
 
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1302,7 +1303,8 @@ $("#AssessmentSiteUploadImages").change(function () {
                             lastModified: file.lastModifiedDate
                         });
 
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer");
+                        //f, imageid, textid = '', removeid = '', addid = '', table = '', imageAltName = '', divID = '',uploadID = '', removeFunction = '', addFunction = '', imageSize = '', width = ''
+                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer", element[1], element[5]);
                     }
                 };
                 image.src = data;
@@ -1346,7 +1348,7 @@ $("#AssessmentExteriorUploadImages").change(function () {
             var elementID = parseInt(i) + 1;
             //Create elements
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentExteriorImagesContainer", "AssessmentExteriorImage" + elementID, "Exteriorlabel" + elementID, "IMG" + elementID, "AssessmentExteriorImageText" + elementID, "AssessmentExteriorRemoveButton" + elementID, "AddAssessmentExteriorImageButton" + elementID, "ExteriorForm" + elementID);
+            var element = createImagesElements("AccessmentExteriorImagesContainer", "AssessmentExteriorImage_" + elementID, "Exteriorlabel" + elementID, "IMG" + elementID, "AssessmentExteriorImageText" + elementID, "AssessmentExteriorRemoveButton" + elementID, "AddAssessmentExteriorImageButton" + elementID, "ExteriorForm" + elementID);
 
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1363,7 +1365,7 @@ $("#AssessmentExteriorUploadImages").change(function () {
                             lastModified: file.lastModifiedDate
                         });
 
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentExteriorImagesContainer");
+                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentExteriorImagesContainer", element[1], element[5]);
                     }
                 };
                 image.src = data;
@@ -1406,7 +1408,7 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
             var elementID = parseInt(i) + 1;
             //Create elements
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentInteriorLivingImagesContainer", "AssessmentInteriorLivingImage" + elementID, "Livinglabel" + elementID, "IMG" + elementID, "AssessmentInteriorLivingImageText" + elementID, "AssessmentInteriorLivingRemoveButton" + elementID, "AddAssessmentInteriorLivingImageButton" + elementID, "LivingForm" + elementID);
+            var element = createImagesElements("AccessmentInteriorLivingImagesContainer", "AssessmentInteriorLivingImage_" + elementID, "Livinglabel" + elementID, "IMG" + elementID, "AssessmentInteriorLivingImageText" + elementID, "AssessmentInteriorLivingRemoveButton" + elementID, "AddAssessmentInteriorLivingImageButton" + elementID, "LivingForm" + elementID);
 
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1423,7 +1425,7 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
                             lastModified: file.lastModifiedDate
                         });
 
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorLivingImagesContainer");
+                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorLivingImagesContainer", element[1], element[5]);
                     }
                 };
                 image.src = data;
@@ -1465,7 +1467,7 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
             var elementID = parseInt(i) + 1;
             //Create elements
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentInteriorBedroomImagesContainer", "AssessmentInteriorBedroomImage" + elementID, "Bedroomlabel" + elementID, "IMG" + elementID, "AssessmentInteriorBedroomImageText" + elementID, "AssessmentInteriorBedroomRemoveButton" + elementID, "AddAssessmentInteriorBedroomImageButton" + elementID, "BedroomForm" + elementID);
+            var element = createImagesElements("AccessmentInteriorBedroomImagesContainer", "AssessmentInteriorBedroomImage_" + elementID, "Bedroomlabel" + elementID, "IMG" + elementID, "AssessmentInteriorBedroomImageText" + elementID, "AssessmentInteriorBedroomRemoveButton" + elementID, "AddAssessmentInteriorBedroomImageButton" + elementID, "BedroomForm" + elementID);
 
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1482,7 +1484,7 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
                             lastModified: file.lastModifiedDate
                         });
 
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorBedroomImagesContainer");
+                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorBedroomImagesContainer", element[1], element[5]);
                     }
                 };
                 image.src = data;
@@ -1523,7 +1525,7 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
             var elementID = parseInt(i) + 1;
             //Create elements
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentInteriorServiceImagesContainer", "AssessmentInteriorServiceImage" + elementID, "Servicelabel" + elementID, "IMG" + elementID, "AssessmentInteriorServiceImageText" + elementID, "AssessmentInteriorServiceRemoveButton" + elementID, "AddAssessmentInteriorServiceImageButton" + elementID, "ServiceForm" + elementID);
+            var element = createImagesElements("AccessmentInteriorServiceImagesContainer", "AssessmentInteriorServiceImage_" + elementID, "Servicelabel" + elementID, "IMG" + elementID, "AssessmentInteriorServiceImageText" + elementID, "AssessmentInteriorServiceRemoveButton" + elementID, "AddAssessmentInteriorServiceImageButton" + elementID, "ServiceForm" + elementID);
 
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1540,7 +1542,7 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
                             lastModified: file.lastModifiedDate
                         });
 
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorServiceImagesContainer");
+                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorServiceImagesContainer", element[1], element[5]);
                     }
                 };
                 image.src = data;

@@ -62,7 +62,7 @@
         $('input[type=text]').each
         //$('input').each
         (
-            function() {
+            function () {
                 //console.log(this.id);
                 //console.log(this.value);
 
@@ -77,7 +77,7 @@
         );
 
         $('textarea').each(
-            function() {
+            function () {
                 if ((this.id != "") && (this.id != undefined)) {
                     data.push({
                         id: this.id,
@@ -88,7 +88,7 @@
         );
 
         $('select').each(
-            function() {
+            function () {
                 // if (this.id.substr(0, 17) == 'HOWRoofVoidSelect')
                 // {
                 //   console.log(this.id + "saving");
@@ -114,7 +114,7 @@
                 bookingcode: <?php echo $bookingcode; ?>,
                 data: jsondata
             },
-            function(result) {
+            function (result) {
                 var response = JSON.parse(result);
 
                 if (response.rc == 0)
@@ -142,7 +142,7 @@
                 uuid ']; ?>',
                 bookingcode: <?php echo $bookingcode; ?>
             },
-            function(result) {
+            function (result) {
                 var response = JSON.parse(result);
                 if (response.rc == 0) {
                     //this booking does not have a pdf in the ./pdf directory, could upload straght away
@@ -154,7 +154,7 @@
                     doPromptOkCancel
                         (
                             'This report already has a saved pdf report, do you want to overwrite it?',
-                            function(result) {
+                            function (result) {
                                 if (result) {
                                     $('#savingPDFAlert').show('fade');
                                     // console.log("genereate the pdf anayway");
@@ -176,7 +176,7 @@
         $.post(
             'ajax_uploadPDF.php',
             formData,
-            function(result) {
+            function (result) {
                 var response = JSON.parse(result);
                 //console.log(response.passingText);
                 //console.log(response.rc)
@@ -211,7 +211,8 @@
     }
 
     //imageSize == height
-    function doUploadFile(f, imageid, textid = '', removeid = '', addid = '', table = '', imageAltName = '', divID = '', uploadID = '', removeFunction = '', addFunction = '', imageSize = '', width = '') {
+    function doUploadFile(f, imageid, textid = '', removeid = '', addid = '', table = '', imageAltName = '', divID = '',
+        uploadID = '', removeFunction = '', addFunction = '', imageSize = '', width = '') {
         var formData = new FormData();
         // add assoc key values, this will be posts values
         formData.append('file', f, f.name);
@@ -237,14 +238,14 @@
         $.ajax({
             type: 'POST',
             url: 'ajax_uploadimage.php',
-            xhr: function() {
+            xhr: function () {
                 var myXhr = $.ajaxSettings.xhr();
                 if (myXhr.upload) {
                     //myXhr.upload.addEventListener('progress', that.progressHandling, false);
                 }
                 return myXhr;
             },
-            success: function(result) {
+            success: function (result) {
                 var response = JSON.parse(result);
                 if (response.rc == 0) {
                     console.log('successful');
@@ -253,7 +254,7 @@
                 }
                 //break down the response message. 
             },
-            error: function(error) {
+            error: function (error) {
                 //console.log('Error...');
                 console.log(error);
             },
@@ -272,7 +273,7 @@
                 bookingcode: <?php echo $bookingcode; ?>,
                 imageid: imageid
             },
-            function(result) {
+            function (result) {
                 var response = JSON.parse(result);
 
                 if (response.rc != 0)
@@ -288,8 +289,9 @@
 
     // ************************************************************************************************************
     // Document ready...
-    $(function() {
-        var data = <?php if (!isset($booking["reportdata"]) || $booking["reportdata"] == "") echo "[]"; else echo $booking["reportdata"]; ?>;
+    $(function () {
+        var data =
+            <?php if (!isset($booking["reportdata"]) || $booking["reportdata"] == "") echo "[]"; else echo $booking["reportdata"]; ?>;
         var photos = <?php if (sizeof($photos) == 0) echo "[]"; else echo json_encode($photos); ?>;
         var maxIamge = 0;
         var countingImage = 0;
@@ -300,21 +302,26 @@
         //console.log(photos);
         //calculate the image
         for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName === 'MaintenanceImagesTable' || photos[i].tableName === 'ConstructionImagesTable' ||
-                photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName === 'DilapidationImagesTable' || photos[i].tableName == 'CPImagesTable' || photos[i].tableName == 'HOWImagesTable' || photos[i].tableName === 'HA_ImgsContents') {
+            if (photos[i].tableName === 'MaintenanceImagesTable' || photos[i].tableName ===
+                'ConstructionImagesTable' ||
+                photos[i].tableName === 'AdviceImagesTable' || photos[i].tableName ===
+                'DilapidationImagesTable' || photos[i].tableName == 'CPImagesTable' || photos[i].tableName ==
+                'HOWImagesTable' || photos[i].tableName === 'HA_ImgsContents') {
                 countingImage++;
             }
         }
         //console.log('the current number of images ' + countingImage);
         for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName === 'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable' || photos[i].tableName === 'HA_PdfContents') {
+            if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName ===
+                'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable' ||
+                photos[i].tableName === 'HA_PdfContents') {
                 countingDrawing++;
             }
         }
         // Any photos?
         //console.log(photos.length);
         photos.forEach(
-            function(p) {
+            function (p) {
                 //console.log(p.filename);
                 var url = 'photos/' + p.filename;
                 //console.log(url);
@@ -356,8 +363,7 @@
                         //console.log(p.addid);
                         //console.log(imageID.style.width);
                         //console.log(addButton);
-                        if (addButton) 
-                        {
+                        if (addButton) {
                             console.log("button existed");
                             addButton.style.display = 'none';
                             addButton.style.width = p.width;
@@ -381,8 +387,7 @@
                                     // console.log('no photos');
                                     nextAddButton.style.display = 'block';
                                 }
-                            } 
-                            else {
+                            } else {
                                 //console.log('next image is not existed, it is not on property assessment or timber pest insepction report');
                                 // if (p.addid.substr(0, 16) == 'CPImageAddButton') {
                                 //     console.log('let build something， CP IMAGES');
@@ -427,511 +432,558 @@
                         //console.log('the next add id is ' + nextaddid);
                         // console.log('the next imageID is ' + nextImageID);
                     }
-                } 
-                else {
+                } else {
                     //console.log(p.imageid + " corresponding image field is not extied");
                     //console.log("2222222Table Name: " + p.tableName);
                     if (p.tableName) {
                         //console.log(p.tableName);
-                            if (p.tableName === 'homeFeasibilityDrawingsTable') {
-                                console.log("I am in Home Feasibility Drawing Table");
-                                document.getElementById(p.tableName).style.display = 'block';
+                        if (p.tableName === 'AccessmentSiteImagesContainer') {
+                            //Insert (lastElementID, imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID)
+                            //Receive ([imgID, labelID, textID, rmBtnID, addBtnID, formID])
+                            var element = createImagesElements(p.tableName, p.imageid, p.imageAltName, "",
+                                p.textid, p.removeid, p.addid, p.divID);
+                            // console.log(element);
+                            $("#" + element[0]).attr("src", url);
+                        } else if (p.tableName === 'AccessmentExteriorImagesContainer') {
+                            //Insert (lastElementID, imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID)
+                            //Receive ([imgID, labelID, textID, rmBtnID, addBtnID, formID])
+                            var element = createImagesElements(p.tableName, p.imageid, p.imageAltName, "",
+                                p.textid, p.removeid, p.addid, p.divID);
+                            // console.log(element);
+                            $("#" + element[0]).attr("src", url);
+                        } else if (p.tableName === 'AccessmentInteriorLivingImagesContainer') {
+                            //Insert (lastElementID, imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID)
+                            //Receive ([imgID, labelID, textID, rmBtnID, addBtnID, formID])
+                            var element = createImagesElements(p.tableName, p.imageid, p.imageAltName, "",
+                                p.textid, p.removeid, p.addid, p.divID);
+                            // console.log(element);
+                            $("#" + element[0]).attr("src", url);
+                        } else if (p.tableName === 'AccessmentInteriorBedroomImagesContainer') {
+                            //Insert (lastElementID, imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID)
+                            //Receive ([imgID, labelID, textID, rmBtnID, addBtnID, formID])
+                            var element = createImagesElements(p.tableName, p.imageid, p.imageAltName, "",
+                                p.textid, p.removeid, p.addid, p.divID);
+                            // console.log(element);
+                            $("#" + element[0]).attr("src", url);
+                        } else if (p.tableName === 'AccessmentInteriorServiceImagesContainer') {
+                            //Insert (lastElementID, imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID)
+                            //Receive ([imgID, labelID, textID, rmBtnID, addBtnID, formID])
+                            var element = createImagesElements(p.tableName, p.imageid, p.imageAltName, "",
+                                p.textid, p.removeid, p.addid, p.divID);
+                            // console.log(element);
+                            $("#" + element[0]).attr("src", url);
+                        } else if (p.tableName === 'homeFeasibilityDrawingsTable') {
+                            console.log("I am in Home Feasibility Drawing Table");
+                            document.getElementById(p.tableName).style.display = 'block';
 
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "imageCaption" + currentID;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
 
-                                addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
+                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
 
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '100%';
-                                document.getElementById(p.imageid).style.height = '100%';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '100%';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '100%';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '100%';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                    
-                            } else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
-                                
-                                document.getElementById(p.tableName).style.display = 'block';
-                                console.log("I am in renovation Feasibility Drawing Table");
-                               
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "imageCaption" + currentID;
-                               
-                                //console.log(p.addid);
-                                //document.getElementById(p.tableName).style.display = 'block';
-                                addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID, p.removeFunction,
-                                    p.addFunction, p.imageSize, p.width);
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '100%';
-                                document.getElementById(p.imageid).style.height = '100%';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '100%';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '100%';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '100%';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                //create the next image area base on the max image number, the current ID smaller than it, create.
-                            } else if (p.tableName === 'DilapidationImagesTable') {
-                                var table = document.getElementById(p.tableName);
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "imageCaption" + currentID;
-                            
-                                table.style.display = 'block';
-                                addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.textid).style.display = 'block';
-                                // document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '500px';
-                                document.getElementById(p.imageid).style.height = '500px';
-                            } else if (p.tableName === 'AdviceImagesTable') {
-                                maxImage = 30;
-                                var table = document.getElementById(p.tableName);
-                                //get the current id from the imageID.
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "imageCaption" + currentID;
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '100%';
+                            document.getElementById(p.imageid).style.height = '100%';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '100%';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '100%';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '100%';
+                            document.getElementById(imgLabelID).style.display = 'block';
 
-                                table.style.display = 'block';
-                                addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.textid).style.display = 'block';
-                                // document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '500px';
-                                document.getElementById(p.imageid).style.height = '500px';
-                                
-                            } else if (p.tableName === 'MaintenanceImagesTable') {
-                                var table = document.getElementById(p.tableName);
-                                //get the current id from the imageID.
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "imageCaption" + currentID;
-                                table.style.display = 'block';
-                                addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.textid).style.display = 'block';
-                                // document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '500px';
-                                document.getElementById(p.imageid).style.height = '500px';
-                        
-                            } else if (p.tableName === 'MaintenanceDrawingsTable') {
-                               
-                                var table = document.getElementById(p.tableName);
-                                //get the current id from the imageID.
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "drawingCaption" + currentID;
-                                table.style.display = 'block';
-                                addDrawingElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '100%';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '100%';
-                                // document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '100%';
-                                document.getElementById(p.imageid).style.height = '100%';
-                                
-                            } else if (p.tableName === 'ConstructionImagesTable') {
-                                var maxImage = 30;
-                                var table = document.getElementById(p.tableName);
-                                //get the current id from the imageID.
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "imageCaption" + currentID;
-                                var idGroup = [];
+                        } else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
 
-                                table.style.display = 'block';
+                            document.getElementById(p.tableName).style.display = 'block';
+                            console.log("I am in renovation Feasibility Drawing Table");
 
-                                addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.textid).style.display = 'block';
-                                // document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '500px';
-                                document.getElementById(p.imageid).style.height = '500px';
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
 
-                                var totalContainers = $('#ConstructionPhotographs').find('> form');
+                            //console.log(p.addid);
+                            //document.getElementById(p.tableName).style.display = 'block';
+                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                p.removeFunction,
+                                p.addFunction, p.imageSize, p.width);
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '100%';
+                            document.getElementById(p.imageid).style.height = '100%';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '100%';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '100%';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '100%';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            //create the next image area base on the max image number, the current ID smaller than it, create.
+                        } else if (p.tableName === 'DilapidationImagesTable') {
+                            var table = document.getElementById(p.tableName);
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
 
-                                if(totalContainers.length == countingImage && totalContainers.length < maxImage)
-                                {                                   
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    for (var i = 0; i < totalContainers.length; i++)
-                                    {
-                                        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                        var id = Number(idStr);
-                                        idGroup.push(id);
-                                    }
-                                    //console.log(idGroup);
-                                    idGroup.sort(function(a, b){return a - b});
-                                    //console.log(idGroup);
-                                    console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                    var lastID = idGroup[idGroup.length-1]
-                                    var newID = Number(lastID) + 1;
-                                    var altID = Number(lastID) + 2;
-                                    nextAltName = 'image ' + altID;
-                                    //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                    var nextImageID = 'ConstructionImage' + newID;
-                                    var nextTextID = 'ConstructionImageText' + newID;
-                                    var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
-                                    var nextAddButtonID = 'AddConstructionImageButton' + newID;
-                                    var nextUploadID = 'ConstructionUploadImage' + newID;
-                                    addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                            'RemoveOneConstructionImage(this.id)', 'AddOneConstructionImage(this.id)', '500px', '500px');
+                            table.style.display = 'block';
+                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid,
+                                p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.textid).style.display = 'block';
+                            // document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '500px';
+                            document.getElementById(p.imageid).style.height = '500px';
+                        } else if (p.tableName === 'AdviceImagesTable') {
+                            maxImage = 30;
+                            var table = document.getElementById(p.tableName);
+                            //get the current id from the imageID.
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
 
+                            table.style.display = 'block';
+                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid,
+                                p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.textid).style.display = 'block';
+                            // document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '500px';
+                            document.getElementById(p.imageid).style.height = '500px';
+
+                        } else if (p.tableName === 'MaintenanceImagesTable') {
+                            var table = document.getElementById(p.tableName);
+                            //get the current id from the imageID.
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
+                            table.style.display = 'block';
+                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid,
+                                p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.textid).style.display = 'block';
+                            // document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '500px';
+                            document.getElementById(p.imageid).style.height = '500px';
+
+                        } else if (p.tableName === 'MaintenanceDrawingsTable') {
+
+                            var table = document.getElementById(p.tableName);
+                            //get the current id from the imageID.
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "drawingCaption" + currentID;
+                            table.style.display = 'block';
+                            addDrawingElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid,
+                                p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '100%';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '100%';
+                            // document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '100%';
+                            document.getElementById(p.imageid).style.height = '100%';
+
+                        } else if (p.tableName === 'ConstructionImagesTable') {
+                            var maxImage = 30;
+                            var table = document.getElementById(p.tableName);
+                            //get the current id from the imageID.
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
+                            var idGroup = [];
+
+                            table.style.display = 'block';
+
+                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid,
+                                p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.textid).style.display = 'block';
+                            // document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '500px';
+                            document.getElementById(p.imageid).style.height = '500px';
+
+                            var totalContainers = $('#ConstructionPhotographs').find('> form');
+
+                            if (totalContainers.length == countingImage && totalContainers.length <
+                                maxImage) {
+                                console.log(
+                                    "have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image"
+                                );
+                                // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                for (var i = 0; i < totalContainers.length; i++) {
+                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img')
+                                        .attr('id').replace(/[^\d.]/g, '');
+                                    var id = Number(idStr);
+                                    idGroup.push(id);
                                 }
-                            } else if (p.tableName === 'CPImagesTable') {
-                                //                            var table = document.getElementById(p.tableName);
-                                //                            table.style.display = 'block';
-                                //                            //console.log("the total number of images in this CP report are : " + countingImage);
-                                //                            //console.log(p.imageid);
-                                //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
-                                //                            //if (imageNo === 0)
-                                //                            //{
-                                //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                //                                'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
-                                //                            $('#' + p.imageid).attr('src', url);
-                                //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
-                                //                            var labelID = "imageCaption" + givenID;
-                                //                            document.getElementById(p.addid).style.display = 'none';
-                                //                            document.getElementById(p.removeid).style.display = 'block';
-                                //                            document.getElementById(p.textid).style.display = 'block';
-                                //                            document.getElementById(p.imageid).style.display = 'block';
-                                //                            document.getElementById(p.imageid).style.width = '480px';
-                                //                            document.getElementById(labelID).style.display = 'block';
-                                //                            //get the current id from the imageID.
-                                //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //                            var nextID = Number(currentID) + 1;
-                                //                            //console.log("the next ID is " + nextID);
-                                //                            var altID = Number(nextID) + 1;
-                                //                            if (nextID >= countingImage) {
-                                //                                var altName = 'Image' + altID;
-                                //                                console.log("I am here!!! need to create a image " + altName);
-                                //                                var imageID = 'CPImage' + nextID;
-                                //                                var textID = 'CPImageText' + nextID;
-                                //                                var removeButtonID = 'CPImageRemoveButton' + nextID;
-                                //                                var addButtonID = 'CPImageAddButton' + nextID;
-                                //                                var uploadID = 'CPImageUpload' + nextID;
-                                //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
-                                //
-                                //                            }
+                                //console.log(idGroup);
+                                idGroup.sort(function (a, b) {
+                                    return a - b
+                                });
+                                //console.log(idGroup);
+                                console.log("the last ID is " + idGroup[idGroup.length - 1]);
+                                var lastID = idGroup[idGroup.length - 1]
+                                var newID = Number(lastID) + 1;
+                                var altID = Number(lastID) + 2;
+                                nextAltName = 'image ' + altID;
+                                //console.log("I am here!!! need another image element ,the next id  " + newID);
+                                var nextImageID = 'ConstructionImage' + newID;
+                                var nextTextID = 'ConstructionImageText' + newID;
+                                var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
+                                var nextAddButtonID = 'AddConstructionImageButton' + newID;
+                                var nextUploadID = 'ConstructionUploadImage' + newID;
+                                addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID,
+                                    nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                                    'RemoveOneConstructionImage(this.id)',
+                                    'AddOneConstructionImage(this.id)', '500px', '500px');
 
-                                //[imgID, btnID, captionID, containerID,labelID]
-                                //console.log("IMAGE id: " + p.imageid);
-                                //                            var temp = parseInt(p.imageid.split("_")[0]);
-                                var temp = p.imageid.replace("CPImage", "");
-                                //                            console.log("Before Photos count :" + photos_count);
-                                //                            console.log("temp : " + temp);
-                                if (temp >= photos_count) {
-                                    photos_count = temp;
-                                    photos_count++;
-                                }
-                                //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
-                                var elementID = createPhoto(temp);
-                                //                            console.log("After count: " + photos_count);
-                                $("#" + elementID[1]).attr("src", url);
-                                $("#" + p.tableName).show();
-
-                            } else if (p.tableName === 'HOWImagesTable') {
-                                //                            var table = document.getElementById(p.tableName);
-                                //                            table.style.display = 'block';
-                                //                            console.log("the total number of images in this HOW report are : " + countingImage);
-                                //                            //console.log(p.imageid);
-                                //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
-                                //                            //if (imageNo === 0)
-                                //                            //{
-                                //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                //                                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
-                                //                            $('#' + p.imageid).attr('src', url);
-                                //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
-                                //                            var labelID = "HOWimageCaption" + givenID;
-                                //                            document.getElementById(p.addid).style.display = 'none';
-                                //                            document.getElementById(p.removeid).style.display = 'block';
-                                //                            document.getElementById(p.textid).style.display = 'block';
-                                //                            document.getElementById(p.imageid).style.display = 'block';
-                                //                            document.getElementById(p.imageid).style.width = '480px';
-                                //                            document.getElementById(labelID).style.display = 'block';
-                                //                            //get the current id from the imageID.
-                                //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //                            var nextID = Number(currentID) + 1;
-                                //                            console.log("the next ID is " + nextID);
-                                //                            var altID = Number(nextID) + 1;
-                                //                            if (nextID >= countingImage) {
-                                //                                var altName = 'Image' + altID;
-                                //                                console.log("I am here!!! need to create a image " + altName);
-                                //                                var imageID = 'HOWImage' + nextID;
-                                //                                var textID = 'HOWImageText' + nextID;
-                                //                                var removeButtonID = 'HOWImageRemoveButton' + nextID;
-                                //                                var addButtonID = 'HOWImageAddButton' + nextID;
-                                //                                var uploadID = 'HOWImageUpload' + nextID;
-                                //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
-                                //                            }
-                                var temp = p.imageid.replace("HOWImage", "");
-                                //                            console.log("Before Photos count :" + photos_count);
-                                //                            console.log("temp : " + temp);
-                                if (temp >= photos_count) {
-                                    photos_count = temp;
-                                    photos_count++;
-                                }
-                                //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
-                                var elementID = createPhoto(temp);
-                                //                            console.log("After count: " + photos_count);
-                                $("#" + elementID[1]).attr("src", url);
-                                $("#" + p.tableName).show();
-
-                            } else if (p.tableName === "HA_PdfContents") {
-                                //console.log("Beofre pdf Count: " + pdfCounts);
-                                //imgbtnID = [img ID, deltebuttonID, caption ID, container ID]
-
-                                var temp = parseInt(p.imageid.split("_")[0]);
-                                //console.log("TEMP: "+ temp);
-
-                                if (temp >= pdfCounts) {
-                                    pdfCounts = temp;
-                                    pdfCounts++;
-                                }
-                                //console.log("After pdf Count: " + temp);
-
-                                var imgbtnID = createPDFImg(temp);
-
-                                //Show img
-                                $("#" + imgbtnID[0]).show();
-
-                                //Show delete button
-                                $("#" + imgbtnID[1]).show();
-
-                                //Attach img
-                                //console.log("Image URL: " + url);
-                                $("#" + imgbtnID[0]).attr("src", url);
-                                $("#" + p.tableName).show();
-                            } else if (p.tableName === "HA_ImgsContents") {
-                                //[imgID, btnID, captionID, containerID]
-                                //console.log("IMAGE id: " + p.imageid);
-                                var temp = parseInt(p.imageid.split("_")[0]);
-
-                                //                            console.log("Before Photos count :" + photos_count);
-                                //                            console.log("temp : " + temp);
-                                if (temp >= photos_count) {
-                                    photos_count = temp;
-                                    photos_count++;
-                                }
-                                //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
-                                var elementID = createPhoto(temp);
-                                //                            console.log("After count: " + photos_count);
-                                $("#" + elementID[1]).attr("src", url);
-                                $("#" + p.tableName).show();
-                            }else if(p.tableName === "TimberSummaryImagesTable")
-                            {
-                                console.log("I am in Timber Summary Images Table");
-                                document.getElementById(p.tableName).style.display = 'block';
-
-                                var maxImages = 3;
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "TimberSummaryImageCaption" + currentID;
-                                var idGroup = [];
-
-                                addImageElements(p.imageAltName,'TimberSummaryPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSummaryImageForm','TimberSummaryImageCaption');
-
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '340px';
-                                document.getElementById(p.imageid).style.height = '340px';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '340px';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '340px';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '340px';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                
                             }
-                            else if(p.tableName === "TimberSiteImagesTable")
-                            {
-                                console.log("I am in Timber Site Images Table");
-                                document.getElementById(p.tableName).style.display = 'block';
+                        } else if (p.tableName === 'CPImagesTable') {
+                            //                            var table = document.getElementById(p.tableName);
+                            //                            table.style.display = 'block';
+                            //                            //console.log("the total number of images in this CP report are : " + countingImage);
+                            //                            //console.log(p.imageid);
+                            //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
+                            //                            //if (imageNo === 0)
+                            //                            //{
+                            //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                            //                                'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
+                            //                            $('#' + p.imageid).attr('src', url);
+                            //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
+                            //                            var labelID = "imageCaption" + givenID;
+                            //                            document.getElementById(p.addid).style.display = 'none';
+                            //                            document.getElementById(p.removeid).style.display = 'block';
+                            //                            document.getElementById(p.textid).style.display = 'block';
+                            //                            document.getElementById(p.imageid).style.display = 'block';
+                            //                            document.getElementById(p.imageid).style.width = '480px';
+                            //                            document.getElementById(labelID).style.display = 'block';
+                            //                            //get the current id from the imageID.
+                            //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //                            var nextID = Number(currentID) + 1;
+                            //                            //console.log("the next ID is " + nextID);
+                            //                            var altID = Number(nextID) + 1;
+                            //                            if (nextID >= countingImage) {
+                            //                                var altName = 'Image' + altID;
+                            //                                console.log("I am here!!! need to create a image " + altName);
+                            //                                var imageID = 'CPImage' + nextID;
+                            //                                var textID = 'CPImageText' + nextID;
+                            //                                var removeButtonID = 'CPImageRemoveButton' + nextID;
+                            //                                var addButtonID = 'CPImageAddButton' + nextID;
+                            //                                var uploadID = 'CPImageUpload' + nextID;
+                            //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
+                            //
+                            //                            }
 
-                                var maxImages = 3;
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "TimberSiteImageCaption" + currentID;
-                                var idGroup = [];
-
-                                addImageElements(p.imageAltName,'TimberSitePhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSiteImageForm','TimberSiteImageCaption');
-
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '340px';
-                                document.getElementById(p.imageid).style.height = '340px';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '340px';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '340px';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '340px';
-                                document.getElementById(imgLabelID).style.display = 'block';
+                            //[imgID, btnID, captionID, containerID,labelID]
+                            //console.log("IMAGE id: " + p.imageid);
+                            //                            var temp = parseInt(p.imageid.split("_")[0]);
+                            var temp = p.imageid.replace("CPImage", "");
+                            //                            console.log("Before Photos count :" + photos_count);
+                            //                            console.log("temp : " + temp);
+                            if (temp >= photos_count) {
+                                photos_count = temp;
+                                photos_count++;
                             }
-                            else if(p.tableName === "TimberExteriorImagesTable")
-                            {
-                                console.log("I am in Timber Exterior Images Table");
-                                document.getElementById(p.tableName).style.display = 'block';
+                            //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
+                            var elementID = createPhoto(temp);
+                            //                            console.log("After count: " + photos_count);
+                            $("#" + elementID[1]).attr("src", url);
+                            $("#" + p.tableName).show();
 
-                                var maxImages = 3;
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "TimberExteriorImageCaption" + currentID;
-                                var idGroup = [];
-
-                                addImageElements(p.imageAltName,'TimberExteriorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberExteriorImageForm','TimberExteriorImageCaption');
-
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '340px';
-                                document.getElementById(p.imageid).style.height = '340px';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '340px';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '340px';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '340px';
-                                document.getElementById(imgLabelID).style.display = 'block';
+                        } else if (p.tableName === 'HOWImagesTable') {
+                            //                            var table = document.getElementById(p.tableName);
+                            //                            table.style.display = 'block';
+                            //                            console.log("the total number of images in this HOW report are : " + countingImage);
+                            //                            //console.log(p.imageid);
+                            //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
+                            //                            //if (imageNo === 0)
+                            //                            //{
+                            //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                            //                                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                            //                            $('#' + p.imageid).attr('src', url);
+                            //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
+                            //                            var labelID = "HOWimageCaption" + givenID;
+                            //                            document.getElementById(p.addid).style.display = 'none';
+                            //                            document.getElementById(p.removeid).style.display = 'block';
+                            //                            document.getElementById(p.textid).style.display = 'block';
+                            //                            document.getElementById(p.imageid).style.display = 'block';
+                            //                            document.getElementById(p.imageid).style.width = '480px';
+                            //                            document.getElementById(labelID).style.display = 'block';
+                            //                            //get the current id from the imageID.
+                            //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //                            var nextID = Number(currentID) + 1;
+                            //                            console.log("the next ID is " + nextID);
+                            //                            var altID = Number(nextID) + 1;
+                            //                            if (nextID >= countingImage) {
+                            //                                var altName = 'Image' + altID;
+                            //                                console.log("I am here!!! need to create a image " + altName);
+                            //                                var imageID = 'HOWImage' + nextID;
+                            //                                var textID = 'HOWImageText' + nextID;
+                            //                                var removeButtonID = 'HOWImageRemoveButton' + nextID;
+                            //                                var addButtonID = 'HOWImageAddButton' + nextID;
+                            //                                var uploadID = 'HOWImageUpload' + nextID;
+                            //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
+                            //                            }
+                            var temp = p.imageid.replace("HOWImage", "");
+                            //                            console.log("Before Photos count :" + photos_count);
+                            //                            console.log("temp : " + temp);
+                            if (temp >= photos_count) {
+                                photos_count = temp;
+                                photos_count++;
                             }
-                            else if(p.tableName === "TimberInteriorImagesTable")
-                            {
-                                console.log("I am in Timber Interior Images Table");
-                                document.getElementById(p.tableName).style.display = 'block';
+                            //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
+                            var elementID = createPhoto(temp);
+                            //                            console.log("After count: " + photos_count);
+                            $("#" + elementID[1]).attr("src", url);
+                            $("#" + p.tableName).show();
 
-                                var maxImages = 3;
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "TimberInteriorImageCaption" + currentID;
-                                var idGroup = [];
+                        } else if (p.tableName === "HA_PdfContents") {
+                            //console.log("Beofre pdf Count: " + pdfCounts);
+                            //imgbtnID = [img ID, deltebuttonID, caption ID, container ID]
 
-                                addImageElements(p.imageAltName,'TimberInteriorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberInteriorImageForm','TimberInteriorImageCaption');
+                            var temp = parseInt(p.imageid.split("_")[0]);
+                            //console.log("TEMP: "+ temp);
 
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '340px';
-                                document.getElementById(p.imageid).style.height = '340px';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '340px';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '340px';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '340px';
-                                document.getElementById(imgLabelID).style.display = 'block';
+                            if (temp >= pdfCounts) {
+                                pdfCounts = temp;
+                                pdfCounts++;
                             }
-                            else if(p.tableName === "TimberRoofImagesTable")
-                            {
-                                console.log("I am in Timber Roof Images Table");
-                                document.getElementById(p.tableName).style.display = 'block';
+                            //console.log("After pdf Count: " + temp);
 
-                                var maxImages = 3;
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "TimberRoofImageCaption" + currentID;
-                                var idGroup = [];
+                            var imgbtnID = createPDFImg(temp);
 
-                                addImageElements(p.imageAltName,'TimberRoofPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberRoofImageForm','TimberRoofImageCaption');
+                            //Show img
+                            $("#" + imgbtnID[0]).show();
 
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '340px';
-                                document.getElementById(p.imageid).style.height = '340px';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '340px';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '340px';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '340px';
-                                document.getElementById(imgLabelID).style.display = 'block';
+                            //Show delete button
+                            $("#" + imgbtnID[1]).show();
+
+                            //Attach img
+                            //console.log("Image URL: " + url);
+                            $("#" + imgbtnID[0]).attr("src", url);
+                            $("#" + p.tableName).show();
+                        } else if (p.tableName === "HA_ImgsContents") {
+                            //[imgID, btnID, captionID, containerID]
+                            //console.log("IMAGE id: " + p.imageid);
+                            var temp = parseInt(p.imageid.split("_")[0]);
+
+                            //                            console.log("Before Photos count :" + photos_count);
+                            //                            console.log("temp : " + temp);
+                            if (temp >= photos_count) {
+                                photos_count = temp;
+                                photos_count++;
                             }
-                            else if(p.tableName === "TimberSubfloorImagesTable")
-                            {
-                                console.log("I am in Timber Subfloor Images Table");
-                                document.getElementById(p.tableName).style.display = 'block';
+                            //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
+                            var elementID = createPhoto(temp);
+                            //                            console.log("After count: " + photos_count);
+                            $("#" + elementID[1]).attr("src", url);
+                            $("#" + p.tableName).show();
+                        } else if (p.tableName === "TimberSummaryImagesTable") {
+                            console.log("I am in Timber Summary Images Table");
+                            document.getElementById(p.tableName).style.display = 'block';
 
-                                var maxImages = 3;
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "TimberSubfloorImageCaption" + currentID;
-                                var idGroup = [];
+                            var maxImages = 3;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "TimberSummaryImageCaption" + currentID;
+                            var idGroup = [];
 
-                                addImageElements(p.imageAltName,'TimberSubfloorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSubfloorImageForm','TimberSubfloorImageCaption');
+                            addImageElements(p.imageAltName, 'TimberSummaryPhotographs', p.imageid, p.textid,
+                                p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width,
+                                'TimberSummaryImageForm', 'TimberSummaryImageCaption');
 
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '340px';
-                                document.getElementById(p.imageid).style.height = '340px';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '340px';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '340px';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '340px';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                            }
-                            else if(p.tableName === "TimberRecommendationImagesTable")
-                            {
-                                console.log("I am in Timber Recommendation Images Table");
-                                document.getElementById(p.tableName).style.display = 'block';
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '340px';
+                            document.getElementById(p.imageid).style.height = '340px';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '340px';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '340px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '340px';
+                            document.getElementById(imgLabelID).style.display = 'block';
 
-                                var maxImages = 3;
-                                var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "TimberRecommendationImageCaption" + currentID;
-                                var idGroup = [];
+                        } else if (p.tableName === "TimberSiteImagesTable") {
+                            console.log("I am in Timber Site Images Table");
+                            document.getElementById(p.tableName).style.display = 'block';
 
-                                addImageElements(p.imageAltName,'TimberRecommendationPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberRecommendationImageForm','TimberRecommendationImageCaption');
+                            var maxImages = 3;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "TimberSiteImageCaption" + currentID;
+                            var idGroup = [];
 
-                                $('#' + p.imageid).attr('src', url);
-                                document.getElementById(p.imageid).style.display = 'block';
-                                document.getElementById(p.imageid).style.width = '340px';
-                                document.getElementById(p.imageid).style.height = '340px';
-                                document.getElementById(p.addid).style.display = 'none';
-                                document.getElementById(p.addid).style.width = '340px';
-                                document.getElementById(p.removeid).style.display = 'block';
-                                document.getElementById(p.removeid).style.width = '340px';
-                                document.getElementById(p.textid).style.display = 'block';
-                                document.getElementById(p.textid).style.width = '340px';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                            }
+                            addImageElements(p.imageAltName, 'TimberSitePhotographs', p.imageid, p.textid,
+                                p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width,
+                                'TimberSiteImageForm', 'TimberSiteImageCaption');
+
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '340px';
+                            document.getElementById(p.imageid).style.height = '340px';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '340px';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '340px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '340px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                        } else if (p.tableName === "TimberExteriorImagesTable") {
+                            console.log("I am in Timber Exterior Images Table");
+                            document.getElementById(p.tableName).style.display = 'block';
+
+                            var maxImages = 3;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "TimberExteriorImageCaption" + currentID;
+                            var idGroup = [];
+
+                            addImageElements(p.imageAltName, 'TimberExteriorPhotographs', p.imageid, p.textid,
+                                p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width,
+                                'TimberExteriorImageForm', 'TimberExteriorImageCaption');
+
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '340px';
+                            document.getElementById(p.imageid).style.height = '340px';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '340px';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '340px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '340px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                        } else if (p.tableName === "TimberInteriorImagesTable") {
+                            console.log("I am in Timber Interior Images Table");
+                            document.getElementById(p.tableName).style.display = 'block';
+
+                            var maxImages = 3;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "TimberInteriorImageCaption" + currentID;
+                            var idGroup = [];
+
+                            addImageElements(p.imageAltName, 'TimberInteriorPhotographs', p.imageid, p.textid,
+                                p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width,
+                                'TimberInteriorImageForm', 'TimberInteriorImageCaption');
+
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '340px';
+                            document.getElementById(p.imageid).style.height = '340px';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '340px';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '340px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '340px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                        } else if (p.tableName === "TimberRoofImagesTable") {
+                            console.log("I am in Timber Roof Images Table");
+                            document.getElementById(p.tableName).style.display = 'block';
+
+                            var maxImages = 3;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "TimberRoofImageCaption" + currentID;
+                            var idGroup = [];
+
+                            addImageElements(p.imageAltName, 'TimberRoofPhotographs', p.imageid, p.textid,
+                                p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width,
+                                'TimberRoofImageForm', 'TimberRoofImageCaption');
+
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '340px';
+                            document.getElementById(p.imageid).style.height = '340px';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '340px';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '340px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '340px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                        } else if (p.tableName === "TimberSubfloorImagesTable") {
+                            console.log("I am in Timber Subfloor Images Table");
+                            document.getElementById(p.tableName).style.display = 'block';
+
+                            var maxImages = 3;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "TimberSubfloorImageCaption" + currentID;
+                            var idGroup = [];
+
+                            addImageElements(p.imageAltName, 'TimberSubfloorPhotographs', p.imageid, p.textid,
+                                p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width,
+                                'TimberSubfloorImageForm', 'TimberSubfloorImageCaption');
+
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '340px';
+                            document.getElementById(p.imageid).style.height = '340px';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '340px';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '340px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '340px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                        } else if (p.tableName === "TimberRecommendationImagesTable") {
+                            console.log("I am in Timber Recommendation Images Table");
+                            document.getElementById(p.tableName).style.display = 'block';
+
+                            var maxImages = 3;
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "TimberRecommendationImageCaption" + currentID;
+                            var idGroup = [];
+
+                            addImageElements(p.imageAltName, 'TimberRecommendationPhotographs', p.imageid,
+                                p.textid, p.removeid, p.addid, p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width,
+                                'TimberRecommendationImageForm', 'TimberRecommendationImageCaption');
+
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '340px';
+                            document.getElementById(p.imageid).style.height = '340px';
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.addid).style.width = '340px';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.removeid).style.width = '340px';
+                            document.getElementById(p.textid).style.display = 'block';
+                            document.getElementById(p.textid).style.width = '340px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                        }
                     }
                 }
             }
@@ -945,7 +997,7 @@
         var count_homeLow = 0;
         var count_homeinvolvepeople = 0;
         data.forEach(
-            function(d) {
+            function (d) {
                 if (d.id.substr(0, 7) == 'homeLow') {
                     count_homeLow++;
                 }
@@ -979,7 +1031,7 @@
         var count_renovationLow = 0;
         var count_renovationInvolvePeople = 0;
         data.forEach(
-            function(d) {
+            function (d) {
                 if (d.id.substr(0, 13) == 'renovationLow') {
                     count_renovationLow++;
                 }
@@ -1016,7 +1068,7 @@
         var count_exteriorLimitation = 0;
         var count_interiorLimitation = 0;
         data.forEach(
-            function(d) {
+            function (d) {
                 //console.log(d.id.substr(0,8));
                 if (d.id.substr(0, 8) == 'EDSelect') {
                     count_defect++;
@@ -1050,22 +1102,26 @@
         if (count_siteLimitation > 1) {
             count_siteLimitation -= 1;
             for (var i = 0; i < count_siteLimitation; i++)
-                addAccessLimitation('AssessmentSiteNotesTable', 'AssessmentSiteLimitationSelect', 'AssessmentSiteLimitationNote');
+                addAccessLimitation('AssessmentSiteNotesTable', 'AssessmentSiteLimitationSelect',
+                    'AssessmentSiteLimitationNote');
         }
         if (count_servicelimitation > 1) {
             count_servicelimitation -= 1;
             for (var i = 0; i < count_servicelimitation; i++)
-                addAccessLimitation('AssessmentServiceNotesTable', 'AssessmentServiceLimitationSelect', 'AssessmentServiceLimitationNote');
+                addAccessLimitation('AssessmentServiceNotesTable', 'AssessmentServiceLimitationSelect',
+                    'AssessmentServiceLimitationNote');
         }
         if (count_exteriorLimitation > 1) {
             count_exteriorLimitation -= 1;
             for (var i = 0; i < count_exteriorLimitation; i++)
-                addAccessLimitation('AssessmentPropertyExteriorNotesTable', 'AssessmentPropertyExteriorLimitationSelect', 'AssessmentPropertyExteriorLimitationNote');
+                addAccessLimitation('AssessmentPropertyExteriorNotesTable',
+                    'AssessmentPropertyExteriorLimitationSelect', 'AssessmentPropertyExteriorLimitationNote');
         }
         if (count_interiorLimitation > 1) {
             count_interiorLimitation -= 1;
             for (var i = 0; i < count_interiorLimitation; i++)
-                addAccessLimitation('AssessmentPropertyInteriorNotesTable', 'AssessmentPropertyInteriorLimitationSelect', 'AssessmentPropertyInteriorLimitationNote');
+                addAccessLimitation('AssessmentPropertyInteriorNotesTable',
+                    'AssessmentPropertyInteriorLimitationSelect', 'AssessmentPropertyInteriorLimitationNote');
         }
         <?php
         }
@@ -1078,7 +1134,7 @@
 
         var count_designconsultationinvolvepeople = 0;
         data.forEach(
-            function(d) {
+            function (d) {
 
                 if (d.id.substr(0, 32) == 'DesignConsultationInvolvedPeople') {
                     count_designconsultationinvolvepeople++;
@@ -1102,7 +1158,7 @@
         ?>
         var count_summary = 0;
         data.forEach(
-            function(d) {
+            function (d) {
                 if (d.id.substr(0, 8) == 'CSSelect') {
                     count_summary++;
                 }
@@ -1155,7 +1211,7 @@
         var count_wetMajor = 0;
 
         data.forEach(
-            function(d) {
+            function (d) {
                 //console.log(d.id.substr(0,8));
                 if (d.id.substr(0, 8) == 'EDSelect') {
                     count_defect++;
@@ -1246,13 +1302,15 @@
             //console.log('need to add table');
             count_siteAssessLimitation -= 2;
             for (var i = 0; i < count_siteAssessLimitation; i++) {
-                addOneAccessLimitation('siteAccessLimitationsTable', 'siteAccessItem', 'siteAccessImageRef', 'SiteAccessSelect', 'siteAccessNotes');
+                addOneAccessLimitation('siteAccessLimitationsTable', 'siteAccessItem', 'siteAccessImageRef',
+                    'SiteAccessSelect', 'siteAccessNotes');
             }
         }
         if (count_siteAssessMaintenance > 1) {
             count_siteAssessMaintenance -= 1;
             for (var i = 0; i < count_siteAssessMaintenance; i++) {
-                addOneDefects('siteMinorDefectsTable', 'siteMaintenanceItemNo', 'siteMaintenanceImgRef', 'siteMaintenanceNotes');
+                addOneDefects('siteMinorDefectsTable', 'siteMaintenanceItemNo', 'siteMaintenanceImgRef',
+                    'siteMaintenanceNotes');
             }
         }
         if (count_siteAssessMajor > 1) {
@@ -1276,20 +1334,23 @@
         if (count_exteriorLimitation > 2) {
             count_exteriorLimitation -= 2;
             for (var i = 0; i < count_exteriorLimitation; i++) {
-                addOneAccessLimitation('exteriorAccessLimitationsTable', 'exteriorAccessItem', 'exteriorAccessImageRef', 'exteriorAccessSelect', 'exteriorAccessNotes')
+                addOneAccessLimitation('exteriorAccessLimitationsTable', 'exteriorAccessItem',
+                    'exteriorAccessImageRef', 'exteriorAccessSelect', 'exteriorAccessNotes')
             }
         }
         if (count_exteriorMaintenance > 1) {
             count_exteriorMaintenance -= 1;
             for (var i = 0; i < count_exteriorMaintenance; i++) {
-                addOneDefects('exteriorMinorDefectsTable', 'exteriorMinorDefectItemNo', 'exteriorMinorDefectImgRef', 'exteriorMinorDefectNotes')
+                addOneDefects('exteriorMinorDefectsTable', 'exteriorMinorDefectItemNo',
+                    'exteriorMinorDefectImgRef', 'exteriorMinorDefectNotes')
             }
         }
 
         if (count_exteriorMajor > 1) {
             count_exteriorMajor -= 1;
             for (var i = 0; i < count_exteriorMajor; i++) {
-                addOneDefects('exteriorMajorDefectsTable', 'exteriorMajorItemNo', 'exteriorMajorImgRef', 'exteriorMajorNotes');
+                addOneDefects('exteriorMajorDefectsTable', 'exteriorMajorItemNo', 'exteriorMajorImgRef',
+                    'exteriorMajorNotes');
             }
         }
 
@@ -1315,19 +1376,22 @@
         if (count_dryLimitation > 2) {
             count_dryLimitation -= 2;
             for (var i = 0; i < count_dryLimitation; i++) {
-                addOneAccessLimitation('interiorDryAccessLimitationsTable', 'interiorDryAccessItem', 'interiorDryAccessImageRef', 'interiorDryAccessSelect', 'interiorDryAccessNotes');
+                addOneAccessLimitation('interiorDryAccessLimitationsTable', 'interiorDryAccessItem',
+                    'interiorDryAccessImageRef', 'interiorDryAccessSelect', 'interiorDryAccessNotes');
             }
         }
         if (count_dryMaintenance > 1) {
             count_dryMaintenance -= 1;
             for (var i = 0; i < count_dryMaintenance; i++) {
-                addOneDefects('interiorDryMinorTable', 'interiorDryMinorItemNo', 'interiorDryMinorImgRef', 'interiorDryMinorNotes');
+                addOneDefects('interiorDryMinorTable', 'interiorDryMinorItemNo', 'interiorDryMinorImgRef',
+                    'interiorDryMinorNotes');
             }
         }
         if (count_dryMajor > 1) {
             count_dryMajor -= 1;
             for (var i = 0; i < count_dryMajor; i++) {
-                addOneDefects('interiorDryMajorTable', 'interiorDryMajorItemNo', 'interiorDryMajorImgRef', 'interiorDryMajorNotes');
+                addOneDefects('interiorDryMajorTable', 'interiorDryMajorItemNo', 'interiorDryMajorImgRef',
+                    'interiorDryMajorNotes');
             }
         }
         if (count_wetArea > 1) {
@@ -1345,19 +1409,22 @@
         if (count_wetLimitation > 2) {
             count_wetLimitation -= 2;
             for (var i = 0; i < count_wetLimitation; i++) {
-                addOneAccessLimitation('interiorWetAccessLimitationsTable', 'interiorWetAccessItem', 'interiorWetAccessImageRef', 'interiorWetAccessSelect', 'interiorWetAccessNotes')
+                addOneAccessLimitation('interiorWetAccessLimitationsTable', 'interiorWetAccessItem',
+                    'interiorWetAccessImageRef', 'interiorWetAccessSelect', 'interiorWetAccessNotes')
             }
         }
         if (count_wetMaintenance > 1) {
             count_wetMaintenance -= 1;
             for (var i = 0; i < count_wetMaintenance; i++) {
-                addOneDefects('interiorWetMinorTable', 'interiorWetMinorItemNo', 'interiorWetMinorImgRef', 'interiorWetMinorNotes');
+                addOneDefects('interiorWetMinorTable', 'interiorWetMinorItemNo', 'interiorWetMinorImgRef',
+                    'interiorWetMinorNotes');
             }
         }
         if (count_wetMajor > 1) {
             count_wetMajor -= 1;
             for (var i = 0; i < count_wetMajor; i++) {
-                addOneDefects('interiorWetMajorTable', 'interiorWetMajorItemNo', 'interiorWetMajorImgRef', 'interiorWetMajorNotes');
+                addOneDefects('interiorWetMajorTable', 'interiorWetMajorItemNo', 'interiorWetMajorImgRef',
+                    'interiorWetMajorNotes');
             }
         }
 
@@ -1369,7 +1436,7 @@
 
         //**** loop the data again, for the dynamic feature filed under each DIVRow */
         data.forEach(
-            function(d) {
+            function (d) {
                 for (var i = 0; i < count_siteAreaDuplicate; i++) {
                     var rowNumber = i;
                     var siteAreaRow;
@@ -1482,7 +1549,7 @@
         var count_acccess = 0;
 
         data.forEach(
-            function(d) {
+            function (d) {
                 if (d.id.substr(0, 13) == 'HOWSiteSelect') {
                     count_site++;
                 }
@@ -1587,7 +1654,8 @@
         if (count_building > 18) {
             count_building -= 18;
             for (var i = 0; i < count_building; i++) {
-                createOneCell('HOWBuildingExteriorTable', 'HOWBuildingName', 'HOWBuildingSelect', 'HOWBuildingNote');
+                createOneCell('HOWBuildingExteriorTable', 'HOWBuildingName', 'HOWBuildingSelect',
+                    'HOWBuildingNote');
             }
         }
         if (count_subFloor > 7) {
@@ -1619,121 +1687,141 @@
         if (count_entry > 11) {
             count_entry -= 11;
             for (var i = 0; i < count_entry; i++) {
-                createOneCell('HOWInternal_Entry_Table', 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote');
+                createOneCell('HOWInternal_Entry_Table', 'HOWInternal_EntryName', 'HOWInternal_EntrySelect',
+                    'HOWInternal_EntryNote');
             }
         }
         if (count_stair > 11) {
             count_stair -= 11;
             for (var i = 0; i < count_stair; i++) {
-                createOneCell('HOWInternal_Stair_Table', 'HOWInternal_StairName', 'HOWInternal_StairSelect', 'HOWInternal_StairNote');
+                createOneCell('HOWInternal_Stair_Table', 'HOWInternal_StairName', 'HOWInternal_StairSelect',
+                    'HOWInternal_StairNote');
             }
         }
         if (count_living > 11) {
             count_living -= 11;
             for (var i = 0; i < count_living; i++) {
-                createOneCell('HOWInternal_LivingFront_Table', 'HOWInternal_LivingFrontName', 'HOWInternal_LivingFrontSelect', 'HOWInternal_LivingFrontNote');
+                createOneCell('HOWInternal_LivingFront_Table', 'HOWInternal_LivingFrontName',
+                    'HOWInternal_LivingFrontSelect', 'HOWInternal_LivingFrontNote');
             }
         }
         if (count_lounge > 11) {
             count_lounge -= 11;
             for (var i = 0; i < count_lounge; i++) {
-                createOneCell('HOWInternal_Lounge_Table', 'HOWInternal_LoungeName', 'HOWInternal_LoungeSelect', 'HOWInternal_LoungeNote');
+                createOneCell('HOWInternal_Lounge_Table', 'HOWInternal_LoungeName', 'HOWInternal_LoungeSelect',
+                    'HOWInternal_LoungeNote');
             }
         }
         if (count_kitchen > 17) {
             count_kitchen -= 17;
             for (var i = 0; i < count_kitchen; i++) {
-                createOneCell('HOWInternal_Kitchen_Table', 'HOWInternal_KitchenName', 'HOWInternal_KitchenSelect', 'HOWInternal_KitchenNote');
+                createOneCell('HOWInternal_Kitchen_Table', 'HOWInternal_KitchenName',
+                    'HOWInternal_KitchenSelect', 'HOWInternal_KitchenNote');
             }
         }
         if (count_family > 11) {
             count_family -= 11;
             for (var i = 0; i < count_family; i++) {
-                createOneCell('HOWInternal_Family_Table', 'HOWInternal_FamilyName', 'HOWInternal_FamilySelect', 'HOWInternal_FamilyNote');
+                createOneCell('HOWInternal_Family_Table', 'HOWInternal_FamilyName', 'HOWInternal_FamilySelect',
+                    'HOWInternal_FamilyNote');
             }
         }
         if (count_dining > 11) {
             count_dining -= 11;
             for (var i = 0; i < count_dining; i++) {
-                createOneCell('HOWInternal_Dining_Table', 'HOWInternal_DiningName', 'HOWInternal_DiningSelect', 'HOWInternal_DiningNote');
+                createOneCell('HOWInternal_Dining_Table', 'HOWInternal_DiningName', 'HOWInternal_DiningSelect',
+                    'HOWInternal_DiningNote');
             }
         }
         if (count_bedroom1 > 11) {
             count_bedroom1 -= 11;
             for (var i = 0; i < count_bedroom1; i++) {
-                createOneCell('HOWInternal_Bedroom1_Table', 'HOWInternal_Bedroom1Name', 'HOWInternal_Bedroom1Select', 'HOWInternal_Bedroom1Note');
+                createOneCell('HOWInternal_Bedroom1_Table', 'HOWInternal_Bedroom1Name',
+                    'HOWInternal_Bedroom1Select', 'HOWInternal_Bedroom1Note');
             }
         }
         if (count_bedroom2 > 11) {
             count_bedroom2 -= 11;
             for (var i = 0; i < count_bedroom2; i++) {
-                createOneCell('HOWInternal_Bedroom2_Table', 'HOWInternal_Bedroom2Name', 'HOWInternal_Bedroom2Select', 'HOWInternal_Bedroom2Note');
+                createOneCell('HOWInternal_Bedroom2_Table', 'HOWInternal_Bedroom2Name',
+                    'HOWInternal_Bedroom2Select', 'HOWInternal_Bedroom2Note');
             }
         }
         if (count_bedroom3 > 11) {
             count_bedroom3 -= 11;
             for (var i = 0; i < count_bedroom3; i++) {
-                createOneCell('HOWInternal_Bedroom3_Table', 'HOWInternal_Bedroom3Name', 'HOWInternal_Bedroom3Select', 'HOWInternal_Bedroom3Note');
+                createOneCell('HOWInternal_Bedroom3_Table', 'HOWInternal_Bedroom3Name',
+                    'HOWInternal_Bedroom3Select', 'HOWInternal_Bedroom3Note');
             }
         }
         if (count_bedroom4 > 11) {
             count_bedroom4 -= 11;
             for (var i = 0; i < count_bedroom4; i++) {
-                createOneCell('HOWInternal_Bedroom4_Table', 'HOWInternal_Bedroom4Name', 'HOWInternal_Bedroom4Select', 'HOWInternal_Bedroom4Note');
+                createOneCell('HOWInternal_Bedroom4_Table', 'HOWInternal_Bedroom4Name',
+                    'HOWInternal_Bedroom4Select', 'HOWInternal_Bedroom4Note');
             }
         }
         if (count_study > 11) {
             count_study -= 11;
             for (var i = 0; i < count_study; i++) {
-                createOneCell('HOWInternal_Study_Table', 'HOWInternal_StudyName', 'HOWInternal_StudySelect', 'HOWInternal_StudyNote');
+                createOneCell('HOWInternal_Study_Table', 'HOWInternal_StudyName', 'HOWInternal_StudySelect',
+                    'HOWInternal_StudyNote');
             }
         }
         if (count_retreat > 11) {
             count_retreat -= 11;
             for (var i = 0; i < count_retreat; i++) {
-                createOneCell('HOWInternal_Retreat_Table', 'HOWInternal_RetreatName', 'HOWInternal_RetreatSelect', 'HOWInternal_RetreatNote');
+                createOneCell('HOWInternal_Retreat_Table', 'HOWInternal_RetreatName',
+                    'HOWInternal_RetreatSelect', 'HOWInternal_RetreatNote');
             }
         }
         if (count_wc > 15) {
             count_wc -= 15;
             for (var i = 0; i < count_wc; i++) {
-                createOneCell('HOWInternalService_WC_Table', 'HOWInternalService_WCName', 'HOWInternalService_WCSelect', 'HOWInternalService_WCNote');
+                createOneCell('HOWInternalService_WC_Table', 'HOWInternalService_WCName',
+                    'HOWInternalService_WCSelect', 'HOWInternalService_WCNote');
             }
         }
         if (count_bathroom1 > 16) {
             count_bathroom1 -= 16;
             for (var i = 0; i < count_bathroom1; i++) {
-                createOneCell('HOWInternalService_Bathroom1_Table', 'HOWInternalService_Bathroom1Name', 'HOWInternalService_Bathroom1Select', 'HOWInternalService_Bathroom1Note');
+                createOneCell('HOWInternalService_Bathroom1_Table', 'HOWInternalService_Bathroom1Name',
+                    'HOWInternalService_Bathroom1Select', 'HOWInternalService_Bathroom1Note');
             }
         }
         if (count_bathroom2 > 16) {
             count_bathroom2 -= 16;
             for (var i = 0; i < count_bathroom1; i++) {
-                createOneCell('HOWInternalService_Bathroom2_Table', 'HOWInternalService_Bathroom2Name', 'HOWInternalService_Bathroom2Select', 'HOWInternalService_Bathroom2Note');
+                createOneCell('HOWInternalService_Bathroom2_Table', 'HOWInternalService_Bathroom2Name',
+                    'HOWInternalService_Bathroom2Select', 'HOWInternalService_Bathroom2Note');
             }
         }
         if (count_bathroom3 > 16) {
             count_bathroom3 -= 16;
             for (var i = 0; i < count_bathroom3; i++) {
-                createOneCell('HOWInternalService_Bathroom3_Table', 'HOWInternalService_Bathroom3Name', 'HOWInternalService_Bathroom3Select', 'HOWInternalService_Bathroom3Note');
+                createOneCell('HOWInternalService_Bathroom3_Table', 'HOWInternalService_Bathroom3Name',
+                    'HOWInternalService_Bathroom3Select', 'HOWInternalService_Bathroom3Note');
             }
         }
         if (count_bathroom4 > 16) {
             count_bathroom4 -= 16;
             for (var i = 0; i < count_bathroom4; i++) {
-                createOneCell('HOWInternalService_Bathroom4_Table', 'HOWInternalService_Bathroom4Name', 'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note');
+                createOneCell('HOWInternalService_Bathroom4_Table', 'HOWInternalService_Bathroom4Name',
+                    'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note');
             }
         }
         if (count_laundry > 14) {
             count_laundry -= 14;
             for (var i = 0; i < count_laundry; i++) {
-                createOneCell('HOWInternalService_Laundry_Table', 'HOWInternalService_LaundryName', 'HOWInternalService_LaundrySelect', 'HOWInternalService_LaundryNote');
+                createOneCell('HOWInternalService_Laundry_Table', 'HOWInternalService_LaundryName',
+                    'HOWInternalService_LaundrySelect', 'HOWInternalService_LaundryNote');
             }
         }
         if (count_internalServices > 6) {
             count_internalServices -= 6;
             for (var i = 0; i < count_internalServices; i++) {
-                createOneCell('HOWInternalService_Service_Table', 'HOWInternalService_ServiceName', 'HOWInternalService_ServiceSelect', 'HOWInternalService_ServiceNote');
+                createOneCell('HOWInternalService_Service_Table', 'HOWInternalService_ServiceName',
+                    'HOWInternalService_ServiceSelect', 'HOWInternalService_ServiceNote');
             }
         }
         if (count_defects > 2) {
@@ -1756,7 +1844,7 @@
         if (basename($_SERVER['SCRIPT_NAME']) == 'HomeAccessReport.php'){
         ?>
         data.forEach(
-            function(d) {
+            function (d) {
 
                 const elementsID = d.id.split("_");
                 var ele_number = elementsID[0];
@@ -1852,7 +1940,7 @@
         // ***** Finally, populate with data...
         // Blast through ALL elements previously saved..,
         data.forEach(
-            function(d) {
+            function (d) {
                 var fld = '#' + d.id;
                 //                console.log(d.id);
 
@@ -1867,5 +1955,4 @@
             }
         );
     });
-
 </script>
