@@ -545,12 +545,12 @@
 </div>
 <!--Summary Photos-->
 <div class="container">
-    <h3 class="sectionSubHead" style="font-size: 20px">Photos</h3>
-    <div class="container">
-        <input type="button" id="get_ConstructionImage" value="Upload Images (Max 3 images)" class="uploadImageButton" onclick="TimberSummaryUploadImages()" style="white-space: normal; width: 15%">
+    <h3 class="sectionSubHead" style="font-size: 20px;margin-top:50px">Photos</h3>
+    <div class="container" style="margin-top:20px">
+        <input type="button" id="TimberSummaryAddImagesButton" value="Upload Images (Max 3 images)" class="uploadImageButton" onclick="TimberSummaryUploadImages()" style="white-space: normal; width: 15%">
         <input type="file" id="TimberSummaryUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
-    </div>
-    <table id="TimberSummaryImagesTable" style="margin-top: 20px;width:100%">
+    </div> 
+    <table id="TimberSummaryImagesTable" style="margin-top: 20px;width:100%;display:none">
         <tr>
             <th>
                 <div class="row form-group" id="TimberSummaryPhotographs">
@@ -1085,89 +1085,22 @@
 </div>
 <!--Site and Garden - Display and Add Images -->
 <div class="container">
-    <table id="TimberSiteImages">
+    <div class="container"> 
+        <input type="button" id="TimberSiteAddImagesButton" value="Upload Images (Max 3 images)" class="uploadImageButton" onclick="TimberSiteUploadImages()" style="white-space: normal; width: 15%">
+        <input type="file" id="TimberSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    </div>
+    <table id="TimberSiteImagesTable" style="margin-top: 20px;width:100%;display:none">
+
         <tr>
-            <th style="width: 20%">
-                <label>Images (max 3 images) </label>
-                <input type="button" value="Upload Image" class="uploadImageButton"
-                       onclick="TimberSiteUploadImages()">
-                <input type="file" id="TimberSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg"
-                       multiple>
-            </th>
             <th>
-                <div class="row form-group">
-                    &nbsp;
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSiteImage0" src="#" alt="Image1" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSiteImageText0"
-                                   style="width:265px;height:10px; display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSiteRemoveButton0"
-                                   onclick="RemoveTimberSiteImage0()" style="display: none ; width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSiteImageButton0"
-                                   onclick="AddTimberSiteImage0()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSiteUploadImage0" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSiteImage1" src="#" alt="Image2" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSiteImageText1"
-                                   style="width:265px;height:10px ;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSiteRemoveButton1"
-                                   onclick="RemoveTimberSiteImage1()" style="width:265px;display:none ">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSiteImageButton1"
-                                   onclick="AddTimberSiteImage1()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSiteUploadImage1" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSiteImage2" src="#" alt="Image3" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSiteImageText2"
-                                   style="width:265px;height:10px;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSiteRemoveButton2"
-                                   onclick="RemoveTimberSiteImage2()" style="display: none;width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSiteImageButton2"
-                                   onclick="AddTimberSiteImage2()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSiteUploadImage2" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-                    </form>
+                <div class="row form-group" id="TimberSitePhotographs">
                 </div>
-
             </th>
         </tr>
     </table>
     <!--<hr style="height:1px;border:none;color:#333;background-color:#333;">-->
+<hr>
+<br>
 </div>
 
 <!--Exterior of Buildings -->
@@ -1219,7 +1152,7 @@
     </div>
     <hr>
 </div>
-<!-- SExterior of Buildings- Subterranean Termites -->
+<!-- Exterior of Buildings- Subterranean Termites -->
 <div class="container">
     <div class="row form-group">
         <div class="col-sm-4">
@@ -1917,89 +1850,17 @@
 </div>
 <!--Exterior of Buildings - Display and Add Images -->
 <div class="container">
-    <table id="TimberExteriorImages">
-        <tr>
-            <th style="width: 20%">
-                <label>Images (max 3 images) </label>
-                <input type="button" value="Upload Image" class="uploadImageButton"
+    <div class="container" style="margin-top:20px">
+    <input type="button" value="Upload Images (Max 3 images)" class="uploadImageButton"
                        onclick="TimberExteriorUploadImages()">
-                <input type="file" id="TimberExteriorUploadImages" class="inputImage" accept="image/x-png,image/jpeg"
+    <input type="file" id="TimberExteriorUploadImages" class="inputImage" accept="image/x-png,image/jpeg"
                        multiple>
-            </th>
+    </div>
+    <table id="TimberExteriorImagesTable" style="margin-top: 20px;width:100%;display:none">
+        <tr>
             <th>
-
-                <div class="row form-group">
-                    &nbsp;
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberExteriorImage0" src="#" alt="Image1"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberExteriorImageText0"
-                                   style="width:265px;height:10px; display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberExteriorRemoveButton0"
-                                   onclick="RemoveTimberExteriorImage0()" style="display: none ; width:265px">
-                                   <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberExteriorImageButton0"
-                                   onclick="AddTimberExteriorImage0()" style="width:265px;display: none ">
-                            <input type="file" id="TimberExteriorUploadImage0" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                                   <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberExteriorImage1" src="#" alt="Image2"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberExteriorImageText1"
-                                   style="width:265px;height:10px ;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberExteriorRemoveButton1"
-                                   onclick="RemoveTimberExteriorImage1()" style="width:265px;display:none ">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberExteriorImageButton1"
-                                   onclick="AddTimberExteriorImage1()" style="width:265px;display: none ">
-                            <input type="file" id="TimberExteriorUploadImage1" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberExteriorImage2" src="#" alt="Image3"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberExteriorImageText2"
-                                   style="width:265px;height:10px;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberExteriorRemoveButton2"
-                                   onclick="RemoveTimberExteriorImage2()" style="display: none;width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberExteriorImageButton2"
-                                   onclick="AddTimberExteriorImage2()" style="width:265px;display: none ">
-                            <input type="file" id="TimberExteriorUploadImage2" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-                    </form>
+                <div class="row form-group" id="TimberExteriorPhotographs">
                 </div>
-
             </th>
         </tr>
     </table>
@@ -2457,89 +2318,15 @@
 </div>
 <!--Interior of Buildings - Display and Add Images -->
 <div class="container">
-    <table id="TimberInteriorImages">
+    <div class="container" style="margin-top:20px">
+        <input type="button" value="Upload Images (Max 3 images)" class="uploadImageButton" onclick="TimberInteriorUploadImages()">
+        <input type="file" id="TimberInteriorUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    </div>
+    <table id="TimberInteriorImagesTable" style="margin-top: 20px;width:100%;display:none">
         <tr>
-            <th style="width: 20%">
-                <label>Images (max 3 images) </label>
-                <input type="button" value="Upload Image" class="uploadImageButton"
-                       onclick="TimberInteriorUploadImages()">
-                <input type="file" id="TimberInteriorUploadImages" class="inputImage" accept="image/x-png,image/jpeg"
-                       multiple>
-            </th>
             <th>
-
-                <div class="row form-group">
-                    &nbsp;
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberInteriorImage0" src="#" alt="Image1"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberInteriorImageText0"
-                                   style="width:265px;height:10px; display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberInteriorRemoveButton0"
-                                   onclick="RemoveTimberInteriorImage0()" style="display: none ; width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberInteriorImageButton0"
-                                   onclick="AddTimberInteriorImage0()" style="width:265px;display: none ">
-                            <input type="file" id="TimberInteriorUploadImage0" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberInteriorImage1" src="#" alt="Image2"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberInteriorImageText1"
-                                   style="width:265px;height:10px ;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberInteriorRemoveButton1"
-                                   onclick="RemoveTimberInteriorImage1()" style="width:265px;display:none ">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberInteriorImageButton1"
-                                   onclick="AddTimberInteriorImage1()" style="width:265px;display: none ">
-                            <input type="file" id="TimberInteriorUploadImage1" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberInteriorImage2" src="#" alt="Image3"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberInteriorImageText2"
-                                   style="width:265px;height:10px;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberInteriorRemoveButton2"
-                                   onclick="RemoveTimberInteriorImage2()" style="display: none;width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberInteriorImageButton2"
-                                   onclick="AddTimberInteriorImage2()" style="width:265px;display: none ">
-                            <input type="file" id="TimberInteriorUploadImage2" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-                    </form>
+                <div class="row form-group" id="TimberInteriorPhotographs">
                 </div>
-
             </th>
         </tr>
     </table>
@@ -3010,91 +2797,20 @@
 </div>
 <!--Roof Space - Display and Add Images -->
 <div class="container">
-    <table id="TimberRoofImages">
+    <div class="container" style="margin-top:20px">
+        <input type="button" value="Upload Image(max 3 Images)" class="uploadImageButton" onclick="TimberRoofUploadImages()">
+        <input type="file" id="TimberRoofUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    </div>
+    <table id="TimberRoofImagesTable" style="margin-top: 20px;width:100%;display:none">
         <tr>
-            <th style="width: 20%">
-                <label>Images (max 3 images) </label>
-                <input type="button" value="Upload Image" class="uploadImageButton"
-                       onclick="TimberRoofUploadImages()">
-                <input type="file" id="TimberRoofUploadImages" class="inputImage" accept="image/x-png,image/jpeg"
-                       multiple>
-            </th>
             <th>
-
-                <div class="row form-group">
-                    &nbsp;
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberRoofImage0" src="#" alt="Image1" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberRoofImageText0"
-                                   style="width:265px;height:10px; display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberRoofRemoveButton0"
-                                   onclick="RemoveTimberRoofImage0()" style="display: none ; width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberRoofImageButton0"
-                                   onclick="AddTimberRoofImage0()" style="width:265px;display: none ">
-                            <input type="file" id="TimberRoofUploadImage0" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberRoofImage1" src="#" alt="Image2" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberRoofImageText1"
-                                   style="width:265px;height:10px ;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberRoofRemoveButton1"
-                                   onclick="RemoveTimberRoofImage1()" style="width:265px;display:none ">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberRoofImageButton1"
-                                   onclick="AddTimberRoofImage1()" style="width:265px;display: none ">
-                            <input type="file" id="TimberRoofUploadImage1" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberRoofImage2" src="#" alt="Image3" style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberRoofImageText2"
-                                   style="width:265px;height:10px;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberRoofRemoveButton2"
-                                   onclick="RemoveTimberRoofImage2()" style="display: none;width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberRoofImageButton2"
-                                   onclick="AddTimberRoofImage2()" style="width:265px;display: none ">
-                            <input type="file" id="TimberRoofUploadImage2" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-                    </form>
+                <div class="row form-group" id="TimberRoofPhotographs">
                 </div>
-
             </th>
         </tr>
     </table>
     <br>
-    <hr style="height:1px;border:none;color:#333;background-color:#333;">
+    <hr style="height:1px;color:#333;background-color:#333;">
 </div>
 
 <!--Sub Floor Space-->
@@ -3631,89 +3347,15 @@
 </div>
 <!--Sub Floor Space - Display and Add Images -->
 <div class="container">
-    <table id="TimberSubfloorImages">
+    <div class="container" style="margin-top:20px">
+        <input type="button" value="Upload Image(max 3 Images)" class="uploadImageButton" onclick="TimberSubfloorUploadImages()">
+        <input type="file" id="TimberSubfloorUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    </div>
+    <table id="TimberSubfloorImagesTable" style="margin-top: 20px;width:100%;display:none">
         <tr>
-            <th style="width: 20%">
-                <label>Images (max 3 images) </label>
-                <input type="button" value="Upload Image" class="uploadImageButton"
-                       onclick="TimberSubfloorUploadImages()">
-                <input type="file" id="TimberSubfloorUploadImages" class="inputImage" accept="image/x-png,image/jpeg"
-                       multiple>
-            </th>
             <th>
-
-                <div class="row form-group">
-                    &nbsp;
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSubfloorImage0" src="#" alt="Image1"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSubfloorImageText0"
-                                   style="width:265px;height:10px; display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSubfloorRemoveButton0"
-                                   onclick="RemoveTimberSubfloorImage0()" style="display: none ; width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSubfloorImageButton0"
-                                   onclick="AddTimberSubfloorImage0()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSubfloorUploadImage0" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSubfloorImage1" src="#" alt="Image2"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSubfloorImageText1"
-                                   style="width:265px;height:10px ;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSubfloorRemoveButton1"
-                                   onclick="RemoveTimberSubfloorImage1()" style="width:265px;display:none ">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSubfloorImageButton1"
-                                   onclick="AddTimberSubfloorImage1()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSubfloorUploadImage1" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-
-                    </form>
-                    <form>
-                        <div class="col-sm">
-                            <img id="TimberSubfloorImage2" src="#" alt="Image3"
-                                 style="width:0;height:0;display: none"/>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" name="image1" placeholder="name" id="TimberSubfloorImageText2"
-                                   style="width:265px;height:10px;display: none">
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Remove" id="TimberSubfloorRemoveButton2"
-                                   onclick="RemoveTimberSubfloorImage2()" style="display: none;width:265px">
-                            <br>
-                        </div>
-                        <div class="col-sm">
-                            <input type="button" value="Add" id="AddTimberSubfloorImageButton2"
-                                   onclick="AddTimberSubfloorImage2()" style="width:265px;display: none ">
-                            <input type="file" id="TimberSubfloorUploadImage2" class="inputImage"
-                                   accept="image/x-png,image/jpeg" style="display: none">
-                            <br>
-                        </div>
-                    </form>
+                <div class="row form-group" id="TimberSubfloorPhotographs">
                 </div>
-
             </th>
         </tr>
     </table>
@@ -3762,7 +3404,7 @@
     <h2 class="content-head text-center firstH1">Recommendations</h2><br>
 </div>
 <div class="container">
-    <table id="TimberRecommendationTable">
+    <table id="TimberRecommendationImagesTable">
         <tr>
             <th colspan="2">
                 <label class="sectionSubHead" style="color: black">Overall Risk</label>
@@ -3863,7 +3505,7 @@
         <!-- Images -->
         <tr>
             <th colspan="2">
-                <label>Images (max 3 images) </label>
+                <laebl>Images (max 3 images)</label>
                 <input type="button" id="get_image" value="Upload Image" class="uploadImageButton"
                        onclick="TimberRecommendationUploadImages()">
                 <input type="file" id="TimberRecommendationUploadImages" class="inputImage"
@@ -3871,6 +3513,12 @@
             </th>
         </tr>
         <tr>
+            <th colspan="2">
+                <div class="row form-group" id="TimberRecommendationPhotographs">
+                </div>
+            </th>
+        </tr>
+        <!-- <tr>
             <th colspan="2">
 
                 <div class="row form-group">
@@ -3946,7 +3594,7 @@
                 </div>
 
             </th>
-        </tr>
+        </tr> -->
     </table>
 </div>
 

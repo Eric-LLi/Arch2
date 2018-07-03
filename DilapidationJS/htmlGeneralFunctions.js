@@ -2,7 +2,85 @@
  * Created by Fafa on 15/1/18.
  */
 
- var firstRemove60th = true;
+var firstRemove60th = true;
+
+function onload()
+ {
+     reorderImages();
+     automaticNumbering();
+     addNewImageForm()
+ }
+
+function reorderImages()
+{
+    console.log("need to reorder the images");
+    var totalContainers = $('#DilapidationPhotographs').find('> form');
+    var BigContainer = document.getElementById('DilapidationPhotographs');
+    console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     console.log((totalContainers[i].id));
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    console.log(totalContainers);
+
+    $("#DilapidationPhotographs").empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+       BigContainer.appendChild(totalContainers[i]);
+    }
+}
+
+
+function automaticNumbering()
+{
+    console.log("need to refresh the image number");
+    var totalContainers = $('#DilapidationPhotographs').find('> form');
+    for(var i=0;i<totalContainers.length;i++)
+    {
+        //console.log(i);
+        //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
+    }
+}
+function addNewImageForm()
+{
+    maxImage = 60;
+    var idGroup = [];
+    var totalContainers = $('#DilapidationPhotographs').find('> form');
+    console.log("the current form in the report DilapidationPhotographs is " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    console.log("the last ID is " + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    var newID = Number(lastID) + 1;
+    var altID = Number(lastID) + 2;
+    if(totalContainers.length < maxImage && totalContainers.length != 0)
+    {
+        console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'DilapidationImage' + newID;
+        var nextTextID = 'DilapidationImageText' + newID;
+        var nextRemoveButtonID = 'DilapidationImageRemoveButton' + newID;
+        var nextAddButtonID = 'AddDilapidationImageButton' + newID;
+        var nextUploadID = 'DilapidationUploadImage' + newID;
+        addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '0px');
+    }
+}
 
 function countWord(click_id)
 {
@@ -192,7 +270,7 @@ $('#DilapidationUploadImages').change(function(){
             var uploadID = 'DilapidationUploadImage' + count;
             addImageElements(altName, 'DilapidationPhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
                 'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '0px');
-
+            automaticNumbering();
         },1500)
     }
     else
@@ -266,6 +344,10 @@ $('#DilapidationUploadImages').change(function(){
                 }, 600);
             }
         }
+        setTimeout(function(){
+            automaticNumbering();
+
+        },1000)
     }
 
 });
@@ -362,11 +444,9 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     container2.appendChild(imgLabel);
     container3.appendChild(textInput);
     container4.appendChild(removeButton);
-    container4.appendChild(addButton);
+    container5.appendChild(addButton);
     container5.appendChild(uploadFile);
 }
-
-
 
 
 /*
@@ -465,6 +545,7 @@ function addOneDilapidationImage(click_id)
                         }
                     );
                 });
+                automaticNumbering();
                 if (Number(selectedID) == Number(lastID))
                 {
                     if(totalContainers.length < 60)
@@ -558,6 +639,7 @@ function RemoveOneDilapidationImage(click_id)
         $("#DilapidationPhotographs").empty();
         document.getElementById('DilapidationImagesTable').style.display = 'none';
     }
+    automaticNumbering();
 
 }
 

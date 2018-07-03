@@ -2,8 +2,123 @@
  * Created by Fafa on 20/1/18.
  */
 
- var firstRemove40th = true;
- var firstRemove6th = true;
+var firstRemove40th = true;
+var firstRemove6th = true;
+ function onload()
+ {
+    reorderImages('MaintenancePhotographs');
+    reorderImages('MaintenanceDrawings');
+    automaticNumbering('MaintenancePhotographs');
+    automaticNumbering('MaintenanceDrawings');
+    addNewImageForm();
+    addNewDrawingForm();
+ }
+
+function reorderImages(divid)
+{
+    console.log("need to reorder the images " + divid);
+    var totalContainers = $('#'+divid).find('> form');
+    var BigContainer = document.getElementById(divid);
+    //console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     console.log((totalContainers[i].id));
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    //console.log(totalContainers);
+
+    $('#'+divid).empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+       BigContainer.appendChild(totalContainers[i]);
+    }
+}
+
+
+function automaticNumbering(divid)
+{
+    console.log("need to refresh the image number" + divid);
+    var totalContainers = $('#'+divid).find('> form');
+    //console.log(totalContainers);
+    for(var i=0;i<totalContainers.length;i++)
+    {
+        //console.log(i);
+        //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
+        //totalContainers.eq(i).children('div').eq(1).children('label').get(0).style.display = 'block';
+    }
+}
+function addNewImageForm()
+{
+    maxImage = 40;
+    var idGroup = [];
+    var totalContainers = $('#MaintenancePhotographs').find('> form');
+    console.log("the current form in the report MaintenancePhotographs is " + totalContainers.length);
+    if(totalContainers.length < maxImage && totalContainers.length != 0)
+    {
+        for (var i = 0; i < totalContainers.length; i++)
+        {
+            var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+            var id = Number(idStr);
+            idGroup.push(id);
+        }
+        //console.log(idGroup);
+        idGroup.sort(function(a, b){return a - b});
+        //console.log(idGroup);
+        console.log("the last ID is " + idGroup[idGroup.length-1]);
+        var lastID = idGroup[idGroup.length-1]
+        var newID = Number(lastID) + 1;
+        var altID = Number(lastID) + 2;
+        console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'MaintenanceImage' + newID;
+        var nextTextID = 'MaintenanceImageText' + newID;
+        var nextRemoveButtonID = 'MaintenanceImageRemoveButton' + newID;
+        var nextAddButtonID = 'AddMaintenanceImageButton' + newID;
+        var nextUploadID = 'MaintenanceUploadImage' + newID;
+        addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            'RemoveOneMaintenanceImage(this.id)', 'AddOneMaintenanceImage(this.id)', '500px', '0px');
+    }
+}
+function addNewDrawingForm()
+{
+    var maxDrawing = 6;
+    var idGroup = [];
+    var totalContainers = $('#MaintenanceDrawings').find('> form');
+    console.log("the current form in the report MaintenanceDrawings is " + totalContainers.length);
+    if(totalContainers.length < maxDrawing && totalContainers.length != 0)
+    {
+        for (var i = 0; i < totalContainers.length; i++)
+        {
+            var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+            var id = Number(idStr);
+            idGroup.push(id);
+        }
+        //console.log(idGroup);
+        idGroup.sort(function(a, b){return a - b});
+        //console.log(idGroup);
+        console.log("the last ID is " + idGroup[idGroup.length-1]);
+        var lastID = idGroup[idGroup.length-1]
+        var newID = Number(lastID) + 1;
+        var altID = Number(lastID) + 2;
+        console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'MaintenanceDrawing' + newID;
+        var nextTextID = 'MaintenanceDrawingText' + newID;
+        var nextRemoveButtonID = 'MaintenanceDrawingRemoveButton' + newID;
+        var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
+        var nextUploadID = 'MaintenanceUploadDrawing' + newID;
+        addDrawingElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px');
+    }
+}
 
 function countWord(click_id)
 {
@@ -147,7 +262,7 @@ $('#MaintenanceUploadImages').change(function() {
                     var altName = 'image' + nameID;
                     var imageID = 'MaintenanceImage' + ii;
                     var textID = 'MaintenanceImageText' + ii;
-                    var removeButtonID = 'MaintenanceRemoveButton' + ii;
+                    var removeButtonID = 'MaintenanceImageRemoveButton' + ii;
                     var addButtonID = 'AddMaintenanceImageButton' + ii;
                     var uploadID = 'MaintenanceUploadImage' + ii;
                     var imgLabelID = "imageCaption" + ii;
@@ -209,12 +324,12 @@ $('#MaintenanceUploadImages').change(function() {
             var altName = 'Image' + altID;
             var imageID = 'MaintenanceImage' + count;
             var textID = 'MaintenanceImageText' + count;
-            var removeButtonID = 'MaintenanceRemoveButton' + count;
+            var removeButtonID = 'MaintenanceImageRemoveButton' + count;
             var addButtonID = 'AddMaintenanceImageButton' + count;
             var uploadID = 'MaintenanceUploadImage' + count;
             addImageElements(altName, 'MaintenancePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
                 'RemoveOneMaintenanceImage(this.id)', 'AddOneMaintenanceImage(this.id)', '500px', '0px');
-
+            automaticNumbering('MaintenancePhotographs');
         },2000)
     }
     else
@@ -231,7 +346,7 @@ $('#MaintenanceUploadImages').change(function() {
                     var altName = 'image' + nameID;
                     var imageID = 'MaintenanceImage' + ii;
                     var textID = 'MaintenanceImageText' + ii;
-                    var removeButtonID = 'MaintenanceRemoveButton' + ii;
+                    var removeButtonID = 'MaintenanceImageRemoveButton' + ii;
                     var addButtonID = 'AddMaintenanceImageButton' + ii;
                     var uploadID = 'MaintenanceUploadImage' + ii;
                     var imgLabelID = "imageCaption" + ii;
@@ -288,6 +403,10 @@ $('#MaintenanceUploadImages').change(function() {
                 }, 600);
             }
         }
+        setTimeout(function(){
+            automaticNumbering('MaintenancePhotographs');
+
+        },1000)
     }
 
 });
@@ -312,7 +431,7 @@ function AddOneMaintenanceImage(click_id)
 
     var imageID = 'MaintenanceImage' + selectedID;
     var textID = 'MaintenanceImageText' + selectedID;
-    var removeButtonID = 'MaintenanceRemoveButton' + selectedID;
+    var removeButtonID = 'MaintenanceImageRemoveButton' + selectedID;
     var addButtonID = 'AddMaintenanceImageButton' + selectedID;
     var uploadID = 'MaintenanceUploadImage' + selectedID;
     var imgLabelID = "imageCaption" + selectedID;
@@ -385,6 +504,7 @@ function AddOneMaintenanceImage(click_id)
                         }
                     );
                 });
+                automaticNumbering('MaintenancePhotographs');
                 if (Number(selectedID) == Number(lastID))
                 {
                     if(totalContainers.length < 40)
@@ -396,7 +516,7 @@ function AddOneMaintenanceImage(click_id)
                         //console.log("I am here!!! need another image element ,the next id  " + newID);
                         var nextImageID = 'MaintenanceImage' + newID;
                         var nextTextID = 'MaintenanceImageText' + newID;
-                        var nextRemoveButtonID = 'MaintenanceRemoveButton' + newID;
+                        var nextRemoveButtonID = 'MaintenanceImageRemoveButton' + newID;
                         var nextAddButtonID = 'AddMaintenanceImageButton' + newID;
                         var nextUploadID = 'MaintenanceUploadImage' + newID;
                         addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID, 'RemoveOneMaintenanceImage(this.id)', 'AddOneMaintenanceImage(this.id)', '500px', '0px');
@@ -415,7 +535,7 @@ function RemoveOneMaintenanceImage(click_id)
     var selectedID = String(click_id);
     var id = selectedID.replace ( /[^\d.]/g, '' );
     var imageID = 'MaintenanceImage' + id;
-    var removeButtonID = 'MaintenanceRemoveButton' + id;
+    var removeButtonID = 'MaintenanceImageRemoveButton' + id;
     var addButtonID = 'AddMaintenanceImageButton' + id;
     var textID = 'MaintenanceImageText' + id;
     var formID = 'imageForm' + id;
@@ -461,7 +581,7 @@ function RemoveOneMaintenanceImage(click_id)
         //console.log("I am here!!! need another image element ,the next id  " + newID);
         var nextImageID = 'MaintenanceImage' + newID;
         var nextTextID = 'MaintenanceImageText' + newID;
-        var nextRemoveButtonID = 'MaintenanceRemoveButton' + newID;
+        var nextRemoveButtonID = 'MaintenanceImageRemoveButton' + newID;
         var nextAddButtonID = 'AddMaintenanceImageButton' + newID;
         var nextUploadID = 'MaintenanceUploadImage' + newID;
         addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
@@ -479,6 +599,7 @@ function RemoveOneMaintenanceImage(click_id)
         $("#MaintenancePhotographs").empty();
         document.getElementById('MaintenanceImagesTable').style.display = 'none';
     }
+    automaticNumbering('MaintenancePhotographs');
 }
 
 
@@ -496,7 +617,7 @@ function AddOneMaintenanceDrawing(click_id)
     var removeButtonID = 'MaintenanceDrawingRemoveButton' + selectedID;
     var addButtonID = 'AddMaintenanceDrawingButton' + selectedID;
     var uploadID = 'MaintenanceUploadDrawing' + selectedID;
-    var imgLabelID = "imageCaption" + selectedID;
+    var imgLabelID = "drawingCaption" + selectedID;
 
     for (var i = 0; i < totalContainers.length; i++)
     {
@@ -516,7 +637,7 @@ function AddOneMaintenanceDrawing(click_id)
         if (this.files && this.files[0]) {
             if(totalContainers.length == 6)
             {
-                console.log("add the last 30th image, need to reset the firstRemove30th");
+                console.log("add the last 6th image, need to reset the firstRemove6th");
                 firstRemove6th = true;
             }
             if(totalContainers.length <= 6)
@@ -556,7 +677,7 @@ function AddOneMaintenanceDrawing(click_id)
                             // image.style.height = '250px';
                             var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
                             //console.log(file);
-                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'MaintenanceDrawingsTable',nextAltName,'MaintenanceDrawings',uploadID,'RemoveOneMaintenanceDrawing(this.id)','AddOneMaintenanceDrawing(this.id)','500px','500px');
+                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'MaintenanceDrawingsTable',nextAltName,'MaintenanceDrawings',uploadID,'RemoveOneMaintenanceDrawing(this.id)','AddOneMaintenanceDrawing(this.id)','100%','100%');
     
                         },
                         {
@@ -567,12 +688,13 @@ function AddOneMaintenanceDrawing(click_id)
                         }
                     );
                 });
+                automaticNumbering('MaintenanceDrawings');
                 if (Number(selectedID) == Number(lastID))
                 {
                     if(totalContainers.length < 6)
                     {
                         //if the total number of image is less than 6, then need to create a new image element to allow user to upload another one.
-                        console.log("you are adding an image to the last id block");
+                        console.log("you are adding an image to the last id block, and not exceed the maximum, create a new form.");
                         var newID = Number(lastID) + 1;
                         var altID = Number(lastID) + 2;
                         nextAltName = 'image ' + altID;
@@ -583,7 +705,7 @@ function AddOneMaintenanceDrawing(click_id)
                         var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
                         var nextUploadID = 'MaintenanceUploadDrawing' + newID;
                         addDrawingElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                            'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px');
+                            'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px','drawing');
                     }
                 }
             }
@@ -653,7 +775,7 @@ function RemoveOneMaintenanceDrawing(click_id)
         var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
         var nextUploadID = 'MaintenanceUploadDrawing' + newID;
         addDrawingElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-        'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px');
+        'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px','drawing');
         firstRemove6th = false;
     }
 
@@ -667,6 +789,7 @@ function RemoveOneMaintenanceDrawing(click_id)
         $("#MaintenanceDrawings").empty();
         document.getElementById('MaintenanceDrawingsTable').style.display = 'none';
     }
+    automaticNumbering('MaintenanceDrawings');
 
 }
 
@@ -719,7 +842,7 @@ $('#MaintenanceUploadDrawings').change(function() {
                     var removeButtonID = 'MaintenanceDrawingRemoveButton' + ii;
                     var addButtonID = 'AddMaintenanceDrawingButton' + ii;
                     var uploadID = 'MaintenanceUploadDrawing' + ii;
-                    var imgLabelID = "imageCaption" + ii;
+                    var imgLabelID = "drawingCaption" + ii;
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
 
@@ -785,7 +908,7 @@ $('#MaintenanceUploadDrawings').change(function() {
             var uploadID = 'MaintenanceUploadDrawing' + count;
             addDrawingElements(altName, 'MaintenanceDrawings', imageID, textID, removeButtonID, addButtonID, uploadID,
                 'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '100%', '0px');
-
+            automaticNumbering('MaintenanceDrawings');
         },500)
     }
     else
@@ -805,7 +928,7 @@ $('#MaintenanceUploadDrawings').change(function() {
                     var removeButtonID = 'MaintenanceDrawingRemoveButton' + ii;
                     var addButtonID = 'AddMaintenanceDrawingButton' + ii;
                     var uploadID = 'MaintenanceUploadDrawing' + ii;
-                    var imgLabelID = "imageCaption" + ii;
+                    var imgLabelID = "drawingCaption" + ii;
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
 
@@ -860,6 +983,9 @@ $('#MaintenanceUploadDrawings').change(function() {
                 }, 600);
             }
         }
+        setTimeout(function(){
+            automaticNumbering('MaintenanceDrawings');
+        },1200)
     }
 
 });
@@ -954,7 +1080,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     container2.appendChild(imgLabel);
     container3.appendChild(textInput);
     container4.appendChild(removeButton);
-    container4.appendChild(addButton);
+    container5.appendChild(addButton);
     container5.appendChild(uploadFile);
 
 
@@ -1034,7 +1160,8 @@ function addDrawingElements(imageAltName, divID, imageID, imageTextID, removeBut
 
     //create the image label for image caption number. 
     var imgLabel = document.createElement("label");
-    var imgLabelID = "imageCaption" + currentID;
+
+    var imgLabelID =  "drawingCaption" + currentID;
     imgLabel.setAttribute("id", imgLabelID);
     imgLabel.style.display = "none";
     imgLabel.innerHTML = "Drawing " + (Number(currentID)+1);
@@ -1051,7 +1178,7 @@ function addDrawingElements(imageAltName, divID, imageID, imageTextID, removeBut
     container2.appendChild(imgLabel);
     container3.appendChild(textInput);
     container4.appendChild(removeButton);
-    container4.appendChild(addButton);
+    container5.appendChild(addButton);
     container5.appendChild(uploadFile);
 
 

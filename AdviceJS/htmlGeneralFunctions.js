@@ -8,6 +8,7 @@
  {
      reorderImages();
      automaticNumbering();
+     addNewImageForm()
  }
 
 function reorderImages()
@@ -44,6 +45,39 @@ function automaticNumbering()
         //console.log(i);
         //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
         totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
+    }
+}
+function addNewImageForm()
+{
+    maxImage = 30;
+    var idGroup = [];
+    var totalContainers = $('#AdvicePhotographs').find('> form');
+    console.log("the current form in the report AdvicePhotographs is " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    console.log("the last ID is " + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    var newID = Number(lastID) + 1;
+    var altID = Number(lastID) + 2;
+    if(totalContainers.length < maxImage && totalContainers.length != 0)
+    {
+        console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'AdviceImage' + newID;
+        var nextTextID = 'AdviceImageText' + newID;
+        var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
+        var nextAddButtonID = 'AddAdviceImageButton' + newID;
+        var nextUploadID = 'AdviceUploadImage' + newID;
+        addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
     }
 }
 
@@ -626,7 +660,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     container2.appendChild(imgLabel);
     container3.appendChild(textInput);
     container4.appendChild(removeButton);
-    container4.appendChild(addButton);
+    container5.appendChild(addButton);
     container5.appendChild(uploadFile);
 
 

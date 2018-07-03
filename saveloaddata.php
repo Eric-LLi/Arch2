@@ -295,7 +295,7 @@
         var countingImage = 0;
         var countingDrawing = 0;
         var imageNo = 0;
-        var countingTimberSummary = 0;
+
 
         //console.log(photos);
         //calculate the image
@@ -305,19 +305,12 @@
                 countingImage++;
             }
         }
-        console.log('the current number of images ' + countingImage);
+        //console.log('the current number of images ' + countingImage);
         for (var i = 0; i < photos.length; ++i) {
             if (photos[i].tableName == 'MaintenanceDrawingsTable' || photos[i].tableName === 'homeFeasibilityDrawingsTable' || photos[i].tableName === 'RenovationFeasibilityDrawingsTable' || photos[i].tableName === 'HA_PdfContents') {
                 countingDrawing++;
             }
         }
-        console.log('the current number of drawing ' + countingDrawing);
-        for (var i = 0; i < photos.length; ++i) {
-            if (photos[i].tableName == 'TimberSummaryImagesTable') {
-                countingTimberSummary++;
-            }
-        }
-        console.log('the current number of timber summary drawing ' + countingTimberSummary);
         // Any photos?
         //console.log(photos.length);
         photos.forEach(
@@ -440,594 +433,505 @@
                     //console.log("2222222Table Name: " + p.tableName);
                     if (p.tableName) {
                         //console.log(p.tableName);
-                        if (p.tableName === 'homeFeasibilityDrawingsTable') {
-                            console.log("I am in Home Feasibility Drawing Table");
-                            document.getElementById(p.tableName).style.display = 'block';
+                            if (p.tableName === 'homeFeasibilityDrawingsTable') {
+                                console.log("I am in Home Feasibility Drawing Table");
+                                document.getElementById(p.tableName).style.display = 'block';
 
-                            var maxDrawings = 4;
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //var nextID = Number(currentID) + 1;
-                            var imgLabelID = "imageCaption" + currentID;
-                            var idGroup = [];
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "imageCaption" + currentID;
 
-                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
 
-                            $('#' + p.imageid).attr('src', url);
-                            document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '100%';
-                            document.getElementById(p.imageid).style.height = '100%';
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.addid).style.width = '100%';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.removeid).style.width = '100%';
-                            document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.textid).style.width = '100%';
-                            document.getElementById(imgLabelID).style.display = 'block';
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '100%';
+                                document.getElementById(p.imageid).style.height = '100%';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '100%';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '100%';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '100%';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                    
+                            } else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
+                                
+                                document.getElementById(p.tableName).style.display = 'block';
+                                console.log("I am in renovation Feasibility Drawing Table");
+                               
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "imageCaption" + currentID;
+                               
+                                //console.log(p.addid);
+                                //document.getElementById(p.tableName).style.display = 'block';
+                                addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID, p.removeFunction,
+                                    p.addFunction, p.imageSize, p.width);
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '100%';
+                                document.getElementById(p.imageid).style.height = '100%';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '100%';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '100%';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '100%';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                //create the next image area base on the max image number, the current ID smaller than it, create.
+                            } else if (p.tableName === 'DilapidationImagesTable') {
+                                var table = document.getElementById(p.tableName);
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "imageCaption" + currentID;
                             
-                            var totalContainers = $('#homeFeasibilityDrawings').find('> form');
-                            console.log("the current form in the report is :" + totalContainers.length);
+                                table.style.display = 'block';
+                                addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.textid).style.display = 'block';
+                                // document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '500px';
+                                document.getElementById(p.imageid).style.height = '500px';
+                            } else if (p.tableName === 'AdviceImagesTable') {
+                                maxImage = 30;
+                                var table = document.getElementById(p.tableName);
+                                //get the current id from the imageID.
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "imageCaption" + currentID;
 
-                            //create the next image area base on the max image number, the current ID smaller than it, create.
-                            // var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            // var nextID = Number(currentID) + 1;
-                            // console.log("the current total number of drawings " + countingDrawing);
-                            // console.log("the currentID " + currentID);
-                            // console.log("the nextID " + nextID);
-                            if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawings) 
+                                table.style.display = 'block';
+                                addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.textid).style.display = 'block';
+                                // document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '500px';
+                                document.getElementById(p.imageid).style.height = '500px';
+                                
+                            } else if (p.tableName === 'MaintenanceImagesTable') {
+                                var table = document.getElementById(p.tableName);
+                                //get the current id from the imageID.
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "imageCaption" + currentID;
+                                table.style.display = 'block';
+                                addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.textid).style.display = 'block';
+                                // document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '500px';
+                                document.getElementById(p.imageid).style.height = '500px';
+                        
+                            } else if (p.tableName === 'MaintenanceDrawingsTable') {
+                               
+                                var table = document.getElementById(p.tableName);
+                                //get the current id from the imageID.
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "drawingCaption" + currentID;
+                                table.style.display = 'block';
+                                addDrawingElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '100%';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '100%';
+                                // document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '100%';
+                                document.getElementById(p.imageid).style.height = '100%';
+                                
+                            } else if (p.tableName === 'ConstructionImagesTable') {
+                                var maxImage = 30;
+                                var table = document.getElementById(p.tableName);
+                                //get the current id from the imageID.
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "imageCaption" + currentID;
+                                var idGroup = [];
+
+                                table.style.display = 'block';
+
+                                addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width);
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.textid).style.display = 'block';
+                                // document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '500px';
+                                document.getElementById(p.imageid).style.height = '500px';
+
+                                var totalContainers = $('#ConstructionPhotographs').find('> form');
+
+                                if(totalContainers.length == countingImage && totalContainers.length < maxImage)
+                                {                                   
+                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+                                    // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                    for (var i = 0; i < totalContainers.length; i++)
+                                    {
+                                        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+                                        var id = Number(idStr);
+                                        idGroup.push(id);
+                                    }
+                                    //console.log(idGroup);
+                                    idGroup.sort(function(a, b){return a - b});
+                                    //console.log(idGroup);
+                                    console.log("the last ID is " + idGroup[idGroup.length-1]);
+                                    var lastID = idGroup[idGroup.length-1]
+                                    var newID = Number(lastID) + 1;
+                                    var altID = Number(lastID) + 2;
+                                    nextAltName = 'image ' + altID;
+                                    //console.log("I am here!!! need another image element ,the next id  " + newID);
+                                    var nextImageID = 'ConstructionImage' + newID;
+                                    var nextTextID = 'ConstructionImageText' + newID;
+                                    var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
+                                    var nextAddButtonID = 'AddConstructionImageButton' + newID;
+                                    var nextUploadID = 'ConstructionUploadImage' + newID;
+                                    addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+                                            'RemoveOneConstructionImage(this.id)', 'AddOneConstructionImage(this.id)', '500px', '500px');
+
+                                }
+                            } else if (p.tableName === 'CPImagesTable') {
+                                //                            var table = document.getElementById(p.tableName);
+                                //                            table.style.display = 'block';
+                                //                            //console.log("the total number of images in this CP report are : " + countingImage);
+                                //                            //console.log(p.imageid);
+                                //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
+                                //                            //if (imageNo === 0)
+                                //                            //{
+                                //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                //                                'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
+                                //                            $('#' + p.imageid).attr('src', url);
+                                //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
+                                //                            var labelID = "imageCaption" + givenID;
+                                //                            document.getElementById(p.addid).style.display = 'none';
+                                //                            document.getElementById(p.removeid).style.display = 'block';
+                                //                            document.getElementById(p.textid).style.display = 'block';
+                                //                            document.getElementById(p.imageid).style.display = 'block';
+                                //                            document.getElementById(p.imageid).style.width = '480px';
+                                //                            document.getElementById(labelID).style.display = 'block';
+                                //                            //get the current id from the imageID.
+                                //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //                            var nextID = Number(currentID) + 1;
+                                //                            //console.log("the next ID is " + nextID);
+                                //                            var altID = Number(nextID) + 1;
+                                //                            if (nextID >= countingImage) {
+                                //                                var altName = 'Image' + altID;
+                                //                                console.log("I am here!!! need to create a image " + altName);
+                                //                                var imageID = 'CPImage' + nextID;
+                                //                                var textID = 'CPImageText' + nextID;
+                                //                                var removeButtonID = 'CPImageRemoveButton' + nextID;
+                                //                                var addButtonID = 'CPImageAddButton' + nextID;
+                                //                                var uploadID = 'CPImageUpload' + nextID;
+                                //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
+                                //
+                                //                            }
+
+                                //[imgID, btnID, captionID, containerID,labelID]
+                                //console.log("IMAGE id: " + p.imageid);
+                                //                            var temp = parseInt(p.imageid.split("_")[0]);
+                                var temp = p.imageid.replace("CPImage", "");
+                                //                            console.log("Before Photos count :" + photos_count);
+                                //                            console.log("temp : " + temp);
+                                if (temp >= photos_count) {
+                                    photos_count = temp;
+                                    photos_count++;
+                                }
+                                //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
+                                var elementID = createPhoto(temp);
+                                //                            console.log("After count: " + photos_count);
+                                $("#" + elementID[1]).attr("src", url);
+                                $("#" + p.tableName).show();
+
+                            } else if (p.tableName === 'HOWImagesTable') {
+                                //                            var table = document.getElementById(p.tableName);
+                                //                            table.style.display = 'block';
+                                //                            console.log("the total number of images in this HOW report are : " + countingImage);
+                                //                            //console.log(p.imageid);
+                                //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
+                                //                            //if (imageNo === 0)
+                                //                            //{
+                                //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                //                                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                                //                            $('#' + p.imageid).attr('src', url);
+                                //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
+                                //                            var labelID = "HOWimageCaption" + givenID;
+                                //                            document.getElementById(p.addid).style.display = 'none';
+                                //                            document.getElementById(p.removeid).style.display = 'block';
+                                //                            document.getElementById(p.textid).style.display = 'block';
+                                //                            document.getElementById(p.imageid).style.display = 'block';
+                                //                            document.getElementById(p.imageid).style.width = '480px';
+                                //                            document.getElementById(labelID).style.display = 'block';
+                                //                            //get the current id from the imageID.
+                                //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //                            var nextID = Number(currentID) + 1;
+                                //                            console.log("the next ID is " + nextID);
+                                //                            var altID = Number(nextID) + 1;
+                                //                            if (nextID >= countingImage) {
+                                //                                var altName = 'Image' + altID;
+                                //                                console.log("I am here!!! need to create a image " + altName);
+                                //                                var imageID = 'HOWImage' + nextID;
+                                //                                var textID = 'HOWImageText' + nextID;
+                                //                                var removeButtonID = 'HOWImageRemoveButton' + nextID;
+                                //                                var addButtonID = 'HOWImageAddButton' + nextID;
+                                //                                var uploadID = 'HOWImageUpload' + nextID;
+                                //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
+                                //                            }
+                                var temp = p.imageid.replace("HOWImage", "");
+                                //                            console.log("Before Photos count :" + photos_count);
+                                //                            console.log("temp : " + temp);
+                                if (temp >= photos_count) {
+                                    photos_count = temp;
+                                    photos_count++;
+                                }
+                                //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
+                                var elementID = createPhoto(temp);
+                                //                            console.log("After count: " + photos_count);
+                                $("#" + elementID[1]).attr("src", url);
+                                $("#" + p.tableName).show();
+
+                            } else if (p.tableName === "HA_PdfContents") {
+                                //console.log("Beofre pdf Count: " + pdfCounts);
+                                //imgbtnID = [img ID, deltebuttonID, caption ID, container ID]
+
+                                var temp = parseInt(p.imageid.split("_")[0]);
+                                //console.log("TEMP: "+ temp);
+
+                                if (temp >= pdfCounts) {
+                                    pdfCounts = temp;
+                                    pdfCounts++;
+                                }
+                                //console.log("After pdf Count: " + temp);
+
+                                var imgbtnID = createPDFImg(temp);
+
+                                //Show img
+                                $("#" + imgbtnID[0]).show();
+
+                                //Show delete button
+                                $("#" + imgbtnID[1]).show();
+
+                                //Attach img
+                                //console.log("Image URL: " + url);
+                                $("#" + imgbtnID[0]).attr("src", url);
+                                $("#" + p.tableName).show();
+                            } else if (p.tableName === "HA_ImgsContents") {
+                                //[imgID, btnID, captionID, containerID]
+                                //console.log("IMAGE id: " + p.imageid);
+                                var temp = parseInt(p.imageid.split("_")[0]);
+
+                                //                            console.log("Before Photos count :" + photos_count);
+                                //                            console.log("temp : " + temp);
+                                if (temp >= photos_count) {
+                                    photos_count = temp;
+                                    photos_count++;
+                                }
+                                //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
+                                var elementID = createPhoto(temp);
+                                //                            console.log("After count: " + photos_count);
+                                $("#" + elementID[1]).attr("src", url);
+                                $("#" + p.tableName).show();
+                            }else if(p.tableName === "TimberSummaryImagesTable")
                             {
-                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                for (var i = 0; i < totalContainers.length; i++)
-                                {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                console.log(idGroup);
-                                idGroup.sort(function(a, b){return a - b});
-                                console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                var lastID = idGroup[idGroup.length-1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'homeDrawing' + newID;
-                                var nextTextID = 'homeDrawingText' + newID;
-                                var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
-                                var nextAddButtonID = 'homeDrawingAddButton' + newID;
-                                var nextUploadID = 'homeDrawingUpload' + newID;
-                                addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                    'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
+                                console.log("I am in Timber Summary Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
 
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberSummaryImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberSummaryPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSummaryImageForm','TimberSummaryImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                                
                             }
-                            // else 
-                            // {
-                            //     console.log('have max drawings, no more creating');
-                            // }
-
-                        } else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
-                            var maxIamge = 4;
-                            document.getElementById(p.tableName).style.display = 'block';
-                            console.log("I am in renovation Feasibility Drawing Table");
-                            var maxDrawings = 4;
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //var nextID = Number(currentID) + 1;
-                            var imgLabelID = "imageCaption" + currentID;
-                            var idGroup = [];
-                            //console.log(p.addid);
-                            //document.getElementById(p.tableName).style.display = 'block';
-                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID, p.removeFunction,
-                                p.addFunction, p.imageSize, p.width);
-                            $('#' + p.imageid).attr('src', url);
-                            document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '100%';
-                            document.getElementById(p.imageid).style.height = '100%';
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.addid).style.width = '100%';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.removeid).style.width = '100%';
-                            document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.textid).style.width = '100%';
-                            document.getElementById(imgLabelID).style.display = 'block';
-                            //create the next image area base on the max image number, the current ID smaller than it, create.
-
-                            var totalContainers = $('#renovationFeasibilityDrawings').find('> form');
-                            console.log("the current form in the report is :" + totalContainers.length);
-
-                            if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawings) 
+                            else if(p.tableName === "TimberSiteImagesTable")
                             {
-                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                for (var i = 0; i < totalContainers.length; i++)
-                                {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                console.log(idGroup);
-                                idGroup.sort(function(a, b){return a - b});
-                                console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                var lastID = idGroup[idGroup.length-1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'renovationDrawing' + newID;
-                                var nextTextID = 'renovationDrawingText' + newID;
-                                var nextRemoveButtonID = 'renovationDrawingRemoveButton' + newID;
-                                var nextAddButtonID = 'renovationDrawingAddButton' + newID;
-                                var nextUploadID = 'renovationDrawingUpload' + newID;
-                                addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                    'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
+                                console.log("I am in Timber Site Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
 
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberSiteImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberSitePhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSiteImageForm','TimberSiteImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
                             }
-                        } else if (p.tableName === 'DilapidationImagesTable') {
-                            var maxImage = 60;
-                            var table = document.getElementById(p.tableName);
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //var nextID = Number(currentID) + 1;
-                            var imgLabelID = "imageCaption" + currentID;
-                            var idGroup = [];
-
-                            table.style.display = 'block';
-                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
-                            $('#' + p.imageid).attr('src', url);
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.textid).style.display = 'block';
-                            // document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(imgLabelID).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '500px';
-                            document.getElementById(p.imageid).style.height = '500px';
-                            //get the current id from the imageID.
-                            var totalContainers = $('#DilapidationPhotographs').find('> form');
-                            //console.log("the current form in the report is :" + totalContainers.length);
-
-                            if(totalContainers.length == countingImage && totalContainers.length < maxImage)
-                            {                                   
-                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                for (var i = 0; i < totalContainers.length; i++)
-                                {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                //console.log(idGroup);
-                                idGroup.sort(function(a, b){return a - b});
-                                //console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                var lastID = idGroup[idGroup.length-1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'DilapidationImage' + newID;
-                                var nextTextID = 'DilapidationImageText' + newID;
-                                var nextRemoveButtonID = 'DilapidationImageRemoveButton' + newID;
-                                var nextAddButtonID = 'AddDilapidationImageButton' + newID;
-                                var nextUploadID = 'DilapidationUploadImage' + newID;
-                                addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '0px');
-
-                            }
-                        } else if (p.tableName === 'AdviceImagesTable') {
-                            maxImage = 30;
-                            var table = document.getElementById(p.tableName);
-                             //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //var nextID = Number(currentID) + 1;
-                            var imgLabelID = "imageCaption" + currentID;
-                            var idGroup = [];
-
-                            table.style.display = 'block';
-                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
-                            $('#' + p.imageid).attr('src', url);
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.textid).style.display = 'block';
-                            // document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(imgLabelID).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '500px';
-                            document.getElementById(p.imageid).style.height = '500px';
-                           
-                            var totalContainers = $('#AdvicePhotographs').find('> form');
-                            //console.log("the current form in the report is :" + totalContainers.length);
-    
-                            //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
-                            
-                            if(totalContainers.length == countingImage && totalContainers.length < maxImage)
-                            {                                   
-                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                for (var i = 0; i < totalContainers.length; i++)
-                                {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                //console.log(idGroup);
-                                idGroup.sort(function(a, b){return a - b});
-                                //console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                var lastID = idGroup[idGroup.length-1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'AdviceImage' + newID;
-                                var nextTextID = 'AdviceImageText' + newID;
-                                var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
-                                var nextAddButtonID = 'AddAdviceImageButton' + newID;
-                                var nextUploadID = 'AdviceUploadImage' + newID;
-                                addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                    'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
-
-                            }
-                            
-                        } else if (p.tableName === 'MaintenanceImagesTable') {
-
-                             maxImage = 40;
-                            var table = document.getElementById(p.tableName);
-                             //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //var nextID = Number(currentID) + 1;
-                            var imgLabelID = "imageCaption" + currentID;
-                            var idGroup = [];
-
-                            table.style.display = 'block';
-                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
-                            $('#' + p.imageid).attr('src', url);
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.textid).style.display = 'block';
-                            // document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(imgLabelID).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '500px';
-                            document.getElementById(p.imageid).style.height = '500px';
-                           
-                            var totalContainers = $('#MaintenancePhotographs').find('> form');
-                            //console.log("the current form in the report is :" + totalContainers.length);
-                            //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
-                            if(totalContainers.length == countingImage && totalContainers.length < maxImage)
-                            {                                   
-                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                for (var i = 0; i < totalContainers.length; i++)
-                                {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                //console.log(idGroup);
-                                idGroup.sort(function(a, b){return a - b});
-                                //console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                var lastID = idGroup[idGroup.length-1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'MaintenanceImage' + newID;
-                                var nextTextID = 'MaintenanceImageText' + newID;
-                                var nextRemoveButtonID = 'MaintenanceRemoveButton' + newID;
-                                var nextAddButtonID = 'AddMaintenanceImageButton' + newID;
-                                var nextUploadID = 'MaintenanceUploadImage' + newID;
-                                addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                    'RemoveOneMaintenanceImage(this.id)', 'AddOneMaintenanceImage(this.id)', '500px', '0px');
-
-                            }
-                        } else if (p.tableName === 'MaintenanceDrawingsTable') {
-                            var maxDrawing = 6;
-                            var table = document.getElementById(p.tableName);
-                             //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //var nextID = Number(currentID) + 1;
-                            var imgLabelID = "imageCaption" + currentID;
-                            var idGroup = [];
-
-                            table.style.display = 'block';
-                            addDrawingElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
-                            $('#' + p.imageid).attr('src', url);
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.removeid).style.width = '100%';
-                            document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.textid).style.width = '100%';
-                            // document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(imgLabelID).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '100%';
-                            document.getElementById(p.imageid).style.height = '100%';
-                           
-                            var totalContainers = $('#MaintenanceDrawings').find('> form');
-                            console.log("the current form in the report is :" + totalContainers.length);
-                            if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawing) 
+                            else if(p.tableName === "TimberExteriorImagesTable")
                             {
-                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                for (var i = 0; i < totalContainers.length; i++)
-                                {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                console.log(idGroup);
-                                idGroup.sort(function(a, b){return a - b});
-                                console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                var lastID = idGroup[idGroup.length-1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'MaintenanceDrawing' + newID;
-                                var nextTextID = 'MaintenanceDrawingText' + newID;
-                                var nextRemoveButtonID = 'MaintenanceDrawingRemoveButton' + newID;
-                                var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
-                                var nextUploadID = 'MaintenanceUploadDrawing' + newID;
-                                addDrawingElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                    'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '500px', '0px');
+                                console.log("I am in Timber Exterior Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
 
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberExteriorImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberExteriorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberExteriorImageForm','TimberExteriorImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
                             }
-                        } else if (p.tableName === 'ConstructionImagesTable') {
-                            var maxImage = 30;
-                            var table = document.getElementById(p.tableName);
-                             //get the current id from the imageID.
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //var nextID = Number(currentID) + 1;
-                            var imgLabelID = "imageCaption" + currentID;
-                            var idGroup = [];
-
-                            table.style.display = 'block';
-
-                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width);
-                            $('#' + p.imageid).attr('src', url);
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.textid).style.display = 'block';
-                            // document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(imgLabelID).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '500px';
-                            document.getElementById(p.imageid).style.height = '500px';
-
-                            var totalContainers = $('#ConstructionPhotographs').find('> form');
-
-                             if(totalContainers.length == countingImage && totalContainers.length < maxImage)
-                            {                                   
-                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                for (var i = 0; i < totalContainers.length; i++)
-                                {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                //console.log(idGroup);
-                                idGroup.sort(function(a, b){return a - b});
-                                //console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                var lastID = idGroup[idGroup.length-1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'ConstructionImage' + newID;
-                                var nextTextID = 'ConstructionImageText' + newID;
-                                var nextRemoveButtonID = 'ConstructionImageRemoveButton' + newID;
-                                var nextAddButtonID = 'AddConstructionImageButton' + newID;
-                                var nextUploadID = 'ConstructionUploadImage' + newID;
-                                addImageElements(nextAltName, 'ConstructionPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'RemoveOneConstructionImage(this.id)', 'AddOneConstructionImage(this.id)', '500px', '500px');
-
-                            }
-                        } else if (p.tableName === 'CPImagesTable') {
-                            //                            var table = document.getElementById(p.tableName);
-                            //                            table.style.display = 'block';
-                            //                            //console.log("the total number of images in this CP report are : " + countingImage);
-                            //                            //console.log(p.imageid);
-                            //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
-                            //                            //if (imageNo === 0)
-                            //                            //{
-                            //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                            //                                'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0px');
-                            //                            $('#' + p.imageid).attr('src', url);
-                            //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
-                            //                            var labelID = "imageCaption" + givenID;
-                            //                            document.getElementById(p.addid).style.display = 'none';
-                            //                            document.getElementById(p.removeid).style.display = 'block';
-                            //                            document.getElementById(p.textid).style.display = 'block';
-                            //                            document.getElementById(p.imageid).style.display = 'block';
-                            //                            document.getElementById(p.imageid).style.width = '480px';
-                            //                            document.getElementById(labelID).style.display = 'block';
-                            //                            //get the current id from the imageID.
-                            //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //                            var nextID = Number(currentID) + 1;
-                            //                            //console.log("the next ID is " + nextID);
-                            //                            var altID = Number(nextID) + 1;
-                            //                            if (nextID >= countingImage) {
-                            //                                var altName = 'Image' + altID;
-                            //                                console.log("I am here!!! need to create a image " + altName);
-                            //                                var imageID = 'CPImage' + nextID;
-                            //                                var textID = 'CPImageText' + nextID;
-                            //                                var removeButtonID = 'CPImageRemoveButton' + nextID;
-                            //                                var addButtonID = 'CPImageAddButton' + nextID;
-                            //                                var uploadID = 'CPImageUpload' + nextID;
-                            //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
-                            //
-                            //                            }
-
-                            //[imgID, btnID, captionID, containerID,labelID]
-                            //console.log("IMAGE id: " + p.imageid);
-                            //                            var temp = parseInt(p.imageid.split("_")[0]);
-                            var temp = p.imageid.replace("CPImage", "");
-                            //                            console.log("Before Photos count :" + photos_count);
-                            //                            console.log("temp : " + temp);
-                            if (temp >= photos_count) {
-                                photos_count = temp;
-                                photos_count++;
-                            }
-                            //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
-                            var elementID = createPhoto(temp);
-                            //                            console.log("After count: " + photos_count);
-                            $("#" + elementID[1]).attr("src", url);
-                            $("#" + p.tableName).show();
-
-                        } else if (p.tableName === 'HOWImagesTable') {
-                            //                            var table = document.getElementById(p.tableName);
-                            //                            table.style.display = 'block';
-                            //                            console.log("the total number of images in this HOW report are : " + countingImage);
-                            //                            //console.log(p.imageid);
-                            //                            //use the imageNo to determine the current image number, it is 0 means this is the first image, then create the element for the first image and the element for the next image.
-                            //                            //if (imageNo === 0)
-                            //                            //{
-                            //                            addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                            //                                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
-                            //                            $('#' + p.imageid).attr('src', url);
-                            //                            var givenID = p.imageid.replace(/[^\d.]/g, '');
-                            //                            var labelID = "HOWimageCaption" + givenID;
-                            //                            document.getElementById(p.addid).style.display = 'none';
-                            //                            document.getElementById(p.removeid).style.display = 'block';
-                            //                            document.getElementById(p.textid).style.display = 'block';
-                            //                            document.getElementById(p.imageid).style.display = 'block';
-                            //                            document.getElementById(p.imageid).style.width = '480px';
-                            //                            document.getElementById(labelID).style.display = 'block';
-                            //                            //get the current id from the imageID.
-                            //                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //                            var nextID = Number(currentID) + 1;
-                            //                            console.log("the next ID is " + nextID);
-                            //                            var altID = Number(nextID) + 1;
-                            //                            if (nextID >= countingImage) {
-                            //                                var altName = 'Image' + altID;
-                            //                                console.log("I am here!!! need to create a image " + altName);
-                            //                                var imageID = 'HOWImage' + nextID;
-                            //                                var textID = 'HOWImageText' + nextID;
-                            //                                var removeButtonID = 'HOWImageRemoveButton' + nextID;
-                            //                                var addButtonID = 'HOWImageAddButton' + nextID;
-                            //                                var uploadID = 'HOWImageUpload' + nextID;
-                            //                                addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0');
-                            //                            }
-                            var temp = p.imageid.replace("HOWImage", "");
-                            //                            console.log("Before Photos count :" + photos_count);
-                            //                            console.log("temp : " + temp);
-                            if (temp >= photos_count) {
-                                photos_count = temp;
-                                photos_count++;
-                            }
-                            //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
-                            var elementID = createPhoto(temp);
-                            //                            console.log("After count: " + photos_count);
-                            $("#" + elementID[1]).attr("src", url);
-                            $("#" + p.tableName).show();
-
-                        } else if (p.tableName === "HA_PdfContents") {
-                            //console.log("Beofre pdf Count: " + pdfCounts);
-                            //imgbtnID = [img ID, deltebuttonID, caption ID, container ID]
-
-                            var temp = parseInt(p.imageid.split("_")[0]);
-                            //console.log("TEMP: "+ temp);
-
-                            if (temp >= pdfCounts) {
-                                pdfCounts = temp;
-                                pdfCounts++;
-                            }
-                            //console.log("After pdf Count: " + temp);
-
-                            var imgbtnID = createPDFImg(temp);
-
-                            //Show img
-                            $("#" + imgbtnID[0]).show();
-
-                            //Show delete button
-                            $("#" + imgbtnID[1]).show();
-
-                            //Attach img
-                            //console.log("Image URL: " + url);
-                            $("#" + imgbtnID[0]).attr("src", url);
-                            $("#" + p.tableName).show();
-                        } else if (p.tableName === "HA_ImgsContents") {
-                            //[imgID, btnID, captionID, containerID]
-                            //console.log("IMAGE id: " + p.imageid);
-                            var temp = parseInt(p.imageid.split("_")[0]);
-
-                            //                            console.log("Before Photos count :" + photos_count);
-                            //                            console.log("temp : " + temp);
-                            if (temp >= photos_count) {
-                                photos_count = temp;
-                                photos_count++;
-                            }
-                            //[imgContainerID, newImgID, imgTextID, imgRmBtnID]
-                            var elementID = createPhoto(temp);
-                            //                            console.log("After count: " + photos_count);
-                            $("#" + elementID[1]).attr("src", url);
-                            $("#" + p.tableName).show();
-                        }else if(p.tableName === "TimberSummaryImagesTable")
-                        {
-                            console.log("I am in Timber Summary Images Table");
-                            document.getElementById(p.tableName).style.display = 'block';
-
-                            var maxImages = 3;
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            //var nextID = Number(currentID) + 1;
-                            var imgLabelID = "TimberSummaryImageCaption" + currentID;
-                            var idGroup = [];
-
-                            addImageElements(p.imageAltName,'TimberSummaryPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
-                                p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSummaryImageForm','TimberSummaryImageCaption');
-
-                            $('#' + p.imageid).attr('src', url);
-                            document.getElementById(p.imageid).style.display = 'block';
-                            document.getElementById(p.imageid).style.width = '265px';
-                            document.getElementById(p.imageid).style.height = '265px';
-                            document.getElementById(p.addid).style.display = 'none';
-                            document.getElementById(p.addid).style.width = '265px';
-                            document.getElementById(p.removeid).style.display = 'block';
-                            document.getElementById(p.removeid).style.width = '265px';
-                            document.getElementById(p.textid).style.display = 'block';
-                            document.getElementById(p.textid).style.width = '265px';
-                            document.getElementById(imgLabelID).style.display = 'block';
-                            
-                            var totalContainers = $('#TimberSummaryPhotographs').find('> form');
-                            console.log("the current form in the report is :" + totalContainers.length);
-
-                            //create the next image area base on the max image number, the current ID smaller than it, create.
-                            // var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            // var nextID = Number(currentID) + 1;
-                            // console.log("the current total number of drawings " + countingDrawing);
-                            // console.log("the currentID " + currentID);
-                            // console.log("the nextID " + nextID);
-                            if (totalContainers.length == countingTimberSummary && totalContainers.length < maxImages) 
+                            else if(p.tableName === "TimberInteriorImagesTable")
                             {
-                                console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                for (var i = 0; i < totalContainers.length; i++)
-                                {
-                                    var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    var id = Number(idStr);
-                                    idGroup.push(id);
-                                }
-                                //console.log(idGroup);
-                                idGroup.sort(function(a, b){return a - b});
-                                //console.log(idGroup);
-                                console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                var lastID = idGroup[idGroup.length-1]
-                                var newID = Number(lastID) + 1;
-                                var altID = Number(lastID) + 2;
-                                nextAltName = 'image ' + altID;
-                                //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                var nextImageID = 'TimberSummaryImage' + newID;
-                                var nextTextID = 'TimberSummaryImageText' + newID;
-                                var nextRemoveButtonID = 'TimberSummaryRemoveButton' + newID;
-                                var nextAddButtonID = 'AddTimberSummaryImageButton' + newID;
-                                var nextUploadID = 'TimberSummaryUploadImage' + newID;
-                                addImageElements(nextAltName, 'TimberSummaryPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                    'RemoveOneTimberSummaryImage(this.id)', 'AddOneTimberSummaryImage(this.id)', '265px', '265px','TimberSummaryImageForm','TimberSummaryImageCaption');
+                                console.log("I am in Timber Interior Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
 
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberInteriorImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberInteriorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberInteriorImageForm','TimberInteriorImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
                             }
-                        }
+                            else if(p.tableName === "TimberRoofImagesTable")
+                            {
+                                console.log("I am in Timber Roof Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
+
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberRoofImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberRoofPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberRoofImageForm','TimberRoofImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                            }
+                            else if(p.tableName === "TimberSubfloorImagesTable")
+                            {
+                                console.log("I am in Timber Subfloor Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
+
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberSubfloorImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberSubfloorPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberSubfloorImageForm','TimberSubfloorImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                            }
+                            else if(p.tableName === "TimberRecommendationImagesTable")
+                            {
+                                console.log("I am in Timber Recommendation Images Table");
+                                document.getElementById(p.tableName).style.display = 'block';
+
+                                var maxImages = 3;
+                                var currentID = p.imageid.replace(/[^\d.]/g, '');
+                                //var nextID = Number(currentID) + 1;
+                                var imgLabelID = "TimberRecommendationImageCaption" + currentID;
+                                var idGroup = [];
+
+                                addImageElements(p.imageAltName,'TimberRecommendationPhotographs', p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
+                                    p.removeFunction, p.addFunction, p.imageSize, p.width,'TimberRecommendationImageForm','TimberRecommendationImageCaption');
+
+                                $('#' + p.imageid).attr('src', url);
+                                document.getElementById(p.imageid).style.display = 'block';
+                                document.getElementById(p.imageid).style.width = '340px';
+                                document.getElementById(p.imageid).style.height = '340px';
+                                document.getElementById(p.addid).style.display = 'none';
+                                document.getElementById(p.addid).style.width = '340px';
+                                document.getElementById(p.removeid).style.display = 'block';
+                                document.getElementById(p.removeid).style.width = '340px';
+                                document.getElementById(p.textid).style.display = 'block';
+                                document.getElementById(p.textid).style.width = '340px';
+                                document.getElementById(imgLabelID).style.display = 'block';
+                            }
                     }
                 }
             }
