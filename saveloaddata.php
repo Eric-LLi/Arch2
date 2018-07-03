@@ -331,108 +331,109 @@
                 if (image) {
                     //console.log('1111111have imageID');
                     //console.log(imageID);
-                    image.style.display = 'block';
-                    image.alt = p.imageAltName
-                    //imageID.style.width = '265px';
-                    //console.log(p.imageid + " width is " + p.width);
-                    //console.log(p.imageid + " alt name is " + p.imageAltName);
-                    image.style.width = p.width;
-                    //imageID.style.height = '265px';
-                    image.style.height = p.imageSize;
-                    $('#' + p.imageid).attr('src', url);
+                    // image.style.display = 'block';
+                    // image.alt = p.imageAltName
+                    // //imageID.style.width = '265px';
+                    // //console.log(p.imageid + " width is " + p.width);
+                    // //console.log(p.imageid + " alt name is " + p.imageAltName);
+                    // image.style.width = p.width;
+                    // //imageID.style.height = '265px';
+                    // image.style.height = p.imageSize;
+                    // $('#' + p.imageid).attr('src', url);
 
-                    if ((p.textid != '') && (p.textid != null)) {
-                        var textID = document.getElementById(p.textid);
-                        textID.style.display = 'block';
-                        textID.style.width = p.width
-                    }
+                    // if ((p.textid != '') && (p.textid != null)) {
+                    //     var textID = document.getElementById(p.textid);
+                    //     textID.style.display = 'block';
+                    //     textID.style.width = p.width
+                    // }
 
-                    if ((p.removeid != '') && (p.removeid != null)) {
-                        var removeID = document.getElementById(p.removeid);
-                        if (removeID) {
-                            removeID.style.display = 'block';
-                            //console.log('the widht is ' + p.width);
-                            removeID.style.width = p.width;
-                        }
-                    }
-                    console.log('the addID is ' + p.addid);
-                    if ((p.addid != '') && (p.addid != null)) {
-                        var addButton = document.getElementById(p.addid);
-                        //console.log('the current add button is ' + addButton);
-                        //console.log(p.imageid);
-                        //console.log(p.addid);
-                        //console.log(imageID.style.width);
-                        //console.log(addButton);
-                        if (addButton) {
-                            console.log("button existed");
-                            addButton.style.display = 'none';
-                            addButton.style.width = p.width;
-                            var nextaddid = incString(p.addid);
-                            var currentID = p.imageid.replace(/[^\d.]/g, '');
-                            var nextID = Number(currentID) + 1;
-                            var nextImageID = p.imageid.replace(/[0-9]/g, '') + nextID;
-                            var nextImage = document.getElementById(nextImageID);
-                            var nextAddButton = document.getElementById(nextaddid);
-                            // if(p.addid.substr(0,17) == 'HOWImageAddButton')
-                            // {
-                            //   console.log("need to unblock the label");
-                            //   var currentID = p.imageid.replace ( /[^\d.]/g, '' );
-                            //   //display the label elementment
-                            //   var labelID = "HOWimageCaption" + currentID;
-                            //   document.getElementById(labelID).style.display = 'block';
-                            // }
-                            if (nextImage) {
-                                //console.log(nextImage.src)
-                                if (nextImage.src.indexOf("photos") < 0) {
-                                    // console.log('no photos');
-                                    nextAddButton.style.display = 'block';
-                                }
-                            } else {
-                                //console.log('next image is not existed, it is not on property assessment or timber pest insepction report');
-                                // if (p.addid.substr(0, 16) == 'CPImageAddButton') {
-                                //     console.log('let build something， CP IMAGES');
-                                //     var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //     //display the label elementment
-                                //     var labelID = "imageCaption" + currentID;
-                                //     document.getElementById(labelID).style.display = 'block';
-                                //     //create the next image form
-                                //     var nextID = Number(currentID) + 1;
-                                //     //console.log("the next ID is " + nextID);
-                                //     var altID = Number(nextID) + 1;
-                                //     nextAltName = 'image ' + altID;
-                                //     //console.log("I am here!!! " + nextAltName);
-                                //     var altName = 'Image' + altID;
-                                //     var imageID = 'CPImage' + nextID;
-                                //     var textID = 'CPImageText' + nextID;
-                                //     var removeButtonID = 'CPImageRemoveButton' + nextID;
-                                //     var addButtonID = 'CPImageAddButton' + nextID;
-                                //     var uploadID = 'CPImageUpload' + nextID;
-                                //     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
-                                // }
-                                // if (p.addid.substr(0, 17) == 'HOWImageAddButton') {
-                                //     var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                //     console.log('let build something， HOW REPORT');
-                                //     //display the label elementment
-                                //     var labelID = "HOWimageCaption" + currentID;
-                                //     document.getElementById(labelID).style.display = 'block';
-                                //     var nextID = Number(currentID) + 1;
-                                //     var altID = Number(nextID) + 1;
-                                //     var altName = 'Image' + altID;
-                                //     var imageID = 'HOWImage' + nextID;
-                                //     var textID = 'HOWImageText' + nextID;
-                                //     var removeButtonID = 'HOWImageRemoveButton' + nextID;
-                                //     var addButtonID = 'HOWImageAddButton' + nextID;
-                                //     var uploadID = 'HOWImageUpload' + nextID;
-                                //     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                                //         'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
-                                // }
-                            }
-                        }
+                    // if ((p.removeid != '') && (p.removeid != null)) {
+                    //     var removeID = document.getElementById(p.removeid);
+                    //     if (removeID) {
+                    //         removeID.style.display = 'block';
+                    //         //console.log('the widht is ' + p.width);
+                    //         removeID.style.width = p.width;
+                    //     }
+                    // }
+                    // console.log('the addID is ' + p.addid);
+                    // if ((p.addid != '') && (p.addid != null)) {
+                    //     var addButton = document.getElementById(p.addid);
+                    //     //console.log('the current add button is ' + addButton);
+                    //     //console.log(p.imageid);
+                    //     //console.log(p.addid);
+                    //     //console.log(imageID.style.width);
+                    //     //console.log(addButton);
+                    //     if (addButton) {
+                    //         console.log("button existed");
+                    //         addButton.style.display = 'none';
+                    //         addButton.style.width = p.width;
+                    //         var nextaddid = incString(p.addid);
+                    //         var currentID = p.imageid.replace(/[^\d.]/g, '');
+                    //         var nextID = Number(currentID) + 1;
+                    //         var nextImageID = p.imageid.replace(/[0-9]/g, '') + nextID;
+                    //         var nextImage = document.getElementById(nextImageID);
+                    //         var nextAddButton = document.getElementById(nextaddid);
+                    //         // if(p.addid.substr(0,17) == 'HOWImageAddButton')
+                    //         // {
+                    //         //   console.log("need to unblock the label");
+                    //         //   var currentID = p.imageid.replace ( /[^\d.]/g, '' );
+                    //         //   //display the label elementment
+                    //         //   var labelID = "HOWimageCaption" + currentID;
+                    //         //   document.getElementById(labelID).style.display = 'block';
+                    //         // }
+                    //         if (nextImage) {
+                    //             //console.log(nextImage.src)
+                    //             if (nextImage.src.indexOf("photos") < 0) {
+                    //                 // console.log('no photos');
+                    //                 nextAddButton.style.display = 'block';
+                    //             }
+                    //         } else {
+                    //             //console.log('next image is not existed, it is not on property assessment or timber pest insepction report');
+                    //             // if (p.addid.substr(0, 16) == 'CPImageAddButton') {
+                    //             //     console.log('let build something， CP IMAGES');
+                    //             //     var currentID = p.imageid.replace(/[^\d.]/g, '');
+                    //             //     //display the label elementment
+                    //             //     var labelID = "imageCaption" + currentID;
+                    //             //     document.getElementById(labelID).style.display = 'block';
+                    //             //     //create the next image form
+                    //             //     var nextID = Number(currentID) + 1;
+                    //             //     //console.log("the next ID is " + nextID);
+                    //             //     var altID = Number(nextID) + 1;
+                    //             //     nextAltName = 'image ' + altID;
+                    //             //     //console.log("I am here!!! " + nextAltName);
+                    //             //     var altName = 'Image' + altID;
+                    //             //     var imageID = 'CPImage' + nextID;
+                    //             //     var textID = 'CPImageText' + nextID;
+                    //             //     var removeButtonID = 'CPImageRemoveButton' + nextID;
+                    //             //     var addButtonID = 'CPImageAddButton' + nextID;
+                    //             //     var uploadID = 'CPImageUpload' + nextID;
+                    //             //     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID, 'removeOneCPImage(this.id)', 'addOneCPImage(this.id)', '480px', '0');
+                    //             // }
+                    //             // if (p.addid.substr(0, 17) == 'HOWImageAddButton') {
+                    //             //     var currentID = p.imageid.replace(/[^\d.]/g, '');
+                    //             //     console.log('let build something， HOW REPORT');
+                    //             //     //display the label elementment
+                    //             //     var labelID = "HOWimageCaption" + currentID;
+                    //             //     document.getElementById(labelID).style.display = 'block';
+                    //             //     var nextID = Number(currentID) + 1;
+                    //             //     var altID = Number(nextID) + 1;
+                    //             //     var altName = 'Image' + altID;
+                    //             //     var imageID = 'HOWImage' + nextID;
+                    //             //     var textID = 'HOWImageText' + nextID;
+                    //             //     var removeButtonID = 'HOWImageRemoveButton' + nextID;
+                    //             //     var addButtonID = 'HOWImageAddButton' + nextID;
+                    //             //     var uploadID = 'HOWImageUpload' + nextID;
+                    //             //     addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
+                    //             //         'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
+                    //             // }
+                    //         }
+                    //     }
                         //console.log('the current add id is ' + p.addid);
                         //console.log('the next add id is ' + nextaddid);
                         // console.log('the next imageID is ' + nextImageID);
-                    }
-                } else {
+                    //}
+                } 
+                else {
                     //console.log(p.imageid + " corresponding image field is not extied");
                     //console.log("2222222Table Name: " + p.tableName);
                     if (p.tableName) {
