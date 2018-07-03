@@ -5,7 +5,73 @@
 var flag = false;
 function onload()
 {
+    //reorderImages('AccessmentSiteImagesContainer');
     automaticNumbering('AccessmentSiteImagesContainer');
+    automaticNumbering('AccessmentExteriorImagesContainer');
+    
+}
+function automaticNumbering(divid)
+{
+    //console.log("need to refresh the image number");
+    var totalContainers = $('#'+divid).find('> form');
+    //console.log(totalContainers);
+    for(var i=0;i<totalContainers.length;i++)
+    {
+        //console.log(totalContainers.eq(i).children('label').get(0));
+        //console.log(totalContainers.eq(i).children('form').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('label').get(0).innerHTML = "IMG " + (i+1);
+    }
+}
+function reorderImages(divid)
+{
+    var totalContainers = $('#'+divid).find('> form');
+    var BigContainer = document.getElementById(divid);
+    //console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     console.log((totalContainers[i].id));
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    //console.log(totalContainers);
+
+    $('#'+divid).empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+       BigContainer.appendChild(totalContainers[i]);
+       var imgID = totalContainers.eq(i).children('img').get(0).id;
+       //console.log(imgID);
+       var labelID = totalContainers.eq(i).children('label').get(0).id;
+       //console.log(labelID);
+       var textID = totalContainers.eq(i).children('input').eq(0).get(0).id;
+       //console.log(textID);
+       var rmBtnID = totalContainers.eq(i).children('input').eq(1).get(0).id;
+       //console.log(rmBtnID);
+       var addBtnID = totalContainers.eq(i).children('input').eq(2).get(0).id;
+       //console.log(addBtnID);
+       var formID = totalContainers[i].id;
+       //console.log(formID);
+       var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+       var imgContainerID = id + "_imgContainer";
+       var ImgID = totalContainers.eq(i).children('img').id;
+       // console.log(imgContainerID);
+       // console.log(id);
+       // console.log(ImgID);
+       var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID];
+       //console.log(element);
+        // $("#" + rmBtnID).click(function () {
+        //     // DeleteImage(formID, imgID, textID);
+        //     DeleteOneImg(element);
+        // });
+       var removeBtn = document.getElementById(totalContainers.eq(i).children('input').eq(1).get(0).id);
+       var removeFunction = "DeleteOneImg('"+element+"')";
+       console.log(removeFunction);
+       removeBtn.setAttribute("onclick", removeFunction);
+    }
 }
 
 /**
@@ -179,18 +245,7 @@ function moreEvidentDefect() {
 }
 
 
-function automaticNumbering(divid)
-{
-    //console.log("need to refresh the image number");
-    var totalContainers = $('#'+divid).find('> form');
-    //console.log(totalContainers);
-    for(var i=0;i<totalContainers.length;i++)
-    {
-        //console.log(totalContainers.eq(i).children('label').get(0));
-        //console.log(totalContainers.eq(i).children('form').eq(1).children('label').get(0));
-        totalContainers.eq(i).children('label').get(0).innerHTML = "IMG " + (i+1);
-    }
-}
+
 
 
 
