@@ -2,6 +2,97 @@
  * Created by Fafa on 12/1/18.
  */
 var firstRemove4th = true;
+function onload()
+ {
+     reorderImages();
+     automaticNumbering();
+     addNewImageForm()
+ }
+
+function reorderImages()
+{
+    console.log("need to reorder the images");
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    var BigContainer = document.getElementById('homeFeasibilityDrawings');
+    console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     console.log((totalContainers[i].id));
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    console.log(totalContainers);
+
+    $("#homeFeasibilityDrawings").empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+       BigContainer.appendChild(totalContainers[i]);
+    }
+}
+
+
+function automaticNumbering()
+{
+    console.log("need to refresh the image number");
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    for(var i=0;i<totalContainers.length;i++)
+    {
+        //console.log(i);
+        //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
+    }
+}
+function addNewImageForm()
+{
+    maxImage = 4;
+    var idGroup = [];
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    console.log("the current form in the report homeFeasibilityDrawings is " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++)
+    {
+        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
+        var id = Number(idStr);
+        idGroup.push(id);
+    }
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b});
+    //console.log(idGroup);
+    console.log("the last ID is " + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1]
+    var newID = Number(lastID) + 1;
+    var altID = Number(lastID) + 2;
+    if(totalContainers.length < maxImage && totalContainers.length != 0)
+    {
+        console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+        nextAltName = 'image ' + altID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        var nextImageID = 'homeDrawing' + newID;
+        var nextTextID = 'homeDrawingText' + newID;
+        var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
+        var nextAddButtonID = 'homeDrawingAddButton' + newID;
+        var nextUploadID = 'homeDrawingUpload' + newID;
+        addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
+    }
+}
+
+function countWord(click_id)
+{
+    var words = document.getElementById(click_id).value;
+    var regex = /\s+/gi;
+    var wordCount = words.trim().replace(regex, ' ').split(' ').length;
+    //console.log("total word count: " + wordCount);
+    // if (wordCount >= 4)
+    // {
+    //     document.getElementById(click_id).disabled = true;
+    //     alert("you can only enter 3 words");
+    // }
+}
+
 function formatNumber(click_id)
 {
     var val = document.getElementById(click_id).value;
@@ -316,7 +407,7 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
             var uploadID = 'homeDrawingUpload' + count;
             addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
                 'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-
+            automaticNumbering();
 
         },400)
     }
@@ -391,6 +482,10 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
                 }, 500);
             }
         }
+        setTimeout(function(){
+            automaticNumbering();
+
+        },1000)
     }
 
 });
@@ -497,76 +592,9 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     container2.appendChild(imgLabel);
     container3.appendChild(textInput);
     container4.appendChild(removeButton);
-    container4.appendChild(addButton);
+    container5.appendChild(addButton);
     container5.appendChild(uploadFile);
 }
-
-
-// function addDrawing()
-// {
-//     var table = document.getElementById('homeFeasibilityDrawingsTable');
-//     var rowCount = table.rows.length;
-//     console.log(rowCount);
-//     var row = table.insertRow(rowCount);
-//     var cell1 = row.insertCell(0);
-
-//     var form = document.createElement('form');
-
-//     var img = document.createElement('img');
-//     img.src = "#";
-//     var imageNo  = rowCount + 1;
-//     img.alt = 'Drawing' + imageNo;
-//     img.id = 'homeDrawing' + rowCount;
-//     img.style.width = '100%';
-//     img.style.height = '100%';
-//     img.style.paddingTop = '10px';
-//     img.style.marginBottom = '10px';
-//     img.style.display = 'none';
-
-//     var nameInput = document.createElement('INPUT');
-//     nameInput.setAttribute('class','form-control');
-//     nameInput.setAttribute('title','name');
-//     nameInput.setAttribute('type','text');
-//     nameInput.id = 'homeDrawingText' + rowCount;
-//     nameInput.style.marginBottom = '10px';
-
-//     //create an input for the remove button
-//     var removeButton = document.createElement('INPUT');
-//     removeButton.setAttribute("type", "button");
-//     removeButton.setAttribute("value", "Remove");
-//     removeButton.setAttribute("onclick", 'removeOneHomeDrawing(this.id)');
-//     removeButton.id = 'homeDrawingRemoveButton' + rowCount;
-//     removeButton.style.width = '100%';
-//     removeButton.style.height = "25px";
-//     removeButton.style.display = "none";
-
-//     //create an input for add button
-//     var addButton = document.createElement('INPUT');
-//     addButton.setAttribute("type", "button");
-//     addButton.setAttribute("value", "Add");
-//     addButton.setAttribute("onclick", 'addOneHomeDrawing(this.id)');
-//     addButton.id = 'homeDrawingAddButton' + rowCount;
-//     addButton.style.width = '100%';
-//     addButton.style.height = "25px";
-//     addButton.style.display = 'block';
-
-//     //create an input for file, to upload images, this is the one with upload action
-//     var uploadFile = document.createElement('INPUT');
-//     uploadFile.setAttribute("type", "file");
-//     uploadFile.id = 'homeDrawingUpload' + rowCount;
-//     uploadFile.setAttribute("class", "inputImage");
-//     uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
-
-//     uploadFile.style.display = 'none';
-
-//     form.appendChild(img);
-//     form.appendChild(nameInput);
-//     form.appendChild(removeButton);
-//     form.appendChild(addButton);
-//     form.appendChild(uploadFile);
-//     cell1.appendChild(form);
-
-// }
 
 function removeOneHomeDrawing(click_id)
 {
@@ -638,6 +666,7 @@ function removeOneHomeDrawing(click_id)
          document.getElementById('homeFeasibilityDrawingsTable').style.display = 'none';
      }
 
+    automaticNumbering();
 }
 
 function addOneHomeDrawing(click_id)
@@ -734,6 +763,7 @@ function addOneHomeDrawing(click_id)
                         }
                     );
                 });
+                automaticNumbering();
                 if (Number(selectedID) == Number(lastID))
                 {
                     if (totalContainers.length < 4)

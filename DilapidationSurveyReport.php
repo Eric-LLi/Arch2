@@ -37,7 +37,7 @@
     <?php require_once("saveloaddata.php"); ?>
     <?php require_once("meta.php"); ?>
 </head>
-<body>
+<body onload="onload()">
 <!--Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">ArchiCentre Task</a>

@@ -437,11 +437,9 @@
                                 console.log("I am in Home Feasibility Drawing Table");
                                 document.getElementById(p.tableName).style.display = 'block';
 
-                                var maxDrawings = 4;
                                 var currentID = p.imageid.replace(/[^\d.]/g, '');
                                 //var nextID = Number(currentID) + 1;
                                 var imgLabelID = "imageCaption" + currentID;
-                                var idGroup = [];
 
                                 addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                     p.removeFunction, p.addFunction, p.imageSize, p.width);
@@ -457,57 +455,16 @@
                                 document.getElementById(p.textid).style.display = 'block';
                                 document.getElementById(p.textid).style.width = '100%';
                                 document.getElementById(imgLabelID).style.display = 'block';
-                                
-                                var totalContainers = $('#homeFeasibilityDrawings').find('> form');
-                                console.log("the current form in the report is :" + totalContainers.length);
-
-                                //create the next image area base on the max image number, the current ID smaller than it, create.
-                                // var currentID = p.imageid.replace(/[^\d.]/g, '');
-                                // var nextID = Number(currentID) + 1;
-                                // console.log("the current total number of drawings " + countingDrawing);
-                                // console.log("the currentID " + currentID);
-                                // console.log("the nextID " + nextID);
-                                if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawings) 
-                                {
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    for (var i = 0; i < totalContainers.length; i++)
-                                    {
-                                        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                        var id = Number(idStr);
-                                        idGroup.push(id);
-                                    }
-                                    console.log(idGroup);
-                                    idGroup.sort(function(a, b){return a - b});
-                                    console.log(idGroup);
-                                    console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                    var lastID = idGroup[idGroup.length-1]
-                                    var newID = Number(lastID) + 1;
-                                    var altID = Number(lastID) + 2;
-                                    nextAltName = 'image ' + altID;
-                                    //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                    var nextImageID = 'homeDrawing' + newID;
-                                    var nextTextID = 'homeDrawingText' + newID;
-                                    var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
-                                    var nextAddButtonID = 'homeDrawingAddButton' + newID;
-                                    var nextUploadID = 'homeDrawingUpload' + newID;
-                                    addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-
-                                }
-                                // else 
-                                // {
-                                //     console.log('have max drawings, no more creating');
-                                // }
-
+                    
                             } else if (p.tableName === 'RenovationFeasibilityDrawingsTable') {
-                                var maxIamge = 4;
+                                
                                 document.getElementById(p.tableName).style.display = 'block';
                                 console.log("I am in renovation Feasibility Drawing Table");
-                                var maxDrawings = 4;
+                               
                                 var currentID = p.imageid.replace(/[^\d.]/g, '');
                                 //var nextID = Number(currentID) + 1;
                                 var imgLabelID = "imageCaption" + currentID;
-                                var idGroup = [];
+                               
                                 //console.log(p.addid);
                                 //document.getElementById(p.tableName).style.display = 'block';
                                 addImageElements(p.imageAltName, p.imageid, p.textid, p.removeid, p.addid, p.uploadID, p.removeFunction,
@@ -524,45 +481,12 @@
                                 document.getElementById(p.textid).style.width = '100%';
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 //create the next image area base on the max image number, the current ID smaller than it, create.
-
-                                var totalContainers = $('#renovationFeasibilityDrawings').find('> form');
-                                console.log("the current form in the report is :" + totalContainers.length);
-
-                                if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawings) 
-                                {
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    for (var i = 0; i < totalContainers.length; i++)
-                                    {
-                                        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                        var id = Number(idStr);
-                                        idGroup.push(id);
-                                    }
-                                    console.log(idGroup);
-                                    idGroup.sort(function(a, b){return a - b});
-                                    console.log(idGroup);
-                                    console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                    var lastID = idGroup[idGroup.length-1]
-                                    var newID = Number(lastID) + 1;
-                                    var altID = Number(lastID) + 2;
-                                    nextAltName = 'image ' + altID;
-                                    //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                    var nextImageID = 'renovationDrawing' + newID;
-                                    var nextTextID = 'renovationDrawingText' + newID;
-                                    var nextRemoveButtonID = 'renovationDrawingRemoveButton' + newID;
-                                    var nextAddButtonID = 'renovationDrawingAddButton' + newID;
-                                    var nextUploadID = 'renovationDrawingUpload' + newID;
-                                    addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'removeOneRenovationDrawing(this.id)', 'addOneRenovationDrawing(this.id)', '100%', '0px');
-
-                                }
                             } else if (p.tableName === 'DilapidationImagesTable') {
-                                var maxImage = 60;
                                 var table = document.getElementById(p.tableName);
                                 var currentID = p.imageid.replace(/[^\d.]/g, '');
                                 //var nextID = Number(currentID) + 1;
                                 var imgLabelID = "imageCaption" + currentID;
-                                var idGroup = [];
-
+                            
                                 table.style.display = 'block';
                                 addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                     p.removeFunction, p.addFunction, p.imageSize, p.width);
@@ -574,38 +498,6 @@
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 document.getElementById(p.imageid).style.width = '500px';
                                 document.getElementById(p.imageid).style.height = '500px';
-                                //get the current id from the imageID.
-                                var totalContainers = $('#DilapidationPhotographs').find('> form');
-                                //console.log("the current form in the report is :" + totalContainers.length);
-
-                                if(totalContainers.length == countingImage && totalContainers.length < maxImage)
-                                {                                   
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    for (var i = 0; i < totalContainers.length; i++)
-                                    {
-                                        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                        var id = Number(idStr);
-                                        idGroup.push(id);
-                                    }
-                                    //console.log(idGroup);
-                                    idGroup.sort(function(a, b){return a - b});
-                                    //console.log(idGroup);
-                                    console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                    var lastID = idGroup[idGroup.length-1]
-                                    var newID = Number(lastID) + 1;
-                                    var altID = Number(lastID) + 2;
-                                    nextAltName = 'image ' + altID;
-                                    //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                    var nextImageID = 'DilapidationImage' + newID;
-                                    var nextTextID = 'DilapidationImageText' + newID;
-                                    var nextRemoveButtonID = 'DilapidationImageRemoveButton' + newID;
-                                    var nextAddButtonID = 'AddDilapidationImageButton' + newID;
-                                    var nextUploadID = 'DilapidationUploadImage' + newID;
-                                    addImageElements(nextAltName, 'DilapidationPhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                            'RemoveOneDilapidationImage(this.id)', 'addOneDilapidationImage(this.id)', '500px', '0px');
-
-                                }
                             } else if (p.tableName === 'AdviceImagesTable') {
                                 maxImage = 30;
                                 var table = document.getElementById(p.tableName);
@@ -613,7 +505,6 @@
                                 var currentID = p.imageid.replace(/[^\d.]/g, '');
                                 //var nextID = Number(currentID) + 1;
                                 var imgLabelID = "imageCaption" + currentID;
-                                var idGroup = [];
 
                                 table.style.display = 'block';
                                 addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
@@ -626,51 +517,13 @@
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 document.getElementById(p.imageid).style.width = '500px';
                                 document.getElementById(p.imageid).style.height = '500px';
-                            
-                                var totalContainers = $('#AdvicePhotographs').find('> form');
-                                //console.log("the current form in the report is :" + totalContainers.length);
-        
-                                //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
-                                
-                                if(totalContainers.length == countingImage && totalContainers.length < maxImage)
-                                {                                   
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    for (var i = 0; i < totalContainers.length; i++)
-                                    {
-                                        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                        var id = Number(idStr);
-                                        idGroup.push(id);
-                                    }
-                                    //console.log(idGroup);
-                                    idGroup.sort(function(a, b){return a - b});
-                                    //console.log(idGroup);
-                                    console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                    var lastID = idGroup[idGroup.length-1]
-                                    var newID = Number(lastID) + 1;
-                                    var altID = Number(lastID) + 2;
-                                    nextAltName = 'image ' + altID;
-                                    //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                    var nextImageID = 'AdviceImage' + newID;
-                                    var nextTextID = 'AdviceImageText' + newID;
-                                    var nextRemoveButtonID = 'AdviceImageRemoveButton' + newID;
-                                    var nextAddButtonID = 'AddAdviceImageButton' + newID;
-                                    var nextUploadID = 'AdviceUploadImage' + newID;
-                                    addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
-
-                                }
                                 
                             } else if (p.tableName === 'MaintenanceImagesTable') {
-
-                                maxImage = 40;
                                 var table = document.getElementById(p.tableName);
                                 //get the current id from the imageID.
                                 var currentID = p.imageid.replace(/[^\d.]/g, '');
                                 //var nextID = Number(currentID) + 1;
                                 var imgLabelID = "imageCaption" + currentID;
-                                var idGroup = [];
-
                                 table.style.display = 'block';
                                 addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                     p.removeFunction, p.addFunction, p.imageSize, p.width);
@@ -682,47 +535,14 @@
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 document.getElementById(p.imageid).style.width = '500px';
                                 document.getElementById(p.imageid).style.height = '500px';
-                            
-                                var totalContainers = $('#MaintenancePhotographs').find('> form');
-                                //console.log("the current form in the report is :" + totalContainers.length);
-                                //based on the total image in the database, and compare with he maxImage in this report, to determine whether need to creae a "Add" buttton for user to upload a new image
-                                if(totalContainers.length == countingImage && totalContainers.length < maxImage)
-                                {                                   
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    // var lastID = totalContainers.eq(totalContainers.length-1).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                    for (var i = 0; i < totalContainers.length; i++)
-                                    {
-                                        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                        var id = Number(idStr);
-                                        idGroup.push(id);
-                                    }
-                                    //console.log(idGroup);
-                                    idGroup.sort(function(a, b){return a - b});
-                                    //console.log(idGroup);
-                                    console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                    var lastID = idGroup[idGroup.length-1]
-                                    var newID = Number(lastID) + 1;
-                                    var altID = Number(lastID) + 2;
-                                    nextAltName = 'image ' + altID;
-                                    //console.log("I am here!!! need another image element ,the next id  " + newID);
-                                    var nextImageID = 'MaintenanceImage' + newID;
-                                    var nextTextID = 'MaintenanceImageText' + newID;
-                                    var nextRemoveButtonID = 'MaintenanceRemoveButton' + newID;
-                                    var nextAddButtonID = 'AddMaintenanceImageButton' + newID;
-                                    var nextUploadID = 'MaintenanceUploadImage' + newID;
-                                    addImageElements(nextAltName, 'MaintenancePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'RemoveOneMaintenanceImage(this.id)', 'AddOneMaintenanceImage(this.id)', '500px', '0px');
-
-                                }
+                        
                             } else if (p.tableName === 'MaintenanceDrawingsTable') {
-                                var maxDrawing = 6;
+                               
                                 var table = document.getElementById(p.tableName);
                                 //get the current id from the imageID.
                                 var currentID = p.imageid.replace(/[^\d.]/g, '');
                                 //var nextID = Number(currentID) + 1;
                                 var imgLabelID = "imageCaption" + currentID;
-                                var idGroup = [];
-
                                 table.style.display = 'block';
                                 addDrawingElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                     p.removeFunction, p.addFunction, p.imageSize, p.width);
@@ -736,36 +556,7 @@
                                 document.getElementById(imgLabelID).style.display = 'block';
                                 document.getElementById(p.imageid).style.width = '100%';
                                 document.getElementById(p.imageid).style.height = '100%';
-                            
-                                var totalContainers = $('#MaintenanceDrawings').find('> form');
-                                console.log("the current form in the report is :" + totalContainers.length);
-                                if (totalContainers.length == countingDrawing && totalContainers.length < maxDrawing) 
-                                {
-                                    console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-                                    for (var i = 0; i < totalContainers.length; i++)
-                                    {
-                                        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-                                        var id = Number(idStr);
-                                        idGroup.push(id);
-                                    }
-                                    console.log(idGroup);
-                                    idGroup.sort(function(a, b){return a - b});
-                                    console.log(idGroup);
-                                    console.log("the last ID is " + idGroup[idGroup.length-1]);
-                                    var lastID = idGroup[idGroup.length-1]
-                                    var newID = Number(lastID) + 1;
-                                    var altID = Number(lastID) + 2;
-                                    nextAltName = 'image ' + altID;
-                                    console.log("I am here!!! need another image element ,the next id  " + newID);
-                                    var nextImageID = 'MaintenanceDrawing' + newID;
-                                    var nextTextID = 'MaintenanceDrawingText' + newID;
-                                    var nextRemoveButtonID = 'MaintenanceDrawingRemoveButton' + newID;
-                                    var nextAddButtonID = 'AddMaintenanceDrawingButton' + newID;
-                                    var nextUploadID = 'MaintenanceUploadDrawing' + newID;
-                                    addDrawingElements(nextAltName, 'MaintenanceDrawings', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                                        'RemoveOneMaintenanceDrawing(this.id)', 'AddOneMaintenanceDrawing(this.id)', '500px', '0px');
-
-                                }
+                                
                             } else if (p.tableName === 'ConstructionImagesTable') {
                                 var maxImage = 30;
                                 var table = document.getElementById(p.tableName);
