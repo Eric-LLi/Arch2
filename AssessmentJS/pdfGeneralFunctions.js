@@ -587,17 +587,25 @@ function getCoverImage(id) {
 
 function displayThreeImg(id) {
     var forms = $("#" + id + " form");
-
+    console.log(forms);
     var result = [],
         row = [];
 
     for (var i = 0; i < forms.length; i++) {
-        var img = forms.eq(i).children("div").eq(0).children("img");
-        var text = forms.eq(i).children("div").eq(1).children("input");
+        var img = forms.eq(i).children("img").eq(0);
+        var label = forms.eq(i).children("label").eq(0);
+        var text = forms.eq(i).children("input").eq(0);
         if (img.attr("src") !== "#") {
             row.push({
                 stack: [
                     getPhoto(img.attr("id")),
+                    {
+                        text: label.text(),
+                        width: 160,
+                        style: 'tableText',
+                        bold: true,
+                        margin: [0, 3, 0, 0]
+                    },
                     {
                         text: getText(text.attr("id")),
                         width: 160,
@@ -627,12 +635,20 @@ function displaySixImg(id) {
         count = 1;
 
     for (var i = 0; i < forms.length; i++) {
-        var img = forms.eq(i).children("div").eq(0).children("img");
-        var text = forms.eq(i).children("div").eq(1).children("input");
+        var img = forms.eq(i).children("img").eq(0);
+        var label = forms.eq(i).children("label").eq(0);
+        var text = forms.eq(i).children("input").eq(0);
         if (img.attr("src") !== "#") {
             row.push({
                 stack: [
                     getPhoto(img.attr("id")),
+                    {
+                        text: label.text(),
+                        width: 160,
+                        style: 'tableText',
+                        bold: true,
+                        margin: [0, 3, 0, 0]
+                    },
                     {
                         text: getText(text.attr("id")),
                         width: 160,
@@ -668,7 +684,8 @@ function getPhoto(id) {
     var imageSection;
     var myImage = document.getElementById(id);
 
-    if (myImage.style.display === "block") {
+
+    if (!isEmpty(myImage)) {
         //has image, check whether it is from database or just upload
         if (checkImage(id) >= 0) {
             console.log('reload');
