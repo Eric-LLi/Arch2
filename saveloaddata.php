@@ -542,7 +542,7 @@
                                 //get the current id from the imageID.
                                 var currentID = p.imageid.replace(/[^\d.]/g, '');
                                 //var nextID = Number(currentID) + 1;
-                                var imgLabelID = "imageCaption" + currentID;
+                                var imgLabelID = "drawingCaption" + currentID;
                                 table.style.display = 'block';
                                 addDrawingElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid, p.uploadID,
                                     p.removeFunction, p.addFunction, p.imageSize, p.width);

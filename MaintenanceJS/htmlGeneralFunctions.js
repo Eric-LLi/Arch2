@@ -617,7 +617,7 @@ function AddOneMaintenanceDrawing(click_id)
     var removeButtonID = 'MaintenanceDrawingRemoveButton' + selectedID;
     var addButtonID = 'AddMaintenanceDrawingButton' + selectedID;
     var uploadID = 'MaintenanceUploadDrawing' + selectedID;
-    var imgLabelID = "imageCaption" + selectedID;
+    var imgLabelID = "drawingCaption" + selectedID;
 
     for (var i = 0; i < totalContainers.length; i++)
     {
@@ -842,7 +842,7 @@ $('#MaintenanceUploadDrawings').change(function() {
                     var removeButtonID = 'MaintenanceDrawingRemoveButton' + ii;
                     var addButtonID = 'AddMaintenanceDrawingButton' + ii;
                     var uploadID = 'MaintenanceUploadDrawing' + ii;
-                    var imgLabelID = "imageCaption" + ii;
+                    var imgLabelID = "drawingCaption" + ii;
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
 
@@ -928,7 +928,7 @@ $('#MaintenanceUploadDrawings').change(function() {
                     var removeButtonID = 'MaintenanceDrawingRemoveButton' + ii;
                     var addButtonID = 'AddMaintenanceDrawingButton' + ii;
                     var uploadID = 'MaintenanceUploadDrawing' + ii;
-                    var imgLabelID = "imageCaption" + ii;
+                    var imgLabelID = "drawingCaption" + ii;
                     //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
 
 
@@ -1080,7 +1080,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     container2.appendChild(imgLabel);
     container3.appendChild(textInput);
     container4.appendChild(removeButton);
-    container4.appendChild(addButton);
+    container5.appendChild(addButton);
     container5.appendChild(uploadFile);
 
 
@@ -1088,7 +1088,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
 
 
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
-function addDrawingElements(imageAltName, divID, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width,section) {
+function addDrawingElements(imageAltName, divID, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
     var currentID = imageID.replace(/[^\d.]/g, '');
     var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
@@ -1161,7 +1161,7 @@ function addDrawingElements(imageAltName, divID, imageID, imageTextID, removeBut
     //create the image label for image caption number. 
     var imgLabel = document.createElement("label");
 
-    var imgLabelID =  section+"Caption" + currentID;
+    var imgLabelID =  "drawingCaption" + currentID;
     imgLabel.setAttribute("id", imgLabelID);
     imgLabel.style.display = "none";
     imgLabel.innerHTML = "Drawing " + (Number(currentID)+1);
