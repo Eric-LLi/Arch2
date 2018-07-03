@@ -1092,9 +1092,11 @@ function DeleteOneImg(element) {
     $("#" + element[0]).attr("src", "#");
     $("#" + element[0]).hide();
     $("#" + element[1]).hide();
+    $("#" + element[2]).val("");
     $("#" + element[2]).hide();
     $("#" + element[3]).hide();
     $("#" + element[4]).show();
+
 }
 var global_Img;
 
@@ -1220,14 +1222,15 @@ function createImagesElements(lastElementID, imgID, labelID = "", labelValue = "
     rmBtn.setAttribute("id", rmBtnID);
     rmBtn.setAttribute("type", "button");
     rmBtn.setAttribute("value", "Remove");
-    rmBtn.style.width = "165px";
+    rmBtn.style.width = "265px";
 
     addBtn.setAttribute("id", addBtnID);
     addBtn.setAttribute("type", "button");
     addBtn.setAttribute("value", "Add");
-    addBtn.style.width = "165px";
+    addBtn.style.width = "265px";
 
-    label.setAttribute("id", labelID + id);
+    label.setAttribute("id", labelID);
+    label.style.marginBottom = "0px";
     label.innerHTML = "IMG_" + id;
 
     $("#" + lastElementID).append(form);

@@ -63,9 +63,9 @@ function generatePDF(mode) {
     //Get all table cells data from Attachments.
     var AttachmentsData = getTableData_Attachments();
     //Get photos
-    var getPhotoImgsData = getPhotoImgs();
+    // var getPhotoImgsData = getPhotoImgs();
     //Get PDFs
-    var getSketchImgsData = getSketchImgs();
+    // var getSketchImgsData = getSketchImgs();
     //    var imagesPDFData = getImagePDF();
 
     // Page start drawing from here...
@@ -556,7 +556,7 @@ function generatePDF(mode) {
                 style: 'pageTopHeader'
             },
             {
-                pageBreak: 'after',
+                
                 style: 'Contents',
                 columns: [{
                     width: 250,
@@ -590,16 +590,17 @@ function generatePDF(mode) {
             //                text: $('#HA_DIVPhotos').attr('data-title'),
             //                style: 'pageTopHeader'
             //            },
+
             //Photos
-            {
-                layout: 'noBorders',
-                pageBreak: 'after',
-                table: {
-                    widths: [250, 250],
-                    headerRows: 1,
-                    body: getPhotoImgsData
-                }
-            },
+            getPhotoData(),
+            // {
+            //     layout: 'noBorders',
+            //     table: {
+            //         widths: [250, 250],
+            //         headerRows: 1,
+            //         body: getPhotoImgsData
+            //     }
+            // },
 
             /**
              * (10) Report Detail Page ten
@@ -611,14 +612,16 @@ function generatePDF(mode) {
             //                style: 'pageTopHeader'
             //            },
             //Sketch imgs
-            {
-                layout: 'noBorders',
-                table: {
-                    widths: [500],
-                    headerRows: 1,
-                    body: getSketchImgsData
-                }
-            }
+            getSketchImgs(),
+            // {
+            //     layout: 'noBorders',
+            //     pageBreak: 'before',
+            //     table: {
+            //         widths: [500],
+            //         headerRows: 1,
+            //         body: getSketchImgsData
+            //     }
+            // }
         ],
         styles: {
             coverPageHeader: {
