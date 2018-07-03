@@ -1347,20 +1347,23 @@ function getImages() {
 
     if (isEmpty(totalContainers.length)) {
         tableBody = {
-            layout: 'noBorders',
-            table: {
-                body: [
-                    [
-                        {
-                            text: 'PHOTOGRAPHS',
-                            color: 'red',
-                            fontSize: 11,
-                            bold: 'true'
-                        }
-                    ]
-                ]
-            }
-        }
+            text:''
+        };
+        // tableBody = {
+        //     layout: 'noBorders',
+        //     table: {
+        //         body: [
+        //             [
+        //                 {
+        //                     text: 'PHOTOGRAPHS',
+        //                     color: 'red',
+        //                     fontSize: 11,
+        //                     bold: 'true'
+        //                 }
+        //             ]
+        //         ]
+        //     }
+        // }
     } else {
         row.push({
             text: 'PHOTOGRAPHS',
@@ -1430,6 +1433,7 @@ function getImages() {
             data.push(row);
         }
         tableBody = {
+            pageBreak: 'before',
             layout: 'noBorders',
             table: {
                 widths: [250, 250],

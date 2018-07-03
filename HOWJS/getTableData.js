@@ -1830,19 +1830,8 @@ function getImagesTable() {
 
     if (isEmpty(totalContainers.length)) {
         tableBody = {
-            layout: 'noBorders',
-            table: {
-                body: [
-                    [
-                        {
-                            text: "Photographs",
-                            style: 'pageTopHeader',
-                            margin: [0, 0, 0, 5]
-                        }
-                    ]
-                ]
-            }
-        }
+            text:''
+        };
     } else {
         row.push({
             text: "Photographs",
@@ -1911,6 +1900,7 @@ function getImagesTable() {
             data.push(row);
         }
         tableBody = {
+            pageBreak: 'before',
             layout: 'noBorders',
             table: {
                 widths: [250, 250],

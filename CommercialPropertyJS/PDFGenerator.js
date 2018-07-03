@@ -991,8 +991,8 @@ function generatePDF(mode) {
                     getMinorDefectsTable('interiorWetMinorTable', 'interiorWetMinorItemNo', 'interiorWetMinorImgRef', 'interiorWetMinorNotes', 'interiorWetMinorRecommendationText'),
                     getMajorDefectsTable('interiorWetMajorTable', 'interiorWetMajorItemNo', 'interiorWetMajorImgRef', 'interiorWetMajorNotes', 'interiorWetMajorRecommendationText'),
                     getGeneralNotes('interiorWetMajorGeneralNotes')
-                ],
-                pageBreak: 'after'
+                ]
+                //pageBreak: 'after'
             },
             /**
              * Photographs

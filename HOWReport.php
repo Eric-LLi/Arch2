@@ -29,7 +29,7 @@
     <?php require_once("saveloaddata.php"); ?>
     
 </head>
-<body>
+<body onload = "onload()">
 <!--Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">ArchiCentre Task</a>

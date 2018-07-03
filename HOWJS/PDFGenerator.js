@@ -287,8 +287,8 @@ function generatePDF(mode) {
                 stack:[
                     giveMeHugeDraft(mode),
                     getInternalServiceTable()
-                ],
-                pageBreak: 'after'
+                ]
+                //pageBreak: 'after'
             },
             /**
              * Images
@@ -298,13 +298,14 @@ function generatePDF(mode) {
                     giveMeHugeDraft(mode),
                     makeAGap(),
                     getImagesTable()
-                ],
-                pageBreak:'after'
+                ]
+                //pageBreak:'after'
             },
             /**
              * Defects and Incomplete Table
              */
             {
+                pageBreak: 'before',
                 stack:[
                     giveMeHugeDraft(mode),
                     {
@@ -313,13 +314,14 @@ function generatePDF(mode) {
                         margin:[0,5,0,5]
                     },
                     getDefectIncompleteTable()
-                ],
-                pageBreak: 'after'
+                ]
+                // pageBreak: 'after'
             },
             /**
              * Access Limitation Table, Referenced Document
              */
             {
+                pageBreak: 'before',
                 stack:[
                     giveMeHugeDraft(mode),
                     {
@@ -351,8 +353,8 @@ function generatePDF(mode) {
                         margin:[0,5,0,10]
                     },
                     getAttachmentTable()
-                ],
-                pageBreak: 'after'
+                ]
+                //pageBreak: 'after'
             },
 
 
@@ -360,6 +362,7 @@ function generatePDF(mode) {
              *  The Scope of Page & Definition
              * */
             {
+                pageBreak: 'before',
                 stack: [
                     giveMeHugeDraft(mode),
                     {
@@ -506,8 +509,8 @@ function generatePDF(mode) {
                         ],
                         columnGap: 20
                     }
-                ],
-                pageBreak: 'after'
+                ]
+                //pageBreak: 'after'
             },
 
             /**
