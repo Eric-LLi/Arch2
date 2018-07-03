@@ -1108,6 +1108,7 @@ function createPDFImg(id) {
 
 
     container.setAttribute("id", containerID);
+    container.setAttribute("class", "text-center ml-2");
 
     label.setAttribute("id", label);
     label.innerHTML = "Sketch " + id;
@@ -1133,7 +1134,7 @@ function createPDFImg(id) {
     document.getElementById(containerID).appendChild(document.createElement("br"));
     document.getElementById(containerID).appendChild(caption);
     document.getElementById(containerID).appendChild(btnElement);
-    
+
 
     var combine = [imgID, btnID, captionID, containerID];
     return combine;

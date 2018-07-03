@@ -992,6 +992,29 @@ function getTableData_Attachments() {
     return data;
 }
 
+function getPhotoData() {
+    if (!isEmpty($('#HA_ImgsContents div'))) {
+        return {
+            pageBreak: 'before',
+            layout: 'noBorders',
+            table: {
+                widths: [250, 250],
+                headerRows: 1,
+                body: getPhotoImgs()
+            }
+        }
+    } else {
+        return {};
+    }
+    // {
+    //     layout: 'noBorders',
+    //     table: {
+    //         widths: [250, 250],
+    //         headerRows: 1,
+    //         body: getPhotoImgsData
+    //     }
+    // },
+}
 //Get photo images.
 function getPhotoImgs() {
     var data = [],
@@ -1034,7 +1057,8 @@ function getPhotoImgs() {
                         alignment: 'center'
                     },
                     {
-                        text: $(divContainers.eq(i).children('label')).text()
+                        text: $(divContainers.eq(i).children('label')).text(),
+                        alignment: 'center'
                     },
                     {
                         text: $(divContainers.eq(i).children('input')).val()
@@ -1057,8 +1081,24 @@ function getPhotoImgs() {
     }
 }
 
-//Get sketch images.
 function getSketchImgs() {
+    if (!isEmpty($('#HA_PdfContents div'))) {
+        return {
+            layout: 'noBorders',
+            pageBreak: 'before',
+            table: {
+                widths: [500],
+                headerRows: 1,
+                body: getSketchImgsData()
+            }
+        }
+    } else {
+        return {};
+    }
+}
+
+//Get sketch images.
+function getSketchImgsData() {
     var data = [],
         row = [],
         imgContainer, imgSrc;
@@ -1066,44 +1106,51 @@ function getSketchImgs() {
     var divContainers = $('#HA_PdfContents div');
     //    console.log(divContainers);
 
-    //Insert header
-    row.push({
-        text: "Sketchs",
-        style: 'pageTopHeader',
-
-    });
-    data.push(row);
-    row = [];
-
-    if (isEmpty(divContainers.length)) {
-        row.push({});
+    if (!isEmpty(divContainers)) {
+        //Insert header
+        row.push({
+            text: "Sketchs",
+            style: 'pageTopHeader',
+        });
         data.push(row);
-        console.log(data);
-        return data;
+        row = [];
 
-    } else {
-        for (var i = 0; i < divContainers.length; i++) {
-            imgContainer = divContainers.eq(i).children('img');
-
-            if (imgContainer.attr('src').includes("photos/"))
-                imgSrc = convertImgToBase64(imgContainer.get(0));
-            else {
-                imgSrc = imgContainer.attr('src');
-            }
-            row.push({
-                stack: [{
-                        image: imgSrc,
-                        alignment: 'center'
-                    },
-                    {
-                        text: $(divContainers.eq(i).children('input')).val()
-                    }
-                ]
-            });
+        if (isEmpty(divContainers.length)) {
+            row.push({});
             data.push(row);
-            row = [];
+            console.log(data);
+            return data;
+
+        } else {
+            for (var i = 0; i < divContainers.length; i++) {
+                imgContainer = divContainers.eq(i).children('img');
+
+                if (imgContainer.attr('src').includes("photos/"))
+                    imgSrc = convertImgToBase64(imgContainer.get(0));
+                else {
+                    imgSrc = imgContainer.attr('src');
+                }
+                row.push({
+                    stack: [{
+                            image: imgSrc,
+                            alignment: 'center'
+                        },
+                        {
+                            text: $(divContainers.eq(i).children('label').eq(0)).text(),
+                            alignment: 'center'
+                        },
+                        {
+                            text: $(divContainers.eq(i).children('input')).val()
+                        }
+                    ]
+                });
+                data.push(row);
+                row = [];
+            }
+            return data;
         }
-        return data;
+    } else {
+        return [{}];
     }
 }
 
