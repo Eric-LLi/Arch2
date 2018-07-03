@@ -3,76 +3,73 @@
  */
 
 var flag = false;
-function onload()
-{
-    //reorderImages('AccessmentSiteImagesContainer');
-    automaticNumbering('AccessmentSiteImagesContainer');
-    automaticNumbering('AccessmentExteriorImagesContainer');
-    
-}
-function automaticNumbering(divid)
-{
-    //console.log("need to refresh the image number");
-    var totalContainers = $('#'+divid).find('> form');
-    //console.log(totalContainers);
-    for(var i=0;i<totalContainers.length;i++)
-    {
-        //console.log(totalContainers.eq(i).children('label').get(0));
-        //console.log(totalContainers.eq(i).children('form').eq(1).children('label').get(0));
-        totalContainers.eq(i).children('label').get(0).innerHTML = "IMG " + (i+1);
-    }
-}
-function reorderImages(divid)
-{
-    var totalContainers = $('#'+divid).find('> form');
-    var BigContainer = document.getElementById(divid);
-    //console.log(totalContainers);
-    // for (var i=0;i<totalContainers.length;i++)
-    // {
-    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
-    //     console.log((totalContainers[i].id));
-    // }
-    totalContainers.sort(function(a,b)
-    {
-        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
-    });
 
-    //console.log(totalContainers);
+function onload() {
+    //     //reorderImages('AccessmentSiteImagesContainer');
+    //     // automaticNumbering('AccessmentSiteImagesContainer');
+    //     // automaticNumbering('AccessmentExteriorImagesContainer');
 
-    $('#'+divid).empty();
-    for (var i=0;i<totalContainers.length;i++)
-    {
-       BigContainer.appendChild(totalContainers[i]);
-       var imgID = totalContainers.eq(i).children('img').get(0).id;
-       //console.log(imgID);
-       var labelID = totalContainers.eq(i).children('label').get(0).id;
-       //console.log(labelID);
-       var textID = totalContainers.eq(i).children('input').eq(0).get(0).id;
-       //console.log(textID);
-       var rmBtnID = totalContainers.eq(i).children('input').eq(1).get(0).id;
-       //console.log(rmBtnID);
-       var addBtnID = totalContainers.eq(i).children('input').eq(2).get(0).id;
-       //console.log(addBtnID);
-       var formID = totalContainers[i].id;
-       //console.log(formID);
-       var id = totalContainers[i].id.replace(/[^\d.]/g, '');
-       var imgContainerID = id + "_imgContainer";
-       var ImgID = totalContainers.eq(i).children('img').id;
-       // console.log(imgContainerID);
-       // console.log(id);
-       // console.log(ImgID);
-       var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID];
-       //console.log(element);
-        // $("#" + rmBtnID).click(function () {
-        //     // DeleteImage(formID, imgID, textID);
-        //     DeleteOneImg(element);
-        // });
-       var removeBtn = document.getElementById(totalContainers.eq(i).children('input').eq(1).get(0).id);
-       var removeFunction = "DeleteOneImg('"+element+"')";
-       console.log(removeFunction);
-       removeBtn.setAttribute("onclick", removeFunction);
-    }
 }
+
+// function automaticNumbering(divid) {
+//     //console.log("need to refresh the image number");
+//     var totalContainers = $('#' + divid).find('> form');
+//     //console.log(totalContainers);
+//     for (var i = 0; i < totalContainers.length; i++) {
+//         //console.log(totalContainers.eq(i).children('label').get(0));
+//         //console.log(totalContainers.eq(i).children('form').eq(1).children('label').get(0));
+//         totalContainers.eq(i).children('label').get(0).innerHTML = "IMG " + (i + 1);
+//     }
+// }
+
+// function reorderImages(divid) {
+//     var totalContainers = $('#' + divid).find('> form');
+//     var BigContainer = document.getElementById(divid);
+//     //console.log(totalContainers);
+//     // for (var i=0;i<totalContainers.length;i++)
+//     // {
+//     //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+//     //     console.log((totalContainers[i].id));
+//     // }
+//     totalContainers.sort(function (a, b) {
+//         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+//     });
+
+//     //console.log(totalContainers);
+
+//     $('#' + divid).empty();
+//     for (var i = 0; i < totalContainers.length; i++) {
+//         BigContainer.appendChild(totalContainers[i]);
+//         var imgID = totalContainers.eq(i).children('img').get(0).id;
+//         //console.log(imgID);
+//         var labelID = totalContainers.eq(i).children('label').get(0).id;
+//         //console.log(labelID);
+//         var textID = totalContainers.eq(i).children('input').eq(0).get(0).id;
+//         //console.log(textID);
+//         var rmBtnID = totalContainers.eq(i).children('input').eq(1).get(0).id;
+//         //console.log(rmBtnID);
+//         var addBtnID = totalContainers.eq(i).children('input').eq(2).get(0).id;
+//         //console.log(addBtnID);
+//         var formID = totalContainers[i].id;
+//         //console.log(formID);
+//         var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+//         var imgContainerID = id + "_imgContainer";
+//         var ImgID = totalContainers.eq(i).children('img').id;
+//         // console.log(imgContainerID);
+//         // console.log(id);
+//         // console.log(ImgID);
+//         var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID];
+//         //console.log(element);
+//         // $("#" + rmBtnID).click(function () {
+//         //     // DeleteImage(formID, imgID, textID);
+//         //     DeleteOneImg(element);
+//         // });
+//         var removeBtn = document.getElementById(totalContainers.eq(i).children('input').eq(1).get(0).id);
+//         var removeFunction = "DeleteOneImg('" + element + "')";
+//         console.log(removeFunction);
+//         removeBtn.setAttribute("onclick", removeFunction);
+//     }
+// }
 
 /**
  *
@@ -575,14 +572,8 @@ function DeleteImage(formID, imgID, textID) {
 
 function DeleteOneImg(element) {
     doRemovePhoto(element[0]);
-    $("#" + element[0]).attr("src", "#");
-    $("#" + element[0]).hide();
-    $("#" + element[1]).hide();
-    $("#" + element[2]).val("");
-    $("#" + element[2]).hide();
-    $("#" + element[3]).hide();
-    $("#" + element[4]).show();
-
+    $("#" + element[5]).remove();
+    createEmptElementForAddingImg();
 }
 var global_Img;
 
@@ -621,11 +612,15 @@ $("#AssessmentSiteSingleImage").on('change', function (e) {
             image.src = data;
         };
         reader.readAsDataURL(file[0]);
+
+        //Add empty element
+        createEmptElementForAddingImg();
+
     }
 
-    setTimeout(function(){
-        automaticNumbering('AccessmentSiteImagesContainer');
-    },300)
+    // setTimeout(function () {
+    //     automaticNumbering('AccessmentSiteImagesContainer');
+    // }, 300)
 });
 
 
@@ -678,7 +673,7 @@ function AssessmentInteriorBedroomUploadImages() {
 
 function AssessmentInteriorServiceUploadImages() {
     var imageIDs = $("#AccessmentInteriorServiceImages img");
-    console.log(imageIDs);
+    // console.log(imageIDs);
 
     for (var i = 0; i < imageIDs.length; i++) {
         if (imageIDs.eq(i).attr("src") !== "#") {
@@ -722,7 +717,7 @@ function createImagesElements(lastElementID, imgID, labelID = "", labelValue = "
 
     label.setAttribute("id", labelID);
     label.style.marginBottom = "0px";
-    //label.innerHTML = "IMG_" + id;
+    label.innerHTML = "IMG_" + id;
 
 
     $("#" + lastElementID).append(form);
@@ -748,8 +743,7 @@ function createImagesElements(lastElementID, imgID, labelID = "", labelValue = "
     return element;
 }
 
-$('#AssessmentSiteUploadImages').click(function()
-{
+$('#AssessmentSiteUploadImages').click(function () {
     //console.log(this.value);
     this.value = null;
 });
@@ -767,7 +761,7 @@ $("#AssessmentSiteUploadImages").change(function () {
             $("#AccessmentSiteImagesContainer").empty();
         }
 
-        var allImages = [];
+        var allImages;
         if (this.files.length > 3) {
             alert("You can only selected three images maximum");
             //Only save 3 files.
@@ -778,9 +772,10 @@ $("#AssessmentSiteUploadImages").change(function () {
             allImages = this.files;
         }
 
+        var elementID;
         Object.keys(allImages).forEach(i => {
             const file = allImages[i];
-            var elementID = parseInt(i) + 1;
+            elementID = parseInt(i) + 1;
             //Create elements
             //[imgID, labelID, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentSiteImagesContainer", "AssessmentSiteImage_" + elementID, "SiteGardenlabel" + elementID, "IMG" + elementID, "AssessmentSiteImageText" + elementID, "AssessmentSiteRemoveButton" + elementID, "AddAssessmentSiteImageButton" + elementID, "SiteGardonForm" + elementID);
@@ -810,17 +805,18 @@ $("#AssessmentSiteUploadImages").change(function () {
 
         });
 
-        setTimeout(function(){
-            automaticNumbering('AccessmentSiteImagesContainer');
-        },1000)
-        
+        // setTimeout(function () {
+        //     automaticNumbering('AccessmentSiteImagesContainer');
+        // }, 1000)
         // read3ImagesURL(this, 'AddAssessmentSiteImageButton0', 'AddAssessmentSiteImageButton1', 'AddAssessmentSiteImageButton2', 'AssessmentSiteImage0', 'AssessmentSiteImage1', 'AssessmentSiteImage2', 'AssessmentSiteImageText0', 'AssessmentSiteImageText1', 'AssessmentSiteImageText2', 'AssessmentSiteRemoveButton0', 'AssessmentSiteRemoveButton1', 'AssessmentSiteRemoveButton2');
+
+        //Add empty element
+        createEmptElementForAddingImg();
     }
     //  read6ImagesURL(this,'AddAssessmentSiteImageButton0','AddAssessmentSiteImageButton1','AddAssessmentSiteImageButton2','AddAssessmentSiteImageButton3','AddAssessmentSiteImageButton4','AddAssessmentSiteImageButton5','AssessmentSiteImage0','AssessmentSiteImage1','AssessmentSiteImage2','AssessmentSiteImage3','AssessmentSiteImage4','AssessmentSiteImage5','AssessmentSiteImageText0','AssessmentSiteImageText1','AssessmentSiteImageText2','AssessmentSiteImageText3','AssessmentSiteImageText4','AssessmentSiteImageText5','AssessmentSiteRemoveButton0','AssessmentSiteRemoveButton1','AssessmentSiteRemoveButton2','AssessmentSiteRemoveButton3','AssessmentSiteRemoveButton4','AssessmentSiteRemoveButton5');
 });
 
-$('#AssessmentExteriorUploadImages').click(function()
-{
+$('#AssessmentExteriorUploadImages').click(function () {
     //console.log(this.value);
     this.value = null;
 });
@@ -850,10 +846,10 @@ $("#AssessmentExteriorUploadImages").change(function () {
         } else {
             allImages = this.files;
         }
-
+        var elementID;
         Object.keys(allImages).forEach(i => {
             const file = allImages[i];
-            var elementID = parseInt(i) + 1;
+            elementID = parseInt(i) + 1;
             //Create elements
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentExteriorImagesContainer", "AssessmentExteriorImage_" + elementID, "Exteriorlabel" + elementID, "IMG" + elementID, "AssessmentExteriorImageText" + elementID, "AssessmentExteriorRemoveButton" + elementID, "AddAssessmentExteriorImageButton" + elementID, "ExteriorForm" + elementID);
@@ -881,12 +877,14 @@ $("#AssessmentExteriorUploadImages").change(function () {
             reader.readAsDataURL(file);
 
         });
+
+        //Add empty element
+        createEmptElementForAddingImg();
     }
 
 });
 
-$('#AssessmentInteriorLivingUploadImages').click(function()
-{
+$('#AssessmentInteriorLivingUploadImages').click(function () {
     //console.log(this.value);
     this.value = null;
 });
@@ -917,9 +915,10 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
             allImages = this.files;
         }
 
+        var elementID;
         Object.keys(allImages).forEach(i => {
             const file = allImages[i];
-            var elementID = parseInt(i) + 1;
+            elementID = parseInt(i) + 1;
             //Create elements
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentInteriorLivingImagesContainer", "AssessmentInteriorLivingImage_" + elementID, "Livinglabel" + elementID, "IMG" + elementID, "AssessmentInteriorLivingImageText" + elementID, "AssessmentInteriorLivingRemoveButton" + elementID, "AddAssessmentInteriorLivingImageButton" + elementID, "LivingForm" + elementID);
@@ -947,12 +946,14 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
             reader.readAsDataURL(file);
 
         });
+
+        //Add empty element
+        createEmptElementForAddingImg();
     }
 
 });
 
-$('#AssessmentInteriorBedroomUploadImages').click(function()
-{
+$('#AssessmentInteriorBedroomUploadImages').click(function () {
     //console.log(this.value);
     this.value = null;
 });
@@ -981,10 +982,10 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
         } else {
             allImages = this.files;
         }
-
+        var elementID;
         Object.keys(allImages).forEach(i => {
             const file = allImages[i];
-            var elementID = parseInt(i) + 1;
+            elementID = parseInt(i) + 1;
             //Create elements
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentInteriorBedroomImagesContainer", "AssessmentInteriorBedroomImage_" + elementID, "Bedroomlabel" + elementID, "IMG" + elementID, "AssessmentInteriorBedroomImageText" + elementID, "AssessmentInteriorBedroomRemoveButton" + elementID, "AddAssessmentInteriorBedroomImageButton" + elementID, "BedroomForm" + elementID);
@@ -1012,11 +1013,13 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
             reader.readAsDataURL(file);
 
         });
+
+        //Add empty element
+        createEmptElementForAddingImg();
     }
 });
 
-$('#AssessmentInteriorServiceUploadImages').click(function()
-{
+$('#AssessmentInteriorServiceUploadImages').click(function () {
     //console.log(this.value);
     this.value = null;
 });
@@ -1035,6 +1038,7 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
             $("#AccessmentInteriorServiceImagesContainer").empty();
         }
 
+
         var allImages = [];
         if (this.files.length > 3) {
             alert("You can only selected three images maximum");
@@ -1045,10 +1049,10 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
         } else {
             allImages = this.files;
         }
-
+        var elementID;
         Object.keys(allImages).forEach(i => {
             const file = allImages[i];
-            var elementID = parseInt(i) + 1;
+            elementID = parseInt(i) + 1;
             //Create elements
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentInteriorServiceImagesContainer", "AssessmentInteriorServiceImage_" + elementID, "Servicelabel" + elementID, "IMG" + elementID, "AssessmentInteriorServiceImageText" + elementID, "AssessmentInteriorServiceRemoveButton" + elementID, "AddAssessmentInteriorServiceImageButton" + elementID, "ServiceForm" + elementID);
@@ -1075,6 +1079,9 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
             };
             reader.readAsDataURL(file);
         });
+
+        //Add empty element
+        createEmptElementForAddingImg();
     }
 });
 
@@ -1126,6 +1133,62 @@ function convertBase64UrlToBlob(urlData, type) {
     });
 }
 
+function createEmptElementForAddingImg(MaxImagesnumber = 6) {
+    //5 upload container.
+    const container = ["AccessmentSiteImagesContainer", "AccessmentExteriorImagesContainer", "AccessmentInteriorLivingImagesContainer", "AccessmentInteriorBedroomImagesContainer", "AccessmentInteriorServiceImagesContainer"];
+    for (var i = 0; i < container.length; i++) {
+        var element = $("#" + container[i] + " form");
+        //Check if contained hidden form.
+        var emt = element.find("img:hidden");
+
+        //Only add one empty element when there is no hidden form.
+        if (emt.length == 0) {
+
+            //Different uploads have different limitation.
+            if (i === 0 || i === 4) {
+                //Max image is 3, default is 6
+                MaxImagesnumber = 3;
+            }
+
+            //do not run when there is no form or reached limitation already.
+            if (element.length < MaxImagesnumber && element.length != 0) {
+                var maxid = [];
+                for (var j = 0; j < element.length; j++) {
+                    //save id in array.
+                    maxid.push(element.eq(j).attr("id"));
+                }
+                //The last one in array is the largest one.
+                maxid.sort();
+
+                //The existing max id plus one
+                var num = parseInt(maxid[maxid.length - 1].replace(/\D+/, "")) + 1;
+
+                //Create elements id.
+                var imgID = (element.eq(0).children("img").attr("id")).replace(/\d+/, "") + num;
+                var textID = (element.eq(0).children("input[type=text]").attr("id")).replace(/\d+/, "") + num;
+                var labelID = (element.eq(0).children("label").attr("id")).replace(/\d+/, "") + num;
+                var labelValue = "IMG" + (parseInt(element.length) + 1);
+                var removeBtnID = (element.eq(0).children("input[type=button]").eq(0).attr("id")).replace(/\d+/, "") + num;
+                var addBtnID = (element.eq(0).children("input[type=button]").eq(1).attr("id")).replace(/\d+/, "") + num;
+                var formID = element.eq(0).attr("id").replace(/\d+/, "") + num;
+
+                // console.log(formID);
+                var emptyElement = createImagesElements(container[i], imgID, labelID, labelValue, textID, removeBtnID, addBtnID, formID);
+
+                //The new form only show add button.
+                $("#" + emptyElement[0]).hide();
+                $("#" + emptyElement[1]).hide();
+                $("#" + emptyElement[2]).val("");
+                $("#" + emptyElement[2]).hide();
+                $("#" + emptyElement[3]).hide();
+                $("#" + emptyElement[4]).show();
+
+            }
+        }
+    }
+}
+
 $(document).ready(function () {
     checkReloadOther();
+    createEmptElementForAddingImg();
 })
