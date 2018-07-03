@@ -990,7 +990,7 @@ function generatePDF(mode) {
                         alignment: 'center',
                         layout: 'noBorders',
                         table: {
-                            body: displayThreeImg("AccessmentSiteImages")
+                            body: displayThreeImg("AccessmentSiteImagesContainer")
                         }
                     },
                     // {
@@ -1069,7 +1069,7 @@ function generatePDF(mode) {
                         alignment: 'center',
                         layout: 'noBorders',
                         table: {
-                            body: displaySixImg("AccessmentExteriorImages")
+                            body: displaySixImg("AccessmentExteriorImagesContainer")
                         }
                     },
 
@@ -1169,14 +1169,14 @@ function generatePDF(mode) {
                         alignment: 'center',
                         layout: 'noBorders',
                         table: {
-                            body: displaySixImg("AccessmentInteriorLivingImages")
+                            body: displaySixImg("AccessmentInteriorLivingImagesContainer")
                         }
                     },
                     {
                         alignment: 'center',
                         layout: 'noBorders',
                         table: {
-                            body: displaySixImg("AccessmentInteriorBedroomImages")
+                            body: displaySixImg("AccessmentInteriorBedroomImagesContainer")
                         }
                     },
                     // {
@@ -1442,7 +1442,7 @@ function generatePDF(mode) {
                         alignment: 'center',
                         layout: 'noBorders',
                         table: {
-                            body: displayThreeImg("AccessmentInteriorServiceImages")
+                            body: displayThreeImg("AccessmentInteriorServiceImagesContainer")
                         }
                     },
 
