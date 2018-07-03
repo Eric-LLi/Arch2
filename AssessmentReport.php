@@ -2182,25 +2182,28 @@
                         <br>
                         <input type="button" value="Upload Image" class="uploadImageButton" onclick="AssessmentSiteUploadImages()">
                         <input type="file" id="AssessmentSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+                        <input type="file" id="AssessmentSiteSingleImage" accept="image/x-png,image/jpeg" class="inputImage">
                     </th>
-                    <th>
-                        <div class="row form-group">
+                    <th class="container">
+                        <div id="AccessmentSiteImagesContainer" class="row"></div>
+                    </th>
+                    <!-- <div class="row">
                             &nbsp;
-                            <form>
+                            <form class="col-sm">
                                 <div class="col-sm">
-                                    <img id="AssessmentSiteImage0" src="#" alt="Image1" style="width:265px;height:265px;display:none" />
+                                <img id="AssessmentSiteImage0" src="#" alt="Image1" style="width:265px;height:265px;display:none" />
                                 </div>
                                 <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText0" style="width:265px;height:10px;display:none">
+                                <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText0" style="width:265px;height:10px;display:none">
                                 </div>
                                 <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentSiteRemoveButton0" onclick="RemoveAssessmentSiteImage0()" style="width:265px;display:none">
-                                    <br>
+                                <input type="button" value="Remove" id="AssessmentSiteRemoveButton0" onclick="RemoveAssessmentSiteImage0()" style="width:265px;display:none">
+                                <br>
                                 </div>
                                 <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentSiteImageButton0" onclick="AddAssessmentSiteImage0()" style="width:265px;display:none">
-                                    <input type="file" id="AssessmentSiteUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
-                                    <br>
+                                <input type="button" value="Add" id="AddAssessmentSiteImageButton0" onclick="AddAssessmentSiteImage0()" style="width:265px;display:none">
+                                <input type="file" id="AssessmentSiteUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
+                                <br>
                                 </div>
                             </form>
                             <form>
@@ -2235,8 +2238,7 @@
                                     <input type="file" id="AssessmentSiteUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
                                 </div>
                             </form>
-                        </div>
-                    </th>
+                        </div> -->
                 </tr>
             </table>
         </div>
@@ -5582,8 +5584,10 @@
                         <input type="button" value="Upload Image" class="uploadImageButton" onclick="AssessmentExteriorUploadImages()">
                         <input type="file" id="AssessmentExteriorUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
-                    <th>
-                        <div class="row form-group">
+
+                    <th class="container">
+                        <div id="AccessmentExteriorImagesContainer" class="row"></div>
+                        <!-- <div class="row form-group">
                             <form>
                                 <div class="col-sm">
                                     <img id="AssessmentExteriorImage0" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
@@ -5684,8 +5688,7 @@
                                     <input type="file" id="AssessmentExteriorUploadImage5" class="inputImage" style="display: none">
                                 </div>
                             </form>
-                        </div>
-
+                        </div> -->
                     </th>
                 </tr>
             </table>
@@ -8144,7 +8147,9 @@
                         <input type="file" id="AssessmentInteriorLivingUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
                     <th>
-                        <div class="row form-group">
+                        <div id="AccessmentInteriorLivingImagesContainer" class="row"></div>
+                    </th>
+                    <!-- <div class="row form-group">
                             <form>
                                 <div class="col-sm">
                                     <img id="AssessmentInteriorLivingImage0" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
@@ -8257,12 +8262,10 @@
                                     <input type="file" id="AssessmentInteriorLivingUploadImage5" class="inputImage" style="display: none">
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
-                    </th>
                 </tr>
             </table>
-            <hr>
         </div>
 
         <!--Property Interior Bedroom Areas-->
@@ -9371,7 +9374,8 @@
                         <input type="file" id="AssessmentInteriorBedroomUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
                     <th>
-                        <div class="row form-group">
+                        <div id="AccessmentInteriorBedroomImagesContainer" class="row"></div>
+                        <!-- <div class="row form-group">
 
                             <form>
                                 <div class="col-sm">
@@ -9488,7 +9492,7 @@
                                     <input type="file" id="AssessmentInteriorBedroomUploadImage5" class="inputImage" style="display: none">
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
                     </th>
                 </tr>
@@ -13762,7 +13766,8 @@
                         <input type="file" id="AssessmentInteriorServiceUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
                     <th>
-                        <div class="row form-group">
+                        <div id="AccessmentInteriorServiceImagesContainer" class="row"></div>
+                        <!-- <div class="row form-group">
                             &nbsp;
                             <form>
                                 <div class="col-sm">
@@ -13820,7 +13825,7 @@
                                     <input type="file" id="AssessmentInteriorServiceUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
                     </th>
                 </tr>
