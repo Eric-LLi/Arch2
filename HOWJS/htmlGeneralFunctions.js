@@ -1,7 +1,75 @@
 /**
  * Created by Fafa on 20/12/17.
  */
+function onload()
+ {
+     reorderImages();
+     automaticNumbering();
+ }
 
+function reorderImages()
+{
+    console.log("need to reorder the images");
+    var totalContainers = $("#HOWImagesTable").children('div');
+    var BigContainer = document.getElementById('HOWImagesTable');
+    console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+    //     var imgContainerID = id + "_CPimgContainer";
+    //     var ImgID = totalContainers.eq(i).children('img').get(0).id;
+
+    //     console.log(imgContainerID);
+    //     console.log(id);
+    //     console.log(ImgID);
+    //     // console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     //console.log((totalContainers[i].id));
+    //     console.log(totalContainers.eq(i).children('button').get(0).onclick);
+    //     var imgRmBtnID = totalContainers.eq(i).children('button').get(0).id;
+    //     // $("#" + imgRmBtnID).click(function () {
+    //     //     imagesRemoveBtn(imgContainerID, newImgID);
+    //     // });
+    //     totalContainers.eq(i).children('button').get(0).onclick = function(){imagesRemoveBtn(imgContainerID, ImgID)};
+        
+    // }
+    totalContainers.sort(function(a,b)
+    {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+    console.log(totalContainers);
+
+    $("#HOWImagesTable").empty();
+    for (var i=0;i<totalContainers.length;i++)
+    {
+        BigContainer.appendChild(totalContainers[i]);
+        var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+        var imgContainerID = id + "_HOWimgContainer";
+        var ImgID = totalContainers.eq(i).children('img').get(0).id;
+        // console.log(imgContainerID);
+        // console.log(id);
+        // console.log(ImgID);
+        var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
+        var removeFunction = "imagesRemoveBtn('"+imgContainerID+"', '"+ImgID+"')";
+        console.log(removeFunction);
+        removeBtn.setAttribute("onclick", removeFunction);
+        console.log(removeBtn);
+        
+    }
+}
+
+
+function automaticNumbering()
+{
+    console.log("need to refresh the image number");
+    var totalContainers = $("#HOWImagesTable").children('div');
+    for(var i=0;i<totalContainers.length;i++)
+    {
+        //console.log(i);
+        //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('label').get(0).innerHTML = "IMG " + (i+1);
+    }
+}
 
 
 function loadSelectOption(id) {
@@ -601,326 +669,6 @@ function clearRecommendation(labelID) {
     label.placeholder = "Recommendations will be displayed here";
 }
 
-//function HOWUploadImages()
-//{
-//    document.getElementById('HOWUploadImages').click();
-//}
-//
-//$('#HOWUploadImages').change(function(){
-//    $("#HOWImagesDIV").empty();
-//    var table = document.getElementById("HOWImagesTable");
-//    table.style.display = 'block';
-//    var count = this.files.length;
-//    var imageFile = this.files;
-//    //console.log(count);
-//
-//    for (var i = 0; i<count;i++)
-//        {
-//            try {
-//                //noinspection ExceptionCaughtLocallyJS
-//                throw i
-//            }
-//            catch (ii) {
-//                setTimeout(function ()
-//                {
-//                    var nameID = ii + 1;
-//                    var altName = 'Image ' + nameID;
-//                    var imageID = 'HOWImage' + ii;
-//                    var textID = 'HOWImageText' + ii;
-//                    var removeButtonID = 'HOWImageRemoveButton' + ii;
-//                    var addButtonID = 'HOWImageAddButton' + ii;
-//                    var uploadID = 'HOWImageUpload' + ii;
-//                    var labelID = "HOWimageCaption" + ii;
-//
-//                    //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
-//                    //addDrawing();
-//                    addImageElements(altName,imageID, textID, removeButtonID, addButtonID, uploadID,
-//                        'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '485px');
-//
-//                    loadImage.parseMetaData(imageFile[ii], function (data) {
-//                        //console.log('I am in loadImage function');
-//                        var orientation = 0;
-//                        var date = new Date();
-//                        var imageName = imageFile[ii].name;
-//                        var imageType = imageFile[ii].type;
-//                        var image = document.getElementById(imageID);
-//                        var removeButton = document.getElementById(removeButtonID);
-//                        var description  = document.getElementById(textID);
-//                        var addButton = document.getElementById(addButtonID);
-//                        var label = document.getElementById(labelID);
-//                        //if exif data available, update orientation
-//                        if (data.exif) {
-//                            orientation = data.exif.get('Orientation');
-//                        }
-//                        var loadingImage = loadImage(imageFile[ii], function (canvas) {
-//                                var base64data = canvas.toDataURL(imageType);
-//                                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-//                                image.setAttribute('src',base64data);
-//                                //$(selectionImage).attr('src',base64data);
-//                                removeButton.style.display = 'block';
-//                                removeButton.style.width = '480px';
-//                                addButton.style.display = 'none';
-//                                addButton.style.width = '480px';
-//                                description.style.display = 'block';
-//                                image.style.display = 'block';
-//                                image.style.width = '480px';
-//                                description.style.width = '480px';
-//                                label.style.display = 'block';
-//                                // image.style.height = '250px';
-//                                var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-//                                //console.log(file);
-//                                doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'HOWImagesTable',altName,'HOWImagesDIV',uploadID,'removeOneHOWImage(this.id)','addOneHOWImage(this.id)','480px','480px');
-//
-//                            },
-//                            {
-//                                canvas: true,
-//                                orientation: orientation,
-//                                maxWidth:1500,
-//                                maxHeight:1200
-//                            }
-//                        );
-//                    });
-//
-//                }, 200);
-//            }
-//        }
-//        setTimeout(function(){
-//            //addDrawing();
-//            var altID= count + 1;
-//            var altName = 'Image' + altID;
-//            var imageID = 'HOWImage' + count;
-//            var textID = 'HOWImageText' + count;
-//            var removeButtonID = 'HOWImageRemoveButton' + count;
-//            var addButtonID = 'HOWImageAddButton' + count;
-//            var uploadID = 'HOWImageUpload' + count;
-//            addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-//                'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
-//
-//        },400)
-//
-//
-//
-//});
-//
-//function removeOneHOWImage(click_id)
-//{
-//    var selectedID = String(click_id);
-//    var id = selectedID.replace ( /[^\d.]/g, '' );
-//    var imageID = 'HOWImage' + id;
-//    var removeButtonID = 'HOWImageRemoveButton' + id;
-//    var addButtonID = 'HOWImageAddButton' + id;
-//    var descriptionID = 'HOWImageText' + id;
-//    var labelID = "HOWimageCaption" + id;
-//
-//
-//    var imageSelect = '#' + imageID;
-//    $(imageSelect).attr('src', '#');
-//    var image = document.getElementById(imageID);
-//    var button = document.getElementById(removeButtonID);
-//    var addButton = document.getElementById(addButtonID);
-//    var description = document.getElementById(descriptionID);
-//    var label = document.getElementById(labelID);
-//
-//    button.style.display = 'none';
-//    addButton.style.display = 'block';
-//    description.value = "";
-//    description.style.display = 'none';
-//    label.style.display = 'none';
-//    //image.style.width = '0px';
-//    image.style.display = 'none';
-//    doRemovePhoto(imageID);
-//}
-//
-//function addOneHOWImage(click_id)
-//{
-//    //console.log(click_id);
-//
-//    var id;
-//    var selectedID = String(click_id);
-//    id = selectedID.replace ( /[^\d.]/g, '' );
-//    var nameID = Number(id) + 1;
-//    var altName = 'Image ' + nameID;
-//    var imageID = 'HOWImage' + id;
-//    var textID = 'HOWImageText' + id;
-//    var removeButtonID = 'HOWImageRemoveButton' + id;
-//    var addButtonID = 'HOWImageAddButton' + id;
-//    var uploadID = 'HOWImageUpload' + id;
-//    var labelID = "HOWimageCaption" + id;
-//    // console.log(uploadID);
-//    var x = document.getElementById(uploadID);
-//    x.click();
-//    x.addEventListener('change',function(){
-//        if (this.files && this.files[0]) {
-//            var imageFile = this.files[0];
-//            //load the image src to the current imageID.
-//            loadImage.parseMetaData(imageFile, function (data) {
-//                //console.log('I am in loadImage function');
-//                var orientation = 0;
-//                var date = new Date();
-//                // var selectionImage = '#AdviceImage' + ii;
-//                var imageName = imageFile.name;
-//                var imageType = imageFile.type;
-//                var image = document.getElementById(imageID);
-//                var removeButton = document.getElementById(removeButtonID);
-//                var description  = document.getElementById(textID);
-//                var addButton = document.getElementById(addButtonID);
-//                var label = document.getElementById(labelID);
-//                //if exif data available, update orientation
-//                if (data.exif) {
-//                    orientation = data.exif.get('Orientation');
-//                }
-//                var loadingImage = loadImage(imageFile, function (canvas) {
-//                        var base64data = canvas.toDataURL(imageType);
-//                        //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-//                        image.setAttribute('src',base64data);
-//                        //$(selectionImage).attr('src',base64data);
-//                        removeButton.style.display = 'block';
-//                        removeButton.style.width = '480px';
-//                        addButton.style.display = 'none';
-//                        description.style.display = 'block';
-//                        image.style.display = 'block';
-//                        image.style.width = '480px';
-//                        label.style.display = 'block';
-//                        // image.style.height = '250px';
-//                        var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-//                        //console.log(file);
-//                        doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'HOWImagesTable',altName,'HOWImagesDIV',uploadID,'removeOneHOWImage(this.id)','addOneHOWImage(this.id)','480px','480px');
-//                    },
-//                    {
-//                        canvas: true,
-//                        orientation: orientation,
-//                        maxWidth:1500,
-//                        maxHeight:1200
-//                    }
-//                );
-//            });
-//        }
-//    });
-//
-//    var lastImage = document.getElementById('HOWImagesDIV').lastElementChild.lastChild.firstChild;
-//    var newID = Number(lastImage.id.replace( /[^\d.]/g, '' ))+1;
-//    var altID = Number(newID) + 1;
-//    nextAltName = 'drawing  ' + altID;
-//        //console.log("I am here!!! need another image element ,the next id  " + newID);
-//    var nextImageID = 'HOWImage' + newID;
-//    var nextTextID = 'HOWImageText' + newID;
-//    var nextRemoveButtonID = 'HOWImageRemoveButton' + newID;
-//    var nextAddButtonID = 'HOWImageAddButton' + newID;
-//    var nextUploadID = 'HOWImageUpload' + newID;
-//    addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-//            'removeOneHOWImage(this.id)', 'addOneHOWImage(this.id)', '480px', '0px');
-//
-//
-//}
-//add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
-//function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
-//    var BigContainer = document.getElementById('HOWImagesDIV');
-//
-//    //var BigContainer = document.getElementById(divID);
-//    var form = document.createElement("form");
-//    // console.log(form);
-//    //form.setAttribute("class","divForm");
-//    //need four dividends in a form
-//    var container1 = document.createElement("div");
-//    var container2 = document.createElement("div");
-//    var container3 = document.createElement("div");
-//    var container4 = document.createElement("div");
-//    var container5 = document.createElement("div");
-//    container1.setAttribute("class", "col-sm");
-//    container2.setAttribute("class", "col-sm");
-//    container3.setAttribute("class", "col-sm");
-//    container4.setAttribute("class", "col-sm");
-//    container5.setAttribute("class", "col-sm");
-//
-//    //crate an image area
-//    var img = document.createElement('img');
-//    img.src = "#";
-//    img.alt = imageAltName;
-//    img.id = imageID;
-//    img.style.display = 'none';
-//    img.style.marginLeft = '10px';
-//    img.style.width = width;
-//    img.style.height = imageSize;
-//    img.style.paddingTop = '10px';
-//
-//    //create an lable
-//    container2.style.textAlign = 'center';
-//    var label = document.createElement('label');
-//    //label.className = "Label";
-//    label.style.width = imageSize;
-//    label.style.height = "15px";
-//    var givenID = imageID.replace ( /[^\d.]/g, '' );
-//    var labelID = "HOWimageCaption" + givenID;
-//    label.id = labelID;
-//    //console.log("the id " + givenID);
-//    var imageNo = Number(givenID)+1;
-//    label.textContent = "IMG " + imageNo;
-//    label.setAttribute("class","figurecaption");
-//    label.style.display = 'none';
-//
-//    //create an input for the text
-//    var textInput = document.createElement('INPUT');
-//    textInput.setAttribute("type", "text");
-//    textInput.style.width = imageSize;
-//    textInput.style.marginLeft = '10px';
-//    textInput.style.height = "10px";
-//    textInput.style.display = 'none';
-//    textInput.id = imageTextID;
-//
-//    //create an input for the remove button
-//    var removeButton = document.createElement('INPUT');
-//    removeButton.setAttribute("type", "button");
-//
-//    removeButton.setAttribute("value", "Remove");
-//    removeButton.setAttribute("onclick", removeFunction);
-//    removeButton.id = removeButtonID;
-//    //removeButton.onclick = removeFunction;
-//    removeButton.style.width = imageSize;
-//    removeButton.style.marginLeft = '10px';
-//    removeButton.style.height = "25px";
-//    removeButton.style.display = "none";
-//
-//
-//    //create an input for add button
-//    var addButton = document.createElement('INPUT');
-//    addButton.setAttribute("type", "button");
-//    addButton.setAttribute("value", "Add");
-//    addButton.setAttribute("onclick", addFunction);
-//    addButton.id = addButtonID;
-//    addButton.style.width = imageSize;
-//    addButton.style.marginLeft = '10px';
-//    addButton.style.height = "25px";
-//    addButton.style.display = 'block';
-//    addButton.style.marginTop = '20px';
-//
-//    //create an input for file, to upload images, this is the one with upload action
-//    var uploadFile = document.createElement('INPUT');
-//    uploadFile.setAttribute("type", "file");
-//    uploadFile.id = uploadFileID;
-//    uploadFile.setAttribute("class", "inputImage");
-//    uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
-//
-//    uploadFile.style.display = 'none';
-//
-//
-//
-//
-//    //put all elements into the correct container
-//    //BigContainer.appendChild(form);
-//    BigContainer.appendChild(form);
-//    form.appendChild(container1);
-//    form.appendChild(container2);
-//    form.appendChild(container3);
-//    form.appendChild(container4);
-//    form.appendChild(container5);
-//    container1.appendChild(img);
-//    container2.appendChild(label);
-//    container3.appendChild(textInput);
-//    container4.appendChild(removeButton);
-//    container4.appendChild(addButton);
-//    container5.appendChild(uploadFile);
-//}
-
 //Upload photos button to trigger input file.
 $("#HOW_uploadImg_Btn").click(function () {
     $("#HOW_ImgsUpload").trigger("click");
@@ -983,6 +731,7 @@ $("#HOW_ImgsUpload").change(function (e) {
                 reader.readAsDataURL(file);
             })
         }
+       
     }
 });
 
@@ -1038,6 +787,7 @@ function imagesRemoveBtn(containerID, imgID) {
     var container = $("#" + containerID).remove();
     //    console.log("Remove ID: " + imgID);
     doRemovePhoto(imgID);
+    automaticNumbering();
 }
 
 //Resize an image
