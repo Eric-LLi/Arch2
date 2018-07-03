@@ -5584,8 +5584,10 @@
                         <input type="button" value="Upload Image" class="uploadImageButton" onclick="AssessmentExteriorUploadImages()">
                         <input type="file" id="AssessmentExteriorUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
-                    <th>
-                        <div class="row form-group">
+
+                    <th class="container">
+                        <div id="AccessmentExteriorImagesContainer" class="row"></div>
+                        <!-- <div class="row form-group">
                             <form>
                                 <div class="col-sm">
                                     <img id="AssessmentExteriorImage0" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
@@ -5686,8 +5688,7 @@
                                     <input type="file" id="AssessmentExteriorUploadImage5" class="inputImage" style="display: none">
                                 </div>
                             </form>
-                        </div>
-
+                        </div> -->
                     </th>
                 </tr>
             </table>
@@ -8146,7 +8147,9 @@
                         <input type="file" id="AssessmentInteriorLivingUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
                     <th>
-                        <div class="row form-group">
+                        <div id="AccessmentInteriorLivingImagesContainer" class="row"></div>
+                    </th>
+                    <!-- <div class="row form-group">
                             <form>
                                 <div class="col-sm">
                                     <img id="AssessmentInteriorLivingImage0" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
@@ -8259,12 +8262,10 @@
                                     <input type="file" id="AssessmentInteriorLivingUploadImage5" class="inputImage" style="display: none">
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
-                    </th>
                 </tr>
             </table>
-            <hr>
         </div>
 
         <!--Property Interior Bedroom Areas-->
@@ -9373,7 +9374,8 @@
                         <input type="file" id="AssessmentInteriorBedroomUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
                     <th>
-                        <div class="row form-group">
+                        <div id="AccessmentInteriorBedroomImagesContainer" class="row"></div>
+                        <!-- <div class="row form-group">
 
                             <form>
                                 <div class="col-sm">
@@ -9490,7 +9492,7 @@
                                     <input type="file" id="AssessmentInteriorBedroomUploadImage5" class="inputImage" style="display: none">
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
                     </th>
                 </tr>
@@ -13764,7 +13766,8 @@
                         <input type="file" id="AssessmentInteriorServiceUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
                     </th>
                     <th>
-                        <div class="row form-group">
+                        <div id="AccessmentInteriorServiceImagesContainer" class="row"></div>
+                        <!-- <div class="row form-group">
                             &nbsp;
                             <form>
                                 <div class="col-sm">
@@ -13822,7 +13825,7 @@
                                     <input type="file" id="AssessmentInteriorServiceUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
                     </th>
                 </tr>
