@@ -4000,7 +4000,7 @@ function getValueinSCP() {
  * Set the photo tables
  * */
 function getPhotoTable(id) {
-    console.log(id);
+    //console.log(id);
     var result;
     var row = [];
     var data = [];
@@ -4041,7 +4041,7 @@ function getPhotoTable(id) {
                     //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
                     //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
     
-                console.log(imgLabel);
+                //console.log(imgLabel);
                 //console.log(imgSrc);
     
                 if (typeof imgSrc  != "undefined")
@@ -4087,7 +4087,7 @@ function getPhotoTable(id) {
                     }
                 }
             }
-            console.log(divCount);
+            //console.log(divCount);
              //the last row only has one cell, need to put an empty cell to this row. 
             if (divCount == 2) {
                 console.log("the last row only has one cell, need to put two empty cells to this row.")
@@ -4103,7 +4103,7 @@ function getPhotoTable(id) {
             }
             
         
-            console.log(data);
+            //console.log(data);
 
             tableBody = {
                 layout: {

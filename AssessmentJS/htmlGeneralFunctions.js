@@ -80,10 +80,10 @@ function moreEvidentDefect() {
         var emptyLine = document.createElement('br');
         div.appendChild(emptyLine);
         var newDivID = 'EDRow' + divNumber;
-        console.log(newDivID);
+        //console.log(newDivID);
         newEDIDNumber = divNumber * 3;
         newEDID = 'ED' + newEDIDNumber;
-        console.log(newEDID);
+        //console.log(newEDID);
 
         var newDivRow = document.createElement('div');
         newDivRow.setAttribute('class', 'row');
@@ -134,7 +134,7 @@ function moreEvidentDefect() {
 
         var lastDivRow = document.getElementById(lastRowID);
         newEDIDNumber = (divNumber - 1) * 3 + nestDivNumber;
-        console.log(newEDIDNumber);
+        //console.log(newEDIDNumber);
         var newDiv = document.createElement('div');
         newDiv.setAttribute('class', 'col-sm-4');
         newDiv.id = 'ED' + newEDIDNumber;
@@ -384,7 +384,7 @@ $("#AssessmentUploadCoverImage").change(function () {
         // console.log(imageType);
         // console.log(imageName);
         loadImage.parseMetaData(imageFile, function (data) {
-            console.log('I am in loadImage function');
+            //console.log('I am in loadImage function');
             var orientation = 0;
             var image = document.getElementById('AssessmentCoverImage');
             var removeButton = document.getElementById('AssessmentCoverImageRemoveButton');
@@ -444,7 +444,7 @@ function DeleteImage(formID, imgID, textID) {
 }
 
 function DeleteOneImg(element) {
-    console.log(element);
+    //console.log(element);
     doRemovePhoto(element[0]);
     $("#" + element[5]).remove();
     automaticNumbering(element[6]);
@@ -458,7 +458,7 @@ $('#AssessmentSiteSingleImage').click(function () {
 });
 //Add one image
 $("#AssessmentSiteSingleImage").on('change', function (e) {
-    console.log("need to upload a single image");
+    //console.log("need to upload a single image");
     var file = e.currentTarget.files;
 
     if (!isEmpty(global_Img) && !isEmpty(file)) {
@@ -517,58 +517,58 @@ function AssessmentSiteUploadImages() {
 }
 
 function AssessmentExteriorUploadImages() {
-    var imageIDs = $("#AccessmentExteriorImages img");
-    console.log(imageIDs);
+    //var imageIDs = $("#AccessmentExteriorImages img");
+    //console.log(imageIDs);
 
-    for (var i = 0; i < imageIDs.length; i++) {
-        if (imageIDs.eq(i).attr("src") !== "#") {
-            var id = imageIDs.eq(i).attr("id");
-            console.log(id);
-            doRemovePhoto(id);
-        }
-    }
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     if (imageIDs.eq(i).attr("src") !== "#") {
+    //         var id = imageIDs.eq(i).attr("id");
+    //         console.log(id);
+    //         doRemovePhoto(id);
+    //     }
+    // }
     document.getElementById('AssessmentExteriorUploadImages').click();
 }
 
 function AssessmentInteriorLivingUploadImages() {
-    var imageIDs = $("#AccessmentInteriorLivingImages img");
-    console.log(imageIDs);
+    // var imageIDs = $("#AccessmentInteriorLivingImages img");
+    // console.log(imageIDs);
 
-    for (var i = 0; i < imageIDs.length; i++) {
-        if (imageIDs.eq(i).attr("src") !== "#") {
-            var id = imageIDs.eq(i).attr("id");
-            console.log(id);
-            doRemovePhoto(id);
-        }
-    }
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     if (imageIDs.eq(i).attr("src") !== "#") {
+    //         var id = imageIDs.eq(i).attr("id");
+    //         console.log(id);
+    //         doRemovePhoto(id);
+    //     }
+    // }
     document.getElementById('AssessmentInteriorLivingUploadImages').click();
 }
 
 function AssessmentInteriorBedroomUploadImages() {
-    var imageIDs = $("#AccessmentInteriorBedroomImages img");
-    //console.log(imageIDs);
+    // var imageIDs = $("#AccessmentInteriorBedroomImages img");
+    // //console.log(imageIDs);
 
-    for (var i = 0; i < imageIDs.length; i++) {
-        if (imageIDs.eq(i).attr("src") !== "#") {
-            var id = imageIDs.eq(i).attr("id");
-            console.log(id);
-            doRemovePhoto(id);
-        }
-    }
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     if (imageIDs.eq(i).attr("src") !== "#") {
+    //         var id = imageIDs.eq(i).attr("id");
+    //         console.log(id);
+    //         doRemovePhoto(id);
+    //     }
+    // }
     document.getElementById('AssessmentInteriorBedroomUploadImages').click();
 }
 
 function AssessmentInteriorServiceUploadImages() {
-    var imageIDs = $("#AccessmentInteriorServiceImages img");
-    // console.log(imageIDs);
+    // var imageIDs = $("#AccessmentInteriorServiceImages img");
+    // // console.log(imageIDs);
 
-    for (var i = 0; i < imageIDs.length; i++) {
-        if (imageIDs.eq(i).attr("src") !== "#") {
-            var id = imageIDs.eq(i).attr("id");
-            console.log(id);
-            doRemovePhoto(id);
-        }
-    }
+    // for (var i = 0; i < imageIDs.length; i++) {
+    //     if (imageIDs.eq(i).attr("src") !== "#") {
+    //         var id = imageIDs.eq(i).attr("id");
+    //         console.log(id);
+    //         doRemovePhoto(id);
+    //     }
+    // }
     document.getElementById('AssessmentInteriorServiceUploadImages').click();
 }
 
@@ -1071,7 +1071,7 @@ function createEmptElementForAddingImg(MaxImagesnumber = 6) {
 
             //do not run when there is no form or reached limitation already.
             if (element.length < MaxImagesnumber && element.length != 0) {
-                console.log("need to create one more");
+                //console.log("need to create one more");
                 //console.log(element);
                 var maxid = [];
                 for (var j = 0; j < element.length; j++) {
@@ -1149,7 +1149,7 @@ function automaticNumbering(divid) {
 function reorderImages(divid) {
     var totalContainers = $('#' + divid).find('> form');
     var BigContainer = document.getElementById(divid);
-    console.log(totalContainers);
+    //console.log(totalContainers);
     // for (var i=0;i<totalContainers.length;i++)
     // {
     //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
@@ -1159,7 +1159,7 @@ function reorderImages(divid) {
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
 
-    console.log(totalContainers);
+    //console.log(totalContainers);
 
     $('#' + divid).empty();
     for (var i = 0; i < totalContainers.length; i++) {
@@ -1183,7 +1183,7 @@ function reorderImages(divid) {
         // console.log(id);
         // console.log(ImgID);
         var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID,divid];
-        console.log(element);
+        //console.log(element);
         //console.log(element);
         // $("#" + rmBtnID).click(function () {
         //     // DeleteImage(formID, imgID, textID);
@@ -1197,7 +1197,7 @@ function reorderImages(divid) {
         // });
         //["AssessmentSiteImage_3", "SiteGardenlabel3", "AssessmentSiteImageText3", "AssessmentSiteRemoveButton3", "AddAssessmentSiteImageButton3", "SiteGardonForm3", "AccessmentSiteImagesContainer"]
         var removeFunction = "DeleteOneImg(['" + imgID + "','" + labelID+"','" + textID + "','" + rmBtnID +"','" +  addBtnID + "','" + formID + "','" + divid + "'])";
-        console.log(removeFunction);
+        //console.log(removeFunction);
         $("#" + addBtnID).click(function () {
             global_Img = element;
             $("#AssessmentSiteSingleImage").click();
