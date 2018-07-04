@@ -330,7 +330,7 @@
                 //if the image is exited, then just need to populate the image with the src.
                 if (image) {
                     //console.log('1111111have imageID');
-                    console.log(imageID);
+                    //console.log(imageID);
                     image.style.display = 'block';
                     image.alt = p.imageAltName
                     //imageID.style.width = '265px';
@@ -355,7 +355,7 @@
                             removeID.style.width = p.width;
                         }
                     }
-                    console.log('the addID is ' + p.addid);
+                    //console.log('the addID is ' + p.addid);
                     if ((p.addid != '') && (p.addid != null)) {
                         var addButton = document.getElementById(p.addid);
                         //console.log('the current add button is ' + addButton);
