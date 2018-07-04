@@ -39,7 +39,7 @@
         <?php require_once("meta.php"); ?>
     </head>
 
-    <body onload="onload()">
+    <body>
         <!--Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">ArchiCentre Task</a>

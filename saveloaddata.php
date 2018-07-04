@@ -441,8 +441,10 @@
                         if (p.tableName === 'AccessmentSiteImagesContainer') {
                             //Insert (lastElementID, imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID)
                             //Receive ([imgID, labelID, textID, rmBtnID, addBtnID, formID])
+                            //console.log(p.divID);
                             var element = createImagesElements(p.tableName, p.imageid, p.imageAltName, "",
                                 p.textid, p.removeid, p.addid, p.divID);
+                            //console.log(element);
                             // console.log(element);
                             $("#" + element[0]).attr("src", url);
                         } else if (p.tableName === 'AccessmentExteriorImagesContainer') {
