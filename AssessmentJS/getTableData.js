@@ -3994,3 +3994,144 @@ function getValueinSCP() {
         return document.getElementById('conditionOfBuilding').value;
     }
 }
+
+
+/**
+ * Set the photo tables
+ * */
+function getPhotoTable(id) {
+    console.log(id);
+    var result;
+    var row = [];
+    var data = [];
+    var tableBody, divCount = 1;
+    var totalContainers = $('#'+id).find('> form');
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').get(0));
+    // console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'));
+    // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
+    // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+    console.log("the current total image form is: " + totalContainers.length + ", image number need to -1, the last one is only a form, no image");
+    if (totalContainers.length == 0) {
+        tableBody = {
+            text:''
+        };
+    }
+    else
+    {
+        var firstImgSrc = totalContainers.eq(0).children('img').attr('src');
+        if (totalContainers.length == 1 && typeof firstImgSrc == "undefined")
+        {
+            console.log("only has one container, and this container is emtpy");
+            tableBody = {
+                text:''
+            };
+        }
+        else
+        {
+            for (var i = 0; i < totalContainers.length; i++)
+            {
+                var img = totalContainers.eq(i).children('img').get(0),
+                    imgSrc = totalContainers.eq(i).children('img').attr('src'),
+                    imgLabel = totalContainers.eq(i).children('label').text(),
+                    imgText = totalContainers.eq(i).children('input').eq(0).val()
+                    // width = 0,
+                    // height = 0;
+                    //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
+                    //console.log(totalContainers.eq(i).children('div').eq(0).children('img').attr('src'));
+                    //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
+                    //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
+    
+                console.log(imgLabel);
+                //console.log(imgSrc);
+    
+                if (typeof imgSrc  != "undefined")
+                {
+                    if (imgSrc.includes("photos/") > 0) 
+                    {
+                        imgSrc = convertImgToBase64(img);
+                    }
+        
+                    // if (img.width >= img.height) {
+                    //     width = 250;
+                    //     height = 187;
+                    // } else {
+                    //     width = img.width * 187 / img.height;
+                    //     height = 187;
+                    // }
+        
+                    row.push({
+                        stack: [
+                            {
+                                image: imgSrc,
+                                height: 120,
+                                width: 160,
+                                margin:[10,30,0,5],
+                                alignment: 'center'
+                            },
+                            {
+                                text: imgLabel,
+                                margin: [0, 5],
+                                alignment: 'center'
+                            },
+                            {
+                                text: imgText
+                            }
+                        ]
+                    })
+                    divCount++;
+                    //the row has three cells, this row is completed, need to reset the row, and put this row into the table data
+                    if (divCount === 4) {
+                        data.push(row);
+                        row = [];
+                        divCount = 1;
+                    }
+                }
+            }
+            console.log(divCount);
+             //the last row only has one cell, need to put an empty cell to this row. 
+            if (divCount == 2) {
+                console.log("the last row only has one cell, need to put two empty cells to this row.")
+                row.push({});
+                row.push({});
+                data.push(row);
+            }
+            if (divCount == 3)
+            {
+                console.log("the last row only has two cell, need to put one empty cells to this row.")
+                row.push({});
+                data.push(row);
+            }
+            
+        
+            console.log(data);
+
+            tableBody = {
+                layout: {
+                    hLineColor: function (i, node) {
+                        return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+                    },
+                    vLineColor: function (i, node) {
+                        return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                    }
+                },
+                table: {
+                    
+                    body: data
+                }
+            } 
+        }
+    }
+    return tableBody;
+}
+
+
+function convertImgToBase64(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var src = canvas.toDataURL("image/jpeg");
+
+    return src;
+}
