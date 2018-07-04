@@ -586,8 +586,10 @@ function getCoverImage(id) {
 }
 
 function displayThreeImg(id) {
+    console.log("geting three images");
+    console.log(id);
     var forms = $("#" + id + " form");
-    console.log(forms);
+    //console.log(forms);
     var result = [],
         row = [];
 
@@ -620,14 +622,18 @@ function displayThreeImg(id) {
     }
     if (!isEmpty(row)) {
         result.push(row);
+        console.log(result);
     } else {
         result.push({});
+        console.log(result);
     }
     return result;
 
 }
 
 function displaySixImg(id) {
+    console.log("geting six images");
+    console.log(id);
     var forms = $("#" + id + " form");
 
     var result = [],
@@ -671,12 +677,16 @@ function displaySixImg(id) {
             row.push({});
         }
         result.push(row);
+        console.log(result);
     }
     if (isEmpty(result)) {
         result.push({});
+        console.log(result);
         return result;
     } else
         return result;
+
+
 
 }
 

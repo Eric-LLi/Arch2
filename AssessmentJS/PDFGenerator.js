@@ -985,14 +985,15 @@ function generatePDF(mode) {
                     getGarage(),
                     getBoundary(),
                     makeAGap(),
+                    getPhotoTable('AccessmentSiteImagesContainer'),
                     //Display images
-                    {
-                        alignment: 'center',
-                        layout: 'noBorders',
-                        table: {
-                            body: displayThreeImg("AccessmentSiteImagesContainer")
-                        }
-                    },
+                    // {
+                    //     alignment: 'center',
+                    //     layout: 'noBorders',
+                    //     table: {
+                    //         body: displayThreeImg("AccessmentSiteImagesContainer")
+                    //     }
+                    // },
                     // {
                     //     alignment: 'center',
                     //     columns: [
@@ -1065,13 +1066,14 @@ function generatePDF(mode) {
                     getVerandas(),
                     getAssessmentOthers(),
                     makeAGap(),
-                    {
-                        alignment: 'center',
-                        layout: 'noBorders',
-                        table: {
-                            body: displaySixImg("AccessmentExteriorImagesContainer")
-                        }
-                    },
+                    getPhotoTable('AccessmentExteriorImagesContainer'),
+                    // {
+                    //     alignment: 'center',
+                    //     layout: 'noBorders',
+                    //     table: {
+                    //         body: displaySixImg("AccessmentExteriorImagesContainer")
+                    //     }
+                    // },
 
                     // {
                     //     alignment: 'center',
@@ -1165,20 +1167,22 @@ function generatePDF(mode) {
                     getAssessmentKitchen(),
                     getAssessmentBedroom(),
                     makeAGap(),
-                    {
-                        alignment: 'center',
-                        layout: 'noBorders',
-                        table: {
-                            body: displaySixImg("AccessmentInteriorLivingImagesContainer")
-                        }
-                    },
-                    {
-                        alignment: 'center',
-                        layout: 'noBorders',
-                        table: {
-                            body: displaySixImg("AccessmentInteriorBedroomImagesContainer")
-                        }
-                    },
+                    getPhotoTable('AccessmentInteriorLivingImagesContainer'),
+                    getPhotoTable('AccessmentInteriorBedroomImagesContainer'),
+                    // {
+                    //     alignment: 'center',
+                    //     layout: 'noBorders',
+                    //     table: {
+                    //         body: displaySixImg("AccessmentInteriorLivingImagesContainer")
+                    //     }
+                    // },
+                    // {
+                    //     alignment: 'center',
+                    //     layout: 'noBorders',
+                    //     table: {
+                    //         body: displaySixImg("AccessmentInteriorBedroomImagesContainer")
+                    //     }
+                    // },
                     // {
                     //     alignment: 'center',
                     //     columns: [{
@@ -1437,14 +1441,15 @@ function generatePDF(mode) {
                     getAssessmentPowderRoom(),
                     getAssessmentServices(),
                     makeAGap(),
+                    getPhotoTable('AccessmentInteriorServiceImagesContainer'),
                     //display images, max 3
-                    {
-                        alignment: 'center',
-                        layout: 'noBorders',
-                        table: {
-                            body: displayThreeImg("AccessmentInteriorServiceImagesContainer")
-                        }
-                    },
+                    // {
+                    //     alignment: 'center',
+                    //     layout: 'noBorders',
+                    //     table: {
+                    //         body: displayThreeImg("AccessmentInteriorServiceImagesContainer")
+                    //     }
+                    // },
 
                     // {
                     //     alignment: 'center',
