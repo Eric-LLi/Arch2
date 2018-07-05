@@ -650,8 +650,8 @@ function generatePDF(mode) {
                 fontSize: 10
             },
             colText: {
-                fontSize: 9,
-                margin:[0,5,0,5]
+                fontSize: 9
+                //margin:[0,5,0,5]
             },
         }
     };
