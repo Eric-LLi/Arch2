@@ -209,7 +209,7 @@ $('#MaintenanceUploadCoverImage').change(function(){
                 orientation = data.exif.get('Orientation');
             }
             var loadingImage = loadImage(imageFile, function (canvas) {
-                    var base64data = canvas.toDataURL(imageType);
+                    var base64data = canvas.toDataURL("image/jpeg");
                     //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
                     image.setAttribute('src',base64data);
                     removeButton.style.display = 'block';
@@ -304,7 +304,7 @@ $('#MaintenanceUploadImages').change(function() {
                             orientation = data.exif.get('Orientation');
                         }
                         var loadingImage = loadImage(imageFile[ii], function (canvas) {
-                                var base64data = canvas.toDataURL(imageType);
+                                var base64data = canvas.toDataURL("image/jpeg");
                                 //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
                                 image.setAttribute('src',base64data);
                                 //$(selectionImage).attr('src',base64data);
@@ -388,7 +388,7 @@ $('#MaintenanceUploadImages').change(function() {
                             orientation = data.exif.get('Orientation');
                         }
                         var loadingImage = loadImage(imageFile[ii], function (canvas) {
-                                var base64data = canvas.toDataURL(imageType);
+                                var base64data = canvas.toDataURL("image/jpeg");
                                 //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
                                 image.setAttribute('src',base64data);
                                 //$(selectionImage).attr('src',base64data);
@@ -494,7 +494,7 @@ function AddOneMaintenanceImage(click_id)
                         orientation = data.exif.get('Orientation');
                     }
                     var loadingImage = loadImage(imageFile, function (canvas) {
-                            var base64data = canvas.toDataURL(imageType);
+                            var base64data = canvas.toDataURL("image/jpeg");
                             //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
                             image.setAttribute('src',base64data);
                             //$(selectionImage).attr('src',base64data);
@@ -677,7 +677,7 @@ function AddOneMaintenanceDrawing(click_id)
                         orientation = data.exif.get('Orientation');
                     }
                     var loadingImage = loadImage(imageFile, function (canvas) {
-                            var base64data = canvas.toDataURL(imageType);
+                            var base64data = canvas.toDataURL("image/jpeg");
                             //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
                             image.setAttribute('src',base64data);
                             //$(selectionImage).attr('src',base64data);
@@ -874,7 +874,7 @@ $('#MaintenanceUploadDrawings').change(function() {
                             orientation = data.exif.get('Orientation');
                         }
                         var loadingImage = loadImage(imageFile[ii], function (canvas) {
-                                var base64data = canvas.toDataURL(imageType);
+                                var base64data = canvas.toDataURL("image/jpeg");
                                 //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
                                 image.setAttribute('src',base64data);
                                 //$(selectionImage).attr('src',base64data);
@@ -961,7 +961,7 @@ $('#MaintenanceUploadDrawings').change(function() {
                             orientation = data.exif.get('Orientation');
                         }
                         var loadingImage = loadImage(imageFile[ii], function (canvas) {
-                                var base64data = canvas.toDataURL(imageType);
+                                var base64data = canvas.toDataURL("image/jpeg");
                                 //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
                                 image.setAttribute('src',base64data);
                                 //$(selectionImage).attr('src',base64data);
