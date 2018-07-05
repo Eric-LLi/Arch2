@@ -1146,10 +1146,20 @@ function getImagesTable()
                             alignment: 'center'
                         },
                         {
-                            text: imgText,
-                            fontSize: 9,
-                            margin:[0,5,0,10]
+                            columns:[
+                                {
+                                    width: 500,
+                                    text: imgText,
+                                    fontSize: 9,
+                                    margin:[0,5,0,20]
+                                }
+                            ]                       
                         }
+                        // {
+                        //     text: imgText,
+                        //     fontSize: 9,
+                        //     margin:[0,5,0,10]
+                        // }
                     ]
                 })
                 divCount++;
@@ -1181,6 +1191,7 @@ function getImagesTable()
                 }
             },
             table: {
+                width:[500],
                 headerRows: 1,
                 body: data
             }
