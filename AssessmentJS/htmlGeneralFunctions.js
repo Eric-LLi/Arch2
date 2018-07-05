@@ -650,7 +650,7 @@ $("#AssessmentSiteUploadImages").change(function () {
             $("#AccessmentSiteImagesContainer").empty();
         }
 
-        var allImages;
+        var allImages = [];
         if (this.files.length > 3) {
             alert("You can only selected three images maximum");
             //Only save 3 files.

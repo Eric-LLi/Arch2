@@ -926,7 +926,7 @@ function getImagesTable()
                 fontSize: 15,
                 color: 'red',
                 bold: true,
-                margin: [0, 0, 0, 5]
+                margin: [0, 0, 0, 20]
              
             }
         ];
@@ -969,16 +969,21 @@ function getImagesTable()
                             image: imgSrc,
                             height:500,
                             width:500,
-                            margin:[10,30,0,5],
+                            margin:[0,0,0,5],
+                            //margin:[10,30,0,5],
                             alignment: 'center'
                         },
                         {
                             text: imgLabel,
-                            margin: [0, 5],
+                            bold:'true',
+                            fontSize:10,
+                            margin: [0, 2],
                             alignment: 'center'
                         },
                         {
-                            text: imgText
+                            text: imgText,
+                            fontSize: 9,
+                            margin:[0,5,0,10]
                         }
                     ]
                 })

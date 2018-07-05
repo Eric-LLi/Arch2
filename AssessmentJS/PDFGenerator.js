@@ -1777,7 +1777,8 @@ function generatePDF(mode) {
                 bold: true
             },
             colText: {
-                fontSize: 9
+                fontSize: 9,
+                margin:[0,5,0,5]
             },
             paragraphMargin: {
                 margin: [0, 0, 0, 6]

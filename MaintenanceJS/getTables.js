@@ -687,7 +687,7 @@ function getImagesTable()
             {
                 text:'Address: ' + fullAddress,
                 style: 'tableBoldTextAlignLeft',
-                margin: [0, 0, 0, 10],
+                margin: [0, 0, 0, 20],
                 colSpan:2
             },{}
         ];
@@ -729,18 +729,30 @@ function getImagesTable()
                             image: imgSrc,
                             height: 200,
                             width: 250,
-                            margin:[10,30,0,5],
+                            margin:[0,0,0,5],
+                            //margin:[10,30,0,5],
                             alignment: 'center'
                         },
                         {
                             text: imgLabel,
-                            margin: [0, 5],
+                            bold:'true',
+                            fontSize:10,
+                            margin: [0, 2],
                             alignment: 'center'
                         },
                         {
-                            text: imgText
+                            columns:[
+                                {
+                                    width: 250,
+                                    text: imgText,
+                                    fontSize: 9,
+                                    margin:[0,5,0,20]
+                                }
+                            ]
+                            
                         }
-                    ]
+                    ],
+                    margin:[0,5,0,10]
                 })
                 divCount++;
                 //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
@@ -816,7 +828,7 @@ function getDrawingTable()
             {
                 text:'Address: ' + fullAddress,
                 style: 'tableBoldTextAlignLeft',
-                margin: [0, 0, 0, 10]
+                margin: [0, 0, 0, 20]
             }
         ];
         data.push(secondRow);
@@ -857,18 +869,24 @@ function getDrawingTable()
                             image: imgSrc,
                             width:500,
                             height:500,
-                            margin:[10,30,0,5],
+                            margin:[0,0,0,5],
+                            //margin:[10,30,0,5],
                             alignment: 'center'
                         },
                         {
                             text: imgLabel,
-                            margin: [0, 5],
+                            bold:'true',
+                            fontSize:10,
+                            margin: [0, 2],
                             alignment: 'center'
                         },
                         {
-                            text: imgText
+                            text: imgText,
+                            fontSize: 9,
+                            margin:[0,5,0,10]
                         }
-                    ]
+                    ],
+                    margin:[0,5,0,10]
                 })
                 divCount++;
                 //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
