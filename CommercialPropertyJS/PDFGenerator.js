@@ -1025,8 +1025,8 @@ function generatePDF(mode) {
                 margin: [0, 0, 0, 2]
             },
             colText: {
-                fontSize: 10,
-                margin: [0, 2, 0, 2]
+                fontSize: 9
+                //margin:[0,5,0,5]
             },
             secondHeader: {
                 fontSize: 14,

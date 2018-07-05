@@ -1369,6 +1369,7 @@ function getImages() {
             text: 'PHOTOGRAPHS',
             color: 'red',
             fontSize: 11,
+            margin: [0, 0, 0, 5],
             bold: 'true'
         }, {});
         data.push(row);
@@ -1376,7 +1377,8 @@ function getImages() {
         row.push({
             text: 'Address: ' + getIt('CP_Address') + ', ' + getIt('CP_Suburb'),
             fontSize: 10,
-            bold: 'true'
+            bold: 'true',
+            margin:[0,0,0,20]
         }, {});
         data.push(row);
         row = [];
@@ -1407,18 +1409,30 @@ function getImages() {
                         image: imgSrc,
                         width: width,
                         height: height,
-                        margin: [0, 80, 0, 0],
-                        alignment: 'center'
+                        margin:[0,0,0,5]
+                        //margin:[0,30,0,5]
+                        //alignment: 'center'
                     },
                     {
                         text: imgLabel,
-                        margin: [0, 5],
+                        bold:'true',
+                        fontSize:10,
+                        margin: [0, 2],
                         alignment: 'center'
                     },
                     {
-                        text: imgText
+                        columns:[
+                            {
+                                width: width,
+                                text: imgText,
+                                fontSize: 9,
+                                margin:[0,5,0,20]
+                            }
+                        ]
+                        
                     }
-                ]
+                ],
+                margin:[0,5,0,10]
             })
             divCount++;
             if (divCount === 3) {
@@ -1434,10 +1448,18 @@ function getImages() {
         }
         tableBody = {
             pageBreak: 'before',
-            layout: 'noBorders',
+            layout: {
+                hLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+                },
+                vLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                }
+            },
+            //layout: 'noBorders',
             table: {
-                widths: [250, 250],
                 headerRows: 2,
+                widths: [width, width],
                 body: data
             }
         }

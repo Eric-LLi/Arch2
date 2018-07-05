@@ -1843,7 +1843,7 @@ function getImagesTable() {
         row.push({
             text: 'Address: ' + fullAddress,
             style: 'tableBoldTextAlignLeft',
-            margin: [0, 0, 0, 10]
+            margin: [0, 0, 0, 20],
         }, {});
         data.push(row);
         row = [];
@@ -1874,18 +1874,29 @@ function getImagesTable() {
                         image: imgSrc,
                         width: width,
                         height: height,
-                        margin: [0, 80, 0, 0],
+                        margin:[0,0,0,5],
+                        //margin: [0, 80, 0, 0],
                         alignment: 'center'
                     },
                     {
                         text: imgLabel,
-                        margin: [0, 5],
+                        bold:'true',
+                        fontSize:10,
+                        margin: [0, 2],
                         alignment: 'center'
                     },
                     {
-                        text: imgText
+                        columns:[
+                            {
+                                width: width,
+                                text: imgText,
+                                fontSize: 9,
+                                margin:[0,5,0,20]
+                            }
+                        ]                       
                     }
-                ]
+                ],
+                margin:[0,5,0,10]
             })
             divCount++;
             if (divCount === 3) {
@@ -1903,7 +1914,7 @@ function getImagesTable() {
             pageBreak: 'before',
             layout: 'noBorders',
             table: {
-                widths: [250, 250],
+                widths: [width, width],
                 headerRows: 2,
                 body: data
             }

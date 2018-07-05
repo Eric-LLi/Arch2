@@ -3095,18 +3095,30 @@ function getImagesTable(divid)
                             image: imgSrc,
                             height: 110,
                             width: 160,
-                            margin:[5,20,0,5],
-                            alignment: 'center'
+                            margin:[0,0,0,5]
+                            // margin:[5,20,0,5],
+                            // alignment: 'center'
                         },
                         {
                             text: imgLabel,
-                            margin: [0, 5],
+                            bold:'true',
+                            fontSize:10,
+                            margin: [0, 2],
                             alignment: 'center'
                         },
                         {
-                            text: imgText
+                            columns:[
+                                {
+                                    width: 160,
+                                    text: imgText,
+                                    fontSize: 9,
+                                    margin:[0,4,0,20]
+                                }
+                            ]
+                            
                         }
-                    ]
+                    ],
+                    margin:[0,5,0,10]
                 })
                 divCount++;
                 //the row has two cells, this row is completed, need to reset the row, and put this row into the table data

@@ -622,7 +622,7 @@ function generatePDF(mode) {
                 fontSize: 12
             },
             tableBoldTextAlignLeft: {
-                fontSize: 9,
+                fontSize: 10,
                 bold: true
             },
             pageTopHeader: {
@@ -632,6 +632,7 @@ function generatePDF(mode) {
             },
             colText: {
                 fontSize: 9
+                //margin:[0,5,0,5]
             },
             paragraphMargin: {
                 margin: [0, 0, 0, 6]
