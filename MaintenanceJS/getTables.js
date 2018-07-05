@@ -881,10 +881,20 @@ function getDrawingTable()
                             alignment: 'center'
                         },
                         {
-                            text: imgText,
-                            fontSize: 9,
-                            margin:[0,5,0,10]
+                            columns:[
+                                {
+                                    width: 500,
+                                    text: imgText,
+                                    fontSize: 9,
+                                    margin:[0,5,0,20]
+                                }
+                            ]                       
                         }
+                        // {
+                        //     text: imgText,
+                        //     fontSize: 9,
+                        //     margin:[0,5,0,10]
+                        // }
                     ],
                     margin:[0,5,0,10]
                 })
@@ -898,6 +908,7 @@ function getDrawingTable()
             }
             
         }
+        console.log(data);
         //the last row only has one cell, need to put an empty cell to this row. 
         // if (divCount == 2) {
         //     //console.log("the last row only has one cell, need to put an empty cell to this row.")
@@ -916,6 +927,7 @@ function getDrawingTable()
                 }
             },
             table: {
+                width:[500],
                 headerRows: 2,
                 body: data
             }
