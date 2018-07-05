@@ -1029,6 +1029,7 @@ function getPhotoImgs() {
     row.push({
         text: "Photos",
         style: 'pageTopHeader',
+        margin: [0, 0, 0, 20],
 
     }, {});
     data.push(row);
@@ -1053,17 +1054,30 @@ function getPhotoImgs() {
                         image: imgSrc,
                         width: 250,
                         height: 187,
-                        margin: [0, 80, 0, 0],
-                        alignment: 'center'
+                        margin:[0,0,0,5]
+                        // margin: [0, 80, 0, 0],
+                        // alignment: 'center'
                     },
                     {
                         text: $(divContainers.eq(i).children('label')).text(),
+                        bold:'true',
+                        fontSize:10,
+                        margin: [0, 2],
                         alignment: 'center'
                     },
                     {
-                        text: $(divContainers.eq(i).children('input')).val()
+                        columns:[
+                            {
+                                width: 250,
+                                text: $(divContainers.eq(i).children('input')).val(),
+                                fontSize: 9,
+                                margin:[0,5,0,20]
+                            }
+                        ]
+                        
                     }
-                ]
+                ],
+                margin:[0,5,0,20]
             });
             divCount++;
             if (divCount === 3) {
@@ -1111,6 +1125,7 @@ function getSketchImgsData() {
         row.push({
             text: "Sketchs",
             style: 'pageTopHeader',
+            margin: [0, 0, 0, 20]
         });
         data.push(row);
         row = [];
@@ -1137,10 +1152,14 @@ function getSketchImgsData() {
                         },
                         {
                             text: $(divContainers.eq(i).children('label').eq(0)).text(),
+                            bold:'true',
+                            fontSize:10,
+                            margin: [0, 2],
                             alignment: 'center'
                         },
                         {
-                            text: $(divContainers.eq(i).children('input')).val()
+                            text: $(divContainers.eq(i).children('input')).val(),
+                            fontSize: 9
                         }
                     ]
                 });

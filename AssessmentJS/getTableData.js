@@ -4065,18 +4065,27 @@ function getPhotoTable(id) {
                                 image: imgSrc,
                                 height: 120,
                                 width: 160,
-                                margin:[10,30,0,5],
-                                alignment: 'center'
+                                margin:[0,0,0,5]
+                                //alignment: 'center'
                             },
+                            // {
+                            //     text: imgLabel,
+                            //     margin: [0, 5],
+                            //     alignment: 'center'
+                            // },
                             {
-                                text: imgLabel,
-                                margin: [0, 5],
-                                alignment: 'center'
-                            },
-                            {
-                                text: imgText
+                                columns:[
+                                    {
+                                        width: 160,
+                                        text: imgText,
+                                        fontSize: 9,
+                                        margin:[0,5,0,20]
+                                    }
+                                ]
+                                
                             }
-                        ]
+                        ],
+                        margin:[0,5,0,10]
                     })
                     divCount++;
                     //the row has three cells, this row is completed, need to reset the row, and put this row into the table data
@@ -4115,6 +4124,7 @@ function getPhotoTable(id) {
                     }
                 },
                 table: {
+                    width:[160,160,160],
                     
                     body: data
                 }

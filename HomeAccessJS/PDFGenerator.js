@@ -648,7 +648,11 @@ function generatePDF(mode) {
             },
             Contents: {
                 fontSize: 10
-            }
+            },
+            colText: {
+                fontSize: 9,
+                margin:[0,5,0,5]
+            },
         }
     };
     if (mode === 'save') {

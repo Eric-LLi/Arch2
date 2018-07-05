@@ -43,7 +43,7 @@ function automaticNumbering()
     {
         //console.log(i);
         //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
-        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
+        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "Drawing " + (i+1);
     }
 }
 function addNewImageForm()
