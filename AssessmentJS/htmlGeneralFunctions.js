@@ -1220,5 +1220,11 @@ $(document).ready(function () {
     automaticNumbering('AccessmentInteriorBedroomImagesContainer');
     automaticNumbering('AccessmentInteriorServiceImagesContainer');
     createEmptElementForAddingImg();
+
+    // var name = document.getElementById('0').value;
+    // console.log(name);
+    // console.log(String(name).replace(/\s+/g, " "));
+    //document.getElementById('0').value = String(name).replace(/\s+/g, " ")
+
     
 })

@@ -3099,13 +3099,13 @@ function getImagesTable(divid)
                             // margin:[5,20,0,5],
                             // alignment: 'center'
                         },
-                        {
-                            text: imgLabel,
-                            bold:'true',
-                            fontSize:10,
-                            margin: [0, 2],
-                            alignment: 'center'
-                        },
+                        // {
+                        //     text: imgLabel,
+                        //     bold:'true',
+                        //     fontSize:10,
+                        //     margin: [0, 2],
+                        //     alignment: 'center'
+                        // },
                         {
                             columns:[
                                 {
