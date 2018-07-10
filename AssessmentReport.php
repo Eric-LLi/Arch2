@@ -82,8 +82,7 @@
                     <div class="col-sm">
                         <label>Name</label>
                         <br>
-                        <input id="0" class="form-control" title="name" type="text" value="<?php echo doNiceArrayElemAsString('custfirstname') . "
-                            " . doNiceArrayElemAsString('custlastname'); ?>">
+                        <input id="0" class="form-control" title="name" type="text" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
                     </div>
                     <div class="col-sm">
                         <label>Phone</label>
@@ -197,8 +196,7 @@
                     <div class="col-sm">
                         <label>Architect Name</label>
                         <br>
-                        <input id="architectName" title="name" class="form-control" type="text" value="<?php echo doNiceArrayElemAsString('archfirstname') . "
-                            " . doNiceArrayElemAsString('archlastname'); ?>">
+                        <input id="architectName" title="name" class="form-control" type="text" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>">
                     </div>
                     <div class="col-sm">
                         <label>Registration No.</label>

@@ -61,8 +61,7 @@ require_once("loadbooking.php");
                                 <div class="col-sm">
                                     <label id="HA_lbClientName">Name: </label>
                                     <br>
-                                    <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . "
-                                        " . doNiceArrayElemAsString('custlastname'); ?>">
+                                    <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
                                 </div>
                                 <div class="col-sm">
                                     <label id="HA_lbClientPhone">Phone: </label>
@@ -148,8 +147,7 @@ require_once("loadbooking.php");
                                     <div class="col-sm">
                                         <label id="HA_lbarchitectName">Architect: </label>
                                         <br>
-                                        <input id="HA_architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . "
-                                            " . doNiceArrayElemAsString('archlastname'); ?>">
+                                        <input id="HA_architectName" class="form-control" type="text" title="architectName" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>">
                                     </div>
                                     <div class="col-sm">
                                         <label id="HA_lbregistrationNumber">Registration No. : </label>
