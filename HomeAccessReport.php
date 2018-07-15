@@ -61,8 +61,7 @@ require_once("loadbooking.php");
                                 <div class="col-sm">
                                     <label id="HA_lbClientName">Name: </label>
                                     <br>
-                                    <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . "
-                                        " . doNiceArrayElemAsString('custlastname'); ?>">
+                                    <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
                                 </div>
                                 <div class="col-sm">
                                     <label id="HA_lbClientPhone">Phone: </label>
