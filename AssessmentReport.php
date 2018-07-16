@@ -196,8 +196,7 @@
                     <div class="col-sm">
                         <label>Architect Name</label>
                         <br>
-                        <input id="architectName" title="name" class="form-control" type="text" value="<?php echo doNiceArrayElemAsString('archfirstname') . "
-                            " . doNiceArrayElemAsString('archlastname'); ?>">
+                        <input id="architectName" title="name" class="form-control" type="text" value="<?php echo doNiceArrayElemAsString('archfirstname') . " " . doNiceArrayElemAsString('archlastname'); ?>">
                     </div>
                     <div class="col-sm">
                         <label>Registration No.</label>

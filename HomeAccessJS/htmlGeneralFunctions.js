@@ -910,7 +910,7 @@ $("#Imgs_Upload").change(function (e) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 //                imgFile.src = e.target.result
-                var data = e.target.result
+                var data = e.target.result;
                 var image = new Image();
                 image.onload = function () {
                     var width = image.width;
@@ -972,11 +972,11 @@ $("#Imgs_Upload").change(function (e) {
             //                });
             //            }
             //        }
-        })
+        });
 
         setTimeout(function () {
             automaticNumbering('HA_ImgsContents', 'IMG');
-        }, 1000)
+        }, 1000);
     }
 });
 //Photos page; create html image, text, remove button and container.
@@ -1090,7 +1090,7 @@ function createPDFImg(id) {
         caption = document.createElement("input"),
         label = document.createElement("label");
 
-    tr = document.getElementById("HA_PdfContents"),
+    var tr = document.getElementById("HA_PdfContents"),
         captionID = id + "_Cap",
         containerID = id + "_DIV",
         imgID = id + "_IMG",
@@ -1241,7 +1241,7 @@ $("#file-to-upload").on('change', function (e) {
     setTimeout(function () {
         automaticNumbering('HA_PdfContents', 'Sketch');
 
-    }, 2000)
+    }, 2000);
 
 
 });
