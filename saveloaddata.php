@@ -194,7 +194,7 @@
                     // //var bookingCode = document.getElementById('customer_booking').value;
                     // var url = baseURL + bookingCode + '.pdf';
                     // window.open(url);
-
+                    return formData;
 
 
                 } else {
@@ -204,12 +204,13 @@
                         type: 'error',
                         timeout: 5000
                     });
+                    return {};
                 }
 
             }
         );
         //console.log('saving pdf');
-        return formData;
+       
     }
 
     //imageSize == height
