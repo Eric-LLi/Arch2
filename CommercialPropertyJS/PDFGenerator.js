@@ -1090,11 +1090,11 @@ function generatePDF(mode) {
                 bold: true,
                 color: 'red'
             },
-            pageTopHeader: {
-                fontSize: 17,
-                color: 'red',
-                bold: true
-            },
+            // pageTopHeader: {
+            //     fontSize: 17,
+            //     color: 'red',
+            //     bold: true
+            // },
             tightTable: {
                 margin: [0, 0, 30, 0]
             },
