@@ -8,29 +8,28 @@ function generatePDF(mode) {
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isMobile = {
-        Android: function() {
+        Android: function () {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function() {
+        BlackBerry: function () {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function() {
+        iOS: function () {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function() {
+        Opera: function () {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function() {
+        Windows: function () {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function() {
+        any: function () {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
     var docDefinition = {
         footer: function (currentPage, pageCount) {
-            if (currentPage === 1)
-            {
+            if (currentPage === 1) {
                 return {
                     columns: [
                         determineFrontPageFooter(mode),
@@ -39,14 +38,12 @@ function generatePDF(mode) {
                             alignment: 'right',
                             margin: [0, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
-            }
-            else
-            {
+            } else {
                 return {
                     columns: [
                         determineFooter(mode),
@@ -55,8 +52,8 @@ function generatePDF(mode) {
                             alignment: 'left',
                             margin: [10, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
@@ -67,11 +64,9 @@ function generatePDF(mode) {
              * (1) Cover Page
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         alignment: 'justify',
-                        columns: [
-                            {
+                        columns: [{
                                 image: coverPageLogo,
                                 alignment: 'left',
                                 width: 130
@@ -87,15 +82,14 @@ function generatePDF(mode) {
                     },
                     giveMeHugeDraft(mode),
                     {
-                        table:{
+                        table: {
                             // widths: ['*', '*'],
-                            body:[
-                                [
-                                    {
+                            body: [
+                                [{
                                         border: [true, true, false, true],
                                         text: maintenanceAdviceReportText,
                                         fontSize: 9,
-                                        margin:[5,5,5,5]
+                                        margin: [5, 5, 5, 5]
 
                                     },
                                     {
@@ -103,14 +97,14 @@ function generatePDF(mode) {
                                         stack: [
                                             getCoverImage('MaintenanceCoverImage')
                                         ],
-                                        margin:[5,5,5,5]
+                                        margin: [5, 5, 5, 5]
                                         //margin:[10,10,10,10]
                                     }
 
                                 ]
                             ]
                         },
-                        layout:{
+                        layout: {
                             hLineWidth: function (i, node) {
                                 return (i === 0 || i === node.table.body.length) ? 2 : 1;
                             },
@@ -146,8 +140,7 @@ function generatePDF(mode) {
              * (2) Introduction
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Introduction',
                         style: 'pageTopHeader'
                     },
@@ -158,7 +151,9 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: [introductionP2a, {text: getIt('0')}, introductionP2b],
+                        text: [introductionP2a, {
+                            text: getIt('0')
+                        }, introductionP2b],
                         fontSize: 9
                     },
                     makeAGap(),
@@ -188,8 +183,7 @@ function generatePDF(mode) {
              * (3) The Scope of Assessment
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'The Scope of Assessment',
                         style: 'pageTopHeader'
                     },
@@ -200,10 +194,8 @@ function generatePDF(mode) {
                     },
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
+                        columns: [{
+                                stack: [{
                                         text: reportStandardP1,
                                         style: 'paragraphMargin'
                                     },
@@ -220,8 +212,7 @@ function generatePDF(mode) {
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        ul: [
-                                            {
+                                        ul: [{
                                                 text: whatIncBulletList1,
                                                 style: 'bulletMargin'
                                             },
@@ -244,8 +235,7 @@ function generatePDF(mode) {
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        ul: [
-                                            {
+                                        ul: [{
                                                 text: whatNotRecordedBulletList1,
                                                 style: 'bulletMargin'
                                             },
@@ -260,10 +250,8 @@ function generatePDF(mode) {
                                 style: 'colText'
                             },
                             {
-                                stack: [
-                                    {
-                                        ul: [
-                                            {
+                                stack: [{
+                                        ul: [{
                                                 text: whatNotRecordedBulletList4,
                                                 style: 'bulletMargin'
                                             },
@@ -276,8 +264,7 @@ function generatePDF(mode) {
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                ol: [
-                                                    {
+                                                ol: [{
                                                         text: whatNotRecordedBulletList6a,
                                                         style: 'nestedBulletMargin'
                                                     },
@@ -335,8 +322,7 @@ function generatePDF(mode) {
              * (4) Defect definitions + Assessment Access
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Defect definitions',
                         style: 'pageTopHeader'
                     },
@@ -349,8 +335,7 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        stack: [
-                            {
+                        stack: [{
                                 text: assessmentAccessP1,
                                 style: 'paragraphMargin'
                             },
@@ -388,8 +373,7 @@ function generatePDF(mode) {
              * (5) Attachments + General Advice
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Attachments',
                         style: 'pageTopHeader'
                     },
@@ -417,34 +401,29 @@ function generatePDF(mode) {
                     makeAGap(),
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
-                                        ul: [
-                                            {
-                                                text: generalAdviceBulletList1
-                                            },
-                                            {
-                                                text: generalAdviceBulletList2
-                                            },
-                                            {
-                                                text: generalAdviceBulletList3
-                                            },
-                                            {
-                                                text: generalAdviceBulletList4
-                                            },
-                                            {
-                                                text: generalAdviceBulletList5
-                                            }
-                                        ]
-                                    }
-                                ],
+                        columns: [{
+                                stack: [{
+                                    ul: [{
+                                            text: generalAdviceBulletList1
+                                        },
+                                        {
+                                            text: generalAdviceBulletList2
+                                        },
+                                        {
+                                            text: generalAdviceBulletList3
+                                        },
+                                        {
+                                            text: generalAdviceBulletList4
+                                        },
+                                        {
+                                            text: generalAdviceBulletList5
+                                        }
+                                    ]
+                                }],
                                 style: 'colText'
                             },
                             {
-                                stack: [
-                                    {
+                                stack: [{
                                         ul: [
                                             generalAdviceBulletList6,
                                             generalAdviceBulletList7
@@ -469,87 +448,82 @@ function generatePDF(mode) {
              * (6) Terms & Conditions
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Terms & Conditions',
                         style: 'pageTopHeader'
                     },
                     makeAGap(),
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
-                                        text: termConditionP1M,
-                                        style: 'paragraphMargin'
-                                    },
-                                    {
-                                        text: termConditionP2M,
-                                        style: 'paragraphMargin'
-                                    },
-                                    {
-                                        text: termConditionP3M,
-                                        style: 'paragraphMargin'
-                                    },
-                                    {
-                                        text: termConditionP4M,
-                                        style: 'paragraphMargin'
-                                    },
-                                    {
-                                        ol: [
-                                            {
-                                                text: termConditionBulletList1M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList2M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList3M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList4M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList5M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList6M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList7M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList8M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList9M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList10M,
-                                                style: 'bulletMargin'
-                                            },
-                                            {
-                                                text: termConditionBulletList11M,
-                                                style: 'bulletMargin'
-                                            },
-                                            termConditionBulletList12M
+                        columns: [{
+                            stack: [{
+                                    text: termConditionP1M,
+                                    style: 'paragraphMargin'
+                                },
+                                {
+                                    text: termConditionP2M,
+                                    style: 'paragraphMargin'
+                                },
+                                {
+                                    text: termConditionP3M,
+                                    style: 'paragraphMargin'
+                                },
+                                {
+                                    text: termConditionP4M,
+                                    style: 'paragraphMargin'
+                                },
+                                {
+                                    ol: [{
+                                            text: termConditionBulletList1M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList2M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList3M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList4M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList5M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList6M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList7M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList8M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList9M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList10M,
+                                            style: 'bulletMargin'
+                                        },
+                                        {
+                                            text: termConditionBulletList11M,
+                                            style: 'bulletMargin'
+                                        },
+                                        termConditionBulletList12M
 
-                                        ]
-                                    }
-                                ],
-                                style: 'colText'
-                            }
-                        ]
+                                    ]
+                                }
+                            ],
+                            style: 'colText'
+                        }]
                     }
                 ],
                 pageBreak: 'after'
@@ -558,8 +532,7 @@ function generatePDF(mode) {
              * (6) Maintenance Advice Summary
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Maintenance Advice Summary',
                         style: 'pageTopHeader'
                     },
@@ -693,12 +666,11 @@ function generatePDF(mode) {
     };
     // open the PDF in a new window
     // pdfMake.createPdf(docDefinition).open();
-    if (mode == 'save')
-    {
+    if (mode == 'save') {
         //console.log('click');
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
         $('#savingPDFAlert').show('fade');
-        pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
+        pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
             //var base64 = encodedString;
             //$('#savingPDFAlert').show('fade');
             doSavePDF(encodedString);
@@ -708,34 +680,40 @@ function generatePDF(mode) {
     }
 
     //if the mode is final or preview, open the pdf directly
-    else
-    {
-        if( isMobile.any() )
-        {
-            if (isSafari && iOS) 
-            {
+    else {
+        if (isMobile.any()) {
+            if (isSafari && iOS) {
                 //alert("You are using Safari on iOS!");
                 pdfMake.createPdf(docDefinition).open();
-            }
-            else
-            {
+            } else {
                 var reader = new FileReader();
 
-                pdfMake.createPdf(docDefinition).getBlob(function(blob){
-                    reader.onload = function(e){
+                pdfMake.createPdf(docDefinition).getBlob(function (blob) {
+                    reader.onload = function (e) {
                         //window.location.href = reader.result;
-                        window.open(reader.result,'_blank');
+                        window.open(reader.result, '_blank');
                     };
                     reader.readAsDataURL(blob);
                 });
             }
-           
-        }
-        else
-        {
+
+        } else {
             console.log("It is on pc");
             // pdfMake.createPdf(docDefinition).open();
-            
+            var firstPromise = new Promise((resolve, reject) => {
+                pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
+                    var base64 = encodedString;
+                    let formData = doSavePDF(base64);
+                    if (!isEmpty(formData.bookingcode))
+                        resolve(formData.bookingcode);
+                });
+            });
+
+            firstPromise.then((data) => {
+                console.log("Save " + data + ".pdf success!!..Now open it.");
+                // pdfMake.createPdf(docDefinition).open();
+                window.open("pdfreport/" + data + ".pdf", "_blank");
+            });
         }
 
     }
