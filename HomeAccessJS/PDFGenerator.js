@@ -556,7 +556,7 @@ function generatePDF(mode) {
                 style: 'pageTopHeader'
             },
             {
-                
+
                 style: 'Contents',
                 columns: [{
                     width: 250,
@@ -674,7 +674,19 @@ function generatePDF(mode) {
             });
         } else {
             console.log("It is on pc");
-            pdfMake.createPdf(docDefinition).open({}, window.open('', '_blank'));
+
+            var firstPromise = new Promise((resolve, reject) => {
+                pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
+                    var base64 = encodedString;
+                    doSavePDF(base64);
+                    resolve("PDF base64 success!");
+                });
+            });
+
+            firstPromise.then((result) => {
+                console.log(result);
+                pdfMake.createPdf(docDefinition).open();
+            });
         }
     }
 }
