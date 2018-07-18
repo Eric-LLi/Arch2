@@ -630,11 +630,7 @@ function generatePDF(mode) {
                 fontSize: 9,
                 bold: true
             },
-            pageTopHeader: {
-                fontSize: 17,
-                color: 'red',
-                bold: true
-            },
+            
             colText: {
                 fontSize: 9
                 //margin:[0,5,0,5]
@@ -705,7 +701,22 @@ function generatePDF(mode) {
         {
             console.log("It is on pc");
             //alert("You are using a PC");
-            pdfMake.createPdf(docDefinition).open();
+            // pdfMake.createPdf(docDefinition).open();
+
+            var firstPromise = new Promise((resolve, reject) => {
+                pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
+                    var base64 = encodedString;
+                    let formData = doSavePDF(base64);
+                    if (!isEmpty(formData.bookingcode))
+                        resolve(formData.bookingcode);
+                });
+            });
+
+            firstPromise.then((data) => {
+                console.log("Save " + data + ".pdf success!!..Now open it.");
+                // pdfMake.createPdf(docDefinition).open();
+                window.open("pdfreport/" + data + ".pdf", "_blank");
+            });
         }
         //pdfMake.createPdf(docDefinition).open();
         //document.open();

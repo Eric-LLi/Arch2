@@ -1036,7 +1036,10 @@ function generatePDF(mode) {
             firstPromise.then((data) => {
                 console.log("Save " + data + ".pdf success!!..Now open it.");
                 // pdfMake.createPdf(docDefinition).open();
-                window.open("pdfreport/" + data + ".pdf", "_blank");
+                setTimeout(() => {
+                    window.open("pdfreport/" + data + ".pdf", "_blank");
+                }, 500);
+
             });
         }
 
