@@ -109,8 +109,7 @@
 
         $.post(
             'ajax_savereportdata.php', {
-                uuid: '<?php echo $_SESSION['
-                uuid ']; ?>',
+                uuid: '<?php echo $_SESSION['uuid']; ?>',
                 bookingcode: <?php echo $bookingcode; ?>,
                 data: jsondata
             },
@@ -138,8 +137,7 @@
         console.log('I am inside checking permission');
         $.post(
             'ajax_checkPDF.php', {
-                uuid: '<?php echo $_SESSION['
-                uuid ']; ?>',
+                uuid: '<?php echo $_SESSION['uuid']; ?>',
                 bookingcode: <?php echo $bookingcode; ?>
             },
             function (result) {
