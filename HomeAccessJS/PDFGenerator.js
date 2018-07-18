@@ -9,7 +9,29 @@ var btn_genferateHomeAccessReportPDF = function (mode) {
         generatePDF(mode);
     }
 };
-
+//Check empty.
+function isEmpty(val) {
+    switch (typeof val) {
+        case 'undefined':
+            return true;
+        case 'string':
+            if (val.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+            break;
+        case 'boolean':
+            if (!val) return true;
+            break;
+        case 'number':
+            if (0 === val || isNaN(val)) return true;
+            break;
+        case 'object':
+            if (null === val || val.length === 0) return true;
+            for (var i in val) {
+                return false;
+            }
+            return true;
+    }
+    return false;
+}
 //generalPDF(mode)
 function generatePDF(mode) {
     //    console.log("generateHomeAccessReportPDF");
@@ -674,18 +696,20 @@ function generatePDF(mode) {
             });
         } else {
             console.log("It is on pc");
-
+            // window.open("pdfreport/1778.pdf", "_blank");
             var firstPromise = new Promise((resolve, reject) => {
                 pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
                     var base64 = encodedString;
-                    doSavePDF(base64);
-                    resolve("PDF base64 success!");
+                    let formData = doSavePDF(base64);
+                    if (!isEmpty(formData.bookingcode))
+                        resolve(formData.bookingcode);
                 });
             });
 
-            firstPromise.then((result) => {
-                console.log(result);
-                pdfMake.createPdf(docDefinition).open();
+            firstPromise.then((data) => {
+                console.log("Save " + data + ".pdf success!!..Now open it.");
+                // pdfMake.createPdf(docDefinition).open();
+                window.open("pdfreport/" + data + ".pdf", "_blank");
             });
         }
     }
