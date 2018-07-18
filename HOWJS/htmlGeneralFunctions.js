@@ -703,7 +703,7 @@ $("#HOW_ImgsUpload").change(function (e) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     //                imgFile.src = e.target.result
-                    var data = e.target.result
+                    var data = e.target.result;
                     var image = new Image();
                     image.onload = function () {
                         var width = image.width;
@@ -729,7 +729,7 @@ $("#HOW_ImgsUpload").change(function (e) {
                     image.src = data;
                 };
                 reader.readAsDataURL(file);
-            })
+            });
         }
        
     }

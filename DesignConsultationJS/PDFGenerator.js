@@ -14,22 +14,22 @@ function generatePDF(mode) {
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
     var isMobile = {
-        Android: function() {
+        Android: function () {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function() {
+        BlackBerry: function () {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function() {
+        iOS: function () {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function() {
+        Opera: function () {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function() {
+        Windows: function () {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function() {
+        any: function () {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
@@ -50,8 +50,7 @@ function generatePDF(mode) {
                         }
                     ]
                 };
-            }
-            else {
+            } else {
                 return {
                     columns: [
                         determineFooter(mode),
@@ -72,10 +71,8 @@ function generatePDF(mode) {
              * (1) Cover Page
              * */
             {
-                stack: [
-                    {
-                        columns: [
-                            {
+                stack: [{
+                        columns: [{
                                 // Draw Cover Page image
                                 image: coverPageLogo,
                                 //image: 'logo',
@@ -93,32 +90,26 @@ function generatePDF(mode) {
                         //alignment: 'justify',
                         table: {
                             body: [
-                                [
-                                    {
+                                [{
                                         text: 'Design Consultation',
                                         border: [true, true, true, false],
                                         style: 'thirdHeader'
                                         // colSpan:2,
-                                    }//, {}
+                                    } //, {}
                                 ],
-                                [
-                                    {
-                                        text: DesignConsultation1,
-                                        border: [true, false, true, false],
-                                        fontSize: 9,
-                                        style: 'paragraphMargin'
-                                    }
-                                ],
-                                [
-                                    {
-                                        text: DesignConsultation2,
-                                        border: [true, false, true, false],
-                                        fontSize: 9,
-                                        style: 'paragraphMargin'
-                                    }
-                                ],
-                                [
-                                    {
+                                [{
+                                    text: DesignConsultation1,
+                                    border: [true, false, true, false],
+                                    fontSize: 9,
+                                    style: 'paragraphMargin'
+                                }],
+                                [{
+                                    text: DesignConsultation2,
+                                    border: [true, false, true, false],
+                                    fontSize: 9,
+                                    style: 'paragraphMargin'
+                                }],
+                                [{
                                         text: DesignConsultation3,
                                         border: [true, false, true, true],
                                         fontSize: 9,
@@ -175,8 +166,7 @@ function generatePDF(mode) {
              * (3) Where to from here?
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Where to from here?',
                         style: 'pageTopHeader'
                     },
@@ -186,8 +176,7 @@ function generatePDF(mode) {
                         fontSize: 9
                     },
                     {
-                        ul: [
-                            {
+                        ul: [{
                                 text: Where2,
                                 style: 'bulletMargin'
                             },
@@ -214,8 +203,7 @@ function generatePDF(mode) {
              * (4) Benefits
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Benefits of Using an Archicentre Australia Architect',
                         style: 'pageTopHeader'
                     },
@@ -240,8 +228,7 @@ function generatePDF(mode) {
                         fontSize: 9
                     },
                     {
-                        ul: [
-                            {
+                        ul: [{
                                 text: Benefits5,
                                 style: 'bulletMargin'
                             },
@@ -268,14 +255,13 @@ function generatePDF(mode) {
                         text: Benefits10,
                         fontSize: 9
                     }
-                    
+
                 ],
                 style: 'colText',
                 pageBreak: 'after'
             },
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Architects',
                         style: 'fifthHeader'
                     },
@@ -284,8 +270,7 @@ function generatePDF(mode) {
                         fontSize: 9
                     },
                     {
-                        ul: [
-                            {
+                        ul: [{
                                 text: Architects2,
                                 style: 'bulletMargin'
                             },
@@ -343,8 +328,7 @@ function generatePDF(mode) {
              * (5) Who else is involved?
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Who else is involved?',
                         style: 'pageTopHeader'
                     },
@@ -364,8 +348,7 @@ function generatePDF(mode) {
              * (6) Report Scope
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'The Scope of the Report',
                         style: 'pageTopHeader'
                     },
@@ -383,18 +366,15 @@ function generatePDF(mode) {
              * (7) Terms & Conditions
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Terms & Conditions',
                         style: 'pageTopHeader'
                     },
                     makeAGap(),
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
+                        columns: [{
+                                stack: [{
                                         text: TermsNConditions1,
                                         style: 'paragraphMargin'
                                     },
@@ -420,8 +400,7 @@ function generatePDF(mode) {
                                     },
                                     {
                                         separator: ['(', ')'],
-                                        ol: [
-                                            {
+                                        ol: [{
                                                 text: TermsNConditions6,
                                                 style: 'bulletMargin',
                                                 alignment: 'justify'
@@ -437,15 +416,13 @@ function generatePDF(mode) {
                                 style: 'colText'
                             },
                             {
-                                stack: [
-                                    {
+                                stack: [{
                                         text: TermsNConditions8,
                                         style: 'paragraphMargin'
                                     },
                                     {
                                         //start: 5,
-                                        ol: [
-                                            {
+                                        ol: [{
                                                 text: TermsNConditions9,
                                                 style: 'bulletMargin',
                                                 alignment: 'justify'
@@ -641,11 +618,10 @@ function generatePDF(mode) {
     // Open a new tab and show the PDF
 
     // if the mode is save, only get the base64 and pass it to the doSavePDF() function. 
-    if (mode == 'save')
-   {
-       //console.log('click');
+    if (mode == 'save') {
+        //console.log('click');
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-        pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
+        pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
             var base64 = encodedString;
             $('#savingPDFAlert').show('fade');
             doSavePDF(base64);
@@ -655,42 +631,51 @@ function generatePDF(mode) {
     }
 
     //if the mode is final or preview, open the pdf directly
-    else
-    {
-        if( isMobile.any() )
-        {
-            if (isSafari && iOS) 
-            {
+    else {
+        if (isMobile.any()) {
+            if (isSafari && iOS) {
                 //alert("You are using Safari on iOS!");
                 pdfMake.createPdf(docDefinition).open();
-            }
-            else
-            {
+            } else {
                 var reader = new FileReader();
 
-                pdfMake.createPdf(docDefinition).getBlob(function(blob){
+                pdfMake.createPdf(docDefinition).getBlob(function (blob) {
                     // window.URL = window.URL || window.webkitURL;
                     // var url = window.URL.createObjectURL(blob);
                     // window.open(url);
-                    reader.onload = function(e){
+                    reader.onload = function (e) {
                         //window.location.href = reader.result;
-                        window.open(reader.result,'_blank');
+                        window.open(reader.result, '_blank');
                     };
                     reader.readAsDataURL(blob);
                     // reader.readAsDataURL(blob);
                     // window.open(blob);
                 });
             }
-        }
-        else
-        {
+        } else {
             console.log("It is on pc");
-            var document = pdfMake.createPdf(docDefinition);
-            document.open();
+            // var document = pdfMake.createPdf(docDefinition);
+            // document.open();
             // document.getBlob(function(blob){
             //     console.log(blob)
             // });
+            var firstPromise = new Promise((resolve, reject) => {
+                pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
+                    var base64 = encodedString;
+                    let formData = doSavePDF(base64);
+                    if (!isEmpty(formData.bookingcode))
+                        resolve(formData.bookingcode);
+                });
+            });
 
+            firstPromise.then((data) => {
+                console.log("Save " + data + ".pdf success!!..Now open it.");
+                // pdfMake.createPdf(docDefinition).open();
+                setTimeout(() => {
+                    window.open("pdfreport/" + data + ".pdf", "_blank");
+                }, 500);
+
+            });
         }
 
 

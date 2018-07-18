@@ -171,6 +171,7 @@
             bookingcode: <?php echo $bookingcode; ?>
 
         };
+        // console.log(formData);
         $.post(
             'ajax_uploadPDF.php',
             formData,
@@ -194,6 +195,8 @@
                     // var url = baseURL + bookingCode + '.pdf';
                     // window.open(url);
 
+
+
                 } else {
                     $('savingPDFAlert').hide('fade');
                     noty({
@@ -206,6 +209,7 @@
             }
         );
         //console.log('saving pdf');
+        return formData;
     }
 
     //imageSize == height
