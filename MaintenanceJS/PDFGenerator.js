@@ -734,7 +734,8 @@ function generatePDF(mode) {
         else
         {
             console.log("It is on pc");
-            pdfMake.createPdf(docDefinition).open();
+            // pdfMake.createPdf(docDefinition).open();
+            
         }
 
     }
