@@ -27,6 +27,8 @@
 <script type="text/javascript" src="js/dx.chartjs.js"></script>
 <script type="text/javascript" src="js/accounting.min.js"></script>
 <script type="text/javascript" src="js/decimal.min.js"></script>
+<script src="js/images.js"></script>
+<script src="js/loadImageJS/load-image.all.min.js"></script>
 
 <style>
   .button-rounded

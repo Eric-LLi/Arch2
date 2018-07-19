@@ -906,72 +906,62 @@ $("#Imgs_Upload").change(function (e) {
             //Read the file and convert to an image element.
             //            var imgFile = document.createElement('img');
 
+            loadImage.parseMetaData(file, function (data) {
+                var orientation = 0;
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                //                imgFile.src = e.target.result
-                var data = e.target.result;
-                var image = new Image();
-                image.onload = function () {
-                    var width = image.width;
-                    var height = image.height;
+                var loadingImage = loadImage(file, function (canvas) {
+                    var data = canvas.toDataURL('image/jpeg');
+                    var image = new Image();
+                    image.onload = function () {
+                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
 
-                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                        if (!isEmpty(code)) {
+                            $("#" + element[1]).attr("src", code);
 
-                    if (!isEmpty(code)) {
-                        $("#" + element[1]).attr("src", code);
+                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                type: file.type,
+                                lastModified: file.lastModifiedDate
+                            });
 
-                        var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                            type: file.type,
-                            lastModified: file.lastModifiedDate
-                        });
+                            doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
 
-                        doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
+                            $("#Imgpage-loader").hide();
+                            $("#HA_ImgsContents").show();
+                        }
+                    };
+                    image.src = data;
+                }, {
+                    canvas: true,
+                    orientation: orientation
+                });
+            });
+            // var reader = new FileReader();
+            // reader.onload = function (e) {
+            //     var data = e.target.result;
+            //     var image = new Image();
+            //     image.onload = function () {
+            //         var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
 
-                        $("#Imgpage-loader").hide();
-                        $("#HA_ImgsContents").show();
-                    }
-                };
-                image.src = data;
-            };
-            reader.readAsDataURL(file);
-            //            const reader = new FileReader();
-            //            reader.onload = (e) => {
-            //                var code = reader.result;
-            //                if (code !== null) {
-            //                    setTimeout(function () {
-            //                        if (("#" + element[1]).length > 0) {
-            //                            $("#" + element[1]).attr("src", code);
-            //
-            //                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-            //                                type: file.type,
-            //                                lastModified: file.lastModifiedDate
-            //                            });
-            //
-            //                            if ($("#HA_BookingNo").val() === "0") {
-            //
-            //                                alert("Please select booking from main page. ");
-            //
-            //                                $(location).attr("href", "index.php");
-            //
-            //                            } else {
-            //                                doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
-            //                            }
-            //                        } else {
-            //                            console.log("NO element::" + element[1]);
-            //                        }
-            //                    }, 30);
-            //                } else {
-            //                    console.log("No code for image!!");
-            //                }
-            //            }
-            //            reader.readAsDataURL(file);
-            //                        });
+            //         if (!isEmpty(code)) {
+            //             $("#" + element[1]).attr("src", code);
 
+            //             var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+            //                 type: file.type,
+            //                 lastModified: file.lastModifiedDate
+            //             });
 
-            //                });
-            //            }
-            //        }
+            //             doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
+
+            //             $("#Imgpage-loader").hide();
+            //             $("#HA_ImgsContents").show();
+            //         }
+            //     };
+            //     image.src = data;
+            // };
+            // reader.readAsDataURL(file);
         });
 
         setTimeout(function () {
