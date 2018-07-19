@@ -14243,7 +14243,7 @@
     ?>
                 <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
                 <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-                <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button>
+                <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
                 <?php
         }
         else
