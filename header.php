@@ -33,7 +33,7 @@
                 &nbsp;&nbsp;&nbsp;
                 <input name="fldPwd" class="easyui-passwordbox" prompt="Login password" iconWidth="28" style="width: 200px;" />
                 &nbsp;&nbsp;&nbsp;
-                <a href="#" id="btnLogin" class="easyui-linkbutton" data-options="iconCls:'icon-login'" style="font-family:Arial, Helvetica, sans-serif; font-size:">Login</a>
+                <a href="#" id="btnLogin" class="easyui-linkbutton" data-options="iconCls:'icon-login'" style="font-family:Arial, Helvetica, sans-serif;">Login</a>
               </form>
           <?php
             }
