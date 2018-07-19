@@ -84,7 +84,6 @@ textarea {
     border: 2px solid black;
     padding: 15px;
     border-radius: 5px;
-
     /*margin: 10px;*/
     cursor: pointer;
 }
@@ -102,7 +101,6 @@ textarea {
     height: 50px;
     align-content: center;
     font-size: small;
-
 }
 
 /*New*/
@@ -121,7 +119,6 @@ th {
     text-align: left;
     padding: 8px;
 }
-
 
 .zui-table {
     border: none;
@@ -189,5 +186,10 @@ th {
 }
 
 button {
+    cursor: pointer;
+}
+
+input[type="button"],
+input[type="submit"] {
     cursor: pointer;
 }

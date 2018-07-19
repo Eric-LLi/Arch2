@@ -473,30 +473,61 @@ $("#AssessmentSiteSingleImage").on('change', function (e) {
         $("#" + element[3]).show();
         $("#" + element[4]).hide();
 
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var data = e.target.result;
-            var image = new Image();
+        loadImage.parseMetaData(file[0], function (data) {
+            var orientation = 0;
+            if (data.exif) {
+                orientation = data.exif.get('Orientation');
+            }
 
-            image.onload = function () {
-                var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                if (!isEmpty(code)) {
-                    $("#" + element[0]).attr("src", code);
+            var loadingImage = loadImage(file[0], function (canvas) {
+                var data = canvas.toDataURL('image/jpeg');
+                var image = new Image();
+                image.onload = function () {
+                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                    if (!isEmpty(code)) {
+                        $("#" + element[0]).attr("src", code);
+                        var imgFile = new File([convertBase64UrlToBlob(code, file[0].type)], file[0].name, {
+                            type: file[0].type,
+                            lastModified: file[0].lastModifiedDate
+                        });
+                        doRemovePhoto(element[0]);
+                        //doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer");
+                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5]);
+                    }
+                };
+                image.src = data;
+            }, {
+                canvas: true,
+                orientation: orientation
+            });
+        });
 
-                    var imgFile = new File([convertBase64UrlToBlob(code, file[0].type)], file[0].name, {
-                        type: file[0].type,
-                        lastModified: file[0].lastModifiedDate
-                    });
 
-                    doRemovePhoto(element[0]);
-                    //doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer");
-                    doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5]);
+        // var reader = new FileReader();
+        // reader.onload = function (e) {
+        //     var data = e.target.result;
+        //     var image = new Image();
 
-                }
-            };
-            image.src = data;
-        };
-        reader.readAsDataURL(file[0]);
+            
+        //     image.onload = function () {
+        //         var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+        //         if (!isEmpty(code)) {
+        //             $("#" + element[0]).attr("src", code);
+
+        //             var imgFile = new File([convertBase64UrlToBlob(code, file[0].type)], file[0].name, {
+        //                 type: file[0].type,
+        //                 lastModified: file[0].lastModifiedDate
+        //             });
+
+        //             doRemovePhoto(element[0]);
+        //             //doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer");
+        //             doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5]);
+
+        //         }
+        //     };
+        //     image.src = data;
+        // };
+        // reader.readAsDataURL(file[0]);
 
         automaticNumbering(element[6]);
 
@@ -593,11 +624,13 @@ function createImagesElements(lastElementID, imgID, labelID = "", labelValue = "
     text.style.width = "265px";
 
     rmBtn.setAttribute("id", rmBtnID);
+    rmBtn.setAttribute("class","btn btn-danger");
     rmBtn.setAttribute("type", "button");
     rmBtn.setAttribute("value", "Remove");
     rmBtn.style.width = "265px";
 
     addBtn.setAttribute("id", addBtnID);
+    addBtn.setAttribute("class","btn btn-secondary");
     addBtn.setAttribute("type", "button");
     addBtn.setAttribute("value", "Add");
     addBtn.style.width = "265px";
@@ -669,28 +702,57 @@ $("#AssessmentSiteUploadImages").change(function () {
             //[imgID, labelID, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentSiteImagesContainer", "AssessmentSiteImage_" + elementID, "SiteGardenlabel" + elementID, "IMG" + elementID, "AssessmentSiteImageText" + elementID, "AssessmentSiteRemoveButton" + elementID, "AddAssessmentSiteImageButton" + elementID, "SiteGardonForm" + elementID);
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var data = e.target.result;
-                var image = new Image();
+            loadImage.parseMetaData(file, function (data) {
+                var orientation = 0;
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
 
-                image.onload = function () {
-                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                    if (!isEmpty(code)) {
-                        $("#" + element[0]).attr("src", code);
+                var loadingImage = loadImage(file, function (canvas) {
+                    var data = canvas.toDataURL('image/jpeg');
+                    var image = new Image();
+                    image.onload = function () {
+                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                        if (!isEmpty(code)) {
+                            $("#" + element[0]).attr("src", code);
 
-                        var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                            type: file.type,
-                            lastModified: file.lastModifiedDate
-                        });
+                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                type: file.type,
+                                lastModified: file.lastModifiedDate
+                            });
 
-                        //f, imageid, textid = '', removeid = '', addid = '', table = '', imageAltName = '', divID = '',uploadID = '', removeFunction = '', addFunction = '', imageSize = '', width = ''
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer", element[1], element[5]);
-                    }
-                };
-                image.src = data;
-            };
-            reader.readAsDataURL(file);
+                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer", element[1], element[5]);
+                        }
+                    };
+                    image.src = data;
+                }, {
+                    canvas: true,
+                    orientation: orientation
+                });
+            });
+
+            // var reader = new FileReader();
+            // reader.onload = function (e) {
+            //     var data = e.target.result;
+            //     var image = new Image();
+
+            //     image.onload = function () {
+            //         var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+            //         if (!isEmpty(code)) {
+            //             $("#" + element[0]).attr("src", code);
+
+            //             var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+            //                 type: file.type,
+            //                 lastModified: file.lastModifiedDate
+            //             });
+
+            //             //f, imageid, textid = '', removeid = '', addid = '', table = '', imageAltName = '', divID = '',uploadID = '', removeFunction = '', addFunction = '', imageSize = '', width = ''
+            //             doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer", element[1], element[5]);
+            //         }
+            //     };
+            //     image.src = data;
+            // };
+            // reader.readAsDataURL(file);
 
         });
 
@@ -741,27 +803,56 @@ $("#AssessmentExteriorUploadImages").change(function () {
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentExteriorImagesContainer", "AssessmentExteriorImage_" + elementID, "Exteriorlabel" + elementID, "IMG" + elementID, "AssessmentExteriorImageText" + elementID, "AssessmentExteriorRemoveButton" + elementID, "AddAssessmentExteriorImageButton" + elementID, "ExteriorForm" + elementID);
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var data = e.target.result;
-                var image = new Image();
+            loadImage.parseMetaData(file, function (data) {
+                var orientation = 0;
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
 
-                image.onload = function () {
-                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                    if (!isEmpty(code)) {
-                        $("#" + element[0]).attr("src", code);
+                var loadingImage = loadImage(file, function (canvas) {
+                    var data = canvas.toDataURL('image/jpeg');
+                    var image = new Image();
+                    image.onload = function () {
+                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                        if (!isEmpty(code)) {
+                            $("#" + element[0]).attr("src", code);
 
-                        var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                            type: file.type,
-                            lastModified: file.lastModifiedDate
-                        });
+                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                type: file.type,
+                                lastModified: file.lastModifiedDate
+                            });
 
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentExteriorImagesContainer", element[1], element[5]);
-                    }
-                };
-                image.src = data;
-            };
-            reader.readAsDataURL(file);
+                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentExteriorImagesContainer", element[1], element[5]);
+                        }
+                    };
+                    image.src = data;
+                }, {
+                    canvas: true,
+                    orientation: orientation
+                });
+            });
+
+            // var reader = new FileReader();
+            // reader.onload = function (e) {
+            //     var data = e.target.result;
+            //     var image = new Image();
+
+            //     image.onload = function () {
+            //         var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+            //         if (!isEmpty(code)) {
+            //             $("#" + element[0]).attr("src", code);
+
+            //             var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+            //                 type: file.type,
+            //                 lastModified: file.lastModifiedDate
+            //             });
+
+            //             doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentExteriorImagesContainer", element[1], element[5]);
+            //         }
+            //     };
+            //     image.src = data;
+            // };
+            // reader.readAsDataURL(file);
 
         });
 
@@ -814,27 +905,56 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentInteriorLivingImagesContainer", "AssessmentInteriorLivingImage_" + elementID, "Livinglabel" + elementID, "IMG" + elementID, "AssessmentInteriorLivingImageText" + elementID, "AssessmentInteriorLivingRemoveButton" + elementID, "AddAssessmentInteriorLivingImageButton" + elementID, "LivingForm" + elementID);
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var data = e.target.result;
-                var image = new Image();
+            loadImage.parseMetaData(file, function (data) {
+                var orientation = 0;
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
 
-                image.onload = function () {
-                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                    if (!isEmpty(code)) {
-                        $("#" + element[0]).attr("src", code);
+                var loadingImage = loadImage(file, function (canvas) {
+                    var data = canvas.toDataURL('image/jpeg');
+                    var image = new Image();
+                    image.onload = function () {
+                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                        if (!isEmpty(code)) {
+                            $("#" + element[0]).attr("src", code);
 
-                        var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                            type: file.type,
-                            lastModified: file.lastModifiedDate
-                        });
+                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                type: file.type,
+                                lastModified: file.lastModifiedDate
+                            });
 
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorLivingImagesContainer", element[1], element[5]);
-                    }
-                };
-                image.src = data;
-            };
-            reader.readAsDataURL(file);
+                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorLivingImagesContainer", element[1], element[5]);
+                        }
+                    };
+                    image.src = data;
+                }, {
+                    canvas: true,
+                    orientation: orientation
+                });
+            });
+
+            // var reader = new FileReader();
+            // reader.onload = function (e) {
+            //     var data = e.target.result;
+            //     var image = new Image();
+
+            //     image.onload = function () {
+            //         var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+            //         if (!isEmpty(code)) {
+            //             $("#" + element[0]).attr("src", code);
+
+            //             var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+            //                 type: file.type,
+            //                 lastModified: file.lastModifiedDate
+            //             });
+
+            //             doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorLivingImagesContainer", element[1], element[5]);
+            //         }
+            //     };
+            //     image.src = data;
+            // };
+            // reader.readAsDataURL(file);
 
         });
 
@@ -885,27 +1005,56 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
             //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
             var element = createImagesElements("AccessmentInteriorBedroomImagesContainer", "AssessmentInteriorBedroomImage_" + elementID, "Bedroomlabel" + elementID, "IMG" + elementID, "AssessmentInteriorBedroomImageText" + elementID, "AssessmentInteriorBedroomRemoveButton" + elementID, "AddAssessmentInteriorBedroomImageButton" + elementID, "BedroomForm" + elementID);
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var data = e.target.result;
-                var image = new Image();
+            loadImage.parseMetaData(file, function (data) {
+                var orientation = 0;
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
 
-                image.onload = function () {
-                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                    if (!isEmpty(code)) {
-                        $("#" + element[0]).attr("src", code);
+                var loadingImage = loadImage(file, function (canvas) {
+                    var data = canvas.toDataURL('image/jpeg');
+                    var image = new Image();
+                    image.onload = function () {
+                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                        if (!isEmpty(code)) {
+                            $("#" + element[0]).attr("src", code);
 
-                        var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                            type: file.type,
-                            lastModified: file.lastModifiedDate
-                        });
+                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                type: file.type,
+                                lastModified: file.lastModifiedDate
+                            });
 
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorBedroomImagesContainer", element[1], element[5]);
-                    }
-                };
-                image.src = data;
-            };
-            reader.readAsDataURL(file);
+                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorBedroomImagesContainer", element[1], element[5]);
+                        }
+                    };
+                    image.src = data;
+                }, {
+                    canvas: true,
+                    orientation: orientation
+                });
+            });
+
+            // var reader = new FileReader();
+            // reader.onload = function (e) {
+            //     var data = e.target.result;
+            //     var image = new Image();
+
+            //     image.onload = function () {
+            //         var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+            //         if (!isEmpty(code)) {
+            //             $("#" + element[0]).attr("src", code);
+
+            //             var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+            //                 type: file.type,
+            //                 lastModified: file.lastModifiedDate
+            //             });
+
+            //             doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorBedroomImagesContainer", element[1], element[5]);
+            //         }
+            //     };
+            //     image.src = data;
+            // };
+            // reader.readAsDataURL(file);
 
         });
 
