@@ -135,13 +135,13 @@ function moreEvidentDefect() {
         var lastDivRow = document.getElementById(lastRowID);
         newEDIDNumber = (divNumber - 1) * 3 + nestDivNumber;
         //console.log(newEDIDNumber);
-        var newDiv = document.createElement('div');
+        let newDiv = document.createElement('div');
         newDiv.setAttribute('class', 'col-sm-4');
         newDiv.id = 'ED' + newEDIDNumber;
         lastDivRow.appendChild(newDiv);
 
 
-        var name = document.createElement('INPUT');
+        let name = document.createElement('INPUT');
         name.setAttribute('class', 'form-control');
         name.setAttribute('title', 'name');
         name.setAttribute('type', 'text');
@@ -150,20 +150,20 @@ function moreEvidentDefect() {
         newDiv.appendChild(name);
 
 
-        var selectList = document.createElement("select");
+        let selectList = document.createElement("select");
         selectList.id = "EDSelect" + newEDIDNumber;
         selectList.style.width = '100%';
-        var selectOption = ["✔", "XX", 'X', 'U', 'NA'];
-        var selectOptionValue = ["√", "XX", 'X', 'U', 'NA'];
-        var selectValue = ["No Visible Significant Defect", "Major Defect", "Maintenance Item or Minor Defect",
+        let selectOption = ["✔", "XX", 'X', 'U', 'NA'];
+        let selectOptionValue = ["√", "XX", 'X', 'U', 'NA'];
+        let selectValue = ["No Visible Significant Defect", "Major Defect", "Maintenance Item or Minor Defect",
             "Unknown / Inaccessible / Not Tested", "Not Applicable; No Such Item"
         ];
 
 
         //Create and append the options
-        for (var i = 0; i < selectOption.length; i++) {
-            var option = document.createElement("option");
-            var group = document.createElement('optgroup');
+        for (let i = 0; i < selectOption.length; i++) {
+            let option = document.createElement("option");
+            let group = document.createElement('optgroup');
             group.label = selectValue[i];
             option.value = selectOptionValue[i];
             option.text = selectOption[i];
@@ -256,10 +256,10 @@ function morePropertyExteriorWall() {
     var button = document.getElementById('morePropertyExteriorWallButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add More Wall"
+        button.innerHTML = "Add More Wall";
     }
 
 }
@@ -269,10 +269,10 @@ function morePropertyExteriorVerandas() {
     var button = document.getElementById('morePropertyExteriorVerandasButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add More Verandahs"
+        button.innerHTML = "Add More Verandahs";
     }
 
 }
@@ -283,10 +283,10 @@ function moreLivingAreaRooms() {
     var button = document.getElementById('moreLivingAreaRoomButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add More Rooms"
+        button.innerHTML = "Add More Rooms";
     }
 }
 
@@ -296,10 +296,10 @@ function moreLivingAreaStair() {
     var button = document.getElementById('moreLivingAreaStairButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add One Stair"
+        button.innerHTML = "Add One Stair";
     }
 }
 
@@ -309,10 +309,10 @@ function moreLivingAreaKitchen() {
     var button = document.getElementById('moreLivingAreaKitchenButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add One Kitchen"
+        button.innerHTML = "Add One Kitchen";
     }
 }
 
@@ -321,10 +321,10 @@ function moreBedrooms() {
     var button = document.getElementById('moreBedroomsButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add More Bedrooms"
+        button.innerHTML = "Add More Bedrooms";
     }
 }
 
@@ -333,10 +333,10 @@ function moreBathrooms() {
     var button = document.getElementById('moreBathroomsButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add More Bathroom"
+        button.innerHTML = "Add More Bathroom";
     }
 
 }
@@ -347,10 +347,10 @@ function morePowderRooms() {
     var button = document.getElementById('morePowderRoomsButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add More Powder Rooms"
+        button.innerHTML = "Add More Powder Rooms";
     }
 }
 
@@ -359,10 +359,10 @@ function moreLaundry() {
     var button = document.getElementById('moreLaundryButton');
     if (div.style.display === 'none') {
         div.style.display = 'block';
-        button.innerHTML = "Hide"
+        button.innerHTML = "Hide";
     } else {
         div.style.display = 'none';
-        button.innerHTML = "Add One Laundry"
+        button.innerHTML = "Add One Laundry";
     }
 }
 
@@ -475,7 +475,7 @@ $("#AssessmentSiteSingleImage").on('change', function (e) {
 
         var reader = new FileReader();
         reader.onload = function (e) {
-            var data = e.target.result
+            var data = e.target.result;
             var image = new Image();
 
             image.onload = function () {
@@ -654,7 +654,7 @@ $("#AssessmentSiteUploadImages").change(function () {
         if (this.files.length > 3) {
             alert("You can only selected three images maximum");
             //Only save 3 files.
-            for (var i = 0; i < 3; i++) {
+            for (let i = 0; i < 3; i++) {
                 allImages.push(this.files[i]);
             }
         } else {
@@ -671,7 +671,7 @@ $("#AssessmentSiteUploadImages").change(function () {
 
             var reader = new FileReader();
             reader.onload = function (e) {
-                var data = e.target.result
+                var data = e.target.result;
                 var image = new Image();
 
                 image.onload = function () {
@@ -696,7 +696,7 @@ $("#AssessmentSiteUploadImages").change(function () {
 
         setTimeout(function () {
             automaticNumbering('AccessmentSiteImagesContainer');
-        }, 800)
+        }, 800);
 
         //Add empty element
         createEmptElementForAddingImg();
@@ -727,7 +727,7 @@ $("#AssessmentExteriorUploadImages").change(function () {
         if (this.files.length > 6) {
             alert("You can only selected Six images maximum");
             //Only save 6 files.
-            for (var i = 0; i < 6; i++) {
+            for (let i = 0; i < 6; i++) {
                 allImages.push(this.files[i]);
             }
         } else {
@@ -743,7 +743,7 @@ $("#AssessmentExteriorUploadImages").change(function () {
 
             var reader = new FileReader();
             reader.onload = function (e) {
-                var data = e.target.result
+                var data = e.target.result;
                 var image = new Image();
 
                 image.onload = function () {
@@ -767,7 +767,7 @@ $("#AssessmentExteriorUploadImages").change(function () {
 
         setTimeout(function () {
             automaticNumbering('AccessmentExteriorImagesContainer');
-        }, 1000)
+        }, 1000);
 
         //Add empty element
         createEmptElementForAddingImg();
@@ -799,7 +799,7 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
         if (this.files.length > 6) {
             alert("You can only selected Six images maximum");
             //Only save 6 files.
-            for (var i = 0; i < 6; i++) {
+            for (let i = 0; i < 6; i++) {
                 allImages.push(this.files[i]);
             }
         } else {
@@ -816,7 +816,7 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
 
             var reader = new FileReader();
             reader.onload = function (e) {
-                var data = e.target.result
+                var data = e.target.result;
                 var image = new Image();
 
                 image.onload = function () {
@@ -840,7 +840,7 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
 
         setTimeout(function () {
             automaticNumbering('AccessmentInteriorLivingImagesContainer');
-        }, 1000)
+        }, 1000);
 
         //Add empty element
         createEmptElementForAddingImg();
@@ -871,7 +871,7 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
         if (this.files.length > 6) {
             alert("You can only selected Six images maximum");
             //Only save 6 files.
-            for (var i = 0; i < 6; i++) {
+            for (let i = 0; i < 6; i++) {
                 allImages.push(this.files[i]);
             }
         } else {
@@ -887,7 +887,7 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
 
             var reader = new FileReader();
             reader.onload = function (e) {
-                var data = e.target.result
+                var data = e.target.result;
                 var image = new Image();
 
                 image.onload = function () {
@@ -911,7 +911,7 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
 
         setTimeout(function () {
             automaticNumbering('AccessmentInteriorBedroomImagesContainer');
-        }, 1000)
+        }, 1000);
 
         //Add empty element
         createEmptElementForAddingImg();
@@ -942,7 +942,7 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
         if (this.files.length > 3) {
             alert("You can only selected three images maximum");
             //Only save 3 files.
-            for (var i = 0; i < 3; i++) {
+            for (let i = 0; i < 3; i++) {
                 allImages.push(this.files[i]);
             }
         } else {
@@ -958,7 +958,7 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
 
             var reader = new FileReader();
             reader.onload = function (e) {
-                var data = e.target.result
+                var data = e.target.result;
                 var image = new Image();
 
                 image.onload = function () {
@@ -981,7 +981,7 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
 
         setTimeout(function () {
             automaticNumbering('AccessmentInteriorServiceImagesContainer');
-        }, 1000)
+        }, 1000);
 
         //Add empty element
         createEmptElementForAddingImg();
@@ -1227,4 +1227,4 @@ $(document).ready(function () {
     //document.getElementById('0').value = String(name).replace(/\s+/g, " ")
 
     
-})
+});
