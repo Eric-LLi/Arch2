@@ -668,14 +668,29 @@ function generatePDF(mode) {
     //if the mode is final or preview, open the pdf directly, depends on what device the user is using
     else {
         if (isMobile.any()) {
-            var reader = new FileReader();
-            pdfMake.createPdf(docDefinition).getBlob(function (blob) {
-                reader.onload = function (e) {
-                    //window.location.href = reader.result;
-                    window.open(reader.result, '_blank');
-                };
-                reader.readAsDataURL(blob);
-            });
+            if (isSafari && iOS) {
+                console.log("IOS system!");
+                //alert("You are using Safari on iOS!");
+                // pdfMake.createPdf(docDefinition).open();
+                pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
+                    doSavePDF(encodedString);
+                });
+            } else {
+                console.log("Android system!!");
+                //alert("You are not using Safari on iOS!");
+                // var reader = new FileReader();
+
+                // pdfMake.createPdf(docDefinition).getBlob(function (blob) {
+                //     reader.onload = function (e) {
+                //         //window.location.href = reader.result;
+                //         window.open(reader.result, '_blank');
+                //     };
+                //     reader.readAsDataURL(blob);
+                // });
+                pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
+                    doSavePDF(encodedString);
+                });
+            }
         } else {
             console.log("It is on pc");
             // window.open("pdfreport/1778.pdf", "_blank");
