@@ -7,34 +7,36 @@
  * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  * */
 function generatePDF(mode) {
+    //Prevent multiple request.
+    $("button").prop("disabled", true);
+
     resetImageCounting();
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isMobile = {
-        Android: function() {
+        Android: function () {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function() {
+        BlackBerry: function () {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function() {
+        iOS: function () {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function() {
+        Opera: function () {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function() {
+        Windows: function () {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function() {
+        any: function () {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
     // Page start drawing from here...
     var docDefinition = {
         footer: function (currentPage, pageCount) {
-            if (currentPage === 1)
-            {
+            if (currentPage === 1) {
                 return {
                     columns: [
                         determineFrontPageFooter(mode),
@@ -43,14 +45,12 @@ function generatePDF(mode) {
                             alignment: 'right',
                             margin: [0, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
-            }
-            else
-            {
+            } else {
                 return {
                     columns: [
                         determineFooter(mode),
@@ -59,8 +59,8 @@ function generatePDF(mode) {
                             alignment: 'left',
                             margin: [10, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
@@ -75,8 +75,7 @@ function generatePDF(mode) {
                 stack: [
 
                     {
-                        columns: [
-                            {
+                        columns: [{
                                 // Draw Cover Page image
                                 image: coverPageLogo,
                                 width: 130,
@@ -92,15 +91,14 @@ function generatePDF(mode) {
                     giveMeHugeDraft(mode),
 
                     {
-                        table:{
+                        table: {
                             // widths: ['*', '*'],
-                            body:[
-                                [
-                                    {
+                            body: [
+                                [{
                                         border: [true, true, false, true],
                                         text: ConstructionReportText,
                                         fontSize: 9,
-                                        margin:[5,5,5,5]
+                                        margin: [5, 5, 5, 5]
 
                                     },
                                     {
@@ -108,14 +106,14 @@ function generatePDF(mode) {
                                         stack: [
                                             getCoverImage('ConstructionCoverImage')
                                         ],
-                                        margin:[5,5,5,5]
+                                        margin: [5, 5, 5, 5]
                                         //margin:[10,10,10,10]
                                     }
 
                                 ]
                             ]
                         },
-                        layout:{
+                        layout: {
                             hLineWidth: function (i, node) {
                                 return (i === 0 || i === node.table.body.length) ? 2 : 1;
                             },
@@ -136,12 +134,12 @@ function generatePDF(mode) {
                         margin: [0, 30, 0, 5]
                     },
 
-                     makeAGap(),
-                     getCustomerDetailsTable(),
-                     makeAGap(),
-                     getAssessmentDetailsTable(),
-                     makeAGap(),
-                     getAssessorDetailsTable()
+                    makeAGap(),
+                    getCustomerDetailsTable(),
+                    makeAGap(),
+                    getAssessmentDetailsTable(),
+                    makeAGap(),
+                    getAssessorDetailsTable()
                     // makeAGap(),
                     // getPropertySummaryTable(),
                     // makeAGap()
@@ -152,35 +150,31 @@ function generatePDF(mode) {
              *  (2) ASSESSMENT STAGE REVIEWED, SUMMARIES
              */
             {
-                stack:[
+                stack: [
                     getAssessmentStageReviewed(),
                     makeAGap(),
                     getAssessmentExtent(),
                     makeAGap(),
 
                     {
-                        text:'Summaries',
-                        style:'thirdHeader',
+                        text: 'Summaries',
+                        style: 'thirdHeader',
                         margin: [0, 0, 0, 10]
                     },
                     getConstructionSummary(),
                     makeAGap(),
                     {
-                        table:{
-                            widths:['*'],
-                            body:[
-                                [
-                                    {
-                                        text:'ASSESSMENT SUMMARY',
-                                        style:'tableHeader'
-                                    }
-                                ],
-                                [
-                                    {
-                                        text:getIt('assessmentSummary'),
-                                        fontSize:9
-                                    }
-                                ]
+                        table: {
+                            widths: ['*'],
+                            body: [
+                                [{
+                                    text: 'ASSESSMENT SUMMARY',
+                                    style: 'tableHeader'
+                                }],
+                                [{
+                                    text: getIt('assessmentSummary'),
+                                    fontSize: 9
+                                }]
                             ]
                         },
                         layout: {
@@ -200,18 +194,15 @@ function generatePDF(mode) {
              * (4) The Scope of Inspection Page
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'The Scope of Service',
                         style: 'pageTopHeader'
                     },
                     makeAGap(),
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
+                        columns: [{
+                                stack: [{
                                         text: scopeOfInspectionP1,
                                         style: 'paragraphMargin'
                                     },
@@ -236,15 +227,15 @@ function generatePDF(mode) {
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:'For Strata, Stratum and Company Title Properties',
-                                        fontSite:16,
-                                        bold:true,
-                                        color:'red',
-                                        alignment:'left',
+                                        text: 'For Strata, Stratum and Company Title Properties',
+                                        fontSite: 16,
+                                        bold: true,
+                                        color: 'red',
+                                        alignment: 'left',
                                         margin: [0, 8, 0, 6]
                                     },
                                     {
-                                        text:scopeOfInspectionP7
+                                        text: scopeOfInspectionP7
                                     },
                                     makeAGap(),
                                     {
@@ -256,17 +247,16 @@ function generatePDF(mode) {
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        ul:[
-                                            {
-                                                text:'Observed building defects;',
+                                        ul: [{
+                                                text: 'Observed building defects;',
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:'Observed incomplete work;',
+                                                text: 'Observed incomplete work;',
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:'Observed area or items of poor quality workmanship;',
+                                                text: 'Observed area or items of poor quality workmanship;',
                                                 style: 'bulletMargin'
                                             }
                                         ]
@@ -275,60 +265,58 @@ function generatePDF(mode) {
                                 style: 'colText'
                             },
                             {
-                                stack: [
-                                    {
+                                stack: [{
                                         text: 'WHAT IS NOT RECORDED IN YOUR REPORT',
                                         style: 'pageSubHeader'
                                     },
                                     {
-                                        ul: [
-                                                {
-                                                    text:whatNotRecordedP1,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP2,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP3,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP4,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP5,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP6,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP7,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP8,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP9,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotRecordedP10,
-                                                    style: 'bulletMargin'
-                                                }
+                                        ul: [{
+                                                text: whatNotRecordedP1,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP2,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP3,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP4,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP5,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP6,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP7,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP8,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP9,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotRecordedP10,
+                                                style: 'bulletMargin'
+                                            }
                                         ]
                                     },
                                     makeAGap(),
                                     {
                                         text: 'Assessment Access',
                                         style: 'pageTopHeader',
-                                        margin:[0,0,0,8]
+                                        margin: [0, 0, 0, 8]
                                     },
                                     {
                                         text: assessmentAccessP1,
@@ -356,8 +344,7 @@ function generatePDF(mode) {
              * (5)Attachment Page, Terms and Conditions
              * */
             {
-                stack:[
-                    {
+                stack: [{
                         text: 'Attachments',
                         style: 'pageTopHeader'
                     },
@@ -387,32 +374,29 @@ function generatePDF(mode) {
                     makeAGap(),
                     {
                         alignment: 'justify',
-                        columns:[
-                            {
-                                stack:[
-                                    {
-                                        text:termsConditionsP1,
+                        columns: [{
+                                stack: [{
+                                        text: termsConditionsP1,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:termsConditionsP2,
+                                        text: termsConditionsP2,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:termsConditionsP3,
+                                        text: termsConditionsP3,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:termsConditionsP4,
+                                        text: termsConditionsP4,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:termsConditionsP5,
+                                        text: termsConditionsP5,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        ol:[
-                                            {
+                                        ol: [{
                                                 text: termsConditionsUl1,
                                                 style: 'bulletMargin',
                                                 alignment: 'justify'
@@ -445,14 +429,13 @@ function generatePDF(mode) {
                                         ]
                                     }
 
-                                ], style: 'colText'
+                                ],
+                                style: 'colText'
                             },
                             {
-                                stack:[
-                                    {
+                                stack: [{
                                         start: 7,
-                                        ol:[
-                                            {
+                                        ol: [{
                                                 text: termsConditionsUl7,
                                                 style: 'bulletMargin',
                                                 alignment: 'justify'
@@ -497,16 +480,15 @@ function generatePDF(mode) {
                 Construction Quality Assurance Assessment Report
              */
             {
-                stack:[
-                    {
-                        text:'Construction Quality Assurance Assessment Report',
-                        style:'pageTopHeader',
-                        margin:[0,0,0,5]
+                stack: [{
+                        text: 'Construction Quality Assurance Assessment Report',
+                        style: 'pageTopHeader',
+                        margin: [0, 0, 0, 5]
                     },
                     {
-                        text:reportText,
-                        alignment:'justify',
-                        fontSize:9
+                        text: reportText,
+                        alignment: 'justify',
+                        fontSize: 9
                     },
                     makeAGap(),
                     getListOfDefective(),
@@ -516,9 +498,9 @@ function generatePDF(mode) {
                     getInternalAreas(),
                     makeAGap(),
                     {
-                        text:'*Appliances e.g. Air conditioning, heating, fans etc. have been turned on, but operational performance has not been tested.' +
-                        '\n **These items have been visually assessed unless otherwise noted but have not been tested for operation or compliance.',
-                        fontSize:9
+                        text: '*Appliances e.g. Air conditioning, heating, fans etc. have been turned on, but operational performance has not been tested.' +
+                            '\n **These items have been visually assessed unless otherwise noted but have not been tested for operation or compliance.',
+                        fontSize: 9
 
                     }
 
@@ -531,7 +513,7 @@ function generatePDF(mode) {
                 Construction Images max 30,two images per page
              */
             {
-                stack:[
+                stack: [
                     getConstructionImagesTable()
                 ]
             }
@@ -718,27 +700,26 @@ function generatePDF(mode) {
     //pdfMake.createPdf(docDefinition).open();
 
 
-    if (mode == 'save')
-    {
+    if (mode == 'save') {
         //console.log('click');
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-        pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
+        pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
             var base64 = encodedString;
             $('#savingPDFAlert').show('fade');
             doSavePDF(base64);
             //console.log(base64);
         });
 
-    }
-    else if(mode == "preview"){
+    } else if (mode == "preview") {
         console.log("This is preview mode!!");
         pdfMake.createPdf(docDefinition).open();
+
+        //Prevent multiple request.
+        $("button").prop("disabled", false);
     }
     //if the mode is final or preview, open the pdf directly
-    else
-    {
-        if( isMobile.any() )
-        {
+    else {
+        if (isMobile.any()) {
             if (isSafari && iOS) {
                 console.log("IOS system!");
                 //alert("You are using Safari on iOS!");
@@ -763,9 +744,7 @@ function generatePDF(mode) {
                 });
             }
 
-        }
-        else
-        {
+        } else {
             console.log("It is on pc");
             // pdfMake.createPdf(docDefinition).open();
             pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {

@@ -12,6 +12,9 @@ var btn_genferateHomeAccessReportPDF = function (mode) {
 
 //generalPDF(mode)
 function generatePDF(mode) {
+     //Prevent multiple request.
+     $("button").prop("disabled", true);
+
     //    console.log("generateHomeAccessReportPDF");
     //reset image number and general notes paragraphs number
     if (mode === 'save') {
@@ -664,6 +667,9 @@ function generatePDF(mode) {
     else if(mode == "preview"){
         console.log("This is preview mode!!");
         pdfMake.createPdf(docDefinition).open();
+
+        //Prevent multiple request.
+        $("button").prop("disabled", false);
     }
     //if the mode is final or preview, open the pdf directly, depends on what device the user is using
     else {

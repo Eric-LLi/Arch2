@@ -8,6 +8,9 @@
  * */
 
 function generatePDF(mode) {
+    //Prevent multiple request.
+    $("button").prop("disabled", true);
+
     //reset image number and general notes paragraphs number
     resetTotalCounting();
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
@@ -75,8 +78,7 @@ function generatePDF(mode) {
 
                 stack: [
 
-                    [
-                        {
+                    [{
                             // Draw Cover Page image
                             image: coverPageLogo,
                             width: 160,
@@ -173,8 +175,7 @@ function generatePDF(mode) {
                     giveMeHugeDraft(mode),
                     {
 
-                        text: [
-                            {
+                        text: [{
                                 text: 'Property Assessment Report',
                                 color: 'red'
                             },
@@ -223,18 +224,15 @@ function generatePDF(mode) {
              * (3) The Scope of Page
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'The Scope of Assessment',
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 0]
                     },
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
+                        columns: [{
+                                stack: [{
                                         text: ScopeOfAssessment1,
                                         style: 'colText'
                                     },
@@ -269,8 +267,7 @@ function generatePDF(mode) {
                                 ]
                             },
                             {
-                                stack: [
-                                    {
+                                stack: [{
                                         text: ScopeOfAssessment9,
                                         style: 'colText'
                                     },
@@ -279,8 +276,7 @@ function generatePDF(mode) {
                                         style: 'pageSubHeader'
                                     },
                                     {
-                                        ul: [
-                                            {
+                                        ul: [{
                                                 text: ReportIncluded1,
                                                 style: 'colText'
                                             },
@@ -311,8 +307,7 @@ function generatePDF(mode) {
                                         style: 'colText'
                                     },
                                     {
-                                        ul: [
-                                            {
+                                        ul: [{
                                                 text: ReportNotRecorded1,
                                                 style: 'colText'
                                             },
@@ -358,15 +353,13 @@ function generatePDF(mode) {
              * (4) Attachment
              */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Attachment',
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 5]
                     },
                     {
-                        text: [
-                            {
+                        text: [{
                                 text: Attachments1,
                                 style: 'tableText'
                             },
@@ -393,40 +386,34 @@ function generatePDF(mode) {
                     },
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
-                                        ul: [
-                                            {
-                                                text: GeneralAdvice1,
-                                                style: 'colText'
-                                            },
-                                            {
-                                                text: GeneralAdvice2,
-                                                style: 'colText'
-                                            },
-                                            {
-                                                text: GeneralAdvice3,
-                                                style: 'colText'
-                                            },
-                                            {
-                                                text: GeneralAdvice4,
-                                                style: 'colText'
-                                            },
-                                            {
-                                                text: GeneralAdvice5,
-                                                style: 'colText'
-                                            }
-                                        ]
-                                    }
-                                ]
+                        columns: [{
+                                stack: [{
+                                    ul: [{
+                                            text: GeneralAdvice1,
+                                            style: 'colText'
+                                        },
+                                        {
+                                            text: GeneralAdvice2,
+                                            style: 'colText'
+                                        },
+                                        {
+                                            text: GeneralAdvice3,
+                                            style: 'colText'
+                                        },
+                                        {
+                                            text: GeneralAdvice4,
+                                            style: 'colText'
+                                        },
+                                        {
+                                            text: GeneralAdvice5,
+                                            style: 'colText'
+                                        }
+                                    ]
+                                }]
                             },
                             {
-                                stack: [
-                                    {
-                                        ul: [
-                                            {
+                                stack: [{
+                                        ul: [{
                                                 text: GeneralAdvice6,
                                                 style: 'colText'
                                             },
@@ -460,8 +447,7 @@ function generatePDF(mode) {
              * (5) Terms & Conditions
              */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Terms & Conditions',
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 0]
@@ -469,10 +455,8 @@ function generatePDF(mode) {
 
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
+                        columns: [{
+                                stack: [{
                                         text: Conditions1,
                                         style: 'colText'
                                     },
@@ -494,8 +478,7 @@ function generatePDF(mode) {
                                         style: 'colText'
                                     },
                                     {
-                                        ol: [
-                                            {
+                                        ol: [{
                                                 text: ConditionsNumber1,
                                                 style: 'colText',
                                                 margin: [5, 0, 0, 0]
@@ -521,64 +504,61 @@ function generatePDF(mode) {
                                 ]
                             },
                             {
-                                stack: [
-                                    {
-                                        start: 4,
-                                        ol: [
-                                            {
-                                                text: ConditionsNumber4,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber5,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber6,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber7,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber8,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber9,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber10,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber11,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber12,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            },
-                                            {
-                                                text: ConditionsNumber13,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
-                                            }
-                                        ],
-                                        fontSize: 10
-                                    }
-                                ]
+                                stack: [{
+                                    start: 4,
+                                    ol: [{
+                                            text: ConditionsNumber4,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber5,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber6,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber7,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber8,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber9,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber10,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber11,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber12,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        },
+                                        {
+                                            text: ConditionsNumber13,
+                                            style: 'colText',
+                                            margin: [5, 0, 0, 0]
+                                        }
+                                    ],
+                                    fontSize: 10
+                                }]
                             }
                         ],
                         columnGap: 20
@@ -591,8 +571,7 @@ function generatePDF(mode) {
              * (6) Defect Definitions
              */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Defect Definitions',
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 0]
@@ -601,16 +580,14 @@ function generatePDF(mode) {
                         table: {
                             widths: [100, '*'],
                             body: [
-                                [
-                                    {},
+                                [{},
 
                                     {
                                         text: 'DEFINITION',
                                         style: 'tableHeader'
                                     }
                                 ],
-                                [
-                                    {
+                                [{
                                         text: 'Minor Defect/ Maintenance Item',
                                         fontSize: 10,
                                         bold: true
@@ -620,21 +597,18 @@ function generatePDF(mode) {
                                         fontSize: 10
                                     }
                                 ],
-                                [
-                                    {
+                                [{
                                         text: 'Major Defect',
                                         fontSize: 10,
                                         bold: true
                                     },
                                     {
-                                        stack: [
-                                            {
+                                        stack: [{
                                                 text: MajorDefect,
                                                 fontSize: 10
                                             },
                                             {
-                                                ul: [
-                                                    {
+                                                ul: [{
                                                         text: [
                                                             MajorDefectBullet1,
                                                             {
@@ -676,21 +650,18 @@ function generatePDF(mode) {
                                     }
 
                                 ],
-                                [
-                                    {
+                                [{
                                         text: 'Serious Structural Defect',
                                         fontSize: 10,
                                         bold: true
                                     },
                                     {
-                                        stack: [
-                                            {
+                                        stack: [{
                                                 text: SeriousDefect1,
                                                 fontSize: 10
                                             },
                                             {
-                                                ul: [
-                                                    {
+                                                ul: [{
                                                         text: [
                                                             SeriousDefectBullet1,
                                                             {
@@ -746,10 +717,8 @@ function generatePDF(mode) {
                     },
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
+                        columns: [{
+                                stack: [{
                                         text: AssessmentAccess1,
                                         style: 'colText'
                                     },
@@ -764,8 +733,7 @@ function generatePDF(mode) {
                                 ]
                             },
                             {
-                                stack: [
-                                    {
+                                stack: [{
                                         text: AssessmentAccess4,
                                         style: 'colText'
                                     },
@@ -791,8 +759,7 @@ function generatePDF(mode) {
              * (7) Property Assessment Summary
              */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Your Property Assessment Summary',
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 5]
@@ -810,8 +777,7 @@ function generatePDF(mode) {
                         table: {
                             widths: [400, '*'],
                             body: [
-                                [
-                                    {
+                                [{
                                         text: 'Apparent condition of the building respect to its age',
                                         style: 'thirdHeader'
                                     },
@@ -832,8 +798,7 @@ function generatePDF(mode) {
                         table: {
                             widths: [400, '*'],
                             body: [
-                                [
-                                    {
+                                [{
                                         text: 'Are there any Major Defects evident?',
                                         style: 'thirdHeader'
                                     },
@@ -854,8 +819,7 @@ function generatePDF(mode) {
                         table: {
                             widths: [400, '*'],
                             body: [
-                                [
-                                    {
+                                [{
                                         text: 'Are there any Serious Structural Defects evident?',
                                         style: 'thirdHeader'
                                     },
@@ -882,8 +846,7 @@ function generatePDF(mode) {
              * (8) Property Assessment Notes & Site
              */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Property Assessment Notes',
                         style: 'pageTopHeader'
                     },
@@ -920,8 +883,7 @@ function generatePDF(mode) {
              * (9) Property Exterior
              */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Property Exterior',
                         style: 'pageTopHeader',
                         margin: [0, 20, 0, 10]
@@ -950,8 +912,7 @@ function generatePDF(mode) {
              * (10) Property Interior - Dry Areas
              */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Property Interior – Dry Areas',
                         style: 'pageTopHeader',
                         margin: [0, 20, 0, 10]
@@ -974,8 +935,7 @@ function generatePDF(mode) {
              * (11) Property Interior - Wet Areas
              */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Property Interior – Service (wet) Areas',
                         style: 'pageTopHeader',
                         margin: [0, 20, 0, 10]
@@ -1142,10 +1102,12 @@ function generatePDF(mode) {
             //console.log(base64);
         });
 
-    }
-    else if(mode == "preview"){
+    } else if (mode == "preview") {
         console.log("This is preview mode!!");
         pdfMake.createPdf(docDefinition).open();
+
+        //Prevent multiple request.
+        $("button").prop("disabled", false);
     }
     //if the mode is final or preview, open the pdf directly, depends on what device the user is using
     else {

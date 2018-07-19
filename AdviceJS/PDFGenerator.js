@@ -7,6 +7,9 @@
  * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  * */
 function generatePDF(mode) {
+    //Prevent multiple request.
+    $("button").prop("disabled", true);
+
     // Page start drawing from here...
     if (mode == 'save') {
         $('#savingPDFAlert').show('fade');
@@ -651,6 +654,9 @@ function generatePDF(mode) {
     } else if (mode == "preview") {
         console.log("This is preview mode!!");
         pdfMake.createPdf(docDefinition).open();
+
+        //Prevent multiple request.
+        $("button").prop("disabled", false);
     }
     //if the mode is final or preview, open the pdf directly
     else {

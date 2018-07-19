@@ -9,6 +9,9 @@
 
 
 function generatePDF(mode) {
+    //Prevent multiple request.
+    $("button").prop("disabled", true);
+
     // Page start drawing from here...
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -632,6 +635,9 @@ function generatePDF(mode) {
     else if(mode == "preview"){
         console.log("This is preview mode!!");
         pdfMake.createPdf(docDefinition).open();
+
+        //Prevent multiple request.
+        $("button").prop("disabled", false);
     }
     //if the mode is final or preview, open the pdf directly
     else {

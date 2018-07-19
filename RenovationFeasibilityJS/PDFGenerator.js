@@ -7,6 +7,9 @@
  * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  * */
 function generatePDF(mode) {
+     //Prevent multiple request.
+     $("button").prop("disabled", true);
+
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isMobile = {
@@ -827,6 +830,9 @@ function generatePDF(mode) {
     else if(mode == "preview"){
         console.log("This is preview mode!!");
         pdfMake.createPdf(docDefinition).open();
+
+        //Prevent multiple request.
+        $("button").prop("disabled", false);
     }
      //if the mode is final or preview, open the pdf directly depends on what device the user is using
      else
