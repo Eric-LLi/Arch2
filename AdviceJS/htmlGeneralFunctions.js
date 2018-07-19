@@ -8,7 +8,7 @@
  {
      reorderImages();
      automaticNumbering();
-     addNewImageForm()
+     addNewImageForm();
  }
 
 function reorderImages()
@@ -60,10 +60,10 @@ function addNewImageForm()
         idGroup.push(id);
     }
     //console.log(idGroup);
-    idGroup.sort(function(a, b){return a - b});
+    idGroup.sort(function(a, b){return a - b;});
     //console.log(idGroup);
     console.log("the last ID is " + idGroup[idGroup.length-1]);
-    var lastID = idGroup[idGroup.length-1]
+    var lastID = idGroup[idGroup.length-1];
     var newID = Number(lastID) + 1;
     var altID = Number(lastID) + 2;
     if(totalContainers.length < maxImage && totalContainers.length != 0)
@@ -199,7 +199,7 @@ $('#AdviceUploadImages').change(function() {
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -279,7 +279,7 @@ $('#AdviceUploadImages').change(function() {
             console.log("need to numbering the images");
             automaticNumbering();
 
-        },2000)
+        },2000);
     }
     else
     {
@@ -287,7 +287,7 @@ $('#AdviceUploadImages').change(function() {
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -355,7 +355,7 @@ $('#AdviceUploadImages').change(function() {
         setTimeout(function(){
             automaticNumbering();
 
-        },4000)
+        },4000);
         
     }
 
@@ -371,7 +371,7 @@ $('#AdviceUploadImages').change(function() {
 //noinspection JSUnusedGlobalSymbols
 function addOneAdviceImage(click_id)
 {
-    var id;
+    // var id;
     var selectedID = String(click_id).replace ( /[^\d.]/g, '' );
     var idGroup = [];
     //id = selectedID.replace ( /[^\d.]/g, '' );
@@ -394,10 +394,10 @@ function addOneAdviceImage(click_id)
         idGroup.push(id);
     }
     //console.log(idGroup);
-    idGroup.sort(function(a, b){return a - b});
+    idGroup.sort(function(a, b){return a - b;});
     //console.log(idGroup);
     //console.log("the last ID is" + idGroup[idGroup.length-1]);
-    var lastID = idGroup[idGroup.length-1]
+    var lastID = idGroup[idGroup.length-1];
     console.log("this last id is " + lastID);
     //var x = document.getElementById(uploadID);
     
@@ -510,8 +510,8 @@ function RemoveOneAdviceImage(click_id)
         var id = Number(idStr);
         idGroup.push(id);
     }
-    idGroup.sort(function(a, b){return a - b});
-    var lastID = idGroup[idGroup.length-1]
+    idGroup.sort(function(a, b){return a - b;});
+    var lastID = idGroup[idGroup.length-1];
     console.log("this last id is " + lastID);
 
     var imageSelect = '#' + imageID;
