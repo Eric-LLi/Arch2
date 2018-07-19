@@ -917,7 +917,6 @@ $("#Imgs_Upload").change(function (e) {
                     var image = new Image();
                     image.onload = function () {
                         var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-
                         if (!isEmpty(code)) {
                             $("#" + element[1]).attr("src", code);
 

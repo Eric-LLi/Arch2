@@ -700,35 +700,66 @@ $("#HOW_ImgsUpload").change(function (e) {
                 const element = createPhoto(photos_count);
                 photos_count++;
 
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    //                imgFile.src = e.target.result
-                    var data = e.target.result;
-                    var image = new Image();
-                    image.onload = function () {
-                        var width = image.width;
-                        var height = image.height;
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
+    
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[1]).attr("src", code);
+    
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+    
+                                doUploadFile(imgFile, element[1], element[2], element[3], "", "HOWImagesTable", element[4]);
+    
+                                $("#HOWImagesTable").show();
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
+                });
 
-                        var code = resizeImage_Canvas(image).toDataURL("image/jpeg");
+                // var reader = new FileReader();
+                // reader.onload = function (e) {
+                //     //                imgFile.src = e.target.result
+                //     var data = e.target.result;
+                //     var image = new Image();
+                //     image.onload = function () {
+                //         var width = image.width;
+                //         var height = image.height;
 
-                        if (!isEmpty(code)) {
-                            $("#" + element[1]).attr("src", code);
+                //         var code = resizeImage_Canvas(image).toDataURL("image/jpeg");
 
-                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                                type: file.type,
-                                lastModified: file.lastModifiedDate
-                            });
+                //         if (!isEmpty(code)) {
+                //             $("#" + element[1]).attr("src", code);
 
-                            //                            console.log("UploadID: " + imgFile, element[1], element[2], element[3], "", "HOWImagesTable");
-                            doUploadFile(imgFile, element[1], element[2], element[3], "", "HOWImagesTable", element[4]);
+                //             var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                //                 type: file.type,
+                //                 lastModified: file.lastModifiedDate
+                //             });
 
-                            //                            $("#Imgpage-loader").hide();
-                            $("#HOWImagesTable").show();
-                        }
-                    };
-                    image.src = data;
-                };
-                reader.readAsDataURL(file);
+                //             //                            console.log("UploadID: " + imgFile, element[1], element[2], element[3], "", "HOWImagesTable");
+                //             doUploadFile(imgFile, element[1], element[2], element[3], "", "HOWImagesTable", element[4]);
+
+                //             //                            $("#Imgpage-loader").hide();
+                //             $("#HOWImagesTable").show();
+                //         }
+                //     };
+                //     image.src = data;
+                // };
+                // reader.readAsDataURL(file);
             });
         }
        
