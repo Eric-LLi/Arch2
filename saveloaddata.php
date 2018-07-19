@@ -197,8 +197,7 @@
                     console.log("Opening PDF: "+formData.bookingcode);
                     // resolve(formData.bookingcode);
                     window.open("pdfreport/" + formData.bookingcode + ".pdf", "_blank");
-                    //Enable all button.
-                    $("button").prop("disabled",false);
+                   
                 } else {
                     $('savingPDFAlert').hide('fade');
                     noty({
@@ -206,9 +205,9 @@
                         type: 'error',
                         timeout: 5000
                     });
-                    //Enable all button.
-                    $("button").prop("disabled",false);
                 }
+                 //Enable all button.
+                 $("button").prop("disabled",false);
             }
         );
     }
