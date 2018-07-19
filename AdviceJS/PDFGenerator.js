@@ -8,37 +8,35 @@
  * */
 function generatePDF(mode) {
     // Page start drawing from here...
-    if (mode == 'save')
-    {
+    if (mode == 'save') {
         $('#savingPDFAlert').show('fade');
     }
     resetTotalImagesCaptions();
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isMobile = {
-        Android: function() {
+        Android: function () {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function() {
+        BlackBerry: function () {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function() {
+        iOS: function () {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function() {
+        Opera: function () {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function() {
+        Windows: function () {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function() {
+        any: function () {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
     var docDefinition = {
         footer: function (currentPage, pageCount) {
-            if (currentPage === 1)
-            {
+            if (currentPage === 1) {
                 return {
                     columns: [
                         determineFrontPageFooter(mode),
@@ -47,14 +45,12 @@ function generatePDF(mode) {
                             alignment: 'right',
                             margin: [0, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
-            }
-            else
-            {
+            } else {
                 return {
                     columns: [
                         determineFooter(mode),
@@ -63,8 +59,8 @@ function generatePDF(mode) {
                             alignment: 'left',
                             margin: [10, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
@@ -79,8 +75,7 @@ function generatePDF(mode) {
                 stack: [
 
                     {
-                        columns: [
-                            {
+                        columns: [{
                                 // Draw Cover Page image
                                 image: coverPageLogo,
                                 width: 130,
@@ -95,28 +90,27 @@ function generatePDF(mode) {
                     },
                     giveMeHugeDraft(mode),
                     {
-                        table:{
+                        table: {
                             // widths: ['*', '*'],
-                            body:[
-                                [
-                                    {
+                            body: [
+                                [{
                                         border: [true, true, false, true],
                                         text: archAdviceReportText,
-                                        alignment:'justify',
+                                        alignment: 'justify',
                                         fontSize: 9,
-                                        margin:[10,10,10,10]
+                                        margin: [10, 10, 10, 10]
                                     },
                                     {
                                         border: [false, true, true, true],
                                         stack: [
                                             getCoverImage('AdviceCoverImage')
                                         ],
-                                        margin:[10,10,10,10]
+                                        margin: [10, 10, 10, 10]
                                     }
                                 ]
                             ]
                         },
-                        layout:{
+                        layout: {
                             hLineWidth: function (i, node) {
                                 return (i === 0 || i === node.table.body.length) ? 2 : 1;
                             },
@@ -136,15 +130,18 @@ function generatePDF(mode) {
                         style: 'pageTopHeader',
                         margin: [0, 30, 0, 5]
                     },
-                     getCustomerDetailsTable(),
-                     makeAGap(),
-                     getAssessmentDetailsTable(),
-                     makeAGap(),
-                     getAssessorDetailsTable(),
+                    getCustomerDetailsTable(),
+                    makeAGap(),
+                    getAssessmentDetailsTable(),
+                    makeAGap(),
+                    getAssessorDetailsTable(),
                     {
                         text: 'Report Charges\n This report covers up to 2 hours of the Architect’s time which includes consultation and Report writing. An additional hourly charge is payable for reports exceeding this time.',
-                        fontSize:9,
-                        absolutePosition: {x: 41, y: 730}
+                        fontSize: 9,
+                        absolutePosition: {
+                            x: 41,
+                            y: 730
+                        }
 
                     }
                 ],
@@ -155,19 +152,16 @@ function generatePDF(mode) {
              * (2) The Scope of Advice Page
              * */
             {
-                stack: [
-                    {
+                stack: [{
                         text: 'Report Scope',
                         style: 'pageTopHeader'
                     },
                     makeAGap(),
                     {
                         alignment: 'justify',
-                        columns: [
-                            {
-                                stack: [
-                                    {
-                                        text:'Included in this Report..',
+                        columns: [{
+                                stack: [{
+                                        text: 'Included in this Report..',
                                         style: 'pageSubHeader'
                                     },
                                     {
@@ -183,34 +177,32 @@ function generatePDF(mode) {
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        ul:[
-                                            {
-                                                text:whatIncBulletList1,
+                                        ul: [{
+                                                text: whatIncBulletList1,
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:whatIncBulletList2,
+                                                text: whatIncBulletList2,
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:whatIncBulletList3,
+                                                text: whatIncBulletList3,
                                                 style: 'bulletMargin'
                                             }
                                         ]
 
                                     },
                                     {
-                                        text:whatIncText4,
+                                        text: whatIncText4,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        ul:[
-                                            {
-                                                text:whatIncBulletList4,
+                                        ul: [{
+                                                text: whatIncBulletList4,
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:whatIncBulletList5,
+                                                text: whatIncBulletList5,
                                                 style: 'bulletMargin'
                                             }
                                         ]
@@ -225,25 +217,24 @@ function generatePDF(mode) {
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        ul:[
-                                            {
-                                                text:whatNotIncBulletList1,
+                                        ul: [{
+                                                text: whatNotIncBulletList1,
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:whatNotIncBulletList2,
+                                                text: whatNotIncBulletList2,
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:whatNotIncBulletList3,
+                                                text: whatNotIncBulletList3,
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:whatNotIncBulletList4,
+                                                text: whatNotIncBulletList4,
                                                 style: 'bulletMargin'
                                             },
                                             {
-                                                text:whatNotIncBulletList5,
+                                                text: whatNotIncBulletList5,
                                                 style: 'bulletMargin'
                                             }
                                         ]
@@ -252,57 +243,53 @@ function generatePDF(mode) {
                                 style: 'colText'
                             },
                             {
-                                stack: [
-                                    {
-                                        ul: [
-                                                {
-                                                    stack:[
-                                                        {
-                                                            text:whatNotIncBulletList6,
-                                                            style:'bulletMargin'
-                                                        },
-                                                        {
-                                                            ul:[
-                                                                {
-                                                                    text:whatNotIncBulletList6a,
-                                                                    style:'bulletMargin'
-                                                                },
-                                                                {
-                                                                    text:whatNotIncBulletList6b,
-                                                                    style:'bulletMargin'
-                                                                },
-                                                                {
-                                                                    text:whatNotIncBulletList6c,
-                                                                    style:'bulletMargin'
-                                                                },
-                                                                {
-                                                                    text:whatNotIncBulletList6d,
-                                                                    style:'bulletMargin'
-                                                                },
-                                                                {
-                                                                    text:whatNotIncBulletList6e,
-                                                                    style:'bulletMargin'
-                                                                },
-                                                                {
-                                                                    text:whatNotIncBulletList6f,
-                                                                    style:'bulletMargin'
-                                                                },
-                                                                {
-                                                                    text:whatNotIncBulletList6g,
-                                                                    style:'bulletMargin'
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    text:whatNotIncBulletList7,
-                                                    style: 'bulletMargin'
-                                                },
-                                                {
-                                                    text:whatNotIncBulletList8,
-                                                    style: 'bulletMargin'
-                                                }
+                                stack: [{
+                                        ul: [{
+                                                stack: [{
+                                                        text: whatNotIncBulletList6,
+                                                        style: 'bulletMargin'
+                                                    },
+                                                    {
+                                                        ul: [{
+                                                                text: whatNotIncBulletList6a,
+                                                                style: 'bulletMargin'
+                                                            },
+                                                            {
+                                                                text: whatNotIncBulletList6b,
+                                                                style: 'bulletMargin'
+                                                            },
+                                                            {
+                                                                text: whatNotIncBulletList6c,
+                                                                style: 'bulletMargin'
+                                                            },
+                                                            {
+                                                                text: whatNotIncBulletList6d,
+                                                                style: 'bulletMargin'
+                                                            },
+                                                            {
+                                                                text: whatNotIncBulletList6e,
+                                                                style: 'bulletMargin'
+                                                            },
+                                                            {
+                                                                text: whatNotIncBulletList6f,
+                                                                style: 'bulletMargin'
+                                                            },
+                                                            {
+                                                                text: whatNotIncBulletList6g,
+                                                                style: 'bulletMargin'
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                text: whatNotIncBulletList7,
+                                                style: 'bulletMargin'
+                                            },
+                                            {
+                                                text: whatNotIncBulletList8,
+                                                style: 'bulletMargin'
+                                            }
                                         ]
                                     },
                                     makeAGap(),
@@ -311,11 +298,11 @@ function generatePDF(mode) {
                                         style: 'pageSubHeader'
                                     },
                                     {
-                                        text:reportStandard1,
+                                        text: reportStandard1,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:reportStandard2,
+                                        text: reportStandard2,
                                         style: 'paragraphMargin'
                                     }
                                 ],
@@ -332,24 +319,22 @@ function generatePDF(mode) {
              * (3) Advice Summary Page
              */
             {
-                stack:[
-                    {
-                        text:"Architect's Advice",
-                        style:'pageTopHeader',
-                        margin:[0,0,0,5]
+                stack: [{
+                        text: "Architect's Advice",
+                        style: 'pageTopHeader',
+                        margin: [0, 0, 0, 5]
                     },
                     //makeAGap(),
                     getAdviceTable()
                 ],
-                pageBreak:'after'
+                pageBreak: 'after'
             },
 
             /**
              * (4)Attachments
              * */
             {
-                stack:[
-                    {
+                stack: [{
                         text: 'Attachment',
                         style: 'pageTopHeader'
                     },
@@ -374,33 +359,30 @@ function generatePDF(mode) {
                     getAttachmentTable(),
                     makeAGap(),
                     {
-                        text:'Definitions',
-                        style:'pageTopHeader'
+                        text: 'Definitions',
+                        style: 'pageTopHeader'
                     },
                     makeAGap(),
                     {
-                        columns:[
-                            {
-                                stack:[
-                                    {
-                                        text:definitions1,
+                        columns: [{
+                                stack: [{
+                                        text: definitions1,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:definitions2,
+                                        text: definitions2,
                                         style: 'paragraphMargin'
                                     }
                                 ],
                                 style: 'colText'
                             },
                             {
-                                stack:[
-                                    {
-                                        text:definitions3,
+                                stack: [{
+                                        text: definitions3,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:definitions4,
+                                        text: definitions4,
                                         style: 'paragraphMargin'
                                     }
                                 ],
@@ -417,36 +399,32 @@ function generatePDF(mode) {
              * (5)Terms and Conditions
              * */
             {
-                stack:[
-                    {
+                stack: [{
                         text: 'Terms & Conditions',
                         style: 'pageTopHeader'
                     },
                     makeAGap(),
                     {
                         alignment: 'justify',
-                        columns:[
-                            {
-                                stack:[
-                                    {
-                                        text:termConditionText1,
+                        columns: [{
+                                stack: [{
+                                        text: termConditionText1,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:termConditionText2,
+                                        text: termConditionText2,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:termConditionText3,
+                                        text: termConditionText3,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        text:termConditionText4,
+                                        text: termConditionText4,
                                         style: 'paragraphMargin'
                                     },
                                     {
-                                        ol:[
-                                            {
+                                        ol: [{
                                                 text: termConditionBulletList1,
                                                 style: 'bulletMargin',
                                                 alignment: 'justify'
@@ -484,14 +462,13 @@ function generatePDF(mode) {
                                         ]
                                     }
 
-                                ], style: 'colText'
+                                ],
+                                style: 'colText'
                             },
                             {
-                                stack:[
-                                    {
+                                stack: [{
                                         start: 8,
-                                        ol:[
-                                            {
+                                        ol: [{
                                                 text: termConditionBulletList8,
                                                 style: 'bulletMargin',
                                                 alignment: 'justify'
@@ -540,7 +517,7 @@ function generatePDF(mode) {
              * (6)Images
              * */
             {
-                stack:[
+                stack: [
                     getImagesTable()
                 ]
             }
@@ -630,7 +607,7 @@ function generatePDF(mode) {
                 fontSize: 9,
                 bold: true
             },
-            
+
             colText: {
                 fontSize: 9
                 //margin:[0,5,0,5]
@@ -662,11 +639,10 @@ function generatePDF(mode) {
     // Open a new tab and show the PDF
     //pdfMake.createPdf(docDefinition).open();
 
-    if (mode == 'save')
-    {
+    if (mode == 'save') {
         //console.log('click');
         //const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-        pdfMake.createPdf(docDefinition).getBase64(function(encodedString){
+        pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
             var base64 = encodedString;
             doSavePDF(base64);
             //console.log(base64);
@@ -674,51 +650,29 @@ function generatePDF(mode) {
 
     }
     //if the mode is final or preview, open the pdf directly
-    else
-    {
-        if( isMobile.any() )
-        {
-            if (isSafari && iOS) 
-            {
+    else {
+        if (isMobile.any()) {
+            if (isSafari && iOS) {
                 //alert("You are using Safari on iOS!");
                 pdfMake.createPdf(docDefinition).open();
-            }
-            else
-            {
+            } else {
                 //alert("You are not using Safari on iOS!");
                 var reader = new FileReader();
 
-                pdfMake.createPdf(docDefinition).getBlob(function(blob){
-                    reader.onload = function(e){
+                pdfMake.createPdf(docDefinition).getBlob(function (blob) {
+                    reader.onload = function (e) {
                         //window.location.href = reader.result;
-                        window.open(reader.result,'_blank');
+                        window.open(reader.result, '_blank');
                     };
                     reader.readAsDataURL(blob);
                 });
             }
-        }
-        else
-        {
+        } else {
             console.log("It is on pc");
             //alert("You are using a PC");
             // pdfMake.createPdf(docDefinition).open();
-
-            var firstPromise = new Promise((resolve, reject) => {
-                pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
-                    var base64 = encodedString;
-                    let formData = doSavePDF(base64);
-                    if (!isEmpty(formData.bookingcode))
-                        resolve(formData.bookingcode);
-                });
-            });
-
-            firstPromise.then((data) => {
-                console.log("Save " + data + ".pdf success!!..Now open it.");
-                // pdfMake.createPdf(docDefinition).open();
-                setTimeout(() => {
-                    window.open("pdfreport/" + data + ".pdf", "_blank");
-                }, 500);
-
+            pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
+                doSavePDF(encodedString);
             });
         }
         //pdfMake.createPdf(docDefinition).open();

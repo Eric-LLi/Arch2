@@ -675,22 +675,8 @@ function generatePDF(mode) {
         } else {
             console.log("It is on pc");
             // window.open("pdfreport/1778.pdf", "_blank");
-            var firstPromise = new Promise((resolve, reject) => {
-                pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
-                    var base64 = encodedString;
-                    let formData = doSavePDF(base64);
-                    if (!isEmpty(formData.bookingcode))
-                        resolve(formData.bookingcode);
-                });
-            });
-
-            firstPromise.then((data) => {
-                console.log("Save " + data + ".pdf success!!..Now open it.");
-                // pdfMake.createPdf(docDefinition).open();
-                setTimeout(() => {
-                    window.open("pdfreport/" + data + ".pdf", "_blank");
-                }, 500);
-
+            pdfMake.createPdf(docDefinition).getBase64(function (encodedString) {
+                doSavePDF(encodedString);
             });
         }
     }

@@ -179,7 +179,7 @@
                 var response = JSON.parse(result);
                 //console.log(response.passingText);
                 //console.log(response.rc)
-
+                
                 if (response.rc == 0) {
                     //$('savingPDFAlert').hide('fade');
                     var alert = document.getElementById('savingPDFAlert');
@@ -194,9 +194,9 @@
                     // //var bookingCode = document.getElementById('customer_booking').value;
                     // var url = baseURL + bookingCode + '.pdf';
                     // window.open(url);
-                    return formData;
-
-
+                    console.log("Opening PDF: "+formData.bookingcode);
+                    // resolve(formData.bookingcode);
+                    window.open("pdfreport/" + formData.bookingcode + ".pdf", "_blank");
                 } else {
                     $('savingPDFAlert').hide('fade');
                     noty({
@@ -204,9 +204,7 @@
                         type: 'error',
                         timeout: 5000
                     });
-                    return {};
                 }
-
             }
         );
         //console.log('saving pdf');
