@@ -198,7 +198,7 @@
                     // resolve(formData.bookingcode);
                     window.open("pdfreport/" + formData.bookingcode + ".pdf", "_blank");
                     //Enable all button.
-        $("button").prop("disabled",false);
+                    $("button").prop("disabled",false);
                 } else {
                     $('savingPDFAlert').hide('fade');
                     noty({
@@ -207,13 +207,10 @@
                         timeout: 5000
                     });
                     //Enable all button.
-        $("button").prop("disabled",false);
+                    $("button").prop("disabled",false);
                 }
             }
         );
-        //console.log('saving pdf');
-       //Enable all button.
-        $("button").prop("disabled",false);
     }
 
     //imageSize == height
