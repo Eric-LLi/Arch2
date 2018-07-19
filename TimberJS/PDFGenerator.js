@@ -983,6 +983,7 @@ function generatePDF(mode) {
     // Open a new tab and show the PDF
     //pdfMake.createPdf(docDefinition).open();
 
+    
     if (mode == 'save')
     {
         //console.log('click');
@@ -994,6 +995,10 @@ function generatePDF(mode) {
             //console.log(base64);
         });
 
+    }
+    else if(mode == "preview"){
+        console.log("This is preview mode!!");
+        pdfMake.createPdf(docDefinition).open();
     }
     //if the mode is final or preview, open the pdf directly depends on what device the user is using
     else

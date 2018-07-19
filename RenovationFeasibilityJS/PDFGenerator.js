@@ -824,6 +824,10 @@ function generatePDF(mode) {
         });
 
     }
+    else if(mode == "preview"){
+        console.log("This is preview mode!!");
+        pdfMake.createPdf(docDefinition).open();
+    }
      //if the mode is final or preview, open the pdf directly depends on what device the user is using
      else
      {
