@@ -519,7 +519,7 @@
                             <img id="ConstructionCoverImage" src="#" alt="Image1" style="width:0;height:265px;display: none" />
                         </div>
                         <div class="col-sm">
-                            <input type="button" value="Remove" id="ConstructionCoverImageRemoveButton" onclick="RemoveConstructionCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
+                            <input class="btn btn-danger" type="button" value="Remove" id="ConstructionCoverImageRemoveButton" onclick="RemoveConstructionCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
                             <br>
                         </div>
                     </div>

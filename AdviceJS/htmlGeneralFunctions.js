@@ -2,17 +2,15 @@
  * Created by Fafa on 19/1/18.
  */
 
- var firstRemove30th = true;
- 
- function onload()
- {
-     reorderImages();
-     automaticNumbering();
-     addNewImageForm();
- }
+var firstRemove30th = true;
 
-function reorderImages()
-{
+function onload() {
+    reorderImages();
+    automaticNumbering();
+    addNewImageForm();
+}
+
+function reorderImages() {
     var totalContainers = $('#AdvicePhotographs').find('> form');
     var BigContainer = document.getElementById('AdvicePhotographs');
     console.log(totalContainers);
@@ -21,53 +19,49 @@ function reorderImages()
     //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
     //     console.log((totalContainers[i].id));
     // }
-    totalContainers.sort(function(a,b)
-    {
+    totalContainers.sort(function (a, b) {
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
 
     console.log(totalContainers);
 
     $("#AdvicePhotographs").empty();
-    for (var i=0;i<totalContainers.length;i++)
-    {
-       BigContainer.appendChild(totalContainers[i]);
+    for (var i = 0; i < totalContainers.length; i++) {
+        BigContainer.appendChild(totalContainers[i]);
     }
 }
 
 
-function automaticNumbering()
-{
+function automaticNumbering() {
     console.log("need to refresh the image number");
     var totalContainers = $('#AdvicePhotographs').find('> form');
-    for(var i=0;i<totalContainers.length;i++)
-    {
+    for (var i = 0; i < totalContainers.length; i++) {
         //console.log(i);
         //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
-        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i+1);
+        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "IMG " + (i + 1);
     }
 }
-function addNewImageForm()
-{
+
+function addNewImageForm() {
     maxImage = 30;
     var idGroup = [];
     var totalContainers = $('#AdvicePhotographs').find('> form');
     console.log("the current form in the report AdvicePhotographs is " + totalContainers.length);
-    for (var i = 0; i < totalContainers.length; i++)
-    {
+    for (var i = 0; i < totalContainers.length; i++) {
         var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
         var id = Number(idStr);
         idGroup.push(id);
     }
     //console.log(idGroup);
-    idGroup.sort(function(a, b){return a - b;});
+    idGroup.sort(function (a, b) {
+        return a - b;
+    });
     //console.log(idGroup);
-    console.log("the last ID is " + idGroup[idGroup.length-1]);
-    var lastID = idGroup[idGroup.length-1];
+    console.log("the last ID is " + idGroup[idGroup.length - 1]);
+    var lastID = idGroup[idGroup.length - 1];
     var newID = Number(lastID) + 1;
     var altID = Number(lastID) + 2;
-    if(totalContainers.length < maxImage && totalContainers.length != 0)
-    {
+    if (totalContainers.length < maxImage && totalContainers.length != 0) {
         console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
         nextAltName = 'image ' + altID;
         //console.log("I am here!!! need another image element ,the next id  " + newID);
@@ -82,8 +76,7 @@ function addNewImageForm()
 }
 
 
-function countWord(click_id)
-{
+function countWord(click_id) {
     var words = document.getElementById(click_id).value;
     var regex = /\s+/gi;
     var wordCount = words.trim().replace(regex, ' ').split(' ').length;
@@ -95,18 +88,18 @@ function countWord(click_id)
     // }
 }
 
-function AdviceCover(){
+function AdviceCover() {
     document.getElementById('AdviceUploadCoverImage').click();
 }
 
 
-function RemoveAdviceCoverImage(){
+function RemoveAdviceCoverImage() {
     //RemoveCoverImage('AdviceCoverImage','AdviceCoverImageRemoveButton');
 
     var image = document.getElementById('AdviceCoverImage');
     var removeButton = document.getElementById('AdviceCoverImageRemoveButton');
 
-    image.setAttribute('src','#');
+    image.setAttribute('src', '#');
     image.style.display = 'none';
     image.style.width = 0;
     removeButton.style.display = 'none';
@@ -114,9 +107,9 @@ function RemoveAdviceCoverImage(){
 
 }
 
-$('#AdviceUploadCoverImage').change(function(){
+$('#AdviceUploadCoverImage').change(function () {
     //uploadCoverImage(this,'AdviceCoverImage','AdviceCoverImageRemoveButton','500px');
-    if(this.files && this.files[0]) {
+    if (this.files && this.files[0]) {
         var imageFile = this.files[0];
         var imageType = imageFile.type;
         var imageName = imageFile.name;
@@ -133,26 +126,27 @@ $('#AdviceUploadCoverImage').change(function(){
                 orientation = data.exif.get('Orientation');
             }
             var loadingImage = loadImage(imageFile, function (canvas) {
-                    var base64data = canvas.toDataURL(imageType);
-                    //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                    image.setAttribute('src',base64data);
-                    removeButton.style.display = 'block';
-                    removeButton.style.width = '400px';
-                    image.style.display = 'block';
-                    image.style.width = '400px';
-                    // image.style.height = '250px';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    console.log(file);
-                    doUploadFile(file,'AdviceCoverImage', '', 'AdviceCoverImageRemoveButton', '','','cover image','','','','','265px','400px');
+                var base64data = canvas.toDataURL(imageType);
+                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                image.setAttribute('src', base64data);
+                removeButton.style.display = 'block';
+                removeButton.style.width = '400px';
+                image.style.display = 'block';
+                image.style.width = '400px';
+                // image.style.height = '250px';
+                var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                    type: imageType,
+                    lastModified: date.getTime()
+                });
+                console.log(file);
+                doUploadFile(file, 'AdviceCoverImage', '', 'AdviceCoverImageRemoveButton', '', '', 'cover image', '', '', '', '', '265px', '400px');
 
-                },
-                {
-                    canvas: true,
-                    orientation: orientation,
-                    maxWidth:1300,
-                    maxHeight:1000
-                }
-            );
+            }, {
+                canvas: true,
+                orientation: orientation,
+                maxWidth: 1300,
+                maxHeight: 1000
+            });
         });
     }
 
@@ -160,9 +154,9 @@ $('#AdviceUploadCoverImage').change(function(){
 
 
 
-function AdviceUploadImage(){
+function AdviceUploadImage() {
     document.getElementById('AdviceUploadImages').click();
-    
+
 }
 // var imageInput = document.getElementById('AdviceUploadImages');
 // imageInput.onclick = function()
@@ -170,12 +164,11 @@ function AdviceUploadImage(){
 //     console.log(this.value);
 //     this.value = null;
 // }
-$('#AdviceUploadImages').click(function()
-{
+$('#AdviceUploadImages').click(function () {
     //console.log(this.value);
     this.value = null;
 });
-$('#AdviceUploadImages').change(function() {
+$('#AdviceUploadImages').change(function () {
     firstRemove30th = true;
     var imageIDs = $("#AdvicePhotographs form");
     for (var i = 0; i < imageIDs.length; i++) {
@@ -193,103 +186,12 @@ $('#AdviceUploadImages').change(function() {
         alert("You can only select 30 images. It will only display the first 30 photos");
     }
 
-    if(count < 30)
-    {
-        for (var i = 0; i<count;i++)
-        {
+    if (count < 30) {
+        for (var i = 0; i < count; i++) {
             try {
                 //noinspection ExceptionCaughtLocallyJS
                 throw i;
-            }
-            catch (ii) {
-                setTimeout(function ()
-                {
-                    var nameID = ii + 1;
-                    var altName = 'image' + nameID;
-                    var imageID = 'AdviceImage' + ii;
-                    var textID = 'AdviceImageText' + ii;
-                    var removeButtonID = 'AdviceImageRemoveButton' + ii;
-                    var addButtonID = 'AddAdviceImageButton' + ii;
-                    var uploadID = 'AdviceUploadImage' + ii;
-                    var imgLabelID = "imageCaption" + ii;
-                    //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
-
-
-                    addImageElements(altName, 'AdvicePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
-                        'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '500px');
-
-                    loadImage.parseMetaData(imageFile[ii], function (data) {
-                        //console.log('I am in loadImage function');
-                        var orientation = 0;
-                        var date = new Date();
-                        var selectionImage = '#AdviceImage' + ii;
-                        var imageName = imageFile[ii].name;
-                        var imageType = imageFile[ii].type;
-                        var image = document.getElementById(imageID);
-                        var removeButton = document.getElementById(removeButtonID);
-                        var description  = document.getElementById(textID);
-                        var addButton = document.getElementById(addButtonID);
-                       
-                        //if exif data available, update orientation
-                        if (data.exif) {
-                            orientation = data.exif.get('Orientation');
-                        }
-                        var loadingImage = loadImage(imageFile[ii], function (canvas) {
-                                var base64data = canvas.toDataURL(imageType);
-                                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                                image.setAttribute('src',base64data);
-                                //$(selectionImage).attr('src',base64data);
-                                removeButton.style.display = 'block';
-                                removeButton.style.width = '500px';
-                                addButton.style.display = 'none';
-                                description.style.display = 'block';
-                                image.style.display = 'block';
-                                image.style.width = '500px';
-                                image.style.height = '500px';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                // image.style.height = '250px';
-                                var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                                //console.log(file);
-                                doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'AdviceImagesTable',altName,'AdvicePhotographs',uploadID,'RemoveOneAdviceImage(this.id)','addOneAdviceImage(this.id)','500px','500px');
-
-                            },
-                            {
-                                canvas: true,
-                                orientation: orientation,
-                                maxWidth:1000,
-                                maxHeight:800
-                            }
-                        );
-                    });
-
-                }, 500);
-            }
-        }
-
-        setTimeout(function(){
-            var altID= count + 1;
-            var altName = 'Image' + altID;
-            var imageID = 'AdviceImage' + count;
-            var textID = 'AdviceImageText' + count;
-            var removeButtonID = 'AdviceImageRemoveButton' + count;
-            var addButtonID = 'AddAdviceImageButton' + count;
-            var uploadID = 'AdviceUploadImage' + count;
-            addImageElements(altName, 'AdvicePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
-                'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
-            console.log("need to numbering the images");
-            automaticNumbering();
-
-        },2000);
-    }
-    else
-    {
-        for (var i = 0; i<30;i++)
-        {
-            try {
-                //noinspection ExceptionCaughtLocallyJS
-                throw i;
-            }
-            catch (ii) {
+            } catch (ii) {
                 setTimeout(function () {
                     var nameID = ii + 1;
                     var altName = 'image' + nameID;
@@ -314,49 +216,134 @@ $('#AdviceUploadImages').change(function() {
                         var imageType = imageFile[ii].type;
                         var image = document.getElementById(imageID);
                         var removeButton = document.getElementById(removeButtonID);
-                        var description  = document.getElementById(textID);
+                        var description = document.getElementById(textID);
+                        var addButton = document.getElementById(addButtonID);
+
+                        //if exif data available, update orientation
+                        if (data.exif) {
+                            orientation = data.exif.get('Orientation');
+                        }
+                        var loadingImage = loadImage(imageFile[ii], function (canvas) {
+                            var base64data = canvas.toDataURL(imageType);
+                            //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                            image.setAttribute('src', base64data);
+                            //$(selectionImage).attr('src',base64data);
+                            removeButton.style.display = 'block';
+                            removeButton.style.width = '500px';
+                            addButton.style.display = 'none';
+                            description.style.display = 'block';
+                            image.style.display = 'block';
+                            image.style.width = '500px';
+                            image.style.height = '500px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            // image.style.height = '250px';
+                            var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
+                                type: imageType,
+                                lastModified: date.getTime()
+                            });
+                            //console.log(file);
+                            doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'AdviceImagesTable', altName, 'AdvicePhotographs', uploadID, 'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '500px');
+
+                        }, {
+                            canvas: true,
+                            orientation: orientation,
+                            maxWidth: 1000,
+                            maxHeight: 800
+                        });
+                    });
+
+                }, 500);
+            }
+        }
+
+        setTimeout(function () {
+            var altID = count + 1;
+            var altName = 'Image' + altID;
+            var imageID = 'AdviceImage' + count;
+            var textID = 'AdviceImageText' + count;
+            var removeButtonID = 'AdviceImageRemoveButton' + count;
+            var addButtonID = 'AddAdviceImageButton' + count;
+            var uploadID = 'AdviceUploadImage' + count;
+            addImageElements(altName, 'AdvicePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
+                'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
+            console.log("need to numbering the images");
+            automaticNumbering();
+
+        }, 2000);
+    } else {
+        for (var i = 0; i < 30; i++) {
+            try {
+                //noinspection ExceptionCaughtLocallyJS
+                throw i;
+            } catch (ii) {
+                setTimeout(function () {
+                    var nameID = ii + 1;
+                    var altName = 'image' + nameID;
+                    var imageID = 'AdviceImage' + ii;
+                    var textID = 'AdviceImageText' + ii;
+                    var removeButtonID = 'AdviceImageRemoveButton' + ii;
+                    var addButtonID = 'AddAdviceImageButton' + ii;
+                    var uploadID = 'AdviceUploadImage' + ii;
+                    var imgLabelID = "imageCaption" + ii;
+                    //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
+
+
+                    addImageElements(altName, 'AdvicePhotographs', imageID, textID, removeButtonID, addButtonID, uploadID,
+                        'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '500px');
+
+                    loadImage.parseMetaData(imageFile[ii], function (data) {
+                        //console.log('I am in loadImage function');
+                        var orientation = 0;
+                        var date = new Date();
+                        var selectionImage = '#AdviceImage' + ii;
+                        var imageName = imageFile[ii].name;
+                        var imageType = imageFile[ii].type;
+                        var image = document.getElementById(imageID);
+                        var removeButton = document.getElementById(removeButtonID);
+                        var description = document.getElementById(textID);
                         var addButton = document.getElementById(addButtonID);
                         //if exif data available, update orientation
                         if (data.exif) {
                             orientation = data.exif.get('Orientation');
                         }
                         var loadingImage = loadImage(imageFile[ii], function (canvas) {
-                                var base64data = canvas.toDataURL(imageType);
-                                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                                image.setAttribute('src',base64data);
-                                //$(selectionImage).attr('src',base64data);
-                                removeButton.style.display = 'block';
-                                removeButton.style.width = '500px';
-                                addButton.style.display = 'none';
-                                description.style.display = 'block';
-                                image.style.display = 'block';
-                                image.style.width = '500px';
-                                image.style.height = '500px';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                // image.style.height = '250px';
-                                var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                                //console.log(file);
-                                doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'AdviceImagesTable',altName,'AdvicePhotographs',uploadID,'RemoveOneAdviceImage(this.id)','addOneAdviceImage(this.id)','500px','500px');
+                            var base64data = canvas.toDataURL(imageType);
+                            //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                            image.setAttribute('src', base64data);
+                            //$(selectionImage).attr('src',base64data);
+                            removeButton.style.display = 'block';
+                            removeButton.style.width = '500px';
+                            addButton.style.display = 'none';
+                            description.style.display = 'block';
+                            image.style.display = 'block';
+                            image.style.width = '500px';
+                            image.style.height = '500px';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            // image.style.height = '250px';
+                            var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
+                                type: imageType,
+                                lastModified: date.getTime()
+                            });
+                            //console.log(file);
+                            doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'AdviceImagesTable', altName, 'AdvicePhotographs', uploadID, 'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '500px');
 
-                            },
-                            {
-                                canvas: true,
-                                orientation: orientation,
-                                maxWidth:1000,
-                                maxHeight:800
-                            }
-                        );
+                        }, {
+                            canvas: true,
+                            orientation: orientation,
+                            maxWidth: 1000,
+                            maxHeight: 800
+                        });
                     });
                     //f, imageid, textid, removeid, addid, table = '',imageAltName = '', divID = '', uploadID = '',removeFunction = '',addFunction = '',imageSize = '',width = ''
                     //doUploadFile(imageFile[ii],imageID, textID, removeButtonID, addButtonID,'DilapidationImagesTable',altName,'DilapidationPhotographs',uploadID,'RemoveOneDilapidationImage(this.id)','addOneDilapidationImage(this.id)','510px','510px');
                 }, 500);
             }
         }
-        setTimeout(function(){
+        setTimeout(function () {
             automaticNumbering();
 
-        },4000);
-        
+        }, 4000);
+
     }
 
 });
@@ -369,10 +356,9 @@ $('#AdviceUploadImages').change(function() {
  */
 
 //noinspection JSUnusedGlobalSymbols
-function addOneAdviceImage(click_id)
-{
+function addOneAdviceImage(click_id) {
     // var id;
-    var selectedID = String(click_id).replace ( /[^\d.]/g, '' );
+    var selectedID = String(click_id).replace(/[^\d.]/g, '');
     var idGroup = [];
     //id = selectedID.replace ( /[^\d.]/g, '' );
     console.log("the selectedID " + selectedID);
@@ -386,40 +372,39 @@ function addOneAdviceImage(click_id)
     var addButtonID = 'AddAdviceImageButton' + selectedID;
     var uploadID = 'AdviceUploadImage' + selectedID;
     var imgLabelID = "imageCaption" + selectedID;
-   
-    for (var i = 0; i < totalContainers.length; i++)
-    {
+
+    for (var i = 0; i < totalContainers.length; i++) {
         var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
         var id = Number(idStr);
         idGroup.push(id);
     }
     //console.log(idGroup);
-    idGroup.sort(function(a, b){return a - b;});
+    idGroup.sort(function (a, b) {
+        return a - b;
+    });
     //console.log(idGroup);
     //console.log("the last ID is" + idGroup[idGroup.length-1]);
-    var lastID = idGroup[idGroup.length-1];
+    var lastID = idGroup[idGroup.length - 1];
     console.log("this last id is " + lastID);
     //var x = document.getElementById(uploadID);
-    
-    $("#"+uploadID).unbind().click();
-    $('#'+uploadID).change(function(){
+
+    $("#" + uploadID).unbind().click();
+    $('#' + uploadID).change(function () {
         //console.log("Hi 0");
         if (this.files && this.files[0]) {
-            if(totalContainers.length == 30)
-            {
+            if (totalContainers.length == 30) {
                 console.log("add the last 30th image, need to reset the firstRemove30th");
                 firstRemove30th = true;
             }
 
             //console.log(this.files.length);
             //console.log("Hi 1");
-            if (totalContainers.length <= 30)
-            {
+            if (totalContainers.length <= 30) {
                 //console.log("Hi 2");
                 //if the total number of image is less than 30, then need to create a new image element to allow user to upload another one.
                 var imageFile = this.files[0];
                 //document.getElementById(imgLabelID).style.display = 'block';
-               
+
                 loadImage.parseMetaData(imageFile, function (data) {
                     //console.log('I am in loadImage function');
                     var orientation = 0;
@@ -429,7 +414,7 @@ function addOneAdviceImage(click_id)
                     var imageType = imageFile.type;
                     var image = document.getElementById(imageID);
                     var removeButton = document.getElementById(removeButtonID);
-                    var description  = document.getElementById(textID);
+                    var description = document.getElementById(textID);
                     var addButton = document.getElementById(addButtonID);
                     var imageLable = document.getElementById(imgLabelID);
                     //if exif data available, update orientation
@@ -437,38 +422,37 @@ function addOneAdviceImage(click_id)
                         orientation = data.exif.get('Orientation');
                     }
                     var loadingImage = loadImage(imageFile, function (canvas) {
-                            var base64data = canvas.toDataURL(imageType);
-                            //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                            image.setAttribute('src',base64data);
-                            //$(selectionImage).attr('src',base64data);
-                            removeButton.style.display = 'block';
-                            removeButton.style.width = '500px';
-                            addButton.style.display = 'none';
-                            description.style.display = 'block';
-                            image.style.display = 'block';
-                            image.style.width = '500px';
-                            image.style.height = '500px';
-                            imageLable.style.display = 'block';
-                            // image.style.height = '250px';
-                            var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                            //console.log(file);
-                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'AdviceImagesTable',nextAltName,'AdvicePhotographs',uploadID,'RemoveOneAdviceImage(this.id)','addOneAdviceImage(this.id)','500px','500px');
+                        var base64data = canvas.toDataURL(imageType);
+                        //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                        image.setAttribute('src', base64data);
+                        //$(selectionImage).attr('src',base64data);
+                        removeButton.style.display = 'block';
+                        removeButton.style.width = '500px';
+                        addButton.style.display = 'none';
+                        description.style.display = 'block';
+                        image.style.display = 'block';
+                        image.style.width = '500px';
+                        image.style.height = '500px';
+                        imageLable.style.display = 'block';
+                        // image.style.height = '250px';
+                        var file = new File([convertBase64UrlToBlob(base64data, imageType)], imageName, {
+                            type: imageType,
+                            lastModified: date.getTime()
+                        });
+                        //console.log(file);
+                        doUploadFile(file, imageID, textID, removeButtonID, addButtonID, 'AdviceImagesTable', nextAltName, 'AdvicePhotographs', uploadID, 'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '500px');
 
-                        },
-                        {
-                            canvas: true,
-                            orientation: orientation,
-                            maxWidth:1000,
-                            maxHeight:800
-                        }
-                    );
+                    }, {
+                        canvas: true,
+                        orientation: orientation,
+                        maxWidth: 1000,
+                        maxHeight: 800
+                    });
                 });
                 automaticNumbering();
 
-                if (Number(selectedID) == Number(lastID))
-                {
-                    if(totalContainers.length < 30)
-                    {
+                if (Number(selectedID) == Number(lastID)) {
+                    if (totalContainers.length < 30) {
                         console.log("you are adding an image to the last id block");
                         var newID = Number(lastID) + 1;
                         var altID = Number(lastID) + 2;
@@ -482,19 +466,18 @@ function addOneAdviceImage(click_id)
                         addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
                             'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px');
                     }
-                   
+
                 }
             }
         }
     });
-   
+
 }
 
 
-function RemoveOneAdviceImage(click_id)
-{
+function RemoveOneAdviceImage(click_id) {
     var selectedID = String(click_id);
-    var id = selectedID.replace ( /[^\d.]/g, '' );
+    var id = selectedID.replace(/[^\d.]/g, '');
     var imageID = 'AdviceImage' + id;
     var removeButtonID = 'AdviceImageRemoveButton' + id;
     var addButtonID = 'AddAdviceImageButton' + id;
@@ -503,15 +486,16 @@ function RemoveOneAdviceImage(click_id)
     var totalContainers = $('#AdvicePhotographs').find('> form');
     var idGroup = [];
     console.log("the current total image number is: " + totalContainers.length);
-    for (var i = 0; i < totalContainers.length; i++)
-    {
+    for (var i = 0; i < totalContainers.length; i++) {
         var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
         //console.log(idStr);
         var id = Number(idStr);
         idGroup.push(id);
     }
-    idGroup.sort(function(a, b){return a - b;});
-    var lastID = idGroup[idGroup.length-1];
+    idGroup.sort(function (a, b) {
+        return a - b;
+    });
+    var lastID = idGroup[idGroup.length - 1];
     console.log("this last id is " + lastID);
 
     var imageSelect = '#' + imageID;
@@ -534,8 +518,7 @@ function RemoveOneAdviceImage(click_id)
     $('#' + formID).remove();
 
     //has 30 images but, remove one, will no additional 'add' button, need to create one
-    if(totalContainers.length == 30 && firstRemove30th == true)
-    {
+    if (totalContainers.length == 30 && firstRemove30th == true) {
         console.log("need to create a new add button");
         var newID = Number(lastID) + 1;
         var altID = Number(lastID) + 2;
@@ -554,8 +537,7 @@ function RemoveOneAdviceImage(click_id)
     totalContainers = $('#AdvicePhotographs').find('> form');
     //console.log(totalContainers);
     //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
-    if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
-    {
+    if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined') {
         console.log("it does not have any images, emtpy the div");
         $("#AdvicePhotographs").empty();
         document.getElementById('AdviceImagesTable').style.display = 'none';
@@ -572,7 +554,7 @@ function RemoveOneAdviceImage(click_id)
 
 
 //add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
-function addImageElements(imageAltName, divID, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
+function addImageElements(imageAltName, divID, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize, width) {
     var currentID = imageID.replace(/[^\d.]/g, '');
     var BigContainer = document.getElementById(divID);
     var form = document.createElement("form");
@@ -603,7 +585,7 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     //create an input for the text
     var textInput = document.createElement('INPUT');
     textInput.setAttribute("type", "text");
-    textInput.setAttribute('onkeyup','countWord(this.id)');
+    textInput.setAttribute('onkeyup', 'countWord(this.id)');
     textInput.style.width = imageSize;
     textInput.style.height = "10px";
     textInput.style.display = 'none';
@@ -611,24 +593,26 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
 
     //create an input for the remove button
     var removeButton = document.createElement('INPUT');
+    removeButton.setAttribute("class", "btn btn-danger");
     removeButton.setAttribute("type", "button");
     removeButton.setAttribute("value", "Remove");
     removeButton.setAttribute("onclick", removeFunction);
     removeButton.id = removeButtonID;
     //removeButton.onclick = removeFunction;
     removeButton.style.width = imageSize;
-    removeButton.style.height = "25px";
+    // removeButton.style.height = "25px";
     removeButton.style.display = "none";
 
 
     //create an input for add button
     var addButton = document.createElement('INPUT');
     addButton.setAttribute("type", "button");
+    addButton.setAttribute("class", "btn btn-secondary");
     addButton.setAttribute("value", "Add");
     addButton.setAttribute("onclick", addFunction);
     addButton.id = addButtonID;
     addButton.style.width = imageSize;
-    addButton.style.height = "25px";
+    // addButton.style.height = "25px";
     addButton.style.display = 'block';
     addButton.style.marginTop = '20px';
 
@@ -670,9 +654,9 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
 
 
 //Source from http://www.blogjava.net/jidebingfeng/articles/406171.html
-function convertBase64UrlToBlob(urlData,type){
+function convertBase64UrlToBlob(urlData, type) {
 
-    var bytes=window.atob(urlData.split(',')[1]);        //remove url, convert to byte
+    var bytes = window.atob(urlData.split(',')[1]); //remove url, convert to byte
 
     //deal with anomaly, change the ASCI code less than = 0 to great than zero
     var ab = new ArrayBuffer(bytes.length);
@@ -681,5 +665,11 @@ function convertBase64UrlToBlob(urlData,type){
         ia[i] = bytes.charCodeAt(i);
     }
 
-    return new Blob( [ab] , {type : type});
+    return new Blob([ab], {
+        type: type
+    });
 }
+
+$(document).ready(() => {
+    
+});

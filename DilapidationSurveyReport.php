@@ -232,7 +232,7 @@
                      style="width:265px;height:265px;display: none"/>
             </div>
             <div class="col-sm">
-                <input type="button" value="Remove" id="DilapidationCoverImageRemoveButton"
+                <input class="btn btn-danger" type="button" value="Remove" id="DilapidationCoverImageRemoveButton"
                        onclick="RemoveDilapidationCover()"
                        style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
                 <br>

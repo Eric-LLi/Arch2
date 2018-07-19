@@ -651,23 +651,25 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     //create an input for the remove button
     var removeButton = document.createElement('INPUT');
     removeButton.setAttribute("type", "button");
+    removeButton.setAttribute("class", "btn btn-danger");
     removeButton.setAttribute("value", "Remove");
     removeButton.setAttribute("onclick", removeFunction);
     removeButton.id = removeButtonID;
     //removeButton.onclick = removeFunction;
     removeButton.style.width = imageSize;
-    removeButton.style.height = "25px";
+    // removeButton.style.height = "25px";
     removeButton.style.display = "none";
 
 
     //create an input for add button
     var addButton = document.createElement('INPUT');
     addButton.setAttribute("type", "button");
+    addButton.setAttribute("class", "btn btn-secondary");
     addButton.setAttribute("value", "Add");
     addButton.setAttribute("onclick", addFunction);
     addButton.id = addButtonID;
     addButton.style.width = imageSize;
-    addButton.style.height = "25px";
+    // addButton.style.height = "25px";
     addButton.style.display = 'block';
     addButton.style.marginTop = '20px';
 

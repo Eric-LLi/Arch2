@@ -298,7 +298,7 @@
                          style="width:100%;height:100%;display: none"/>
                 </div>
                 <div class="col-sm">
-                    <input type="button" value="Remove" id="MaintenanceCoverImageRemoveButton"
+                    <input class="btn btn-danger" type="button" value="Remove" id="MaintenanceCoverImageRemoveButton"
                            onclick="RemoveMaintenanceCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width:100%">
                     <br>
                 </div>

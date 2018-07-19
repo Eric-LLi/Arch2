@@ -6,7 +6,7 @@ function onload()
  {
      reorderImages();
      automaticNumbering();
-     addNewImageForm()
+     addNewImageForm();
  }
 
 function reorderImages()
@@ -59,10 +59,10 @@ function addNewImageForm()
         idGroup.push(id);
     }
     //console.log(idGroup);
-    idGroup.sort(function(a, b){return a - b});
+    idGroup.sort(function(a, b){return a - b;});
     //console.log(idGroup);
     console.log("the last ID is " + idGroup[idGroup.length-1]);
-    var lastID = idGroup[idGroup.length-1]
+    var lastID = idGroup[idGroup.length-1];
     var newID = Number(lastID) + 1;
     var altID = Number(lastID) + 2;
     if(totalContainers.length < maxImage && totalContainers.length != 0)
@@ -327,7 +327,7 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -409,7 +409,7 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
                 'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
             automaticNumbering();
 
-        },400)
+        },400);
     }
     else
     {
@@ -417,7 +417,7 @@ $('#HomeFeasibilityUploadDrawings').change(function(){
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -544,23 +544,25 @@ function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, ad
     //create an input for the remove button
     var removeButton = document.createElement('INPUT');
     removeButton.setAttribute("type", "button");
+    removeButton.setAttribute("class", "btn btn-danger");
     removeButton.setAttribute("value", "Remove");
     removeButton.setAttribute("onclick", removeFunction);
     removeButton.id = removeButtonID;
     //removeButton.onclick = removeFunction;
     removeButton.style.width = imageSize;
-    removeButton.style.height = "25px";
+    // removeButton.style.height = "25px";
     removeButton.style.display = "none";
 
 
     //create an input for add button
     var addButton = document.createElement('INPUT');
     addButton.setAttribute("type", "button");
+    addButton.setAttribute("class", "btn btn-secondary");
     addButton.setAttribute("value", "Add");
     addButton.setAttribute("onclick", addFunction);
     addButton.id = addButtonID;
     addButton.style.width = '100%';
-    addButton.style.height = "25px";
+    // addButton.style.height = "25px";
     addButton.style.display = 'block';
     addButton.style.marginTop = '20px';
 

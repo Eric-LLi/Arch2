@@ -246,7 +246,7 @@
                      style="width:0;height:265px;display: none"/>
             </div>
             <div class="col-sm">
-                <input type="button" value="Remove" id="HomeFeasibilityCoverImageRemoveButton"
+                <input class="btn btn-danger" type="button" value="Remove" id="HomeFeasibilityCoverImageRemoveButton"
                        onclick="RemoveHomeFeasibilityCover()"
                        style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
                 <br>

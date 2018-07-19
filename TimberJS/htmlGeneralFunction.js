@@ -83,10 +83,10 @@ function addNewImageForm(section)
         idGroup.push(id);
     }
     //console.log(idGroup);
-    idGroup.sort(function(a, b){return a - b});
+    idGroup.sort(function(a, b){return a - b;});
     //console.log(idGroup);
     console.log("the last ID is " + idGroup[idGroup.length-1]);
-    var lastID = idGroup[idGroup.length-1]
+    var lastID = idGroup[idGroup.length-1];
     var newID = Number(lastID) + 1;
     var altID = Number(lastID) + 2;
     if(totalContainers.length < maxImage && totalContainers.length != 0)
@@ -201,7 +201,7 @@ function RemoveTimberCoverImage() {
     var button = document.getElementById('TimberCoverImageRemoveButton');
 
     button.style.display = 'none';
-    image.style.width = '0px';
+    image.style.display = 'none';
 
     doRemovePhoto('TimberCoverImage');
 }
@@ -237,11 +237,11 @@ $("#TimberSummaryUploadImages").change(function () {
 
     if(count < 3)
     {
-        for (var i = 0; i<count;i++)
+        for (let i = 0; i<count;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -318,15 +318,15 @@ $("#TimberSummaryUploadImages").change(function () {
             "RemoveOneImage(this.id,'Summary')", "AddOneImage(this.id,'Summary')", '340px', '0px','TimberSummaryImageForm','TimberSummaryImageCaption');
             automaticNumbering('TimberSummaryPhotographs');
 
-        },1500)
+        },1500);
     }
     else
     {
-        for (var i = 0; i<3;i++)
+        for (let i = 0; i<3;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -393,7 +393,7 @@ $("#TimberSummaryUploadImages").change(function () {
         }
         setTimeout(function(){
             automaticNumbering('TimberSummaryPhotographs');
-        },1000)
+        },1000);
     }
 });
 
@@ -427,11 +427,11 @@ $("#TimberSiteUploadImages").change(function () {
 
     if(count < 3)
     {
-        for (var i = 0; i<count;i++)
+        for (let i = 0; i<count;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -508,15 +508,15 @@ $("#TimberSiteUploadImages").change(function () {
                 "RemoveOneImage(this.id,'Site')", "AddOneImage(this.id,'Site')", '340px', '0px','TimberSiteImageForm','TimberSiteImageCaption');
             automaticNumbering('TimberSitePhotographs');
 
-        },1500)
+        },1500);
     }
     else
     {
-        for (var i = 0; i<3;i++)
+        for (let i = 0; i<3;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -583,7 +583,7 @@ $("#TimberSiteUploadImages").change(function () {
         }
         setTimeout(function(){
             automaticNumbering('TimberSitePhotographs');
-        },1000)
+        },1000);
     }
 });
 
@@ -616,11 +616,11 @@ $("#TimberExteriorUploadImages").change(function () {
 
     if(count < 3)
     {
-        for (var i = 0; i<count;i++)
+        for (let i = 0; i<count;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -697,15 +697,15 @@ $("#TimberExteriorUploadImages").change(function () {
                 "RemoveOneImage(this.id,'Exterior')", "AddOneImage(this.id,'Exterior')", '340px', '0px','TimberExteriorImageForm','TimberExteriorImageCaption');
             automaticNumbering('TimberExteriorPhotographs');
 
-        },1500)
+        },1500);
     }
     else
     {
-        for (var i = 0; i<3;i++)
+        for (let i = 0; i<3;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -772,7 +772,7 @@ $("#TimberExteriorUploadImages").change(function () {
         }
         setTimeout(function(){
             automaticNumbering('TimberExteriorPhotographs');
-        },1000)
+        },1000);
     }
 });
 
@@ -807,11 +807,11 @@ $("#TimberInteriorUploadImages").change(function () {
 
     if(count < 3)
     {
-        for (var i = 0; i<count;i++)
+        for (let i = 0; i<count;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -888,15 +888,15 @@ $("#TimberInteriorUploadImages").change(function () {
                 "RemoveOneImage(this.id,'Interior')", "AddOneImage(this.id,'Interior')", '340px', '0px','TimberInteriorImageForm','TimberInteriorImageCaption');
             automaticNumbering('TimberInteriorPhotographs');
 
-        },1500)
+        },1500);
     }
     else
     {
-        for (var i = 0; i<3;i++)
+        for (let i = 0; i<3;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -963,7 +963,7 @@ $("#TimberInteriorUploadImages").change(function () {
         }
         setTimeout(function(){
             automaticNumbering('TimberInteriorPhotographs');
-        },1000)
+        },1000);
     }
 });
 
@@ -996,11 +996,11 @@ $("#TimberRoofUploadImages").change(function () {
 
     if(count < 3)
     {
-        for (var i = 0; i<count;i++)
+        for (let i = 0; i<count;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -1077,15 +1077,15 @@ $("#TimberRoofUploadImages").change(function () {
                 "RemoveOneImage(this.id,'Roof')", "AddOneImage(this.id,'Roof')", '340px', '0px','TimberRoofImageForm','TimberRoofImageCaption');
             automaticNumbering('TimberRoofPhotographs');
 
-        },1500)
+        },1500);
     }
     else
     {
-        for (var i = 0; i<3;i++)
+        for (let i = 0; i<3;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -1152,7 +1152,7 @@ $("#TimberRoofUploadImages").change(function () {
         }
         setTimeout(function(){
             automaticNumbering('TimberRoofPhotographs');
-        },1000)
+        },1000);
     }
 });
 
@@ -1185,11 +1185,11 @@ $("#TimberSubfloorUploadImages").change(function () {
 
     if(count < 3)
     {
-        for (var i = 0; i<count;i++)
+        for (let i = 0; i<count;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -1270,11 +1270,11 @@ $("#TimberSubfloorUploadImages").change(function () {
     }
     else
     {
-        for (var i = 0; i<3;i++)
+        for (let i = 0; i<3;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -1341,7 +1341,7 @@ $("#TimberSubfloorUploadImages").change(function () {
         }
         setTimeout(function(){
             automaticNumbering('TimberSubfloorPhotographs');
-        },1000)
+        },1000);
     }
 });
 
@@ -1375,11 +1375,11 @@ $("#TimberRecommendationUploadImages").change(function () {
 
     if(count < 3)
     {
-        for (var i = 0; i<count;i++)
+        for (let i = 0; i<count;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function ()
@@ -1456,15 +1456,15 @@ $("#TimberRecommendationUploadImages").change(function () {
                 "RemoveOneImage(this.id,'Recommendation')", "AddOneImage(this.id,'Recommendation')", '340px', '0px','TimberRecommendationImageForm','TimberRecommendationImageCaption');
             automaticNumbering('TimberRecommendationPhotographs');
 
-        },1500)
+        },1500);
     }
     else
     {
-        for (var i = 0; i<3;i++)
+        for (let i = 0; i<3;i++)
         {
             try {
                 //noinspection ExceptionCaughtLocallyJS
-                throw i
+                throw i;
             }
             catch (ii) {
                 setTimeout(function () {
@@ -1531,7 +1531,7 @@ $("#TimberRecommendationUploadImages").change(function () {
         }
         setTimeout(function(){
             automaticNumbering('TimberRecommendationPhotographs');
-        },1000)
+        },1000);
     }
 });
 
@@ -1569,10 +1569,10 @@ function AddOneImage(click_id,section)
         idGroup.push(id);
     }
     //console.log(idGroup);
-    idGroup.sort(function(a, b){return a - b});
+    idGroup.sort(function(a, b){return a - b;});
     //console.log(idGroup);
     //console.log("the last ID is" + idGroup[idGroup.length-1]);
-    var lastID = idGroup[idGroup.length-1]
+    var lastID = idGroup[idGroup.length-1];
     console.log("this last id is " + lastID);
 
     // console.log(uploadID);
@@ -1718,11 +1718,11 @@ function RemoveOneImage(click_id,section)
     {
         var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
         //console.log(idStr);
-        var id = Number(idStr);
+        let id = Number(idStr);
         idGroup.push(id);
     }
-    idGroup.sort(function(a, b){return a - b});
-    var lastID = idGroup[idGroup.length-1]
+    idGroup.sort(function(a, b){return a - b;});
+    var lastID = idGroup[idGroup.length-1];
     console.log("this last id is " + lastID);
 
 
@@ -1940,23 +1940,25 @@ function addImageElements(imageAltName, divID, imageID, imageTextID, removeButto
     //create an input for the remove button
     var removeButton = document.createElement('INPUT');
     removeButton.setAttribute("type", "button");
+    removeButton.setAttribute("class", "btn btn-danger");
     removeButton.setAttribute("value", "Remove");
     removeButton.setAttribute("onclick", removeFunction);
     removeButton.id = removeButtonID;
     //removeButton.onclick = removeFunction;
     removeButton.style.width = imageSize;
-    removeButton.style.height = "25px";
+    // removeButton.style.height = "25px";
     removeButton.style.display = "none";
 
 
     //create an input for add button
     var addButton = document.createElement('INPUT');
     addButton.setAttribute("type", "button");
+    addButton.setAttribute("class", "btn btn-secondary");
     addButton.setAttribute("value", "Add");
     addButton.setAttribute("onclick", addFunction);
     addButton.id = addButtonID;
     addButton.style.width = imageSize;
-    addButton.style.height = "25px";
+    // addButton.style.height = "25px";
     addButton.style.display = 'block';
     addButton.style.marginTop = '20px';
 

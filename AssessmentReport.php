@@ -372,7 +372,7 @@
                                 <img id="AssessmentCoverImage" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
                             </div>
                             <div class="col-sm">
-                                <input type="button" value="Remove" id="AssessmentCoverImageRemoveButton" onclick="RemoveAssessmentCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
+                                <input class="btn btn-danger" type="button" value="Remove" id="AssessmentCoverImageRemoveButton" onclick="RemoveAssessmentCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
                                 <br>
                             </div>
                         </form>
