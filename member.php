@@ -2299,40 +2299,122 @@
     function doEmailCustomer()
     {
       if (!doGridGetSelectedRowData
-      (
-        'divBookingsG',
-        function(row)
-        {
-          doPromptOkCancel
-          (
-            'Email customer booking ' + row.bookingcode + '?',
-            function(result)
+        (
+          'divBookingsG',
+          function(row)
+          {
+            if (row.reportid == 3)
             {
-              if (result)
-              {
-                $.post
-                (
-                  'ajax_emailbooking.php',
+              doPromptOkCancel
+              (
+                'Email customer booking ' + row.bookingcode + ' and' +row.linkedbookingcode + ' ?',
+                function(result)
+                {
+                  if (result)
                   {
-                    uuid: '<?php echo $_SESSION['uuid']; ?>',
-                    bookingcode: row.bookingcode
-                  },
-                  function(result)
-                  {
-                    var response = JSON.parse(result);
+                    $.post
+                    (
+                      'ajax_emailbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
 
-                    if (response.rc == 0)
-                      doRefreshBookings();
-                    else
-                      noty({text: response.msg, type: 'error', timeout: 10000});
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
                   }
-                );
-              }
+                }
+              );
             }
-          );
-        }
-      ))
-        noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
+            else if (row.linked_bookingcode != null)
+            {
+              doPromptOkCancel
+              (
+                'Email customer booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_emailbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            else
+            {
+              doPromptOkCancel
+              (
+                'Email customer booking ' + row.bookingcode + '?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_emailbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }  
+          }
+        )
+      )
+      noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
     }
 
     function doBookingEmailStatusAsImage(row)

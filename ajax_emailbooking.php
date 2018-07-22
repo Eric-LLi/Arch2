@@ -23,6 +23,7 @@
 
       $dbselect = "select " .
                   "b1.id bookingcode," .
+                  "b1.bookings_id," .
                   "b1.code bc," .
                   "b1.custfirstname," .
                   "b1.custlastname," .
@@ -105,74 +106,219 @@
           while ($dbrow = SharedFetchArray($dbresult))
             $booking = $dbrow;
 
-          $emailtemplate = $reportemails[$booking['itype']];
-          $html = file_get_contents($emailtemplate);
+            $bookings_id = $booking["bookings_id"];
+            $linkBookingID = $booking['linked_bookingcode'];
 
-           //Get the contents of the footer and header to the variables. 
-          $header = file_get_contents('Email_Header.html');
-          $footer = file_get_contents('Email_Footer.html'); 
-          $html = str_replace("XXX_HEADER", $header, $html);
-          $html = str_replace("XXX_FOOTER", $footer, $html);
+            if($booking['linked_bookingcode'] != "")//select the property assessment report in the combined report.after joined select, the result contains the linked timber report.  
+            {
+              error_log('select the property assessment report in the combined report need to send two emails');
+              $emailtemplate = $reportemails[3];
+              error_log($emailtemplate);
+              $html = file_get_contents($emailtemplate);
 
-          $html = str_replace("XXX_DATE", date("l jS \of F Y"), $html);
-          $html = str_replace("XXX_CUSTFIRSTLASTNAME", $booking['custfirstname'] . " " . $booking['custlastname'], $html);
-          $html = str_replace("XXX_CUSTADDRESS1", $booking['custaddress1'], $html);
-          // error_log("***********************");
-          // error_log($booking['custaddress1']);
-          // error_log('custaddress1');
+              //Get the contents of the footer and header to the variables. 
+              $header = file_get_contents('Email_Header.html');
+              $footer = file_get_contents('Email_Footer.html'); 
+              $html = str_replace("XXX_HEADER", $header, $html);
+              $html = str_replace("XXX_FOOTER", $footer, $html);
 
-          $html = str_replace("XXX_CUSTADDRESS2", $booking['custaddress2'], $html);
-          $html = str_replace("XXX_CUSTCITY", $booking['custcity'], $html);
-					$html = str_replace("XXX_CUSTSTATE", $booking['custstate'], $html);
-					$html = str_replace("XXX_CUSTPOSTCODE", $booking['custpostcode'], $html);
-          $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
-					$html = str_replace("XXX_CUSTEMAIL", $booking['custemail'], $html);
-          $html = str_replace("XXX_PROPADDRESS1", $booking['address1'], $html);
-          $html = str_replace("XXX_PROPADDRESS2", $booking['address2'], $html);
-					$html = str_replace("XXX_PROPCITY", $booking['city'], $html);
-          $html = str_replace("XXX_PROPSTATE", $booking['state'], $html);
-          $html = str_replace("XXX_ESTATEAGENTCOMPANY", $booking['estateagentcompany'], $html);
-          $html = str_replace("XXX_ESTATEAGENTCONTACT", $booking['estateagentcontact'], $html);
-          $html = str_replace("XXX_ESTATEAGENTMOBILE", $booking['estateagentmobile'], $html);
-          $html = str_replace("XXX_ESTATEAGENTPHONE", $booking['estateagentphone'], $html);
-          $html = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html);
-          $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
-          $html = str_replace("XXX_CUSTMOBILE", $booking['custmobile'], $html);
-          $html = str_replace("XXX_CUSTPHONE", $booking['custphone'], $html);
-          $html = str_replace("XXX_PROPPOSTCODE", $booking['postcode'], $html);
-          $html = str_replace("XXX_COMMISSION", $booking['commission'], $html);
-          $html = str_replace("XXX_STOREYS", $booking['numstories'], $html);
-          $html = str_replace("XXX_BEDROOMS", $booking['numbedrooms'], $html);
-          $html = str_replace("XXX_BATHROOMS", $booking['numbathrooms'], $html);
-          $html = str_replace("XXX_ROOMS", $booking['numrooms'], $html);
-          $html = str_replace("XXX_OUTBUILDINGS", $booking['numoutbuildings'], $html);
-          $html = str_replace("XXX_CONSTRUCTION", $booking['notes'], $html);
-          $html = str_replace("XXX_PROPERTYPE", $booking['age'], $html);
-          $html = str_replace("XXX_SITEMEETING", ($booking['meetingonsite'] == 0) ? "No" : "Yes", $html);
-          $html = str_replace("XXX_ADVICE", ($booking['renoadvice'] == 0) ? "No" : "Yes", $html);
-          $html = str_replace("XXX_INSPECTION", ($booking['pestinspection'] == 0) ? "No" : "Yes", $html);
-          $html = str_replace("XXX_NOTE", $booking['notes'], $html);
-          $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
-					$html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . " " . $booking['archlastname'], $html);
-					$html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
-          $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
+              $html = str_replace("XXX_DATE", date("l jS \of F Y"), $html);
+              $html = str_replace("XXX_CUSTFIRSTLASTNAME", $booking['custfirstname'] . " " . $booking['custlastname'], $html);
+              $html = str_replace("XXX_CUSTADDRESS1", $booking['custaddress1'], $html);
+              // error_log("***********************");
+              // error_log($booking['custaddress1']);
+              // error_log('custaddress1');
+              $html = str_replace("XXX_CUSTADDRESS2", $booking['custaddress2'], $html);
+              $html = str_replace("XXX_CUSTCITY", $booking['custcity'], $html);
+              $html = str_replace("XXX_CUSTSTATE", $booking['custstate'], $html);
+              $html = str_replace("XXX_CUSTPOSTCODE", $booking['custpostcode'], $html);
+              $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
+              $html = str_replace("XXX_CUSTEMAIL", $booking['custemail'], $html);
+              $html = str_replace("XXX_PROPADDRESS1", $booking['address1'], $html);
+              $html = str_replace("XXX_PROPADDRESS2", $booking['address2'], $html);
+              $html = str_replace("XXX_PROPCITY", $booking['city'], $html);
+              $html = str_replace("XXX_PROPSTATE", $booking['state'], $html);
+              $html = str_replace("XXX_ESTATEAGENTCOMPANY", $booking['estateagentcompany'], $html);
+              $html = str_replace("XXX_ESTATEAGENTCONTACT", $booking['estateagentcontact'], $html);
+              $html = str_replace("XXX_ESTATEAGENTMOBILE", $booking['estateagentmobile'], $html);
+              $html = str_replace("XXX_ESTATEAGENTPHONE", $booking['estateagentphone'], $html);
+              $html = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html);
+              $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
+              $html = str_replace("XXX_CUSTMOBILE", $booking['custmobile'], $html);
+              $html = str_replace("XXX_CUSTPHONE", $booking['custphone'], $html);
+              $html = str_replace("XXX_PROPPOSTCODE", $booking['postcode'], $html);
+              $html = str_replace("XXX_COMMISSION", $booking['commission'], $html);
+              $html = str_replace("XXX_STOREYS", $booking['numstories'], $html);
+              $html = str_replace("XXX_BEDROOMS", $booking['numbedrooms'], $html);
+              $html = str_replace("XXX_BATHROOMS", $booking['numbathrooms'], $html);
+              $html = str_replace("XXX_ROOMS", $booking['numrooms'], $html);
+              $html = str_replace("XXX_OUTBUILDINGS", $booking['numoutbuildings'], $html);
+              $html = str_replace("XXX_CONSTRUCTION", $booking['notes'], $html);
+              $html = str_replace("XXX_PROPERTYPE", $booking['age'], $html);
+              $html = str_replace("XXX_SITEMEETING", ($booking['meetingonsite'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_ADVICE", ($booking['renoadvice'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_INSPECTION", ($booking['pestinspection'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_NOTE", $booking['notes'], $html);
+              $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
+              $html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . " " . $booking['archlastname'], $html);
+              $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
+              $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
 
-          $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
-          $html = str_replace("XXX_LINKREPORT", $link, $html);
+              $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
+              $html = str_replace("XXX_LINKREPORT", $link, $html);
+              $reportPath1 = './pdfreport/'.$bookingcode.".pdf";
+              error_log("the report path for the selected report is " . $reportPath1);
+              $linkBookingID = $booking['linked_bookingcode'];
+              $reportPath2 = './pdfreport/'.$linkBookingID.".pdf";
+              error_log("the report path for the combined timber report is " . $reportPath2);
+              $reportList = array($reportPath1,$reportPath2);
+              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $reportList);
+            }
+            else if($booking["bookings_id"] != "")//select the timber report in the comibined reports, the booking will have the bookings_id for its linked property assessment report. 
+            {
+              error_log("select the timber report in the combine dreport, need to find the other booking id for the property assessment report");
+              $linkBookingID = $booking["bookings_id"];
+            
+              $emailtemplate = $reportemails[3];
+              error_log($emailtemplate);
+              $html = file_get_contents($emailtemplate);
+              //Get the contents of the footer and header to the variables. 
+              $header = file_get_contents('Email_Header.html');
+              $footer = file_get_contents('Email_Footer.html'); 
+              $html = str_replace("XXX_HEADER", $header, $html);
+              $html = str_replace("XXX_FOOTER", $footer, $html);
+
+              $html = str_replace("XXX_DATE", date("l jS \of F Y"), $html);
+              $html = str_replace("XXX_CUSTFIRSTLASTNAME", $booking['custfirstname'] . " " . $booking['custlastname'], $html);
+              $html = str_replace("XXX_CUSTADDRESS1", $booking['custaddress1'], $html);
+              // error_log("***********************");
+              // error_log($booking['custaddress1']);
+              // error_log('custaddress1');
+              $html = str_replace("XXX_CUSTADDRESS2", $booking['custaddress2'], $html);
+              $html = str_replace("XXX_CUSTCITY", $booking['custcity'], $html);
+              $html = str_replace("XXX_CUSTSTATE", $booking['custstate'], $html);
+              $html = str_replace("XXX_CUSTPOSTCODE", $booking['custpostcode'], $html);
+              $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
+              $html = str_replace("XXX_CUSTEMAIL", $booking['custemail'], $html);
+              $html = str_replace("XXX_PROPADDRESS1", $booking['address1'], $html);
+              $html = str_replace("XXX_PROPADDRESS2", $booking['address2'], $html);
+              $html = str_replace("XXX_PROPCITY", $booking['city'], $html);
+              $html = str_replace("XXX_PROPSTATE", $booking['state'], $html);
+              $html = str_replace("XXX_ESTATEAGENTCOMPANY", $booking['estateagentcompany'], $html);
+              $html = str_replace("XXX_ESTATEAGENTCONTACT", $booking['estateagentcontact'], $html);
+              $html = str_replace("XXX_ESTATEAGENTMOBILE", $booking['estateagentmobile'], $html);
+              $html = str_replace("XXX_ESTATEAGENTPHONE", $booking['estateagentphone'], $html);
+              $html = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html);
+              $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
+              $html = str_replace("XXX_CUSTMOBILE", $booking['custmobile'], $html);
+              $html = str_replace("XXX_CUSTPHONE", $booking['custphone'], $html);
+              $html = str_replace("XXX_PROPPOSTCODE", $booking['postcode'], $html);
+              $html = str_replace("XXX_COMMISSION", $booking['commission'], $html);
+              $html = str_replace("XXX_STOREYS", $booking['numstories'], $html);
+              $html = str_replace("XXX_BEDROOMS", $booking['numbedrooms'], $html);
+              $html = str_replace("XXX_BATHROOMS", $booking['numbathrooms'], $html);
+              $html = str_replace("XXX_ROOMS", $booking['numrooms'], $html);
+              $html = str_replace("XXX_OUTBUILDINGS", $booking['numoutbuildings'], $html);
+              $html = str_replace("XXX_CONSTRUCTION", $booking['notes'], $html);
+              $html = str_replace("XXX_PROPERTYPE", $booking['age'], $html);
+              $html = str_replace("XXX_SITEMEETING", ($booking['meetingonsite'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_ADVICE", ($booking['renoadvice'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_INSPECTION", ($booking['pestinspection'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_NOTE", $booking['notes'], $html);
+              $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
+              $html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . " " . $booking['archlastname'], $html);
+              $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
+              $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
+
+              $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
+              $html = str_replace("XXX_LINKREPORT", $link, $html);
+              $reportPath1 = './pdfreport/'.$bookingcode.".pdf";
+              error_log("the report path for the timber report is " . $reportPath1);
+              $reportPath2 = './pdfreport/'.$linkBookingID.".pdf";
+              error_log("the report path for the property assessment report is " . $reportPath2);
+              $reportList = array($reportPath1,$reportPath2);
+              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $reportList);
+            }
+            else
+            {
+              //single report, only need to send one email
+              $emailtemplate = $reportemails[$booking['itype']];
+              error_log($emailtemplate);
+              $html = file_get_contents($emailtemplate);
+
+              //Get the contents of the footer and header to the variables. 
+              $header = file_get_contents('Email_Header.html');
+              $footer = file_get_contents('Email_Footer.html'); 
+              $html = str_replace("XXX_HEADER", $header, $html);
+              $html = str_replace("XXX_FOOTER", $footer, $html);
+
+              $html = str_replace("XXX_DATE", date("l jS \of F Y"), $html);
+              $html = str_replace("XXX_CUSTFIRSTLASTNAME", $booking['custfirstname'] . " " . $booking['custlastname'], $html);
+              $html = str_replace("XXX_CUSTADDRESS1", $booking['custaddress1'], $html);
+              // error_log("***********************");
+              // error_log($booking['custaddress1']);
+              // error_log('custaddress1');
+
+              $html = str_replace("XXX_CUSTADDRESS2", $booking['custaddress2'], $html);
+              $html = str_replace("XXX_CUSTCITY", $booking['custcity'], $html);
+              $html = str_replace("XXX_CUSTSTATE", $booking['custstate'], $html);
+              $html = str_replace("XXX_CUSTPOSTCODE", $booking['custpostcode'], $html);
+              $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
+              $html = str_replace("XXX_CUSTEMAIL", $booking['custemail'], $html);
+              $html = str_replace("XXX_PROPADDRESS1", $booking['address1'], $html);
+              $html = str_replace("XXX_PROPADDRESS2", $booking['address2'], $html);
+              $html = str_replace("XXX_PROPCITY", $booking['city'], $html);
+              $html = str_replace("XXX_PROPSTATE", $booking['state'], $html);
+              $html = str_replace("XXX_ESTATEAGENTCOMPANY", $booking['estateagentcompany'], $html);
+              $html = str_replace("XXX_ESTATEAGENTCONTACT", $booking['estateagentcontact'], $html);
+              $html = str_replace("XXX_ESTATEAGENTMOBILE", $booking['estateagentmobile'], $html);
+              $html = str_replace("XXX_ESTATEAGENTPHONE", $booking['estateagentphone'], $html);
+              $html = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html);
+              $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
+              $html = str_replace("XXX_CUSTMOBILE", $booking['custmobile'], $html);
+              $html = str_replace("XXX_CUSTPHONE", $booking['custphone'], $html);
+              $html = str_replace("XXX_PROPPOSTCODE", $booking['postcode'], $html);
+              $html = str_replace("XXX_COMMISSION", $booking['commission'], $html);
+              $html = str_replace("XXX_STOREYS", $booking['numstories'], $html);
+              $html = str_replace("XXX_BEDROOMS", $booking['numbedrooms'], $html);
+              $html = str_replace("XXX_BATHROOMS", $booking['numbathrooms'], $html);
+              $html = str_replace("XXX_ROOMS", $booking['numrooms'], $html);
+              $html = str_replace("XXX_OUTBUILDINGS", $booking['numoutbuildings'], $html);
+              $html = str_replace("XXX_CONSTRUCTION", $booking['notes'], $html);
+              $html = str_replace("XXX_PROPERTYPE", $booking['age'], $html);
+              $html = str_replace("XXX_SITEMEETING", ($booking['meetingonsite'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_ADVICE", ($booking['renoadvice'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_INSPECTION", ($booking['pestinspection'] == 0) ? "No" : "Yes", $html);
+              $html = str_replace("XXX_NOTE", $booking['notes'], $html);
+              $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
+              $html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . " " . $booking['archlastname'], $html);
+              $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
+              $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
+
+              $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
+              $html = str_replace("XXX_LINKREPORT", $link, $html);
+              $reportPath = './pdfreport/'.$bookingcode.".pdf";
+              error_log("the report path is " . $reportPath);
+
+              error_log("only select one single report");
+              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $reportPath);
+            }
           // $fileName = $bookingcode."."."pdf";
           // $fileDestination = './pdfreport/'.$fileName;
           
           // error_log($fileDestination);
           // $pdf = file_get_contents($fileDestination);
-
-          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html);
-          //SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $pdf);
+          //($from, $fromName, $to, $toName, $subject, $msg, $cc = "", $ccName = "", $attachment = "")
+          // error_log($gConfig['adminemail']);
+          // error_log($booking['custemail']);
+          //SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html);
 
           // Now update email count and date...
           $dbupdate = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
           SharedQuery($dbupdate, $dblink);
 
           $rc = 0;
+          $msg = "Send email to customer successfully";
         }
         else
           $msg = "Unable to fetch booking details...";
