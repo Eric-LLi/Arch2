@@ -188,6 +188,8 @@
               // Let customer know...
               if ($booking['custemail'] != "")
               {
+                error_log($booking['itype']);
+                error_log( $reportconfirmemails[$booking['itype']]);
                 $emailtemplate = $reportconfirmemails[$booking['itype']];
                 // error_log('checking itype');
                 // error_log($booking['itype']);
