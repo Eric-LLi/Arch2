@@ -298,7 +298,11 @@
               $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
               $html = str_replace("XXX_LINKREPORT", $link, $html);
               $reportPath = './pdfreport/'.$bookingcode.".pdf";
+              // $reportPath = "./pdfreport/2321.pdf";
+              // $pdf = fopen($reportPath,"r");
+              $filesize = filesize($reportPath);
               error_log("the report path is " . $reportPath);
+              error_log("the file zie is " . $filesize);
 
               error_log("only select one single report");
               SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $reportPath);
