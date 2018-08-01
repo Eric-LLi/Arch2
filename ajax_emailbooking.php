@@ -164,8 +164,8 @@
               $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
               $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
 
-              $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
-              $html = str_replace("XXX_LINKREPORT", $link, $html);
+              // $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
+              // $html = str_replace("XXX_LINKREPORT", $link, $html);
               $reportPath1 = './pdfreport/'.$bookingcode.".pdf";
               error_log("the report path for the selected report is " . $reportPath1);
               $linkBookingID = $booking['linked_bookingcode'];
@@ -230,8 +230,8 @@
               $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
               $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
 
-              $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
-              $html = str_replace("XXX_LINKREPORT", $link, $html);
+              // $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
+              // $html = str_replace("XXX_LINKREPORT", $link, $html);
               $reportPath1 = './pdfreport/'.$bookingcode.".pdf";
               error_log("the report path for the timber report is " . $reportPath1);
               $reportPath2 = './pdfreport/'.$linkBookingID.".pdf";
@@ -293,12 +293,12 @@
               $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);
               $html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . " " . $booking['archlastname'], $html);
               $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
-              $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
+              // $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
 
-              $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
-              $html = str_replace("XXX_LINKREPORT", $link, $html);
+              // $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
+              // $html = str_replace("XXX_LINKREPORT", $link, $html);
               $reportPath = './pdfreport/'.$bookingcode.".pdf";
-              // $reportPath = "./pdfreport/2321.pdf";
+              // $reportPath = "./pdfreport/1782.pdf";
               // $pdf = fopen($reportPath,"r");
               $filesize = filesize($reportPath);
               error_log("the report path is " . $reportPath);

@@ -200,7 +200,6 @@ function generatePDF(mode) {
                         text:[
                             NoticeOfPurchases1,
                             NoticeOfPurchases2
-
                         ],
                         margin:[0,0,0,8]
                     },
