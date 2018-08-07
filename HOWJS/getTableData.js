@@ -50,7 +50,7 @@ function getOwnerDetailsTable() {
                     {
                         text: 'Booking',
                         style: 'tableBoldTextAlignLeft',
-                        border: [false, true, true, true]
+                        border: [true, true, true, true]
                     },
                     {
                         text: getIt('owner_bookingNo'),
@@ -126,7 +126,7 @@ function getInspectionDetailsTable() {
     var result;
     result = {
         table: {
-            widths: [85, '*', 70, '*', 40, '*'],
+            widths: [85, '*', 60, 60, 80, '*'],
             body: [
                 [
                     {
@@ -151,9 +151,9 @@ function getInspectionDetailsTable() {
                     },
                     {}, {},
                     {
-                        text: 'Lot No:',
+                        text: 'Lot No',
                         style: 'tableBoldTextAlignLeft',
-                        border: [false, true, true, true]
+                        border: [true, true, true, true]
                     },
                     {
                         text: getIt('inspection_lotNo'),
@@ -202,7 +202,7 @@ function getInspectionDetailsTable() {
                     },
                     {},
                     {
-                        text: 'Date of Report:',
+                        text: 'Date of Report',
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
@@ -233,7 +233,7 @@ function getInspectionDetailsTable() {
                         border: [true, true, true, true]
                     },
                     {
-                        text: 'Time of Departure:',
+                        text: 'Time of Departure',
                         style: 'tableBoldTextAlignLeft',
                         border: [false, true, true, true]
                     },
@@ -316,7 +316,7 @@ function getInspectorDetailsTable() {
     var result;
     result = {
         table: {
-            widths: [61, '*', 80, '*'],
+            widths: [85, '*', 70, '*'],
             body: [
                 [
                     {
@@ -329,7 +329,7 @@ function getInspectorDetailsTable() {
                 ],
                 [
                     {
-                        text: 'Archicentre Australia Architect:',
+                        text: 'Archicentre Australia Architect',
                         style: 'tableBoldTextAlignLeft',
                         border: [false, true, true, true]
                     },
@@ -386,7 +386,7 @@ function getReportAuthorisation() {
     var state = document.getElementById('inspection_state').value;
 
     if (state == 'VIC') {
-        //console.log("need to show the signature");
+        console.log("need to show the signature");
         result = {
             table: {
                 widths: ['*', '*'],
@@ -1432,7 +1432,7 @@ function getServicesTable() {
 /**
  * Get the Internal Living & Bedroom Data
  */
-function getLivingBedroomTable() {
+function getLivingBedroomTable1() {
     var data = [];
     var tableBody;
     var entryTableRowCount = document.getElementById('HOWInternal_Entry_Table').rows.length;
@@ -1441,12 +1441,12 @@ function getLivingBedroomTable() {
     var kitchenTableRowCount = document.getElementById('HOWInternal_Kitchen_Table').rows.length;
     var familyTableRowCount = document.getElementById('HOWInternal_Family_Table').rows.length;
     var diningTableRowCount = document.getElementById('HOWInternal_Dining_Table').rows.length;
-    var bedroom1TableRowCount = document.getElementById('HOWInternal_Bedroom1_Table').rows.length;
-    var bedroom2TableRowCount = document.getElementById('HOWInternal_Bedroom2_Table').rows.length;
-    var bedroom3TableRowCount = document.getElementById('HOWInternal_Bedroom3_Table').rows.length;
-    var bedroom4TableRowCount = document.getElementById('HOWInternal_Bedroom4_Table').rows.length;
-    var studyTableCount = document.getElementById('HOWInternal_Study_Table').rows.length;
-    var retreatTableCount = document.getElementById('HOWInternal_Retreat_Table').rows.length;
+    // var bedroom1TableRowCount = document.getElementById('HOWInternal_Bedroom1_Table').rows.length;
+    // var bedroom2TableRowCount = document.getElementById('HOWInternal_Bedroom2_Table').rows.length;
+    // var bedroom3TableRowCount = document.getElementById('HOWInternal_Bedroom3_Table').rows.length;
+    // var bedroom4TableRowCount = document.getElementById('HOWInternal_Bedroom4_Table').rows.length;
+    // var studyTableCount = document.getElementById('HOWInternal_Study_Table').rows.length;
+    // var retreatTableCount = document.getElementById('HOWInternal_Retreat_Table').rows.length;
 
 
     var firstRow = [
@@ -1480,6 +1480,93 @@ function getLivingBedroomTable() {
     var diningTable = createInternalOnePartTable('DINING', diningTableRowCount, 'HOWInternal_DiningName', 'HOWInternal_DiningSelect', 'HOWInternal_DiningNote', 10);
     data = data.concat(diningTable);
 
+    // var bedroom1Table = createInternalOnePartTable('BEDROOM 1', bedroom1TableRowCount, 'HOWInternal_Bedroom1Name', 'HOWInternal_Bedroom1Select', 'HOWInternal_Bedroom1Note', 10);
+    // data = data.concat(bedroom1Table);
+
+    // var bedroom2Table = createInternalOnePartTable('BEDROOM 2', bedroom2TableRowCount, 'HOWInternal_Bedroom2Name', 'HOWInternal_Bedroom2Select', 'HOWInternal_Bedroom2Note', 10);
+    // data = data.concat(bedroom2Table);
+
+    // var bedroom3Table = createInternalOnePartTable('BEDROOM 3', bedroom3TableRowCount, 'HOWInternal_Bedroom3Name', 'HOWInternal_Bedroom3Select', 'HOWInternal_Bedroom3Note', 10);
+    // data = data.concat(bedroom3Table);
+
+    // var bedroom4Table = createInternalOnePartTable('BEDROOM 4', bedroom4TableRowCount, 'HOWInternal_Bedroom4Name', 'HOWInternal_Bedroom4Select', 'HOWInternal_Bedroom4Note', 10);
+    // data = data.concat(bedroom4Table);
+
+    // var studyTable = createInternalOnePartTable('STUDY', studyTableCount, 'HOWInternal_StudyName', 'HOWInternal_StudySelect', 'HOWInternal_StudyNote', 10);
+    // data = data.concat(studyTable);
+
+    // var retreatTable = createInternalOnePartTable('RETREAT (UPPER)', retreatTableCount, 'HOWInternal_RetreatName', 'HOWInternal_RetreatSelect', 'HOWInternal_RetreatNote', 10);
+    // data = data.concat(retreatTable);
+    //console.log(retreatTable);
+    //console.log(data);
+
+    tableBody = {
+        table: {
+            //headerRows: 1, 
+            //dontBreakRows: true,
+            // keepWithHeaderRows: 1,
+            widths: ['*', 'auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
+            dontBreakRows:true,
+            body: data
+        },
+        margin: [0, 5, 0, 5]
+    };
+    //console.log(tableBody);
+
+    return tableBody;
+}
+
+/**
+ * Get the Internal Living & Bedroom Data
+ */
+function getLivingBedroomTable2() {
+    var data = [];
+    var tableBody;
+    // var entryTableRowCount = document.getElementById('HOWInternal_Entry_Table').rows.length;
+    // var stairTableRowCount = document.getElementById('HOWInternal_Stair_Table').rows.length;
+    // var livingFrontTableRowCount = document.getElementById('HOWInternal_LivingFront_Table').rows.length;
+    // var kitchenTableRowCount = document.getElementById('HOWInternal_Kitchen_Table').rows.length;
+    // var familyTableRowCount = document.getElementById('HOWInternal_Family_Table').rows.length;
+    // var diningTableRowCount = document.getElementById('HOWInternal_Dining_Table').rows.length;
+    var bedroom1TableRowCount = document.getElementById('HOWInternal_Bedroom1_Table').rows.length;
+    var bedroom2TableRowCount = document.getElementById('HOWInternal_Bedroom2_Table').rows.length;
+    var bedroom3TableRowCount = document.getElementById('HOWInternal_Bedroom3_Table').rows.length;
+    var bedroom4TableRowCount = document.getElementById('HOWInternal_Bedroom4_Table').rows.length;
+    var studyTableCount = document.getElementById('HOWInternal_Study_Table').rows.length;
+    var retreatTableCount = document.getElementById('HOWInternal_Retreat_Table').rows.length;
+
+
+    var firstRow = [
+        {
+            text: 'INTERNAL LIVING & BEDROOM',
+            colSpan: 10,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
+        },
+        {}, {}, {}, {}, {}, {}, {}, {}, {}
+    ];
+    data.push(firstRow);
+
+    // var entryTable = createInternalOnePartTable('ENTRY & PASSAGE', entryTableRowCount, 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote', 10);
+    // data = data.concat(entryTable);
+
+    // var stairTable = createInternalOnePartTable('STAIR', stairTableRowCount, 'HOWInternal_StairName', 'HOWInternal_StairSelect', 'HOWInternal_StairNote', 10);
+    // data = data.concat(stairTable);
+
+
+    // var livingTable = createInternalOnePartTable('LIVING (CENTRAL)', livingFrontTableRowCount, 'HOWInternal_LivingFrontName', 'HOWInternal_LivingFrontSelect', 'HOWInternal_LivingFrontNote', 10);
+    // data = data.concat(livingTable);
+
+    // var kitchenTable = createInternalOnePartTable('KITCHEN + PANTRY', kitchenTableRowCount, 'HOWInternal_KitchenName', 'HOWInternal_KitchenSelect', 'HOWInternal_KitchenNote', 16);
+    // data = data.concat(kitchenTable);
+
+
+    // var familyTable = createInternalOnePartTable('FAMILY', familyTableRowCount, 'HOWInternal_FamilyName', 'HOWInternal_FamilySelect', 'HOWInternal_FamilyNote', 10);
+    // data = data.concat(familyTable);
+
+    // var diningTable = createInternalOnePartTable('DINING', diningTableRowCount, 'HOWInternal_DiningName', 'HOWInternal_DiningSelect', 'HOWInternal_DiningNote', 10);
+    // data = data.concat(diningTable);
+
     var bedroom1Table = createInternalOnePartTable('BEDROOM 1', bedroom1TableRowCount, 'HOWInternal_Bedroom1Name', 'HOWInternal_Bedroom1Select', 'HOWInternal_Bedroom1Note', 10);
     data = data.concat(bedroom1Table);
 
@@ -1502,7 +1589,11 @@ function getLivingBedroomTable() {
 
     tableBody = {
         table: {
+            //headerRows: 1, 
+            //dontBreakRows: true,
+            // keepWithHeaderRows: 1,
             widths: ['*', 'auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
+            dontBreakRows:true,
             body: data
         },
         margin: [0, 5, 0, 5]
@@ -1513,7 +1604,8 @@ function getLivingBedroomTable() {
 }
 
 
-function getInternalServiceTable() {
+
+function getInternalServiceTable1() {
     var data = [];
     var tableBody;
     var WCTableRowCount = document.getElementById('HOWInternalService_WC_Table').rows.length;
@@ -1521,8 +1613,8 @@ function getInternalServiceTable() {
     var bathroom2TableRowCount = document.getElementById('HOWInternalService_Bathroom2_Table').rows.length;
     var bathroom3TableRowCount = document.getElementById('HOWInternalService_Bathroom3_Table').rows.length;
     var bathroom4TableRowCount = document.getElementById('HOWInternalService_Bathroom4_Table').rows.length;
-    var laundryTableRowCount = document.getElementById('HOWInternalService_Laundry_Table').rows.length;
-    var servicesTableRowCount = document.getElementById('HOWInternalService_Service_Table').rows.length;
+    // var laundryTableRowCount = document.getElementById('HOWInternalService_Laundry_Table').rows.length;
+    // var servicesTableRowCount = document.getElementById('HOWInternalService_Service_Table').rows.length;
 
     var firstRow = [
         {
@@ -1539,17 +1631,74 @@ function getInternalServiceTable() {
     data = data.concat(WCTable);
 
 
-    var bathroom1Table = createInternalOnePartTable('BATHROOM', bathroom1TableRowCount, 'HOWInternalService_Bathroom1Name', 'HOWInternalService_Bathroom1Select', 'HOWInternalService_Bathroom1Note', 15);
+    var bathroom1Table = createInternalOnePartTable('BATHROOM 1', bathroom1TableRowCount, 'HOWInternalService_Bathroom1Name', 'HOWInternalService_Bathroom1Select', 'HOWInternalService_Bathroom1Note', 15);
     data = data.concat(bathroom1Table);
 
-    var bathroom2Table = createInternalOnePartTable('BATHROOM', bathroom2TableRowCount, 'HOWInternalService_Bathroom2Name', 'HOWInternalService_Bathroom2Select', 'HOWInternalService_Bathroom2Note', 15);
+    var bathroom2Table = createInternalOnePartTable('BATHROOM 2', bathroom2TableRowCount, 'HOWInternalService_Bathroom2Name', 'HOWInternalService_Bathroom2Select', 'HOWInternalService_Bathroom2Note', 15);
     data = data.concat(bathroom2Table);
 
-    var bathroom3Table = createInternalOnePartTable('BATHROOM ENSUITE', bathroom3TableRowCount, 'HOWInternalService_Bathroom3Name', 'HOWInternalService_Bathroom3Select', 'HOWInternalService_Bathroom3Note', 15);
+    var bathroom3Table = createInternalOnePartTable('BATHROOM ENSUITE 1', bathroom3TableRowCount, 'HOWInternalService_Bathroom3Name', 'HOWInternalService_Bathroom3Select', 'HOWInternalService_Bathroom3Note', 15);
     data = data.concat(bathroom3Table);
 
-    var bathroom4Table = createInternalOnePartTable('BATHROOM ENSUITE', bathroom4TableRowCount, 'HOWInternalService_Bathroom4Name', 'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note', 15);
+    var bathroom4Table = createInternalOnePartTable('BATHROOM ENSUITE 2', bathroom4TableRowCount, 'HOWInternalService_Bathroom4Name', 'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note', 15);
     data = data.concat(bathroom4Table);
+
+    // var laundryTable = createInternalOnePartTable('LAUNDRY', laundryTableRowCount, 'HOWInternalService_LaundryName', 'HOWInternalService_LaundrySelect', 'HOWInternalService_LaundryNote', 13);
+    // data = data.concat(laundryTable);
+
+    // var servicesTable = createInternalOnePartTable('SERVICES', servicesTableRowCount, 'HOWInternalService_ServiceName', 'HOWInternalService_ServiceSelect', 'HOWInternalService_ServiceNote', 5);
+    // data = data.concat(servicesTable);
+
+
+    tableBody = {
+        table: {
+            widths: ['*', 'auto', 'auto', '*', 'auto', 'auto', '*', 'auto', 'auto', '*'],
+            body: data
+        },
+        margin: [0, 5, 0, 5]
+    };
+
+    return tableBody;
+
+}
+
+function getInternalServiceTable2() {
+    var data = [];
+    var tableBody;
+    // var WCTableRowCount = document.getElementById('HOWInternalService_WC_Table').rows.length;
+    // var bathroom1TableRowCount = document.getElementById('HOWInternalService_Bathroom1_Table').rows.length;
+    // var bathroom2TableRowCount = document.getElementById('HOWInternalService_Bathroom2_Table').rows.length;
+    // var bathroom3TableRowCount = document.getElementById('HOWInternalService_Bathroom3_Table').rows.length;
+    // var bathroom4TableRowCount = document.getElementById('HOWInternalService_Bathroom4_Table').rows.length;
+    var laundryTableRowCount = document.getElementById('HOWInternalService_Laundry_Table').rows.length;
+    var servicesTableRowCount = document.getElementById('HOWInternalService_Service_Table').rows.length;
+
+    var firstRow = [
+        {
+            text: 'INTERNAL SERVICE (WET) AREAS',
+            colSpan: 10,
+            style: 'tableBoldTextAlignLeft',
+            color: 'red'
+        },
+        {}, {}, {}, {}, {}, {}, {}, {}, {}
+    ];
+    data.push(firstRow);
+
+    // var WCTable = createInternalOnePartTable('WC/ POWDER ROOM', WCTableRowCount, 'HOWInternalService_WCName', 'HOWInternalService_WCSelect', 'HOWInternalService_WCNote', 14);
+    // data = data.concat(WCTable);
+
+
+    // var bathroom1Table = createInternalOnePartTable('BATHROOM', bathroom1TableRowCount, 'HOWInternalService_Bathroom1Name', 'HOWInternalService_Bathroom1Select', 'HOWInternalService_Bathroom1Note', 15);
+    // data = data.concat(bathroom1Table);
+
+    // var bathroom2Table = createInternalOnePartTable('BATHROOM', bathroom2TableRowCount, 'HOWInternalService_Bathroom2Name', 'HOWInternalService_Bathroom2Select', 'HOWInternalService_Bathroom2Note', 15);
+    // data = data.concat(bathroom2Table);
+
+    // var bathroom3Table = createInternalOnePartTable('BATHROOM ENSUITE', bathroom3TableRowCount, 'HOWInternalService_Bathroom3Name', 'HOWInternalService_Bathroom3Select', 'HOWInternalService_Bathroom3Note', 15);
+    // data = data.concat(bathroom3Table);
+
+    // var bathroom4Table = createInternalOnePartTable('BATHROOM ENSUITE', bathroom4TableRowCount, 'HOWInternalService_Bathroom4Name', 'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note', 15);
+    // data = data.concat(bathroom4Table);
 
     var laundryTable = createInternalOnePartTable('LAUNDRY', laundryTableRowCount, 'HOWInternalService_LaundryName', 'HOWInternalService_LaundrySelect', 'HOWInternalService_LaundryNote', 13);
     data = data.concat(laundryTable);

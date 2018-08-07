@@ -9,10 +9,10 @@ function onload()
 
 function reorderImages()
 {
-    console.log("need to reorder the images");
+    //console.log("need to reorder the images");
     var totalContainers = $("#HOWImagesTable").children('div');
     var BigContainer = document.getElementById('HOWImagesTable');
-    console.log(totalContainers);
+    //console.log(totalContainers);
     // for (var i=0;i<totalContainers.length;i++)
     // {
     //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
@@ -37,7 +37,7 @@ function reorderImages()
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
 
-    console.log(totalContainers);
+    //console.log(totalContainers);
 
     $("#HOWImagesTable").empty();
     for (var i=0;i<totalContainers.length;i++)
@@ -51,9 +51,9 @@ function reorderImages()
         // console.log(ImgID);
         var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
         var removeFunction = "imagesRemoveBtn('"+imgContainerID+"', '"+ImgID+"')";
-        console.log(removeFunction);
+        //console.log(removeFunction);
         removeBtn.setAttribute("onclick", removeFunction);
-        console.log(removeBtn);
+        //console.log(removeBtn);
         
     }
 }
