@@ -90,32 +90,32 @@ function generatePDF(mode) {
             /**
              * (1) Cover Page
              * */
-            {
+            // {
 
-                stack:
-                    [
-                        {
-                            // Draw Cover Page image
-                            image: coverPageLogo,
-                            width: 160,
-                            height: 160
-                        },
-                        {
-                            text:[
-                                'Archicentre ',
-                                {
-                                    text:'Australia \n',
-                                    color: 'red'
-                                },
-                                {
-                                    text:'Home Warranty \nInspection \n',
-                                    bold:true
-                                },
-                                'Report'
-                            ],
-                            style: 'coverPageHeader'
-                        }
-                    ],
+            //     stack:
+            //         [
+            //             {
+            //                 // Draw Cover Page image
+            //                 image: coverPageLogo,
+            //                 width: 160,
+            //                 height: 160
+            //             },
+            //             {
+            //                 text:[
+            //                     'Archicentre ',
+            //                     {
+            //                         text:'Australia \n',
+            //                         color: 'red'
+            //                     },
+            //                     {
+            //                         text:'Home Warranty \nInspection \n',
+            //                         bold:true
+            //                     },
+            //                     'Report'
+            //                 ],
+            //                 style: 'coverPageHeader'
+            //             }
+            //         ],
                 //     {
                 //         text:'New Home Design',
                 //         style: 'pageTopHeader'
@@ -175,50 +175,89 @@ function generatePDF(mode) {
                 //      makeAGap(),
                 //      getAssessorDetailsTable()
                 // ],
-                pageBreak: 'after'
-            },
+                //pageBreak: 'after'
+            //},
 
 
             /**
-             * (2) Report Detail Page
+             * (1) Cover Page
              */
             {
                 stack:[
-                    giveMeHugeDraft(mode),
                     {
-                        text:'\nHome Warranty Inspection Report',
-                        style:'pageTopHeader',
-                        margin:[0,5,0,5]
-
+                        columns: [{
+                                // Draw Cover Page image
+                                image: coverPageLogo,
+                                width: 130,
+                                height: 130
+                            },
+                            {
+                                text: "Home Warranty Inspection Report",
+                                style: 'coverPageHeader'
+                                // alignment:'right'
+                            }
+                        ]
                     },
+                    giveMeHugeDraft(mode),
+                    // {
+                    //     text:'\nHome Warranty Inspection Report',
+                    //     style:'pageTopHeader',
+                    //     margin:[0,5,0,5]
+
+                    // },
                     {
                         text:'NOTICE TO PURCHASERS',
                         bold:true,
-                        margin:[0,5,0,5]
+                        fontSize:9,
+                        margin:[0,0,0,5]
                     },
                     {
                         text:[
                             NoticeOfPurchases1,
                             NoticeOfPurchases2
-
                         ],
+                        fontSize:9,
                         margin:[0,0,0,8]
                     },
                     {
                         text:NoticeOfPurchases3,
+                        fontSize:9,
                         margin:[0,0,0,8]
                     },
                     {
                         text:NoticeOfPurchases4,
+                        fontSize:9,
                         margin:[0,0,0,8]
                     },
                     {
                         text:'THIS REPORT IS VALID FOR (6) MONTHS FROM THE DATE OF MOST RECENT INSPECTION.',
                         bold:true,
+                        fontSize:10,
                         margin:[0,10,0,10]
                     },
                     getOwnerDetailsTable(),
                     getInspectionDetailsTable(),
+                    // getInspectorDetailsTable(),
+                    // getReportAuthorisation(),
+                    // getDoneWork(),
+                    // {
+                    //     text:'Inspection Summary',
+                    //     style:'pageTopHeader',
+                    //     margin:[0,20,0,5]
+
+                    // },
+                    // getInspectionSummary(),
+                    // {
+                    //     text:'Descriptive Summary of Work done by Owner-Builder',
+                    //     style:'pageTopHeader',
+                    //     margin:[0,20,0,5]
+                    // },
+                    // getDescriptiveSummary()
+                ],
+                pageBreak: 'after'
+            },
+            {
+                stack:[
                     getInspectorDetailsTable(),
                     getReportAuthorisation(),
                     getDoneWork(),
@@ -235,6 +274,7 @@ function generatePDF(mode) {
                         margin:[0,20,0,5]
                     },
                     getDescriptiveSummary()
+
                 ],
                 pageBreak: 'after'
             },
@@ -246,7 +286,7 @@ function generatePDF(mode) {
                     {
                         text:'Inspection Checklist',
                         style:'pageTopHeader',
-                        margin:[0,5,0,5]
+                        margin:[0,0,0,5]
 
                     },
                     {
@@ -257,7 +297,7 @@ function generatePDF(mode) {
                     {
                         text:InspectionChecklist,
                         fontSize:9,
-                        margin:[0,0,0,15]
+                        margin:[0,0,0,5]
                     },
                     getSiteTable(),
                     getBuildingExteriorTable(),
@@ -282,14 +322,28 @@ function generatePDF(mode) {
             {
                 stack:[
                     giveMeHugeDraft(mode),
-                    getLivingBedroomTable()
+                    getLivingBedroomTable1(),
                 ],
                 pageBreak: 'after'
             },
             {
                 stack:[
                     giveMeHugeDraft(mode),
-                    getInternalServiceTable()
+                    getLivingBedroomTable2(),
+                ],
+                pageBreak: 'after'
+            },
+            {
+                stack:[
+                    giveMeHugeDraft(mode),
+                    getInternalServiceTable1()
+                ],
+                pageBreak: 'after'
+            },
+            {
+                stack:[
+                    giveMeHugeDraft(mode),
+                    getInternalServiceTable2()
                 ]
                 //pageBreak: 'after'
             },
@@ -334,7 +388,7 @@ function generatePDF(mode) {
                     },
                     getAccessLimitationTable(),
                     {
-                        text: 'Attachment',
+                        text: 'Attachments',
                         style: 'pageTopHeader',
                         margin:[0,5,0,5]
                     },
@@ -677,11 +731,17 @@ function generatePDF(mode) {
          * Styles
          * */
         styles: {
-            coverPageHeader: {
-                fontSize: 50,
-                italics: true,
-                color: 'black',
-                margin: [20, 150, 0, 100]
+            // coverPageHeader: {
+            //     fontSize: 50,
+            //     italics: true,
+            //     color: 'black',
+            //     margin: [20, 150, 0, 100]
+            // },
+            coverPageHeader:{
+                fontSize: 24,
+                bold: true,
+                color: 'red',
+                margin: [15, 50, 0, 20]
             },
             firstHeader: {
                 fontSize: 20,

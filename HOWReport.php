@@ -1239,7 +1239,7 @@
                             <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote12"></textarea></th>
                         </tr>
                         <tr>
-                            <th style="text-align: left" id="HOWInternal_KitchenName13">Behcn-top</th>
+                            <th style="text-align: left" id="HOWInternal_KitchenName13">bench-top</th>
                             <th style="text-align: left">
                                 <select id="HOWInternal_KitchenSelect13" style="width:100%"  title="checkList"></select>
                             <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote13"></textarea></th>
