@@ -354,7 +354,7 @@ function generatePDF(mode) {
              */
             {
                 stack: [{
-                        text: 'Attachment',
+                        text: 'Attachments',
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 5]
                     },

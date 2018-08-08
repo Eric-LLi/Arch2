@@ -1507,7 +1507,7 @@ function generatePDF(mode) {
              * */
             {
                 stack: [{
-                        text: 'Attachment',
+                        text: 'Attachments',
                         style: 'pageTopHeader'
                     },
                     makeAGap(),
