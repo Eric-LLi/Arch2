@@ -575,6 +575,7 @@ function generatePDF(mode) {
              */
 
             {
+                pageBreak: 'before',
                 stack: [
                     giveMeHugeDraft(mode),
                     {

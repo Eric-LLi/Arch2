@@ -247,8 +247,15 @@
                     <form>
                         <div class="row form-group">
                             <div class="col-sm">
-                                <label>Signature</label><br>
-                                <input id="inspection_signature" class="form-control" type="text" title="signature" style="margin-top: 0">
+                                <!-- <label>Signature</label><br>
+                                <input id="inspection_signature" class="form-control" type="text" title="signature" style="margin-top: 0"> -->
+                                
+                                <button type="button" id="signature_addbtn" class="btn btn-primary" style="width:265px;margin:auto" >Upload Signature</button>
+                                <input type="file" id="signautre_input" accept="image/x-png,image/jpeg" class="inputImage">
+                                <br/>
+                                <img id="how_signature_image" src="#" alt="signature" style="width:265px;height:265px;display: none;margin:auto" />
+                                <br/>
+                                <button type="button" id="signature_removebtn" class="btn btn-danger" style="width:265px;display:none;margin:auto" onclick="removeSignature()">Remove</button>
                             </div>
                             <div class="col-sm">
                                 <label>Block Print Name</label><br>

@@ -63,6 +63,7 @@ function automaticNumbering()
 {
     console.log("need to refresh the image number");
     var totalContainers = $("#HOWImagesTable").children('div');
+    //console.log(totalContainers.length);
     for(var i=0;i<totalContainers.length;i++)
     {
         //console.log(i);
@@ -669,6 +670,72 @@ function clearRecommendation(labelID) {
     label.placeholder = "Recommendations will be displayed here";
 }
 
+//Upload signature photo
+
+$('#signature_addbtn').click(function(){
+    //console.log("click");
+    $("#signautre_input").click();
+})
+
+$('#signautre_input').click(function () {
+    //console.log("clear");
+    this.value = null;
+});
+
+$("#signautre_input").on('change',function(e){
+    console.log("open");
+    var file = e.currentTarget.files;
+    if(!isEmpty(file))
+    {
+        $("#signature_addbtn").hide();
+        $("#signature_removebtn").show();
+        $("#how_signature_image").show();
+
+        loadImage.parseMetaData(file[0], function (data) {
+            var orientation = 0;
+            if (data.exif) {
+                orientation = data.exif.get('Orientation');
+            }
+
+            var loadingImage = loadImage(file[0], function (canvas) {
+                var data = canvas.toDataURL('image/jpeg');
+                var image = new Image();
+                image.onload = function () {
+                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                    if (!isEmpty(code)) {
+                        $("#how_signature_image").attr("src", code);
+                        var imgFile = new File([convertBase64UrlToBlob(code, file[0].type)], file[0].name, {
+                            type: file[0].type,
+                            lastModified: file[0].lastModifiedDate
+                        });
+                        doRemovePhoto("how_signature_image");
+                        //doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentSiteImagesContainer");
+                        //f, imageid, textid = '', removeid = '', addid = '', table = '', imageAltName = '', divID = '',uploadID = '', removeFunction = '', addFunction = '', imageSize = '', width = ''
+                        doUploadFile(imgFile, "how_signature_image", "", "signature_removebtn", "signature_addbtn","","signature", '',"signautre_input", '', '', "265px", "265px");
+                    }
+                };
+                image.src = data;
+            }, {
+                canvas: true,
+                orientation: orientation
+            });
+        });
+    }
+});
+
+function removeSignature()
+{
+    //console.log("click");
+    doRemovePhoto("how_signature_image");
+    $("#signature_addbtn").show();
+    $("#signature_removebtn").hide();
+    $("#how_signature_image").attr("src","#");
+    $("#how_signature_image").hide();
+    
+}
+
+
+
 //Upload photos button to trigger input file.
 $("#HOW_uploadImg_Btn").click(function () {
     $("#HOW_ImgsUpload").trigger("click");
@@ -761,6 +828,7 @@ $("#HOW_ImgsUpload").change(function (e) {
                 // };
                 // reader.readAsDataURL(file);
             });
+            automaticNumbering();
         }
        
     }

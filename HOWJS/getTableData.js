@@ -402,14 +402,19 @@ function getReportAuthorisation() {
                     ],
                     [
                         {
-                            text: getIt('inspection_signature'),
+                            //text: getIt('inspection_signature'),
                             border: [false, true, false, true],
-                            fontSize: 9
+                            stack:[
+                                getSignature("how_signature_image")
+                            ],
+                            alignment: 'center'
                         },
                         {
                             text: getIt('inspection_blockPrintName'),
                             border: [false, true, false, true],
-                            fontSize: 9
+                            fontSize: 9,
+                            bold: true,
+                            alignment: 'center'
                         }
                     ],
                     [
@@ -422,7 +427,8 @@ function getReportAuthorisation() {
                         {
                             text: '(BLOCK PRINT NAME)',
                             border: [false, true, false, true],
-                            fontSize: 9
+                            fontSize: 9,
+                            alignment: 'center'
                         }
 
                     ]

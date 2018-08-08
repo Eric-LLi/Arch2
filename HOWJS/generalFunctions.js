@@ -377,6 +377,54 @@ function giveMeHugeDraft(mode) {
     }
 }
 
+/**
+ * Get the signature
+ */
+function getSignature(id)
+{
+    var imageSection;
+    var myImage = document.getElementById(id);
+    //console.log($("#"+id).attr("src"));
+    var myWidth = myImage.width;
+    if ($("#"+id).attr("src") == "#") {
+        console.log('no signature');
+        imageSection = {
+            text: "",
+            width: 0,
+            height: 0
+        }
+    }
+    else
+    {
+        //console.log('has cover');
+        if (checkImage(id) >= 0)
+        {
+            console.log('reload');
+            var canvas = document.createElement("canvas");
+            canvas.width = myImage.naturalWidth;
+            canvas.height = myImage.naturalHeight;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(myImage,0,0);
+            var src = canvas.toDataURL("image/png");
+
+            imageSection = {
+                image:src,
+                height: 50,
+                width: 200
+            }
+        }
+        else{
+            console.log('just upload');
+            imageSection = {
+                image: myImage.src,
+                height: 50,
+                width: 200
+            }
+        }
+
+    }
+    return imageSection;
+}
 
 /**
  * Get image for the Cover page
