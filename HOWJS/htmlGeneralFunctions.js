@@ -461,6 +461,18 @@ function loadSelect() {
 }
 
 
+//Capitalized the first letter of the string
+function capitalizeFirstLetter(id)
+{
+    // console.log(id);
+    var string = document.getElementById(id).value;
+    var newString = string.charAt(0).toUpperCase() + string.slice(1);
+    document.getElementById(id).value = newString;
+    // console.log(newString);
+
+
+}
+
 
 function createOneCell(tableID, name, select, textAreaName) {
 
@@ -479,9 +491,11 @@ function createOneCell(tableID, name, select, textAreaName) {
     nameInput.setAttribute('class', 'form-control');
     nameInput.setAttribute('title', 'name');
     nameInput.setAttribute('type', 'text');
+    
     //nameInput.setAttribute('placeholder','enter cost name');
     //nameInput.id = 'HOWSiteName' + rowCount;
     nameInput.id = name + rowCount;
+    nameInput.setAttribute('onkeypress','capitalizeFirstLetter(this.id)');
     //nameInput.style.width="inherit";
     //nameInput.style.width='205px';
     cell1.appendChild(nameInput);
@@ -547,6 +561,7 @@ function createOneOutBuildingSpaceCell() {
             nameInput.setAttribute('title', 'name');
             nameInput.setAttribute('type', 'text');
             nameInput.id = 'HOWOutBuildingPlace' + (rowCount - 1);
+            nameInput.setAttribute('onkeypress','capitalizeFirstLetter(this.id)');
             th.appendChild(nameInput);
             row.appendChild(th);
         } else {

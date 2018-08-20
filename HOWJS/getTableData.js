@@ -1194,13 +1194,12 @@ function getOutBuildingTable() {
             cell1 = {
 
                 text: 'Element',
-                style: 'tableBoldTextAlignLeft',
-                color: 'red'
+                style: 'tableBoldTextAlignLeft'
             };
             cell2 = {
                 text: 'Space',
-                style: 'tableBoldTextAlignLeft',
-                color: 'red'
+                style: 'tableBoldTextAlignLeft'
+                //color: 'red'
             };
 
 
@@ -1253,8 +1252,8 @@ function getOutBuildingTable() {
         var cell1 = {
             text: element,
             colSpan: 2,
-            style: 'tableBoldTextAlignLeft',
-            color: 'red'
+            style: 'tableBoldTextAlignLeft'
+            // color: 'red'
         };
         var cell2 = {};
         newRow.push(cell1);

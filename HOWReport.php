@@ -332,16 +332,17 @@
                 <div class="row form-group">
                     <div class="col-sm-6">
                         <label>Sub-Structure</label><br>
-                        <input id="summary_subStructure" class="form-control" type="text" title="sub-structure" style="margin-top: 0">
+                        <input id="summary_subStructure" class="form-control" type="text" title="sub-structure" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Floors</label><br>
-                        <input id="summary_floors" class="form-control" type="text" title="floors" style="margin-top: 0">
+                        <input id="summary_floors" class="form-control" type="text" title="floors" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Roof</label><br>
                         <!--<input id="summary_roof" class="form-control" type="text" title="roof">-->
-                        <select id="summary_roof"  name="summary_roof" title="summary_window" style="width: 100%;margin-top:0;height: 49px">
+                        <input id="summary_roof" class="form-control" type="text" title="roof" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
+                        <!-- <select id="summary_roof"  name="summary_roof" title="summary_window" style="width: 100%;margin-top:0;height: 49px">
                             <option value="Choose an item" disabled selected>Choose an item.</option>
                             <option value="Concrete tiles">Concrete tiles</option>
                             <option value="terracotta tiles">terracotta tiles</option>
@@ -350,59 +351,60 @@
                             <option value="part slate,part sheet">part slate,part sheet</option>
                             <option value="bituminous">bituminous</option>
                             <option value="">unknown - inaccessible</option>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="col-sm-6">
                         <label>Ext Walls</label><br>
-                        <input id="summary_extWalls" class="form-control" type="text" title="walls" style="margin-top: 0">
+                        <input id="summary_extWalls" class="form-control" type="text" title="walls" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Windows</label><br>
-                        <select id="summary_window"  name="summary_window" title="summary_window" style="width: 100%;margin-top:0;height: 49px">
+                        <input id="summary_window" class="form-control" type="text" title="window" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
+                        <!-- <select id="summary_window"  name="summary_window" title="summary_window" style="width: 100%;margin-top:0;height: 49px">
                             <option value="Choose an item" disabled selected>Choose an item.</option>
                             <option value="Timber Framed">Timber Framed</option>
                             <option value="Aluminium Framed">Aluminium Framed</option>
                             <option value="Steel Framed">Steel Framed</option>
                             <option value="PVC Framed">PVC Framed</option>
                             <option value="Composite Framed">Composite Framed</option>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="col-sm-6">
                         <label>No. of Storeys</label><br>
-                        <input id="summary_noOfStoreys" class="form-control" type="text" title="storeys" style="margin-top: 0">
+                        <input id="summary_noOfStoreys" class="form-control" type="text" title="storeys" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
 
                     <div class="col-sm-6">
                         <label>Site Grade</label><br>
-                        <input id="summary_siteGrade" class="form-control" type="text" title="Site Garden" style="margin-top: 0">
+                        <input id="summary_siteGrade" class="form-control" type="text" title="Site Garden" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Furnished</label><br>
-                        <input id="summary_furnished" class="form-control" type="text" title="Furnished" style="margin-top: 0">
+                        <input id="summary_furnished" class="form-control" type="text" title="Furnished" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Garage</label><br>
-                        <input id="summary_garage" class="form-control" type="text" title="Tree Coverage" style="margin-top: 0">
+                        <input id="summary_garage" class="form-control" type="text" title="Tree Coverage" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Carport</label><br>
-                        <input id="summary_carport" class="form-control" type="text" title="Carport" style="margin-top: 0">
+                        <input id="summary_carport" class="form-control" type="text" title="Carport" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Garage roof</label><br>
-                        <input id="summary_garageRoof" class="form-control" type="text" title="Garage" style="margin-top: 0">
+                        <input id="summary_garageRoof" class="form-control" type="text" title="Garage" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Carport roof</label><br>
-                        <input id="summary_carportRoof" class="form-control" type="text" title="carport roof" style="margin-top: 0">
+                        <input id="summary_carportRoof" class="form-control" type="text" title="carport roof" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Store/shed</label><br>
-                        <input id="summary_store" class="form-control" type="text" title="store" style="margin-top: 0">
+                        <input id="summary_store" class="form-control" type="text" title="store" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                     <div class="col-sm-6">
                         <label>Pergola</label><br>
-                        <input id="summary_pergola" class="form-control" type="text" title="pergola" style="margin-top: 0">
+                        <input id="summary_pergola" class="form-control" type="text" title="pergola" style="margin-top: 0" onkeypress="capitalizeFirstLetter(this.id)">
                     </div>
                 </div>
             </form>

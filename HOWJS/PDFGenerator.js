@@ -393,21 +393,36 @@ function generatePDF(mode) {
                         margin:[0,5,0,5]
                     },
                     {
-                        text:ReferencedDocuments1,
-                        style: 'tableText'
-                    },
-                    {
-                        text: 'http://www.archicentreaustralia.com.au/report_downloads/',
-                        link: "http://www.archicentreaustralia.com.au/report_downloads/",
-                        color: 'red',
-                        decoration: "underline",
+                        text: [
+                            ReferencedDocuments1,
+                            {
+                                text: 'http://www.archicentreaustralia.com.au/report_downloads/',
+                                link: "http://www.archicentreaustralia.com.au/report_downloads/",
+                                color: 'red',
+                                decoration: "underline",
+                            }
+                        ],
                         style: 'tableText',
-                        margin:[0,0,0,5]
+                        // alignment: 'justify',
+                        margin: [0, 0, 0, 6]
                     },
+
+                    // {
+                    //     text:ReferencedDocuments1,
+                    //     style: 'tableText'
+                    // },
+                    // {
+                    //     text: 'http://www.archicentreaustralia.com.au/report_downloads/',
+                    //     link: "http://www.archicentreaustralia.com.au/report_downloads/",
+                    //     color: 'red',
+                    //     decoration: "underline",
+                    //     style: 'tableText',
+                    //     margin:[0,0,0,5]
+                    // },
                     {
                         text:ReferencedDocuments2,
                         style: 'tableText',
-                        margin:[0,5,0,10]
+                        margin:[0,0,0,10]
                     },
                     getAttachmentTable()
                 ]
