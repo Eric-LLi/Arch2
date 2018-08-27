@@ -78,12 +78,12 @@ var keySelectOption = [{
         name: 'XX',
         value: 'Major_Defect'
     },
+    // {
+    //     name: 'U',
+    //     value: 'Unknown/Inaccessible/Not_tested/Not_visible'
+    // },
     {
-        name: 'U',
-        value: 'Unknown/Inaccessible/Not_tested/Not_visible'
-    },
-    {
-        name: 'NA',
+        name: '--',
         value: 'Not_applicable,no_such_item'
     }
 ];

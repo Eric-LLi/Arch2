@@ -107,37 +107,53 @@ function generatePDF(mode) {
             /**
              * (1) Cover Page
              * */
-            {
-                image: coverPageLogo,
-                width: 160,
-                height: 160
-            },
-            giveMeHugeDraft(mode),
-            {
-                text: [{
-                    text: page1,
-                }, {
-                    text: page1_2,
-                    color: 'red'
-                }, {
-                    text: page1_3 + '\n' + page1_4,
-                    bold: true
-                }],
-                style: 'coverPageHeader',
-                pageBreak: 'after'
-            },
+            // {
+            //     image: coverPageLogo,
+            //     width: 160,
+            //     height: 160
+            // },
+            // giveMeHugeDraft(mode),
+            // {
+            //     text: [{
+            //         text: page1,
+            //     }, {
+            //         text: page1_2,
+            //         color: 'red'
+            //     }, {
+            //         text: page1_3 + '\n' + page1_4,
+            //         bold: true
+            //     }],
+            //     style: 'coverPageHeader',
+            //     pageBreak: 'after'
+            // },
 
             /**
              * (2) Report Detail Page Two
              */
+            
             {
-                text: page2Header,
-                style: "pageTopHeader"
+                columns: [{
+                        // Draw Cover Page image
+                        image: coverPageLogo,
+                        width: 130,
+                        height: 130
+                    },
+                    {
+                        text: page2Header,
+                        style: 'coverPageHeader'
+                        // alignment:'right'
+                    }
+                ]
             },
+            // {
+            //     text: page2Header,
+            //     style: "pageTopHeader"
+            // },
             giveMeHugeDraft(mode),
             {
                 text: page2subHeader,
-                margin: [0, 10, 0, 0]
+                margin: [0, 10, 0, 10],
+                fontSize: 10
             },
             {
                 style: 'tableContent',
@@ -230,23 +246,40 @@ function generatePDF(mode) {
                             text: $('#HA_AdviceSought').val()
                         }]
                     ]
-                }
+                } 
             },
             {
-                text: [{
-                    text: page2_1 + "\n"
-                }, {
-                    text: page2_2
-                }],
-                margin: [0, 100, 0, 0],
-                fontSize: 9,
-                pageBreak: 'after'
+                table:{
+                    widths: ['100%'],
+                    body:[
+                        [
+                            {
+                                border: [false, true, false, false],
+                                text:[
+                                    {
+                                        text: page2_1 + "\n"
+                                    }, 
+                                    {
+                                        text: page2_2
+                                    }
+                                   ],
+                                   fontSize:8,
+                                   margin:[0,2,0,0]
+                            }
+                        ]
+                    ]
+                },
+                layout:{
+                    hLineColor:'#999999',
+                    vLineColor:'#999999'
+                }
             },
 
             /**
              * (3) Report Detail Page Three
              */
             {
+                pageBreak: 'before',
                 text: page3Header,
                 style: 'pageTopHeader'
             },
@@ -314,10 +347,10 @@ function generatePDF(mode) {
             giveMeHugeDraft(mode),
             {
                 style: 'tableContent',
-                alignment: 'center',
+                //alignment: 'center',
                 table: {
                     headerRows: 1,
-                    widths: ['*', 'auto', '*'],
+                    widths: [190, 'auto', '*'],
                     body: [
                         [{
                             colSpan: 3,
@@ -371,7 +404,7 @@ function generatePDF(mode) {
                 style: 'tableContent',
                 table: {
                     headerRows: 1,
-                    widths: ['*', 'auto', '*', 'auto'],
+                    widths: ['*', 13, '*', 13],
                     body: hsCheckData
                 }
             },
@@ -483,7 +516,6 @@ function generatePDF(mode) {
             },
             //Repair Maintenance
             {
-                pageBreak: 'after',
                 style: 'tableContent',
                 table: {
                     widths: [100, 'auto', 150, '*', 150],
@@ -505,6 +537,7 @@ function generatePDF(mode) {
             },
             //Attachments
             {
+                pageBreak: 'before',
                 text: $('#HA_DivAttachments').attr('data-title'),
                 style: 'pageTopHeader'
             },
@@ -517,7 +550,7 @@ function generatePDF(mode) {
                     {
                         text: page10_2_2,
                         decoration: 'underline',
-                        color: 'blue'
+                        color: 'red'
                     },
                     {
                         text: page10_2_3,
@@ -628,9 +661,10 @@ function generatePDF(mode) {
         ],
         styles: {
             coverPageHeader: {
-                fontSize: 50,
-                margin: [20, 100, 0, 100],
-                italics: true
+                fontSize: 24,
+                bold: true,
+                color: 'red',
+                margin: [15, 50, 0, 20]
             },
             pageTopHeader: {
                 fontSize: 20,
@@ -642,12 +676,12 @@ function generatePDF(mode) {
                 fontSize: 12,
                 color: 'red',
                 bold: true,
-                margin: [0, 5, 0, 5]
+                margin: [0, 3, 0, 3]
             },
             tableContent: {
                 fontSize: 10,
                 //bold: true,
-                margin: [0, 0, 0, 30]
+                margin: [0, 0, 0, 20]
             },
             Contents: {
                 fontSize: 10

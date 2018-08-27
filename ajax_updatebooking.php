@@ -18,6 +18,13 @@
       $custfirstname = $_POST['custfirstname'];
       $custlastname = $_POST['custlastname'];
       $custemail = $_POST['custemail'];
+
+      // error_log($custemail);
+      // split("\,",$custemail);
+      // error_log(print_r(explode(',',$custemail),TRUE));
+      // error_log(SharedNullOrQuoted($custemail, 50, $dblink));
+      // $custemail = explode(',',$custemail,-1);
+      
       $custmobile = $_POST['custmobile'];
       $custphone = $_POST['custphone'];
       $custaddress1 = $_POST['custaddress1'];
