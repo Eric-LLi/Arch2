@@ -109,7 +109,7 @@ function determineFrontPageFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -25, 0, 0]
+                margin: [40, -35, 0, 0]
             };
             return result;
         }
@@ -408,7 +408,7 @@ function getTableData_HSCheck() {
 
                     row.push({
                         text: $(cellElement).text(),
-                        alignment: 'center',
+                        alignment: 'left',
                         bold: true
                     });
                     break;
@@ -695,8 +695,8 @@ function getTableData_FieldNotes() {
                     }
                     row.push({
                         text: $(cellElement).val(),
-                        alignment: 'center',
-                        bold: true
+                        alignment: 'center'
+                        // bold: true
                     });
                     break;
             }
@@ -1123,7 +1123,7 @@ function getSketchImgsData() {
     if (!isEmpty(divContainers)) {
         //Insert header
         row.push({
-            text: "Sketchs",
+            text: "Sketches",
             style: 'pageTopHeader',
             margin: [0, 0, 0, 20]
         });
@@ -1148,6 +1148,8 @@ function getSketchImgsData() {
                 row.push({
                     stack: [{
                             image: imgSrc,
+                            // height:500,
+                            width:550,
                             alignment: 'center'
                         },
                         {
