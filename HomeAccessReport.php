@@ -250,9 +250,9 @@ require_once("loadbooking.php");
                                                 <label class="form-check-label" for="checkBox_1">
                                                     <input id="checkBox_1" type="checkbox" class="form-check-input" value="Ramp"> Ramp </label>
                                                 <label class="form-check-label" for="checkBox_2">
-                                                    <input id="checkBox_2" type="checkbox" class="form-check-input" value="Bathroom_Modification"> Bathroom_Modification </label>
+                                                    <input id="checkBox_2" type="checkbox" class="form-check-input" value="Bathroom Modification"> Bathroom Modification </label>
                                                 <label class="form-check-label" for="checkBox_3">
-                                                    <input id="checkBox_3" type="checkbox" class="form-check-input" value="Platform_Steps"> Platform_Steps </label>
+                                                    <input id="checkBox_3" type="checkbox" class="form-check-input" value="Platform Steps"> Platform Steps </label>
                                                 <label class="form-check-label" for="checkBox_4">
                                                     <input id="checkBox_4" type="checkbox" class="form-check-input" value="Other"> Other </label>
                                             </div>
@@ -348,7 +348,7 @@ require_once("loadbooking.php");
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label id="FS_lbFault_Trip">Trip &#38; Slop</label>
+                                            <label id="FS_lbFault_Trip">Trip &#38; Slope</label>
                                         </td>
                                         <td>
                                             <select class="form-control" id="Fault_Trip">
@@ -523,7 +523,7 @@ require_once("loadbooking.php");
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label id="HS_lbCheck_Vermin">Vermin / signs of termites &#38; borers</label>
+                                        <label id="HS_lbCheck_Vermin">Vermin / Signs of termites &#38; borers</label>
                                     </td>
                                     <td>
                                         <select class="form-control" id="Check_Vermin">
@@ -686,7 +686,7 @@ require_once("loadbooking.php");
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label id="RM_lbCheck_Gutters">Gutters / drainage</label>
+                                        <label id="RM_lbCheck_Gutters">Gutters / Drainage</label>
                                     </td>
                                     <td>
                                         <select class="form-control" id="Check_Gutters">
