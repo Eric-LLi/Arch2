@@ -357,7 +357,7 @@ Opinion of probable costs with respect to the above (these will depend on the ou
             </td>
         </tr>
         <tr>
-            <td><input class="form-control" title="others" placeholder="other" id="other0"></td>
+            <td><input class="form-control" title="others" placeholder="other" id="other0" type="text"></td>
             <td style="text-align: center">
                 <select title="approvals2" id="approvals2">
                     <option value="Yes">Yes</option>
@@ -386,55 +386,55 @@ Opinion of probable costs with respect to the above (these will depend on the ou
 
         </tr>
         <tr>
-            <td><input class="form-control" title="Site Establishment" value="Site Establishment/Services" id="homeName0"></td>
-            <td><input class="form-control" title="lowRange" value="$" id="homeLow0" onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)"></td>
-            <td><input class="form-control" title="highRange" value="$" id="homeHigh0" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)"></td>
+            <td><input class="form-control" title="Site Establishment" value="Site Establishment/Services" id="homeName0" type=text></td>
+            <td><input class="form-control" title="lowRange" value="$" id="homeLow0" onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)" type=text></td>
+            <td><input class="form-control" title="highRange" value="$" id="homeHigh0" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)" type=text></td>
         </tr>
         <tr>
-            <td><input class="form-control" value='Demolition' title="Demolition" id="homeName1"></td>
-            <td><input class="form-control" value = '$' title="lowRange" id="homeLow1" onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)"></td>
-            <td><input class="form-control" value = '$' title="highRange" id="homeHigh1" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)"></td>
+            <td><input class="form-control" value='Demolition' title="Demolition" id="homeName1" type=text></td>
+            <td><input class="form-control" value = '$' title="lowRange" id="homeLow1" onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)" type=text></td>
+            <td><input class="form-control" value = '$' title="highRange" id="homeHigh1" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)" type=text></td>
         </tr>
         <tr>
-            <td><input class="form-control" value='Building Shell' title="Building Shell" id="homeName2"></td>
-            <td><input class="form-control" value = '$' title="lowRange" id="homeLow2"  onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)"></td>
-            <td><input class="form-control" value = '$' title="highRange" id="homeHigh2" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)"></td>
+            <td><input class="form-control" value='Building Shell' title="Building Shell" id="homeName2" type=text></td>
+            <td><input class="form-control" value = '$' title="lowRange" id="homeLow2"  onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)" type=text></td>
+            <td><input class="form-control" value = '$' title="highRange" id="homeHigh2" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)" type=text></td>
         </tr>
         <tr>
-            <td><input class="form-control" value='Fitout' title="Fitout" id="homeName3"></td>
-            <td><input class="form-control" value = '$' title="lowRange" id="homeLow3"  onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)"></td>
-            <td><input class="form-control" value = '$' title="highRange" id="homeHigh3" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)"></td>
+            <td><input class="form-control" value='Fitout' title="Fitout" id="homeName3" type=text></td>
+            <td><input class="form-control" value = '$' title="lowRange" id="homeLow3"  onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)" type=text></td>
+            <td><input class="form-control" value = '$' title="highRange" id="homeHigh3" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)" type=text></td>
         </tr>
         <tr>
-            <td><input class="form-control" value='Heating/Cooling' title="Heating/Cooling" id="homeName4"></td>
-            <td><input class="form-control" value = '$' title="lowRange" id="homeLow4" onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)"></td>
-            <td><input class="form-control" value = '$' title="highRange" id="homeHigh4" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)"></td>
+            <td><input class="form-control" value='Heating/Cooling' title="Heating/Cooling" id="homeName4" type=text></td>
+            <td><input class="form-control" value = '$' title="lowRange" id="homeLow4" onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)" type=text></td>
+            <td><input class="form-control" value = '$' title="highRange" id="homeHigh4" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)" type=text></td>
         </tr>
         <tr>
-            <td><input class="form-control" value='External Works' title="External Works" id="homeName5"></td>
-            <td><input class="form-control" value = '$' title="lowRange" id="homeLow5" onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)"></td>
-            <td><input class="form-control" value = '$' title="highRange" id="homeHigh5" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)"></td>
+            <td><input class="form-control" value='External Works' title="External Works" id="homeName5" type=text></td>
+            <td><input class="form-control" value = '$' title="lowRange" id="homeLow5" onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)" type=text></td>
+            <td><input class="form-control" value = '$' title="highRange" id="homeHigh5" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)" type=text></td>
         </tr>
 
         <tr>
-            <td><input class="form-control" value='Contractor’s Margin' title="Contractor’s Margin" id="homeName6"></td>
-            <td><input class="form-control" value = '$' title="lowRange" id="homeLow6"  onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)"></td>
-            <td><input class="form-control" value = '$' title="highRange" id="homeHigh6" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)"></td>
+            <td><input class="form-control" value='Contractor’s Margin' title="Contractor’s Margin" id="homeName6" type=text></td>
+            <td><input class="form-control" value = '$' title="lowRange" id="homeLow6"  onblur="calculateHomeLow()" onkeyup="formatNumber(this.id)" type=text></td>
+            <td><input class="form-control" value = '$' title="highRange" id="homeHigh6" onblur="calculateHomeHigh()" onkeyup="formatNumber(this.id)" type=text></td>
         </tr>
         <tr>
             <td>Subtotal:</td>
-            <td><input class="form-control" value = '$' title="lowRange" id="homeLowSubTotal" readonly></td>
-            <td><input class="form-control" value = '$' title="highRange" id="homeHighSubTotal" readonly></td>
+            <td><input class="form-control" value = '$' title="lowRange" id="homeLowSubTotal" type=text readonly></td>
+            <td><input class="form-control" value = '$' title="highRange" id="homeHighSubTotal" type=text readonly></td>
         </tr>
         <tr>
             <td>GST(10%):</td>
-            <td><input class="form-control" value = '$' title="homeLowGST" id="homeLowGST" readonly></td>
-            <td><input class="form-control" value = '$' title="homeHighGST" id="homeHighGST" readonly></td>
+            <td><input class="form-control" value = '$' title="homeLowGST" id="homeLowGST" type=text readonly></td>
+            <td><input class="form-control" value = '$' title="homeHighGST" id="homeHighGST" type=text readonly></td>
         </tr>
         <tr>
             <td>Total:</td>
-            <td><input class="form-control" value = '$' title="lowRange" id="homeLowTotal" readonly></td>
-            <td><input class="form-control" value = '$' title="highRange" id="homeHighTotal" readonly></td>
+            <td><input class="form-control" value = '$' title="lowRange" id="homeLowTotal" type=text readonly></td>
+            <td><input class="form-control" value = '$' title="highRange" id="homeHighTotal" type=text readonly></td>
         </tr>
     </table>
     <br>
@@ -463,7 +463,7 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
             <th style="color: #f44336;text-align: center">What they do</th>
         </tr>
         <tr>
-            <td><input class="form-control" placeholder="Land surveyor" id="homeInvolvedPeople0" style="text-align: center"></td>
+            <td><input class="form-control" placeholder="Land surveyor" id="homeInvolvedPeople0" style="text-align: center" type=text></td>
             <td>
                 <p>Prepare different types of site information depending on your project. This may include:</p>
                 <ul>
@@ -477,7 +477,7 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
             </td>
         </tr>
         <tr>
-            <td><input class="form-control" placeholder="Geotechnical(soil) engineer" id="homeInvolvedPeople1" style="text-align: center"></td>
+            <td><input class="form-control" placeholder="Geotechnical(soil) engineer" id="homeInvolvedPeople1" style="text-align: center" type=text></td>
             <td>
                 <p>Using specialist equipment, take one or more samples of soil from your site for analysis, provide
                     information about its structure and make recommendations about the design of the new
@@ -486,7 +486,7 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
             </td>
         </tr>
         <tr>
-            <td><input class="form-control" placeholder="Structural enginner" id="homeInvolvedPeople2" style="text-align: center"></td>
+            <td><input class="form-control" placeholder="Structural enginner" id="homeInvolvedPeople2" style="text-align: center" type=text></td>
             <td>
                 <p>Design and document the structural components of your building such as the slab or footings,
                     wall bracing, roof beams etc, based on the architect’s design, geotechnical recommendations,
@@ -496,7 +496,7 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
             </td>
         </tr>
         <tr>
-            <td><input class="form-control" placeholder="Building surveyor" id="homeInvolvedPeople3" style="text-align: center"></td>
+            <td><input class="form-control" placeholder="Building surveyor" id="homeInvolvedPeople3" style="text-align: center" type=text></td>
             <td>
                 <p>Issue the building permit/approval and check the construction documentation for compliance
                     with the National Construction Code. Carry out on-site checks at major milestones during the
@@ -506,21 +506,21 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
             </td>
         </tr>
         <tr>
-            <td><input class="form-control" placeholder="Planning advisor" id="homeInvolvedPeople4" style="text-align: center"></td>
+            <td><input class="form-control" placeholder="Planning advisor" id="homeInvolvedPeople4" style="text-align: center" type=text></td>
             <td>
                 <p>Advise on planning issues and may represent you at Council meetings or hearings. Generally
                     required only for complex projects.</p>
             </td>
         </tr>
         <tr>
-            <td><input class="form-control" placeholder="Energy rater" id="homeInvolvedPeople5" style="text-align: center"></td>
+            <td><input class="form-control" placeholder="Energy rater" id="homeInvolvedPeople5" style="text-align: center" type=text></td>
             <td>
                 <p>Analyse the project for compliance with required sustainability measures and provide advice
                     regarding ways to achieve compliance, if required.</p>
             </td>
         </tr>
         <tr>
-            <td><input class="form-control" placeholder="Quantity surveyor" id="homeInvolvedPeople6" style="text-align: center"></td>
+            <td><input class="form-control" placeholder="Quantity surveyor" id="homeInvolvedPeople6" style="text-align: center" type=text></td>
             <td>
                 <p>Prepare independent cost estimates for the build and provide advice regarding budgetary issues.</p>
             </td>
