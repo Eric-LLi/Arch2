@@ -370,7 +370,7 @@ Opinion of probable costs with respect to the above (these will depend on the ou
             </td>
         </tr>
         <tr>
-            <td><input class="form-control" title="others" placeholder="other" id="other0"></td>
+            <td><input class="form-control" title="others" placeholder="other" id="other0" type="text"></td>
             <td style="text-align: center">
                 <select title="approvals2" id="approvals2">
                     <option value="Yes">Yes</option>
