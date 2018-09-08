@@ -649,7 +649,7 @@
                     <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWRoofVoidNote0"></textarea></th>
                 </tr>
                 <tr>
-                    <th style="text-align: left" id="HOWRoofVoidName1">Starking</th>
+                    <th style="text-align: left" id="HOWRoofVoidName1">Sarking</th>
                     <th style="text-align: left">
                         <select id="HOWRoofVoidSelect1" style="width:100%"  title="checkList"></select>
                     <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWRoofVoidNote1"></textarea></th>
@@ -798,7 +798,7 @@
                         </tr>
 
                         <tr>
-                            <th  class="zui-sticky-col" style="height: 103px" id="HOWOutBuildingPlace2">Veranda</th>
+                            <th  class="zui-sticky-col" style="height: 103px" id="HOWOutBuildingPlace2">Verandah</th>
                             <td>
                                 <select id="HOWOutBuildingPlace2Select0"  title="checkList"></select>
                                 <textarea id="HOWOutBuildingPlace2Text0" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
@@ -1248,19 +1248,19 @@
                             <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote12"></textarea></th>
                         </tr>
                         <tr>
-                            <th style="text-align: left" id="HOWInternal_KitchenName13">bench-top</th>
+                            <th style="text-align: left" id="HOWInternal_KitchenName13">Bench-top</th>
                             <th style="text-align: left">
                                 <select id="HOWInternal_KitchenSelect13" style="width:100%"  title="checkList"></select>
                             <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote13"></textarea></th>
                         </tr>
                         <tr>
-                            <th style="text-align: left" id="HOWInternal_KitchenName14">Exhaust / Range hood</th>
+                            <th style="text-align: left" id="HOWInternal_KitchenName14">Exhaust/Range hood</th>
                             <th style="text-align: left">
                                 <select id="HOWInternal_KitchenSelect14" style="width:100%"  title="checkList"></select>
                             <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote14"></textarea></th>
                         </tr>
                         <tr>
-                            <th style="text-align: left" id="HOWInternal_KitchenName15">Stove / Cooktop / Oven</th>
+                            <th style="text-align: left" id="HOWInternal_KitchenName15">Stove/Cooktop/Oven</th>
                             <th style="text-align: left">
                                 <select id="HOWInternal_KitchenSelect15" style="width:100%"  title="checkList"></select>
                             <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote15"></textarea></th>
