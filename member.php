@@ -2666,7 +2666,7 @@
           striped: true,
           toolbar: '#tbBookings',
           showFooter: true,
-          sortName: 'datecreated',
+          sortName: 'bookingcode',
           sortOrder: 'desc',
           remoteSort: false,
           multiSort: true,
