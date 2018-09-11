@@ -2598,6 +2598,55 @@
         }
       );
 
+      // $('#divBookingsG').datagrid('enableFilter');
+      // $('#divBookingsG').datagrid('enableFilter',[
+      //     {
+      //       field:'status',
+      //       type:'combobox',
+      //       options:{
+      //         panelHeight:'auto',
+      //         data:[{value:'',text:'All'},{value:'P',text:'P'},{value:'N',text:'N'}],
+      //         onChange:function(value){
+      //                   if (value == ''){
+      //                       dg.datagrid('removeFilterRule', 'status');
+      //                   } else {
+      //                       dg.datagrid('addFilterRule', {
+      //                           field: 'status',
+      //                           op: 'equal',
+      //                           value: value
+      //                       });
+      //                   }
+      //                   dg.datagrid('doFilter');
+      //           }
+      //     }
+      //     }
+      //   ]);
+
+    //$('#divBookingsG').datagrid('enableFilter');
+      // $('#divBookingsG').datagrid('enableFilter', [{
+      //   field:'status',
+      //   type:'combobox',
+      //   options:{
+      //         panelHeight:'auto',
+      //         data:[{value:'',text:'All'},{value:'P',text:'P'},{value:'N',text:'N'}],
+      //         onChange:function(value){
+      //                   if (value == ''){
+      //                       dg.datagrid('removeFilterRule', 'status');
+      //                   } else {
+      //                       dg.datagrid('addFilterRule', {
+      //                           field: 'status',
+      //                           op: 'equal',
+      //                           value: value
+      //                       });
+      //                   }
+      //                   dg.datagrid('doFilter');
+      //           }
+      //     }
+        
+      // }]);
+      
+
+
       $('#divBookingsG').datagrid
       (
         {
