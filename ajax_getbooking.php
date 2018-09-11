@@ -55,6 +55,8 @@
                   "b1.estateagentmobile," .
                   "b1.estateagentphone," .
 
+                  "b1.reportdata," .
+
                   "b1.datecreated," .
                   "b1.datemodified " .
 
