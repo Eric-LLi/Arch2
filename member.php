@@ -1205,7 +1205,7 @@
         $('#fldNewBookingCustPostcode').textbox('clear');
 
         // Report TAB
-        $('#fldNewBookingReport').combobox('disable');
+        //$('#fldNewBookingReport').combobox('disable');
 
         <?php
           if (SharedIsAdmin())
@@ -1321,6 +1321,15 @@
 
                   // Report TAB
                   $('#fldNewBookingReport').combobox('setValue', b.reportid);
+                  if(b.reportdata  === null)
+                  {
+                    console.log("has not create report yet, can reselect report type");
+                    $('#fldNewBookingReport').combobox('enable');
+                  }
+                  else
+                  {
+                    $('#fldNewBookingReport').combobox('disable');
+                  }
 
                   <?php
                     if (SharedIsAdmin())
