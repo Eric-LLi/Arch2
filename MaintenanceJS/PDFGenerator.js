@@ -127,9 +127,10 @@ function generatePDF(mode) {
                         style: 'pageTopHeader',
                         margin: [0, 30, 0, 5]
                     },
-                    getCustomerDetailsTable()
-                ],
-                pageBreak: 'after'
+                    getCustomerDetailsTable(),
+                    makeAGap(),
+                ]
+                // pageBreak: 'after'
             },
             {
                 stack: [
