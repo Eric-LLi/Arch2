@@ -152,7 +152,9 @@ function countWord(click_id)
 //Learn from https://stackoverflow.com/questions/37479257/how-to-add-bullet-point-in-a-textarea
 function startBullet(id)
 {
+    console.log(id + " is focused");
     if (document.getElementById(id).value === '') {
+        console.log('add a bullet first');
         document.getElementById(id).value += '• ';
     }
 }
