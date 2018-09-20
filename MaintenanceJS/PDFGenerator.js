@@ -550,7 +550,7 @@ function generatePDF(mode) {
                     getYMASSummary(),
                     makeAGap(),
                     {
-                        text: 'Major Defect:',
+                        text: 'Major Defects:',
                         style: 'pageSubHeader'
                     },
                     getYMASMajorDefects(),

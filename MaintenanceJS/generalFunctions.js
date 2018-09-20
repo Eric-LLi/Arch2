@@ -231,7 +231,7 @@ function cleanArray(actual) {
             newArray.push(actual[i]);
         }
     }
-    //console.log(newArray);
+   // console.log(newArray);
     return newArray;
 }
 
@@ -249,14 +249,33 @@ function giveMeTheBullet(id) {
     {
         for (var i = 0; i < makeItAnArr.length; i++)
         {
-            console.log(makeItAnArr[i].slice(2));
-            var content =
+            var bullet = (makeItAnArr[i].slice(0,2));
+            //console.log(bullet);
+            if(bullet == '• ')
             {
-                text:makeItAnArr[i].slice(2),
-                margin:[0,0,0,3],
-                alignment:'left'
-            };
-            data.push(content);
+                //console.log("the paragraph has a bullet, need to remove it first");
+                var content =
+                {
+                    text:makeItAnArr[i].slice(2),
+                    //text:makeItAnArr[i],
+                    margin:[0,0,0,3],
+                    alignment:'left'
+                };
+                data.push(content);
+            }
+            else
+            {
+                //console.log("the paragraph does not have a bullet, just all text");
+                var content =
+                {
+                    text:makeItAnArr[i],
+                    margin:[0,0,0,3],
+                    alignment:'left'
+                };
+                data.push(content);
+            }
+            //console.log(makeItAnArr[i].slice(2));
+           
         }
 
         //data.push({text: makeItAnArr[makeItAnArr.length - 1], alignment: 'left'});
