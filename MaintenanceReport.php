@@ -318,7 +318,7 @@
                 <label class="sectionSubHead" style="font-size: 20px">Summary: </label>
                 <label style="width:100%">The following summarizes our advice with respect to particular concerns identified at the property</label>
                 <textarea id="YMAS-TEXT1" title="summary"
-                          class="form-control"
+                          class="autoExpand"
                           style="border: 2px solid #000000" placeholder="Please write down the brief summary here..."></textarea>
             </div>
         </div>
