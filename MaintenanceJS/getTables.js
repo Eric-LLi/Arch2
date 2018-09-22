@@ -553,28 +553,62 @@ function getYMASMajorDefects() {
  * */
 function getYMASSeriousStructuralDefects() {
     var result;
-
-    result = {
-        table: {
-            widths: ['*'],
-            body: [
-                [{
-                    stack: [
-                        {
-                            text: 'Under the circumstances our recommendations are as follows:',
-                            bold: true,
-                            margin: [0, 0, 0, 4]
-                        },
-                        {
-                            ul: giveMeTheBullet('YMAS-TEXT3')
-                        }
-                    ],
-                    style: 'tableText',
-                    alignment: 'justify'
-                }]
-            ]
+    makeItAnArr = cleanArray(getIt('YMAS-TEXT3').split('\n'));
+    if (makeItAnArr.length > 0)
+    {
+        var bullet = (makeItAnArr[0].slice(0,2));
+        if(bullet == '• ')
+        {
+            result = {
+                table: {
+                    widths: ['*'],
+                    body: [
+                        [{
+                            stack: [
+                                {
+                                    text: 'Under the circumstances our recommendations are as follows:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4]
+                                },
+                                {
+                                    ul: giveMeTheBullet('YMAS-TEXT3')
+                                }
+                            ],
+                            style: 'tableText',
+                            alignment: 'justify'
+                        }]
+                    ]
+                }
+            };
         }
-    };
+        else
+        {
+            result = {
+                table: {
+                    widths: ['*'],
+                    body: [
+                        [{
+                            stack: [
+                                {
+                                    text: 'Under the circumstances our recommendations are as follows:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4]
+                                },
+                                giveMeTheBullet('YMAS-TEXT3')
+                                // {
+                                //     ul: giveMeTheBullet('YMAS-TEXT3')
+                                // }
+                            ],
+                            style: 'tableText',
+                            alignment: 'justify'
+                        }]
+                    ]
+                }
+            };
+        }
+    }
+
+   
     return result;
 }
 
@@ -584,66 +618,137 @@ function getYMASSeriousStructuralDefects() {
 function getAdviceTable() {
     var result;
 
-    result = {
-        table: {
-            widths: ['*'],
-            body: [
-                [{
-                    text: 'Advice',
-                    style: 'tableHeader'
-                }],
-                [{
-                    stack: [
-                        {
-                            text: 'Observations and Analysis:',
-                            bold: true,
-                            margin: [0, 0, 0, 4],
-                            fontSize: 10
-                        },
-                        {
-                            text: getIt('ADVICE-TEXT1')
-                        },
-                        makeAGap(),
-                        {
-                            text: 'Recommendations:',
-                            bold: true,
-                            margin: [0, 0, 0, 4],
-                            fontSize: 10
-                        },
-                        {
-                            text: getIt('ADVICE-TEXT2')
-                        },
-                        makeAGap(),
-                        {
-                            text: 'Consequences:',
-                            bold: true,
-                            margin: [0, 0, 0, 4],
-                            fontSize: 10
-                        },
-                        {
-                            text: 'Significant risk or cost consequences of not proceeding with this advice are as follows:',
-                            margin: [0, 0, 0, 4]
-                        },
-                        {
-                            ul: giveMeTheBullet('ADVICE-TEXT3')
-                        },
-                        makeAGap(),
-                        {
-                            text: 'Summary:',
-                            bold: true,
-                            margin: [0, 0, 0, 4],
-                            fontSize: 10
-                        },
-                        {
-                            text: getIt('ADVICE-TEXT4')
-                        }
-                    ],
-                    style: 'tableText',
-                    alignment: 'justify'
-                }]
-            ]
+    makeItAnArr = cleanArray(getIt('ADVICE-TEXT3').split('\n'));
+    if (makeItAnArr.length > 0)
+    {
+        var bullet = (makeItAnArr[0].slice(0,2));
+        if(bullet == '• ')
+        {
+            result = {
+                table: {
+                    widths: ['*'],
+                    body: [
+                        [{
+                            text: 'Advice',
+                            style: 'tableHeader'
+                        }],
+                        [{
+                            stack: [
+                                {
+                                    text: 'Observations and Analysis:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4],
+                                    fontSize: 10
+                                },
+                                {
+                                    text: getIt('ADVICE-TEXT1')
+                                },
+                                makeAGap(),
+                                {
+                                    text: 'Recommendations:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4],
+                                    fontSize: 10
+                                },
+                                {
+                                    text: getIt('ADVICE-TEXT2')
+                                },
+                                makeAGap(),
+                                {
+                                    text: 'Consequences:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4],
+                                    fontSize: 10
+                                },
+                                {
+                                    text: 'Significant risk or cost consequences of not proceeding with this advice are as follows:',
+                                    margin: [0, 0, 0, 4]
+                                },
+                                {
+                                    ul: giveMeTheBullet('ADVICE-TEXT3')
+                                },
+                                makeAGap(),
+                                {
+                                    text: 'Summary:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4],
+                                    fontSize: 10
+                                },
+                                {
+                                    text: getIt('ADVICE-TEXT4')
+                                }
+                            ],
+                            style: 'tableText',
+                            alignment: 'justify'
+                        }]
+                    ]
+                }
+            };
         }
-    };
+        else
+        {
+            result = {
+                table: {
+                    widths: ['*'],
+                    body: [
+                        [{
+                            text: 'Advice',
+                            style: 'tableHeader'
+                        }],
+                        [{
+                            stack: [
+                                {
+                                    text: 'Observations and Analysis:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4],
+                                    fontSize: 10
+                                },
+                                {
+                                    text: getIt('ADVICE-TEXT1')
+                                },
+                                makeAGap(),
+                                {
+                                    text: 'Recommendations:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4],
+                                    fontSize: 10
+                                },
+                                {
+                                    text: getIt('ADVICE-TEXT2')
+                                },
+                                makeAGap(),
+                                {
+                                    text: 'Consequences:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4],
+                                    fontSize: 10
+                                },
+                                {
+                                    text: 'Significant risk or cost consequences of not proceeding with this advice are as follows:',
+                                    margin: [0, 0, 0, 4]
+                                },
+                                giveMeTheBullet('ADVICE-TEXT3'),
+                                makeAGap(),
+                                {
+                                    text: 'Summary:',
+                                    bold: true,
+                                    margin: [0, 0, 0, 4],
+                                    fontSize: 10
+                                },
+                                {
+                                    text: getIt('ADVICE-TEXT4')
+                                }
+                            ],
+                            style: 'tableText',
+                            alignment: 'justify'
+                        }]
+                    ]
+                }
+            };
+        }
+    }
+   
+    
     return result;
 }
 
