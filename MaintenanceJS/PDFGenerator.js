@@ -544,7 +544,7 @@ function generatePDF(mode) {
                     getPropertySummaryTable(),
                     makeAGap(),
                     {
-                        text: 'Summary:',
+                        text: 'INTRODUCTION:',
                         style: 'pageSubHeader'
                     },
                     getYMASSummary(),

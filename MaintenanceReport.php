@@ -318,8 +318,8 @@
                 <label class="sectionSubHead" style="font-size: 20px">Summary: </label>
                 <label style="width:100%">The following summarizes our advice with respect to particular concerns identified at the property</label>
                 <textarea id="YMAS-TEXT1" title="summary"
-                          class="form-control"
-                          style="border: 2px solid #000000" placeholder="Please write down the brief summary here..."></textarea>
+                          class="autoExpand"
+                          style="border: 2px solid #000000;height: 200px" placeholder="Please write down the brief summary here..."></textarea>
             </div>
         </div>
         <div class="row form-group">
@@ -328,7 +328,7 @@
                 <label style="width:100%">Significant risk or cost consequences of not proceeding with this advice are as follows:</label>
                 <textarea id="YMAS-TEXT2"
                           placeholder="Please write down the brief consequences here..."
-                          class="form-control" style="border: 2px solid #000000"></textarea>
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
             </div>
         </div>
         <!--&#10;(Bullet points will be assigned automatically.) -->
@@ -338,7 +338,7 @@
                 <label style="width:100%">Under the circumstances our recommendations are as follows</label>
                 <textarea id="YMAS-TEXT3"
                           placeholder="Please write down the brief recommendations here..."
-                          class="form-control" style="border: 2px solid #000000" onfocus="startBullet('YMAS-TEXT3')" onkeyup="assignBullet('YMAS-TEXT3')"></textarea>
+                          class="form-control" style="border: 2px solid #000000;height: 200px" onfocus="startBullet('YMAS-TEXT3')" onkeyup="assignBullet('YMAS-TEXT3')"></textarea>
             </div>
         </div>
     </form>
@@ -355,20 +355,20 @@
         <div class="row form-group">
             <div class="col-sm">
                 <label class="sectionSubHead" style="font-size: 20px">Observations and Analysis: </label>
-                <textarea id="ADVICE-TEXT1" class="form-control" title="observation"></textarea>
+                <textarea id="ADVICE-TEXT1" class="form-control" style="height: 200px" title="observation"></textarea>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
                 <label class="sectionSubHead" style="font-size: 20px">Recommendations: </label>
-                <textarea id="ADVICE-TEXT2" class="form-control" title="recommendation"></textarea>
+                <textarea id="ADVICE-TEXT2" class="form-control" style="height: 200px" title="recommendation"></textarea>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
                 <label class="sectionSubHead" style="font-size: 20px">Consequence: </label>
                 <label style="width:100%">Significant risk or cost consequences of not proceeding with this advice are as follows:</label>
-                <textarea id="ADVICE-TEXT3" class="form-control" title="consequence" onfocus="startBullet('ADVICE-TEXT3')" onkeyup="assignBullet('ADVICE-TEXT3')"></textarea>
+                <textarea id="ADVICE-TEXT3" class="form-control" style="height: 200px" title="consequence" onfocus="startBullet('ADVICE-TEXT3')" onkeyup="assignBullet('ADVICE-TEXT3')"></textarea>
             </div>
         </div>
         <div class="row form-group">
