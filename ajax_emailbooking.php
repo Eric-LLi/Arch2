@@ -115,6 +115,7 @@
               $emailtemplate = $reportemails[3];
               error_log($emailtemplate);
               $html = file_get_contents($emailtemplate);
+              $html2 = file_get_contents("email_second.html");
 
               //Get the contents of the footer and header to the variables. 
               $header = file_get_contents('Email_Header.html');
@@ -163,6 +164,13 @@
               $html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . " " . $booking['archlastname'], $html);
               $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
               $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
+
+
+              $html2 = str_replace("XXX_HEADER", $header, $html2);
+              $html2 = str_replace("XXX_FOOTER", $footer, $html2);
+              $html2 = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html2);
+              $html2 = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html2);
+              $html2 = str_replace("XXX_BOOKINGREPORT", $reportTypes[$booking['itype']],$html2);
 
               // $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
               // $html = str_replace("XXX_LINKREPORT", $link, $html);
@@ -173,6 +181,7 @@
               error_log("the report path for the combined timber report is " . $reportPath2);
               $reportList = array($reportPath1,$reportPath2);
               SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $reportList);
+              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html2,"", "", "");
             }
             else if($booking["bookings_id"] != "")//select the timber report in the comibined reports, the booking will have the bookings_id for its linked property assessment report. 
             {
@@ -182,6 +191,7 @@
               $emailtemplate = $reportemails[3];
               error_log($emailtemplate);
               $html = file_get_contents($emailtemplate);
+              $html2 = file_get_contents("email_second.html");
               //Get the contents of the footer and header to the variables. 
               $header = file_get_contents('Email_Header.html');
               $footer = file_get_contents('Email_Footer.html'); 
@@ -230,6 +240,12 @@
               $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
               $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
 
+              $html2 = str_replace("XXX_HEADER", $header, $html2);
+              $html2 = str_replace("XXX_FOOTER", $footer, $html2);
+              $html2 = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html2);
+              $html2 = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html2);
+              $html2 = str_replace("XXX_BOOKINGREPORT", $reportTypes[$booking['itype']],$html2);
+
               // $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
               // $html = str_replace("XXX_LINKREPORT", $link, $html);
               $reportPath1 = './pdfreport/'.$bookingcode.".pdf";
@@ -238,6 +254,8 @@
               error_log("the report path for the property assessment report is " . $reportPath2);
               $reportList = array($reportPath1,$reportPath2);
               SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $reportList);
+              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html2,"", "", "");
+
             }
             else
             {
@@ -245,6 +263,7 @@
               $emailtemplate = $reportemails[$booking['itype']];
               error_log($emailtemplate);
               $html = file_get_contents($emailtemplate);
+              $html2 = file_get_contents("email_second.html");
 
               //Get the contents of the footer and header to the variables. 
               $header = file_get_contents('Email_Header.html');
@@ -295,6 +314,14 @@
               $html = str_replace("XXX_ARCHITECTPHONE", $booking['archmobile'], $html);
               // $html = str_replace("XXX_ITYPENAME", $userTypes[$booking['usertype']], $html);
 
+              $html2 = str_replace("XXX_HEADER", $header, $html2);
+              $html2 = str_replace("XXX_FOOTER", $footer, $html2);
+              $html2 = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html2);
+              $html2 = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html2);
+              $html2 = str_replace("XXX_BOOKINGREPORT", $reportTypes[$booking['itype']],$html2);
+
+
+
               // $link = "http://www.archicentreaustraliainspections.com/mybooking.php?bc=" . $booking['bc'];
               // $html = str_replace("XXX_LINKREPORT", $link, $html);
               $reportPath = './pdfreport/'.$bookingcode.".pdf";
@@ -306,6 +333,8 @@
 
               error_log("only select one single report");
               SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html,"", "", $reportPath);
+              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html2,"", "", "");
+
             }
           // $fileName = $bookingcode."."."pdf";
           // $fileDestination = './pdfreport/'.$fileName;
