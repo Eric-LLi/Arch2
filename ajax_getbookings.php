@@ -102,8 +102,11 @@
                   // "b1.dateexpired is null " .
                   $clause . " " .
                   "order by " .
-                  "b1.datecreated desc " .
-                  "limit 500";
+                  "b1.id desc, ".
+                  "b1.bookings_id desc,".
+                  "b2.id desc ".
+                  // "b1.datecreated desc " .
+                  "limit 800";
       error_log($dbselect);
       if ($dbresult = SharedQuery($dbselect, $dblink))
       {
