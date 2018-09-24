@@ -499,12 +499,12 @@ function getYMASSummary() {
                         },
                         {
                             text: getIt('YMAS-TEXT1'),
-                            margin: [0, 0, 0, 0]
-                        },
-                        {
-                            text: getIt('ADVICE-TEXT4'),
                             margin: [0, 0, 0, 4]
                         },
+                        // {
+                        //     text: getIt('ADVICE-TEXT4'),
+                        //     margin: [0, 0, 0, 4]
+                        // },
                         {
                             text: 'Further detail can be found within the body of this report and queries may be directed to the named architect or Archicentre Australia.',
                             bold: true
@@ -675,7 +675,8 @@ function getAdviceTable() {
                                     fontSize: 10
                                 },
                                 {
-                                    text: getIt('ADVICE-TEXT4')
+                                    text: getIt('ADVICE-TEXT4'),
+                                    margin: [0, 0, 0, 4]
                                 }
                             ],
                             style: 'tableText',
@@ -736,7 +737,8 @@ function getAdviceTable() {
                                     fontSize: 10
                                 },
                                 {
-                                    text: getIt('ADVICE-TEXT4')
+                                    text: getIt('ADVICE-TEXT4'),
+                                    margin: [0, 0, 0, 4]
                                 }
                             ],
                             style: 'tableText',
