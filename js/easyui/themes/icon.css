@@ -1,103 +1,423 @@
-.icon-blank {background:url('icons/blank.gif') no-repeat center center;}
-.icon-add {background:url('icons/edit_add.png') no-repeat center center;}
-.icon-edit {background:url('icons/pencil.png') no-repeat center center;}
-.icon-clear {background:url('icons/clear.png') no-repeat center center;}
-.icon-remove {background:url('icons/edit_remove.png') no-repeat center center;}
-.icon-save {background:url('icons/filesave.png') no-repeat center center;}
-.icon-cut {background:url('icons/cut.png') no-repeat center center;}
-.icon-ok {background:url('icons/ok.png') no-repeat center center;}
-.icon-no {background:url('icons/no.png') no-repeat center center;}
-.icon-cancel {background:url('icons/cancel.png') no-repeat center center;}
-.icon-reload {background:url('icons/reload.ping') no-repeat center center;}
-.icon-refreshlist {background:url('icons/refreshlist.png') no-repeat center center;}
-.icon-search {background:url('icons/search.png') no-repeat center center;}
-.icon-print {background:url('icons/print.png') no-repeat center center;}
-.icon-help {background:url('icons/help.png') no-repeat center center;}
-.icon-undo {background:url('icons/undo.png') no-repeat center center;}
-.icon-redo {background:url('icons/redo.png') no-repeat center center;}
-.icon-back {background:url('icons/back.png') no-repeat center center;}
-.icon-sum {background:url('icons/sum.png') no-repeat center center;}
-.icon-tip {background:url('icons/tip.png') no-repeat center center;}
-.icon-filter {background:url('icons/filter.png') no-repeat center center;}
-.icon-man {background:url('icons/man.png') no-repeat center center;}
-.icon-lock {background:url('icons/lock.png') no-repeat center center;}
-.icon-more {background:url('icons/more.png') no-repeat center center;}
-.icon-barcode {background:url('icons/barcode.png') no-repeat center center;}
-.icon-duplicate {background:url('icons/duplicate.png') no-repeat center center;}
-.icon-move {background:url('icons/move.png') no-repeat center center;}
-.icon-alarm {background:url('icons/alarm.png') no-repeat center center;}
-.icon-attachment {background:url('icons/attachment.png') no-repeat center center;}
-.icon-calendar {background:url('icons/calendar.png') no-repeat center center;}
-.icon-chart {background:url('icons/chart.png') no-repeat center center;}
-.icon-notes {background:url('icons/notes.png') no-repeat center center;}
-.icon-stats {background:url('icons/stats.png') no-repeat center center;}
-.icon-contacts {background:url('icons/contacts.png') no-repeat center center;}
-.icon-hierarchy {background:url('icons/hierarchy.png') no-repeat center center;}
-.icon-chat {background:url('icons/chat.png') no-repeat center center;}
-.icon-import {background:url('icons/import.png') no-repeat center center;}
-.icon-export {background:url('icons/export.png') no-repeat center center;}
-.icon-barchart {background:url('icons/barchart.png') no-repeat center center;}
-.icon-comments {background:url('icons/comments.png') no-repeat center center;}
-.icon-mappin {background:url('icons/mappin.png') no-repeat center center;}
-.icon-download {background:url('icons/download.png') no-repeat center center;}
-.icon-dollar {background:url('icons/dollar.png') no-repeat center center;}
-.icon-sync {background:url('icons/sync.png') no-repeat center center;}
-.icon-users {background:url('icons/users.png') no-repeat center center;}
-.icon-globe {background:url('icons/globe.png') no-repeat center center;}
-.icon-accounts {background:url('icons/accounts.png') no-repeat center center;}
-.icon-tax {background:url('icons/tax.png') no-repeat center center;}
-.icon-settings {background:url('icons/settings.png') no-repeat center center;}
-.icon-schedule {background:url('icons/schedule.png') no-repeat center center;}
-.icon-people {background:url('icons/people.png') no-repeat center center;}
-.icon-order {background:url('icons/order.png') no-repeat center center;}
-.icon-attention {background:url('icons/attention.png') no-repeat center center;}
-.icon-invoice {background:url('icons/invoice.png') no-repeat center center;}
-.icon-inventory {background:url('icons/inventory.png') no-repeat center center;}
-.icon-bank {background:url('icons/bank.png') no-repeat center center;}
-.icon-sale {background:url('icons/sale.png') no-repeat center center;}
-.icon-gauge {background:url('icons/gauge.png') no-repeat center center;}
-.icon-payment {background:url('icons/payment.png') no-repeat center center;}
-.icon-timetable {background:url('icons/timetable.png') no-repeat center center;}
-.icon-product {background:url('icons/product.png') no-repeat center center;}
-.icon-receipt {background:url('icons/receipt.png') no-repeat center center;}
-.icon-clientlist {background:url('icons/clientlist.png') no-repeat center center;}
-.icon-tools {background:url('icons/tools.png') no-repeat center center;}
-.icon-teacher {background:url('icons/teacher.png') no-repeat center center;}
-.icon-template {background:url('icons/template.png') no-repeat center center;}
-.icon-cash {background:url('icons/cash.png') no-repeat center center;}
-.icon-box {background:url('icons/box.png') no-repeat center center;}
-.icon-database {background:url('icons/database.png') no-repeat center center;}
-.icon-registry {background:url('icons/registry.png') no-repeat center center;}
-.icon-stockgraphs {background:url('icons/stockgraphs.png') no-repeat center center;}
-.icon-payroll {background:url('icons/payroll.png') no-repeat center center;}
-.icon-maintenance {background:url('icons/maintenance.png') no-repeat center center;}
-.icon-objects {background:url('icons/objects.png') no-repeat center center;}
-.icon-ordertracking {background:url('icons/ordertracking.png') no-repeat center center;}
-.icon-about {background:url('icons/about.png') no-repeat center center;}
-.icon-calculator {background:url('icons/calculator.png') no-repeat center center;}
-.icon-orderform {background:url('icons/orderform.png') no-repeat center center;}
-.icon-todolist {background:url('icons/todolist.png') no-repeat center center;}
-.icon-newnote {background:url('icons/newnote.png') no-repeat center center;}
-.icon-finance {background:url('icons/finance.png') no-repeat center center;}
-.icon-purchases {background:url('icons/refunds.png') no-repeat center center;}
-.icon-delivery {background:url('icons/delivery.png') no-repeat center center;}
-.icon-eurocoin {background:url('icons/euro_coin.png') no-repeat center center;}
-.icon-money {background:url('icons/money.png') no-repeat center center;}
-.icon-email {background:url('icons/email.png') no-repeat center center;}
-.icon-mobile {background:url('icons/mobile.png') no-repeat center center;}
-.icon-mechanic {background:url('icons/mechanic.png') no-repeat center center;}
-.icon-wrench {background:url('icons/wrench.png') no-repeat center center;}
-.icon-warehouse {background:url('icons/warehouse.png') no-repeat center center;}
-.icon-checkout {background:url('icons/checkout.png') no-repeat center center;}
-.icon-info {background:url('icons/info.png') no-repeat center center;}
-.icon-wirelessconnection {background:url('icons/wirelessconnection.png') no-repeat center center;}
-.icon-visualcontact {background:url('icons/visualcontact.png') no-repeat center center;}
-.icon-checkboxes {background:url('icons/checkboxes.png') no-repeat center center;}
-.icon-call {background:url('icons/call.png') no-repeat center center;}
-.icon-create {background:url('icons/create.png') no-repeat center center;}
-.icon-list {background:url('icons/list.png') no-repeat center center;}
-.icon-lists {background:url('icons/lists.png') no-repeat center center;}
-.icon-marketreport {background:url('icons/marketreport.png') no-repeat center center;}
-.icon-revert {background:url('icons/revert.png') no-repeat center center;}
-.icon-login {background:url('icons/login.png') no-repeat center center;}
-.icon-key {background:url('icons/key.png') no-repeat center center;}
+.icon-blank {
+    background: url('icons/blank.gif') no-repeat center center;
+}
+
+.icon-add {
+    background: url('icons/edit_add.png') no-repeat center center;
+}
+
+.icon-edit {
+    background: url('icons/pencil.png') no-repeat center center;
+}
+
+.icon-clear {
+    background: url('icons/clear.png') no-repeat center center;
+}
+
+.icon-remove {
+    background: url('icons/edit_remove.png') no-repeat center center;
+}
+
+.icon-save {
+    background: url('icons/filesave.png') no-repeat center center;
+}
+
+.icon-cut {
+    background: url('icons/cut.png') no-repeat center center;
+}
+
+.icon-ok {
+    background: url('icons/ok.png') no-repeat center center;
+}
+
+.icon-no {
+    background: url('icons/no.png') no-repeat center center;
+}
+
+.icon-cancel {
+    background: url('icons/cancel.png') no-repeat center center;
+}
+
+.icon-reload {
+    background: url('icons/reload.ping') no-repeat center center;
+}
+
+.icon-refreshlist {
+    background: url('icons/refreshlist.png') no-repeat center center;
+}
+
+.icon-search {
+    background: url('icons/search.png') no-repeat center center;
+}
+
+.icon-print {
+    background: url('icons/print.png') no-repeat center center;
+}
+
+.icon-help {
+    background: url('icons/help.png') no-repeat center center;
+}
+
+.icon-undo {
+    background: url('icons/undo.png') no-repeat center center;
+}
+
+.icon-redo {
+    background: url('icons/redo.png') no-repeat center center;
+}
+
+.icon-back {
+    background: url('icons/back.png') no-repeat center center;
+}
+
+.icon-sum {
+    background: url('icons/sum.png') no-repeat center center;
+}
+
+.icon-tip {
+    background: url('icons/tip.png') no-repeat center center;
+}
+
+.icon-filter {
+    background: url('icons/filter.png') no-repeat center center;
+}
+
+.icon-man {
+    background: url('icons/man.png') no-repeat center center;
+}
+
+.icon-lock {
+    background: url('icons/lock.png') no-repeat center center;
+}
+
+.icon-more {
+    background: url('icons/more.png') no-repeat center center;
+}
+
+.icon-barcode {
+    background: url('icons/barcode.png') no-repeat center center;
+}
+
+.icon-duplicate {
+    background: url('icons/duplicate.png') no-repeat center center;
+}
+
+.icon-move {
+    background: url('icons/move.png') no-repeat center center;
+}
+
+.icon-alarm {
+    background: url('icons/alarm.png') no-repeat center center;
+}
+
+.icon-attachment {
+    background: url('icons/attachment.png') no-repeat center center;
+}
+
+.icon-calendar {
+    background: url('icons/calendar.png') no-repeat center center;
+}
+
+.icon-chart {
+    background: url('icons/chart.png') no-repeat center center;
+}
+
+.icon-notes {
+    background: url('icons/notes.png') no-repeat center center;
+}
+
+.icon-stats {
+    background: url('icons/stats.png') no-repeat center center;
+}
+
+.icon-contacts {
+    background: url('icons/contacts.png') no-repeat center center;
+}
+
+.icon-hierarchy {
+    background: url('icons/hierarchy.png') no-repeat center center;
+}
+
+.icon-chat {
+    background: url('icons/chat.png') no-repeat center center;
+}
+
+.icon-import {
+    background: url('icons/import.png') no-repeat center center;
+}
+
+.icon-export {
+    background: url('icons/export.png') no-repeat center center;
+}
+
+.icon-barchart {
+    background: url('icons/barchart.png') no-repeat center center;
+}
+
+.icon-comments {
+    background: url('icons/comments.png') no-repeat center center;
+}
+
+.icon-mappin {
+    background: url('icons/mappin.png') no-repeat center center;
+}
+
+.icon-download {
+    background: url('icons/download.png') no-repeat center center;
+}
+
+.icon-dollar {
+    background: url('icons/dollar.png') no-repeat center center;
+}
+
+.icon-sync {
+    background: url('icons/sync.png') no-repeat center center;
+}
+
+.icon-users {
+    background: url('icons/users.png') no-repeat center center;
+}
+
+.icon-globe {
+    background: url('icons/globe.png') no-repeat center center;
+}
+
+.icon-accounts {
+    background: url('icons/accounts.png') no-repeat center center;
+}
+
+.icon-tax {
+    background: url('icons/tax.png') no-repeat center center;
+}
+
+.icon-settings {
+    background: url('icons/settings.png') no-repeat center center;
+}
+
+.icon-schedule {
+    background: url('icons/schedule.png') no-repeat center center;
+}
+
+.icon-people {
+    background: url('icons/people.png') no-repeat center center;
+}
+
+.icon-order {
+    background: url('icons/order.png') no-repeat center center;
+}
+
+.icon-attention {
+    background: url('icons/attention.png') no-repeat center center;
+}
+
+.icon-invoice {
+    background: url('icons/invoice.png') no-repeat center center;
+}
+
+.icon-inventory {
+    background: url('icons/inventory.png') no-repeat center center;
+}
+
+.icon-bank {
+    background: url('icons/bank.png') no-repeat center center;
+}
+
+.icon-sale {
+    background: url('icons/sale.png') no-repeat center center;
+}
+
+.icon-gauge {
+    background: url('icons/gauge.png') no-repeat center center;
+}
+
+.icon-payment {
+    background: url('icons/payment.png') no-repeat center center;
+}
+
+.icon-timetable {
+    background: url('icons/timetable.png') no-repeat center center;
+}
+
+.icon-product {
+    background: url('icons/product.png') no-repeat center center;
+}
+
+.icon-receipt {
+    background: url('icons/receipt.png') no-repeat center center;
+}
+
+.icon-clientlist {
+    background: url('icons/clientlist.png') no-repeat center center;
+}
+
+.icon-tools {
+    background: url('icons/tools.png') no-repeat center center;
+}
+
+.icon-teacher {
+    background: url('icons/teacher.png') no-repeat center center;
+}
+
+.icon-template {
+    background: url('icons/template.png') no-repeat center center;
+}
+
+.icon-cash {
+    background: url('icons/cash.png') no-repeat center center;
+}
+
+.icon-box {
+    background: url('icons/box.png') no-repeat center center;
+}
+
+.icon-database {
+    background: url('icons/database.png') no-repeat center center;
+}
+
+.icon-registry {
+    background: url('icons/registry.png') no-repeat center center;
+}
+
+.icon-stockgraphs {
+    background: url('icons/stockgraphs.png') no-repeat center center;
+}
+
+.icon-payroll {
+    background: url('icons/payroll.png') no-repeat center center;
+}
+
+.icon-maintenance {
+    background: url('icons/maintenance.png') no-repeat center center;
+}
+
+.icon-objects {
+    background: url('icons/objects.png') no-repeat center center;
+}
+
+.icon-ordertracking {
+    background: url('icons/ordertracking.png') no-repeat center center;
+}
+
+.icon-about {
+    background: url('icons/about.png') no-repeat center center;
+}
+
+.icon-calculator {
+    background: url('icons/calculator.png') no-repeat center center;
+}
+
+.icon-orderform {
+    background: url('icons/orderform.png') no-repeat center center;
+}
+
+.icon-todolist {
+    background: url('icons/todolist.png') no-repeat center center;
+}
+
+.icon-newnote {
+    background: url('icons/newnote.png') no-repeat center center;
+}
+
+.icon-finance {
+    background: url('icons/finance.png') no-repeat center center;
+}
+
+.icon-purchases {
+    background: url('icons/refunds.png') no-repeat center center;
+}
+
+.icon-delivery {
+    background: url('icons/delivery.png') no-repeat center center;
+}
+
+.icon-eurocoin {
+    background: url('icons/euro_coin.png') no-repeat center center;
+}
+
+.icon-money {
+    background: url('icons/money.png') no-repeat center center;
+}
+
+.icon-email {
+    background: url('icons/email.png') no-repeat center center;
+}
+
+.icon-mobile {
+    background: url('icons/mobile.png') no-repeat center center;
+}
+
+.icon-mechanic {
+    background: url('icons/mechanic.png') no-repeat center center;
+}
+
+.icon-wrench {
+    background: url('icons/wrench.png') no-repeat center center;
+}
+
+.icon-warehouse {
+    background: url('icons/warehouse.png') no-repeat center center;
+}
+
+.icon-checkout {
+    background: url('icons/checkout.png') no-repeat center center;
+}
+
+.icon-info {
+    background: url('icons/info.png') no-repeat center center;
+}
+
+.icon-wirelessconnection {
+    background: url('icons/wirelessconnection.png') no-repeat center center;
+}
+
+.icon-visualcontact {
+    background: url('icons/visualcontact.png') no-repeat center center;
+}
+
+.icon-checkboxes {
+    background: url('icons/checkboxes.png') no-repeat center center;
+}
+
+.icon-call {
+    background: url('icons/call.png') no-repeat center center;
+}
+
+.icon-create {
+    background: url('icons/create.png') no-repeat center center;
+}
+
+.icon-list {
+    background: url('icons/list.png') no-repeat center center;
+}
+
+.icon-lists {
+    background: url('icons/lists.png') no-repeat center center;
+}
+
+.icon-marketreport {
+    background: url('icons/marketreport.png') no-repeat center center;
+}
+
+.icon-revert {
+    background: url('icons/revert.png') no-repeat center center;
+}
+
+.icon-login {
+    background: url('icons/login.png') no-repeat center center;
+}
+
+.icon-key {
+    background: url('icons/key.png') no-repeat center center;
+}
+
+.icon-trash {
+    background: url('icons/trashcan.png') no-repeat center center;
+}
+
+.icon-create-document {
+    background: url('icons/create-document.png') no-repeat center center;
+}
+
+.icon-upload {
+    background: url('icons/upload.png') no-repeat center center;
+}
