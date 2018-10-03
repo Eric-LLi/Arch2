@@ -18,6 +18,7 @@
       $custfirstname = $_POST['custfirstname'];
       $custlastname = $_POST['custlastname'];
       $custemail = $_POST['custemail'];
+      error_log($custemail);
 
       // error_log($custemail);
       // split("\,",$custemail);

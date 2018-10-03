@@ -224,6 +224,13 @@
       );
     }
 
+    function doResetSearch()
+    {
+      $('#cbSearchReportStatus').combobox('setValue',0);
+      $('#fldSearchEmail').textbox('clear');
+      doRefreshBookings();
+    }
+
     function doRefreshMembers()
     {
       console.log('***** Refreshing members...');
@@ -885,7 +892,8 @@
 
         $('#fldNewBookingCustFirstName').textbox('clear');
         $('#fldNewBookingCustLastName').textbox('clear');
-        $('#fldNewBookingCustEmail').textbox('clear');
+        // $('#fldNewBookingCustEmail').textbox('clear');
+        $('#fldNewBookingCustEmail2').tagbox('clear');
         $('#fldNewBookingCustMobile').textbox('clear');
         $('#fldNewBookingCustPhone').textbox('clear');
         $('#fldNewBookingCustAddress1').textbox('clear');
@@ -953,6 +961,32 @@
             // Customer TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
 
+            $('#fldNewBookingCustEmail2').tagbox
+            (
+              {
+                tagStyler: function(value)
+                {
+                  return 'background:#ffd7d7;';
+                },
+                inputEvents: $.extend({}, $.fn.tagbox.defaults.inputEvents, {
+                    keyup: function(e)
+                    {
+                      // console.log(e.keyCode);
+                      if(e.keyCode == 186)
+                      {
+                        // console.log('user hit ; need to do something');
+                        var custemail = $('#fldNewBookingCustEmail2').tagbox('getValues');
+                        var custemailstr = $('#fldNewBookingCustEmail2').tagbox('getText');
+                        custemailstr = custemailstr.substring(0, custemailstr.length - 1)
+                        custemail.push(custemailstr);
+                        $('#fldNewBookingCustEmail2').tagbox('clear');
+                        $('#fldNewBookingCustEmail2').tagbox('setValues',custemail);
+                          }
+                        }
+                    })
+                  }
+            );
+
             // Properties TAB
             $('#fldNewBookingReport').combobox
             (
@@ -961,10 +995,10 @@
                 textField: 'name',
                 limitToList: true,
                 data: reports,
-                onSelect: function(record)
-                {
-                  $('#btnNewBookingAdd').linkbutton('enable');
-                }
+                // onSelect: function(record)
+                // {
+                //   $('#btnNewBookingAdd').linkbutton('enable');
+                // }
               }
             );
             $('#fldNewBookingState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
@@ -988,13 +1022,20 @@
           [
             {
               text: 'Add',
-              disabled: true,
+              disabled: false,
               id: 'btnNewBookingAdd',
               handler: function()
               {
+                $('#fldNewBookingCustEmail2').tagbox('textbox').trigger($.Event("keydown", {keyCode: 13}));
+                var custemail = $('#fldNewBookingCustEmail2').tagbox('getValues');
+                
+                custemail = JSON.stringify(custemail);
+                custemail = custemail.slice(1, custemail.length - 1);
+                custemail = custemail.replace(/"/g,"");
+
                 var custfirstname = $('#fldNewBookingCustFirstName').textbox('getValue');
                 var custlastname = $('#fldNewBookingCustLastName').textbox('getValue');
-                var custemail = $('#fldNewBookingCustEmail').textbox('getValue');
+                // var custemail = $('#fldNewBookingCustEmail').textbox('getValue');
                 var custmobile = $('#fldNewBookingCustMobile').textbox('getValue');
                 var custphone = $('#fldNewBookingCustPhone').textbox('getValue');
                 var custaddress1 = $('#fldNewBookingCustAddress1').textbox('getValue');
@@ -1189,6 +1230,7 @@
 
     function doUpdateBooking(booking)
     {
+     //console.log(booking); 
       function doReset()
       {
         // Customer TAB
@@ -1196,7 +1238,8 @@
 
         $('#fldNewBookingCustFirstName').textbox('clear');
         $('#fldNewBookingCustLastName').textbox('clear');
-        $('#fldNewBookingCustEmail').textbox('clear');
+        // $('#fldNewBookingCustEmail').textbox('clear');
+        $('#fldNewBookingCustEmail2').tagbox('clear');
         $('#fldNewBookingCustMobile').textbox('clear');
         $('#fldNewBookingCustPhone').textbox('clear');
         $('#fldNewBookingCustAddress1').textbox('clear');
@@ -1269,11 +1312,35 @@
                 valueField: 'id',
                 textField: 'name',
                 limitToList: true,
-                data: reports,
+                data: editreports,
                 onSelect: function(record)
                 {
                   $('#btnNewBookingAdd').linkbutton('enable');
                 }
+              }
+            );
+
+            $('#fldNewBookingCustEmail2').tagbox
+            (
+              {
+                tagStyler: function(value)
+                {
+                  return 'background:#ffd7d7;';
+                },
+                inputEvents: $.extend({}, $.fn.tagbox.defaults.inputEvents, {
+                  keyup: function(e){
+                  if(e.keyCode == 186)
+                  {
+                      // console.log('user hit ; need to do something');
+                      var custemail = $('#fldNewBookingCustEmail2').tagbox('getValues');
+                      var custemailstr = $('#fldNewBookingCustEmail2').tagbox('getText');
+                      custemailstr = custemailstr.substring(0, custemailstr.length - 1)
+                      custemail.push(custemailstr);
+                      $('#fldNewBookingCustEmail2').tagbox('clear');
+                      $('#fldNewBookingCustEmail2').tagbox('setValues',custemail);
+                    }
+                  }
+                })
               }
             );
             $('#fldNewBookingState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
@@ -1305,13 +1372,12 @@
                 if (response.rc == 0)
                 {
                   var b = response.booking;
-
                   // Customer TAB
                   $('#fldNewBookingCustState').combobox('setValue', b.custstate);
 
                   $('#fldNewBookingCustFirstName').textbox('setValue', b.custfirstname);
                   $('#fldNewBookingCustLastName').textbox('setValue', b.custlastname);
-                  $('#fldNewBookingCustEmail').textbox('setValue', b.custemail);
+                  $('#fldNewBookingCustEmail2').tagbox('setValues', b.custemail);
                   $('#fldNewBookingCustMobile').textbox('setValue', b.custmobile);
                   $('#fldNewBookingCustPhone').textbox('setValue', b.custphone);
                   $('#fldNewBookingCustAddress1').textbox('setValue', b.custaddress1);
@@ -1320,16 +1386,26 @@
                   $('#fldNewBookingCustPostcode').textbox('setValue', b.custpostcode);
 
                   // Report TAB
-                  $('#fldNewBookingReport').combobox('setValue', b.reportid);
-                  if(b.reportdata  === null)
+                  //$('#fldNewBookingReport').combobox('setValue', b.reportid);
+                  if(b.reportid == 3 || booking.linked_bookingcode !== null )
                   {
-                    console.log("has not create report yet, can reselect report type");
-                    $('#fldNewBookingReport').combobox('enable');
+                    console.log("this is a combined report, select the timber one or the property one,cannot change report type, regardless whether there is save report data");
+                    $('#fldNewBookingReport').combobox({data: reports});
+                    $('#fldNewBookingReport').combobox('disable');
                   }
                   else
                   {
-                    $('#fldNewBookingReport').combobox('disable');
+                    if(b.reportdata  === null)
+                    {
+                      console.log("has not create report yet, can reselect report type");
+                      $('#fldNewBookingReport').combobox('enable');
+                    }
+                    else
+                    {
+                      $('#fldNewBookingReport').combobox('disable');
+                    }
                   }
+                   $('#fldNewBookingReport').combobox('setValue', b.reportid);
 
                   <?php
                     if (SharedIsAdmin())
@@ -1382,9 +1458,19 @@
               id: 'btnNewBookingAdd',
               handler: function()
               {
+                //Trigger the 'Enter' event, so all the emailaddreses are tages, no missing. 
+                $('#fldNewBookingCustEmail2').tagbox('textbox').trigger($.Event("keydown", {keyCode: 13}));
+                var custemail = $('#fldNewBookingCustEmail2').tagbox('getValues');
+                
+                custemail = JSON.stringify(custemail);
+                custemail = custemail.slice(1, custemail.length - 1);
+                custemail = custemail.replace(/"/g,"");
+                // console.log(custemail);
+                // custemail.toString();
+                //console.log(custemail.join());
                 var custfirstname = $('#fldNewBookingCustFirstName').textbox('getValue');
                 var custlastname = $('#fldNewBookingCustLastName').textbox('getValue');
-                var custemail = $('#fldNewBookingCustEmail').textbox('getValue');
+                // var custemail = $('#fldNewBookingCustEmail').textbox('getValue');
                 var custmobile = $('#fldNewBookingCustMobile').textbox('getValue');
                 var custphone = $('#fldNewBookingCustPhone').textbox('getValue');
                 var custaddress1 = $('#fldNewBookingCustAddress1').textbox('getValue');
@@ -1537,8 +1623,8 @@
                   }
                 }
                 else
-                  doMandatoryTextbox('Please select a report', 'fldNewBookingReport');
-              }
+                  doMandatoryTextbox('Please select a report', 'fldNewBookingReport');               
+              }    
             },
             {
               text: 'Reset',
@@ -1773,8 +1859,13 @@
           {
             $('#fldSelectArchitect').combobox('clear');
           }
-
-          if (row.reportid == 3)
+          //console.log(row.reportid);
+          if(row.reportid == 0)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet");
+            noty({text: 'This is an unassinged report, cannot allocate architect', type: 'warning', timeout: 4000});
+          }
+          else if (row.reportid == 3)
           {
             function doReset()
             {
@@ -2072,34 +2163,42 @@
         'divBookingsG',
         function(row)
         {
-          doPromptOkCancel
-          (
-            'Mark booking ' + row.bookingcode + ' as paid?',
-            function(result)
-            {
-              if (result)
+          if(row.reportid == 0)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet");
+            noty({text: 'This is an unassinged report, cannot mark it as paid', type: 'warning', timeout: 4000});
+          }
+          else
+          {
+            doPromptOkCancel
+            (
+              'Mark booking ' + row.bookingcode + ' as paid?',
+              function(result)
               {
-                $.post
-                (
-                  'ajax_setbookingstatus.php',
-                  {
-                    uuid: '<?php echo $_SESSION['uuid']; ?>',
-                    bookingcode: row.bookingcode,
-                    status: 'paid'
-                  },
-                  function(result)
-                  {
-                    var response = JSON.parse(result);
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_setbookingstatus.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      status: 'paid'
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
 
-                    if (response.rc == 0)
-                      doRefreshBookings();
-                    else
-                      noty({text: response.msg, type: 'error', timeout: 10000});
-                  }
-                );
+                      if (response.rc == 0)
+                        doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
               }
-            }
-          );
+            );
+          }
         }
       ))
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
@@ -2112,34 +2211,43 @@
         'divBookingsG',
         function(row)
         {
-          doPromptOkCancel
-          (
-            'Mark booking ' + row.bookingcode + ' as completed?',
-            function(result)
-            {
-              if (result)
+          if(row.reportid == 0)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet");
+            noty({text: 'This is an unassinged report, cannot mark it as completed', type: 'warning', timeout: 4000});
+          }
+          else
+          {
+            doPromptOkCancel
+            (
+              'Mark booking ' + row.bookingcode + ' as completed?',
+              function(result)
               {
-                $.post
-                (
-                  'ajax_setbookingstatus.php',
-                  {
-                    uuid: '<?php echo $_SESSION['uuid']; ?>',
-                    bookingcode: row.bookingcode,
-                    status: 'completed'
-                  },
-                  function(result)
-                  {
-                    var response = JSON.parse(result);
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_setbookingstatus.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      status: 'completed'
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
 
-                    if (response.rc == 0)
-                      doRefreshBookings();
-                    else
-                      noty({text: response.msg, type: 'error', timeout: 10000});
-                  }
-                );
+                      if (response.rc == 0)
+                        doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
               }
-            }
-          );
+            );
+          }
+
         }
       ))
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
@@ -2152,34 +2260,43 @@
         'divBookingsG',
         function(row)
         {
-          doPromptOkCancel
-          (
-            'Mark booking ' + row.bookingcode + ' as uncompleted?',
-            function(result)
-            {
-              if (result)
+          if(row.reportid == 0)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet");
+            noty({text: 'This is an unassinged report, cannot ask an architect to redo', type: 'warning', timeout: 4000});
+          }
+          else
+          {
+            doPromptOkCancel
+            (
+              'Mark booking ' + row.bookingcode + ' as uncompleted?',
+              function(result)
               {
-                $.post
-                (
-                  'ajax_setbookingstatus.php',
-                  {
-                    uuid: '<?php echo $_SESSION['uuid']; ?>',
-                    bookingcode: row.bookingcode,
-                    status: 'uncompleted'
-                  },
-                  function(result)
-                  {
-                    var response = JSON.parse(result);
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_setbookingstatus.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      status: 'uncompleted'
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
 
-                    if (response.rc == 0)
-                      doRefreshBookings();
-                    else
-                      noty({text: response.msg, type: 'error', timeout: 10000});
-                  }
-                );
+                      if (response.rc == 0)
+                        doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
               }
-            }
-          );
+            );
+          }
+
         }
       ))
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
@@ -2192,34 +2309,43 @@
         'divBookingsG',
         function(row)
         {
-          doPromptOkCancel
-          (
-            'Mark booking ' + row.bookingcode + ' as approved?',
-            function(result)
-            {
-              if (result)
+          if(row.reportid == 0)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet");
+            noty({text: 'This is an unassinged report, cannot mark it approved', type: 'warning', timeout: 4000});
+          }
+          else
+          {
+            doPromptOkCancel
+            (
+              'Mark booking ' + row.bookingcode + ' as approved?',
+              function(result)
               {
-                $.post
-                (
-                  'ajax_setbookingstatus.php',
-                  {
-                    uuid: '<?php echo $_SESSION['uuid']; ?>',
-                    bookingcode: row.bookingcode,
-                    status: 'approved'
-                  },
-                  function(result)
-                  {
-                    var response = JSON.parse(result);
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_setbookingstatus.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      status: 'approved'
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
 
-                    if (response.rc == 0)
-                      doRefreshBookings();
-                    else
-                      noty({text: response.msg, type: 'error', timeout: 10000});
-                  }
-                );
+                      if (response.rc == 0)
+                        doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
               }
-            }
-          );
+            );
+          }
+
         }
       ))
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
@@ -2232,74 +2358,83 @@
       (
         'divBookingsG',
         function(row, index)
-              {
-                switch (parseInt(row.reportid))
-                {
-                  case 1:
-                    $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  case 2:
-                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  case 3:
-                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  case 4:
-                    $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  case 5:
-                    $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  case 6:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-									case 7:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-									case 8:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-									case 9:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-									case 10:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-									case 11:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-									case 12:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-									case 13:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-									case 14:
-                    $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;		
-                  case 15:
-                    $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  case 16:
-                    $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  case 17:
-                    $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  case 18:
-                    $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 19:
-                    $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                  //case 20:
-                    //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    //break;
-                  case 21:
-                    $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                    break;
-                }
-              }
+        {
+          if(row.reportid == 0)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet")
+            noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
+          }
+          else
+          {
+            switch (parseInt(row.reportid))
+            {
+              case 1:
+                $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 2:
+                $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 3:
+                $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 4:
+                $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 5:
+                $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 6:
+                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 7:
+                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 8:
+                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 9:
+                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 10:
+                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 11:
+                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 12:
+                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 13:
+                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 14:
+                $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;		
+              case 15:
+                $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 16:
+                $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 17:
+                $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 18:
+                $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                break;
+              case 19:
+                $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              //case 20:
+                //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                //break;
+              case 21:
+                $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+            }
+          }
+          
+        }
       ))
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
     }
@@ -2312,7 +2447,12 @@
           'divBookingsG',
           function(row)
           {
-            if (row.reportid == 3)
+            if(row.reportid == 0)
+            {
+              // console.log("this is an unassinged report, cannot allocate architect yet")
+              noty({text: 'This is an unassinged report, cannot send report to customer', type: 'warning', timeout: 3000});
+            }
+            else if (row.reportid == 3)
             {
               doPromptOkCancel
               (
@@ -2420,6 +2560,53 @@
                 }
               );
             }  
+          }
+        )
+      )
+      noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
+    }
+
+    function doCopyBooking()
+    {
+      if (!doGridGetSelectedRowData
+        (
+          'divBookingsG',
+          function(row)
+          { 
+            doPromptOkCancel
+            (
+              'Copy this booking?',
+              function(result)
+              {
+                if (result)
+                {
+                  //console.log(row.bookingcode);
+                  //console.log(row);
+                  $.post
+                  (
+                    'ajax_copybooking.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
+
+                      if (response.rc == 0)
+                      {
+                        doRefreshBookings();
+                        noty({text: response.msg, type: 'success', timeout: 3000});
+                      }
+                      else
+                      {
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                      }
+                    }
+                  );
+                }
+              }
+            ); 
           }
         )
       )
@@ -2561,7 +2748,6 @@
 
       return lnk;
     }
-
     // ************************************************************************************************************
     // Document ready...
 
@@ -2606,54 +2792,6 @@
           document.getElementById('frmLogout').submit();
         }
       );
-
-      // $('#divBookingsG').datagrid('enableFilter');
-      // $('#divBookingsG').datagrid('enableFilter',[
-      //     {
-      //       field:'status',
-      //       type:'combobox',
-      //       options:{
-      //         panelHeight:'auto',
-      //         data:[{value:'',text:'All'},{value:'P',text:'P'},{value:'N',text:'N'}],
-      //         onChange:function(value){
-      //                   if (value == ''){
-      //                       dg.datagrid('removeFilterRule', 'status');
-      //                   } else {
-      //                       dg.datagrid('addFilterRule', {
-      //                           field: 'status',
-      //                           op: 'equal',
-      //                           value: value
-      //                       });
-      //                   }
-      //                   dg.datagrid('doFilter');
-      //           }
-      //     }
-      //     }
-      //   ]);
-
-    //$('#divBookingsG').datagrid('enableFilter');
-      // $('#divBookingsG').datagrid('enableFilter', [{
-      //   field:'status',
-      //   type:'combobox',
-      //   options:{
-      //         panelHeight:'auto',
-      //         data:[{value:'',text:'All'},{value:'P',text:'P'},{value:'N',text:'N'}],
-      //         onChange:function(value){
-      //                   if (value == ''){
-      //                       dg.datagrid('removeFilterRule', 'status');
-      //                   } else {
-      //                       dg.datagrid('addFilterRule', {
-      //                           field: 'status',
-      //                           op: 'equal',
-      //                           value: value
-      //                       });
-      //                   }
-      //                   dg.datagrid('doFilter');
-      //           }
-      //     }
-        
-      // }]);
-      
 
 
       $('#divBookingsG').datagrid
@@ -2782,71 +2920,79 @@
               function(row, index)
               {
                 r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
-                switch (parseInt(row.reportid))
+                if(row.reportid == 0)
                 {
-                  case 1:
-                    $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 2:
-                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 3:
-                    $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 4:
-                    $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 5:
-                    $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 6:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-									case 7:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-									case 8:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-									case 9:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-									case 10:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-									case 11:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-									case 12:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-									case 13:
-                    $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-									case 14:
-                    $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;		
-                  case 15:
-                    $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 16:
-                    $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 17:
-                    $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 18:
-                    $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  case 19:
-                    $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
-                  //case 20:
-                    //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    //break;
-                  case 21:
-                    $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                    break;
+                  // console.log("this is an unassinged report, cannot allocate architect yet")
+                  noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
+                }
+                else
+                {
+                  switch (parseInt(row.reportid))
+                  {
+                    case 1:
+                      $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 2:
+                      $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 3:
+                      $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 4:
+                      $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 5:
+                      $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 6:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 7:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 8:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 9:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 10:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 11:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 12:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 13:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 14:
+                      $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;		
+                    case 15:
+                      $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 16:
+                      $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 17:
+                      $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 18:
+                      $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 19:
+                      $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    //case 20:
+                      //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      //break;
+                    case 21:
+                      $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                  }
                 }
               }
             )
@@ -3034,7 +3180,7 @@
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Toolbars...                                                                                                                                                              -->
   <div id="tbBookings" style="height: auto; display: none">
-    <div style="margin-bottom: 5px">
+    <div style="margin-bottom: 5px;padding-bottom:5px">
       <a href="javascript:void(0)" onClick="doNewBooking()" class="easyui-linkbutton" iconCls="icon-add">New Booking</a>
       <a href="javascript:void(0)" onClick="doEditBooking()" class="easyui-linkbutton" iconCls="icon-edit">Edit Booking</a>
       <a href="javascript:void(0)" onClick="doOpenReport()" class="easyui-linkbutton" iconCls="icon-edit">Open Report</a>
@@ -3042,7 +3188,8 @@
         if (SharedIsAdmin())
         {
       ?>
-          <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-duplicate">Upload PDF Report</a>
+          <a href="javascript:void(0)" onClick="doCopyBooking()" class="easyui-linkbutton" iconCls="icon-duplicate">Copy Booking</a>
+          <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-upload">Upload PDF Report</a>
           <a href="javascript:void(0)" onClick="doMarkPaid()" class="easyui-linkbutton" iconCls="icon-payment">Paid</a>
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
           <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Architect Reedit</a>
@@ -3058,6 +3205,16 @@
     <?php
         }
       ?>
+      <br/>
+      <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
+        <span>Status: </span> 
+        <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 200px;">	
+        <span>Email: </span>  <td><input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;"></td>
+        <a href="javascript:void(0)" onClick="doSearchReport()" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+        <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
+
+      </div>
+      
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
 <!--      <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>-->
      
@@ -3219,10 +3376,15 @@
               <td>Last Name:</td>
               <td><input id="fldNewBookingCustLastName" class="easyui-textbox" style="width: 300px;"></td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>Email:</td>
               <td><input id="fldNewBookingCustEmail" class="easyui-textbox" data-options="iconCls: 'icon-email'" style="width: 300px;"></td>
-            </tr>
+            </tr> -->
+            <tr>
+              <td>Email:</td>
+                <td>        
+                    <input  id="fldNewBookingCustEmail2" class="easyui-tagbox" style="width:300px">
+                </td>
             <tr>
               <td>Mobile:</td>
               <td><input id="fldNewBookingCustMobile" class="easyui-textbox" data-options="iconCls: 'icon-mobile'" style="width: 120px;"></td>
@@ -3381,6 +3543,40 @@
       </div>
     </div>
   </div>
+
+  <!-- <div id="dlgBookingSearch" class="easyui-dialog" title="Bookings Search" style="width: 450px; height: 300px;" data-options="resizable: false, modal: true, closable: false, closed: true">
+    <table>
+      <tr>
+        <td>Status:</td>
+        <td>
+        	<select id="cbSearchOrderMaxHistory" class="easyui-combobox" style="width: 200px;">
+	            <option>Paid</option>
+	            <option>Agree Price has not been set</option>
+	            <option>Completed</option>
+	            <option>Approved</option>
+          </select>
+        </td> -->
+        
+<!--          <td><input type="text" id="cbSearchOrderStatus" class="easyui-combobox"></td>
+ --><!--         <td><div id="cbSearchOrderStatus" style="width: 300px;"></div></td>
+ -->     
+      <!-- <tr>
+        <td>Email:</td>
+        <td><input type="text" id="fldSearchPONo" class="easyui-textbox"></td>
+      </tr>
+      <tr>
+        <td>Max Results:</td>
+        <td>
+          <select id="cbSearchOrderMaxHistory" class="easyui-combobox" style="width: 120px;">
+            <option>200</option>
+            <option>500</option>
+            <option>1000</option>
+            <option>2000</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+  </div> -->
 
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>

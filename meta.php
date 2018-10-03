@@ -19,6 +19,8 @@
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="js/jquery.redirect.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/datagrid-filter.js"></script>
+<script type="text/javascript" src="js/easyui/plugins/jquery.tagbox.js"></script>
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/underscore.string.js"></script>
 <script type="text/javascript" src="js/moment.min.js"></script>
@@ -95,6 +97,7 @@
 <script>
   var reports =
   [
+    {name:'Unassigned',id:0},
     {name: 'Property Assessment Report', id: 1},
     {name: 'Timber Pest Inspection Report', id: 2},
     //{name: 'Combined Timber Pest Inspection Report', id: 3},
@@ -118,6 +121,43 @@
     {name: 'Commercial Dilapidation Survey', id: 20},
 		{name: 'Residential Home Access & Services Report', id: 21}
   ];
+  //This is the selected list for use to select when edit a report, cannot change a report combined report, so remove the combined one. 
+  var editreports =
+  [
+    {name:'Unassigned',id:0},
+    {name: 'Property Assessment Report', id: 1},
+    {name: 'Timber Pest Inspection Report', id: 2},
+    //{name: 'Combined Timber Pest Inspection Report', id: 3},
+    // {name: 'Property and Timber Pest', id: 3},
+    {name: 'Maintenance Advice', id: 4},
+    {name: 'Architect\'s Advice', id: 5},
+    {name: 'Construction Quality Assurance - Stage 1', id: 6},
+		{name: 'Construction Quality Assurance - Stage 2', id: 7},
+		{name: 'Construction Quality Assurance - Stage 3', id: 8},
+		{name: 'Construction Quality Assurance - Stage 4', id: 9},
+		{name: 'Construction Quality Assurance - Stage 5', id: 10},
+		{name: 'Construction Quality Assurance - Stage 6', id: 11},
+		{name: 'Construction Quality Assurance - Stage 7', id: 12},
+		{name: 'Construction Quality Assurance - Stage 8', id: 13},
+    {name: 'Design Consultation Report', id: 14},
+		{name: 'Dilapidation Survey', id: 15},
+    {name: 'Home Feasibility', id: 16},
+    {name: 'Renovation Feasibility', id: 17},
+    {name: 'Residential Home Warranty Report', id: 18},
+    {name: 'Commercial Property Assessment Report', id: 19},
+    {name: 'Commercial Dilapidation Survey', id: 20},
+		{name: 'Residential Home Access & Services Report', id: 21}
+  ];
+
+  //This is for the status select combox search
+  var reportstatus = 
+  [
+    {status:'All',id:0},
+    {status:'Paid',id:1},
+    {status:'Agree Price has not been set',id:2},
+    {status:'Completed',id:3},
+    {status:'Approved',id:4},
+  ]
   var scope =
   [
     {name: 'Property Assessment Scope', id: 1},
