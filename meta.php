@@ -10,17 +10,17 @@
 
 <link rel="shortcut icon" id="favicon" href="favicon.png" type="image/x-icon">
 
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="js/easyui/themes/default/easyui.css">
-<link rel="stylesheet" href="js/easyui/themes/icon.css">
+<link rel="stylesheet" href="css/font-awesome.min.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="css/animate.min.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="js/easyui/themes/default/easyui.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="js/easyui/themes/icon.css?<?php echo time(); ?>">
 
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="js/jquery.redirect.js"></script>
-<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/easyui/datagrid-filter.js"></script>
-<script type="text/javascript" src="js/easyui/plugins/jquery.tagbox.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js?<?php echo time(); ?>"></script>
+<script type="text/javascript" src="js/easyui/datagrid-filter.js?<?php echo time(); ?>"></script>
+<script type="text/javascript" src="js/easyui/plugins/jquery.tagbox.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/underscore.string.js"></script>
 <script type="text/javascript" src="js/moment.min.js"></script>

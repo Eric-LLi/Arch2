@@ -1377,7 +1377,10 @@
 
                   $('#fldNewBookingCustFirstName').textbox('setValue', b.custfirstname);
                   $('#fldNewBookingCustLastName').textbox('setValue', b.custlastname);
-                  $('#fldNewBookingCustEmail2').tagbox('setValues', b.custemail);
+                  if(b.custemail != null)
+                  {
+                    $('#fldNewBookingCustEmail2').tagbox('setValues', b.custemail);
+                  }
                   $('#fldNewBookingCustMobile').textbox('setValue', b.custmobile);
                   $('#fldNewBookingCustPhone').textbox('setValue', b.custphone);
                   $('#fldNewBookingCustAddress1').textbox('setValue', b.custaddress1);
@@ -3205,7 +3208,7 @@
     <?php
         }
       ?>
-      <br/>
+      <!-- <br/>
       <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
         <span>Status: </span> 
         <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 200px;">	
@@ -3213,7 +3216,7 @@
         <a href="javascript:void(0)" onClick="doSearchReport()" class="easyui-linkbutton" iconCls="icon-search">Search</a>
         <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
 
-      </div>
+      </div> -->
       
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
 <!--      <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>-->
