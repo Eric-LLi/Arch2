@@ -2810,7 +2810,7 @@
           sortName: 'bookingcode',
           sortOrder: 'desc',
           remoteSort: false,
-          multiSort: true,
+          multiSort: false,
           autoRowHeight: false,
           rowStyler: function(index,row)
           {
@@ -2843,11 +2843,11 @@
           frozenColumns:
           [
             [
-              {title: 'Booking Status',         rowspan: 2, field: 'status',    width: 85,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingStatusAsImage(row);}},
-              {title: 'Email Status',         rowspan: 2, field: 'emailstatus', width: 80,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingEmailStatusAsImage(row);}},
-              {title: 'Assigned',       rowspan: 2, field: 'assigned',          width: 50,  align: 'center', resizable: false, formatter: function(value, row, index) {return doBookingAssignedImage(row);}},
-              {title: 'Booking Code',   rowspan: 2, field: 'bookingcode',       width: 100, align: 'left',   resizable: true, sortable: true, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}},
-              {title: 'Linked Booking', rowspan: 2, field: 'linkedbookingcode', width: 100, align: 'left',   resizable: true, sortable: true, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}}
+              {title: 'Booking Status',         rowspan: 2, field: 'status',    width: 100,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingStatusAsImage(row);}},
+              {title: 'Email Status',         rowspan: 2, field: 'emailstatus', width: 85,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingEmailStatusAsImage(row);}},
+              {title: 'Assigned',       rowspan: 2, field: 'assigned',          width: 70,  align: 'center', resizable: false, formatter: function(value, row, index) {return doBookingAssignedImage(row);}},
+              {title: 'Booking Code',   rowspan: 2, field: 'bookingcode',       width: 95, align: 'left',   resizable: false, sortable: false, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}},
+              {title: 'Linked Booking', rowspan: 2, field: 'linkedbookingcode', width: 110, align: 'left',   resizable: false, sortable: false, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}}
             ],
             [
             ]
@@ -2859,56 +2859,56 @@
               {title: 'Customer',       colspan: 4},
               {title: 'Property',       colspan: 12},
               {title: 'Architect',      colspan: 4},
-              {title: 'Completed',      rowspan: 2, field: 'datecompleted',     width: 150, align: 'right',  resizable: true, sortable: true},
-              {title: 'Approved',       rowspan: 2, field: 'dateapproved',      width: 150, align: 'right',  resizable: true, sortable: true},
-              {title: 'Paid',           rowspan: 2, field: 'datepaid',          width: 150, align: 'right',  resizable: true, sortable: true},
+              {title: 'Completed',      rowspan: 2, field: 'datecompleted',     width: 150, align: 'right',  resizable: false, sortable: false},
+              {title: 'Approved',       rowspan: 2, field: 'dateapproved',      width: 150, align: 'right',  resizable: false, sortable: false},
+              {title: 'Paid',           rowspan: 2, field: 'datepaid',          width: 150, align: 'right',  resizable: false, sortable: false},
               {title: 'Email',          colspan: 2},
 
-              {title: 'Created',        rowspan: 2, field: 'datecreated',       width: 150, align: 'right',  resizable: true, sortable: true},
-              {title: 'By',             rowspan: 2, field: 'usercreatedid',     width: 200, align: 'left',   resizable: true, sortable: true, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return row.usercreatedfirstname + ' ' + row.usercreatedlastname;}},
-              {title: 'Modified',       rowspan: 2, field: 'datemodified',      width: 150, align: 'right',  resizable: true, sortable: true},
-              {title: 'By',             rowspan: 2, field: 'usermodifiedid',    width: 200, align: 'left',   resizable: true, sortable: true, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return (_.isNull(row.usermodifiedfirstname)) ? '' : row.usermodifiedfirstname + ' ' + row.usermodifiedlastname;}},
-              {title: 'Cancelld Date',  rowspan: 2, field: 'datecancelled',      width: 150, align: 'right',  resizable: true, sortable: true},
+              {title: 'Created',        rowspan: 2, field: 'datecreated',       width: 150, align: 'right',  resizable: false, sortable: false},
+              {title: 'By',             rowspan: 2, field: 'usercreatedid',     width: 150, align: 'left',   resizable: false, sortable: false, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return row.usercreatedfirstname + ' ' + row.usercreatedlastname;}},
+              {title: 'Modified',       rowspan: 2, field: 'datemodified',      width: 150, align: 'right',  resizable: false, sortable: false},
+              {title: 'By',             rowspan: 2, field: 'usermodifiedid',    width: 150, align: 'left',   resizable: false, sortable: false, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return (_.isNull(row.usermodifiedfirstname)) ? '' : row.usermodifiedfirstname + ' ' + row.usermodifiedlastname;}},
+              {title: 'Cancelld Date',  rowspan: 2, field: 'datecancelled',     width: 150, align: 'left',  resizable: false, sortable: false},
             ],
             [
-              {title: 'Report',                     field: 'reportid',          width: 150, align: 'left',   resizable: true, formatter: function(value, row) {return doGetStringFromIdInObjArray(reports, value);}},
+              {title: 'Report',                     field: 'reportid',                      align: 'left',   resizable: false, formatter: function(value, row) {return doGetStringFromIdInObjArray(reports, value);}},
               <?php
                 if (SharedIsAdmin())
                 {
               ?>
-                  {title: 'Agreed Price',           field: 'budget',            width: 100, align: 'right',  resizable: true},
+                  {title: 'Agreed Price',           field: 'budget',            width: 90,  align: 'center',  resizable: false},
               <?php
                 }
               ?>
-              {title: 'Commission',                 field: 'commission',        width: 100, align: 'right',  resizable: true},
-              {title: 'Travel Costs',               field: 'travel',            width: 100, align: 'right',  resizable: true},
-              {title: 'Spotter Fee',                field: 'spotter',           width: 100, align: 'right',  resizable: true},
+              {title: 'Commission',                 field: 'commission',        width: 100, align: 'center',  resizable: false},
+              {title: 'Travel Costs',               field: 'travel',            width: 100, align: 'center',  resizable: false},
+              {title: 'Spotter Fee',                field: 'spotter',           width: 100, align: 'center',  resizable: false},
 
-              {title: 'First Name',                 field: 'custfirstname',     width: 150, align: 'left',   resizable: true},
-              {title: 'Last Name',                  field: 'custlastname',      width: 150, align: 'left',   resizable: true},
-              {title: 'Email',                      field: 'custemail',         width: 150, align: 'left',   resizable: true},
-              {title: 'Mobile',                     field: 'custmobile',        width: 100, align: 'left',   resizable: true},
+              {title: 'First Name',                 field: 'custfirstname',     width: 120, align: 'left',   resizable: false},
+              {title: 'Last Name',                  field: 'custlastname',      width: 120, align: 'left',   resizable: false},
+              {title: 'Email',                      field: 'custemail',                     align: 'left',   resizable: false},
+              {title: 'Mobile',                     field: 'custmobile',        width: 100, align: 'left',   resizable: false},
 
-              {title: 'Address1',                   field: 'address1',          width: 150, align: 'left',   resizable: true, styler: function(value, row, index) {return 'color: ' + colour_sienna;}},
-              {title: 'Address2',                   field: 'address2',          width: 150, align: 'left',   resizable: true},
-              {title: 'Suburb',                     field: 'city',              width: 150, align: 'left',   resizable: true},
-              {title: 'State',                      field: 'state',             width: 150, align: 'left',   resizable: true},
-              {title: 'Postcode',                   field: 'postcode',          width: 150, align: 'left',   resizable: true},
-              {title: 'No. Storeys',               	field: 'numstories',        width: 100, align: 'center', resizable: true},
-              {title: 'No. Bedrooms',              	field: 'numbedrooms',       width: 100, align: 'center', resizable: true},
-              {title: 'No. Bathrooms',             	field: 'numbathrooms',      width: 100, align: 'center', resizable: true},
-              {title: 'No. Rooms',                 	field: 'numrooms',          width: 100, align: 'center', resizable: true},
-              {title: 'No. Outbuildings',         	field: 'numbuildings',  	  width: 100, align: 'center', resizable: true},
-              {title: 'Construction Type',          field: 'construction',      width: 120, align: 'center', resizable: true},
-              {title: 'Property Age',               field: 'age',               width: 120, align: 'center', resizable: true},
+              {title: 'Address1',                   field: 'address1',                      align: 'left',   resizable: false, styler: function(value, row, index) {return 'color: ' + colour_sienna;}},
+              {title: 'Address2',                   field: 'address2',                      align: 'left',   resizable: false},
+              {title: 'Suburb',                     field: 'city',              width: 100, align: 'left',   resizable: true},
+              {title: 'State',                      field: 'state',             width: 60,  align: 'center', resizable: false},
+              {title: 'Postcode',                   field: 'postcode',          width: 60,  align: 'center', resizable: false},
+              {title: 'No. Storeys',               	field: 'numstories',        width: 100, align: 'center', resizable: false},
+              {title: 'No. Bedrooms',              	field: 'numbedrooms',       width: 100, align: 'center', resizable: false},
+              {title: 'No. Bathrooms',             	field: 'numbathrooms',      width: 100, align: 'center', resizable: false},
+              {title: 'No. Rooms',                 	field: 'numrooms',          width: 100, align: 'center', resizable: false},
+              {title: 'No. Outbuildings',         	field: 'numbuildings',  	  width: 110, align: 'center', resizable: false},
+              {title: 'Construction Type',          field: 'construction',      width: 120, align: 'center', resizable: false},
+              {title: 'Property Age',               field: 'age',               width: 120, align: 'center', resizable: false},
 
-              {title: 'Name',                       field: 'archname',          width: 200, align: 'left',   resizable: true, styler: function(value, row, index) {return 'color: ' + colour_royalblue;}, formatter: function(value, row) {return _.titleize(row.archfirstname) + ' ' + _.titleize(row.archlastname);}},
-              {title: 'Reg. No.',                   field: 'archregno',         width: 120, align: 'left',   resizable: true},
-              {title: 'Email',                      field: 'archemail',         width: 150, align: 'left',   resizable: true},
-              {title: 'Mobile',                     field: 'archmobile',        width: 100, align: 'left',   resizable: true},
+              {title: 'Name',                       field: 'archname',          width: 120, align: 'left',   resizable: false, styler: function(value, row, index) {return 'color: ' + colour_royalblue;}, formatter: function(value, row) {return _.titleize(row.archfirstname) + ' ' + _.titleize(row.archlastname);}},
+              {title: 'Reg. No.',                   field: 'archregno',         width: 120, align: 'left',   resizable: false},
+              {title: 'Email',                      field: 'archemail',                     align: 'left',   resizable: false},
+              {title: 'Mobile',                     field: 'archmobile',        width: 100, align: 'left',   resizable: false},
 
-              {title: 'Count',                      field: 'emailcount',        width: 80,  align: 'right',   resizable: true, sortable: true, formatter: function(value, row) {return (value == 0) ? '' : value;}},
-              {title: 'Last',                       field: 'lastemailed',       width: 150, align: 'right',   resizable: true, sortable: true}
+              {title: 'Count',                      field: 'emailcount',        width: 80,  align: 'center',   resizable: false, sortable: false, formatter: function(value, row) {return (value == 0) ? '' : value;}},
+              {title: 'Last',                       field: 'lastemailed',       width: 150, align: 'center',   resizable: false, sortable: false}
             ]
           ],
           onRowContextMenu: function(e, index, row)
