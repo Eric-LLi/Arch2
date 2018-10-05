@@ -904,6 +904,7 @@
         // Report TAB
         $('#fldNewBookingReport').combobox('clear');
         $('#fldNewBookingReport').combobox('enable');
+        $('#fldNewBookingReport').combobox('setValue', 0); // set the default report type is 'Unassigned', id is 0;
 
         <?php
           if (SharedIsAdmin())
@@ -945,7 +946,7 @@
         $('#fldNewBookingEstateAgentPhone').textbox('clear');
 
         // Misc
-        $('#btnNewBookingAdd').linkbutton('disable');
+        //$('#btnNewBookingAdd').linkbutton('disable');
       }
 
       $('#dlgBookingNew').dialog
@@ -960,7 +961,7 @@
           {
             // Customer TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
-
+            
             $('#fldNewBookingCustEmail2').tagbox
             (
               {
@@ -1001,6 +1002,7 @@
                 // }
               }
             );
+            // $('#fldNewBookingReport').combobox('setValue',reports[0]);
             $('#fldNewBookingState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
             $('#fldNewBookingNumStories').combobox({valueField: 'name', textField: 'name', limitToList: true, data: numitems});
             $('#fldNewBookingNumBedRooms').combobox({valueField: 'name', textField: 'name', limitToList: true, data: numitems});
@@ -1044,7 +1046,7 @@
                 var custpostcode = $('#fldNewBookingCustPostcode').textbox('getValue');
                 var custstate = $('#fldNewBookingCustState').combobox('getValue');
 
-                var reportid = $('#fldNewBookingReport').combobox('getValue');
+                var reportid = $('#fldNewBookingReport').combobox('getValue');               
                 <?php
                   if (SharedIsAdmin())
                   {
@@ -1289,7 +1291,7 @@
         $('#fldNewBookingEstateAgentPhone').textbox('clear');
 
         // Misc
-        $('#btnNewBookingAdd').linkbutton('disable');
+        //$('#btnNewBookingAdd').linkbutton('disable');
       }
 
       $('#dlgBookingNew').dialog
@@ -1313,10 +1315,10 @@
                 textField: 'name',
                 limitToList: true,
                 data: editreports,
-                onSelect: function(record)
-                {
-                  $('#btnNewBookingAdd').linkbutton('enable');
-                }
+                // onSelect: function(record)
+                // {
+                //   $('#btnNewBookingAdd').linkbutton('enable');
+                // }
               }
             );
 
@@ -1457,7 +1459,7 @@
           [
             {
               text: 'Save',
-              disabled: true,
+              disabled: false,
               id: 'btnNewBookingAdd',
               handler: function()
               {
@@ -1519,6 +1521,10 @@
                 var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                 var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
 
+                if(reportid == "" || reportid == null)
+                {
+                  reportid = 0
+                }
                 if (!_.isBlank(reportid))
                 {
                   if (!_.isBlank(custfirstname))
@@ -2884,8 +2890,8 @@
               {title: 'Travel Costs',               field: 'travel',            width: 100, align: 'center',  resizable: false},
               {title: 'Spotter Fee',                field: 'spotter',           width: 100, align: 'center',  resizable: false},
 
-              {title: 'First Name',                 field: 'custfirstname',     width: 120, align: 'left',   resizable: false},
-              {title: 'Last Name',                  field: 'custlastname',      width: 120, align: 'left',   resizable: false},
+              {title: 'First Name',                 field: 'custfirstname',     width: 150, align: 'left',   resizable: false},
+              {title: 'Last Name',                  field: 'custlastname',      width: 150, align: 'left',   resizable: false},
               {title: 'Email',                      field: 'custemail',                     align: 'left',   resizable: false},
               {title: 'Mobile',                     field: 'custmobile',        width: 100, align: 'left',   resizable: false},
 
