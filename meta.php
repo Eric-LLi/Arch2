@@ -69,6 +69,18 @@
   .panel-body{
 	  font-family:Arial, Helvetica, sans-serif;
   }
+
+  .searchcombo_img{
+			display:inline-block;
+			vertical-align:middle;
+			width:16px;
+			height:16px;
+		}
+	.searchcombo_text{
+			display:inline-block;
+			vertical-align:middle;
+			padding:3px 0 3px 3px;
+		}
   
   h2{
 	  font-family:Arial, Helvetica, sans-serif;
@@ -153,10 +165,11 @@
   var reportstatus = 
   [
     {status:'All',id:0},
-    {status:'Paid',id:1},
-    {status:'Agree Price has not been set',id:2},
-    {status:'Completed',id:3},
-    {status:'Approved',id:4},
+    {status:'Agree Price has not been set',icon:'images/led/ball-black.png',id:1},
+    {status:'Approved',icon:'images/led/ball-green.png',id:2},
+    {status:'Completed',icon:'images/led/ball-lightblue.png',id:3},
+    {status:'Paid',icon:'images/led/ball-orange.png',id:4},
+    {status:'Not Paid',icon:'images/led/ball-darkblue.png',id:5}
   ]
   var scope =
   [
