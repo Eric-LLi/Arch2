@@ -13,6 +13,7 @@
     if (isset($_POST['bookingcode']) && isset($_POST['uuid']))
     {
       $bookingcode = $_POST['bookingcode'];
+      $bookingid = $_POST['bookingcode'];
       $uuid = $_POST['uuid'];
 
       $custfirstname = $_POST['custfirstname'];
