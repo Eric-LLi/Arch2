@@ -202,6 +202,8 @@
     function doRefreshBookings()
     {
       console.log('***** Refreshing bookings...');
+      $('#cbSearchReportStatus').combobox('setValue',0);
+      $('#fldSearchEmail').textbox('clear');
       $.post
       (
         'ajax_getbookings.php',
@@ -222,13 +224,6 @@
           }
         }
       );
-    }
-
-    function doResetSearch()
-    {
-      $('#cbSearchReportStatus').combobox('setValue',0);
-      $('#fldSearchEmail').textbox('clear');
-      doRefreshBookings();
     }
 
     function doRefreshMembers()
@@ -2692,6 +2687,11 @@
         img = '<img src="images/led/ball-orange.png" width="20" height="20">';
         tooltip = 'Booking has been paid';
       }
+      else if (_.isNull(row.datepaid) && !_.isBlank(row.budget))
+      {
+        img = '<img src="images/led/ball-darkblue.png" width="20" height="20">';
+        tooltip = 'Booking has not been paid';
+      }
 
       lnk = '<a href="#" title="' + tooltip + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
 
@@ -2756,6 +2756,50 @@
         lnk = '<a href="#" title="' + typename + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
 
       return lnk;
+    }
+
+    function doSearchBookings()
+    {
+      console.log('***** Searching bookings...');
+      var selectedreportstatus = $('#cbSearchReportStatus').combobox('getValue');
+      // console.log(selectedreportstatus);
+      var emailinput = $('#fldSearchEmail').textbox('getValue');
+      // console.log(emailinput);
+      $.post
+      (
+        'ajax_searchbookings.php',
+        {
+          uuid: '<?php echo $_SESSION['uuid']; ?>',
+          itype: <?php echo $_SESSION['itype']; ?>,
+          status: selectedreportstatus,
+          email: emailinput
+        },
+        function(result)
+        {
+          var response = JSON.parse(result);
+          // console.log(response.msg);
+          //console.log(response.rc)
+
+          if (response.rc == 0)
+          {
+            cache_bookings = response.rows;
+            // console.log(cache_bookings);
+            $('#divBookingsG').datagrid('reload');
+          }
+          else
+          {
+            cache_bookings = response.rows;
+            // console.log(cache_bookings);
+            $('#divBookingsG').datagrid('reload');
+            noty({text: response.msg, type: 'warning', timeout: 10000});
+          }
+        }
+      );
+    }
+
+    function doResetSearch()
+    {
+      doRefreshBookings();
     }
     // ************************************************************************************************************
     // Document ready...
@@ -3065,6 +3109,28 @@
         }
       );
 
+      $('#cbSearchReportStatus').combobox
+      (
+        {
+          valueField:'id',
+          textField:'status',
+          data:reportstatus,
+          formatter:function(row)
+          {
+            if(row.id != 0)
+            {
+              var imageFile = row.icon;
+              return '<img class="searchcombo_img" src="'+imageFile+'"/><span class="searchcombo_text">'+row.status+'</span>';
+            }
+            else
+            {
+              return '<span class="searchcombo_text">'+row.status+'</span>';
+            }
+          
+          }
+        }
+      );
+
       // ************************************************************************************************************
       // Populate data...
       doRefreshBookings();
@@ -3214,18 +3280,20 @@
     <?php
         }
       ?>
-      <!-- <br/>
+      <br/>
       <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
         <span>Status: </span> 
-        <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 200px;">	
-        <span>Email: </span>  <td><input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;"></td>
-        <a href="javascript:void(0)" onClick="doSearchReport()" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+        <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 230px;">	
+        <span>Customer Email: </span>  
+        <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
+        <a href="javascript:void(0)" onClick="doSearchBookings()" class="easyui-linkbutton" iconCls="icon-search">Search</a>
         <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
 
-      </div> -->
+      </div>
       
-      <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a> -->
-<!--      <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a>-->
+      <!-- deprecated Functions -->
+      <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
+      <a href="javascript:void(0)" onClick="doClearBooking()" class="easyui-linkbutton" iconCls="icon-clear">Clear Selection</a> -->
      
     </div>
   </div>
@@ -3553,39 +3621,6 @@
     </div>
   </div>
 
-  <!-- <div id="dlgBookingSearch" class="easyui-dialog" title="Bookings Search" style="width: 450px; height: 300px;" data-options="resizable: false, modal: true, closable: false, closed: true">
-    <table>
-      <tr>
-        <td>Status:</td>
-        <td>
-        	<select id="cbSearchOrderMaxHistory" class="easyui-combobox" style="width: 200px;">
-	            <option>Paid</option>
-	            <option>Agree Price has not been set</option>
-	            <option>Completed</option>
-	            <option>Approved</option>
-          </select>
-        </td> -->
-        
-<!--          <td><input type="text" id="cbSearchOrderStatus" class="easyui-combobox"></td>
- --><!--         <td><div id="cbSearchOrderStatus" style="width: 300px;"></div></td>
- -->     
-      <!-- <tr>
-        <td>Email:</td>
-        <td><input type="text" id="fldSearchPONo" class="easyui-textbox"></td>
-      </tr>
-      <tr>
-        <td>Max Results:</td>
-        <td>
-          <select id="cbSearchOrderMaxHistory" class="easyui-combobox" style="width: 120px;">
-            <option>200</option>
-            <option>500</option>
-            <option>1000</option>
-            <option>2000</option>
-          </select>
-        </td>
-      </tr>
-    </table>
-  </div> -->
 
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>

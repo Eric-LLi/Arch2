@@ -106,7 +106,7 @@
                   "b1.bookings_id desc,".
                   "b2.id desc ".
                   // "b1.datecreated desc " .
-                  "limit 800";
+                  "limit 500";
       error_log($dbselect);
       if ($dbresult = SharedQuery($dbselect, $dblink))
       {
