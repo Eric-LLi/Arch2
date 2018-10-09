@@ -171,7 +171,7 @@ function getAssessorDetailsTable() {
             widths: [61, '*', 80, '*'],
             body: [
                 [{
-                    text: 'ASSESSOR DETAILS',
+                    text: 'ARCHITECT DETAILS',
                     style: 'tableHeader',
                     colSpan: 4,
                     border: [false, false, false, true]
