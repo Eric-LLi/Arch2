@@ -1397,11 +1397,12 @@
                   {
                     if(b.reportdata  === null)
                     {
-                      console.log("has not create report yet, can reselect report type");
+                      console.log("has not create report yet,reportdata is null, can reselect report type");
                       $('#fldNewBookingReport').combobox('enable');
                     }
                     else
                     {
+                      console.log("reportdata is not null, cannot reselect report type");
                       $('#fldNewBookingReport').combobox('disable');
                     }
                   }
@@ -2570,47 +2571,448 @@
       noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
     }
 
+    /**
+     * Copy Booking, the open dialogue similiar to the new booking dialogue, but the customer details have been populated in advanced. 
+     */
+
     function doCopyBooking()
     {
       if (!doGridGetSelectedRowData
         (
           'divBookingsG',
           function(row)
-          { 
-            doPromptOkCancel
-            (
-              'Copy this booking?',
-              function(result)
-              {
-                if (result)
-                {
-                  //console.log(row.bookingcode);
-                  //console.log(row);
-                  $.post
-                  (
-                    'ajax_copybooking.php',
-                    {
-                      uuid: '<?php echo $_SESSION['uuid']; ?>',
-                      bookingcode: row.bookingcode
-                    },
-                    function(result)
-                    {
-                      var response = JSON.parse(result);
+          {
 
-                      if (response.rc == 0)
+           
+            var selectedCustFirstName = row.custfirstname;
+            var selectedCustLastName = row.custlastname;
+            var selectedCustEmail = row.custemail;
+            var selectedCustMobile = row.custmobile;
+            var selectedCustPhone = row.custphone;
+            var selectedCustAddress1 = row.custaddress1;
+            var selectedCustAddress2 = row.custaddress2;
+            var selectedCustCity = row.custcity;
+            var selectedCustState = row.custstate;
+            var selectedCustPostcode = row.custpostcode;
+            //console.log(selectedCustEmail);
+
+           
+            function doReset()
+            {
+              // Customer TAB
+              // $('#fldNewBookingCustState').combobox('clear');
+            
+              // $('#fldNewBookingCustFirstName').textbox('clear');
+              // $('#fldNewBookingCustLastName').textbox('clear');
+              // $('#fldNewBookingCustEmail').textbox('clear');
+              // $('#fldNewBookingCustEmail2').tagbox('clear');
+              // $('#fldNewBookingCustMobile').textbox('clear');
+              // $('#fldNewBookingCustPhone').textbox('clear');
+              // $('#fldNewBookingCustAddress1').textbox('clear');
+              // $('#fldNewBookingCustAddress2').textbox('clear');
+              // $('#fldNewBookingCustCity').textbox('clear');
+              // $('#fldNewBookingCustPostcode').textbox('clear');
+
+              //Populate the customer details fields. 
+              $('#fldNewBookingCustFirstName').textbox('setValue',selectedCustFirstName);
+              $('#fldNewBookingCustLastName').textbox('setValue',selectedCustLastName);
+              $('#fldNewBookingCustMobile').textbox('setValue',selectedCustMobile);
+              $('#fldNewBookingCustPhone').textbox('setValue',selectedCustPhone);
+              $('#fldNewBookingCustAddress1').textbox('setValue',selectedCustAddress1);
+              $('#fldNewBookingCustAddress2').textbox('setValue',selectedCustAddress2);
+              $('#fldNewBookingCustCity').textbox('setValue',selectedCustCity);
+              $('#fldNewBookingCustPostcode').textbox('setValue',selectedCustPostcode);
+              $('#fldNewBookingCustState').combobox('setValue',selectedCustState);
+              if(selectedCustEmail != null)
+              {
+                $('#fldNewBookingCustEmail2').tagbox('setValues',selectedCustEmail);
+              }
+              // Report TAB
+              $('#fldNewBookingReport').combobox('clear');
+              $('#fldNewBookingReport').combobox('enable');
+              $('#fldNewBookingReport').combobox('setValue', 0); // set the default report type is 'Unassigned', id is 0;
+
+              <?php
+                if (SharedIsAdmin())
+                {
+              ?>
+                  $('#fldNewBookingBudget').numberbox('clear');
+                  $('#fldNewBookingCommission').numberbox('clear');
+                  $('#fldNewBookingTravel').numberbox('clear');
+                  $('#fldNewBookingSpotter').numberbox('clear');
+
+              <?php
+                }
+              ?>
+              $('#fldNewBookingNotes').textbox('clear');
+
+              // Properties TAB
+              $('#fldNewBookingState').combobox('clear');
+              $('#fldNewBookingNumStories').combobox('clear');
+              $('#fldNewBookingNumBedRooms').combobox('clear');
+              $('#fldNewBookingNumBathRooms').combobox('clear');
+              $('#fldNewBookingNumRooms').combobox('clear');
+              $('#fldNewBookingNumOutBuildings').combobox('clear');
+
+              $('#fldNewBookingAddress1').textbox('clear');
+              $('#fldNewBookingAddress2').textbox('clear');
+              $('#fldNewBookingCity').textbox('clear');
+              $('#fldNewBookingPostcode').textbox('clear');
+              $('#fldNewBookingConstruction').textbox('clear');
+              $('#fldNewBookingAge').textbox('clear');
+
+              $('#fldNewBookingMeetingOnSite').switchbutton('uncheck');
+              $('#fldNewBookingRenoAdvice').switchbutton('uncheck');
+              $('#fldNewBookingPestInspection').switchbutton('uncheck');
+
+              // Estate agent TAB
+              $('#fldNewBookingEstateAgentCompany').textbox('clear');
+              $('#fldNewBookingEstateAgentContact').textbox('clear');
+              $('#fldNewBookingEstateAgentMobile').textbox('clear');
+              $('#fldNewBookingEstateAgentPhone').textbox('clear');
+
+              // Misc
+              //$('#btnNewBookingAdd').linkbutton('disable');
+            }
+
+            $('#dlgBookingNew').dialog
+            (
+              {
+                title: 'New Booking',
+                modal: true,
+                onClose: function()
+                {
+                },
+                onOpen: function()
+                {
+                  // Customer TAB
+                  $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
+                  
+                  $('#fldNewBookingCustEmail2').tagbox
+                  (
+                    {
+                      tagStyler: function(value)
                       {
-                        doRefreshBookings();
-                        noty({text: response.msg, type: 'success', timeout: 3000});
-                      }
-                      else
-                      {
-                        noty({text: response.msg, type: 'error', timeout: 10000});
-                      }
+                        return 'background:#ffd7d7;';
+                      },
+                      inputEvents: $.extend({}, $.fn.tagbox.defaults.inputEvents, {
+                          keyup: function(e)
+                          {
+                            // console.log(e.keyCode);
+                            if(e.keyCode == 186)
+                            {
+                              // console.log('user hit ; need to do something');
+                              var custemail = $('#fldNewBookingCustEmail2').tagbox('getValues');
+                              var custemailstr = $('#fldNewBookingCustEmail2').tagbox('getText');
+                              custemailstr = custemailstr.substring(0, custemailstr.length - 1)
+                              custemail.push(custemailstr);
+                              $('#fldNewBookingCustEmail2').tagbox('clear');
+                              $('#fldNewBookingCustEmail2').tagbox('setValues',custemail);
+                                }
+                              }
+                          })
+                        }
+                  );
+
+                  // Properties TAB
+                  $('#fldNewBookingReport').combobox
+                  (
+                    {
+                      valueField: 'id',
+                      textField: 'name',
+                      limitToList: true,
+                      data: reports,
+                      // onSelect: function(record)
+                      // {
+                      //   $('#btnNewBookingAdd').linkbutton('enable');
+                      // }
                     }
                   );
+
+                  $('#fldNewBookingCustEmail2').tagbox
+                  (
+                    {
+                      tagStyler: function(value)
+                      {
+                        return 'background:#ffd7d7;';
+                      },
+                      inputEvents: $.extend({}, $.fn.tagbox.defaults.inputEvents, {
+                        keyup: function(e){
+                        if(e.keyCode == 186)
+                        {
+                            // console.log('user hit ; need to do something');
+                            var custemail = $('#fldNewBookingCustEmail2').tagbox('getValues');
+                            var custemailstr = $('#fldNewBookingCustEmail2').tagbox('getText');
+                            custemailstr = custemailstr.substring(0, custemailstr.length - 1)
+                            custemail.push(custemailstr);
+                            $('#fldNewBookingCustEmail2').tagbox('clear');
+                            $('#fldNewBookingCustEmail2').tagbox('setValues',custemail);
+                          }
+                        }
+                      })
+                    }
+                  );
+                  // $('#fldNewBookingReport').combobox('setValue',reports[0]);
+                  $('#fldNewBookingState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
+                  $('#fldNewBookingNumStories').combobox({valueField: 'name', textField: 'name', limitToList: true, data: numitems});
+                  $('#fldNewBookingNumBedRooms').combobox({valueField: 'name', textField: 'name', limitToList: true, data: numitems});
+                  $('#fldNewBookingNumBathRooms').combobox({valueField: 'name', textField: 'name', limitToList: true, data: numitems});
+                  $('#fldNewBookingNumRooms').combobox({valueField: 'name', textField: 'name', limitToList: true, data: numitems});
+                  $('#fldNewBookingNumOutBuildings').combobox({valueField: 'name', textField: 'name', limitToList: true, data: numitems});
+
+                  $('#fldNewBookingMeetingOnSite').switchbutton({onText: 'Yes', offText: 'No', checked: false});
+                  $('#fldNewBookingRenoAdvice').switchbutton({onText: 'Yes', offText: 'No', checked: false});
+                  $('#fldNewBookingPestInspection').switchbutton({onText: 'Yes', offText: 'No', checked: false});
+
+                  // Misc...
+                  $('#fldNewBookingCustAddress1').textbox('textbox').attr('autocomplete', 'on');
+                  $('#fldNewBookingAddress1').textbox('textbox').attr('autocomplete', 'on');
+
+                  doReset();
+                },
+                buttons:
+                [
+                  {
+                    text: 'Add',
+                    disabled: false,
+                    id: 'btnNewBookingAdd',
+                    handler: function()
+                    {
+                      $('#fldNewBookingCustEmail2').tagbox('textbox').trigger($.Event("keydown", {keyCode: 13}));
+                      var custemail = $('#fldNewBookingCustEmail2').tagbox('getValues');
+                      
+                      custemail = JSON.stringify(custemail);
+                      custemail = custemail.slice(1, custemail.length - 1);
+                      custemail = custemail.replace(/"/g,"");
+
+                      var custfirstname = $('#fldNewBookingCustFirstName').textbox('getValue');
+                      var custlastname = $('#fldNewBookingCustLastName').textbox('getValue');
+                      // var custemail = $('#fldNewBookingCustEmail').textbox('getValue');
+                      var custmobile = $('#fldNewBookingCustMobile').textbox('getValue');
+                      var custphone = $('#fldNewBookingCustPhone').textbox('getValue');
+                      var custaddress1 = $('#fldNewBookingCustAddress1').textbox('getValue');
+                      var custaddress2 = $('#fldNewBookingCustAddress2').textbox('getValue');
+                      var custcity = $('#fldNewBookingCustCity').textbox('getValue');
+                      var custpostcode = $('#fldNewBookingCustPostcode').textbox('getValue');
+                      var custstate = $('#fldNewBookingCustState').combobox('getValue');
+
+                      var reportid = $('#fldNewBookingReport').combobox('getValue');               
+                      <?php
+                        if (SharedIsAdmin())
+                        {
+                      ?>
+                          var budget = $('#fldNewBookingBudget').numberbox('getValue');
+                          var commission = $('#fldNewBookingCommission').numberbox('getValue');
+                          var travel = $('#fldNewBookingTravel').numberbox('getValue');
+                          var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
+                      <?php
+                        }
+                      ?>
+                      var notes = $('#fldNewBookingNotes').textbox('getValue');
+
+                      var numstories = $('#fldNewBookingNumStories').combobox('getValue');
+                      var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
+                      var numbathrooms = $('#fldNewBookingNumBathRooms').combobox('getValue');
+                      var numrooms = $('#fldNewBookingNumRooms').combobox('getValue');
+                      var numbuildings = $('#fldNewBookingNumOutBuildings').combobox('getValue');
+
+                      var address1 = $('#fldNewBookingAddress1').textbox('getValue');
+                      var address2 = $('#fldNewBookingAddress2').textbox('getValue');
+                      var city = $('#fldNewBookingCity').textbox('getValue');
+                      var postcode = $('#fldNewBookingPostcode').textbox('getValue');
+                      var state = $('#fldNewBookingState').combobox('getValue');
+                      var construction = $('#fldNewBookingConstruction').textbox('getValue');
+                      var age = $('#fldNewBookingAge').textbox('getValue');
+
+                      var meetingonsite = doSwitchButtonChecked('fldNewBookingMeetingOnSite');
+                      var renoadvice = doSwitchButtonChecked('fldNewBookingRenoAdvice');
+                      var pestinspection = doSwitchButtonChecked('fldNewBookingPestInspection');
+
+                      var estateagentcompany = $('#fldNewBookingEstateAgentCompany').textbox('getValue');
+                      var estateagentcontact = $('#fldNewBookingEstateAgentContact').textbox('getValue');
+                      var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
+                      var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
+                      //console.log(custemail);
+
+                      if (!_.isBlank(reportid))
+                      {
+                        if (!_.isBlank(custfirstname))
+                        {
+                          if (!_.isBlank(custlastname))
+                          {
+                            if (!_.isBlank(custemail) || !_.isBlank(custmobile))
+                            {
+                              if (!_.isBlank(address1))
+                              {
+                                
+                                var data =
+                                {
+                                  custfirstname: _.titleize(custfirstname),
+                                  custlastname: _.titleize(custlastname),
+                                  custemail: custemail,
+                                  custmobile: custmobile,
+                                  custphone: custphone,
+                                  custaddress1: custaddress1,
+                                  custaddress2: custaddress2,
+                                  custcity: custcity,
+                                  custpostcode: custpostcode,
+                                  custstate: custstate,
+
+                                  reportid: reportid,
+                                  <?php
+                                    if (SharedIsAdmin())
+                                    {
+                                  ?>
+                                      budget: budget,
+                                      commission: commission,
+                                      travel: travel,
+                                      spotter: spotter,
+                                  <?php
+                                    }
+                                  ?>
+                                  notes: notes,
+
+                                  numstories: numstories,
+                                  numbedrooms: numbedrooms,
+                                  numbathrooms: numbathrooms,
+                                  numrooms: numrooms,
+                                  numbuildings: numbuildings,
+                                  address1: address1,
+                                  address2: address2,
+                                  city: city,
+                                  postcode: postcode,
+                                  state: state,
+                                  construction: construction,
+                                  age: age,
+                                  meetingonsite: meetingonsite,
+                                  renoadvice: renoadvice,
+                                  pestinspection: pestinspection,
+
+                                  estateagentcompany: estateagentcompany,
+                                  estateagentcontact: estateagentcontact,
+                                  estateagentmobile: estateagentmobile,
+                                  estateagentphone: estateagentphone,
+                                  uuid: '<?php echo $_SESSION['uuid']; ?>'
+                                };
+                                //console.log(data);
+
+                                $.post
+                                (
+                                  'ajax_copybooking.php',
+                                  data,
+                                  function(result)
+                                  {
+                                    //console.log(result);
+                                    var response = JSON.parse(result);
+
+                                    if (response.rc == 0)
+                                    {
+                                      doRefreshBookings();
+                                      noty({text: response.msg, type: 'success', timeout: 10000});
+                                      $('#dlgBookingNew').dialog('close');
+                                    }
+                                    else
+                                      noty({text: response.msg, type: 'error', timeout: 10000});
+                                  }
+                                );
+                              }
+                              else
+                              {
+                                $('#newbookingtabs').tabs('select', 2);
+                                doMandatoryTextbox('Please enter property address', 'address1');
+                              }
+                            }
+                            else
+                            {
+                              $('#newbookingtabs').tabs('select', 0);
+                              doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                            }
+                          }
+                          else
+                          {
+                            $('#newbookingtabs').tabs('select', 0);
+                            doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                          }
+                        }
+                        else
+                        {
+                          $('#newbookingtabs').tabs('select', 0);
+                          doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                        }
+                      }
+                      else
+                        doMandatoryTextbox('Please select a report', 'fldNewBookingReport');
+                    }
+                  },
+                  {
+                    text: 'Reset',
+                    handler: function()
+                    {
+                      doReset();
+                    }
+                  },
+                  {
+                    text: 'Close',
+                    handler: function()
+                    {
+                      $('#dlgBookingNew').dialog('close');
+                    }
+                  }
+                ]
+              }
+            ).dialog('center').dialog('open');
+
+            $('#newbookingtabs').tabs
+            (
+              {
+                onSelect: function(title, index)
+                {
+                  if (title == 'Map')
+                  {
+                    // Force refresh since map was created when this dialog was closed...
+                    google.maps.event.trigger(map_booking, 'resize');
+                    if (!_.isNull(marker))
+                      map_booking.panTo(marker.getPosition());
+                  }
                 }
               }
-            ); 
+            );  
+            
+            
+            // doPromptOkCancel
+            // (
+            //   'Copy this booking?',
+            //   function(result)
+            //   {
+            //     if (result)
+            //     {
+            //       //console.log(row.bookingcode);
+            //       //console.log(row);
+            //       $.post
+            //       (
+            //         'ajax_copybooking.php',
+            //         {
+            //          uuid: '<?php/* echo $_SESSION['uuid']; */?>',
+            //           bookingcode: row.bookingcode
+            //         },
+            //         function(result)
+            //         {
+            //           var response = JSON.parse(result);
+
+            //           if (response.rc == 0)
+            //           {
+            //             doRefreshBookings();
+            //             noty({text: response.msg, type: 'success', timeout: 3000});
+            //           }
+            //           else
+            //           {
+            //             noty({text: response.msg, type: 'error', timeout: 10000});
+            //           }
+            //         }
+            //       );
+            //     }
+            //   }
+            // ); 
           }
         )
       )
@@ -2687,11 +3089,11 @@
         img = '<img src="images/led/ball-orange.png" width="20" height="20">';
         tooltip = 'Booking has been paid';
       }
-      else if (_.isNull(row.datepaid) && !_.isBlank(row.budget))
-      {
-        img = '<img src="images/led/ball-darkblue.png" width="20" height="20">';
-        tooltip = 'Booking has not been paid';
-      }
+      // else if (_.isNull(row.datepaid) && !_.isBlank(row.budget))
+      // {
+      //   img = '<img src="images/led/ball-darkblue.png" width="20" height="20">';
+      //   tooltip = 'Booking has not been paid';
+      // }
 
       lnk = '<a href="#" title="' + tooltip + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
 
@@ -3281,7 +3683,7 @@
         }
       ?>
       <br/>
-      <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
+      <!-- <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
         <span>Status: </span> 
         <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 230px;">	
         <span>Customer Email: </span>  
@@ -3289,7 +3691,7 @@
         <a href="javascript:void(0)" onClick="doSearchBookings()" class="easyui-linkbutton" iconCls="icon-search">Search</a>
         <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
 
-      </div>
+      </div> -->
       
       <!-- deprecated Functions -->
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
