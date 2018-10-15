@@ -9,13 +9,20 @@
   {
     if (isset($_POST['uuid']) && isset($_POST['itype']))
     {
+      // $page = isset($_POST['page']) ? intval($_POST['page']) : 0;
+      // $row = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
+      // error_log($page);
+      // error_log($row);
       $uuid = $_POST['uuid'];
       $itype = (int)$_POST['itype'];
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $selectedstatus = $_POST['status'];
       $emailinput = $_POST['email'];
-      error_log($selectedstatus);
-      error_log($emailinput);
+      // $pageNumber = ($_POST['pageNumber'] - 1);
+      // $pageSize = $_POST['pageSize'];
+      // $offset = $pageNumber * $pageSize;
+      // error_log($offset);
+      // error_log($pageSize);
       $clause = "where ";
 
       if ($itype != 99)
@@ -38,11 +45,15 @@
       }
       else if ($selectedstatus == 4) // status == 4 --> has paid
       {
-        $clause = $clause . " " .  " b1.datepaid is not null and b1.dateapproved is null and b1.datecompleted is null and ";
+        $clause = $clause . " " .  " b1.datepaid is not null and b1.dateapproved is null and b1.datecompleted is null and b1.users_id is null and ";
       }
-      else if ($selectedstatus == 5) // status == 4 --> has not paid
+      else if ($selectedstatus == 5) // status == 5 --> has not paid
       {
         $clause = $clause . " " .  " b1.datepaid is null and b1.budget is not null and b1.dateapproved is null and b1.datecompleted is null and ";
+      }
+      else if ($selectedstatus == 6) //status == 6 --> work has started, but not completed. 
+      {
+        $clause = $clause . " " .  " b1.datepaid is not null and b1.users_id is not null and b1.datecompleted is null and b1.dateapproved is null and ";
       }
 
       if($emailinput != "")
@@ -143,8 +154,9 @@
                   "b1.id desc, ".
                   "b1.bookings_id desc,".
                   "b2.id desc ".
+                  "limit 300 ";
                   // "b1.datecreated desc " .
-                  "limit 100";
+                  // "limit $pageSize offset $offset";
       error_log($dbselect);
       if ($dbresult = SharedQuery($dbselect, $dblink))
       {
@@ -165,7 +177,7 @@
          
       }
       else
-        $msg = "2.Unable to fetch list of bookings...";
+        $msg = "Unable to fetch list of bookings...";
     }
   }
 
@@ -174,7 +186,9 @@
     $msg = "3.Unable to fetch bookings...";
   }
 
+  // $response = array("rc" => $rc, "msg" => $msg, "rows" => $rows,"total" => 60); //The total is for the total row in the database, should use count(*) to get the exact number of rows
   $response = array("rc" => $rc, "msg" => $msg, "rows" => $rows);
+
   $json = json_encode($response);
   echo $json;
 ?>

@@ -12,10 +12,19 @@
       $uuid = $_POST['uuid'];
       $itype = (int)$_POST['itype'];
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
-      $clause = "";
+      $clause = "where ";
 
       if ($itype != 99)
-        $clause = "where b1.users_id=$userid";
+      {
+        $clause = $clause . " " .   "b1.users_id=$userid";
+      }
+      else
+      {
+        $clause = $clause . " " .  " b1.datecompleted is not null and b1.datepaid is not null and b1.budget is not null and b1.dateapproved is null ";
+      }
+
+      error_log($clause);
+       
 
       $dbselect = "select " .
                   "b1.id bookingcode," .
