@@ -11,6 +11,7 @@ function generatePDF(mode) {
     $("button").prop("disabled", true);
 
     resetTotalImagesCaptions();
+    var inspectionsChecklistContent;
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (mode == 'save')
@@ -37,6 +38,43 @@ function generatePDF(mode) {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
+    var rowCount = document.getElementById('HOWOutBuildingTable').rows.length;
+    console.log(rowCount);
+    if(rowCount <= 6)
+    {
+        console.log("less than 6");
+        inspectionsChecklistContent = [
+            getOutBuildingTable(),
+            getServicesTable(),
+            {
+                text:Services1,
+                fontSize:9
+            },
+            {
+                text:Services2,
+                fontSize:9
+            }
+
+        ]
+    }
+    else
+    {
+        console.log("more than 6");
+        inspectionsChecklistContent = [
+            getOutBuildingTable(),
+            getOutBuildingTable2(),
+            getServicesTable(),
+            {
+                text:Services1,
+                fontSize:9
+            },
+            {
+                text:Services2,
+                fontSize:9
+            }
+
+        ]
+    }
 
     // Page start drawing from here...
     var docDefinition = {
@@ -303,19 +341,35 @@ function generatePDF(mode) {
                     getBuildingExteriorTable(),
                     getSubFloorTable(),
                     getRoofVoidTable(),
-                    getOutBuildingTable(),
-                    getServicesTable(),
-                    {
-                        text:Services1,
-                        fontSize:9
-                    },
-                    {
-                        text:Services2,
-                        fontSize:9
-                    }
+                    inspectionsChecklistContent
+                    //getOutBuildingTable(),
+                    // getServicesTable(),
+                    // {
+                    //     text:Services1,
+                    //     fontSize:9
+                    // },
+                    // {
+                    //     text:Services2,
+                    //     fontSize:9
+                    // }
                 ],
-                pageBreak: 'after'
+                pageBreak:'after',
             },
+            // {
+            //     stack:[
+            //         getOutBuildingTable2(),
+            //         getServicesTable(),
+            //         {
+            //             text:Services1,
+            //             fontSize:9
+            //         },
+            //         {
+            //             text:Services2,
+            //             fontSize:9
+            //         }
+            //     ],
+            //     pageBreak: 'after'
+            // },
             /**
              * Inspection Checklist Continue
              */
