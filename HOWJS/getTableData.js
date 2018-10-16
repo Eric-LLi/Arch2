@@ -385,7 +385,7 @@ function getReportAuthorisation() {
 
     var state = document.getElementById('inspection_state').value;
 
-    if (state == 'VIC') {
+    if (state == 'VIC' || state == "Victoria") {
         console.log("need to show the signature");
         result = {
             table: {
@@ -1151,15 +1151,21 @@ function getOutBuildingTable() {
     var width = [];
     var tableBody;
     var rowCount = document.getElementById('HOWOutBuildingTable').rows.length;
+    if(rowCount > 6)
+    {
+       rowCount = 6;
+    }
+   
     var colCount = document.getElementById('HOWOutBuildingTable').rows[0].cells.length;
 
-    //console.log('The row in HOWOutBuildingTable is ' + rowCount);
-    //console.log('The column in HOWOutBuildingTable is ' + colCount);
+    // console.log('The row in HOWOutBuildingTable is ' + rowCount);
+    // console.log('The column in HOWOutBuildingTable is ' + colCount);
     var firstRow = [];
     var secondRow = [];
 
     //Set upt the first row
     for (var i = 0; i < rowCount * 2; i++) {
+        //console.log(i);
 
         var cell;
         if (i == 0) {
@@ -1177,6 +1183,7 @@ function getOutBuildingTable() {
 
         firstRow.push(cell);
     }
+    //console.log(firstRow);
     data.push(firstRow);
 
 
@@ -1227,6 +1234,7 @@ function getOutBuildingTable() {
         secondRow.push(cell1);
         secondRow.push(cell2);
     }
+    //console.log(secondRow);
     data.push(secondRow);
 
 
@@ -1287,6 +1295,7 @@ function getOutBuildingTable() {
             newRow.push(cell2);
 
         }
+        //console.log(newRow);
         data.push(newRow);
     }
 
@@ -1309,6 +1318,7 @@ function getOutBuildingTable() {
 
         width.push(cell);
     }
+    //console.log(width);
 
     tableBody = {
         table: {
@@ -1319,6 +1329,207 @@ function getOutBuildingTable() {
     };
     //console.log(tableBody);
 
+    // if(rowCount > 6)
+    // {
+    //     getOutBuildingTable2();
+    // }
+    // else
+    // {
+    //     getServicesTable();
+    //     getServicesText();
+    // }
+
+    return tableBody;
+}
+
+/**
+ * Get Out Buildings & Attached Structures
+ * the number of rows in the html equal the number of columns in the pdf table
+ * the number of columns in the html equals to the number of the rows in the pdf table
+ */
+function getOutBuildingTable2() {
+    var data = [];
+    var width = [];
+    var tableBody;
+    var rowCount = document.getElementById('HOWOutBuildingTable').rows.length - 6;
+    var colCount = document.getElementById('HOWOutBuildingTable').rows[0].cells.length;
+
+    //console.log('The row in HOWOutBuildingTable is ' + rowCount);
+    //console.log('The column in HOWOutBuildingTable is ' + colCount);
+    var firstRow = [];
+    var secondRow = [];
+
+    //Set upt the first row
+    for (var i = 6; i < (rowCount * 2 + 6); i++) {
+        //console.log(i);
+        var cell;
+        if (i == 6) {
+            cell = {
+
+                text: 'OUT BUILDINGS & ATTACHED STRUCTURES (CONTINUED)',
+                colSpan: rowCount * 2,
+                style: 'tableBoldTextAlignLeft',
+                color: 'red'
+            }
+
+        } else {
+            cell = {};
+        }
+
+        firstRow.push(cell);
+    }
+    //console.log(firstRow);
+    data.push(firstRow);
+
+
+
+    /**
+     * Set up the second row. the number of the rows in the html table equals to the number of columns in the pdf table
+     * use rowCount to loop, each loop, create two cell in the second row in the pdf table
+     * each row represents two cells
+     */
+    for (var i = 6; i < (rowCount+6); i++) {
+        var cell1;
+        var cell2;
+
+        if (i == 6) {
+            cell1 = {
+
+                text: 'Element',
+                style: 'tableBoldTextAlignLeft'
+            };
+            cell2 = {
+                text: 'Space',
+                style: 'tableBoldTextAlignLeft'
+                //color: 'red'
+            };
+
+
+        } 
+        else 
+        {
+            var placeID = i - 1;
+            var place = '';
+           // if (i > 3) {
+                place = document.getElementById('HOWOutBuildingPlace' + placeID).value;
+            // } else {
+            //     place = document.getElementById('HOWOutBuildingPlace' + placeID).textContent;
+            // }
+            //console.log(place);
+
+            cell1 = {
+                text: place,
+                bold: true,
+                colSpan: 2,
+                style: 'tableText',
+                // noWrap: true
+            };
+            cell2 = {}
+
+        }
+
+        secondRow.push(cell1);
+        secondRow.push(cell2);
+       
+    }
+    //console.log(secondRow);
+    data.push(secondRow);
+
+
+    /**
+     * Set upt the dynamically data filed.
+     * use the colCount - 1 as the first round loop count. this will create enough rows in the pdf table
+     * the number of columns - 1 will be the remaining number of the rows in the table.
+     * use the number of columns to determine the rows in the pdf table
+     * then use the number of rows to determine the number of cells in each each in the pdf table.
+     */
+    for (var i = 0; i < colCount - 1; i++) {
+        var newRow = [];
+
+        /**
+         * Set up the cell in each row. and the data of the cell comes from the same columns
+         * The number of cells equal to rowCount. so use rowCount as the second round loop.
+         * each cell contains two set of data
+         * The first cell contains the element's name and an empty filed. --> Fixed --> extract outside the loop
+         * The rest of cells contains data --> need to extract from html.--> use the loop. loop (rowCount - 1) times
+         *
+         */
+        var element = document.getElementById('HOWOutBuildingElement' + i).textContent;
+        var cell1 = {
+            text: element,
+            colSpan: 2,
+            style: 'tableBoldTextAlignLeft'
+            // color: 'red'
+        };
+        var cell2 = {};
+        newRow.push(cell1);
+        newRow.push(cell2);
+
+        //Start the loop to extract all the data from the html that is dynamically.
+        //each row == two cells in the pdf table
+        for (var b = 6; b < (rowCount - 1 + 6); b++) {
+            var cell1;
+            var cell2;
+            var baseName = 'HOWOutBuildingPlace';
+
+
+            var selectID = baseName + b + 'Select' + i;
+            var textID = baseName + b + 'Text' + i;
+            // console.log(selectID);
+            // console.log(textID);
+            cell1 = {
+                text: getIt(selectID),
+                bold: true,
+                style: 'tableText',
+                noWrap: true
+            };
+            cell2 = {
+                text: getIt(textID),
+                bold: true,
+                style: 'tableText',
+                noWrap: true
+            };
+
+            //}
+            newRow.push(cell1);
+            newRow.push(cell2);
+
+        }
+        //console.log(newRow);
+        data.push(newRow);
+    }
+
+    //Set up the width
+    for (var i = 6; i < (rowCount * 2 + 6); i++) {
+        var cell;
+        console.log(i);
+
+        if (i > 7) {
+            if (isOdd(i) == 1) {
+                cell = '*';
+            } else {
+                cell = 15;
+            }
+        } else {
+            cell = 'auto';
+        }
+
+
+        //cell = '*';
+
+        width.push(cell);
+    }
+    console.log(width);
+
+    tableBody = {
+        table: {
+            widths: width,
+            body: data
+        },
+        margin: [0, 5, 0, 5]
+    };
+    //console.log(tableBody);
+   
     return tableBody;
 }
 
@@ -1431,6 +1642,21 @@ function getServicesTable() {
     };
 
     return tableBody;
+}
+
+function getServicesText()
+{
+   var text1 = [
+       {
+            text:Services1,
+            fontSize:9
+       },
+       {
+            text:Services2,
+            fontSize:9
+       }
+   ];
+   return text1;
 }
 
 
