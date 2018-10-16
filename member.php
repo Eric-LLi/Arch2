@@ -199,11 +199,10 @@
 
     // ************************************************************************************************************
     // Data fetching...
-    function doRefreshBookings()
+    // function doRefreshBookings()
+    function doReloadBookings()
     {
-      console.log('***** Refreshing bookings...');
-      $('#cbSearchReportStatus').combobox('setValue',0);
-      $('#fldSearchEmail').textbox('clear');
+      console.log('***** Reloading bookings, only status of Completed...');
       $.post
       (
         'ajax_getbookings.php',
@@ -1151,7 +1150,8 @@
 
                               if (response.rc == 0)
                               {
-                                doRefreshBookings();
+                                //doRefreshBookings();
+                                doSearchBookings();
                                 
 
                                 noty({text: response.msg, type: 'success', timeout: 10000});
@@ -1227,7 +1227,6 @@
 
     function doUpdateBooking(booking)
     {
-     //console.log(booking); 
       function doReset()
       {
         // Customer TAB
@@ -1593,7 +1592,8 @@
 
                               if (response.rc == 0)
                               {
-                                doRefreshBookings();
+                                // doRefreshBookings();
+                                doSearchBookings();
 
                                 noty({text: response.msg, type: 'success', timeout: 10000});
                                 $('#dlgBookingNew').dialog('close');
@@ -1707,7 +1707,8 @@
 
                       if (response.rc == 0)
                       {
-                        doRefreshBookings();
+                        //doRefreshBookings();
+                        doSearchBookings();
                         noty({text: response.msg, type: 'success', timeout: 3000});
                       }
                       else
@@ -1753,7 +1754,8 @@
 
                         if (response.rc == 0)
                         {
-                          doRefreshBookings();
+                          // doRefreshBookings();
+                          doSearchBookings();
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -1825,7 +1827,8 @@
 
                         if (response.rc == 0)
                         {
-                          doRefreshBookings();
+                          // doRefreshBookings();
+                          doSearchBookings();
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -2195,7 +2198,10 @@
                       var response = JSON.parse(result);
 
                       if (response.rc == 0)
-                        doRefreshBookings();
+                      {
+                        doSearchBookings();
+                      }
+                        // doRefreshBookings();
                       else
                         noty({text: response.msg, type: 'error', timeout: 10000});
                     }
@@ -2243,7 +2249,10 @@
                       var response = JSON.parse(result);
 
                       if (response.rc == 0)
-                        doRefreshBookings();
+                      {
+                        doReloadBookings(); //Complete only visible to architect/inspector, always get all bookings, so use reload. search toolbar is not availabel for them. 
+                        //doSearchBookings();
+                      }
                       else
                         noty({text: response.msg, type: 'error', timeout: 10000});
                     }
@@ -2292,7 +2301,10 @@
                       var response = JSON.parse(result);
 
                       if (response.rc == 0)
-                        doRefreshBookings();
+                      {
+                        //doRefreshBookings();
+                        doSearchBookings();
+                      }
                       else
                         noty({text: response.msg, type: 'error', timeout: 10000});
                     }
@@ -2341,7 +2353,10 @@
                       var response = JSON.parse(result);
 
                       if (response.rc == 0)
-                        doRefreshBookings();
+                      {
+                        //doRefreshBookings();
+                        doSearchBookings();
+                      }
                       else
                         noty({text: response.msg, type: 'error', timeout: 10000});
                     }
@@ -2479,7 +2494,8 @@
 
                         if (response.rc == 0)
                         {
-                          doRefreshBookings();
+                          // doRefreshBookings();
+                          doSearchBookings();
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -2515,7 +2531,8 @@
 
                         if (response.rc == 0)
                         {
-                          doRefreshBookings();
+                          // doRefreshBookings();
+                          doSearchBookings();
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -2551,7 +2568,8 @@
 
                         if (response.rc == 0)
                         {
-                          doRefreshBookings();
+                          //doRefreshBookings();
+                          doSearchBookings();
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -2907,7 +2925,8 @@
 
                                     if (response.rc == 0)
                                     {
-                                      doRefreshBookings();
+                                      // doRefreshBookings();
+                                      doSearchBookings();
                                       noty({text: response.msg, type: 'success', timeout: 10000});
                                       $('#dlgBookingNew').dialog('close');
                                     }
@@ -3049,8 +3068,10 @@
       return lnk;
     }
 
+    var n = 1;
     function doBookingStatusAsImage(row)
     {
+      
       // Account for footer row...
       if (_.isUndefined(row.reportid) || _.isNull(row.reportid))
         return '';
@@ -3084,16 +3105,24 @@
         img =  '<img src="images/led/ball-lightblue.png" width="20" height="20">';
         tooltip = 'Booking has been completed';
       }
+      
+      else if (!_.isNull(row.datepaid) && !_.isBlank(row.archfirstname) && _.isNull(row.datecompleted))
+      {
+        // console.log("I am here1");
+        img = '<img src="images/led/ball-purple.png" width="20" height="20">';
+        tooltip = 'Booking has started';
+      }
       else if (!_.isNull(row.datepaid))
       {
         img = '<img src="images/led/ball-orange.png" width="20" height="20">';
         tooltip = 'Booking has been paid';
       }
-      // else if (_.isNull(row.datepaid) && !_.isBlank(row.budget))
-      // {
-      //   img = '<img src="images/led/ball-darkblue.png" width="20" height="20">';
-      //   tooltip = 'Booking has not been paid';
-      // }
+      else if (_.isNull(row.datepaid) && !_.isBlank(row.budget))
+      {
+        img = '<img src="images/led/ball-darkblue.png" width="20" height="20">';
+        tooltip = 'Booking has not been paid';
+      }
+      
 
       lnk = '<a href="#" title="' + tooltip + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
 
@@ -3160,6 +3189,7 @@
       return lnk;
     }
 
+    //function doSearchBookings(pageNumber,pageSize)
     function doSearchBookings()
     {
       console.log('***** Searching bookings...');
@@ -3174,7 +3204,9 @@
           uuid: '<?php echo $_SESSION['uuid']; ?>',
           itype: <?php echo $_SESSION['itype']; ?>,
           status: selectedreportstatus,
-          email: emailinput
+          email: emailinput,
+          // pageNumber:pageNumber,
+          // pageSize:pageSize
         },
         function(result)
         {
@@ -3187,6 +3219,7 @@
             cache_bookings = response.rows;
             // console.log(cache_bookings);
             $('#divBookingsG').datagrid('reload');
+            // var bookingPager = $('#divBookingsG').datagrid('getPager').pagination({total:response.total}); 
           }
           else
           {
@@ -3201,7 +3234,54 @@
 
     function doResetSearch()
     {
-      doRefreshBookings();
+      $('#cbSearchReportStatus').combobox('setValue',0);
+      $('#fldSearchEmail').textbox('clear');
+      doSearchBookings();
+      //doRefreshBookings();
+    }
+
+    function doPageBooking(pageNumber,pageSize)
+    {
+      console.log('***** Searching bookings...');
+      var selectedreportstatus = $('#cbSearchReportStatus').combobox('getValue');
+      // console.log(selectedreportstatus);
+      var emailinput = $('#fldSearchEmail').textbox('getValue');
+      // console.log(emailinput);
+      $.post
+      (
+        'ajax_searchbookings.php',
+        {
+          uuid: '<?php echo $_SESSION['uuid']; ?>',
+          itype: <?php echo $_SESSION['itype']; ?>,
+          status: selectedreportstatus,
+          email: emailinput,
+          pageNumber:pageNumber,
+          pageSize:pageSize
+        },
+        function(result)
+        {
+          var response = JSON.parse(result);
+          // console.log(response.msg);
+          //console.log(response.rc)
+
+          if (response.rc == 0)
+          {
+            cache_bookings = response.rows;
+            console.log(cache_bookings);
+            console.log(pageNumber);
+            $('#divBookingsG').datagrid('reload');
+            // $('#divBookingsG').datagrid('getPager').pagination({total:response.total}); 
+            // $('#divBookingsG').datagrid('getPager').pagination('select',pageNumber); 
+          }
+          else
+          {
+            cache_bookings = response.rows;
+            // console.log(cache_bookings);
+            $('#divBookingsG').datagrid('reload');
+            noty({text: response.msg, type: 'warning', timeout: 10000});
+          }
+        }
+      );
     }
     // ************************************************************************************************************
     // Document ready...
@@ -3264,6 +3344,7 @@
           remoteSort: false,
           multiSort: false,
           autoRowHeight: false,
+          // pagination: true,
           rowStyler: function(index,row)
           {
             if (row.datecancelled != null)
@@ -3455,6 +3536,28 @@
         }
       );
 
+
+      // var bookingPager = $('#divBookingsG').datagrid('getPager'); 
+      //   bookingPager.pagination({
+      //   total:2000,
+      //   pageSize:10,
+      //   pageList:[10,20,30],
+      //   showRefresh:false,
+      //   onSelectPage:function(pageNumber,pageSize)
+      //   {
+      //     console.log(pageNumber);
+      //     console.log(pageSize);
+      //     //bookingPager.pagination('loading');
+      //     //alert('pageNumber:'+pageNumber+',pageSize:'+pageSize);
+      //     //bookingPager.pagination('loaded');
+      //     doPageBooking(pageNumber,pageSize);
+      //   },
+      //   onChangePageSize:function(pageSize)
+      //   {
+      //     //alert('pageNumber:'+pageSize);
+      //   }
+      // });
+
       $('#divMembersG').datagrid
       (
         {
@@ -3532,10 +3635,12 @@
           }
         }
       );
+      $('#cbSearchReportStatus').combobox('select',3);
 
       // ************************************************************************************************************
       // Populate data...
-      doRefreshBookings();
+      //doRefreshBookings();
+      doReloadBookings()
       doRefreshMembers();
 
       // ************************************************************************************************************
@@ -3598,7 +3703,10 @@
                   var response = JSON.parse(result);
 
                   if (response.rc == 0)
-                    doRefreshBookings();
+                  {
+                    //doRefreshBookings();
+                    doSearchBookings();
+                  }
                   else
                     noty({text: response.msg, type: 'error', timeout: 10000});
                 }
@@ -3633,7 +3741,10 @@
                   var response = JSON.parse(result);
 
                   if (response.rc == 0)
-                    doRefreshBookings();
+                  {
+                    //doRefreshBookings();
+                    doSearchBookings();
+                  }
                   else
                     noty({text: response.msg, type: 'error', timeout: 10000});
                 }
@@ -3673,6 +3784,16 @@
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
           <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Customer</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
+          <br/>
+          <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
+            <span>Status: </span> 
+            <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 230px;">	
+            <span>Customer Email: </span>  
+            <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
+            <a href="javascript:void(0)" onClick="doSearchBookings()" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+            <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
+
+          </div>
       <?php
         }
         else
@@ -3682,16 +3803,7 @@
     <?php
         }
       ?>
-      <br/>
-      <!-- <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
-        <span>Status: </span> 
-        <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 230px;">	
-        <span>Customer Email: </span>  
-        <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
-        <a href="javascript:void(0)" onClick="doSearchBookings()" class="easyui-linkbutton" iconCls="icon-search">Search</a>
-        <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
 
-      </div> -->
       
       <!-- deprecated Functions -->
       <!-- <a href="javascript:void(0)" onClick="doRemoveBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>

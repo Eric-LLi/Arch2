@@ -165,12 +165,14 @@
   var reportstatus = 
   [
     {status:'All',id:0},
-    {status:'Agree Price has not been set',icon:'images/led/ball-black.png',id:1},
     {status:'Approved',icon:'images/led/ball-green.png',id:2},
-    {status:'Completed',icon:'images/led/ball-lightblue.png',id:3},
     {status:'Paid',icon:'images/led/ball-orange.png',id:4},
-    {status:'Not Paid',icon:'images/led/ball-darkblue.png',id:5}
-  ]
+    {status:'Work Started',icon:'images/led/ball-purple.png',id:6},
+    {status:'Completed',icon:'images/led/ball-lightblue.png',id:3},
+    {status:'Not Paid',icon:'images/led/ball-darkblue.png',id:5},
+    {status:'No Agreed Price',icon:'images/led/ball-black.png',id:1},
+    
+  ];
   var scope =
   [
     {name: 'Property Assessment Scope', id: 1},
