@@ -975,3 +975,118 @@ function convertBase64UrlToBlob(urlData, type) {
         type: type
     });
 }
+
+// -- New Functions for creating/removing new tabs
+function addPanel(panelid)
+{
+    $('#dlgRoomNew').dialog
+    (
+        {
+            onOpen:function()
+            {
+                console.log("open the dialog");
+            },
+            buttons:
+            [
+                
+                {
+                    text:'Add',
+                    handler:function()
+                    {
+                        var name = $('#fldNewRoomName').textbox('getValue');
+                        console.log(name);
+                        if(name != "" && name != null)
+                        {
+                            console.log("addPanel, panel id " + panelid);
+                            var panel = "#" + panelid;
+                            var count = $(panel).tabs('tabs').length;
+                            console.log("the number of tabs in this div is " + count);
+                            var index = count + 1;
+                            $(panel).tabs('add',{
+                                title: name,
+                                content: '<div style="padding:10px">Content'+index+'</div>',
+                                closable: true
+                            });
+                            $('#dlgRoomNew').dialog('close');
+                        }
+                       
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    handler: function()
+                    {
+                      $('#dlgRoomNew').dialog('close');
+                    }
+                }
+            ]
+        }
+        
+    ).dialog('center').dialog('open');
+   
+    
+}
+
+function removePanel(panelid)
+{
+    console.log("removePanel, panel id " + panelid);
+    var panel = "#" + panelid;
+    var tab = $(panel).tabs('getSelected');
+    if (tab){
+        var index = $(panel).tabs('getTabIndex', tab);
+        $(panel).tabs('close', index);
+    }
+}
+
+function editRoomName()
+{
+    $('#dlgRoomNew').dialog
+    (
+        {
+            title:'Edit Room Name',
+
+            onOpen:function()
+            {
+                console.log("open the dialog");
+                var tab = $('#internal-tabs').tabs('getSelected');
+                var title = tab.panel('options').title;
+                console.log(title);
+                $('#fldNewRoomName').textbox('setValue',title);
+            },
+            buttons:
+            [
+                
+                {
+                    text:'Save',
+                    handler:function()
+                    {
+                        var newtitle = $('#fldNewRoomName').textbox('getValue');
+                        console.log(newtitle);
+                        if(newtitle != "" && newtitle != null)
+                        {
+                            var tab = $('#internal-tabs').tabs('getSelected');
+                            $('#internal-tabs').tabs('update',{
+                                tab:tab,
+                                options:{
+                                    title:newtitle
+                                }
+                            });
+                            
+                           
+                            $('#dlgRoomNew').dialog('close');
+                        }
+                       
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    handler: function()
+                    {
+                      $('#dlgRoomNew').dialog('close');
+                    }
+                }
+            ]
+        }
+        
+    ).dialog('center').dialog('open');
+}
