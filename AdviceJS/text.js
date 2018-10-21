@@ -6,7 +6,7 @@ var archAdviceReportText = 'This Report provides independent expert advice from 
 
 var whatIncText1 = 'This Report has been prepared, on a visual review of the documentation and instructions, whether in writing or verbal, provided by you, the client.';
 
-var whatIncText2 = 'The Report is limited a visual assessment of the item, area or matter of concern.';
+var whatIncText2 = 'The Report is limited to a visual assessment of the item, area or matter of concern.';
 
 var whatIncText3 = 'Where this relates to a defect or problem with a building or property element the architect will, where appropriate:';
 

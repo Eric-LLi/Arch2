@@ -78,14 +78,15 @@ function generatePDF(mode) {
 
     // Page start drawing from here...
     var docDefinition = {
+        pageMargins: [40,55,40,45],
         header: function(currentPage){
             if(currentPage != 1)
             {
                return{
                    image: coverPageLogo,
                    width: 40,
-                   height: 40
-                   // margin:[10,20,20,20]
+                   height: 40,
+                   margin:[15,15,15,15]
                };
             }
         },
@@ -104,7 +105,8 @@ function generatePDF(mode) {
                             color:'grey',
                             bold:true
                         }
-                    ]
+                    ],
+                    // margin:[0,10,0,200]
                 };
             }
             else
@@ -115,12 +117,13 @@ function generatePDF(mode) {
                         {
                             text: '\nPage | ' + currentPage.toString() + ' of ' + pageCount,
                             alignment: 'left',
-                            margin: [10, 0, 40, 0],
+                            // margin: [0, 0, 40, 0],
                             fontSize: 10,
                             color:'grey',
                             bold:true
                         }
-                    ]
+                    ],
+                    // margin:[0,10,10,200]
                 };
             }
         },

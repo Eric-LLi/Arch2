@@ -584,7 +584,7 @@
 	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote9"></textarea></th>
 	                    </tr>
 	                    <tr>
-	                        <th style="text-align: left" id="HOWBuildingName10">Windows Still Gap</th>
+	                        <th style="text-align: left" id="HOWBuildingName10">Windows Sill Gap</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect10" style="width:100%"  title="checkList"></select>
 	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote10"></textarea></th>

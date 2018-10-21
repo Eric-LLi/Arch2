@@ -94,39 +94,27 @@ function determineFooter(mode)
         {
             result = {
                 table:{
-                    widths: ['auto', 350],
+                    widths: [80, 350],
                     body:[
                         [
                             {
-                                rowSpan:2,
                                 image:footerImage,
                                 alignment:'left',
                                 width:80,
                                 height:34
                             },
                             {
-                                text:'\nNSW Nominated Architect B. Inwood Reg, No. 7108',
+                                text:'\nNSW Nominated Architect B. Inwood Reg, No. 7108 \n\n © COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment:'left',
                                 fontSize:7,
-                                margin:[0,5,0,0],
-                                color:'#8E8B8B'
-                            }
-                        ],
-                        [
-                            '',
-                            {
-                                text:'© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
-                                alignment:'left',
-                                fontSize:7,
-                                margin:[0,-1,0,0],
+                                margin:[0,0,0,0],
                                 color:'#8E8B8B'
                             }
                         ]
-
                     ]
                 },
                 layout:'noBorders',
-                margin: [40, 0, 10, 0]
+                margin: [40, -9, 10, 0]
             };
             return result;
         }
@@ -134,7 +122,7 @@ function determineFooter(mode)
         {
             result = {
                 table:{
-                    widths: ['auto', 350],
+                    widths: [80, 350],
                     body:[
                         [
                             {
@@ -148,7 +136,7 @@ function determineFooter(mode)
                                 text:'© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment:'left',
                                 fontSize:7,
-                                margin:[0,25,0,0],
+                                margin:[0,22,0,0],
                                 color:'#8E8B8B'
                             }
                         ]
@@ -156,7 +144,7 @@ function determineFooter(mode)
                     ]
                 },
                 layout:'noBorders',
-                margin: [40, -1, 10, 0]
+                margin: [40, -9, 10, 0]
             };
             return result;
         }
@@ -229,7 +217,7 @@ function determineFrontPageFooter(mode) {
                     ]
                 },
                 layout:'noBorders',
-                margin: [40, -25, 0, 0]
+                margin: [40, -28, 0, 0]
             };
             return result;
         }
@@ -268,7 +256,7 @@ function determineFrontPageFooter(mode) {
                     ]
                 },
                 layout:'noBorders',
-                margin: [40, -25, 0, 0]
+                margin: [40, -28, 0, 0]
             };
             return result;
         }

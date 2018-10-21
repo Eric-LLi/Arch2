@@ -38,6 +38,7 @@ function generatePDF(mode) {
         }
     };
     var docDefinition = {
+        pageMargins: [40,55,40,45],
         footer: function (currentPage, pageCount) {
             if (currentPage === 1) {
                 return {
@@ -60,7 +61,7 @@ function generatePDF(mode) {
                         {
                             text: '\nPage | ' + currentPage.toString() + ' of ' + pageCount,
                             alignment: 'left',
-                            margin: [10, 0, 40, 0],
+                            // margin: [10, 0, 40, 0],
                             fontSize: 10,
                             color: 'grey',
                             bold: true
