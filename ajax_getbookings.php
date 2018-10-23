@@ -20,7 +20,7 @@
       }
       else
       {
-        $clause = $clause . " " .  " b1.datecompleted is not null and b1.datepaid is not null and b1.budget is not null and b1.dateapproved is null ";
+        $clause = $clause . " " .  " b1.datepaid is null and b1.budget is not null and b1.dateapproved is null and b1.datecompleted is null and b1.datecancelled is null and b1.dateexpired is null ";
       }
 
       error_log($clause);

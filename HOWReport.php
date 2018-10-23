@@ -56,7 +56,7 @@
         <strong>Saving PDF. Please don't close this page. It will take a while</strong>
     </div>
     <h2 class="content-head text-center firstH1" style="font-size: 2rem">Home Warranty Inspection Report</h2>
-    <b>NOTICE TO PURCHASERS</b>
+    <!-- <b>NOTICE TO PURCHASERS</b> -->
     <br>
     <!-- <p>
         THIS IS NOT A PRE-PURCHASE INSPECTION REPORT. Subject to its terms and conditions, this report is prepared
@@ -144,7 +144,7 @@
 	                        <div class="row">
 	                            <div class="col-sm">
 	                                <label>Address</label><br>
-	                                <input id="owner_address" class="form-control" type="text" title="address"  style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custaddress1'). " " . doNiceArrayElemAsString('custaddress2'); ?>">
+	                                <input id="owner_address" class="form-control" type="text" title="address"  style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custaddress1'). " " . doNiceArrayElemAsString('custaddress2'); ?>"/>
 	                            </div>
 	                        </div>
 	                        <div class="row form-group">
@@ -584,7 +584,7 @@
 	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote9"></textarea></th>
 	                    </tr>
 	                    <tr>
-	                        <th style="text-align: left" id="HOWBuildingName10">Windows Still Gap</th>
+	                        <th style="text-align: left" id="HOWBuildingName10">Windows Sill Gap</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect10" style="width:100%"  title="checkList"></select>
 	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote10"></textarea></th>

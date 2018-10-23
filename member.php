@@ -202,7 +202,7 @@
     // function doRefreshBookings()
     function doReloadBookings()
     {
-      console.log('***** Reloading bookings, only status of Completed...');
+      console.log('***** Reloading bookings, only status of Unpaid if the users is admin...');
       $.post
       (
         'ajax_getbookings.php',
@@ -1151,7 +1151,7 @@
                               if (response.rc == 0)
                               {
                                 //doRefreshBookings();
-                                doSearchBookings();
+                                doSearchBookings(false);
                                 
 
                                 noty({text: response.msg, type: 'success', timeout: 10000});
@@ -1593,7 +1593,7 @@
                               if (response.rc == 0)
                               {
                                 // doRefreshBookings();
-                                doSearchBookings();
+                                doSearchBookings(false);
 
                                 noty({text: response.msg, type: 'success', timeout: 10000});
                                 $('#dlgBookingNew').dialog('close');
@@ -1708,7 +1708,7 @@
                       if (response.rc == 0)
                       {
                         //doRefreshBookings();
-                        doSearchBookings();
+                        doSearchBookings(false);
                         noty({text: response.msg, type: 'success', timeout: 3000});
                       }
                       else
@@ -1755,7 +1755,7 @@
                         if (response.rc == 0)
                         {
                           // doRefreshBookings();
-                          doSearchBookings();
+                          doSearchBookings(false);
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -1828,7 +1828,7 @@
                         if (response.rc == 0)
                         {
                           // doRefreshBookings();
-                          doSearchBookings();
+                          doSearchBookings(false);
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -2199,7 +2199,7 @@
 
                       if (response.rc == 0)
                       {
-                        doSearchBookings();
+                        doSearchBookings(false);
                       }
                         // doRefreshBookings();
                       else
@@ -2303,7 +2303,7 @@
                       if (response.rc == 0)
                       {
                         //doRefreshBookings();
-                        doSearchBookings();
+                        doSearchBookings(false);
                       }
                       else
                         noty({text: response.msg, type: 'error', timeout: 10000});
@@ -2355,7 +2355,7 @@
                       if (response.rc == 0)
                       {
                         //doRefreshBookings();
-                        doSearchBookings();
+                        doSearchBookings(false);
                       }
                       else
                         noty({text: response.msg, type: 'error', timeout: 10000});
@@ -2495,7 +2495,7 @@
                         if (response.rc == 0)
                         {
                           // doRefreshBookings();
-                          doSearchBookings();
+                          doSearchBookings(false);
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -2532,7 +2532,7 @@
                         if (response.rc == 0)
                         {
                           // doRefreshBookings();
-                          doSearchBookings();
+                          doSearchBookings(false);
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -2569,7 +2569,7 @@
                         if (response.rc == 0)
                         {
                           //doRefreshBookings();
-                          doSearchBookings();
+                          doSearchBookings(false);
                           noty({text: response.msg, type: 'success', timeout: 3000});
                         }
                         else
@@ -2926,7 +2926,7 @@
                                     if (response.rc == 0)
                                     {
                                       // doRefreshBookings();
-                                      doSearchBookings();
+                                      doSearchBookings(false);
                                       noty({text: response.msg, type: 'success', timeout: 10000});
                                       $('#dlgBookingNew').dialog('close');
                                     }
@@ -3190,12 +3190,23 @@
     }
 
     //function doSearchBookings(pageNumber,pageSize)
-    function doSearchBookings()
+    function doSearchBookings(searchEmail)
     {
       console.log('***** Searching bookings...');
+      var emailinput;
       var selectedreportstatus = $('#cbSearchReportStatus').combobox('getValue');
+      // var selectedreportstatus = $('#cbSearchReportStatus').combobox().combo('getValue');
       // console.log(selectedreportstatus);
-      var emailinput = $('#fldSearchEmail').textbox('getValue');
+      if(searchEmail == true)
+      {
+        console.log("need to search email input");
+        emailinput = $('#fldSearchEmail').textbox('getValue');
+      }
+      // else
+      // {
+      //   console.log("don't need to search email")
+      //   emailInput = "";
+      // }
       // console.log(emailinput);
       $.post
       (
@@ -3234,9 +3245,9 @@
 
     function doResetSearch()
     {
-      $('#cbSearchReportStatus').combobox('setValue',0);
+      //$('#cbSearchReportStatus').combobox('setValue',0);
       $('#fldSearchEmail').textbox('clear');
-      doSearchBookings();
+      doSearchBookings(false);
       //doRefreshBookings();
     }
 
@@ -3622,7 +3633,7 @@
           data:reportstatus,
           formatter:function(row)
           {
-            if(row.id != 0)
+            if(row.id != 5)
             {
               var imageFile = row.icon;
               return '<img class="searchcombo_img" src="'+imageFile+'"/><span class="searchcombo_text">'+row.status+'</span>';
@@ -3632,10 +3643,19 @@
               return '<span class="searchcombo_text">'+row.status+'</span>';
             }
           
+          },
+          // onLoadSuccess:function(){
+          //   $(this).combobox('setValue',5);
+          // },
+          onChange:function(record)
+          {
+            //console.log(record);
+            doSearchBookings(false);
+            //document.getElementById("searchButton").click();
           }
         }
       );
-      $('#cbSearchReportStatus').combobox('select',3);
+
 
       // ************************************************************************************************************
       // Populate data...
@@ -3705,7 +3725,7 @@
                   if (response.rc == 0)
                   {
                     //doRefreshBookings();
-                    doSearchBookings();
+                    doSearchBookings(false);
                   }
                   else
                     noty({text: response.msg, type: 'error', timeout: 10000});
@@ -3743,7 +3763,7 @@
                   if (response.rc == 0)
                   {
                     //doRefreshBookings();
-                    doSearchBookings();
+                    doSearchBookings(false);
                   }
                   else
                     noty({text: response.msg, type: 'error', timeout: 10000});
@@ -3790,7 +3810,7 @@
             <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 230px;">	
             <span>Customer Email: </span>  
             <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
-            <a href="javascript:void(0)" onClick="doSearchBookings()" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+            <a href="javascript:void(0)" onClick="doSearchBookings(true)" class="easyui-linkbutton" iconCls="icon-search" id="searchButton">Search</a>
             <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
 
           </div>

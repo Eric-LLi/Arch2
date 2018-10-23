@@ -1522,11 +1522,12 @@ function getOutBuildingTable2() {
     console.log(width);
 
     tableBody = {
+        pageBreak:'before',
         table: {
             widths: width,
             body: data
         },
-        margin: [0, 5, 0, 5]
+        margin: [0, 5, 0, 10]
     };
     //console.log(tableBody);
    
@@ -2294,7 +2295,7 @@ function getImagesTable() {
             pageBreak: 'before',
             layout: 'noBorders',
             table: {
-                widths: [width, width],
+                widths: [250, 250],
                 headerRows: 2,
                 body: data
             }

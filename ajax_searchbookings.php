@@ -23,6 +23,7 @@
       // $offset = $pageNumber * $pageSize;
       // error_log($offset);
       // error_log($pageSize);
+      // error_log($selectedstatus);
       $clause = "where ";
 
       if ($itype != 99)
@@ -33,27 +34,27 @@
 
       if($selectedstatus == 1) // status == 1 --> aggree price is not set
       {
-        $clause = $clause . " " . " b1.budget is null and b1.dateapproved is null and b1.datecompleted is null and b1.datepaid is null and ";
+        $clause = $clause . " " . " b1.budget is null and b1.dateapproved is null and b1.datecompleted is null and b1.datepaid is null and b1.datecancelled is null and ";
       }
       else if ($selectedstatus == 2) // status == 2 --> has approved
       {
-        $clause = $clause . " " .  " b1.dateapproved is not null and ";
+        $clause = $clause . " " .  " b1.dateapproved is not null and b1.datecancelled is null and ";
       }
       else if ($selectedstatus == 3) // status == 3 --> has completed
       {
-        $clause = $clause . " " .  " b1.datecompleted is not null and b1.datepaid is not null and b1.budget is not null and b1.dateapproved is null and ";
+        $clause = $clause . " " .  " b1.datecompleted is not null and b1.datepaid is not null and b1.budget is not null and b1.dateapproved is null and b1.datecancelled is null and ";
       }
       else if ($selectedstatus == 4) // status == 4 --> has paid
       {
-        $clause = $clause . " " .  " b1.datepaid is not null and b1.dateapproved is null and b1.datecompleted is null and b1.users_id is null and ";
+        $clause = $clause . " " .  " b1.datepaid is not null and b1.dateapproved is null and b1.datecompleted is null and b1.users_id is null and b1.datecancelled is null and ";
       }
-      else if ($selectedstatus == 5) // status == 5 --> has not paid
+      else if ($selectedstatus == 0) // status == 0 --> has not paid
       {
-        $clause = $clause . " " .  " b1.datepaid is null and b1.budget is not null and b1.dateapproved is null and b1.datecompleted is null and ";
+        $clause = $clause . " " .  " b1.datepaid is null and b1.budget is not null and b1.dateapproved is null and b1.datecompleted is null and b1.datecancelled is null and ";
       }
       else if ($selectedstatus == 6) //status == 6 --> work has started, but not completed. 
       {
-        $clause = $clause . " " .  " b1.datepaid is not null and b1.users_id is not null and b1.datecompleted is null and b1.dateapproved is null and ";
+        $clause = $clause . " " .  " b1.datepaid is not null and b1.users_id is not null and b1.datecompleted is null and b1.dateapproved is null and b1.datecancelled is null and ";
       }
 
       if($emailinput != "")
