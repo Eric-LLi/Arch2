@@ -526,7 +526,27 @@
                             document.getElementById(p.textid).style.width = '100%';
                             document.getElementById(imgLabelID).style.display = 'block';
                             //create the next image area base on the max image number, the current ID smaller than it, create.
-                        } else if (p.tableName === 'DilapidationImagesTable') {
+                        } 
+                        else if (p.tableName === 'DilapidationImagesTable') {
+                            var table = document.getElementById(p.tableName);
+                            var currentID = p.imageid.replace(/[^\d.]/g, '');
+                            //var nextID = Number(currentID) + 1;
+                            var imgLabelID = "imageCaption" + currentID;
+
+                            table.style.display = 'block';
+                            addImageElements(p.imageAltName, p.divID, p.imageid, p.textid, p.removeid, p.addid,
+                                p.uploadID,
+                                p.removeFunction, p.addFunction, p.imageSize, p.width);
+                            $('#' + p.imageid).attr('src', url);
+                            document.getElementById(p.addid).style.display = 'none';
+                            document.getElementById(p.removeid).style.display = 'block';
+                            document.getElementById(p.textid).style.display = 'block';
+                            // document.getElementById(p.imageid).style.display = 'block';
+                            document.getElementById(imgLabelID).style.display = 'block';
+                            document.getElementById(p.imageid).style.width = '500px';
+                            document.getElementById(p.imageid).style.height = '500px';
+                        } 
+                        else if (p.tableName === 'PostDilapidationImagesTable') {
                             var table = document.getElementById(p.tableName);
                             var currentID = p.imageid.replace(/[^\d.]/g, '');
                             //var nextID = Number(currentID) + 1;
@@ -565,7 +585,8 @@
                             document.getElementById(p.imageid).style.width = '500px';
                             document.getElementById(p.imageid).style.height = '500px';
 
-                        } else if (p.tableName === 'MaintenanceImagesTable') {
+                        } 
+                        else if (p.tableName === 'MaintenanceImagesTable') {
                             var table = document.getElementById(p.tableName);
                             //get the current id from the imageID.
                             var currentID = p.imageid.replace(/[^\d.]/g, '');

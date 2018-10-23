@@ -17,7 +17,7 @@
       $itype = (int)$_POST['itype'];
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $selectedstatus = $_POST['status'];
-      $emailinput = $_POST['email'];
+     
       // $pageNumber = ($_POST['pageNumber'] - 1);
       // $pageSize = $_POST['pageSize'];
       // $offset = $pageNumber * $pageSize;
@@ -57,10 +57,15 @@
         $clause = $clause . " " .  " b1.datepaid is not null and b1.users_id is not null and b1.datecompleted is null and b1.dateapproved is null and b1.datecancelled is null and ";
       }
 
-      if($emailinput != "")
+      if(isset($_POST['email']))
       {
+        $emailinput = $_POST['email'];
+        if($emailinput != "")
+        {
           $clause = $clause . " " . "upper(b1.custemail) like CONCAT('%',upper('$emailinput'),'%') and ";
+        }
       }
+      
        
     
       error_log($clause);
