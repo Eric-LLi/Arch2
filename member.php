@@ -3294,6 +3294,30 @@
         }
       );
     }
+
+    function doBookingCustEmailBreakLine(row)
+    {
+      var emailList;
+      var email = "";
+      if (_.isUndefined(row.reportid) || _.isNull(row.reportid))
+      {
+        return '';
+      }
+      else
+      {
+        //console.log(row.custemail);
+        emailList = row.custemail.split(",");
+        
+        for (i = 0; i<emailList.length;i++)
+        {
+          email += emailList[i] + '<br>';
+        }
+        console.log(email);
+        return email;
+      }
+        
+    
+    }
     // ************************************************************************************************************
     // Document ready...
 
@@ -3412,7 +3436,7 @@
               {title: 'By',             rowspan: 2, field: 'usercreatedid',     width: 150, align: 'left',   resizable: false, sortable: false, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return row.usercreatedfirstname + ' ' + row.usercreatedlastname;}},
               {title: 'Modified',       rowspan: 2, field: 'datemodified',      width: 150, align: 'right',  resizable: false, sortable: false},
               {title: 'By',             rowspan: 2, field: 'usermodifiedid',    width: 150, align: 'left',   resizable: false, sortable: false, formatter: function(value, row) {if (!_.isUndefined(row.reportid)) return (_.isNull(row.usermodifiedfirstname)) ? '' : row.usermodifiedfirstname + ' ' + row.usermodifiedlastname;}},
-              {title: 'Cancelld Date',  rowspan: 2, field: 'datecancelled',     width: 150, align: 'left',  resizable: false, sortable: false},
+              {title: 'Cancelled Date', rowspan: 2, field: 'datecancelled',     width: 150, align: 'left',  resizable: false, sortable: false},
             ],
             [
               {title: 'Report',                     field: 'reportid',                      align: 'left',   resizable: false, formatter: function(value, row) {return doGetStringFromIdInObjArray(reports, value);}},
@@ -3538,6 +3562,9 @@
                       //break;
                     case 21:
                       $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 22:
+                      $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                       break;
                   }
                 }
