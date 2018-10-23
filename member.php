@@ -2440,7 +2440,7 @@
                 $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
                 break;
               case 18:
-                $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                $.redirect('HOWReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
                 break;
               case 19:
                 $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
@@ -2450,6 +2450,9 @@
                 //break;
               case 21:
                 $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 22:
+                $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
                 break;
             }
           }
