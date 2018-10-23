@@ -208,8 +208,9 @@
                 $html = file_get_contents('email_architectallocation.html');
                 //error_log($html);
                 $html = doMacros($html, $booking);
+                $custemail = explode(",",$booking['custemail']);
 
-		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
+		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
               }
 
               // Let architect/inspector know... (arch is the linked entries)...
