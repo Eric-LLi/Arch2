@@ -120,7 +120,8 @@ global $reportTypes;
                 $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
                 $html = str_replace("XXX_HEADER", $header, $html);
                 $html = str_replace("XXX_FOOTER", $footer, $html);
-                SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Booking Cancellation Notification", $html);
+                $custemail = explode(",",$booking['custemail']);
+                SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Booking Cancellation Notification", $html);
               }
 
               //let architect/insespector knows
@@ -303,13 +304,13 @@ global $reportTypes;
           $dbupdate2 = "update bookings set " .
                       "users_id=" . SharedNullOrNum($id, $dblink) . "," .
                       "datecancelled=CURRENT_TIMESTAMP," .
-                      "usersexpired_id=$userid " .
+                      "userscancelled_id=$userid " .
                       "where " .
                       "id=$linkBookingID";
           $dbupdate = "update bookings set " .
                       "users_id=" . SharedNullOrNum($id, $dblink) . "," .
                       "datecancelled=CURRENT_TIMESTAMP," .
-                      "usersexpired_id=$userid " .
+                      "userscancelled_id=$userid " .
                       "where " .
                       "id=$bookingcode";
           if ($dbresult2 = SharedQuery($dbupdate, $dblink) && $dbresult3 = SharedQuery($dbupdate2, $dblink))
@@ -328,13 +329,13 @@ global $reportTypes;
             $dbupdate2 = "update bookings set " .
                         "users_id=" . SharedNullOrNum($id, $dblink) . "," .
                         "datecancelled=CURRENT_TIMESTAMP," .
-                        "usersexpired_id=$userid " .
+                        "userscancelled_id=$userid " .
                         "where " .
                         "id=$bookings_id";
             $dbupdate = "update bookings set " .
                         "users_id=" . SharedNullOrNum($id, $dblink) . "," .
                         "datecancelled=CURRENT_TIMESTAMP," .
-                        "usersexpired_id=$userid " .
+                        "userscancelled_id=$userid " .
                         "where " .
                         "id=$bookingcode";
             if ($dbresult2 = SharedQuery($dbupdate, $dblink) && $dbresult3 = SharedQuery($dbupdate2, $dblink))
@@ -353,7 +354,7 @@ global $reportTypes;
             $dbupdate = "update bookings set " .
                         "users_id=" . SharedNullOrNum($id, $dblink) . "," .
                         "datecancelled=CURRENT_TIMESTAMP," .
-                        "usersexpired_id=$userid " .
+                        "userscancelled_id=$userid " .
                         "where " .
                         "id=$bookingcode";
             if ($dbresult2 = SharedQuery($dbupdate, $dblink))
