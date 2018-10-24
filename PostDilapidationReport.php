@@ -67,9 +67,10 @@
     </div>
     <h2 class="content-head text-center firstH1">Post Dilapidation Survey Report</h2><br>
     <p>
-        The Post Dilapidation Survey Report is a special purpose property inspection report undertaken to provide a visual
-        assessment of constructional and cosmetic fabric defects, which are or may be related to movement of the structure
-        or fabric of the subject property evident on the day of the inspection prior to the commencement of neighbouring construction works.
+        The Post Dilapidation Survey Report is a special purpose property inspection report undertaken to provide 
+        a visual assessment of constructional and cosmetic fabric defects, which are or may be related to movement of 
+        the structure or fabric of the subject property evident on the day of the inspection 
+        after the completion of neighbouring construction works.
         <br>The report will provide a photographic record of evident constructional or related defects.
     </p>
 </div>
