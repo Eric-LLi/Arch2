@@ -3227,6 +3227,7 @@
     //function doSearchBookings(pageNumber,pageSize)
     function doSearchBookings(searchEmail)
     {
+      $('#divBookingsG').datagrid('loading');
       console.log('***** Searching bookings...');
       var emailinput;
       var selectedreportstatus = $('#cbSearchReportStatus').combobox('getValue');
