@@ -132,7 +132,7 @@
     {name: 'Commercial Property Assessment Report', id: 19},
     {name: 'Commercial Dilapidation Survey', id: 20},
     {name: 'Residential Home Access & Services Report', id: 21},
-    {name: 'Post-dilapidation Survey Report',id:22},
+    {name: 'Post-Dilapidation Survey Report',id:22},
     {name: 'Quote Report',id:23}
   ];
   //This is the selected list for use to select when edit a report, cannot change a report combined report, so remove the combined one. 
