@@ -17,14 +17,14 @@
     $h = str_replace("XXX_HEADER", $header, $h);
     $h = str_replace("XXX_FOOTER", $footer, $h);
 
-    $h = str_replace("XXX_ARCHITECTNAME", $b['linked_firstname'] . ' ' . $b['linked_lastname'], $h);
-    $h = str_replace("XXX_ARCHITECTPHONE", $b['linked_mobile'], $h);
+    // $h = str_replace("XXX_ARCHITECTNAME", $b['linked_firstname'] . ' ' . $b['linked_lastname'], $h);
+    // $h = str_replace("XXX_ARCHITECTPHONE", $b['linked_mobile'], $h);
 
     $h = str_replace("XXX_BOOKINGCODE", $b['linked_bookingcode'], $h);
 //      ChromePhp::log($b);
 //      error_log($b);
 //    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['linked_bookingcode'], $h);
-    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['bookingcode'], $h);
+
     $h = str_replace("XXX_CUSTFIRSTLASTNAME", $b['custfirstname'] . ' ' . $b['custlastname'], $h);
     $h = str_replace("XXX_CUSTFIRSTNAME", $b['custfirstname'], $h);
     $h = str_replace("XXX_CUSTADDRESS1", $b['custaddress1'], $h);
@@ -48,6 +48,8 @@
     $h = str_replace("XXX_ESTATEAGENTPHONE", $b['estateagentphone'], $h);
     $h = str_replace("XXX_SITEMEETING", $b['meetingonsite'], $h);
     $h = str_replace("XXX_COMMISSION", $b['commission'], $h);
+    $h = str_replace("XXX_TRAVELCOST", $b['travel'], $h);
+    $h = str_replace("XXX_SPOTTER", $b['spotter'], $h);
     $h = str_replace("XXX_STOREYS", $b['numstories'], $h);
     $h = str_replace("XXX_BEDROOMS", $b['numbedrooms'], $h);
     $h = str_replace("XXX_BATHROOMS", $b['numbathrooms'], $h);
@@ -59,9 +61,11 @@
     $h = str_replace("XXX_ADVICE", $b['renoadvice'], $h);
     $h = str_replace("XXX_INSPECTION", $b['pestinspection'], $h);
 
-    $h = str_replace("XXX_COMBOARCHITECTNAME", $b['linked_firstname'] . ' ' . $b['linked_lastname'], $h);
-    $h = str_replace("XXX_COMBOARCHITECTMOBILE", $b['linked_mobile'], $h);
+    $h = str_replace("XXX_COMBOARCHITECTNAME", $b['architectfirstname'] . ' ' . $b['architectlastname'], $h);
+    $h = str_replace("XXX_COMBOARCHITECTMOBILE", $b['architectmobile'], $h);
+    $h = str_replace("XXX_COMBOPROPERTYBOOKINGCODE", $b['bookingcode'], $h);
 
+    $h = str_replace("XXX_COMBOINSPECTBOOKINGCODE", $b['linked_bookingcode'], $h);
     $h = str_replace("XXX_COMBOINSPECTORNAME", $b['inspectorfirstname'] . ' ' . $b['inspectorlastname'], $h);
     $h = str_replace("XXX_COMBOINSPECTORMOBILE", $b['inspectormobile'], $h);
 
@@ -75,13 +79,37 @@
 
   try
   {
-    if (isset($_POST['uuid']) && isset($_POST['archuuid']) && isset($_POST['inspectoruuid']) && isset($_POST['bookingcode']) && isset($_POST['linkedbookingcode']))
+    if (isset($_POST['uuid']) && isset($_POST['archuuid']) && isset($_POST['inspectoruuid']) && isset($_POST['bookingcode']))
     {
+      if(!empty($_POST['linkedbookingcode']))
+      {
+        error_log("combined reports, and select timber one, itype is 3,used the linkedbookingcode as id to the search");
+        // error_log(SharedGetPostVar("bookingcode"));
+        $searchid = SharedGetPostVar("linkedbookingcode");
+        $updatetimberid = SharedGetPostVar("bookingcode");
+        $updatepropertyid = SharedGetPostVar("linkedbookingcode");
+      }
+      else if (!empty($_POST['linked_bookingcode']))
+      {
+        error_log("combined reports, select the property one, itype is 1,use its own id to the search");
+        // error_log(SharedGetPostVar("bookingcode"));
+        $searchid = SharedGetPostVar("bookingcode");
+        $updatepropertyid = SharedGetPostVar("bookingcode");
+        $updatetimberid = SharedGetPostVar("linked_bookingcode");
+
+      }
+      error_log("the bookingid is going to use to the search is : ");
+      error_log($searchid);
+      error_log("update timber report id is: ");
+      error_log($updatetimberid);
+      error_log("update property report id is: ");
+      error_log($updatepropertyid);
+
       $uuid = SharedGetPostVar("uuid");
       $archuuid = SharedGetPostVar("archuuid");
       $inspectoruuid = SharedGetPostVar("inspectoruuid");
-      $bookingcode = SharedGetPostVar("bookingcode");
-      $linkedbookingcode = SharedGetPostVar("linkedbookingcode");
+//       $bookingcode = SharedGetPostVar("bookingcode");
+//       $linkedbookingcode = SharedGetPostVar("linkedbookingcode");
 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $archid = SharedGetUserIdFromUuid($archuuid, $dblink);
@@ -94,20 +122,17 @@
                      "datemodified=CURRENT_TIMESTAMP," .
                      "usersmodified_id=$userid " .
                      "where " .
-                     "id=$bookingcode";
+                     "id=$updatetimberid";
 
         $dbupdate2 = "update bookings set " .
                      "users_id=$archid," .
                      "datemodified=CURRENT_TIMESTAMP," .
                      "usersmodified_id=$userid " .
                      "where " .
-                     "id=$linkedbookingcode";
+                     "id=$updatepropertyid";
 
         $dbresult1 = SharedQuery($dbupdate1, $dblink);
         $dbresult2 = SharedQuery($dbupdate2, $dblink);
-
-
-
 
         if ($dbresult1 && $dbresult2)
         {
@@ -142,7 +167,9 @@
                       "b1.meetingonsite," .
                       "b1.renoadvice," .
                       "b1.pestinspection," .
-                      "b1.commission," .
+                      "b1.commission commission," .
+                      "b1.travel travel," .
+                      "b1.spotter spotter," .
 
                       "b1.estateagentcompany," .
                       "b1.estateagentcontact," .
@@ -152,46 +179,46 @@
                       "b1.itype," .
 
                       "u1.itype usertype," .
-                      "u1.email inspectoremail," .
-                      "u1.firstname inspectorfirstname," .
-                      "u1.lastname inspectorlastname," .
+                      "u1.email architectemail," .
+                      "u1.firstname architectfirstname," .
+                      "u1.lastname architectlastname," .
 
-                      "u1.address1 inspectoraddress1," .
-                      "u1.address2 inspectoraddress2," .
-                      "u1.city inspectorcity," .
-                      "u1.state inspectorstate," .
-                      "u1.postcode inspectorpostcode," .
-                      "u1.regno inspectorregno," .
-                      "u1.company inspectorcompany," .
-                      "u1.phone inspectorphone," .
-                      "u1.mobile inspectormobile," .
+                      "u1.address1 architectaddress1," .
+                      "u1.address2 architectaddress2," .
+                      "u1.city architectcity," .
+                      "u1.state architectstate," .
+                      "u1.postcode architectpostcode," .
+                      "u1.regno architectregno," .
+                      "u1.company architectcompany," .
+                      "u1.phone architectphone," .
+                      "u1.mobile architectmobile," .
 
                       // Linked booking for combined reports... (if any)
-                      // Linked is the arch, base is inspector
+                      // Linked is the inspector, base is architect
                       "b2.id linked_bookingcode," .
                       "b2.itype linked_itype," .
                       "u2.itype linked_usertype," .
-                      "u2.email linked_email," .
-                      "u2.firstname linked_firstname," .
-                      "u2.lastname linked_lastname," .
+                      "u2.email inspectoremail," .
+                      "u2.firstname inspectorfirstname," .
+                      "u2.lastname inspectorlastname," .
 
-                      "u2.address1 linked_address1," .
-                      "u2.address2 linked_address2," .
-                      "u2.city linked_city," .
-                      "u2.state linked_state," .
-                      "u2.postcode linked_postcode," .
-                      "u2.regno linked_regno," .
-                      "u2.company linked_company," .
-                      "u2.phone linked_phone," .
-                      "u2.mobile linked_mobile " .
+                      "u2.address1 inspectoraddress1," .
+                      "u2.address2 inspectoraddress2," .
+                      "u2.city inspectorcity," .
+                      "u2.state inspectorstate," .
+                      "u2.postcode inspectorpostcode," .
+                      "u2.regno inspectorregno," .
+                      "u2.company inspectorcompany," .
+                      "u2.phone inspectorphone," .
+                      "u2.mobile inspectormobile " .
 
                       "from " .
                       "bookings b1 left join users u1 on (b1.users_id=u1.id) " .
-                      "            left join bookings b2 on (b1.bookings_id=b2.id) " .
+                      "            left join arch.bookings b2 on (b2.bookings_id=b1.id) " .
                       "            left join users u2 on (b2.users_id=u2.id) " .
                       "where " .
-                      "b1.id=$bookingcode";
-
+                      "b1.id=$searchid";
+          error_log($dbselect);
           if ($dbresult = SharedQuery($dbselect, $dblink))
           {
             if ($numrows = SharedNumRows($dbresult))
@@ -199,7 +226,8 @@
               $booking = null;
               while ($dbrow = SharedFetchArray($dbresult))
                 $booking = $dbrow;
-//                error_log($booking);
+               //error_log(print_r($booking,TRUE));
+               error_log($booking['commission']);
 //                ChromePhp::log($booking);
               // Let customer know...
               if ($booking['custemail'] != "")
@@ -210,26 +238,19 @@
                 $html = doMacros($html, $booking);
                 $custemail = explode(",",$booking['custemail']);
 
-		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
+		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['linked_itype']] . " Assessment/Inspection Confirmation", $html);
               }
 
-              // Let architect/inspector know... (arch is the linked entries)...
-              if ($booking['linked_bookingcode'] != "")
-              {
-                // Special case combined report - need to send separate emails to architect/inspector and let them know about each other...
-                if ($booking['itype'] == 3)
-                {
-                  // Inspector notification...
-                  $html1 = file_get_contents('email_comboinspectornotification.html');
-                  $html1 = doMacros($html1, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Timber Inspection Confirmation", $html1);
+              // Inspector notification...
+              $html1 = file_get_contents('email_comboinspectornotification.html');
+              $html1 = doMacros($html1, $booking);
+              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1);
 
-                  // Architect notification...
-                  $html2 = file_get_contents('email_comboarchitectnotification.html');
-                  $html2 = doMacros($html2, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_email'], $booking['linked_firstname'] . ' ' . $booking['linked_lastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment Report Confirmation", $html2);
-                }
-              }
+              // Architect notification...
+              $html2 = file_get_contents('email_comboarchitectnotification.html');
+              $html2 = doMacros($html2, $booking);
+              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2);
+
             }
           }
         }
