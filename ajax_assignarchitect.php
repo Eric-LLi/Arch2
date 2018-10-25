@@ -45,6 +45,8 @@
     $h = str_replace("XXX_ESTATEAGENTPHONE", $b['estateagentphone'], $h);
     $h = str_replace("XXX_SITEMEETING", $b['meetingonsite']?"yes":"no", $h);
     $h = str_replace("XXX_COMMISSION", $b['commission'], $h);
+    $h = str_replace("XXX_TRAVELCOST", $b['travel'], $h);
+    $h = str_replace("XXX_SPOTTER", $b['spotter'], $h);
     $h = str_replace("XXX_STOREYS", $b['numstories'], $h);
     $h = str_replace("XXX_BEDROOMS", $b['numbedrooms'], $h);
     $h = str_replace("XXX_BATHROOMS", $b['numbathrooms'], $h);
@@ -127,6 +129,8 @@
                       "b1.renoadvice," .
                       "b1.pestinspection," .
                       "b1.commission," .
+                      "b1.travel travel," .
+                      "b1.spotter spotter," .
 
                       "b1.estateagentcompany," .
                       "b1.estateagentcontact," .
@@ -202,25 +206,10 @@
               }
 
               // Let architect/inspector know...
-              if ($booking['linked_bookingcode'] != "")
-              {
-                // Special case combined report - need to send separate emails to architect/inspector and let them know about each other...
-                if ($booking['itype'] == 3)
-                {
-                  // Architect notification...
-                  $html1 = file_get_contents('email_comboarchitectnotification.html');
-                  $html1 = doMacros($html1, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html1);
-
-                  // Inspector notification...
-                  $html2 = file_get_contents('email_comboinspectornotification.html');
-                  $html2 = doMacros($html2, $booking);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['linked_archemail'], $booking['linked_archfirstname'] . ' ' . $booking['linked_archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Timber Inspection Confirmation", $htm2);
-                }
-              }
-              else if ($booking['archemail'] != "")
+              if ($booking['archemail'] != "")
               {
                 //single report, only need to send one email
+                error_log($booking['itype']);
                 if ($booking['itype'] == 2) //email to inspector only
                 {
                   $html = file_get_contents('email_inspectornotification.html');
