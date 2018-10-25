@@ -78,7 +78,10 @@ function generatePDF(mode) {
                                 width: 130
                             },
                             {
-                                text: 'Post Dilapidation Survey Report',
+                                text: [
+                                    'Dilapidation Survey Report',
+                                    {text:'\n - Post Construction',fontSize:20,margin:[20,0,0,0]}
+                                ],
                                 fontSize: 24,
                                 bold: true,
                                 color: 'red',

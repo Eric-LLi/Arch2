@@ -1057,10 +1057,10 @@
 <div class="container">
     <div class="row form-group">
         <div class="col-sm-4" >
-            <input id="ECCTTPA-otherOption" placeholder="Others" class="form-control" style="width: 50%" title="site garden other">
+            <input id="ECCTTPA-otherOption" type="text" placeholder="Others" class="form-control" style="width: 50%" title="site garden other">
         </div>
         <div class="col-sm">
-            <input id="ECCTTPA-otherChoice" class="form-control" style="width: 100%" title="other description">
+            <input id="ECCTTPA-otherChoice" type="text" class="form-control" style="width: 100%" title="other description">
         </div>
         <br>
     </div>
@@ -1794,10 +1794,10 @@
 <div class="container" style="margin-top: 10px">
     <div class="row form-group">
         <div class="col-sm-4" >
-            <input id="EoB-Table2-O1" placeholder="Others" class="form-control" style="width: 50%">
+            <input id="EoB-Table2-O1" type="text" placeholder="Others" class="form-control" style="width: 50%">
         </div>
         <div class="col-sm form-group">
-            <input id="EoB-Table2-SLC1" title="other description" class="form-control" style="width: 100%">
+            <input id="EoB-Table2-SLC1" type="text" title="other description" class="form-control" style="width: 100%">
         </div>
         <br>
     </div>
@@ -1822,10 +1822,10 @@
 <div class="container" style="margin-top: 10px">
     <div class="row form-group">
         <div class="col-sm-4" >
-            <input id="EoB-Table2-O2" placeholder="Others" class="form-control" style="width: 50%">
+            <input id="EoB-Table2-O2" type="text" placeholder="Others" class="form-control" style="width: 50%">
         </div>
         <div class="col-sm form-group">
-            <input id="EoB-Table2-SLC2" placeholder="" class="form-control" style="width: 100%">
+            <input id="EoB-Table2-SLC2" type="text" placeholder="" class="form-control" style="width: 100%">
 
         </div>
         <br>
@@ -2291,10 +2291,10 @@
 <div class="container">
     <div class="row form-group">
         <div class="col-sm-4" style="margin-top: 3px">
-            <input id="IoB-O1-TITLE" placeholder="Others" class="form-control" style="width:50%">
+            <input id="IoB-O1-TITLE" type="text" placeholder="Others" class="form-control" style="width:50%">
         </div>
         <div class="col-sm-8">
-            <input id="IoB-O1-SLC" placeholder="" class="form-control;input1" style="width:100%">
+            <input id="IoB-O1-SLC" type="text" placeholder="" class="form-control;input1" style="width:100%">
         </div>
         <br>
     </div>
@@ -2769,10 +2769,10 @@
 <div class="container">
     <div class="row form-group">
         <div class="col-sm-4" style="margin-top: 3px">
-            <input id="RS-TABLE2-O1-TEST" placeholder="Others" class="form-control;input1" style="width:50%">
+            <input id="RS-TABLE2-O1-TEST" type="text" placeholder="Others" class="form-control;input1" style="width:50%">
         </div>
         <div class="col-sm-8">
-            <input id="RS-TABLE2-O1-SLC" placeholder="Others" class="form-control;input1" style="width:50%">
+            <input id="RS-TABLE2-O1-SLC" type="text" placeholder="Others" class="form-control;input1" style="width:50%">
 
         </div>
         <br>
@@ -3003,6 +3003,8 @@
                 <option value="No Visible Activity">No Visible Activity</option>
                 <option value="Visible Evidence">Visible Evidence</option>
                 <option value="Visible Active Evidence">Visible Active Evidence</option>
+                <option value="Not Applicable">Not Applicable</option>
+                <option value="Unknown">Unknown</option>
             </select>
         </div>
     </div>
@@ -3320,10 +3322,10 @@
 <div class="container">
     <div class="row form-group">
         <div class="col-sm-4" style="margin-top: 3px">
-            <input id="SFS-TABLE2-O1-TEXT" placeholder="Others" class="form-control" style="width: 50%">
+            <input id="SFS-TABLE2-O1-TEXT" type="text" placeholder="Others" class="form-control" style="width: 50%">
         </div>
         <div class="col-sm-8">
-            <input id="SFS-TABLE2-O1-SLC" placeholder="" class="form-control" style="width: 100%">
+            <input id="SFS-TABLE2-O1-SLC" type="text" placeholder="" class="form-control" style="width: 100%">
         </div>
         <br>
     </div>
@@ -3616,7 +3618,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <label>Property Management Guide</label>
+            <label>Property Maintenance Guide</label>
             <select id="6000" style="width:100%" title="attachment">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>

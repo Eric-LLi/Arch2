@@ -14099,7 +14099,7 @@
             <hr>
             <div class="row">
                 <div class="col-sm">
-                    <label>Property Management Guide</label>
+                    <label>Property Maintenance Guide</label>
                     <select id="6000" style="width:100%" title="Attachment Select">
                         <optgroup label="No Visible Significant Defect">
                             <option value="√">✔</option>

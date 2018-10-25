@@ -2,7 +2,7 @@
  * Created by Fafa on 21/10/18.
  */
 
-var coverPageText = 'The Post Dilapidation Survey Report is a special purpose property inspection report undertaken to provide a visual assessment of constructional and cosmetic fabric defects, which are or may be related to movement of the structure or fabric of the subject property evident on the day of the inspection prior to the commencement of neighbouring construction works.';
+var coverPageText = 'The Post Dilapidation Survey Report is a special purpose property inspection report undertaken to provide a visual assessment of constructional and cosmetic fabric defects, which are or may be related to movement of the structure or fabric of the subject property evident on the day of the inspection after the completion of neighbouring construction works.';
 
 var assessmentAccessDP1 = 'The architect can only inspect the reasonably accessible parts of the property without the use of a ladder or the removal of any furniture, fittings – be they fixed or otherwise – cladding, or lining materials, plants or soil.  The extent of accessible areas will be determined by the inspecting architect at the time of the inspection.';
 

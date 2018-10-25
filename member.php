@@ -2051,53 +2051,61 @@
         function(row,index)
         {
           //noty({text:'Select booking ' + row.bookingcode,type: 'warning', timeout: 4000});
-          document.getElementById('pdfUploadBookingcode').value = row.bookingcode;
-          $.post
-          (
-            'ajax_checkPDF.php',
-            {
-              uuid:'<?php echo $_SESSION['uuid']; ?>',
-              bookingcode: row.bookingcode
-            },
-            function(result)
-            {
-              var response = JSON.parse(result);
-              if(response.rc == 0)
+          if(row.reportid == 0 || row.reportid == 23)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet");
+            noty({text: 'This is an unassinged or a quote report, cannot assign a report type first', type: 'warning', timeout: 4000});
+          }
+          else
+          {
+            document.getElementById('pdfUploadBookingcode').value = row.bookingcode;
+            $.post
+            (
+              'ajax_checkPDF.php',
               {
-                //this booking does not have a pdf in the ./pdf directory, could upload straght away
-                //noty({text:response.msg,type:'info',timeout:4000});
-                doPromptOkCancel
-                (
-                  'Upload a report for booking ' + row.bookingcode + ' from the local computer?',
-                  function(result)
-                  {
-                    if(result)
-                    {
-                      $("#uploadPDF").click();
-                    }
-                  }
-                );
-              }
-              else
+                uuid:'<?php echo $_SESSION['uuid']; ?>',
+                bookingcode: row.bookingcode
+              },
+              function(result)
               {
-                //This booking has a pdf in the ./pdf drectory, need to ask permission
-                doPromptOkCancel
-                (
-                  'Booking ' + row.bookingcode +  ' already has a pdf report, do you want to overwrite it?',
-                  function(result)
-                  {
-                    if (result)
+                var response = JSON.parse(result);
+                if(response.rc == 0)
+                {
+                  //this booking does not have a pdf in the ./pdf directory, could upload straght away
+                  //noty({text:response.msg,type:'info',timeout:4000});
+                  doPromptOkCancel
+                  (
+                    'Upload a report for booking ' + row.bookingcode + ' from the local computer?',
+                    function(result)
                     {
-                      //noty({text:'you click ok',type:'info',timeout:4000});
-                      //$("#theUploadButton").click();
-                      $("#uploadPDF").click();
+                      if(result)
+                      {
+                        $("#uploadPDF").click();
+                      }
                     }
-                  }
-                );  
-                //noty({text:response.msg,type:'info',timeout:4000});
+                  );
+                }
+                else
+                {
+                  //This booking has a pdf in the ./pdf drectory, need to ask permission
+                  doPromptOkCancel
+                  (
+                    'Booking ' + row.bookingcode +  ' already has a pdf report, do you want to overwrite it?',
+                    function(result)
+                    {
+                      if (result)
+                      {
+                        //noty({text:'you click ok',type:'info',timeout:4000});
+                        //$("#theUploadButton").click();
+                        $("#uploadPDF").click();
+                      }
+                    }
+                  );  
+                  //noty({text:response.msg,type:'info',timeout:4000});
+                }
               }
-            }
-          )
+            )
+          }
         }
       ))
       noty({text: 'Please select a booking', type: 'warning', timeout: 2000});
@@ -2176,6 +2184,10 @@
             // console.log("this is an unassinged report, cannot allocate architect yet");
             noty({text: 'This is an unassinged report, cannot mark it as paid', type: 'warning', timeout: 4000});
           }
+          else if(row.reportid == 23)
+          {
+            noty({text: 'This is a quote report, cannot mark it as paid', type: 'warning', timeout: 4000});
+          }
           else
           {
             doPromptOkCancel
@@ -2226,6 +2238,10 @@
           {
             // console.log("this is an unassinged report, cannot allocate architect yet");
             noty({text: 'This is an unassinged report, cannot mark it as completed', type: 'warning', timeout: 4000});
+          }
+          else if(row.reportid == 23)
+          {
+            noty({text: 'This is a quote report, cannot mark it as completed, please select a report type first', type: 'warning', timeout: 4000});
           }
           else
           {
@@ -2279,6 +2295,10 @@
             // console.log("this is an unassinged report, cannot allocate architect yet");
             noty({text: 'This is an unassinged report, cannot ask an architect to redo', type: 'warning', timeout: 4000});
           }
+          else if(row.reportid == 23)
+          {
+            noty({text: 'This is a quote report, please select a report type first', type: 'warning', timeout: 4000});
+          }
           else
           {
             doPromptOkCancel
@@ -2330,6 +2350,10 @@
           {
             // console.log("this is an unassinged report, cannot allocate architect yet");
             noty({text: 'This is an unassinged report, cannot mark it approved', type: 'warning', timeout: 4000});
+          }
+          else if(row.reportid == 23)
+          {
+            noty({text: 'This is a quote report, please select a report type first', type: 'warning', timeout: 4000});
           }
           else
           {
@@ -2383,6 +2407,10 @@
           {
             // console.log("this is an unassinged report, cannot allocate architect yet")
             noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
+          }
+          else if(row.reportid == 23)
+          {
+            noty({text: 'This is a quote report, please select a report type first', type: 'warning', timeout: 4000});
           }
           else
           {
@@ -2440,7 +2468,7 @@
                 $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
                 break;
               case 18:
-                $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                $.redirect('HOWReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
                 break;
               case 19:
                 $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
@@ -2450,6 +2478,9 @@
                 //break;
               case 21:
                 $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
+                break;
+              case 22:
+                $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
                 break;
             }
           }
@@ -2471,6 +2502,10 @@
             {
               // console.log("this is an unassinged report, cannot allocate architect yet")
               noty({text: 'This is an unassinged report, cannot send report to customer', type: 'warning', timeout: 3000});
+            }
+            else if(row.reportid == 23)
+            {
+              noty({text: 'This is a quote report, cannot send report to customer', type: 'warning', timeout: 4000});
             }
             else if (row.reportid == 3)
             {
@@ -3192,6 +3227,7 @@
     //function doSearchBookings(pageNumber,pageSize)
     function doSearchBookings(searchEmail)
     {
+      $('#divBookingsG').datagrid('loading');
       console.log('***** Searching bookings...');
       var emailinput;
       var selectedreportstatus = $('#cbSearchReportStatus').combobox('getValue');
@@ -3495,6 +3531,11 @@
                 {
                   // console.log("this is an unassinged report, cannot allocate architect yet")
                   noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
+                }
+                else if(row.reportid == 23)
+                {
+                  // console.log("this is an quote report");
+                  noty({text: 'This is a quote report, please assign an report type first', type: 'warning', timeout: 3000});
                 }
                 else
                 {
