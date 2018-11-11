@@ -130,7 +130,7 @@
     {name: 'Renovation Feasibility', id: 17},
     {name: 'Residential Home Warranty Report', id: 18},
     {name: 'Commercial Property Assessment Report', id: 19},
-    {name: 'Commercial Dilapidation Survey', id: 20},
+    // {name: 'Commercial Dilapidation Survey', id: 20},
     {name: 'Residential Home Access & Services Report', id: 21},
     {name: 'Post-Dilapidation Survey Report',id:22},
     {name: 'Quote Report',id:23}
@@ -159,7 +159,7 @@
     {name: 'Renovation Feasibility', id: 17},
     {name: 'Residential Home Warranty Report', id: 18},
     {name: 'Commercial Property Assessment Report', id: 19},
-    {name: 'Commercial Dilapidation Survey', id: 20},
+    // {name: 'Commercial Dilapidation Survey', id: 20},
     {name: 'Residential Home Access & Services Report', id: 21},
     {name: 'Post-Dilapidation Survey Report',id:22},
     {name: 'Quote Report',id:23}
@@ -198,7 +198,7 @@
     {name: 'Renovation Feasibility Scope', id: 17},
     {name: 'Residential Home Warranty Report Scope', id: 18},
     {name: 'Commercial Property Assessment Report Scope', id: 19},
-    {name: 'Commercial Dilapidation Survey Scope', id: 20},
+    // {name: 'Commercial Dilapidation Survey Scope', id: 20},
     {name: 'Residential Home Access & Services Scope', id: 21},
     {name: 'Post-Dilapidation Survey Scope',id:22},
     {name: 'Quote Report Scope',id:23}

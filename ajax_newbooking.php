@@ -23,7 +23,7 @@
       $custcity = $_POST['custcity'];
       $custpostcode = $_POST['custpostcode'];
       $custstate = $_POST['custstate'];
-
+      
       $hasbudget = false;
       $hascommission = false;
       $hastravel = false;
@@ -81,6 +81,8 @@
       $estateagentmobile = $_POST['estateagentmobile'];
       $estateagentphone = $_POST['estateagentphone'];
 
+      $quotedescription = $_POST['quotedescription'];
+
       $isuser = isset($_POST['isuser']) ? $_POST['isuser'] : false;
 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
@@ -92,7 +94,7 @@
         global $budget, $commission, $travel, $spotter, $notes, $numstories, $numbedrooms, $numbathrooms, $numbuildings, $numrooms;
         global $address1, $address2, $city, $postcode, $state, $construction, $age, $meetingonsite, $renoadvice, $pestinspection;
         global $estateagentcompany, $estateagentcontact, $estateagentmobile, $estateagentphone, $userid, $hasbudget, $hascommission;
-        global $hastravel,$hasspotter;
+        global $hastravel,$hasspotter,$quotedescription;
 
         $bookingcode = SharedMakeUuid(8);
         $vars1 = "";
@@ -171,6 +173,7 @@
                     "estateagentcontact," .
                     "estateagentmobile," .
                     "estateagentphone," .
+                    'quote_description,' .
 
                     "userscreated_id" .
                     ") " .
@@ -217,6 +220,7 @@
                     SharedNullOrQuoted($estateagentcontact, 50, $dblink) . "," .
                     SharedNullOrQuoted($estateagentmobile, 20, $dblink) . "," .
                     SharedNullOrQuoted($estateagentphone, 20, $dblink) . "," .
+                    SharedNullOrQuoted($quotedescription, 1000, $dblink) . "," .
 
                     SharedNullOrNum($userid, $dblink) .
                     ")";

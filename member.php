@@ -203,6 +203,7 @@
     function doReloadBookings()
     {
       console.log('***** Reloading bookings, only status of Unpaid if the users is admin...');
+      $('#divBookingsG').datagrid('loading');
       $.post
       (
         'ajax_getbookings.php',
@@ -894,6 +895,7 @@
         $('#fldNewBookingCustAddress2').textbox('clear');
         $('#fldNewBookingCustCity').textbox('clear');
         $('#fldNewBookingCustPostcode').textbox('clear');
+        $('#fldNewBookingQuoteDes').textbox('clear');
 
         // Report TAB
         $('#fldNewBookingReport').combobox('clear');
@@ -956,6 +958,9 @@
             // Customer TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
             
+            $('#fldNewBookingQuoteDesTR').hide();
+
+            
             $('#fldNewBookingCustEmail2').tagbox
             (
               {
@@ -994,6 +999,19 @@
                 // {
                 //   $('#btnNewBookingAdd').linkbutton('enable');
                 // }
+                onChange:function(newValue,oldValue)
+                {
+                  if(newValue == 23)//select the quote report
+                  {
+                    // console.log("need to show the quote description field");
+                    $('#fldNewBookingQuoteDesTR').show();
+                  }
+                  else
+                  {
+                    // console.log("need to hide the quote description field");
+                    $('#fldNewBookingQuoteDesTR').hide();
+                  }
+                }
               }
             );
             // $('#fldNewBookingReport').combobox('setValue',reports[0]);
@@ -1076,6 +1094,8 @@
                 var estateagentcontact = $('#fldNewBookingEstateAgentContact').textbox('getValue');
                 var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                 var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
+
+                var quotedescription = $('#fldNewBookingQuoteDes').textbox('getValue');
                 //console.log(custemail);
 
                 if (!_.isBlank(reportid))
@@ -1136,7 +1156,9 @@
                             estateagentcontact: estateagentcontact,
                             estateagentmobile: estateagentmobile,
                             estateagentphone: estateagentphone,
-                            uuid: '<?php echo $_SESSION['uuid']; ?>'
+                            uuid: '<?php echo $_SESSION['uuid']; ?>',
+
+                            quotedescription:quotedescription
                           };
                           //console.log(data);
 
@@ -1242,6 +1264,8 @@
         $('#fldNewBookingCustAddress2').textbox('clear');
         $('#fldNewBookingCustCity').textbox('clear');
         $('#fldNewBookingCustPostcode').textbox('clear');
+        $('#fldNewBookingQuoteDes').textbox('clear');
+
 
         // Report TAB
         //$('#fldNewBookingReport').combobox('disable');
@@ -1302,6 +1326,8 @@
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
 
             // Properties TAB
+            $('#fldNewBookingQuoteDesTR').hide();
+
             $('#fldNewBookingReport').combobox
             (
               {
@@ -1313,6 +1339,18 @@
                 // {
                 //   $('#btnNewBookingAdd').linkbutton('enable');
                 // }
+                onChange:function(newValue,oldValue)
+                {
+                  if(newValue == 23)//select the quote report
+                  {
+                    // console.log("need to show the quote description field");
+                    $('#fldNewBookingQuoteDesTR').show();
+                  }
+                  else
+                  {
+                    $('#fldNewBookingQuoteDesTR').hide();
+                  }
+                }
               }
             );
 
@@ -1419,6 +1457,7 @@
                     }
                   ?>
                   $('#fldNewBookingNotes').textbox('setValue', b.notes);
+                  $('#fldNewBookingQuoteDes').textbox('setValue', b.quote_description);
 
                   // Properties TAB
                   $('#fldNewBookingState').combobox('setValue', b.state);
@@ -1516,6 +1555,9 @@
                 var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                 var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
 
+                var quotedescription = $('#fldNewBookingQuoteDes').textbox('getValue');
+
+
                 if(reportid == "" || reportid == null)
                 {
                   reportid = 0
@@ -1579,7 +1621,10 @@
                             estateagentphone: estateagentphone,
 
                             uuid: '<?php echo $_SESSION['uuid']; ?>',
-                            bookingcode: booking.bookingcode
+                            bookingcode: booking.bookingcode,
+
+                            quotedescription:quotedescription
+
                           };
 
                           $.post
@@ -1677,7 +1722,7 @@
           doUpdateBooking(row);
         }
       ))
-        noty({text: 'Please select a member to edit', type: 'warning', timeout: 4000});
+        noty({text: 'Please select a booking to edit', type: 'warning', timeout: 4000});
     }
 
     function doRemoveBooking()
@@ -1873,7 +1918,8 @@
             // console.log("this is an unassinged report, cannot allocate architect yet");
             noty({text: 'This is an unassinged report, cannot allocate architect', type: 'warning', timeout: 4000});
           }
-          else if (row.reportid == 3)
+          //assign combined reports
+          else if (row.reportid == 3 || row.linked_bookingcode != null)
           {
             function doReset()
             {
@@ -1960,6 +2006,7 @@
               }
             ).dialog('center').dialog('open');
           }
+          //assign signle reports
           else
           {
             if (row.reportid == 2)
@@ -3415,6 +3462,7 @@
           remoteSort: false,
           multiSort: false,
           autoRowHeight: false,
+          loadMsg:'Loading data, please wait...',
           // pagination: true,
           rowStyler: function(index,row)
           {
@@ -3814,6 +3862,7 @@
             'divBookingsG',
             function(row, index)
             {
+              //console.log(row);
               $.post
               (
                 'ajax_assignboth.php',
@@ -3821,6 +3870,7 @@
                   uuid: '<?php echo $_SESSION['uuid']; ?>',
                   bookingcode: row.bookingcode,
                   linkedbookingcode: row.linkedbookingcode,
+                  linked_bookingcode: row.linked_bookingcode,
                   archuuid: args.archuuid,
                   inspectoruuid: args.inspectoruuid
                 },
@@ -4062,7 +4112,7 @@
             <tr>
               <td>Email:</td>
                 <td>        
-                    <input  id="fldNewBookingCustEmail2" class="easyui-tagbox" style="width:300px">
+                    <input  id="fldNewBookingCustEmail2" class="easyui-tagbox" style="width:400px">
                 </td>
             <tr>
               <td>Mobile:</td>
@@ -4100,6 +4150,10 @@
             <tr>
               <td>Report:</td>
               <td><div id="fldNewBookingReport" style="width: 300px;"></div></td>
+            </tr>
+            <tr id="fldNewBookingQuoteDesTR">
+              <td>Quote Type Description:</td>
+              <td><div id="fldNewBookingQuoteDes" class="easyui-textbox" multiline="true" style="width: 300px;height:30px"></div></td>
             </tr>
             <?php
               if (SharedIsAdmin())

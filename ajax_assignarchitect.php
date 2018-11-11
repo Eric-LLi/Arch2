@@ -37,6 +37,8 @@
     $h = str_replace("XXX_PROPCITY", $b['city'], $h);
     $h = str_replace("XXX_PROPSTATE", $b['state'], $h);
     $h = str_replace("XXX_PROPPOSTCODE", $b['postcode'], $h);
+    $h = str_replace("XXX_QUOTEDESCRIPTION", $b['quote_description'], $h);
+
     $h = str_replace("XXX_REPORTTYPE", $reportTypes[$b['itype']], $h);
 
     $h = str_replace("XXX_ESTATEAGENTCOMPANY", $b['estateagentcompany'], $h);
@@ -136,6 +138,8 @@
                       "b1.estateagentcontact," .
                       "b1.estateagentmobile," .
                       "b1.estateagentphone," .
+                      "b1.quote_description," .
+
 
                       "b1.itype," .
                       "u1.itype usertype," .

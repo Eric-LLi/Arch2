@@ -67,6 +67,7 @@
                   "b1.estateagentcontact," .
                   "b1.estateagentmobile," .
                   "b1.estateagentphone," .
+                  "b1.quote_description," .
 
                   "b1.cardname," .
                   "b1.cardno," .
