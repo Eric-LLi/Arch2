@@ -85,6 +85,8 @@
       $estateagentcontact = $_POST['estateagentcontact'];
       $estateagentmobile = $_POST['estateagentmobile'];
       $estateagentphone = $_POST['estateagentphone'];
+      $quotedescription = $_POST['quotedescription'];
+
 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
 
@@ -105,7 +107,7 @@
                   $vars2 .
 				  $vars3 .
 				  $vars4 .
-                  "notes=" . SharedNullOrQuoted($notes, 50, $dblink) . "," .
+                  "notes=" . SharedNullOrQuoted($notes, 1000, $dblink) . "," .
 
                   "numstories=" . SharedNullOrNum($numstories, $dblink) . "," .
                   "numbedrooms=" . SharedNullOrNum($numbedrooms, $dblink) . "," .
@@ -128,6 +130,7 @@
                   "estateagentcontact=" . SharedNullOrQuoted($estateagentcontact, 50, $dblink) . "," .
                   "estateagentmobile=" . SharedNullOrQuoted($estateagentmobile, 20, $dblink) . "," .
                   "estateagentphone=" . SharedNullOrQuoted($estateagentphone, 20, $dblink) . "," .
+                  "quote_description=" . SharedNullOrQuoted($quotedescription, 1000, $dblink) . "," .
 
                   "datemodified=CURRENT_TIMESTAMP," .
                   "usersmodified_id=$userid " .

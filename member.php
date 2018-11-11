@@ -895,6 +895,7 @@
         $('#fldNewBookingCustAddress2').textbox('clear');
         $('#fldNewBookingCustCity').textbox('clear');
         $('#fldNewBookingCustPostcode').textbox('clear');
+        $('#fldNewBookingQuoteDes').textbox('clear');
 
         // Report TAB
         $('#fldNewBookingReport').combobox('clear');
@@ -957,6 +958,9 @@
             // Customer TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
             
+            $('#fldNewBookingQuoteDesTR').hide();
+
+            
             $('#fldNewBookingCustEmail2').tagbox
             (
               {
@@ -995,6 +999,19 @@
                 // {
                 //   $('#btnNewBookingAdd').linkbutton('enable');
                 // }
+                onChange:function(newValue,oldValue)
+                {
+                  if(newValue == 23)//select the quote report
+                  {
+                    // console.log("need to show the quote description field");
+                    $('#fldNewBookingQuoteDesTR').show();
+                  }
+                  else
+                  {
+                    // console.log("need to hide the quote description field");
+                    $('#fldNewBookingQuoteDesTR').hide();
+                  }
+                }
               }
             );
             // $('#fldNewBookingReport').combobox('setValue',reports[0]);
@@ -1077,6 +1094,8 @@
                 var estateagentcontact = $('#fldNewBookingEstateAgentContact').textbox('getValue');
                 var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                 var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
+
+                var quotedescription = $('#fldNewBookingQuoteDes').textbox('getValue');
                 //console.log(custemail);
 
                 if (!_.isBlank(reportid))
@@ -1137,7 +1156,9 @@
                             estateagentcontact: estateagentcontact,
                             estateagentmobile: estateagentmobile,
                             estateagentphone: estateagentphone,
-                            uuid: '<?php echo $_SESSION['uuid']; ?>'
+                            uuid: '<?php echo $_SESSION['uuid']; ?>',
+
+                            quotedescription:quotedescription
                           };
                           //console.log(data);
 
@@ -1243,6 +1264,8 @@
         $('#fldNewBookingCustAddress2').textbox('clear');
         $('#fldNewBookingCustCity').textbox('clear');
         $('#fldNewBookingCustPostcode').textbox('clear');
+        $('#fldNewBookingQuoteDes').textbox('clear');
+
 
         // Report TAB
         //$('#fldNewBookingReport').combobox('disable');
@@ -1303,6 +1326,8 @@
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
 
             // Properties TAB
+            $('#fldNewBookingQuoteDesTR').hide();
+
             $('#fldNewBookingReport').combobox
             (
               {
@@ -1314,6 +1339,18 @@
                 // {
                 //   $('#btnNewBookingAdd').linkbutton('enable');
                 // }
+                onChange:function(newValue,oldValue)
+                {
+                  if(newValue == 23)//select the quote report
+                  {
+                    // console.log("need to show the quote description field");
+                    $('#fldNewBookingQuoteDesTR').show();
+                  }
+                  else
+                  {
+                    $('#fldNewBookingQuoteDesTR').hide();
+                  }
+                }
               }
             );
 
@@ -1420,6 +1457,7 @@
                     }
                   ?>
                   $('#fldNewBookingNotes').textbox('setValue', b.notes);
+                  $('#fldNewBookingQuoteDes').textbox('setValue', b.quote_description);
 
                   // Properties TAB
                   $('#fldNewBookingState').combobox('setValue', b.state);
@@ -1517,6 +1555,9 @@
                 var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                 var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
 
+                var quotedescription = $('#fldNewBookingQuoteDes').textbox('getValue');
+
+
                 if(reportid == "" || reportid == null)
                 {
                   reportid = 0
@@ -1580,7 +1621,10 @@
                             estateagentphone: estateagentphone,
 
                             uuid: '<?php echo $_SESSION['uuid']; ?>',
-                            bookingcode: booking.bookingcode
+                            bookingcode: booking.bookingcode,
+
+                            quotedescription:quotedescription
+
                           };
 
                           $.post
@@ -1678,7 +1722,7 @@
           doUpdateBooking(row);
         }
       ))
-        noty({text: 'Please select a member to edit', type: 'warning', timeout: 4000});
+        noty({text: 'Please select a booking to edit', type: 'warning', timeout: 4000});
     }
 
     function doRemoveBooking()
@@ -4106,6 +4150,10 @@
             <tr>
               <td>Report:</td>
               <td><div id="fldNewBookingReport" style="width: 300px;"></div></td>
+            </tr>
+            <tr id="fldNewBookingQuoteDesTR">
+              <td>Quote Type Description:</td>
+              <td><div id="fldNewBookingQuoteDes" class="easyui-textbox" multiline="true" style="width: 300px;height:30px"></div></td>
             </tr>
             <?php
               if (SharedIsAdmin())
