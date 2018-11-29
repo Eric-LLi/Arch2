@@ -37,34 +37,33 @@ function generatePDF(mode) {
     var docDefinition = 
     {
         footer: function (currentPage, pageCount) {
-            if (currentPage === 1)
-            {
+            if (currentPage === 1) {
                 return {
                     columns: [
-                        determineFrontPageFooter(mode),
+                        determineFrontPageFooter(mode),                                               
                         {
+                            width: 120,
                             text: '\nPage | ' + currentPage.toString() + ' of ' + pageCount,
                             alignment: 'right',
                             margin: [0, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
-            }
-            else
-            {
+            } else {
                 return {
                     columns: [
                         determineFooter(mode),
                         {
+                            width: 120,
                             text: '\nPage | ' + currentPage.toString() + ' of ' + pageCount,
-                            alignment: 'left',
+                            alignment: 'right',
                             margin: [10, 0, 40, 0],
                             fontSize: 10,
-                            color:'grey',
-                            bold:true
+                            color: 'grey',
+                            bold: true
                         }
                     ]
                 };
