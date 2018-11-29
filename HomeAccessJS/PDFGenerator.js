@@ -77,7 +77,9 @@ function generatePDF(mode) {
             if (currentPage === 1) {
                 return {
                     columns: [
-                        determineFrontPageFooter(mode), {
+                        determineFrontPageFooter(mode),                                               
+                        {
+                            width: 120,
                             text: '\nPage | ' + currentPage.toString() + ' of ' + pageCount,
                             alignment: 'right',
                             margin: [0, 0, 40, 0],
@@ -90,9 +92,11 @@ function generatePDF(mode) {
             } else {
                 return {
                     columns: [
-                        determineFooter(mode), {
+                        determineFooter(mode),
+                        {
+                            width: 120,
                             text: '\nPage | ' + currentPage.toString() + ' of ' + pageCount,
-                            alignment: 'left',
+                            alignment: 'right',
                             margin: [10, 0, 40, 0],
                             fontSize: 10,
                             color: 'grey',

@@ -225,6 +225,9 @@ function drawNotesTable(tableID, limitationSelectName, limitationNoteName, major
     PDFtable = {
         table: {
             widths: ['*', '*'],
+            //dontBreakRows: true,
+            // headerRows: 1,
+            // keepWithHeaderRows: 1,
             body: body
         }
     };
@@ -243,47 +246,57 @@ function determineFooter(mode) {
     if (mode == 'final' || mode == 'save') {
         if (state === 'NSW') {
             result = {
+                width: '*',
                 table: {
-                    widths: ['auto', 350],
+                    widths: [80,350],
                     body: [
-                        [{
-                                rowSpan: 2,
-                                image: footerImage,
-                                alignment: 'left',
-                                width: 80,
-                                height: 34
-                            },
+                        [
                             {
-                                text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
+                                image:footerImage,
+                                alignment:'left',
+                                width:80,
+                                height:34
+                            },
+                            // {
+                            //     rowSpan: 2,
+                            //     image: footerImage,
+                            //     alignment: 'left',
+                            //     width: 80,
+                            //     height: 34
+                            // },
+                            {
+                                text:'\nNSW Nominated Architect B. Inwood Reg, No. 7108 \n\n © COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
                                 margin: [0, 5, 0, 0],
                                 color: '#8E8B8B'
                             }
-                        ],
-                        [
-                            '',
-                            {
-                                text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
-                                alignment: 'left',
-                                fontSize: 7,
-                                margin: [0, 0, 0, 0],
-                                color: '#8E8B8B'
-                            }
                         ]
+                        // [
+                        //     '',
+                        //     {
+                        //         text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                        //         alignment: 'left',
+                        //         fontSize: 7,
+                        //         margin: [0, 0, 0, 0],
+                        //         color: '#8E8B8B'
+                        //     }
+                        // ]
 
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, 0, 10, 0]
+                margin: [40, -9, 10, 0]
             };
             return result;
         } else {
             result = {
+                width: '*',
                 table: {
-                    widths: ['auto', 350],
+                    widths: [80,350],
                     body: [
-                        [{
+                        [
+                            {
                                 // rowSpan:2,
                                 image: footerImage,
                                 alignment: 'left',
@@ -294,7 +307,7 @@ function determineFooter(mode) {
                                 text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
-                                margin: [0, 25, 0, 0],
+                                margin: [0, 22, 0, 0],
                                 color: '#8E8B8B'
                             }
                         ]
@@ -302,13 +315,14 @@ function determineFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, 0, 10, 0]
+                margin: [40, -9, 10, 0]
             };
             return result;
         }
     }
     if (mode == 'preview') {
         result = {
+            width: '*',
             text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
             alignment: 'left',
             fontSize: 11,
@@ -332,12 +346,13 @@ function determineFrontPageFooter(mode) {
     if (mode == 'final' || mode == 'save') {
         if (state === 'NSW') {
             result = {
+                width: '*',
                 table: {
                     body: [
                         [{
                                 image: footerImage,
                                 alignment: 'left',
-                                width: 80,
+                                width: 75,
                                 height: 30
                             },
                             {
@@ -383,11 +398,12 @@ function determineFrontPageFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -25, 10, 0]
+                margin: [40, -25, 00, 0]
             };
             return result;
         } else {
             result = {
+                width: '*',
                 table: {
                     body: [
                         [{
@@ -437,6 +453,7 @@ function determineFrontPageFooter(mode) {
 
     if (mode == 'preview') {
         result = {
+            width: '*',
             text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',
             alignment: 'left',
             fontSize: 11,
