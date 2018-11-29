@@ -4125,7 +4125,9 @@ function getPhotoTable(id) {
                 },
                 table: {
                     width:[160,160,160],
-                    
+                    dontBreakRows: true,
+                    // headerRows: ,
+                    // keepWithHeaderRows: 1,
                     body: data
                 }
             } 
