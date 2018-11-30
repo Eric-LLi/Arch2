@@ -23,23 +23,29 @@ function getCustomerDetailsTable() {
                     border: [false, true, true, true]
                 }, {
                     text: getIt('0'),
-                    style: 'tableText',
-                    colSpan: 3,
+                    fontSize: 9,
                     border: [true, true, false, true]
-                }, {}, {}],
+                },{
+                    text: 'Booking No',
+                    style: 'tableBoldTextAlignLeft'
+                }, {
+                    text: getIt('8'),
+                    fontSize: 9,
+                    border: [true, true, false, true]
+                }],
                 [{
                     text: 'Telephone No',
                     style: 'tableBoldTextAlignLeft',
                     border: [false, true, true, true]
                 }, {
                     text: getIt('1'),
-                    style: 'tableText'
+                    fontSize: 9
                 }, {
-                    text: 'Booking No',
+                    text: 'Mobile No',
                     style: 'tableBoldTextAlignLeft'
                 }, {
-                    text: getIt('8'),
-                    style: 'tableText',
+                    text: getIt('customer_mobile'),
+                    fontSize: 9,
                     border: [true, true, false, true]
                 }]
             ]

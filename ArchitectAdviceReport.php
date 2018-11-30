@@ -75,17 +75,22 @@
     <h3 class="sectionSubHead">CUSTOMER DETAILS</h3>
     <form>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <label>Name</label><br>
                 <input class="form-control" type="text" title="name" id="customer_name" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
             </div>
-            <div class="col-sm-4">
-                <label>Phone</label><br>
-                <input class="form-control" type="text" title="phone" id="customer_phone" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
-            </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <label>Booking No.</label><br>
                 <input class="form-control" type="text" title="bookingNo" id="customer_booking" value="<?php echo $bookingcode; ?>">
+            </div>
+            <div class="col-sm-6" style="margin-top:6px">
+                <label>Phone</label><br>
+                <input class="form-control" type="text" title="phone" id="customer_phone" value="<?php echo doNiceArrayElemAsString('custphone'); ?>">
+            </div>
+            <div class="col-sm-6" style="margin-top:6px">
+                <label>Mobile</label>
+                <br>
+                <input id="customer_mobile" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
             </div>
         </div>
     </form>

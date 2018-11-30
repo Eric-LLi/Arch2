@@ -170,13 +170,13 @@ function generatePDF(mode) {
                             style: 'pageSubHeader'
                         }, {}, {}, {}],
                         [
-                            $('#HA_lbClientName').text(), {
-                                colSpan: 3,
-                                text: $('#HA_ClientName').val()
-                            }, {}, {}
+                            $('#HA_lbClientName').text(), $('#HA_ClientName').val(),
+                            {
+                                text:$('#HA_lbBookingNo').text()
+                            }, $('#HA_BookingNo').val()
                         ],
                         [
-                            $('#HA_lbClientPhone').text(), $('#HA_ClientPhone').val(), $('#HA_lbBookingNo').text(), $('#HA_BookingNo').val()
+                            $('#HA_lbClientPhone').text(), $('#HA_ClientPhone').val(), $('#HA_lbClientMobile').text(), $('#HA_ClientMobile').val()
                         ],
                         [{
                             colSpan: 4,

@@ -86,6 +86,23 @@ function getOwnerDetailsTable() {
                         border: [true, true, false, true]
                     }
                 ],
+                [{
+                    text: 'Telephone No',
+                    style: 'tableBoldTextAlignLeft',
+                    border: [false, true, true, true]
+                }, {
+                    text: getIt('owner_phone'),
+                    fontSize: 9,
+                    colSpan: 2
+                },{}, {
+                    text: 'Mobile No',
+                    style: 'tableBoldTextAlignLeft'
+                }, {
+                    text: getIt('owner_mobile'),
+                    fontSize: 9,
+                    border: [true, true, false, true],
+                    colSpan: 2
+                },{}],
                 [
                     {
                         text: 'Telephone (Bus):',
@@ -1692,7 +1709,12 @@ function getLivingBedroomTable1() {
     ];
     data.push(firstRow);
 
-    var entryTable = createInternalOnePartTable('ENTRY & PASSAGE', entryTableRowCount, 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote', 10);
+    var tabs = $('#internal-tabs').tabs('tabs');
+    
+    // console.log(tabs[3].panel('options').title);
+    var roomName1 = tabs[0].panel('options').title
+
+    var entryTable = createInternalOnePartTable(roomName1, entryTableRowCount, 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote', 10);
     data = data.concat(entryTable);
 
     var stairTable = createInternalOnePartTable('STAIR', stairTableRowCount, 'HOWInternal_StairName', 'HOWInternal_StairSelect', 'HOWInternal_StairNote', 10);

@@ -162,15 +162,29 @@
 	                            </div>
 	                        </div>
 	                    </form>
+						<form>
+	                        <div class="row">
+								<div class="col-sm-6">
+									<label>Phone</label><br>
+									<input id="owner_phone" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custphone'); ?>">
+								</div>
+								<div class="col-sm-6">
+									<label>Mobile</label>
+									<br>
+									<input id="owner_mobile" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
+								</div>
+	                        </div>
+	                    </form>
+						
 	                    <form>
 	                        <div class="row">
-	                            <div class="col-sm">
+	                            <div class="col-sm-6" style="margin-top:6px">
 	                                <label>Telephone(Bus)</label><br>
-	                                <input id="owner_bus_telephone" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString(''); ?>">
+	                                <input id="owner_bus_telephone" class="form-control" type="text" title="name" style="margin-top: 0">
 	                            </div>
-	                            <div class="col-sm">
+	                            <div class="col-sm-6" style="margin-top:6px">
 	                                <label>Telephone(Home)</label><br>
-	                                <input id="owner_home_telephone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('postcode'); ?>">
+	                                <input id="owner_home_telephone" class="form-control" type="text" title="phone" style="margin-top: 0">
 	                            </div>
 	                        </div>
 	                    </form>
@@ -926,10 +940,10 @@
 	        <div title="INTERNAL LIVING & BEDROOM" style="padding: 10px;">
 	            <!-- <div class="easyui-tabs tabs-container" style="padding:10px" data-options="tools:'#internal-tab-tools'" id="internal-tabs"> -->
 				<div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:150" id="internal-tabs">
-	            <!-- <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:150,tools:'#internal-tab-tools'" id="internal-tabs"> -->
+	            	<!-- <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:150,tools:'#internal-tab-tools'" id="internal-tabs"> -->
 	                <div title="Entry&Passage" style="padding:10px;font-size: 18px">  <!--data-options="tools:'#internal_tap_strip_tools'" -->
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Entry_Table','HOWInternal_EntryName','HOWInternal_EntrySelect','HOWInternal_EntryNote')" style="margin-bottom: 10px">Add One Feature</button>
-						<button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button>
+						<!-- <button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button> -->
 						<table id="HOWInternal_Entry_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName0">Floor(Structure)</th>
@@ -1001,7 +1015,8 @@
 	                </div>
 	                <div title="Stair" style="padding:10px;font-size: 18px">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Stair_Table','HOWInternal_StairName','HOWInternal_StairSelect','HOWInternal_StairNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Stair_Table">
+						<!-- <button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button> -->
+						<table id="HOWInternal_Stair_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -2717,7 +2732,7 @@
 <!-- <div id="internal-tab-tools">
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-newnote'" onclick="addPanel('internal-tabs')"></a>
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-trash'" onclick="removePanel('internal-tabs')"></a>
-</div>
+</div> -->
 
 <div id="dlgRoomNew" class="easyui-dialog" title="New Room Name" style="width:400px;height:200px;padding:10px" data-options="resizable: false, modal: true, closable: false, closed: true">
     <div style="margin-bottom:20px">
@@ -2726,7 +2741,7 @@
 
 </div>
 
-<div id="internal_tap_strip_tools">
+<!-- <div id="internal_tap_strip_tools">
         <a href="javascript:void(0)" class="icon-edit" onclick="editRoomName()"></a>
 </div> -->
 

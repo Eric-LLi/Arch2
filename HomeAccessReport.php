@@ -58,21 +58,27 @@ require_once("loadbooking.php");
                         <div id="HA_DivClientDetails" title="Client Details" data-title="Client Details" style="padding:10px;font-size: 18px">
                             <!--<form>-->
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col-sm-6">
                                     <label id="HA_lbClientName">Name: </label>
                                     <br>
                                     <input id="HA_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
                                 </div>
-                                <div class="col-sm">
-                                    <label id="HA_lbClientPhone">Phone: </label>
-                                    <br>
-                                    <input id="HA_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
-                                </div>
-                                <div class="col-sm">
+                                <div class="col-sm-6">
                                     <label id="HA_lbBookingNo">Booking No. : </label>
                                     <br>
                                     <input id="HA_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0" value="<?php echo $bookingcode; ?>">
                                 </div>
+                                <div class="col-sm-6" style="margin-top:6px">
+                                    <label id="HA_lbClientPhone">Phone: </label>
+                                    <br>
+                                    <input id="HA_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custphone'); ?>">
+                                </div>
+                                <div class="col-sm-6" style="margin-top:6px">
+                                    <label id="HA_lbClientMobile">Mobile</label>
+                                    <br>
+                                    <input id="HA_ClientMobile" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
+                                </div>
+                               
                             </div>
                             <!--</form>-->
                         </div>

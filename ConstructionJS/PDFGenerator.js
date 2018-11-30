@@ -606,7 +606,7 @@ function generatePDF(mode) {
                 fontSize: 12
             },
             tableBoldTextAlignLeft: {
-                fontSize: 10,
+                fontSize: 9,
                 bold: true
             },
             // pageTopHeader: {

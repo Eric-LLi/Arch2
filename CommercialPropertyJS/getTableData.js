@@ -11,48 +11,43 @@ function getClientDetailsTable() {
         table: {
             widths: [61, '*', 51, '*'],
             body: [
-                [
-                    {
-                        text: 'CLIENT DETAILS',
-                        border: [false, true, false, true],
-                        style: 'tableHeader',
-                        colSpan: 4
-                    }, {}, {}, {}
-                ],
-                [
-                    {
-                        text: 'Name',
-                        style: 'tableBoldTextAlignLeft',
-                        border: [false, true, true, true]
-
-                    },
-                    {
-                        text: getIt('CP_ClientName'),
-                        fontSize: 9,
-                        colSpan: 3,
-                        border: [false, true, false, true]
-                    }
-                ],
-                [
-                    {
-                        text: 'Telephone No',
-                        style: 'tableBoldTextAlignLeft',
-                        border: [false, true, true, true]
-                    },
-                    {
-                        text: getIt('CP_ClientPhone'),
-                        fontSize: 9
-                    },
-                    {
-                        text: 'Booking No',
-                        style: 'tableBoldTextAlignLeft'
-                    },
-                    {
-                        text: getIt('CP_BookingNo'),
-                        fontSize: 9,
-                        border: [true, true, false, true]
-                    }
-                ]
+                [{
+                    text: 'CLIENT DETAILS',
+                    style: 'tableHeader',
+                    colSpan: 4,
+                    border: [false, false, false, true]
+                }, {}, {}, {}],
+                [{
+                    text: 'Name',
+                    style: 'tableBoldTextAlignLeft',
+                    border: [false, true, true, true]
+                }, {
+                    text: getIt('CP_ClientName'),
+                    fontSize: 9,
+                    border: [true, true, false, true]
+                },{
+                    text: 'Booking No',
+                    style: 'tableBoldTextAlignLeft'
+                }, {
+                    text: getIt('CP_BookingNo'),
+                    fontSize: 9,
+                    border: [true, true, false, true]
+                }],
+                [{
+                    text: 'Telephone No',
+                    style: 'tableBoldTextAlignLeft',
+                    border: [false, true, true, true]
+                }, {
+                    text: getIt('CP_ClientPhone'),
+                    fontSize: 9
+                }, {
+                    text: 'Mobile No',
+                    style: 'tableBoldTextAlignLeft'
+                }, {
+                    text: getIt('CP_ClientMobile'),
+                    fontSize: 9,
+                    border: [true, true, false, true]
+                }]
             ]
         },
         margin: [0, 5, 0, 10]

@@ -13,9 +13,9 @@ function getCustomerDetailsTable() {
             body: [
                 [{
                     text: 'CUSTOMER DETAILS',
-                    border: [false, false, false, true],
                     style: 'tableHeader',
-                    colSpan: 4
+                    colSpan: 4,
+                    border: [false, false, false, true]
                 }, {}, {}, {}],
                 [{
                     text: 'Name',
@@ -23,10 +23,16 @@ function getCustomerDetailsTable() {
                     border: [false, true, true, true]
                 }, {
                     text: getIt('customer_name'),
-                    colSpan: 3,
                     fontSize: 9,
                     border: [true, true, false, true]
-                }, {}, {}],
+                },{
+                    text: 'Booking No',
+                    style: 'tableBoldTextAlignLeft'
+                }, {
+                    text: getIt('customer_booking'),
+                    fontSize: 9,
+                    border: [true, true, false, true]
+                }],
                 [{
                     text: 'Telephone No',
                     style: 'tableBoldTextAlignLeft',
@@ -34,13 +40,11 @@ function getCustomerDetailsTable() {
                 }, {
                     text: getIt('customer_phone'),
                     fontSize: 9
-
                 }, {
-                    text: 'Booking No',
+                    text: 'Mobile No',
                     style: 'tableBoldTextAlignLeft'
-
                 }, {
-                    text: getIt('customer_booking'),
+                    text: getIt('customer_mobile'),
                     fontSize: 9,
                     border: [true, true, false, true]
                 }]
