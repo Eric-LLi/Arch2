@@ -11,46 +11,98 @@ function getCustomerDetailsTable() {
         table: {
             widths: [61, '*', 51, '*'],
             body: [
-                [{
-                    text: 'CUSTOMER DETAILS',
-                    border: [false, false, false, true],
-                    style: 'tableHeader',
-                    colSpan: 4
-                }, {}, {}, {}],
-                [{
-                    text: 'Name',
-                    style: 'tableBoldTextAlignLeft',
-                    border: [false, true, true, true]
-                }, {
-                    text: getIt('customer_name'),
-                    fontSize: 9
-                }, {
-                    text: 'Report Date',
-                    style: 'tableBoldTextAlignLeft'
-                }, {
-                    text: getIt('customer_report'),
-                    fontSize: 9,
-                    border: [true, true, false, true]
-                }],
-                [{
-                    text: 'Telephone No',
-                    style: 'tableBoldTextAlignLeft',
-                    border: [false, true, true, true]
-                }, {
-                    text: getIt('customer_phone'),
-                    fontSize: 9
+                // [{
+                //     text: 'CUSTOMER DETAILS',
+                //     border: [false, false, false, true],
+                //     style: 'tableHeader',
+                //     colSpan: 4
+                // }, {}, {}, {}],
+                // [{
+                //     text: 'Name',
+                //     style: 'tableBoldTextAlignLeft',
+                //     border: [false, true, true, true]
+                // }, {
+                //     text: getIt('customer_name'),
+                //     fontSize: 9
+                // }, {
+                //     text: 'Report Date',
+                //     style: 'tableBoldTextAlignLeft'
+                // }, {
+                //     text: getIt('customer_report'),
+                //     fontSize: 9,
+                //     border: [true, true, false, true]
+                // }],
+                // [{
+                //     text: 'Telephone No',
+                //     style: 'tableBoldTextAlignLeft',
+                //     border: [false, true, true, true]
+                // }, {
+                //     text: getIt('customer_phone'),
+                //     fontSize: 9
 
-                }, {
-                    text: 'Booking No',
-                    style: 'tableBoldTextAlignLeft'
+                // }, {
+                //     text: 'Booking No',
+                //     style: 'tableBoldTextAlignLeft'
 
-                }, {
-                    text: getIt('customer_booking'),
-                    fontSize: 9,
-                    border: [true, true, false, true]
-                }]
-            ]
+                // }, {
+                //     text: getIt('customer_booking'),
+                //     fontSize: 9,
+                //     border: [true, true, false, true]
+                // }]
+            
+
+            [{
+                text: 'CUSTOMER DETAILS',
+                border: [false, false, false, true],
+                style: 'tableHeader',
+                colSpan: 4
+            }, {}, {}, {}],
+            [{
+                text: 'Name',
+                style: 'tableBoldTextAlignLeft',
+                border: [false, true, true, true]
+            }, {
+                text: getIt('customer_name'),
+                fontSize: 9,
+            },
+            {
+                text: 'Booking No',
+                style: 'tableBoldTextAlignLeft'
+                //border: [false, true, false, true]
+            }, {
+                text: getIt('customer_booking'),
+                fontSize: 9,
+                border: [true, true, false, true]
+            }],
+            [{
+                text: 'Telephone No',
+                style: 'tableBoldTextAlignLeft',
+                border: [false, true, true, true]
+            }, {
+                text: getIt('customer_phone'),
+                fontSize: 9,
+               
+            }, {
+                text: 'Mobile No',
+                style: 'tableBoldTextAlignLeft'
+            }, {
+                text: getIt('customer_mobile'),
+                fontSize: 9,
+                border: [true, true, false, true],
+            }],
+            [{
+                text: 'Report Date',
+                style: 'tableBoldTextAlignLeft',
+                border: [false, true, true, true]
+            },{
+                text: getIt('customer_report'),
+                fontSize: 9,
+                border: [true, true, false, true],
+                colSpan: 3
+            }, {},{}]
+        ]   
         }
+        
     };
     return result;
 }

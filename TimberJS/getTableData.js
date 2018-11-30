@@ -11,6 +11,37 @@ function getCustomerDetailsTable() {
         table: {
             widths: [61, '*', 51, '*'],
             body: [
+                // [{
+                //     text: 'CUSTOMER DETAILS',
+                //     style: 'tableHeader',
+                //     colSpan: 4,
+                //     border: [false, false, false, true]
+                // }, {}, {}, {}],
+                // [{
+                //     text: 'Name',
+                //     style: 'tableBoldTextAlignLeft',
+                //     border: [false, true, true, true]
+                // }, {
+                //     text: getIt('0'),
+                //     style: 'tableText',
+                //     colSpan: 3,
+                //     border: [true, true, false, true]
+                // }, {}, {}],
+                // [{
+                //     text: 'Telephone No',
+                //     style: 'tableBoldTextAlignLeft',
+                //     border: [false, true, true, true]
+                // }, {
+                //     text: getIt('1'),
+                //     style: 'tableText'
+                // }, {
+                //     text: 'Booking No',
+                //     style: 'tableBoldTextAlignLeft'
+                // }, {
+                //     text: getIt('8'),
+                //     style: 'tableText',
+                //     border: [true, true, false, true]
+                // }],
                 [{
                     text: 'CUSTOMER DETAILS',
                     style: 'tableHeader',
@@ -23,23 +54,29 @@ function getCustomerDetailsTable() {
                     border: [false, true, true, true]
                 }, {
                     text: getIt('0'),
-                    style: 'tableText',
-                    colSpan: 3,
+                    fontSize: 9,
                     border: [true, true, false, true]
-                }, {}, {}],
+                },{
+                    text: 'Booking No',
+                    style: 'tableBoldTextAlignLeft'
+                }, {
+                    text: getIt('8'),
+                    fontSize: 9,
+                    border: [true, true, false, true]
+                }],
                 [{
                     text: 'Telephone No',
                     style: 'tableBoldTextAlignLeft',
                     border: [false, true, true, true]
                 }, {
                     text: getIt('1'),
-                    style: 'tableText'
+                    fontSize: 9
                 }, {
-                    text: 'Booking No',
+                    text: 'Mobile No',
                     style: 'tableBoldTextAlignLeft'
                 }, {
-                    text: getIt('8'),
-                    style: 'tableText',
+                    text: getIt('custmobile'),
+                    fontSize: 9,
                     border: [true, true, false, true]
                 }]
             ]

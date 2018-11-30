@@ -71,17 +71,23 @@ require_once("loadbooking.php");
                     <div title="Client Details" style="padding:10px;font-size: 18px">
                         <form>
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col-sm-6">
                                     <label>Name</label><br>
                                     <input id="CP_ClientName" class="form-control" type="text" title="name" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
                                 </div>
-                                <div class="col-sm">
-                                    <label>Phone</label><br>
-                                    <input id="CP_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
-                                </div>
-                                <div class="col-sm">
+                                <div class="col-sm-6">
                                     <label>Booking No.</label><br>
                                     <input id="CP_BookingNo" class="form-control" type="text" title="bookingNo" style="margin-top: 0" value="<?php echo $bookingcode; ?>">
+                                </div>
+                                <div class="col-sm-6" style="margin-top:6px">
+                                    <label>Phone</label><br>
+                                    <input id="CP_ClientPhone" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custphone'); ?>">
+                                </div>
+                               
+                                <div class="col-sm-6" style="margin-top:6px">
+                                    <label>Mobile</label>
+                                    <br>
+                                    <input id="CP_ClientMobile" class="form-control" type="text" title="phone" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
                                 </div>
                             </div>
                         </form>

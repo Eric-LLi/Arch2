@@ -84,17 +84,22 @@
     <h3 class="sectionSubHead">CUSTOMER DETAILS</h3>
     <form>
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm-6">
                 <label>Name</label><br>
-                <input id="0" class="form-control" type="text" title="name" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
+                <input id="0" class="form-control" type="text" title="name">
             </div>
-            <div class="col-sm">
-                <label>Phone</label><br>
-                <input id="1" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
-            </div>
-            <div class="col-sm">
+            <div class="col-sm-6">
                 <label>Booking No.</label><br>
                 <input id="2" class="form-control" type="text" title="booking number" value="<?php echo $bookingcode; ?>">
+            </div>
+            <div class="col-sm-6" style="margin-top:6px">
+                <label>Phone</label><br>
+                <input id="1" class="form-control" type="text" title="phone">
+            </div>
+            <div class="col-sm-6" style="margin-top:6px">
+                <label>Mobile</label>
+                <br>
+                <input id="customer_mobile" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
             </div>
         </div>
     </form>
@@ -602,6 +607,19 @@
 <!--PDF Generator-->
 <script src="MaintenanceJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <script src="MaintenanceJS/getTables.js?<?php echo time(); ?>"></script>
+
+ <!-- <script type="text/javascript"> 
+       window.onload = function(){
+           console.log("page has loaded, should do something");
+        //    console.log(<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>);
+           document.getElementById('0').value = "<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>";
+           document.getElementById('1').value = "<?php echo doNiceArrayElemAsString('custmobile'); ?>";
+           document.getElementById('2').value = "<?php echo $bookingcode; ?>";
+           document.getElementById('5').value = "<?php echo doNiceArrayElemAsString('address1'); ?>";
+
+
+       }
+</script> -->
 
 </body>
 </html>

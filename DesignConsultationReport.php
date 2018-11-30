@@ -75,18 +75,21 @@
                 <input id="customer_name" class="form-control" type="text" title="name" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
             </div>
             <div class="col-sm-6">
-                <label>Phone</label><br>
-                <input id="customer_phone" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <label>Report Date</label><br>
-                <input id="customer_date" class="form-control" type="text" title="Date">
-            </div>
-            <div class="col-sm-6">
                 <label>Booking No.</label><br>
                 <input id="customer_booking" class="form-control" type="text" title="booking no" value="<?php echo $bookingcode; ?>">
+            </div>
+            <div class="col-sm-6" style="margin-top:6px">
+                <label>Phone</label><br>
+                <input id="customer_phone" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custphone'); ?>">
+            </div>
+            <div class="col-sm-6" style="margin-top:6px">
+                <label>Mobile</label>
+                <br>
+                <input id="customer_mobile" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
+            </div>
+            <div class="col-sm-6" style="margin-top:6px">
+                <label>Report Date</label><br>
+                <input id="customer_date" class="form-control" type="text" title="Date">
             </div>
         </div>
         <div class="row">

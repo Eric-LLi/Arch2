@@ -27,11 +27,11 @@ function getCustomerDetailsTable() {
                     colSpan: 2
                 },{},
                 {
-                    text: 'Report Date',
+                    text: 'Booking No',
                     style: 'tableBoldTextAlignLeft'
                     //border: [false, true, false, true]
                 }, {
-                    text: getIt('customer_date'),
+                    text: getIt('customer_booking'),
                     fontSize: 9,
                     colSpan: 2,
                     border: [true, true, false, true]
@@ -45,14 +45,24 @@ function getCustomerDetailsTable() {
                     fontSize: 9,
                     colSpan: 2
                 },{}, {
-                    text: 'Booking No',
+                    text: 'Mobile No',
                     style: 'tableBoldTextAlignLeft'
                 }, {
-                    text: getIt('customer_booking'),
+                    text: getIt('customer_mobile'),
                     fontSize: 9,
                     border: [true, true, false, true],
                     colSpan: 2
                 },{}],
+                [{
+                    text: 'Report Date',
+                    style: 'tableBoldTextAlignLeft',
+                    border: [false, true, true, true]
+                },{
+                    text: getIt('customer_date'),
+                    fontSize: 9,
+                    border: [true, true, false, true],
+                    colSpan: 5
+                }, {},{},{},{}],
                 [{
                     text: 'Address of Property',
                     style: 'tableBoldTextAlignLeft',
