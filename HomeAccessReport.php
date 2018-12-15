@@ -308,7 +308,7 @@ require_once("loadbooking.php");
                                         <td>
                                             <select class="form-control" id="HA_FlStructure">
                                                 <option value="-1">Choose</option>
-                                                <option value="Concrete">Contrete</option>
+                                                <option value="Concrete">Concrete</option>
                                                 <option value="Timber">Timber</option>
                                             </select>
                                         </td>
@@ -333,7 +333,7 @@ require_once("loadbooking.php");
                                             <select class="form-control" id="HA_Roof">
                                                 <option value="-1">Choose</option>
                                                 <option value="TCT">TCT</option>
-                                                <option value="Concrete">Concrete</option>
+                                                <option value="Concrete">Concrete Tile</option>
                                                 <option value="Sheeting">Sheeting</option>
                                                 <option value="A.C.">A.C.</option>
                                             </select>

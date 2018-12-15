@@ -526,6 +526,7 @@ function getPhotoTable() {
             },
             table: {
                 widths: [250, 250],
+                dontBreakRows: true,
                 headerRows: 2,
                 body: data
             }

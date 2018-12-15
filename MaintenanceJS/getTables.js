@@ -650,6 +650,7 @@ function getAdviceTable() {
                                     text: getIt('ADVICE-TEXT1')
                                 },
                                 makeAGap(),
+                                makeAGap(),
                                 {
                                     text: 'Recommendations:',
                                     bold: true,
@@ -659,6 +660,7 @@ function getAdviceTable() {
                                 {
                                     text: getIt('ADVICE-TEXT2')
                                 },
+                                makeAGap(),
                                 makeAGap(),
                                 {
                                     text: 'Consequences:',
@@ -673,6 +675,7 @@ function getAdviceTable() {
                                 {
                                     ul: giveMeTheBullet('ADVICE-TEXT3')
                                 },
+                                makeAGap(),
                                 makeAGap(),
                                 {
                                     text: 'Summary:',
@@ -896,6 +899,7 @@ function getImagesTable()
             },
             table: {
                 widths: [250, 250],
+                dontBreakRows: true,
                 headerRows: 2,
                 body: data
             }
