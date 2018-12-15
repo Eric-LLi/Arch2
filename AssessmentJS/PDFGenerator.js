@@ -37,6 +37,7 @@ function generatePDF(mode) {
     };
     //getEvidentDefectTable();
     var docDefinition = {
+        pageSize: 'A4',
         footer: function (currentPage, pageCount) {
             if (currentPage === 1) {
                 return {
@@ -1244,6 +1245,7 @@ function generatePDF(mode) {
                     getAssessmentPowderRoom(),
                     getAssessmentServices(),
                     makeAGap(),
+                    makeAGap(),
                     getPhotoTable('AccessmentInteriorServiceImagesContainer'),
                     //display images, max 3
                     // {
@@ -1295,7 +1297,9 @@ function generatePDF(mode) {
                     //     ],
                     //     columnGap: 20
                     // },
-                    //makeAGap(),
+                    makeAGap(),
+                    makeAGap(),
+                    makeAGap(),
                     drawNotesTable('AssessmentServiceNotesTable', 'AssessmentServiceLimitationSelect', 'AssessmentServiceLimitationNote',
                         'AssessmentServiceMajorFound', 'assessmentServiceMajorRecommendations', 'AssessmentServiceMinorFound',
                         'assessmentServiceMinorRecommendations', 'assessmentServiceGeneralNotes')
