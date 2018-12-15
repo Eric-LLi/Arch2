@@ -1173,7 +1173,20 @@
                               if (response.rc == 0)
                               {
                                 //doRefreshBookings();
-                                doSearchBookings(false);
+                                <?php
+                                  if (SharedIsAdmin())
+                                  {
+                                ?>
+                                     doSearchBookings(false);
+                                <?php
+                                  } else {
+                                    ?>
+                                     console.log("need to do something else");
+                                     doReloadBookings();
+                                  <?php
+                                  }
+                                ?>
+                               
                                 
 
                                 noty({text: response.msg, type: 'success', timeout: 10000});
