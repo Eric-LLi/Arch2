@@ -1239,3 +1239,8 @@ document.addEventListener('input', function (event) {
 	if (event.target.tagName.toLowerCase() !== 'textarea') return;
 	autoExpand(event.target);
 }, false);
+
+function loadCustomerDetails()
+{
+    console.log("should load if after the page is loaded");
+}

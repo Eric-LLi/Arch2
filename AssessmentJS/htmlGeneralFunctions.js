@@ -1384,6 +1384,7 @@ function reorderImages(divid) {
     }
 }
 
+//AA-106, make sure these fields get the date from the database related fields. even after the user update in the booking system, 
 $(document).ready(function () {
     checkReloadOther();
     reorderImages('AccessmentSiteImagesContainer');

@@ -175,6 +175,20 @@
     {status:'Completed',icon:'images/led/ball-lightblue.png',id:3},
     {status:'Not Paid',icon:'images/led/ball-darkblue.png',id:0},
     {status:'No Agreed Price',icon:'images/led/ball-black.png',id:1},
+    {status:'Closed',icon:'images/led/ball-grey.png',id:7},
+    
+  ];
+   //This is for the status select combox change
+  var changestatus = 
+  [
+    // {status:'All',id:5},
+    {status:'Approved',icon:'images/led/ball-green.png',id:2},
+    {status:'Paid',icon:'images/led/ball-orange.png',id:4},
+    {status:'Work Started',icon:'images/led/ball-purple.png',id:6},
+    {status:'Completed',icon:'images/led/ball-lightblue.png',id:3},
+    {status:'Not Paid',icon:'images/led/ball-darkblue.png',id:0},
+    {status:'No Agreed Price',icon:'images/led/ball-black.png',id:1},
+    {status:'Closed',icon:'images/led/ball-grey.png',id:7},
     
   ];
   var scope =
