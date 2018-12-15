@@ -3186,6 +3186,7 @@ function getImagesTable(divid)
             },
             table: {
                 width:[160,160,160],
+                dontBreakRows: true,
                 body: data
             }
         }

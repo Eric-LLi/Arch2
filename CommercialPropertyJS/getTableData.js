@@ -1418,7 +1418,7 @@ function getImages() {
                     {
                         columns:[
                             {
-                                width: width,
+                                width: 250,
                                 text: imgText,
                                 fontSize: 9,
                                 margin:[0,5,0,20]
@@ -1454,6 +1454,7 @@ function getImages() {
             //layout: 'noBorders',
             table: {
                 headerRows: 2,
+                dontBreakRows: true,
                 widths: ['*', '*'],
                 body: data
             }
