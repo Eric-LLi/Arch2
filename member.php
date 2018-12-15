@@ -1906,6 +1906,365 @@
         noty({text: 'Please select a booking to remove', type: 'warning', timeout: 4000});
     }
 
+    function doCloseBooking()
+    {
+      if (!doGridGetSelectedRowData
+        (
+          'divBookingsG',
+          function(row, index)
+          {
+            if (row.reportid == 3)
+            {
+              doPromptOkCancel
+              (
+                'Close booking ' + row.bookingcode + ' and' +row.linkedbookingcode + ' ?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_closebooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          // doRefreshBookings();
+                          doSearchBookings(false);
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            else if (row.linked_bookingcode != null)
+            {
+              doPromptOkCancel
+              (
+                'Close booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_closebooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doRefreshBookings();
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            else
+            {
+              doPromptOkCancel
+              (
+                'Close booking ' + row.bookingcode + '?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_cancelbooking.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          // doRefreshBookings();
+                          doSearchBookings(false);
+                          noty({text: response.msg, type: 'success', timeout: 3000});
+                        }
+                        else
+                        {
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                        }
+
+                      }
+                    );
+                  }
+                }
+              );
+            }
+            
+          }
+        ))
+        noty({text: 'Please select a booking to close', type: 'warning', timeout: 4000});
+    }
+
+    function doChangeStatus()
+    {
+      if (!doGridGetSelectedRowData
+      (
+        'divBookingsG',
+        function(row, index)
+        {
+          var title = '';
+          var members = [];
+
+          function doReset()
+          {
+            // $('#fldSelectTheStatus').combobox('clear');
+            if (_.isBlank(row.budget))
+            {
+              $('#fldSelectTheStatus').combobox('select',1);
+            }
+            else if (!_.isNull(row.dateapproved))
+            {
+              $('#fldSelectTheStatus').combobox('select',2);
+            }
+            else if (!_.isNull(row.datecompleted))
+            {
+              $('#fldSelectTheStatus').combobox('select',3);
+            }
+            
+            else if (!_.isNull(row.datepaid) && !_.isBlank(row.archfirstname) && _.isNull(row.datecompleted))
+            {
+              $('#fldSelectTheStatus').combobox('select',6);
+            }
+            else if (!_.isNull(row.datepaid))
+            {
+              $('#fldSelectTheStatus').combobox('select',4);
+            }
+            else if (_.isNull(row.datepaid) && !_.isBlank(row.budget))
+            {
+              $('#fldSelectTheStatus').combobox('select',0);
+            }
+          }
+          // console.log(row);
+
+          if(row.reportid == 3)
+          {
+            title = 'Change booking ' + row.bookingcode + ' and ' + row.linkedbookingcode + ' status';
+          }
+          else if(row.linked_bookingcode != null)
+          {
+            title = 'Change booking ' + row.bookingcode + ' and ' + row.linked_bookingcode + 'status';
+          }
+          else
+          {
+            title = 'Change booking ' + row.bookingcode + ' status';
+          }
+
+          $('#dlgChangeStatus').dialog
+          (
+            {
+              title: title,
+              modal: true,
+              onClose: function()
+              {
+              },
+              onOpen: function()
+              {
+                $('#fldSelectTheStatus').combobox
+                (
+                  {
+                    valueField: 'id',
+                    textField: 'status',
+                    data: changestatus,
+                    onSelect: function(record)
+                    {
+                      $('#btnSelectStatus').linkbutton('enable');
+                    },
+                    formatter:function(row)
+                    {
+                      if(row.id != 5)
+                      {
+                        var imageFile = row.icon;
+                        return '<img class="searchcombo_img" src="'+imageFile+'"/><span class="searchcombo_text">'+row.status+'</span>';
+                      }
+                      else
+                      {
+                        return '<span class="searchcombo_text">'+row.status+'</span>';
+                      }
+                    
+                    },
+                  }
+                );
+                doReset();
+              },
+              buttons:
+              [
+                {
+                  text: 'Change',
+                  disabled: true,
+                  id: 'btnSelectStatus',
+                  handler: function()
+                  {
+                    var statusid = $('#fldSelectTheStatus').combobox('getValue');
+
+                    if (!_.isBlank(status))
+                    {
+                      $('#divEvents').trigger('changestatus', {statusid: statusid});
+                      $('#dlgChangeStatus').dialog('close');
+                    }
+                    else
+                      doMandatoryTextbox('Please select an status', 'fldSelectTheStatus');
+                  }
+                },
+                {
+                  text: 'Reset',
+                  handler: function()
+                  {
+                    doReset();
+                  }
+                },
+                {
+                  text: 'Close',
+                  handler: function()
+                  {
+                    $('#dlgChangeStatus').dialog('close');
+                  }
+                }
+              ]
+            }
+          ).dialog('center').dialog('open');
+          //assign combined reports
+          // if (row.reportid == 3 || row.linked_bookingcode != null)
+          // {
+          //   function doReset()
+          //   {
+          //     $('#fldSelectTheStatus').combobox('clear');
+          //     $('#fldSelectTheStatus').combobox('clear');
+          //   }
+
+          //   $('#dlgChangeStatus').dialog
+          //   (
+          //     {
+          //       modal: true,
+          //       onClose: function()
+          //       {
+          //       },
+          //       onOpen: function()
+          //       {
+          //         $('#fldSelectTheArchitect').combobox
+          //         (
+          //           {
+          //             valueField: 'uuid',
+          //             textField: 'name',
+          //             limitToList: true,
+          //             data: cache_architects,
+          //             onSelect: function(record)
+          //             {
+          //               if (!_.isBlank($('#fldSelectTheInspector').combobox('getValue')))
+          //                 $('#btnSelectedBoth').linkbutton('enable');
+          //             }
+          //           }
+          //         );
+
+          //         $('#fldSelectTheInspector').combobox
+          //         (
+          //           {
+          //             valueField: 'uuid',
+          //             textField: 'name',
+          //             limitToList: true,
+          //             data: cache_inspectors,
+          //             onSelect: function(record)
+          //             {
+          //               if (!_.isBlank($('#fldSelectTheArchitect').combobox('getValue')))
+          //                 $('#btnSelectedBoth').linkbutton('enable');
+          //             }
+          //           }
+          //         );
+
+          //         doReset();
+          //       },
+          //       buttons:
+          //       [
+          //         {
+          //           text: 'Select',
+          //           disabled: true,
+          //           id: 'btnSelectedBoth',
+          //           handler: function()
+          //           {
+          //             var archuuid = $('#fldSelectTheArchitect').combobox('getValue');
+          //             var inspectoruuid = $('#fldSelectTheInspector').combobox('getValue');
+
+          //             if (!_.isBlank(archuuid) && !_.isBlank(inspectoruuid))
+          //             {
+          //               $('#divEvents').trigger('assignboth', {archuuid: archuuid, inspectoruuid: inspectoruuid});
+          //               $('#dlgSelectArchitectAndInspector').dialog('close');
+          //             }
+          //             else
+          //               doMandatoryTextbox('Please select an architect and inspector', 'fldSelectTheArchitect');
+          //           }
+          //         },
+          //         {
+          //           text: 'Reset',
+          //           handler: function()
+          //           {
+          //             doReset();
+          //           }
+          //         },
+          //         {
+          //           text: 'Close',
+          //           handler: function()
+          //           {
+          //             $('#dlgChangeStatus').dialog('close');
+          //           }
+          //         }
+          //       ]
+          //     }
+          //   ).dialog('center').dialog('open');
+          // }
+          // //assign signle reports
+          // else
+          // {
+          //   if (row.reportid == 2)
+          //   {
+          //     title = 'Assign Inspector';
+          //     members = cache_inspectors;
+          //     $('#spnSelectArchitect').text('Inspector:');
+          //   }
+          //   else
+          //   {
+          //     title = 'Assign Architect';
+          //     members = cache_architects;
+          //     $('#spnSelectArchitect').text('Architect:');
+          //   }
+          // }
+        }
+      ))
+        noty({text: 'Please select a booking', type: 'warning', timeout: 4000});
+    }
+
     function doClearBooking()
     {
       $('#divBookingsG').datagrid('clearSelections');
@@ -3935,6 +4294,7 @@
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
           <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Customer</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
+          <a href="javascript:void(0)" onClick="doChangeStatus()" class="easyui-linkbutton" iconCls="icon-move">Change Status</a>
           <br/>
           <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
             <span>Status: </span> 
@@ -4290,6 +4650,16 @@
     </div>
   </div>
 
+  <div id="dlgChangeStatus" class="easyui-dialog" title="Select Architect & Inspector" style="width: 400px; height: 200px;" data-options="resizable: false, modal: true, closable: false, closed: true">
+    <div class="easyui-panel" title="" data-options="fit: true">
+      <table>
+        <tr>
+          <td>Status:</td>
+          <td><div id="fldSelectTheStatus" style="width: 300px;"></div></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>
