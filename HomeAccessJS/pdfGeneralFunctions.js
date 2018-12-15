@@ -1149,7 +1149,7 @@ function getSketchImgsData() {
         imgContainer, imgSrc;
 
     var divContainers = $('#HA_PdfContents div');
-    //    console.log(divContainers);
+    //console.log(divContainers);
 
     if (!isEmpty(divContainers)) {
         //Insert header
@@ -1164,10 +1164,11 @@ function getSketchImgsData() {
         if (isEmpty(divContainers.length)) {
             row.push({});
             data.push(row);
-            console.log(data);
+            //console.log(data);
             return data;
 
         } else {
+            //console.log(divContainers.length);
             for (var i = 0; i < divContainers.length; i++) {
                 imgContainer = divContainers.eq(i).children('img');
 
@@ -1176,18 +1177,19 @@ function getSketchImgsData() {
                 else {
                     imgSrc = imgContainer.attr('src');
                 }
+                //console.log(imgSrc);
                 row.push({
                     stack: [{
                             image: imgSrc,
-                            // height:500,
-                            width:550,
+                            height:600,
+                            width:500,
                             alignment: 'center'
                         },
                         {
                             text: $(divContainers.eq(i).children('label').eq(0)).text(),
                             bold:'true',
                             fontSize:10,
-                            margin: [0, 2],
+                            margin: [0, 5],
                             alignment: 'center'
                         },
                         {
