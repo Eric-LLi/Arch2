@@ -1712,12 +1712,13 @@ function getLivingBedroomTable1() {
     var tabs = $('#internal-tabs').tabs('tabs');
     
     // console.log(tabs[3].panel('options').title);
-    var roomName1 = tabs[0].panel('options').title
+    var roomName0 = tabs[0].panel('options').title
+    var roomName1 = tabs[1].panel('options').title
 
-    var entryTable = createInternalOnePartTable(roomName1, entryTableRowCount, 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote', 10);
+    var entryTable = createInternalOnePartTable(roomName0, entryTableRowCount, 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote', 10);
     data = data.concat(entryTable);
 
-    var stairTable = createInternalOnePartTable('STAIR', stairTableRowCount, 'HOWInternal_StairName', 'HOWInternal_StairSelect', 'HOWInternal_StairNote', 10);
+    var stairTable = createInternalOnePartTable(roomName1, stairTableRowCount, 'HOWInternal_StairName', 'HOWInternal_StairSelect', 'HOWInternal_StairNote', 10);
     data = data.concat(stairTable);
 
 

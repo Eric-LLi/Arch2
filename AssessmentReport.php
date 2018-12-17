@@ -286,7 +286,15 @@
                     <div class="col-sm">
                         <label>Site Grade</label>
                         <br>
-                        <input id="ps6" class="form-control" type="text" title="input">
+                        <!-- <input id="ps6" class="form-control" type="text" title="input"> -->
+                        <select id="ps6" style="width:100%;height:50px;marginBottom:30px" class="form-control" onchange="changeOther('ps6','ps6other')">
+                            <option selected disabled value="Choose an item">Choose an item</option>
+                            <option value="Flat">Flat</option>
+                            <option value="Gentle slope">Gentle slope</option>
+                            <option value="Steep slope">Steep slope</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input id="ps6other" style="display:none;marginTop:30px" placeholder="Other" type="text" class="form-control">
                     </div>
                     <div class="col-sm">
                         <label>Furnished</label>

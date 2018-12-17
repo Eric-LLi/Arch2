@@ -650,7 +650,8 @@ function generatePDF(mode) {
                                     text: 'Site Grade',
                                     style: 'tableBoldTextAlignLeft'
                                 }, {
-                                    text: document.getElementById('ps6').value.trim(),
+                                    // text: document.getElementById('ps6').value.trim(),
+                                    text: getSelectOrOther("ps6"),
                                     style: 'tableText'
                                 }, {
                                     text: 'Furnished',

@@ -37,18 +37,6 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!--<ul class="navbar-nav mr-auto">-->
-            <!--<li class="nav-item">-->
-                <!--<a class="nav-link" href="#">Back</a>-->
-            <!--</li>-->
-        <!--</ul>-->
-        <!--<form class="form-inline my-2 my-lg-0">-->
-            <!--<a class="nav-link" href="#">Welcome XXXXX@XXX.COM</a>-->
-            <!--<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>-->
-        <!--</form>-->
-    </div>
 </nav>
 <!--Title-->
 <div class="container" style="background-color: white">
@@ -939,11 +927,11 @@
 	        </div>
 	        <div title="INTERNAL LIVING & BEDROOM" style="padding: 10px;">
 	            <!-- <div class="easyui-tabs tabs-container" style="padding:10px" data-options="tools:'#internal-tab-tools'" id="internal-tabs"> -->
-				<div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:150" id="internal-tabs">
-	            	<!-- <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:150,tools:'#internal-tab-tools'" id="internal-tabs"> -->
-	                <div title="Entry&Passage" style="padding:10px;font-size: 18px">  <!--data-options="tools:'#internal_tap_strip_tools'" -->
+				<!-- <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:150" id="internal-tabs"> -->
+	            	<div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'left',headerWidth:150,tools:'#internal-tab-tools'" id="internal-tabs">
+	                <div type="tabs_title" title="Entry&Passage" style="padding:10px;font-size: 18px" id="HOW_INTERNAL0">  <!--data-options="tools:'#internal_tap_strip_tools'" -->
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Entry_Table','HOWInternal_EntryName','HOWInternal_EntrySelect','HOWInternal_EntryNote')" style="margin-bottom: 10px">Add One Feature</button>
-						<!-- <button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button> -->
+						<button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button>
 						<table id="HOWInternal_Entry_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName0">Floor(Structure)</th>
@@ -1013,9 +1001,9 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Stair" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Stair" style="padding:10px;font-size: 18px"  id="HOW_INTERNAL1">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Stair_Table','HOWInternal_StairName','HOWInternal_StairSelect','HOWInternal_StairNote')" style="margin-bottom: 10px">Add One Feature</button>
-						<!-- <button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button> -->
+						<button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button>
 						<table id="HOWInternal_Stair_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName0">Floor(Structure)</th>
@@ -2741,9 +2729,9 @@
 
 </div>
 
-<!-- <div id="internal_tap_strip_tools">
+<div id="internal_tap_strip_tools">
         <a href="javascript:void(0)" class="icon-edit" onclick="editRoomName()"></a>
-</div> -->
+</div>
 
 <!--Actions -->
 <!--<div id="newInternalRoom">-->
