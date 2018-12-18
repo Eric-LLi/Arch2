@@ -80,6 +80,7 @@
                   "b1.datecancelled,".
                   "b1.dateapproved," .
                   "b1.datepaid," .
+                  "b1.dateclosed," .
 
                   "b1.datecreated," .
                   "b1.datemodified," .

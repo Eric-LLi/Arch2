@@ -2042,7 +2042,11 @@
           function doReset()
           {
             // $('#fldSelectTheStatus').combobox('clear');
-            if (_.isBlank(row.budget))
+            if (!_.isNull(row.dateclosed))
+            {
+              $('#fldSelectTheStatus').combobox('select',7);
+            }
+            else if (_.isBlank(row.budget))
             {
               $('#fldSelectTheStatus').combobox('select',1);
             }
@@ -2070,180 +2074,184 @@
           }
           // console.log(row);
 
-          if(row.reportid == 3)
+          
+         
+         
+          //assign combined reports
+          if (row.reportid == 3 || row.linked_bookingcode != null)
           {
-            title = 'Change booking ' + row.bookingcode + ' and ' + row.linkedbookingcode + ' status';
-          }
-          else if(row.linked_bookingcode != null)
-          {
-            title = 'Change booking ' + row.bookingcode + ' and ' + row.linked_bookingcode + 'status';
+            if(row.reportid == 3)
+            {
+              title = 'Change booking ' + row.bookingcode + ' and ' + row.linkedbookingcode + ' status';
+            }
+            else if(row.linked_bookingcode != null)
+            {
+              title = 'Change booking ' + row.bookingcode + ' and ' + row.linked_bookingcode + ' status';
+            }
+            $('#dlgChangeStatus').dialog
+            (
+              {
+                title: title,
+                modal: true,
+                onClose: function()
+                {
+                },
+                onOpen: function()
+                {
+                  $('#fldSelectTheStatus').combobox
+                  (
+                    {
+                      valueField: 'id',
+                      textField: 'status',
+                      data: changestatus,
+                      onSelect: function(record)
+                      {
+                        $('#btnSelectStatus').linkbutton('enable');
+                      },
+                      formatter:function(row)
+                      {
+                        if(row.id != 5)
+                        {
+                          var imageFile = row.icon;
+                          return '<img class="searchcombo_img" src="'+imageFile+'"/><span class="searchcombo_text">'+row.status+'</span>';
+                        }
+                        else
+                        {
+                          return '<span class="searchcombo_text">'+row.status+'</span>';
+                        }
+                      
+                      },
+                    }
+                  );
+                  doReset();
+                },
+                buttons:
+                [
+                  {
+                    text: 'Change',
+                    disabled: true,
+                    id: 'btnSelectStatus',
+                    handler: function()
+                    {
+                      var statusid = $('#fldSelectTheStatus').combobox('getValue');
+                      var bookingcode2;
+
+                      if (!_.isBlank(statusid))
+                      {
+                        // $('#divEvents').trigger('changestatus', {statusid: statusid});
+                        if(row.linked_bookingcode != null)
+                        {
+                          bookingcode2 = row.linked_bookingcode
+                        }
+                        else
+                        {
+                          bookingcode2 = row.linkedbookingcode
+                        }
+                        console.log(bookingcode2);
+                       $('#divEvents').trigger('changestatusboth', {statusid: statusid,bookingcode2:bookingcode2});
+                        $('#dlgChangeStatus').dialog('close');
+                      }
+                      else
+                        doMandatoryTextbox('Please select an status', 'fldSelectTheStatus');
+                    }
+                  },
+                  {
+                    text: 'Reset',
+                    handler: function()
+                    {
+                      doReset();
+                    }
+                  },
+                  {
+                    text: 'Close',
+                    handler: function()
+                    {
+                      $('#dlgChangeStatus').dialog('close');
+                    }
+                  }
+                ]
+              }
+            ).dialog('center').dialog('open');
+
           }
           else
           {
             title = 'Change booking ' + row.bookingcode + ' status';
-          }
-
-          $('#dlgChangeStatus').dialog
-          (
-            {
-              title: title,
-              modal: true,
-              onClose: function()
+            $('#dlgChangeStatus').dialog
+            (
               {
-              },
-              onOpen: function()
-              {
-                $('#fldSelectTheStatus').combobox
-                (
-                  {
-                    valueField: 'id',
-                    textField: 'status',
-                    data: changestatus,
-                    onSelect: function(record)
+                title: title,
+                modal: true,
+                onClose: function()
+                {
+                },
+                onOpen: function()
+                {
+                  $('#fldSelectTheStatus').combobox
+                  (
                     {
-                      $('#btnSelectStatus').linkbutton('enable');
-                    },
-                    formatter:function(row)
-                    {
-                      if(row.id != 5)
+                      valueField: 'id',
+                      textField: 'status',
+                      data: changestatus,
+                      onSelect: function(record)
                       {
-                        var imageFile = row.icon;
-                        return '<img class="searchcombo_img" src="'+imageFile+'"/><span class="searchcombo_text">'+row.status+'</span>';
+                        $('#btnSelectStatus').linkbutton('enable');
+                      },
+                      formatter:function(row)
+                      {
+                        if(row.id != 5)
+                        {
+                          var imageFile = row.icon;
+                          return '<img class="searchcombo_img" src="'+imageFile+'"/><span class="searchcombo_text">'+row.status+'</span>';
+                        }
+                        else
+                        {
+                          return '<span class="searchcombo_text">'+row.status+'</span>';
+                        }
+                      
+                      },
+                    }
+                  );
+                  doReset();
+                },
+                buttons:
+                [
+                  {
+                    text: 'Change',
+                    disabled: true,
+                    id: 'btnSelectStatus',
+                    handler: function()
+                    {
+                      var statusid = $('#fldSelectTheStatus').combobox('getValue');
+
+                      if (!_.isBlank(statusid))
+                      {
+                        $('#divEvents').trigger('changestatus', {statusid: statusid});
+                        $('#dlgChangeStatus').dialog('close');
                       }
                       else
-                      {
-                        return '<span class="searchcombo_text">'+row.status+'</span>';
-                      }
-                    
-                    },
-                  }
-                );
-                doReset();
-              },
-              buttons:
-              [
-                {
-                  text: 'Change',
-                  disabled: true,
-                  id: 'btnSelectStatus',
-                  handler: function()
+                        doMandatoryTextbox('Please select an status', 'fldSelectTheStatus');
+                    }
+                  },
                   {
-                    var statusid = $('#fldSelectTheStatus').combobox('getValue');
-
-                    if (!_.isBlank(status))
+                    text: 'Reset',
+                    handler: function()
                     {
-                      $('#divEvents').trigger('changestatus', {statusid: statusid});
+                      doReset();
+                    }
+                  },
+                  {
+                    text: 'Close',
+                    handler: function()
+                    {
                       $('#dlgChangeStatus').dialog('close');
                     }
-                    else
-                      doMandatoryTextbox('Please select an status', 'fldSelectTheStatus');
                   }
-                },
-                {
-                  text: 'Reset',
-                  handler: function()
-                  {
-                    doReset();
-                  }
-                },
-                {
-                  text: 'Close',
-                  handler: function()
-                  {
-                    $('#dlgChangeStatus').dialog('close');
-                  }
-                }
-              ]
-            }
-          ).dialog('center').dialog('open');
-          //assign combined reports
-          // if (row.reportid == 3 || row.linked_bookingcode != null)
-          // {
-          //   function doReset()
-          //   {
-          //     $('#fldSelectTheStatus').combobox('clear');
-          //     $('#fldSelectTheStatus').combobox('clear');
-          //   }
+                ]
+              }
+            ).dialog('center').dialog('open');
+          }
 
-          //   $('#dlgChangeStatus').dialog
-          //   (
-          //     {
-          //       modal: true,
-          //       onClose: function()
-          //       {
-          //       },
-          //       onOpen: function()
-          //       {
-          //         $('#fldSelectTheArchitect').combobox
-          //         (
-          //           {
-          //             valueField: 'uuid',
-          //             textField: 'name',
-          //             limitToList: true,
-          //             data: cache_architects,
-          //             onSelect: function(record)
-          //             {
-          //               if (!_.isBlank($('#fldSelectTheInspector').combobox('getValue')))
-          //                 $('#btnSelectedBoth').linkbutton('enable');
-          //             }
-          //           }
-          //         );
-
-          //         $('#fldSelectTheInspector').combobox
-          //         (
-          //           {
-          //             valueField: 'uuid',
-          //             textField: 'name',
-          //             limitToList: true,
-          //             data: cache_inspectors,
-          //             onSelect: function(record)
-          //             {
-          //               if (!_.isBlank($('#fldSelectTheArchitect').combobox('getValue')))
-          //                 $('#btnSelectedBoth').linkbutton('enable');
-          //             }
-          //           }
-          //         );
-
-          //         doReset();
-          //       },
-          //       buttons:
-          //       [
-          //         {
-          //           text: 'Select',
-          //           disabled: true,
-          //           id: 'btnSelectedBoth',
-          //           handler: function()
-          //           {
-          //             var archuuid = $('#fldSelectTheArchitect').combobox('getValue');
-          //             var inspectoruuid = $('#fldSelectTheInspector').combobox('getValue');
-
-          //             if (!_.isBlank(archuuid) && !_.isBlank(inspectoruuid))
-          //             {
-          //               $('#divEvents').trigger('assignboth', {archuuid: archuuid, inspectoruuid: inspectoruuid});
-          //               $('#dlgSelectArchitectAndInspector').dialog('close');
-          //             }
-          //             else
-          //               doMandatoryTextbox('Please select an architect and inspector', 'fldSelectTheArchitect');
-          //           }
-          //         },
-          //         {
-          //           text: 'Reset',
-          //           handler: function()
-          //           {
-          //             doReset();
-          //           }
-          //         },
-          //         {
-          //           text: 'Close',
-          //           handler: function()
-          //           {
-          //             $('#dlgChangeStatus').dialog('close');
-          //           }
-          //         }
-          //       ]
-          //     }
-          //   ).dialog('center').dialog('open');
-          // }
           // //assign signle reports
           // else
           // {
@@ -2622,7 +2630,7 @@
                     {
                       uuid: '<?php echo $_SESSION['uuid']; ?>',
                       bookingcode: row.bookingcode,
-                      status: 'paid'
+                      status: 4
                     },
                     function(result)
                     {
@@ -2677,7 +2685,7 @@
                     {
                       uuid: '<?php echo $_SESSION['uuid']; ?>',
                       bookingcode: row.bookingcode,
-                      status: 'completed'
+                      status: 3
                     },
                     function(result)
                     {
@@ -2733,7 +2741,7 @@
                     {
                       uuid: '<?php echo $_SESSION['uuid']; ?>',
                       bookingcode: row.bookingcode,
-                      status: 'uncompleted'
+                      status: 6
                     },
                     function(result)
                     {
@@ -2789,7 +2797,7 @@
                     {
                       uuid: '<?php echo $_SESSION['uuid']; ?>',
                       bookingcode: row.bookingcode,
-                      status: 'approved'
+                      status: 2
                     },
                     function(result)
                     {
@@ -3534,7 +3542,13 @@
       var tooltip = '';
       var lnk = '';
 
-      if (_.isBlank(row.budget))
+
+      if (!_.isNull(row.dateclosed))
+      {
+        img = '<img src="images/led/ball-grey.png" width="20" height="20">';
+        tooltip = 'Booking has been closed';
+      }
+      else if (_.isBlank(row.budget) && _.isNull(row.dateclosed))
       {
         img = '<img src="images/led/ball-black.png" width="20" height="20">';
         tooltip = 'Agreed price has not been set';
@@ -3549,16 +3563,22 @@
       //   else
       //     tooltip += row.emailcount + ' times, the last being on ' + lastemailed;
       // }
-      else if (!_.isNull(row.dateapproved))
+      else if (!_.isNull(row.dateapproved) && _.isNull(row.dateclosed))
       {
         img = '<img src="images/led/ball-green.png" width="20" height="20">';
         tooltip = 'Booking has been approved';
       }
-      else if (!_.isNull(row.datecompleted))
+      else if (!_.isNull(row.datecompleted) && _.isNull(row.dateclosed))
       {
         img =  '<img src="images/led/ball-lightblue.png" width="20" height="20">';
         tooltip = 'Booking has been completed';
       }
+      // else if (!_.isNull(row.datepaid) && _.isNull(row.datecompleted))
+      // {
+      //   // console.log("I am here1");
+      //   img = '<img src="images/led/ball-purple.png" width="20" height="20">';
+      //   tooltip = 'Booking has started';
+      // }
       
       else if (!_.isNull(row.datepaid) && !_.isBlank(row.archfirstname) && _.isNull(row.datecompleted))
       {
@@ -3577,6 +3597,7 @@
         tooltip = 'Booking has not been paid';
       }
       
+      
 
       lnk = '<a href="#" title="' + tooltip + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
 
@@ -3589,7 +3610,7 @@
       if (_.isUndefined(row.reportid) || _.isNull(row.reportid))
         return '';
 
-      if (!_.isBlank(row.archfirstname))
+      if (!_.isBlank(row.archfirstname) && (row.archfirstname != "Online"))
       {
         var img = '';
         var lnk = '';
@@ -4262,7 +4283,81 @@
             }
           );
         }
-      );      
+      ); 
+      
+      $('#divEvents').on
+      (
+        'changestatus',
+        function(ev, args)
+        {
+          doGridGetSelectedRowData
+          (
+            'divBookingsG',
+            function(row, index)
+            {
+              $.post
+              (
+                'ajax_setbookingstatus.php',
+                {
+                  uuid: '<?php echo $_SESSION['uuid']; ?>',
+                  bookingcode: row.bookingcode,
+                  status: args.statusid
+                },
+                function(result)
+                {
+                  var response = JSON.parse(result);
+
+                  if (response.rc == 0)
+                  {
+                    //doRefreshBookings();
+                    doSearchBookings(false);
+                  }
+                  else
+                    noty({text: response.msg, type: 'error', timeout: 10000});
+                }
+              );
+            }
+          );
+        }
+      );
+
+      $('#divEvents').on
+      (
+        'changestatusboth',
+        function(ev, args)
+        {
+          doGridGetSelectedRowData
+          (
+            'divBookingsG',
+            function(row, index)
+            {
+              // console.log(args);
+              $.post
+              (
+                'ajax_setbookingstatusboth.php',
+                {
+                  uuid: '<?php echo $_SESSION['uuid']; ?>',
+                  bookingcode: row.bookingcode,
+                  status: args.statusid,
+                  bookingcode2: args.bookingcode2,
+                },
+                function(result)
+                {
+                  var response = JSON.parse(result);
+
+                  if (response.rc == 0)
+                  {
+                    //doRefreshBookings();
+                    doSearchBookings(false);
+                  }
+                  else
+                    noty({text: response.msg, type: 'error', timeout: 10000});
+                }
+              );
+            }
+          );
+        }
+      );
     });
   </script>
 </head>
