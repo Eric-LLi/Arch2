@@ -193,6 +193,12 @@ function checkReloadOther() {
     } else {
         $("#XiaoKe").hide();
     }
+
+    if ($("#ps6").val() === "Other") {
+        $("#ps6other").show();
+    } else {
+        $("#ps6other").hide();
+    }
 }
 
 function checkIfOther() {
@@ -1381,6 +1387,20 @@ function reorderImages(divid) {
             $("#AssessmentSiteSingleImage").click();
         });
         removeBtn.setAttribute("onclick", removeFunction);
+    }
+}
+
+function changeOther(id1,id2)
+{
+    console.log(id1,id2);
+    var select = "#" + id1;
+    var input = "#" + id2;
+    console.log(select);
+    console.log(input);
+    if ($(select).val() === "Other") {
+        $(input).show();
+    } else {
+        $(input).hide();
     }
 }
 

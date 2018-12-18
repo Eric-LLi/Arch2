@@ -68,6 +68,19 @@ function getIt(id) {
     return result;
 }
 
+function getSelectOrOther(id)
+{
+    if(document.getElementById(id).value.trim() != "Other")
+    {
+        return document.getElementById('ps6').value.trim()
+    }
+    else
+    {
+        var otherid = id + "other";
+        return document.getElementById(otherid).value.trim();
+    }
+}
+
 
 /**
  * Make a gap between the elements

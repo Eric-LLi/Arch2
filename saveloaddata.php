@@ -1,4 +1,5 @@
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js?<?php echo time(); ?>"></script>
 <script type="text/javascript">
     // Increments the nuermic portion of the string...
     // e.g XYZ123 becomes XYZ124
@@ -101,6 +102,27 @@
                         id: this.id,
                         value: this.value
                     });
+                }
+            }
+        );
+
+         $('div[type=tabs_title]').each(
+            function () {
+                if ((this.id != "") && (this.id != undefined)) {
+                    console.log(this.id);
+                    if (this.id.substr(0, 12) == 'HOW_INTERNAL')
+                    {
+                        var tabs = $('#internal-tabs').tabs('tabs');
+                        var index = this.id.substr(12,13)
+                        
+                        var title = tabs[index].panel('options').title
+                        console.log(title);
+                        data.push({
+                            id: this.id,
+                            title: title
+                        });
+                    }
+                    
                 }
             }
         );
@@ -1620,6 +1642,24 @@
                 if (d.id.substr(0, 13) == 'HOWAccessItem') {
                     count_acccess++;
                 }
+                if(d.id.substr(0, 12) == 'HOW_INTERNAL')
+                {
+                    var index = d.id.substr(12,13);
+                    console.log(d.title);
+                    console.log(index);
+                    // var tabs = $('#internal-tabs').tabs('tabs')[index];
+                    // console.log(tabs);
+                    var tab = $('#internal-tabs').tabs('tabs')[index];
+                    // tabs[index].panel('options').title = d.title
+                   console.log(tab);
+                    $('#internal-tabs').tabs('update',{
+                        tab:tab,
+                        options:{
+                            title:d.title
+                        }
+                    });
+                    // $(fld).attr("title",d.title);
+                }
 
             }
         )
@@ -1822,6 +1862,8 @@
                 moreAccessLimitation();
             }
         }
+
+
         <?php
         }
         ?>
