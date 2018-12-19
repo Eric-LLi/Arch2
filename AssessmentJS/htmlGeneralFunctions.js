@@ -3,6 +3,8 @@
  */
 
 var flag = false;
+var saveRecommendationArray = [];
+var SiteMajorRecommendationsArray = [];
 
 
 /**
@@ -1425,5 +1427,28 @@ $(document).ready(function () {
     // console.log(String(name).replace(/\s+/g, " "));
     //document.getElementById('0').value = String(name).replace(/\s+/g, " ")
 
-    
+    $('#assessmentSiteMajorRecommendations').combotree({
+        url: 'recommendations.json'
+    });
+    $('#recommendations').combotree({
+        url: 'recommendations.json'
+    });
+
+    // $('#recommendations').combotree('setValues', array);
+    $('#recommendations').combotree('setValues', saveRecommendationArray);
+    $('#assessmentSiteMajorRecommendations').combotree('setValues', SiteMajorRecommendationsArray);
 });
+
+
+function getInfo(id,array)
+{
+
+    if(id == "recommendations")
+    {
+        saveRecommendationArray = array;
+    }
+    else if (id == "assessmentSiteMajorRecommendations")
+    {
+        SiteMajorRecommendationsArray = array;
+    }
+}

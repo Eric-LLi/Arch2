@@ -11,12 +11,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-            crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <?php require_once("meta.php"); ?>
         <!-- Customized CSS -->
         <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/viewPDF.css">
+
         <!--  Import JQuery  -->
-        <script src="js/jquery-1.12.4.min.js"></script>
+        <!-- <script src="js/jquery-1.12.4.min.js"></script> -->
         <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
         <!--  Import pdfMake  -->
         <!-- <script src='../node_modules/pdfmake/build/pdfmake.min.js'></script>
@@ -36,7 +38,8 @@
         </script>
 
         <?php require_once("saveloaddata.php"); ?>
-        <?php require_once("meta.php"); ?>
+       
+    
     </head>
 
     <body>
@@ -194,6 +197,7 @@
             <br>
         </div>
 
+
         <div id="architectDetails" class="container">
             <hr>
             <h3 class="sectionSubHead">ARCHITECT DETAILS</h3>
@@ -331,12 +335,6 @@
                         <div class="form-group col-sm">
                             <label>Apparent condition of the building with respect to its age:</label>
                             <select onchange="checkIfOther()" id="conditionOfBuilding" name="conditionOfBuilding" style="padding-left: 16px" title="select">
-                                <!--
-                        <option value="Well maintained">Well maintained</option>
-                        <option value="Reasonably maintained">Reasonably maintained</option>
-                        <option value="Poorly maintained">Poorly maintained</option>
-                        <option value="Other">Other</option>
--->
                                 <option value="Untested/New">Untested/New</option>
                                 <option value="Reasonably Maintained">Reasonably Maintained</option>
                                 <option value="Fair">Fair</option>
@@ -2286,6 +2284,24 @@
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2">
+                        <!-- <div class="easyui-panel" style="width:100%;padding:15px;"> -->
+                            <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                                <input type="text" id="assessmentSiteMajorRecommendations" class="easyui-combotree" data-options=
+                                            "
+                                            multiple:true,
+                                            multiline:true, 
+                                            valueField:'text',
+                                            textField:'text'
+                                            " 
+                                    style="width:100%;height:60px;fontsize:16px"
+                                >
+                            </div>
+                        <!-- </div> -->
+                    </td>
+                </tr>
+                <!-- <tr>
                     <td>
                         <label class="sectionSubHead" style="color: black">Professional & Trade Recommendations:</label>
                         <select id="AssessmentSiteMajorSelect" style="width:100%" title="recommendationSelect">
@@ -2379,7 +2395,7 @@
                             title="recommendations" style="width: 100%;border: 0;" />
                         <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentSiteMajorRecommendations')" style="margin-top:10px">Clear</button>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td colspan="2" class="sectionSubHead">Maintenance Items and Minor Defects Found:</td>
                 </tr>
@@ -14218,6 +14234,27 @@
             </div>
         </div>
 
+
+
+
+        <div style="width:100%;padding:60px 60px;">
+            <div class="easyui-panel" style="width:100%;padding:15px;">
+                <div style="margin-bottom:20px">
+                <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                    <input type="text" id="recommendations" class="easyui-combotree" data-options=
+                                "
+                                multiple:true,
+                                multiline:true, 
+                                valueField:'text',
+                                textField:'text'
+                                " 
+                        style="width:100%;height:60px;fontsize:16px"
+                    >
+                </div>
+            </div>
+        </div>
+
+      
 
         <!-- <div class="container" style="text-align:center">
   <br>
