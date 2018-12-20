@@ -183,7 +183,7 @@
 	                        <div class="row">
 	                            <div class="col-sm-8">
 	                                <label>Address</label><br>
-	                                <input id="inspection_address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+	                                <input id="inspection_address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
 	                            </div>
 	                            <div class="col-sm-4">
 	                                <label>Lot No.</label><br>

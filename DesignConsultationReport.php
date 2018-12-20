@@ -95,7 +95,7 @@
         <div class="row">
             <div class="col-sm">
                 <label>Address</label><br>
-                <input id="customer_address" class="form-control" type="text" title="ClientAddress" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+                <input id="customer_address" class="form-control" type="text" title="ClientAddress" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
             </div>
         </div>
         <div class="row">
@@ -105,7 +105,7 @@
             </div>
             <div class="col-sm-4">
                 <label>State</label><br>
-                <input id="customer_state" class="form-control" type="text" title="State">
+                <input id="customer_state" class="form-control" type="text" title="State" value="<?php echo doNiceArrayElemAsString('state'); ?>">
                 <!--<select id="customer_state" class="form-control" title="state select" style="width:100%;height: 50px;margin-top: 6px" >-->
                 <!--<option <?php if(doNiceArrayElemAsString('state', false)==""){echo "selected";};?> selected disabled value="">Select a State</option>-->
                 <!--<option <?php if(doNiceArrayElemAsString('state', false)=="VIC"){echo "selected";} ;?> value="VIC">VIC</option>-->

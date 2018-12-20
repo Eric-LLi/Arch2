@@ -86,7 +86,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <label>Name</label><br>
-                <input id="0" class="form-control" type="text" title="name">
+                <input id="0" class="form-control" type="text" title="name" value="<?php echo doNiceArrayElemAsString('custfirstname') . " " . doNiceArrayElemAsString('custlastname'); ?>">
             </div>
             <div class="col-sm-6">
                 <label>Booking No.</label><br>
@@ -94,7 +94,7 @@
             </div>
             <div class="col-sm-6" style="margin-top:6px">
                 <label>Phone</label><br>
-                <input id="1" class="form-control" type="text" title="phone">
+                <input id="1" class="form-control" type="text" title="phone" value="<?php echo doNiceArrayElemAsString('custphone'); ?>">
             </div>
             <div class="col-sm-6" style="margin-top:6px">
                 <label>Mobile</label>
@@ -123,7 +123,7 @@
         <div class="row form-group">
             <div class="col-sm">
                 <label>Address of Property:</label><br>
-                <input id="5" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+                <input id="5" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
             </div>
         </div>
         <div class="row">

@@ -106,7 +106,7 @@
         <div class="row">
             <div class="col-sm">
                 <label>Address</label><br>
-                <input id="2" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+                <input id="2" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
             </div>
         </div>
         <div class="row" style="margin-top: 3px">

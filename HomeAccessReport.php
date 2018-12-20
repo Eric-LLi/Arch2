@@ -89,7 +89,7 @@ require_once("loadbooking.php");
                                     <div class="col-sm">
                                         <label id="HA_lbAddress">Address of Propety: </label>
                                         <br>
-                                        <input id="HA_Address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+                                        <input id="HA_Address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
                                     </div>
                                 </div>
                                 <div class="row form-group">
