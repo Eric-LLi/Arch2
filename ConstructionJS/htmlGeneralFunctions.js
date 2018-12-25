@@ -15,7 +15,7 @@ function reorderImages()
 {
     var totalContainers = $('#ConstructionPhotographs').find('> form');
     var BigContainer = document.getElementById('ConstructionPhotographs');
-    console.log(totalContainers);
+    // console.log(totalContainers);
     // for (var i=0;i<totalContainers.length;i++)
     // {
     //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
@@ -26,7 +26,7 @@ function reorderImages()
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
 
-    console.log(totalContainers);
+    // console.log(totalContainers);
 
     $("#ConstructionPhotographs").empty();
     for (var i=0;i<totalContainers.length;i++)
