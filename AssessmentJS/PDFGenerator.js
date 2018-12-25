@@ -664,7 +664,7 @@ function generatePDF(mode) {
                                     text: 'Extension / Renovations',
                                     style: 'tableBoldTextAlignLeft'
                                 }, {
-                                    text: document.getElementById('ps9').value.trim(),
+                                    text: getSelectOrOther("ps9"),
                                     style: 'tableText'
                                 }, {
                                     text: 'Tree Coverage',

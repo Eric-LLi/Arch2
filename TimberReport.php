@@ -177,7 +177,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <label>Verbal Summary to</label><br>
-                <textarea id="7" class="form-control" title="verbal Summary"></textarea>
+                <!-- <textarea id="7" class="form-control" title="verbal Summary"></textarea> -->
+                <select id="7" style="width:100%;height:50px;marginBottom:30px" class="form-control">
+                    <option selected disabled value="Choose an item">Choose an item</option>
+                    <option value="Given in person">Given in person</option>
+                    <option value="Given over the phone">Given over the phone</option>
+                    <option value="Left message request for call back">Left message request for call back</option>
+                    <option value="Left detailed voice message">Left detailed voice message</option>
+                </select>
             </div>
             <div class="col-sm-6">
                 <label>Date:</label><br>
@@ -270,21 +277,51 @@
         <div class="row form-group">
             <div class="col-sm">
                 <label>Site Grade</label><br>
-                <input id="ps6" class="form-control" type="text" title="site Grade">
+                <!-- <input id="ps6" class="form-control" type="text" title="site Grade"> -->
+                <select id="ps6" style="width:100%;height:50px;marginBottom:30px" class="form-control" onchange="changeOther('ps6','ps6other')">
+                    <option selected disabled value="Choose an item">Choose an item</option>
+                    <option value="Flat">Flat</option>
+                    <option value="Gentle slope">Gentle slope</option>
+                    <option value="Steep slope">Steep slope</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input id="ps6other" style="display:none;marginTop:30px" placeholder="Other" type="text" class="form-control">
             </div>
             <div class="col-sm">
                 <label>Furnished</label><br>
-                <input id="ps7" class="form-control" type="text" title="furnished">
+                <!-- <input id="ps7" class="form-control" type="text" title="furnished"> -->
+                <select id="ps7" style="width:100%;height:50px;marginBottom:30px" class="form-control">
+                    <option selected disabled value="Choose an item">Choose an item</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Partial">Partial</option>
+                </select>
             </div>
             <div class="col-sm">
                 <label>Tree Coverage</label><br>
-                <input id="ps8" class="form-control" type="text" title="tree coverage">
+                <!-- <input id="ps8" class="form-control" type="text" title="tree coverage"> -->
+                <select id="ps8" style="width:100%;height:50px;marginBottom:30px" class="form-control">
+                    <option selected disabled value="Choose an item">Choose an item</option>
+                    <option value="Light">Light</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Dense">Dense</option>
+                </select>
             </div>
         </div>
         <div class="row">
             <div class="col-sm">
                 <label>Extensions / Renovation</label><br>
-                <input id="ps9" class="form-control" type="text" title="extensions/renovation">
+                <!-- <input id="ps9" class="form-control" type="text" title="extensions/renovation"> -->
+                <select id="ps9" style="width:100%;height:50px;marginBottom:30px" class="form-control" onchange="changeOther('ps9','ps9other')">
+                    <option selected disabled value="Choose an item">Choose an item</option>
+                    <option value="No - likely original plan">No - likely original plan</option>
+                    <option value="Yes - Internal renovations">Yes - Internal renovations</option>
+                    <option value="Yes - extended">Yes - extended</option>
+                    <option value="Yes -  upstairs extension">Yes -  upstairs extension</option>
+                    <option value="Yes -  extended & renovated">Yes -  extended & renovated</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input id="ps9other" style="display:none;marginTop:30px" placeholder="Other" type="text" class="form-control">
             </div>
             <div class="col-sm">
                 <label>Estimated Age / Period</label><br>

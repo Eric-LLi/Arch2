@@ -389,3 +389,25 @@ function getPhoto(id) {
     return imageSection;
 
 }
+
+//AA-111
+function getSelectOrOther(id)
+{
+    if(document.getElementById(id).value.trim() != "Other")
+    {
+        if(document.getElementById(id).value.trim() == "Choose an item")
+        {
+            return " ";
+        }
+        else 
+        {
+            return document.getElementById(id).value.trim();
+        }
+       
+    }
+    else
+    {
+        var otherid = id + "other";
+        return document.getElementById(otherid).value.trim();
+    }
+}

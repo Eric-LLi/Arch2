@@ -309,7 +309,7 @@ function getPropertySummaryTable() {
                     text: 'Site Grade',
                     style: 'tableBoldTextAlignLeft'
                 }, {
-                    text: document.getElementById('ps6').value.trim(),
+                    text: getSelectOrOther("ps6"),
                     style: 'tableText'
                 }, {
                     text: 'Furnished',
@@ -322,7 +322,7 @@ function getPropertySummaryTable() {
                     text: 'Extension / Renovations',
                     style: 'tableBoldTextAlignLeft'
                 }, {
-                    text: document.getElementById('ps9').value.trim(),
+                    text: getSelectOrOther("ps9"),
                     style: 'tableText'
                 }, {
                     text: 'Tree Coverage',
