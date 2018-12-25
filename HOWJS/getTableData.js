@@ -1687,6 +1687,7 @@ function getLivingBedroomTable1() {
     var entryTableRowCount = document.getElementById('HOWInternal_Entry_Table').rows.length;
     var stairTableRowCount = document.getElementById('HOWInternal_Stair_Table').rows.length;
     var livingFrontTableRowCount = document.getElementById('HOWInternal_LivingFront_Table').rows.length;
+    var loungeTableRowCount = document.getElementById('HOWInternal_Lounge_Table').rows.length;
     var kitchenTableRowCount = document.getElementById('HOWInternal_Kitchen_Table').rows.length;
     var familyTableRowCount = document.getElementById('HOWInternal_Family_Table').rows.length;
     var diningTableRowCount = document.getElementById('HOWInternal_Dining_Table').rows.length;
@@ -1709,11 +1710,22 @@ function getLivingBedroomTable1() {
     ];
     data.push(firstRow);
 
-    var tabs = $('#internal-tabs').tabs('tabs');
+    var tabs = $('#livingbedroom-tabs').tabs('tabs');
     
     // console.log(tabs[3].panel('options').title);
     var roomName0 = tabs[0].panel('options').title
     var roomName1 = tabs[1].panel('options').title
+    var roomName2 = tabs[2].panel('options').title
+    var roomName3 = tabs[3].panel('options').title
+    var roomName4 = tabs[4].panel('options').title
+    var roomName5 = tabs[5].panel('options').title
+    var roomName6 = tabs[6].panel('options').title
+    var roomName7 = tabs[7].panel('options').title
+    var roomName8 = tabs[8].panel('options').title
+    var roomName9 = tabs[9].panel('options').title
+    var roomName10 = tabs[10].panel('options').title
+    var roomName11 = tabs[11].panel('options').title
+    var roomName12 = tabs[12].panel('options').title
 
     var entryTable = createInternalOnePartTable(roomName0, entryTableRowCount, 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote', 10);
     data = data.concat(entryTable);
@@ -1722,17 +1734,20 @@ function getLivingBedroomTable1() {
     data = data.concat(stairTable);
 
 
-    var livingTable = createInternalOnePartTable('LIVING (CENTRAL)', livingFrontTableRowCount, 'HOWInternal_LivingFrontName', 'HOWInternal_LivingFrontSelect', 'HOWInternal_LivingFrontNote', 10);
+    var livingTable = createInternalOnePartTable(roomName2, livingFrontTableRowCount, 'HOWInternal_LivingFrontName', 'HOWInternal_LivingFrontSelect', 'HOWInternal_LivingFrontNote', 10);
     data = data.concat(livingTable);
 
-    var kitchenTable = createInternalOnePartTable('KITCHEN + PANTRY', kitchenTableRowCount, 'HOWInternal_KitchenName', 'HOWInternal_KitchenSelect', 'HOWInternal_KitchenNote', 16);
+    var loungeTable = createInternalOnePartTable(roomName3, loungeTableRowCount, 'HOWInternal_LoungeName', 'HOWInternal_LoungeSelect', 'HOWInternal_LoungeNote', 10);
+    data = data.concat(loungeTable);
+
+    var kitchenTable = createInternalOnePartTable(roomName4, kitchenTableRowCount, 'HOWInternal_KitchenName', 'HOWInternal_KitchenSelect', 'HOWInternal_KitchenNote', 16);
     data = data.concat(kitchenTable);
 
 
-    var familyTable = createInternalOnePartTable('FAMILY', familyTableRowCount, 'HOWInternal_FamilyName', 'HOWInternal_FamilySelect', 'HOWInternal_FamilyNote', 10);
+    var familyTable = createInternalOnePartTable(roomName5, familyTableRowCount, 'HOWInternal_FamilyName', 'HOWInternal_FamilySelect', 'HOWInternal_FamilyNote', 10);
     data = data.concat(familyTable);
 
-    var diningTable = createInternalOnePartTable('DINING', diningTableRowCount, 'HOWInternal_DiningName', 'HOWInternal_DiningSelect', 'HOWInternal_DiningNote', 10);
+    var diningTable = createInternalOnePartTable(roomName6, diningTableRowCount, 'HOWInternal_DiningName', 'HOWInternal_DiningSelect', 'HOWInternal_DiningNote', 10);
     data = data.concat(diningTable);
 
     // var bedroom1Table = createInternalOnePartTable('BEDROOM 1', bedroom1TableRowCount, 'HOWInternal_Bedroom1Name', 'HOWInternal_Bedroom1Select', 'HOWInternal_Bedroom1Note', 10);
@@ -1802,6 +1817,16 @@ function getLivingBedroomTable2() {
     ];
     data.push(firstRow);
 
+    var tabs = $('#livingbedroom-tabs').tabs('tabs');
+    
+    // console.log(tabs[3].panel('options').title);
+    var roomName7 = tabs[7].panel('options').title
+    var roomName8 = tabs[8].panel('options').title
+    var roomName9 = tabs[9].panel('options').title
+    var roomName10 = tabs[10].panel('options').title
+    var roomName11 = tabs[11].panel('options').title
+    var roomName12 = tabs[12].panel('options').title
+
     // var entryTable = createInternalOnePartTable('ENTRY & PASSAGE', entryTableRowCount, 'HOWInternal_EntryName', 'HOWInternal_EntrySelect', 'HOWInternal_EntryNote', 10);
     // data = data.concat(entryTable);
 
@@ -1822,22 +1847,22 @@ function getLivingBedroomTable2() {
     // var diningTable = createInternalOnePartTable('DINING', diningTableRowCount, 'HOWInternal_DiningName', 'HOWInternal_DiningSelect', 'HOWInternal_DiningNote', 10);
     // data = data.concat(diningTable);
 
-    var bedroom1Table = createInternalOnePartTable('BEDROOM 1', bedroom1TableRowCount, 'HOWInternal_Bedroom1Name', 'HOWInternal_Bedroom1Select', 'HOWInternal_Bedroom1Note', 10);
+    var bedroom1Table = createInternalOnePartTable(roomName7, bedroom1TableRowCount, 'HOWInternal_Bedroom1Name', 'HOWInternal_Bedroom1Select', 'HOWInternal_Bedroom1Note', 10);
     data = data.concat(bedroom1Table);
 
-    var bedroom2Table = createInternalOnePartTable('BEDROOM 2', bedroom2TableRowCount, 'HOWInternal_Bedroom2Name', 'HOWInternal_Bedroom2Select', 'HOWInternal_Bedroom2Note', 10);
+    var bedroom2Table = createInternalOnePartTable(roomName8, bedroom2TableRowCount, 'HOWInternal_Bedroom2Name', 'HOWInternal_Bedroom2Select', 'HOWInternal_Bedroom2Note', 10);
     data = data.concat(bedroom2Table);
 
-    var bedroom3Table = createInternalOnePartTable('BEDROOM 3', bedroom3TableRowCount, 'HOWInternal_Bedroom3Name', 'HOWInternal_Bedroom3Select', 'HOWInternal_Bedroom3Note', 10);
+    var bedroom3Table = createInternalOnePartTable(roomName9, bedroom3TableRowCount, 'HOWInternal_Bedroom3Name', 'HOWInternal_Bedroom3Select', 'HOWInternal_Bedroom3Note', 10);
     data = data.concat(bedroom3Table);
 
-    var bedroom4Table = createInternalOnePartTable('BEDROOM 4', bedroom4TableRowCount, 'HOWInternal_Bedroom4Name', 'HOWInternal_Bedroom4Select', 'HOWInternal_Bedroom4Note', 10);
+    var bedroom4Table = createInternalOnePartTable(roomName10, bedroom4TableRowCount, 'HOWInternal_Bedroom4Name', 'HOWInternal_Bedroom4Select', 'HOWInternal_Bedroom4Note', 10);
     data = data.concat(bedroom4Table);
 
-    var studyTable = createInternalOnePartTable('STUDY', studyTableCount, 'HOWInternal_StudyName', 'HOWInternal_StudySelect', 'HOWInternal_StudyNote', 10);
+    var studyTable = createInternalOnePartTable(roomName11, studyTableCount, 'HOWInternal_StudyName', 'HOWInternal_StudySelect', 'HOWInternal_StudyNote', 10);
     data = data.concat(studyTable);
 
-    var retreatTable = createInternalOnePartTable('RETREAT (UPPER)', retreatTableCount, 'HOWInternal_RetreatName', 'HOWInternal_RetreatSelect', 'HOWInternal_RetreatNote', 10);
+    var retreatTable = createInternalOnePartTable(roomName12, retreatTableCount, 'HOWInternal_RetreatName', 'HOWInternal_RetreatSelect', 'HOWInternal_RetreatNote', 10);
     data = data.concat(retreatTable);
     //console.log(retreatTable);
     //console.log(data);
@@ -1882,20 +1907,29 @@ function getInternalServiceTable1() {
     ];
     data.push(firstRow);
 
-    var WCTable = createInternalOnePartTable('WC/ POWDER ROOM', WCTableRowCount, 'HOWInternalService_WCName', 'HOWInternalService_WCSelect', 'HOWInternalService_WCNote', 14);
+    var tabs = $('#wetareas-tabs').tabs('tabs');
+    
+    // console.log(tabs[3].panel('options').title);
+    var roomName0 = tabs[0].panel('options').title
+    var roomName1 = tabs[1].panel('options').title
+    var roomName2 = tabs[2].panel('options').title
+    var roomName3 = tabs[3].panel('options').title
+    var roomName4 = tabs[4].panel('options').title
+
+    var WCTable = createInternalOnePartTable(roomName0, WCTableRowCount, 'HOWInternalService_WCName', 'HOWInternalService_WCSelect', 'HOWInternalService_WCNote', 14);
     data = data.concat(WCTable);
 
 
-    var bathroom1Table = createInternalOnePartTable('BATHROOM 1', bathroom1TableRowCount, 'HOWInternalService_Bathroom1Name', 'HOWInternalService_Bathroom1Select', 'HOWInternalService_Bathroom1Note', 15);
+    var bathroom1Table = createInternalOnePartTable(roomName1, bathroom1TableRowCount, 'HOWInternalService_Bathroom1Name', 'HOWInternalService_Bathroom1Select', 'HOWInternalService_Bathroom1Note', 15);
     data = data.concat(bathroom1Table);
 
-    var bathroom2Table = createInternalOnePartTable('BATHROOM 2', bathroom2TableRowCount, 'HOWInternalService_Bathroom2Name', 'HOWInternalService_Bathroom2Select', 'HOWInternalService_Bathroom2Note', 15);
+    var bathroom2Table = createInternalOnePartTable(roomName2, bathroom2TableRowCount, 'HOWInternalService_Bathroom2Name', 'HOWInternalService_Bathroom2Select', 'HOWInternalService_Bathroom2Note', 15);
     data = data.concat(bathroom2Table);
 
-    var bathroom3Table = createInternalOnePartTable('BATHROOM ENSUITE 1', bathroom3TableRowCount, 'HOWInternalService_Bathroom3Name', 'HOWInternalService_Bathroom3Select', 'HOWInternalService_Bathroom3Note', 15);
+    var bathroom3Table = createInternalOnePartTable(roomName3, bathroom3TableRowCount, 'HOWInternalService_Bathroom3Name', 'HOWInternalService_Bathroom3Select', 'HOWInternalService_Bathroom3Note', 15);
     data = data.concat(bathroom3Table);
 
-    var bathroom4Table = createInternalOnePartTable('BATHROOM ENSUITE 2', bathroom4TableRowCount, 'HOWInternalService_Bathroom4Name', 'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note', 15);
+    var bathroom4Table = createInternalOnePartTable(roomName4, bathroom4TableRowCount, 'HOWInternalService_Bathroom4Name', 'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note', 15);
     data = data.concat(bathroom4Table);
 
     // var laundryTable = createInternalOnePartTable('LAUNDRY', laundryTableRowCount, 'HOWInternalService_LaundryName', 'HOWInternalService_LaundrySelect', 'HOWInternalService_LaundryNote', 13);
@@ -1939,6 +1973,11 @@ function getInternalServiceTable2() {
     ];
     data.push(firstRow);
 
+    var tabs = $('#wetareas-tabs').tabs('tabs');
+    var roomName5 = tabs[5].panel('options').title
+    var roomName6 = tabs[6].panel('options').title
+
+
     // var WCTable = createInternalOnePartTable('WC/ POWDER ROOM', WCTableRowCount, 'HOWInternalService_WCName', 'HOWInternalService_WCSelect', 'HOWInternalService_WCNote', 14);
     // data = data.concat(WCTable);
 
@@ -1955,10 +1994,10 @@ function getInternalServiceTable2() {
     // var bathroom4Table = createInternalOnePartTable('BATHROOM ENSUITE', bathroom4TableRowCount, 'HOWInternalService_Bathroom4Name', 'HOWInternalService_Bathroom4Select', 'HOWInternalService_Bathroom4Note', 15);
     // data = data.concat(bathroom4Table);
 
-    var laundryTable = createInternalOnePartTable('LAUNDRY', laundryTableRowCount, 'HOWInternalService_LaundryName', 'HOWInternalService_LaundrySelect', 'HOWInternalService_LaundryNote', 13);
+    var laundryTable = createInternalOnePartTable(roomName5, laundryTableRowCount, 'HOWInternalService_LaundryName', 'HOWInternalService_LaundrySelect', 'HOWInternalService_LaundryNote', 13);
     data = data.concat(laundryTable);
 
-    var servicesTable = createInternalOnePartTable('SERVICES', servicesTableRowCount, 'HOWInternalService_ServiceName', 'HOWInternalService_ServiceSelect', 'HOWInternalService_ServiceNote', 5);
+    var servicesTable = createInternalOnePartTable(roomName6, servicesTableRowCount, 'HOWInternalService_ServiceName', 'HOWInternalService_ServiceSelect', 'HOWInternalService_ServiceNote', 5);
     data = data.concat(servicesTable);
 
 

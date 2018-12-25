@@ -1061,8 +1061,10 @@ function removePanel(panelid)
     }
 }
 
-function editRoomName()
+function editRoomName(tabid)
 {
+    //console.log(tabid);
+    let tabfld = '#' + tabid
     $('#dlgRoomNew').dialog
     (
         {
@@ -1070,10 +1072,11 @@ function editRoomName()
 
             onOpen:function()
             {
-                console.log("open the dialog");
-                var tab = $('#internal-tabs').tabs('getSelected');
+                // console.log("open the dialog");
+                // console.log(tabfld);
+                var tab = $(tabfld).tabs('getSelected');
                 var title = tab.panel('options').title;
-                console.log(title);
+                //console.log(title);
                 $('#fldNewRoomName').textbox('setValue',title);
             },
             buttons:
@@ -1084,11 +1087,11 @@ function editRoomName()
                     handler:function()
                     {
                         var newtitle = $('#fldNewRoomName').textbox('getValue');
-                        console.log(newtitle);
+                        //console.log(newtitle);
                         if(newtitle != "" && newtitle != null)
                         {
-                            var tab = $('#internal-tabs').tabs('getSelected');
-                            $('#internal-tabs').tabs('update',{
+                            var tab = $(tabfld).tabs('getSelected');
+                            $(tabfld).tabs('update',{
                                 tab:tab,
                                 options:{
                                     title:newtitle
