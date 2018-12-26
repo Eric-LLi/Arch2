@@ -98,7 +98,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <label>Address of Property:</label><br>
-                        <input id="address" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+                        <input id="address" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
                     </div>
                 </div>
                 <div class="row">

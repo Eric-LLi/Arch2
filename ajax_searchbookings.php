@@ -55,12 +55,16 @@
       else if ($selectedstatus == 6) //status == 6 --> work has started, but not completed. 
       {
         // $clause = $clause . " " .  " b1.datepaid is not null and b1.users_id is not null and b1.datecompleted is null and b1.dateapproved is null and b1.datecancelled is null and ";
-        $clause = $clause . " " .  " b1.datepaid is not null and b1.datecompleted is null and b1.dateapproved is null and b1.datecancelled is null and b1.dateclosed is null and ";
+        $clause = $clause . " " .  " b1.datepaid is not null and b1.users_id is not null and b1.datecompleted is null and b1.dateapproved is null and b1.datecancelled is null and b1.dateclosed is null and ";
       }
       else if ($selectedstatus == 7) //status == 7 --> work has closed, 
       {
         // $clause = $clause . " " .  " b1.datepaid is not null and b1.users_id is not null and b1.datecompleted is null and b1.dateapproved is null and b1.datecancelled is null and ";
         $clause = $clause . " " .  " b1.dateclosed is not null and ";
+      }
+      else if ($selectedstatus == 5) //status == 5 --> All, all not closed work
+      {
+        $clause = $clause . " " .  " b1.dateclosed is null and ";
       }
 
       if(isset($_POST['email']))

@@ -11,12 +11,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-            crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <?php require_once("meta.php"); ?>
         <!-- Customized CSS -->
         <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/viewPDF.css">
+
         <!--  Import JQuery  -->
-        <script src="js/jquery-1.12.4.min.js"></script>
+        <!-- <script src="js/jquery-1.12.4.min.js"></script> -->
         <!-- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
         <!--  Import pdfMake  -->
         <!-- <script src='../node_modules/pdfmake/build/pdfmake.min.js'></script>
@@ -36,7 +38,8 @@
         </script>
 
         <?php require_once("saveloaddata.php"); ?>
-        <?php require_once("meta.php"); ?>
+       
+    
     </head>
 
     <body>
@@ -108,7 +111,7 @@
                     <div class="col-sm">
                         <label>Address of Property</label>
                         <br>
-                        <input id="2" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+                        <input id="2" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
 
                     </div>
                 </div>
@@ -182,7 +185,14 @@
                     <div class="col-sm">
                         <label>Verbal Summary to</label>
                         <br>
-                        <textarea id="7" title="verbal" class="form-control"></textarea>
+                        <!-- <textarea id="7" title="verbal" class="form-control"></textarea> -->
+                        <select id="7" style="width:100%;height:50px;marginBottom:30px" class="form-control">
+                            <option selected disabled value="Choose an item">Choose an item</option>
+                            <option value="Given in person">Given in person</option>
+                            <option value="Given over the phone">Given over the phone</option>
+                            <option value="Left message request for call back">Left message request for call back</option>
+                            <option value="Left detailed voice message">Left detailed voice message</option>
+                        </select>
                     </div>
                     <div class="col-sm">
                         <label>Date</label>
@@ -193,6 +203,7 @@
             </form>
             <br>
         </div>
+
 
         <div id="architectDetails" class="container">
             <hr>
@@ -299,19 +310,41 @@
                     <div class="col-sm">
                         <label>Furnished</label>
                         <br>
-                        <input id="ps7" class="form-control" type="text" title="input">
+                        <!-- <input id="ps7" class="form-control" type="text" title="input"> -->
+                        <select id="ps7" style="width:100%;height:50px;marginBottom:30px" class="form-control">
+                            <option selected disabled value="Choose an item">Choose an item</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Partial">Partial</option>
+                        </select>
                     </div>
                     <div class="col-sm">
                         <label>Tree Coverage</label>
                         <br>
-                        <input id="ps8" class="form-control" type="text" title="input">
+                        <!-- <input id="ps8" class="form-control" type="text" title="input"> -->
+                        <select id="ps8" style="width:100%;height:50px;marginBottom:30px" class="form-control">
+                            <option selected disabled value="Choose an item">Choose an item</option>
+                            <option value="Light">Light</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Dense">Dense</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm">
                         <label>Extensions / Renovation</label>
                         <br>
-                        <input id="ps9" class="form-control" type="text" title="input">
+                        <!-- <input id="ps9" class="form-control" type="text" title="input"> -->
+                        <select id="ps9" style="width:100%;height:50px;marginBottom:30px" class="form-control" onchange="changeOther('ps9','ps9other')">
+                            <option selected disabled value="Choose an item">Choose an item</option>
+                            <option value="No - likely original plan">No - likely original plan</option>
+                            <option value="Yes - Internal renovations">Yes - Internal renovations</option>
+                            <option value="Yes - extended">Yes - extended</option>
+                            <option value="Yes -  upstairs extension">Yes -  upstairs extension</option>
+                            <option value="Yes -  extended & renovated">Yes -  extended & renovated</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input id="ps9other" style="display:none;marginTop:30px" placeholder="Other" type="text" class="form-control">
                     </div>
                     <div class="col-sm">
                         <label>Estimated Age / Period</label>
@@ -331,12 +364,6 @@
                         <div class="form-group col-sm">
                             <label>Apparent condition of the building with respect to its age:</label>
                             <select onchange="checkIfOther()" id="conditionOfBuilding" name="conditionOfBuilding" style="padding-left: 16px" title="select">
-                                <!--
-                        <option value="Well maintained">Well maintained</option>
-                        <option value="Reasonably maintained">Reasonably maintained</option>
-                        <option value="Poorly maintained">Poorly maintained</option>
-                        <option value="Other">Other</option>
--->
                                 <option value="Untested/New">Untested/New</option>
                                 <option value="Reasonably Maintained">Reasonably Maintained</option>
                                 <option value="Fair">Fair</option>
@@ -2286,98 +2313,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label class="sectionSubHead" style="color: black">Professional & Trade Recommendations:</label>
-                        <select id="AssessmentSiteMajorSelect" style="width:100%" title="recommendationSelect">
-                            <optgroup label="Architects">
-                                <option value="AR">AR</option>
-                            </optgroup>
-                            <optgroup label="Building Contractors">
-                                <option value="BC">BC</option>
-                            </optgroup>
-                            <optgroup label="Brick Layers">
-                                <option value="BR">BR</option>
-                            </optgroup>
-                            <optgroup label="Concrete Contractors">
-                                <option value="CC">CC</option>
-                            </optgroup>
-                            <optgroup label="Carpenters and Joiners">
-                                <option value="CJ">CJ</option>
-                            </optgroup>
-                            <optgroup label="Cabinet Makers">
-                                <option value="CM">CM</option>
-                            </optgroup>
-                            <optgroup label="Damp Houses">
-                                <option value="DH">DH</option>
-                            </optgroup>
-                            <optgroup label="Drainers">
-                                <option value="DR">DR</option>
-                            </optgroup>
-                            <optgroup label="Electrical Contractors">
-                                <option value="EL">EL</option>
-                            </optgroup>
-                            <optgroup label="Excavating Contractors">
-                                <option value="EX">EX</option>
-                            </optgroup>
-                            <optgroup label="Fencing Contractors">
-                                <option value="FC">FC</option>
-                            </optgroup>
-                            <optgroup label="Glass Merch / Glazier">
-                                <option value="GL">GL</option>
-                            </optgroup>
-                            <optgroup label="Home Maint / Repair">
-                                <option value="HM">HM</option>
-                            </optgroup>
-                            <optgroup label="House Restump / Reblock">
-                                <option value="HR">HR</option>
-                            </optgroup>
-                            <optgroup label="Insulation Contractors">
-                                <option value="IC">IC</option>
-                            </optgroup>
-                            <optgroup label="Landscape Architects">
-                                <option value="LA">LA</option>
-                            </optgroup>
-                            <optgroup label="Landscape Gardeners & Contractors">
-                                <option value="LG">LG</option>
-                            </optgroup>
-                            <optgroup label="Underpinning Services">
-                                <option value="UP">UP</option>
-                            </optgroup>
-                            <optgroup label="Pest Control">
-                                <option value="PC">PC</option>
-                            </optgroup>
-                            <optgroup label="Painters & Decorators">
-                                <option value="PD">PD</option>
-                            </optgroup>
-                            <optgroup label="Plumbers & Gas fitters">
-                                <option value="PG">PG</option>
-                            </optgroup>
-                            <optgroup label="Plasterers">
-                                <option value="PL">PL</option>
-                            </optgroup>
-                            <optgroup label="Paving - Various">
-                                <option value="PV">PV</option>
-                            </optgroup>
-                            <optgroup label="Roof Const / Repair / Clean">
-                                <option value="RC">RC</option>
-                            </optgroup>
-                            <optgroup label="Structural Engineers">
-                                <option value="SE">SE</option>
-                            </optgroup>
-                            <optgroup label="Tile Layers - Wall / Floor">
-                                <option value="TL">TL</option>
-                            </optgroup>
-                            <optgroup label="Tilers & Slaters">
-                                <option value="TS">TS</option>
-                            </optgroup>
-                        </select>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentSiteMajorRecommendations','AssessmentSiteMajorSelect')"
-                            style="margin-top: 10px">Add</button>
-                    </td>
-                    <td>
-                        <input id="assessmentSiteMajorRecommendations" type="text" readonly placeholder="Recommendations will be displayed here"
-                            title="recommendations" style="width: 100%;border: 0;" />
-                        <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentSiteMajorRecommendations')" style="margin-top:10px">Clear</button>
+                    <td colspan="2">
+                        <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input type="text" id="assessmentSiteMajorRecommendations" class="easyui-combotree" data-options=
+                                        "
+                                        multiple:true,
+                                        multiline:true, 
+                                        valueField:'text',
+                                        textField:'text'
+                                        " 
+                                style="width:100%;height:60px;fontsize:16px"
+                            >
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -2389,98 +2337,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
-                        <select id="AssessmentSiteMinorSelect" style="width:100%" title="recommendationSelect">
-                            <optgroup label="Architects">
-                                <option value="AR">AR</option>
-                            </optgroup>
-                            <optgroup label="Building Contractors">
-                                <option value="BC">BC</option>
-                            </optgroup>
-                            <optgroup label="Brick Layers">
-                                <option value="BR">BR</option>
-                            </optgroup>
-                            <optgroup label="Concrete Contractors">
-                                <option value="CC">CC</option>
-                            </optgroup>
-                            <optgroup label="Carpenters and Joiners">
-                                <option value="CJ">CJ</option>
-                            </optgroup>
-                            <optgroup label="Cabinet Makers">
-                                <option value="CM">CM</option>
-                            </optgroup>
-                            <optgroup label="Damp Houses">
-                                <option value="DH">DH</option>
-                            </optgroup>
-                            <optgroup label="Drainers">
-                                <option value="DR">DR</option>
-                            </optgroup>
-                            <optgroup label="Electrical Contractors">
-                                <option value="EL">EL</option>
-                            </optgroup>
-                            <optgroup label="Excavating Contractors">
-                                <option value="EX">EX</option>
-                            </optgroup>
-                            <optgroup label="Fencing Contractors">
-                                <option value="FC">FC</option>
-                            </optgroup>
-                            <optgroup label="Glass Merch / Glazier">
-                                <option value="GL">GL</option>
-                            </optgroup>
-                            <optgroup label="Home Maint / Repair">
-                                <option value="HM">HM</option>
-                            </optgroup>
-                            <optgroup label="House Restump / Reblock">
-                                <option value="HR">HR</option>
-                            </optgroup>
-                            <optgroup label="Insulation Contractors">
-                                <option value="IC">IC</option>
-                            </optgroup>
-                            <optgroup label="Landscape Architects">
-                                <option value="LA">LA</option>
-                            </optgroup>
-                            <optgroup label="Landscape Gardeners & Contractors">
-                                <option value="LG">LG</option>
-                            </optgroup>
-                            <optgroup label="Underpinning Services">
-                                <option value="UP">UP</option>
-                            </optgroup>
-                            <optgroup label="Pest Control">
-                                <option value="PC">PC</option>
-                            </optgroup>
-                            <optgroup label="Painters & Decorators">
-                                <option value="PD">PD</option>
-                            </optgroup>
-                            <optgroup label="Plumbers & Gas fitters">
-                                <option value="PG">PG</option>
-                            </optgroup>
-                            <optgroup label="Plasterers">
-                                <option value="PL">PL</option>
-                            </optgroup>
-                            <optgroup label="Paving - Various">
-                                <option value="PV">PV</option>
-                            </optgroup>
-                            <optgroup label="Roof Const / Repair / Clean">
-                                <option value="RC">RC</option>
-                            </optgroup>
-                            <optgroup label="Structural Engineers">
-                                <option value="SE">SE</option>
-                            </optgroup>
-                            <optgroup label="Tile Layers - Wall / Floor">
-                                <option value="TL">TL</option>
-                            </optgroup>
-                            <optgroup label="Tilers & Slaters">
-                                <option value="TS">TS</option>
-                            </optgroup>
-                        </select>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentSiteMinorRecommendations','AssessmentSiteMinorSelect')"
-                            style="margin-top: 10px">Add</button>
-                    </td>
-                    <td>
-                        <input id="assessmentSiteMinorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here"
-                            title="recommendations" style="width: 100%;border: 0;" />
-                        <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentSiteMinorRecommendations')" style="margin-top:10px">Clear</button>
+                    <td colspan="2">
+                        <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input type="text" id="assessmentSiteMinorRecommendations" class="easyui-combotree" data-options=
+                                        "
+                                        multiple:true,
+                                        multiline:true, 
+                                        valueField:'text',
+                                        textField:'text'
+                                        " 
+                                style="width:100%;height:60px;fontsize:16px"
+                            >
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -5738,99 +5607,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label class="sectionSubHead" style="color: black">Professional & Trade Recommendations:</label>
-                        <select id="AssessmentPropertyExteriorMajorSelect" style="width:100%" title="recommendationSelect">
-                            <optgroup label="Architects">
-                                <option value="AR">AR</option>
-                            </optgroup>
-                            <optgroup label="Building Contractors">
-                                <option value="BC">BC</option>
-                            </optgroup>
-                            <optgroup label="Brick Layers">
-                                <option value="BR">BR</option>
-                            </optgroup>
-                            <optgroup label="Concrete Contractors">
-                                <option value="CC">CC</option>
-                            </optgroup>
-                            <optgroup label="Carpenters and Joiners">
-                                <option value="CJ">CJ</option>
-                            </optgroup>
-                            <optgroup label="Cabinet Makers">
-                                <option value="CM">CM</option>
-                            </optgroup>
-                            <optgroup label="Damp Houses">
-                                <option value="DH">DH</option>
-                            </optgroup>
-                            <optgroup label="Drainers">
-                                <option value="DR">DR</option>
-                            </optgroup>
-                            <optgroup label="Electrical Contractors">
-                                <option value="EL">EL</option>
-                            </optgroup>
-                            <optgroup label="Excavating Contractors">
-                                <option value="EX">EX</option>
-                            </optgroup>
-                            <optgroup label="Fencing Contractors">
-                                <option value="FC">FC</option>
-                            </optgroup>
-                            <optgroup label="Glass Merch / Glazier">
-                                <option value="GL">GL</option>
-                            </optgroup>
-                            <optgroup label="Home Maint / Repair">
-                                <option value="HM">HM</option>
-                            </optgroup>
-                            <optgroup label="House Restump / Reblock">
-                                <option value="HR">HR</option>
-                            </optgroup>
-                            <optgroup label="Insulation Contractors">
-                                <option value="IC">IC</option>
-                            </optgroup>
-                            <optgroup label="Landscape Architects">
-                                <option value="LA">LA</option>
-                            </optgroup>
-                            <optgroup label="Landscape Gardeners & Contractors">
-                                <option value="LG">LG</option>
-                            </optgroup>
-                            <optgroup label="Underpinning Services">
-                                <option value="UP">UP</option>
-                            </optgroup>
-                            <optgroup label="Pest Control">
-                                <option value="PC">PC</option>
-                            </optgroup>
-                            <optgroup label="Painters & Decorators">
-                                <option value="PD">PD</option>
-                            </optgroup>
-                            <optgroup label="Plumbers & Gas fitters">
-                                <option value="PG">PG</option>
-                            </optgroup>
-                            <optgroup label="Plasterers">
-                                <option value="PL">PL</option>
-                            </optgroup>
-                            <optgroup label="Paving - Various">
-                                <option value="PV">PV</option>
-                            </optgroup>
-                            <optgroup label="Roof Const / Repair / Clean">
-                                <option value="RC">RC</option>
-                            </optgroup>
-                            <optgroup label="Structural Engineers">
-                                <option value="SE">SE</option>
-                            </optgroup>
-                            <optgroup label="Tile Layers - Wall / Floor">
-                                <option value="TL">TL</option>
-                            </optgroup>
-                            <optgroup label="Tilers & Slaters">
-                                <option value="TS">TS</option>
-                            </optgroup>
-                        </select>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentPropertyExteriorMajorRecommendations','AssessmentPropertyExteriorMajorSelect')"
-                            style="margin-top: 10px">Add</button>
-                    </td>
-                    <td>
-                        <input id="assessmentPropertyExteriorMajorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here"
-                            title="recommendations" style="width: 100%;border: 0;" />
-                        <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentPropertyExteriorMajorRecommendations')"
-                            style="margin-top:10px">Clear</button>
+                    <td colspan="2">
+                        <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input type="text" id="assessmentPropertyExteriorMajorRecommendations" class="easyui-combotree" data-options=
+                                        "
+                                        multiple:true,
+                                        multiline:true, 
+                                        valueField:'text',
+                                        textField:'text'
+                                        " 
+                                style="width:100%;height:60px;fontsize:16px"
+                            >
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -5842,99 +5631,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
-                        <select id="AssessmentPropertyExteriorMinorSelect" style="width:100%" title="recommendationSelect">
-                            <optgroup label="Architects">
-                                <option value="AR">AR</option>
-                            </optgroup>
-                            <optgroup label="Building Contractors">
-                                <option value="BC">BC</option>
-                            </optgroup>
-                            <optgroup label="Brick Layers">
-                                <option value="BR">BR</option>
-                            </optgroup>
-                            <optgroup label="Concrete Contractors">
-                                <option value="CC">CC</option>
-                            </optgroup>
-                            <optgroup label="Carpenters and Joiners">
-                                <option value="CJ">CJ</option>
-                            </optgroup>
-                            <optgroup label="Cabinet Makers">
-                                <option value="CM">CM</option>
-                            </optgroup>
-                            <optgroup label="Damp Houses">
-                                <option value="DH">DH</option>
-                            </optgroup>
-                            <optgroup label="Drainers">
-                                <option value="DR">DR</option>
-                            </optgroup>
-                            <optgroup label="Electrical Contractors">
-                                <option value="EL">EL</option>
-                            </optgroup>
-                            <optgroup label="Excavating Contractors">
-                                <option value="EX">EX</option>
-                            </optgroup>
-                            <optgroup label="Fencing Contractors">
-                                <option value="FC">FC</option>
-                            </optgroup>
-                            <optgroup label="Glass Merch / Glazier">
-                                <option value="GL">GL</option>
-                            </optgroup>
-                            <optgroup label="Home Maint / Repair">
-                                <option value="HM">HM</option>
-                            </optgroup>
-                            <optgroup label="House Restump / Reblock">
-                                <option value="HR">HR</option>
-                            </optgroup>
-                            <optgroup label="Insulation Contractors">
-                                <option value="IC">IC</option>
-                            </optgroup>
-                            <optgroup label="Landscape Architects">
-                                <option value="LA">LA</option>
-                            </optgroup>
-                            <optgroup label="Landscape Gardeners & Contractors">
-                                <option value="LG">LG</option>
-                            </optgroup>
-                            <optgroup label="Underpinning Services">
-                                <option value="UP">UP</option>
-                            </optgroup>
-                            <optgroup label="Pest Control">
-                                <option value="PC">PC</option>
-                            </optgroup>
-                            <optgroup label="Painters & Decorators">
-                                <option value="PD">PD</option>
-                            </optgroup>
-                            <optgroup label="Plumbers & Gas fitters">
-                                <option value="PG">PG</option>
-                            </optgroup>
-                            <optgroup label="Plasterers">
-                                <option value="PL">PL</option>
-                            </optgroup>
-                            <optgroup label="Paving - Various">
-                                <option value="PV">PV</option>
-                            </optgroup>
-                            <optgroup label="Roof Const / Repair / Clean">
-                                <option value="RC">RC</option>
-                            </optgroup>
-                            <optgroup label="Structural Engineers">
-                                <option value="SE">SE</option>
-                            </optgroup>
-                            <optgroup label="Tile Layers - Wall / Floor">
-                                <option value="TL">TL</option>
-                            </optgroup>
-                            <optgroup label="Tilers & Slaters">
-                                <option value="TS">TS</option>
-                            </optgroup>
-                        </select>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentPropertyExteriorMinorRecommendations','AssessmentPropertyExteriorMinorSelect')"
-                            style="margin-top: 10px">Add</button>
-                    </td>
-                    <td>
-                        <input id="assessmentPropertyExteriorMinorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here"
-                            title="recommendations" style="width: 100%;border: 0;" />
-                        <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentPropertyExteriorMinorRecommendations')"
-                            style="margin-top:10px">Clear</button>
+                    <td colspan="2">
+                        <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input type="text" id="assessmentPropertyExteriorMinorRecommendations" class="easyui-combotree" data-options=
+                                        "
+                                        multiple:true,
+                                        multiline:true, 
+                                        valueField:'text',
+                                        textField:'text'
+                                        " 
+                                style="width:100%;height:60px;fontsize:16px"
+                            >
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -9544,6 +9253,22 @@
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2">
+                        <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input type="text" id="assessmentPropertyInteriorMajorRecommendations" class="easyui-combotree" data-options=
+                                        "
+                                        multiple:true,
+                                        multiline:true, 
+                                        valueField:'text',
+                                        textField:'text'
+                                        " 
+                                style="width:100%;height:60px;fontsize:16px"
+                            >
+                        </div>
+                    </td>
+                </tr>
+                <!-- <tr>
                     <td>
                         <label class="sectionSubHead" style="color: black">Professional & Trade Recommendations:</label>
                         <select id="AssessmentPropertyInteriorMajorSelect" style="width:100%" title="recommendationSelect">
@@ -9638,7 +9363,7 @@
                         <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentPropertyInteriorMajorRecommendations')"
                             style="margin-top:10px">Clear</button>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td colspan="2" class="sectionSubHead">Maintenance Items and Minor Defects Found:</td>
                 </tr>
@@ -9648,6 +9373,22 @@
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2">
+                        <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input type="text" id="assessmentPropertyInteriorMinorRecommendations" class="easyui-combotree" data-options=
+                                        "
+                                        multiple:true,
+                                        multiline:true, 
+                                        valueField:'text',
+                                        textField:'text'
+                                        " 
+                                style="width:100%;height:60px;fontsize:16px"
+                            >
+                        </div>
+                    </td>
+                </tr>
+                <!-- <tr>
                     <td>
                         <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
                         <select id="AssessmentPropertyInteriorMinorSelect" style="width:100%" title="recommendationSelect">
@@ -9742,7 +9483,7 @@
                         <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentPropertyInteriorMinorRecommendations')"
                             style="margin-top:10px">Clear</button>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td colspan="2">
                         <label class="sectionSubHead">General Notes:</label>
@@ -13877,99 +13618,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label class="sectionSubHead" style="color: black">Professional & Trade Recommendations:</label>
-                        <select id="AssessmentServiceMajorSelect" style="width:100%" title="recommendationSelect">
-                            <optgroup label="Architects">
-                                <option value="AR">AR</option>
-                            </optgroup>
-                            <optgroup label="Building Contractors">
-                                <option value="BC">BC</option>
-                            </optgroup>
-                            <optgroup label="Brick Layers">
-                                <option value="BR">BR</option>
-                            </optgroup>
-                            <optgroup label="Concrete Contractors">
-                                <option value="CC">CC</option>
-                            </optgroup>
-                            <optgroup label="Carpenters and Joiners">
-                                <option value="CJ">CJ</option>
-                            </optgroup>
-                            <optgroup label="Cabinet Makers">
-                                <option value="CM">CM</option>
-                            </optgroup>
-                            <optgroup label="Damp Houses">
-                                <option value="DH">DH</option>
-                            </optgroup>
-                            <optgroup label="Drainers">
-                                <option value="DR">DR</option>
-                            </optgroup>
-                            <optgroup label="Electrical Contractors">
-                                <option value="EL">EL</option>
-                            </optgroup>
-                            <optgroup label="Excavating Contractors">
-                                <option value="EX">EX</option>
-                            </optgroup>
-                            <optgroup label="Fencing Contractors">
-                                <option value="FC">FC</option>
-                            </optgroup>
-                            <optgroup label="Glass Merch / Glazier">
-                                <option value="GL">GL</option>
-                            </optgroup>
-                            <optgroup label="Home Maint / Repair">
-                                <option value="HM">HM</option>
-                            </optgroup>
-                            <optgroup label="House Restump / Reblock">
-                                <option value="HR">HR</option>
-                            </optgroup>
-                            <optgroup label="Insulation Contractors">
-                                <option value="IC">IC</option>
-                            </optgroup>
-                            <optgroup label="Landscape Architects">
-                                <option value="LA">LA</option>
-                            </optgroup>
-                            <optgroup label="Landscape Gardeners & Contractors">
-                                <option value="LG">LG</option>
-                            </optgroup>
-                            <optgroup label="Underpinning Services">
-                                <option value="UP">UP</option>
-                            </optgroup>
-                            <optgroup label="Pest Control">
-                                <option value="PC">PC</option>
-                            </optgroup>
-                            <optgroup label="Painters & Decorators">
-                                <option value="PD">PD</option>
-                            </optgroup>
-                            <optgroup label="Plumbers & Gas fitters">
-                                <option value="PG">PG</option>
-                            </optgroup>
-                            <optgroup label="Plasterers">
-                                <option value="PL">PL</option>
-                            </optgroup>
-                            <optgroup label="Paving - Various">
-                                <option value="PV">PV</option>
-                            </optgroup>
-                            <optgroup label="Roof Const / Repair / Clean">
-                                <option value="RC">RC</option>
-                            </optgroup>
-                            <optgroup label="Structural Engineers">
-                                <option value="SE">SE</option>
-                            </optgroup>
-                            <optgroup label="Tile Layers - Wall / Floor">
-                                <option value="TL">TL</option>
-                            </optgroup>
-                            <optgroup label="Tilers & Slaters">
-                                <option value="TS">TS</option>
-                            </optgroup>
-                        </select>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentServiceMajorRecommendations','AssessmentServiceMajorSelect')"
-                            style="margin-top: 10px">Add</button>
-                    </td>
-                    <td>
-                        <input id="assessmentServiceMajorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here"
-                            title="recommendations" style="width: 100%;border: 0;" />
-                        <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentServiceMajorRecommendations')"
-                            style="margin-top:10px">Clear</button>
+                    <td colspan="2">
+                        <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input type="text" id="assessmentServiceMajorRecommendations" class="easyui-combotree" data-options=
+                                        "
+                                        multiple:true,
+                                        multiline:true, 
+                                        valueField:'text',
+                                        textField:'text'
+                                        " 
+                                style="width:100%;height:60px;fontsize:16px"
+                            >
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -13981,99 +13642,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
-                        <select id="AssessmentServiceMinorSelect" style="width:100%" title="recommendationSelect">
-                            <optgroup label="Architects">
-                                <option value="AR">AR</option>
-                            </optgroup>
-                            <optgroup label="Building Contractors">
-                                <option value="BC">BC</option>
-                            </optgroup>
-                            <optgroup label="Brick Layers">
-                                <option value="BR">BR</option>
-                            </optgroup>
-                            <optgroup label="Concrete Contractors">
-                                <option value="CC">CC</option>
-                            </optgroup>
-                            <optgroup label="Carpenters and Joiners">
-                                <option value="CJ">CJ</option>
-                            </optgroup>
-                            <optgroup label="Cabinet Makers">
-                                <option value="CM">CM</option>
-                            </optgroup>
-                            <optgroup label="Damp Houses">
-                                <option value="DH">DH</option>
-                            </optgroup>
-                            <optgroup label="Drainers">
-                                <option value="DR">DR</option>
-                            </optgroup>
-                            <optgroup label="Electrical Contractors">
-                                <option value="EL">EL</option>
-                            </optgroup>
-                            <optgroup label="Excavating Contractors">
-                                <option value="EX">EX</option>
-                            </optgroup>
-                            <optgroup label="Fencing Contractors">
-                                <option value="FC">FC</option>
-                            </optgroup>
-                            <optgroup label="Glass Merch / Glazier">
-                                <option value="GL">GL</option>
-                            </optgroup>
-                            <optgroup label="Home Maint / Repair">
-                                <option value="HM">HM</option>
-                            </optgroup>
-                            <optgroup label="House Restump / Reblock">
-                                <option value="HR">HR</option>
-                            </optgroup>
-                            <optgroup label="Insulation Contractors">
-                                <option value="IC">IC</option>
-                            </optgroup>
-                            <optgroup label="Landscape Architects">
-                                <option value="LA">LA</option>
-                            </optgroup>
-                            <optgroup label="Landscape Gardeners & Contractors">
-                                <option value="LG">LG</option>
-                            </optgroup>
-                            <optgroup label="Underpinning Services">
-                                <option value="UP">UP</option>
-                            </optgroup>
-                            <optgroup label="Pest Control">
-                                <option value="PC">PC</option>
-                            </optgroup>
-                            <optgroup label="Painters & Decorators">
-                                <option value="PD">PD</option>
-                            </optgroup>
-                            <optgroup label="Plumbers & Gas fitters">
-                                <option value="PG">PG</option>
-                            </optgroup>
-                            <optgroup label="Plasterers">
-                                <option value="PL">PL</option>
-                            </optgroup>
-                            <optgroup label="Paving - Various">
-                                <option value="PV">PV</option>
-                            </optgroup>
-                            <optgroup label="Roof Const / Repair / Clean">
-                                <option value="RC">RC</option>
-                            </optgroup>
-                            <optgroup label="Structural Engineers">
-                                <option value="SE">SE</option>
-                            </optgroup>
-                            <optgroup label="Tile Layers - Wall / Floor">
-                                <option value="TL">TL</option>
-                            </optgroup>
-                            <optgroup label="Tilers & Slaters">
-                                <option value="TS">TS</option>
-                            </optgroup>
-                        </select>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addRecommendations('assessmentServiceMinorRecommendations','AssessmentServiceMinorSelect')"
-                            style="margin-top: 10px">Add</button>
-                    </td>
-                    <td>
-                        <input id="assessmentServiceMinorRecommendations" readonly type="text" placeholder="Recommendations will be displayed here"
-                            title="recommendations" style="width: 100%;border: 0;" />
-                        <button type="button" class="btn btn-danger btn-sm" onclick="clearRecommendation('assessmentServiceMinorRecommendations')"
-                            style="margin-top:10px">Clear</button>
+                    <td colspan="2">
+                        <div style="margin-bottom:20px">
+                            <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input type="text" id="assessmentServiceMinorRecommendations" class="easyui-combotree" data-options=
+                                        "
+                                        multiple:true,
+                                        multiline:true, 
+                                        valueField:'text',
+                                        textField:'text'
+                                        " 
+                                style="width:100%;height:60px;fontsize:16px"
+                            >
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -14216,8 +13797,7 @@
                     </select>
                 </div>
             </div>
-        </div>
-
+        </div>      
 
         <!-- <div class="container" style="text-align:center">
   <br>
@@ -14274,10 +13854,10 @@
         }
       }
     ?>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
 
         <!--<script src="../JS/uploadImages.js"></script>-->

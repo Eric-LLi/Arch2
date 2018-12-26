@@ -9,6 +9,7 @@ var firstRemoveTimberSubfloor3rd = true;
 var firstRemoveTimberRecommendation3rd = true;
 function onload()
 {
+    checkReloadOther();
     reorderImages('TimberSummaryPhotographs');
     reorderImages('TimberSitePhotographs');
     reorderImages('TimberExteriorPhotographs');
@@ -2009,4 +2010,34 @@ function convertBase64UrlToBlob(urlData,type){
     }
 
     return new Blob( [ab] , {type : type});
+}
+
+//AA-111 Check if site grade, or  Extensions/Renovations has selected 'othier' show the text area.
+function checkReloadOther() {
+    if ($("#ps6").val() === "Other") {
+        $("#ps6other").show();
+    } else {
+        $("#ps6other").hide();
+    }
+
+    if ($("#ps9").val() === "Other") {
+        $("#ps9other").show();
+    } else {
+        $("#ps9other").hide();
+    }
+}
+
+//AA-111
+function changeOther(id1,id2)
+{
+    //console.log(id1,id2);
+    var select = "#" + id1;
+    var input = "#" + id2;
+    //console.log(select);
+    //console.log(input);
+    if ($(select).val() === "Other") {
+        $(input).show();
+    } else {
+        $(input).hide();
+    }
 }

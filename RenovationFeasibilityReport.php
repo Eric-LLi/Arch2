@@ -100,7 +100,7 @@
             </div>
             <div class="col-sm-6" style="margin-top:6px">
                 <label>Phone</label><br>
-                <input id="customer_phone" class="form-control" type="text" title="Phone" value="<?php echo doNiceArrayElemAsString('custmobile'); ?>">
+                <input id="customer_phone" class="form-control" type="text" title="Phone" value="<?php echo doNiceArrayElemAsString('custphone'); ?>">
             </div>
              <div class="col-sm-6" style="margin-top:6px">
                 <label>Mobile</label>
@@ -121,7 +121,7 @@
         <div class="row">
             <div class="col-sm">
                 <label>Address</label><br>
-                <input id="address" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+                <input id="address" class="form-control" type="text" title="address" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
             </div>
         </div>
         <div class="row" style="margin-top: 3px">

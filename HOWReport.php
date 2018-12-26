@@ -183,7 +183,7 @@
 	                        <div class="row">
 	                            <div class="col-sm-8">
 	                                <label>Address</label><br>
-	                                <input id="inspection_address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'); ?>">
+	                                <input id="inspection_address" class="form-control" type="text" title="address" style="margin-top: 0" value="<?php echo doNiceArrayElemAsString('address1'). " " .doNiceArrayElemAsString('address2'); ?>">
 	                            </div>
 	                            <div class="col-sm-4">
 	                                <label>Lot No.</label><br>
@@ -926,12 +926,10 @@
 	            </table>
 	        </div>
 	        <div title="INTERNAL LIVING & BEDROOM" style="padding: 10px;">
-	            <!-- <div class="easyui-tabs tabs-container" style="padding:10px" data-options="tools:'#internal-tab-tools'" id="internal-tabs"> -->
-				<!-- <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:150" id="internal-tabs"> -->
-	            	<div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'left',headerWidth:150,tools:'#internal-tab-tools'" id="internal-tabs">
-	                <div type="tabs_title" title="Entry&Passage" style="padding:10px;font-size: 18px" id="HOW_INTERNAL0">  <!--data-options="tools:'#internal_tap_strip_tools'" -->
+	            <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'left',headerWidth:150,tools:'#livingbedroom-tab-tools'" id="livingbedroom-tabs">
+	                <div type="tabs_title" title="Entry&Passage" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom0">  <!--data-options="tools:'#internal_tap_strip_tools'" -->
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Entry_Table','HOWInternal_EntryName','HOWInternal_EntrySelect','HOWInternal_EntryNote')" style="margin-bottom: 10px">Add One Feature</button>
-						<button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button>
+						<button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
 						<table id="HOWInternal_Entry_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName0">Floor(Structure)</th>
@@ -1001,9 +999,9 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div type="tabs_title" title="Stair" style="padding:10px;font-size: 18px"  id="HOW_INTERNAL1">
+	                <div type="tabs_title" title="Stair" style="padding:10px;font-size: 18px"  id="HOW_LivingBedroom1">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Stair_Table','HOWInternal_StairName','HOWInternal_StairSelect','HOWInternal_StairNote')" style="margin-bottom: 10px">Add One Feature</button>
-						<button type="button" class="btn btn-primary" onclick="editRoomName()" style="margin-bottom: 10px">Edit Room Name</button>
+						<button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
 						<table id="HOWInternal_Stair_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName0">Floor(Structure)</th>
@@ -1073,9 +1071,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Living(Front)" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Living(Front)" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom2">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_LivingFront_Table','HOWInternal_LivingFrontName','HOWInternal_LivingFrontSelect','HOWInternal_LivingFrontNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_LivingFront_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_LivingFront_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1144,9 +1143,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Lounge" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Lounge" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom3">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Lounge_Table','HOWInternal_LoungeName','HOWInternal_LoungeSelect','HOWInternal_LoungeNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Lounge_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Lounge_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1215,9 +1215,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Kitchen & Pantry" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Kitchen & Pantry" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom4">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Kitchen_Table','HOWInternal_KitchenName','HOWInternal_KitchenSelect','HOWInternal_KitchenNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Kitchen_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Kitchen_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1322,9 +1323,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Family" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Family" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom5">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Family_Table','HOWInternal_FamilyName','HOWInternal_FamilySelect','HOWInternal_FamilyNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Family_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Family_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1393,9 +1395,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Dining" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Dining" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom6">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Dining_Table','HOWInternal_DiningName','HOWInternal_DiningSelect','HOWInternal_DiningNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Dining_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Dining_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1464,9 +1467,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Bedroom 1" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Bedroom 1" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom7">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Bedroom1_Table','HOWInternal_Bedroom1Name','HOWInternal_Bedroom1Select','HOWInternal_Bedroom1Note')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Bedroom1_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Bedroom1_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1535,9 +1539,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Bedroom 2" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Bedroom 2" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom8">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Bedroom2_Table','HOWInternal_Bedroom2Name','HOWInternal_Bedroom2Select','HOWInternal_Bedroom2Note')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Bedroom2_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Bedroom2_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1606,9 +1611,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Bedroom 3" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Bedroom 3" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom9">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Bedroom3_Table','HOWInternal_Bedroom3Name','HOWInternal_Bedroom3Select','HOWInternal_Bedroom3Note')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Bedroom3_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Bedroom3_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1677,9 +1683,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Bedroom 4" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Bedroom 4" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom10">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Bedroom4_Table','HOWInternal_Bedroom4Name','HOWInternal_Bedroom4Select','HOWInternal_Bedroom4Note')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Bedroom4_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Bedroom4_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1748,9 +1755,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Study" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Study" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom11">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Study_Table','HOWInternal_StudyName','HOWInternal_StudySelect','HOWInternal_StudyNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Study_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Study_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1819,9 +1827,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Retreat" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Retreat" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom12">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Retreat_Table','HOWInternal_RetreatName','HOWInternal_RetreatSelect','HOWInternal_RetreatNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternal_Retreat_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternal_Retreat_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1894,10 +1903,11 @@
 
 	        </div>
 	        <div title="INTERNAL SERVICE(WET) AREAS" style="padding: 10px">
-	            <div class="easyui-tabs" style="padding:10px">
-	                <div title="WC/Powder Room" style="padding:10px;font-size: 18px">
+	            <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'left',headerWidth:150,tools:'#livingbedroom-tab-tools'" id="wetareas-tabs">
+	                <div type="tabs_title" title="WC/Powder Room" style="padding:10px;font-size: 18px" id="HOW_WetAreas0">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternalService_WC_Table','HOWInternalService_WCName','HOWInternalService_WCSelect','HOWInternalService_WCNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternalService_WC_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('wetareas-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternalService_WC_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -1990,9 +2000,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Bathroom 1" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Bathroom 1" style="padding:10px;font-size: 18px" id="HOW_WetAreas1">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternalService_Bathroom1_Table','HOWInternalService_Bathroom1Name','HOWInternalService_Bathroom1Select','HOWInternalService_Bathroom1Note')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternalService_Bathroom1_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('wetareas-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternalService_Bathroom1_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -2091,9 +2102,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Bathroom 2" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Bathroom 2" style="padding:10px;font-size: 18px" id="HOW_WetAreas2">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternalService_Bathroom2_Table','HOWInternalService_Bathroom2Name','HOWInternalService_Bathroom2Select','HOWInternalService_Bathroom2Note')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternalService_Bathroom2_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('wetareas-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternalService_Bathroom2_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -2192,9 +2204,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Bathroom 3" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Bathroom 3" style="padding:10px;font-size: 18px" id="HOW_WetAreas3">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternalService_Bathroom3_Table','HOWInternalService_Bathroom3Name','HOWInternalService_Bathroom3Select','HOWInternalService_Bathroom3Note')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternalService_Bathroom3_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('wetareas-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternalService_Bathroom3_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -2293,9 +2306,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Bathroom 4" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Bathroom 4" style="padding:10px;font-size: 18px" id="HOW_WetAreas4">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternalService_Bathroom4_Table','HOWInternalService_Bathroom4Name','HOWInternalService_Bathroom4Select','HOWInternalService_Bathroom4Note')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternalService_Bathroom4_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('wetareas-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternalService_Bathroom4_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -2394,9 +2408,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Laundry" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Laundry" style="padding:10px;font-size: 18px" id="HOW_WetAreas5">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternalService_Laundry_Table','HOWInternalService_LaundryName','HOWInternalService_LaundrySelect','HOWInternalService_LaundryNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternalService_Laundry_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('wetareas-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternalService_Laundry_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
@@ -2483,9 +2498,10 @@
 	                        </tr>
 	                    </table>
 	                </div>
-	                <div title="Services" style="padding:10px;font-size: 18px">
+	                <div type="tabs_title" title="Services" style="padding:10px;font-size: 18px" id="HOW_WetAreas6">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternalService_Service_Table','HOWInternalService_ServiceName','HOWInternalService_ServiceSelect','HOWInternalService_ServiceNote')" style="margin-bottom: 10px">Add One Feature</button>
-	                    <table id="HOWInternalService_Service_Table">
+	                    <button type="button" class="btn btn-primary" onclick="editRoomName('wetareas-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
+						<table id="HOWInternalService_Service_Table">
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_ServiceName0">Heater/Unit</th>
 	                            <th style="text-align: left">

@@ -1,0 +1,139 @@
+[
+    {
+        "id":0,
+        "text":"Architects",
+        "code":"AR"
+    },
+    {
+        "id":1,
+        "text":"Building Contractors",
+        "code":"BC"
+    },
+    {
+        "id":2,
+        "text":"Brick Layers",
+        "code":"BR"
+    },
+    {
+        "id":3,
+        "text":"Concrete Contractors",
+        "code":"CC"
+    },
+    {
+        "id":4,
+        "text":"Carpenters and Joiners",
+        "code":"CJ"
+    },
+    {
+        "id":5,
+        "text":"Cabinet Makers",
+        "code":"CM"
+    },
+    {
+        "id":6,
+        "text":"Damp Houses",
+        "code":"DH"
+    },
+    {
+        "id":7,
+        "text":"Drainers",
+        "code":"DR"
+    },
+    {
+        "id":8,
+        "text":"Electrical Contractors",
+        "code":"EL"
+    },
+    {
+        "id":9,
+        "text":"Excavating Contractors",
+        "code":"EX"
+    },
+    {
+        "id":10,
+        "text":"Fencing Contractors",
+        "code":"FC"
+    },
+    {
+        "id":11,
+        "text":"Glass Merch / Glazier",
+        "code":"GL"
+    },
+    {
+        "id":12,
+        "text":"Home Maint / Repair",
+        "code":"HM"
+    },
+    {
+        "id":13,
+        "text":"House Restump / Reblock",
+        "code":"HR"
+    },
+    {
+        "id":14,
+        "text":"Insulation Contractors",
+        "code":"IC"
+    },
+    {
+        "id":15,
+        "text":"Landscape Architects",
+        "code":"LA"
+    },
+    {
+        "id":16,
+        "text":"Landscape Gardeners & Contractors",
+        "code":"LG"
+    },
+    {
+        "id":17,
+        "text":"Underpinning Services",
+        "code":"UP"
+    },
+    {
+        "id":18,
+        "text":"Pest Control",
+        "code":"PC"
+    },
+    {
+        "id":19,
+        "text":"Painters & Decorators",
+        "code":"PD"
+    },
+    {
+        "id":20,
+        "text":"Plumbers & Gas fitters",
+        "code":"PG"
+    },
+    {
+        "id":21,
+        "text":"Plasterers",
+        "code":"PL"
+    },
+    {
+        "id":22,
+        "text":"Paving - Various",
+        "code":"PV"
+    },
+    {
+        "id":23,
+        "text":"Roof Const / Repair / Clean",
+        "code":"RC"
+    },
+    {
+        "id":24,
+        "text":"Structural Engineers",
+        "code":"SE"
+    },
+    {
+        "id":25,
+        "text":"Tile Layers - Wall / Floor",
+        "code":"TL"
+    },
+    {
+        "id":26,
+        "text":"Tilers & Slaters",
+        "code":"TS"
+    }
+       
+    
+]

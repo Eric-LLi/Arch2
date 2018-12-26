@@ -76,23 +76,45 @@ function automaticNumbering()
 function loadSelectOption(id) {
     var select = document.getElementById(id);
 
-    var selectOption = ["Choose an item", "√", 'X', '--', 'U', 'IW', 'R', 'P', 'N'];
-    var selectValue = [" ", "No Defects Evident", "Defect Evident", "Not Relevant", "Untested",
-        "Incomplete Work", "Reasonable Access", "Partial Access", 'Not Accessible'];
+    var selectOption = ["Choose an item", "√ - No Defects Evident", 'X - Defect Evident', '-- -  Not Relevant', 'U - Untested', 'IW - Incomplete Work'];
+    var selectValue = ["Choose an item", "√", "X", "--", "U","IW"];
 
 
     //Create and append the options
     for (var i = 0; i < selectOption.length; i++) {
         var option = document.createElement("option");
-        var group = document.createElement('optgroup');
-        group.label = selectValue[i];
+        // var group = document.createElement('optgroup');
+        // group.label = selectValue[i];
         option.text = selectOption[i];
+        option.value = selectValue[i];
         if (i === 0) {
             option.selected = true;
             option.disabled = true;
         }
-        group.appendChild(option);
-        select.appendChild(group);
+        // group.appendChild(option);
+        select.appendChild(option);
+    }
+
+}
+
+function loadAccessSelectOption(id) {
+    var select = document.getElementById(id);
+
+    var selectOption = ["Choose an item", 'R- Reasonable Access', 'P - Partial Access', 'N - Not Accessible'];
+    var selectValue = ["Choose an item", "R", "P", 'N'];
+
+    for (var i = 0; i < selectValue.length; i++) {
+        var option = document.createElement("option");
+        // var group = document.createElement('optgroup');
+        // group.label = selectValue[i];
+        option.text = selectOption[i];
+        option.value = selectValue[i];
+        if (i === 0) {
+            option.selected = true;
+            option.disabled = true;
+        }
+        // group.appendChild(option);
+        select.appendChild(option);
     }
 
 }
@@ -109,7 +131,7 @@ function loadSelect() {
     loadSelectOption('HOWSiteSelect6');
     loadSelectOption('HOWSiteSelect7');
     loadSelectOption('HOWSiteSelect8');
-    loadSelectOption('HOWSiteSelect9');
+    loadAccessSelectOption('HOWSiteSelect9');
 
     loadSelectOption('HOWBuildingSelect0');
     loadSelectOption('HOWBuildingSelect1');
@@ -127,8 +149,8 @@ function loadSelect() {
     loadSelectOption('HOWBuildingSelect13');
     loadSelectOption('HOWBuildingSelect14');
     loadSelectOption('HOWBuildingSelect15');
-    loadSelectOption('HOWBuildingSelect16');
-    loadSelectOption('HOWBuildingSelect17');
+    loadAccessSelectOption('HOWBuildingSelect16');
+    loadAccessSelectOption('HOWBuildingSelect17');
 
     loadSelectOption('HOWSubFloorSelect0');
     loadSelectOption('HOWSubFloorSelect1');
@@ -136,7 +158,7 @@ function loadSelect() {
     loadSelectOption('HOWSubFloorSelect3');
     loadSelectOption('HOWSubFloorSelect4');
     loadSelectOption('HOWSubFloorSelect5');
-    loadSelectOption('HOWSubFloorSelect6');
+    loadAccessSelectOption('HOWSubFloorSelect6');
 
 
     loadSelectOption('HOWRoofVoidSelect0');
@@ -144,7 +166,7 @@ function loadSelect() {
     loadSelectOption('HOWRoofVoidSelect2');
     loadSelectOption('HOWRoofVoidSelect3');
     loadSelectOption('HOWRoofVoidSelect4');
-    loadSelectOption('HOWRoofVoidSelect5');
+    loadAccessSelectOption('HOWRoofVoidSelect5');
 
 
     loadSelectOption('HOWOutBuildingPlace0Select0');
@@ -154,7 +176,7 @@ function loadSelect() {
     loadSelectOption('HOWOutBuildingPlace0Select4');
     loadSelectOption('HOWOutBuildingPlace0Select5');
     loadSelectOption('HOWOutBuildingPlace0Select6');
-    loadSelectOption('HOWOutBuildingPlace0Select7');
+    loadAccessSelectOption('HOWOutBuildingPlace0Select7');
 
 
     loadSelectOption('HOWOutBuildingPlace1Select0');
@@ -164,7 +186,7 @@ function loadSelect() {
     loadSelectOption('HOWOutBuildingPlace1Select4');
     loadSelectOption('HOWOutBuildingPlace1Select5');
     loadSelectOption('HOWOutBuildingPlace1Select6');
-    loadSelectOption('HOWOutBuildingPlace1Select7');
+    loadAccessSelectOption('HOWOutBuildingPlace1Select7');
 
     loadSelectOption('HOWOutBuildingPlace2Select0');
     loadSelectOption('HOWOutBuildingPlace2Select1');
@@ -173,13 +195,13 @@ function loadSelect() {
     loadSelectOption('HOWOutBuildingPlace2Select4');
     loadSelectOption('HOWOutBuildingPlace2Select5');
     loadSelectOption('HOWOutBuildingPlace2Select6');
-    loadSelectOption('HOWOutBuildingPlace2Select7');
+    loadAccessSelectOption('HOWOutBuildingPlace2Select7');
 
 
     loadSelectOption('HOWServicesSelect0');
     loadSelectOption('HOWServicesSelect1');
     loadSelectOption('HOWServicesSelect2');
-    loadSelectOption('HOWServicesSelect3');
+    loadAccessSelectOption('HOWServicesSelect3');
 
     loadSelectOption('HOWInternal_EntrySelect0');
     loadSelectOption('HOWInternal_EntrySelect1');
@@ -191,7 +213,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_EntrySelect7');
     loadSelectOption('HOWInternal_EntrySelect8');
     loadSelectOption('HOWInternal_EntrySelect9');
-    loadSelectOption('HOWInternal_EntrySelect10');
+    loadAccessSelectOption('HOWInternal_EntrySelect10');
 
     loadSelectOption('HOWInternal_StairSelect0');
     loadSelectOption('HOWInternal_StairSelect1');
@@ -203,7 +225,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_StairSelect7');
     loadSelectOption('HOWInternal_StairSelect8');
     loadSelectOption('HOWInternal_StairSelect9');
-    loadSelectOption('HOWInternal_StairSelect10');
+    loadAccessSelectOption('HOWInternal_StairSelect10');
 
     loadSelectOption('HOWInternal_LivingFrontSelect0');
     loadSelectOption('HOWInternal_LivingFrontSelect1');
@@ -215,7 +237,8 @@ function loadSelect() {
     loadSelectOption('HOWInternal_LivingFrontSelect7');
     loadSelectOption('HOWInternal_LivingFrontSelect8');
     loadSelectOption('HOWInternal_LivingFrontSelect9');
-    loadSelectOption('HOWInternal_LivingFrontSelect10');
+    // loadSelectOption('HOWInternal_LivingFrontSelect10');
+    loadAccessSelectOption('HOWInternal_LivingFrontSelect10');
 
 
     loadSelectOption('HOWInternal_LoungeSelect0');
@@ -228,7 +251,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_LoungeSelect7');
     loadSelectOption('HOWInternal_LoungeSelect8');
     loadSelectOption('HOWInternal_LoungeSelect9');
-    loadSelectOption('HOWInternal_LoungeSelect10');
+    loadAccessSelectOption('HOWInternal_LoungeSelect10');
 
     loadSelectOption('HOWInternal_KitchenSelect0');
     loadSelectOption('HOWInternal_KitchenSelect1');
@@ -240,7 +263,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_KitchenSelect7');
     loadSelectOption('HOWInternal_KitchenSelect8');
     loadSelectOption('HOWInternal_KitchenSelect9');
-    loadSelectOption('HOWInternal_KitchenSelect10');
+    loadAccessSelectOption('HOWInternal_KitchenSelect10');
     loadSelectOption('HOWInternal_KitchenSelect11');
     loadSelectOption('HOWInternal_KitchenSelect12');
     loadSelectOption('HOWInternal_KitchenSelect13');
@@ -261,7 +284,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_FamilySelect7');
     loadSelectOption('HOWInternal_FamilySelect8');
     loadSelectOption('HOWInternal_FamilySelect9');
-    loadSelectOption('HOWInternal_FamilySelect10');
+    loadAccessSelectOption('HOWInternal_FamilySelect10');
 
 
     loadSelectOption('HOWInternal_DiningSelect0');
@@ -274,7 +297,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_DiningSelect7');
     loadSelectOption('HOWInternal_DiningSelect8');
     loadSelectOption('HOWInternal_DiningSelect9');
-    loadSelectOption('HOWInternal_DiningSelect10');
+    loadAccessSelectOption('HOWInternal_DiningSelect10');
 
     loadSelectOption('HOWInternal_Bedroom1Select0');
     loadSelectOption('HOWInternal_Bedroom1Select1');
@@ -286,7 +309,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_Bedroom1Select7');
     loadSelectOption('HOWInternal_Bedroom1Select8');
     loadSelectOption('HOWInternal_Bedroom1Select9');
-    loadSelectOption('HOWInternal_Bedroom1Select10');
+    loadAccessSelectOption('HOWInternal_Bedroom1Select10');
 
 
     loadSelectOption('HOWInternal_Bedroom2Select0');
@@ -299,7 +322,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_Bedroom2Select7');
     loadSelectOption('HOWInternal_Bedroom2Select8');
     loadSelectOption('HOWInternal_Bedroom2Select9');
-    loadSelectOption('HOWInternal_Bedroom2Select10');
+    loadAccessSelectOption('HOWInternal_Bedroom2Select10');
 
     loadSelectOption('HOWInternal_Bedroom3Select0');
     loadSelectOption('HOWInternal_Bedroom3Select1');
@@ -311,7 +334,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_Bedroom3Select7');
     loadSelectOption('HOWInternal_Bedroom3Select8');
     loadSelectOption('HOWInternal_Bedroom3Select9');
-    loadSelectOption('HOWInternal_Bedroom3Select10');
+    loadAccessSelectOption('HOWInternal_Bedroom3Select10');
 
     loadSelectOption('HOWInternal_Bedroom4Select0');
     loadSelectOption('HOWInternal_Bedroom4Select1');
@@ -323,7 +346,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_Bedroom4Select7');
     loadSelectOption('HOWInternal_Bedroom4Select8');
     loadSelectOption('HOWInternal_Bedroom4Select9');
-    loadSelectOption('HOWInternal_Bedroom4Select10');
+    loadAccessSelectOption('HOWInternal_Bedroom4Select10');
 
     loadSelectOption('HOWInternal_StudySelect0');
     loadSelectOption('HOWInternal_StudySelect1');
@@ -335,7 +358,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_StudySelect7');
     loadSelectOption('HOWInternal_StudySelect8');
     loadSelectOption('HOWInternal_StudySelect9');
-    loadSelectOption('HOWInternal_StudySelect10');
+    loadAccessSelectOption('HOWInternal_StudySelect10');
 
     loadSelectOption('HOWInternal_RetreatSelect0');
     loadSelectOption('HOWInternal_RetreatSelect1');
@@ -347,7 +370,7 @@ function loadSelect() {
     loadSelectOption('HOWInternal_RetreatSelect7');
     loadSelectOption('HOWInternal_RetreatSelect8');
     loadSelectOption('HOWInternal_RetreatSelect9');
-    loadSelectOption('HOWInternal_RetreatSelect10');
+    loadAccessSelectOption('HOWInternal_RetreatSelect10');
 
     loadSelectOption('HOWInternalService_WCSelect0');
     loadSelectOption('HOWInternalService_WCSelect1');
@@ -360,7 +383,7 @@ function loadSelect() {
     loadSelectOption('HOWInternalService_WCSelect8');
     loadSelectOption('HOWInternalService_WCSelect9');
     loadSelectOption('HOWInternalService_WCSelect10');
-    loadSelectOption('HOWInternalService_WCSelect11');
+    loadAccessSelectOption('HOWInternalService_WCSelect11');
     loadSelectOption('HOWInternalService_WCSelect12');
     loadSelectOption('HOWInternalService_WCSelect13');
     loadSelectOption('HOWInternalService_WCSelect14');
@@ -376,7 +399,7 @@ function loadSelect() {
     loadSelectOption('HOWInternalService_Bathroom1Select8');
     loadSelectOption('HOWInternalService_Bathroom1Select9');
     loadSelectOption('HOWInternalService_Bathroom1Select10');
-    loadSelectOption('HOWInternalService_Bathroom1Select11');
+    loadAccessSelectOption('HOWInternalService_Bathroom1Select11');
     loadSelectOption('HOWInternalService_Bathroom1Select12');
     loadSelectOption('HOWInternalService_Bathroom1Select13');
     loadSelectOption('HOWInternalService_Bathroom1Select14');
@@ -393,7 +416,7 @@ function loadSelect() {
     loadSelectOption('HOWInternalService_Bathroom2Select8');
     loadSelectOption('HOWInternalService_Bathroom2Select9');
     loadSelectOption('HOWInternalService_Bathroom2Select10');
-    loadSelectOption('HOWInternalService_Bathroom2Select11');
+    loadAccessSelectOption('HOWInternalService_Bathroom2Select11');
     loadSelectOption('HOWInternalService_Bathroom2Select12');
     loadSelectOption('HOWInternalService_Bathroom2Select13');
     loadSelectOption('HOWInternalService_Bathroom2Select14');
@@ -410,7 +433,7 @@ function loadSelect() {
     loadSelectOption('HOWInternalService_Bathroom3Select8');
     loadSelectOption('HOWInternalService_Bathroom3Select9');
     loadSelectOption('HOWInternalService_Bathroom3Select10');
-    loadSelectOption('HOWInternalService_Bathroom3Select11');
+    loadAccessSelectOption('HOWInternalService_Bathroom3Select11');
     loadSelectOption('HOWInternalService_Bathroom3Select12');
     loadSelectOption('HOWInternalService_Bathroom3Select13');
     loadSelectOption('HOWInternalService_Bathroom3Select14');
@@ -427,7 +450,7 @@ function loadSelect() {
     loadSelectOption('HOWInternalService_Bathroom4Select8');
     loadSelectOption('HOWInternalService_Bathroom4Select9');
     loadSelectOption('HOWInternalService_Bathroom4Select10');
-    loadSelectOption('HOWInternalService_Bathroom4Select11');
+    loadAccessSelectOption('HOWInternalService_Bathroom4Select11');
     loadSelectOption('HOWInternalService_Bathroom4Select12');
     loadSelectOption('HOWInternalService_Bathroom4Select13');
     loadSelectOption('HOWInternalService_Bathroom4Select14');
@@ -445,7 +468,7 @@ function loadSelect() {
     loadSelectOption('HOWInternalService_LaundrySelect8');
     loadSelectOption('HOWInternalService_LaundrySelect9');
     loadSelectOption('HOWInternalService_LaundrySelect10');
-    loadSelectOption('HOWInternalService_LaundrySelect11');
+    loadAccessSelectOption('HOWInternalService_LaundrySelect11');
     loadSelectOption('HOWInternalService_LaundrySelect12');
     loadSelectOption('HOWInternalService_LaundrySelect13');
 
@@ -455,7 +478,7 @@ function loadSelect() {
     loadSelectOption('HOWInternalService_ServiceSelect2');
     loadSelectOption('HOWInternalService_ServiceSelect3');
     loadSelectOption('HOWInternalService_ServiceSelect4');
-    loadSelectOption('HOWInternalService_ServiceSelect5');
+    loadAccessSelectOption('HOWInternalService_ServiceSelect5');
 
 
 }
@@ -1038,8 +1061,10 @@ function removePanel(panelid)
     }
 }
 
-function editRoomName()
+function editRoomName(tabid)
 {
+    //console.log(tabid);
+    let tabfld = '#' + tabid
     $('#dlgRoomNew').dialog
     (
         {
@@ -1047,10 +1072,11 @@ function editRoomName()
 
             onOpen:function()
             {
-                console.log("open the dialog");
-                var tab = $('#internal-tabs').tabs('getSelected');
+                // console.log("open the dialog");
+                // console.log(tabfld);
+                var tab = $(tabfld).tabs('getSelected');
                 var title = tab.panel('options').title;
-                console.log(title);
+                //console.log(title);
                 $('#fldNewRoomName').textbox('setValue',title);
             },
             buttons:
@@ -1061,11 +1087,11 @@ function editRoomName()
                     handler:function()
                     {
                         var newtitle = $('#fldNewRoomName').textbox('getValue');
-                        console.log(newtitle);
+                        //console.log(newtitle);
                         if(newtitle != "" && newtitle != null)
                         {
-                            var tab = $('#internal-tabs').tabs('getSelected');
-                            $('#internal-tabs').tabs('update',{
+                            var tab = $(tabfld).tabs('getSelected');
+                            $(tabfld).tabs('update',{
                                 tab:tab,
                                 options:{
                                     title:newtitle
