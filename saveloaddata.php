@@ -106,17 +106,29 @@
             }
         );
 
-         $('div[type=tabs_title]').each(
+        $('div[type=tabs_title]').each(
             function () {
                 if ((this.id != "") && (this.id != undefined)) {
-                    console.log(this.id);
-                    if (this.id.substr(0, 12) == 'HOW_INTERNAL')
+                    //console.log(this.id);
+                    if (this.id.substr(0, 17) == 'HOW_LivingBedroom')
                     {
-                        var tabs = $('#internal-tabs').tabs('tabs');
+                        var tabs = $('#livingbedroom-tabs').tabs('tabs');
+                        var index = this.id.substr(17,18)
+                        
+                        var title = tabs[index].panel('options').title
+                        //console.log(title);
+                        data.push({
+                            id: this.id,
+                            title: title
+                        });
+                    }
+                    if (this.id.substr(0, 12) == 'HOW_WetAreas')
+                    {
+                        var tabs = $('#wetareas-tabs').tabs('tabs');
                         var index = this.id.substr(12,13)
                         
                         var title = tabs[index].panel('options').title
-                        console.log(title);
+                        //console.log(title);
                         data.push({
                             id: this.id,
                             title: title
@@ -1075,6 +1087,14 @@
         var count_servicelimitation = 0;
         var count_exteriorLimitation = 0;
         var count_interiorLimitation = 0;
+        var SiteMajorRecommendations = [];
+        var SiteMinorRecommendations = [];
+        var ExteriorMajorRecommendations = [];
+        var ExteriorMinorRecommendations = [];
+        var InteriorMajorRecommendations = [];
+        var InteriorMinorRecommendations = [];
+        var ServiceMajorRecommendations = [];
+        var ServiceMinorRecommendations = [];
         data.forEach(
             function (d) {
                 //console.log(d.id.substr(0,8));
@@ -1096,8 +1116,138 @@
                 if (d.id.substr(0, 42) == 'AssessmentPropertyInteriorLimitationSelect') {
                     count_interiorLimitation++;
                 }
+                if(d.id.substr(0,34)== 'assessmentSiteMajorRecommendations')
+                {
+                    // console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        SiteMajorRecommendationsArray = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        SiteMajorRecommendationsArray = d.value.split(' ');
+                        console.log(SiteMajorRecommendationsArray);
+                    }
+                }
+                if(d.id.substr(0,34)== 'assessmentSiteMinorRecommendations')
+                {
+                    // console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        SiteMinorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        SiteMinorRecommendations = d.value.split(' ');
+                        console.log(SiteMinorRecommendations);
+                    }
+                    
+                }
+                if(d.id.substr(0,46)== 'assessmentPropertyExteriorMajorRecommendations')
+                {
+                    // console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        ExteriorMajorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        ExteriorMajorRecommendations = d.value.split(' ');
+                        console.log(ExteriorMajorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,46)== 'assessmentPropertyExteriorMinorRecommendations')
+                {
+                    // console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        ExteriorMinorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        ExteriorMinorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,46)== 'assessmentPropertyInteriorMajorRecommendations')
+                {
+                    //console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        InteriorMajorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        InteriorMajorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,46)== 'assessmentPropertyInteriorMinorRecommendations')
+                {
+                    //console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        InteriorMinorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        InteriorMinorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,37)== 'assessmentServiceMajorRecommendations')
+                {
+                    //console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        ServiceMajorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        ServiceMajorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,37)== 'assessmentServiceMinorRecommendations')
+                {
+                    //console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        ServiceMinorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        ServiceMinorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
             }
         )
+        getInfo('assessmentSiteMajorRecommendations',SiteMajorRecommendations);
+        getInfo('assessmentSiteMinorRecommendations',SiteMinorRecommendations);
+        getInfo('assessmentPropertyExteriorMajorRecommendations',ExteriorMajorRecommendations);
+        getInfo('assessmentPropertyExteriorMinorRecommendations',ExteriorMinorRecommendations);
+        getInfo('assessmentPropertyInteriorMajorRecommendations',InteriorMajorRecommendations);
+        getInfo('assessmentPropertyInteriorMinorRecommendations',InteriorMinorRecommendations);
+        getInfo('assessmentServiceMajorRecommendations',ServiceMajorRecommendations);
+        getInfo('assessmentServiceMinorRecommendations',ServiceMinorRecommendations);
+        
         //console.log(count_siteLimitation);
         //console.log(count_defect);
 
@@ -1642,17 +1792,36 @@
                 if (d.id.substr(0, 13) == 'HOWAccessItem') {
                     count_acccess++;
                 }
-                if(d.id.substr(0, 12) == 'HOW_INTERNAL')
+                //AA-95
+                if(d.id.substr(0, 17) == 'HOW_LivingBedroom')
                 {
-                    var index = d.id.substr(12,13);
-                    console.log(d.title);
-                    console.log(index);
+                    var index = d.id.substr(17,18);
+                    // console.log(d.title);
+                    // console.log(index);
                     // var tabs = $('#internal-tabs').tabs('tabs')[index];
                     // console.log(tabs);
-                    var tab = $('#internal-tabs').tabs('tabs')[index];
+                    var tab = $('#livingbedroom-tabs').tabs('tabs')[index];
                     // tabs[index].panel('options').title = d.title
-                   console.log(tab);
-                    $('#internal-tabs').tabs('update',{
+                   //console.log(tab);
+                    $('#livingbedroom-tabs').tabs('update',{
+                        tab:tab,
+                        options:{
+                            title:d.title
+                        }
+                    });
+                    // $(fld).attr("title",d.title);
+                }
+                if(d.id.substr(0, 12) == 'HOW_WetAreas')
+                {
+                    var index = d.id.substr(12,13);
+                    // console.log(d.title);
+                    // console.log(index);
+                    // var tabs = $('#internal-tabs').tabs('tabs')[index];
+                    // console.log(tabs);
+                    var tab = $('#wetareas-tabs').tabs('tabs')[index];
+                    // tabs[index].panel('options').title = d.title
+                   //console.log(tab);
+                    $('#wetareas-tabs').tabs('update',{
                         tab:tab,
                         options:{
                             title:d.title
@@ -1977,8 +2146,37 @@
                     return;
 
                 // If field already has value (probably populated from php), then leave alone if saved value is blank...
-                if (($(fld).val() == '') || (d.value != ''))
+                // if(d.id == 0)
+                // {
+                //     console.log($(fld).val());
+                // }
+                // if (($(fld).val() == '') || (d.value != ''))
+                if (($(fld).val() === '' ||$(fld).val() === ' ' || $(fld).val() == null || $(fld).val() == "√" 
+                        || $(fld).val() == "Select if this is the stage" || $(fld).val() == "Choose an Item" || $(fld).val() == "Choose an item" 
+                        || $(fld).val() == "✔"||$(fld).val() == "YES" || $(fld).val() == "Yes" ||$(fld).val() == "AR" 
+                        || $(fld).val() == "Untested/New" || $(fld).val() == "Reasonably Accessible"
+                        || d.id == "PDSurveyReportSummary" || d.id == "surveyReportSummary" || $(fld).val()  == -1
+                        || d.id == "includedScope" || d.id == "notIncludedScope" || $(fld).val() == "$"
+                        || $(fld).val() == "Site Establishment/Services" || $(fld).val() == "Demolition" 
+                        || $(fld).val() == "Building Shell" || $(fld).val() == "Fitout"
+                        || $(fld).val() == "Heating/Cooling" || $(fld).val() == "External Works"
+                        || $(fld).val() == "Contractor’s Margin" || d.id == "extraItemCosts" 
+                        || $(fld).val() == "Demolition/Preliminaries" || $(fld).val() == "Remedial/Alterations"
+                        || $(fld).val() == "New Building Shell" || $(fld).val() == "Fitout" || $(fld).val() == "Services" 
+                        || d.id == "renovationIncludedScope" || d.id == "renovationNotIncludedScope"|| d.id == "renovationExtraItemCosts" 
+                        ))
+                {
+                    // console.log("this " + fld + "has no value")
                     $(fld).val(d.value);
+                }
+                else
+                {
+                    //console.log(d.id);
+                    console.log($(fld).val());
+                }
+
+               
+                    
                 //                console.log(d.value);
             }
         );

@@ -68,11 +68,19 @@ function getIt(id) {
     return result;
 }
 
+//AA-111
 function getSelectOrOther(id)
 {
     if(document.getElementById(id).value.trim() != "Other")
     {
-        return document.getElementById('ps6').value.trim()
+        if(document.getElementById(id).value.trim() == "Choose an item")
+        {
+            return " ";
+        }
+        else 
+        {
+            return document.getElementById(id).value.trim();
+        }
     }
     else
     {
@@ -96,13 +104,18 @@ function makeAGap() {
 
 /**
  * Draw the Assessment NotesTable
+ * New majorfld and minorfld for AA-111
  */
 function drawNotesTable(tableID, limitationSelectName, limitationNoteName, majorTextArea, majorRecommendationID, minorTextArea, minorRecommendationID, generalNote) {
     var body = [];
     var table = document.getElementById(tableID);
-    var majorRecommendation = document.getElementById(majorRecommendationID).value;
+    var majorfld = '#' + majorRecommendationID;
+    var minorfld = '#' + minorRecommendationID;
+    // var majorRecommendation = document.getElementById(majorRecommendationID).value;
+    var majorRecommendation =  $(majorfld).combotree('getText');
+    // console.log(majorRecommendation);
 
-    var minorRecommendation = document.getElementById(minorRecommendationID).value;
+    var minorRecommendation = $(minorfld).combotree('getText');
     var rowCount = table.rows.length;
     var limitationNo = rowCount - 9;
     //console.log(limitationNo);

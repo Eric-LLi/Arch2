@@ -5,6 +5,13 @@
 var flag = false;
 var saveRecommendationArray = [];
 var SiteMajorRecommendationsArray = [];
+var SiteMinorRecommendationsArray = [];
+var ExteriorMajorRecommendationsArray = [];
+var ExteriorMinorRecommendationsArray = [];
+var InteriorMajorRecommendationsArray = [];
+var InteriorMinorRecommendationsArray = [];
+var ServiceMajorRecommendationsArray = [];
+var ServiceMinorRecommendationsArray = [];
 
 
 /**
@@ -188,7 +195,7 @@ function moreEvidentDefect() {
 
  * */
 
-//Check if summary of the condition of the propery has selected 'othier' show the text area.
+//Check if summary of the condition of the propery, site grade, or  Extensions/Renovations has selected 'othier' show the text area.
 function checkReloadOther() {
     if ($("#conditionOfBuilding").val() === "Other") {
         $("#XiaoKe").show();
@@ -200,6 +207,12 @@ function checkReloadOther() {
         $("#ps6other").show();
     } else {
         $("#ps6other").hide();
+    }
+
+    if ($("#ps9").val() === "Other") {
+        $("#ps9other").show();
+    } else {
+        $("#ps9other").hide();
     }
 }
 
@@ -1392,13 +1405,14 @@ function reorderImages(divid) {
     }
 }
 
+//AA-110
 function changeOther(id1,id2)
 {
-    console.log(id1,id2);
+    //console.log(id1,id2);
     var select = "#" + id1;
     var input = "#" + id2;
-    console.log(select);
-    console.log(input);
+    //console.log(select);
+    //console.log(input);
     if ($(select).val() === "Other") {
         $(input).show();
     } else {
@@ -1407,6 +1421,8 @@ function changeOther(id1,id2)
 }
 
 //AA-106, make sure these fields get the date from the database related fields. even after the user update in the booking system, 
+//AA-110, make sure the other fileds will display and show after the page is fully load. 
+//AA-111,make sure the comobotree load the json fild after the page load, and get the save array correctly. 
 $(document).ready(function () {
     checkReloadOther();
     reorderImages('AccessmentSiteImagesContainer');
@@ -1433,10 +1449,38 @@ $(document).ready(function () {
     $('#recommendations').combotree({
         url: 'recommendations.json'
     });
+    $('#assessmentSiteMinorRecommendations').combotree({
+        url: 'recommendations.json'
+    });
+    $('#assessmentPropertyExteriorMajorRecommendations').combotree({
+        url: 'recommendations.json'
+    });
+    $('#assessmentPropertyExteriorMinorRecommendations').combotree({
+        url: 'recommendations.json'
+    });
+    $('#assessmentPropertyInteriorMajorRecommendations').combotree({
+        url: 'recommendations.json'
+    });
+    $('#assessmentPropertyInteriorMinorRecommendations').combotree({
+        url: 'recommendations.json'
+    });
+    $('#assessmentServiceMajorRecommendations').combotree({
+        url: 'recommendations.json'
+    });
+    $('#assessmentServiceMinorRecommendations').combotree({
+        url: 'recommendations.json'
+    });
 
     // $('#recommendations').combotree('setValues', array);
     $('#recommendations').combotree('setValues', saveRecommendationArray);
     $('#assessmentSiteMajorRecommendations').combotree('setValues', SiteMajorRecommendationsArray);
+    $('#assessmentSiteMinorRecommendations').combotree('setValues', SiteMinorRecommendationsArray);
+    $('#assessmentPropertyExteriorMajorRecommendations').combotree('setValues', ExteriorMajorRecommendationsArray);
+    $('#assessmentPropertyExteriorMinorRecommendations').combotree('setValues', ExteriorMinorRecommendationsArray);
+    $('#assessmentPropertyInteriorMajorRecommendations').combotree('setValues', InteriorMajorRecommendationsArray);
+    $('#assessmentPropertyInteriorMinorRecommendations').combotree('setValues', InteriorMinorRecommendationsArray);
+    $('#assessmentServiceMajorRecommendations').combotree('setValues', ServiceMajorRecommendationsArray);
+    $('#assessmentServiceMinorRecommendations').combotree('setValues', ServiceMinorRecommendationsArray);
 });
 
 
@@ -1445,10 +1489,297 @@ function getInfo(id,array)
 
     if(id == "recommendations")
     {
+        console.log(array);
         saveRecommendationArray = array;
     }
     else if (id == "assessmentSiteMajorRecommendations")
     {
-        SiteMajorRecommendationsArray = array;
+        //console.log("assessmentSiteMajorRecommendations");
+        if(array[0] != undefined)
+        {
+            if(typeof array[0] == 'number')
+            {
+                SiteMajorRecommendationsArray = array;
+            }
+            else
+            {
+                //console.log("old reports data, need to conver first");
+                for(var i=0;i<array.length;i++)
+                {
+                    //console.log(array[i]);
+                    array[i] = convertCodesToIndex(array[i]);
+                    //console.log(array[i]);
+                }
+                //console.log(array);
+                SiteMajorRecommendationsArray = array;
+            }
+        }
     }
+    else if (id == "assessmentSiteMinorRecommendations")
+    {
+        //console.log("assessmentSiteMinorRecommendations");
+        //console.log(array[0]);
+        if(array[0] != undefined)
+        {
+            //console.log(typeof array[0]);
+            if(typeof array[0] == 'number')
+            {
+                SiteMinorRecommendationsArray = array;
+            }
+            else
+            {
+                //console.log("old reports data, need to conver first");
+                for(var i=0;i<array.length;i++)
+                {
+                    //console.log(array[i]);
+                    array[i] = convertCodesToIndex(array[i]);
+                    //console.log(array[i]);
+                }
+                //console.log(array);
+                SiteMinorRecommendationsArray = array;
+            }
+        }
+    }
+    else if (id == "assessmentPropertyExteriorMajorRecommendations")
+    {
+        // console.log("assessmentPropertyExteriorMajorRecommendations");
+        // console.log(array[0]);
+        if(array[0] != undefined)
+        {
+            if(typeof array[0] == 'number')
+            {
+                ExteriorMajorRecommendationsArray = array;
+            }
+            else
+            {
+                //console.log("old reports data, need to conver first");
+                for(var i=0;i<array.length;i++)
+                {
+                    //console.log(array[i]);
+                    array[i] = convertCodesToIndex(array[i]);
+                    //console.log(array[i]);
+                }
+                //console.log(array);
+                ExteriorMajorRecommendationsArray = array;
+            }
+        }
+    }
+    else if (id == "assessmentPropertyExteriorMinorRecommendations")
+    {
+        // console.log("assessmentPropertyExteriorMinorRecommendations");
+        // console.log(array[0]);
+        if(array[0] != undefined)
+        {
+            if(typeof array[0] == 'number')
+            {
+                ExteriorMinorRecommendationsArray = array;
+            }
+            else
+            {
+                //console.log("old reports data, need to conver first");
+                for(var i=0;i<array.length;i++)
+                {
+                    //console.log(array[i]);
+                    array[i] = convertCodesToIndex(array[i]);
+                    //console.log(array[i]);
+                }
+                //console.log(array);
+                ExteriorMinorRecommendationsArray = array;
+            }
+        }
+    }
+    else if (id == "assessmentPropertyInteriorMajorRecommendations")
+    {
+        // console.log("assessmentPropertyExteriorMajorRecommendations");
+        // console.log(array[0]);
+        if(array[0] != undefined)
+        {
+            if(typeof array[0] == 'number')
+            {
+                InteriorMajorRecommendationsArray = array;
+            }
+            else
+            {
+                console.log("old reports data, need to conver first");
+                for(var i=0;i<array.length;i++)
+                {
+                    console.log(array[i]);
+                    array[i] = convertCodesToIndex(array[i]);
+                    console.log(array[i]);
+                }
+                console.log(array);
+                InteriorMajorRecommendationsArray = array;
+            }
+        }
+    }
+    else if (id == "assessmentPropertyInteriorMinorRecommendations")
+    {
+        // console.log("assessmentPropertyExteriorMajorRecommendations");
+        // console.log(array[0]);
+        if(array[0] != undefined)
+        {
+            if(typeof array[0] == 'number')
+            {
+                InteriorMinorRecommendationsArray = array;
+            }
+            else
+            {
+                console.log("old reports data, need to conver first");
+                for(var i=0;i<array.length;i++)
+                {
+                    console.log(array[i]);
+                    array[i] = convertCodesToIndex(array[i]);
+                    console.log(array[i]);
+                }
+                console.log(array);
+                InteriorMinorRecommendationsArray = array;
+            }
+        }
+    }
+    else if (id == "assessmentServiceMajorRecommendations")
+    {
+        // console.log("assessmentPropertyExteriorMajorRecommendations");
+        // console.log(array[0]);
+        if(array[0] != undefined)
+        {
+            if(typeof array[0] == 'number')
+            {
+                ServiceMajorRecommendationsArray = array;
+            }
+            else
+            {
+                //console.log("old reports data, need to conver first");
+                for(var i=0;i<array.length;i++)
+                {
+                    //console.log(array[i]);
+                    array[i] = convertCodesToIndex(array[i]);
+                    //console.log(array[i]);
+                }
+                //console.log(array);
+                ServiceMajorRecommendationsArray = array;
+            }
+        }
+    }
+    else if (id == "assessmentServiceMinorRecommendations")
+    {
+        // console.log("assessmentPropertyExteriorMajorRecommendations");
+        // console.log(array[0]);
+        if(array[0] != undefined)
+        {
+            if(typeof array[0] == 'number')
+            {
+                ServiceMinorRecommendationsArray = array;
+            }
+            else
+            {
+                console.log("old reports data, need to conver first");
+                for(var i=0;i<array.length;i++)
+                {
+                    //console.log(array[i]);
+                    array[i] = convertCodesToIndex(array[i]);
+                    //console.log(array[i]);
+                }
+                //console.log(array);
+                ServiceMinorRecommendationsArray = array;
+            }
+        }
+    }
+}
+
+/**
+ * AA-111
+ * This function is for the old reports stored th recommendations as codes, but the new checkbox need index as references to display proper texts. 
+ * so need to convert the codes to index for the checkbox to work. 
+ */
+function convertCodesToIndex(codes)
+{
+    var index;
+    switch(codes)
+    {
+        case 'AR':
+            index = 0;
+            break;
+        case 'BC':
+            index = 1;
+            break;
+        case 'BR':
+            index = 2;
+            break;
+        case 'CC':
+            index = 3;
+            break;
+        case 'CJ':
+            index = 4;
+            break;
+        case 'CM':
+            index = 5;
+            break;
+        case 'DH':
+            index = 6;
+            break;
+        case 'DR':
+            index = 7;
+            break;
+        case 'EL':
+            index = 8;
+            break;
+        case 'EX':
+            index = 9;
+            break;
+        case 'FC':
+            index = 10;
+            break;
+        case 'GL':
+            index = 11;
+            break;
+        case 'HM':
+            index = 12;
+            break;
+        case 'HR':
+            index = 13;
+            break;
+        case 'IC':
+            index = 14;
+            break;
+        case 'LA':
+            index = 15;
+            break;
+        case 'LG':
+            index = 16;
+            break;
+        case 'UP':
+            index = 17;
+            break;
+        case 'PC':
+            index = 18;
+            break;
+        case 'PD':
+            index = 19;
+            break;
+        case 'PG':
+            index = 20;
+            break;
+        case 'PL':
+            index = 21;
+            break;
+        case 'PV':
+            index = 22;
+            break;
+        case 'RC':
+            index = 23;
+            break;
+        case 'SE':
+            index = 24;
+            break;
+        case 'TL':
+            index = 25;
+            break;
+        case 'TS':
+            index = 26;
+            break;
+        default:
+            index = 0;
+    }
+
+    return index;
 }
