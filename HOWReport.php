@@ -111,7 +111,7 @@
 
 
 <div class="container" style="background-color: white">  
-	<div class="easyui-tabs" style="width:100%;height: 600px" data-options="tabPosition: 'top', fit: true, pill: true,headerWidth:220" id="howtabs">
+	<div class="easyui-tabs" style="width:100%;height: 600px" data-options="tabPosition: 'left', fit: true, pill: true,headerWidth:250" id="howtabs">
 	        <!-- <div title="Booking Information" style="padding:10px;font-size: 18px" data-options="iconCls: 'icon-registry'"> -->
 			<div title="Booking Information" style="padding:10px;font-size: 18px">
 	            <div class="easyui-tabs" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:200,tabHeight:35" style="width:inherit;height:550px">
