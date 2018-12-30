@@ -12,6 +12,7 @@
       $uuid = $_POST['uuid'];
       $selectedstatus = $_POST['status'];
       $bookingcode = $_POST['bookingcode'];
+      $assignedarchid = $_POST['archid1'];
 
       
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
@@ -19,6 +20,8 @@
       error_log($selectedstatus);
       error_log($bookingcode);
       error_log($userid);
+      error_log("assignedarchid:");
+      error_log($assignedarchid);
 
       $dbupdate = "";
 
@@ -72,7 +75,7 @@
                     "datecompleted=NULL," .
                     "dateapproved=NULL," .
                     "usersmodified_id=$userid, " .
-                    "users_id=1 " .
+                    "users_id=$assignedarchid " .
                     "where " .
                     "id=$bookingcode";
       }
