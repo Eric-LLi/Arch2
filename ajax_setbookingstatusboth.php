@@ -15,13 +15,69 @@
       $bookingcode = $_POST['bookingcode'];
       $bookingcode2 = $_POST['bookingcode2'];
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
+      $b1archid = "";
+      $b2archid = "";
+      
 
       error_log($uuid);
       error_log($selectedstatus);
       error_log($bookingcode);
       error_log($bookingcode2);
+      $dbselect1 = "select " .
+                  "b1.users_id ".
+
+                  "from " .
+                  "bookings b1  " .
+                  "where ".
+                  "b1.id = $bookingcode";
+      error_log($dbselect1);
+      if ($dbresult1 = SharedQuery($dbselect1, $dblink))
+      {
+        if ($numrows = SharedNumRows($dbresult1))
+        {
+          while ($dbrow = SharedFetchArray($dbresult1))
+            $row = $dbrow;
+            
+            $b1archid = $row['users_id'];
+            
+          $rc = 0;
+        }
+      }
+      $dbselect2 = "select " .
+                  "b1.users_id ".
+                  "from " .
+                  "bookings b1  " .
+                  "where ".
+                  "b1.id = $bookingcode2";
+        error_log($dbselect2);
+        if ($dbresult2 = SharedQuery($dbselect2, $dblink))
+        {
+          if ($numrows = SharedNumRows($dbresult2))
+          {
+            while ($dbrow = SharedFetchArray($dbresult2))
+            $row = $dbrow;
+            
+            $b2archid = $row['users_id'];
+              
+              $rc = 0;
+          }
+        }
      
+      error_log($b1archid);
+      error_log($b2archid);
+        
+      if($b1archid == null)
+      {
+        $b1archid = 1;
+      }
+      if($b2archid == null)
+      {
+        $b2archid = 1;
+      }
+      error_log($b1archid);
+      error_log($b2archid);
      
+      
       if($selectedstatus == 0) // status == 0 --> No Paid
       {
         $dbupdate1 = "update bookings set " . 
@@ -99,14 +155,14 @@
                       "datecompleted=NULL," .
                       "dateapproved=NULL," .
                       "usersmodified_id=$userid, " .
-                      "users_id=1 " .
+                      "users_id=$b1archid " .
                       "where " .
                       "id=$bookingcode";
         $dbupdate2 ="update bookings set " . 
                       "datecompleted=NULL," .
                       "dateapproved=NULL," .
                       "usersmodified_id=$userid, " .
-                      "users_id=1 " .
+                      "users_id=$b2archid " .
                       "where " .
                       "id=$bookingcode2";
       }

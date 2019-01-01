@@ -109,12 +109,11 @@
 	</div>
 </div> -->
 
-
-<div class="container" style="background-color: white">  
-	<div class="easyui-tabs" style="width:100%;height: 600px" data-options="tabPosition: 'top', fit: true, pill: true,headerWidth:220" id="howtabs">
+<div class="container" style="background-color: white">
+	<div class="easyui-tabs" style="width:100%;height:auto;margin:72px;border:15px;padding:15px;" data-options="tabPosition: 'left',pill: true,headerWidth:250" id="howtabs">
 	        <!-- <div title="Booking Information" style="padding:10px;font-size: 18px" data-options="iconCls: 'icon-registry'"> -->
 			<div title="Booking Information" style="padding:10px;font-size: 18px">
-	            <div class="easyui-tabs" data-options="fit:true, pill: true,tabPosition:'top',headerWidth:200,tabHeight:35" style="width:inherit;height:550px">
+	            <div class="easyui-tabs" data-options="pill: true,tabPosition:'top',headerWidth:200,tabHeight:35" style="width:inherit;height:auto">
 	                <div title="OWNERS" style="padding:10px;font-size: 18px">
 	                    <form>
 	                        <div class="row">
@@ -926,7 +925,7 @@
 	            </table>
 	        </div>
 	        <div title="INTERNAL LIVING & BEDROOM" style="padding: 10px;">
-	            <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'left',headerWidth:150,tools:'#livingbedroom-tab-tools'" id="livingbedroom-tabs">
+	            <div class="easyui-tabs" style="padding:10px;width:inherit;height:auto" data-options="pill: true,tabPosition:'left',headerWidth:150,tools:'#livingbedroom-tab-tools'" id="livingbedroom-tabs">
 	                <div type="tabs_title" title="Entry&Passage" style="padding:10px;font-size: 18px" id="HOW_LivingBedroom0">  <!--data-options="tools:'#internal_tap_strip_tools'" -->
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternal_Entry_Table','HOWInternal_EntryName','HOWInternal_EntrySelect','HOWInternal_EntryNote')" style="margin-bottom: 10px">Add One Feature</button>
 						<button type="button" class="btn btn-primary" onclick="editRoomName('livingbedroom-tabs')" style="margin-bottom: 10px">Edit Room Name</button>
@@ -1903,7 +1902,7 @@
 
 	        </div>
 	        <div title="INTERNAL SERVICE(WET) AREAS" style="padding: 10px">
-	            <div class="easyui-tabs" style="padding:10px" data-options="fit:true, pill: true,tabPosition:'left',headerWidth:150,tools:'#livingbedroom-tab-tools'" id="wetareas-tabs">
+	            <div class="easyui-tabs" style="padding:10px;width:inherit;height:auto" data-options="pill: true,tabPosition:'left',headerWidth:150,tools:'#livingbedroom-tab-tools'" id="wetareas-tabs">
 	                <div type="tabs_title" title="WC/Powder Room" style="padding:10px;font-size: 18px" id="HOW_WetAreas0">
 	                    <button type="button" class="btn btn-primary" onclick="createOneCell('HOWInternalService_WC_Table','HOWInternalService_WCName','HOWInternalService_WCSelect','HOWInternalService_WCNote')" style="margin-bottom: 10px">Add One Feature</button>
 	                    <button type="button" class="btn btn-primary" onclick="editRoomName('wetareas-tabs')" style="margin-bottom: 10px">Edit Room Name</button>

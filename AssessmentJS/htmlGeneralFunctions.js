@@ -1,7 +1,6 @@
 /**
  * Created by Fafa on 10/1/18.
  */
-
 var flag = false;
 var saveRecommendationArray = [];
 var SiteMajorRecommendationsArray = [];
@@ -1443,36 +1442,42 @@ $(document).ready(function () {
     // console.log(String(name).replace(/\s+/g, " "));
     //document.getElementById('0').value = String(name).replace(/\s+/g, " ")
 
-    $('#assessmentSiteMajorRecommendations').combotree({
-        url: 'recommendations.json'
-    });
-    $('#recommendations').combotree({
-        url: 'recommendations.json'
-    });
-    $('#assessmentSiteMinorRecommendations').combotree({
-        url: 'recommendations.json'
-    });
-    $('#assessmentPropertyExteriorMajorRecommendations').combotree({
-        url: 'recommendations.json'
-    });
-    $('#assessmentPropertyExteriorMinorRecommendations').combotree({
-        url: 'recommendations.json'
-    });
-    $('#assessmentPropertyInteriorMajorRecommendations').combotree({
-        url: 'recommendations.json'
-    });
-    $('#assessmentPropertyInteriorMinorRecommendations').combotree({
-        url: 'recommendations.json'
-    });
-    $('#assessmentServiceMajorRecommendations').combotree({
-        url: 'recommendations.json'
-    });
-    $('#assessmentServiceMinorRecommendations').combotree({
-        url: 'recommendations.json'
-    });
+    $('#assessmentSiteMajorRecommendations').combotree(
+        'reload', 'recommendations.json'
+    );
+    // $('#assessmentServiceMinorRecommendations').combotree({
+    //     url: 'recommendations.json'
+    // });
+    // $('#assessmentPropertyExteriorMajorRecommendations').combotree({
+    //     url: 'recommendations.json'
+    // });
+    // $('#assessmentPropertyExteriorMinorRecommendations').combotree({
+    //     url: 'recommendations.json'
+    // });
+    // $('#assessmentPropertyInteriorMajorRecommendations').combotree({
+    //     url: 'recommendations.json'
+    // });
+    // $('#assessmentPropertyInteriorMinorRecommendations').combotree({
+    //     url: 'recommendations.json'
+    // });
+    // $('#assessmentServiceMajorRecommendations').combotree({
+    //     url: 'recommendations.json'
+    // });
+    // $('#assessmentServiceMinorRecommendations').combotree({
+    //     url: 'recommendations.json'
+    // });
+    // $('#assessmentSiteMajorRecommendations').combotree('loadData',recommendations1);
+    $('#assessmentSiteMinorRecommendations').combotree('loadData',recommendations2);
+    $('#assessmentPropertyExteriorMajorRecommendations').combotree('loadData',recommendations3);
+    $('#assessmentPropertyExteriorMinorRecommendations').combotree('loadData',recommendations4);
+    $('#assessmentPropertyInteriorMajorRecommendations').combotree('loadData',recommendations5);
+    $('#assessmentPropertyInteriorMinorRecommendations').combotree('loadData',recommendations6);
+    $('#assessmentServiceMajorRecommendations').combotree('loadData',recommendations7);
+    $('#assessmentServiceMinorRecommendations').combotree('loadData',recommendations8);
+  
 
     // $('#recommendations').combotree('setValues', array);
-    $('#recommendations').combotree('setValues', saveRecommendationArray);
+    // $('#recommendations').combotree('setValues', saveRecommendationArray);
     $('#assessmentSiteMajorRecommendations').combotree('setValues', SiteMajorRecommendationsArray);
     $('#assessmentSiteMinorRecommendations').combotree('setValues', SiteMinorRecommendationsArray);
     $('#assessmentPropertyExteriorMajorRecommendations').combotree('setValues', ExteriorMajorRecommendationsArray);
