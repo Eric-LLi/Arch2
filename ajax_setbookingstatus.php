@@ -12,7 +12,7 @@
       $uuid = $_POST['uuid'];
       $selectedstatus = $_POST['status'];
       $bookingcode = $_POST['bookingcode'];
-      $assignedarchid = $_POST['archid1'];
+      $b1archid = "";
 
       
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
@@ -20,10 +20,37 @@
       error_log($selectedstatus);
       error_log($bookingcode);
       error_log($userid);
-      error_log("assignedarchid:");
-      error_log($assignedarchid);
 
       $dbupdate = "";
+
+      $dbselect1 = "select " .
+                  "b1.users_id ".
+
+                  "from " .
+                  "bookings b1  " .
+                  "where ".
+                  "b1.id = $bookingcode";
+      error_log($dbselect1);
+      if ($dbresult1 = SharedQuery($dbselect1, $dblink))
+      {
+        if ($numrows = SharedNumRows($dbresult1))
+        {
+          while ($dbrow = SharedFetchArray($dbresult1))
+            $row = $dbrow;
+            
+            $b1archid = $row['users_id'];
+            
+          $rc = 0;
+        }
+      }
+      error_log($b1archid);
+     
+        
+      if($b1archid == null)
+      {
+        $b1archid = 1;
+      }
+      error_log($b1archid);
 
       if($selectedstatus == 0) // status == 0 --> No Paid
       {
@@ -75,7 +102,7 @@
                     "datecompleted=NULL," .
                     "dateapproved=NULL," .
                     "usersmodified_id=$userid, " .
-                    "users_id=$assignedarchid " .
+                    "users_id=$b1archid " .
                     "where " .
                     "id=$bookingcode";
       }
