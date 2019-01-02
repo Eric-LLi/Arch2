@@ -2830,87 +2830,197 @@
         'divBookingsG',
         function(row, index)
         {
-          if(row.reportid == 0)
+          <?php
+          if (SharedIsAdmin())
           {
-            // console.log("this is an unassinged report, cannot allocate architect yet")
-            noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
-          }
-          else if(row.reportid == 23)
-          {
-            noty({text: 'This is a quote report, please select a report type first', type: 'warning', timeout: 4000});
+          ?>
+            r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+            console.log("admin login");
+            if(row.reportid == 0)
+            {
+              // console.log("this is an unassinged report, cannot allocate architect yet")
+              noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
+            }
+            else if(row.reportid == 23)
+            {
+              // console.log("this is an quote report");
+              noty({text: 'This is a quote report, please assign an report type first', type: 'warning', timeout: 3000});
+            }
+            else
+            {
+              switch (parseInt(row.reportid))
+              {
+                case 1:
+                  $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 2:
+                  $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 3:
+                  $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 4:
+                  $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 5:
+                  $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 6:
+                  $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 7:
+                  $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 8:
+                  $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 9:
+                  $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 10:
+                  $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 11:
+                  $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 12:
+                  $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 13:
+                  $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 14:
+                  $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;		
+                case 15:
+                  $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 16:
+                  $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 17:
+                  $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 18:
+                  $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 19:
+                  $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                //case 20:
+                  //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  //break;
+                case 21:
+                  $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 22:
+                  $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+              }
+            }
+          <?php
           }
           else
           {
-            switch (parseInt(row.reportid))
-            {
-              case 1:
-                $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 2:
-                $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 3:
-                $.redirect('TimberReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 4:
-                $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 5:
-                $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 6:
-                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 7:
-                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 8:
-                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 9:
-                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 10:
-                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 11:
-                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 12:
-                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 13:
-                $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 14:
-                $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;		
-              case 15:
-                $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 16:
-                $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 17:
-                $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 18:
-                $.redirect('HOWReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 19:
-                $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              //case 20:
-                //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                //break;
-              case 21:
-                $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-              case 22:
-                $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode}, 'POST', '_blank');
-                break;
-            }
+          ?>
+              console.log(row.archuuid);
+              let uuid = '<?php echo $_SESSION['uuid']; ?>';
+              console.log(uuid);
+              if(_.isNull(row.archuuid) || row.archuuid != uuid)
+              {
+                noty({text: 'You are not assigned to this booking', type: 'warning', timeout: 3000});
+              }
+              else
+              {
+                r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+                if(row.reportid == 0)
+                {
+                  // console.log("this is an unassinged report, cannot allocate architect yet")
+                  noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
+                }
+                else if(row.reportid == 23)
+                {
+                  // console.log("this is an quote report");
+                  noty({text: 'This is a quote report, please assign an report type first', type: 'warning', timeout: 3000});
+                }
+                else
+                {
+                  switch (parseInt(row.reportid))
+                  {
+                    case 1:
+                      $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 2:
+                      $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 3:
+                      $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 4:
+                      $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 5:
+                      $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 6:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 7:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 8:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 9:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 10:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 11:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 12:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 13:
+                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 14:
+                      $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;		
+                    case 15:
+                      $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 16:
+                      $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 17:
+                      $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 18:
+                      $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 19:
+                      $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    //case 20:
+                      //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      //break;
+                    case 21:
+                      $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 22:
+                      $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                  }
+                }
+              }
+          <?php
           }
+          ?>
+          
+
           
         }
       ))
@@ -3627,6 +3737,27 @@
       return '';
     }
 
+    function doBookingSpotterImage(row)
+    {
+      // console.log(row.usercreatetype);
+      if (_.isUndefined(row.reportid) || _.isNull(row.reportid))
+        return '';
+      if(row.usercreatetype != '99')
+      {
+        var img = '';
+        var lnk = '';
+        console.log(row.usercreatedid);
+        console.log(row.usercreatedfirstname);
+        console.log(row.usercreatedlastname);
+
+        img = '<img src="images/boss.png" width="20" height="20">';
+        lnk = '<a href="#" title="Spotted by ' + row.usercreatedid + ' ' +row.usercreatedfirstname+ ' ' +  row.usercreatedlastname + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
+        console.log("not create by admin");
+        return lnk;
+      }
+
+      return '';
+    }
     function doUserTypeAsImage(row)
     {
       // Account for footer row...
@@ -3890,6 +4021,7 @@
             [
               {title: 'Booking Status',         rowspan: 2, field: 'status',    width: 100,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingStatusAsImage(row);}},
               {title: 'Email Status',         rowspan: 2, field: 'emailstatus', width: 85,  align: 'center', resizable: false, formatter: function(value, row, index) {if (!_.isUndefined(row.reportid)) return doBookingEmailStatusAsImage(row);}},
+              {title: 'Spotter',       rowspan: 2, field: 'usercreate',          width: 70,  align: 'center', resizable: false, formatter: function(value, row, index) {return doBookingSpotterImage(row);}},
               {title: 'Assigned',       rowspan: 2, field: 'assigned',          width: 70,  align: 'center', resizable: false, formatter: function(value, row, index) {return doBookingAssignedImage(row);}},
               {title: 'Booking Code',   rowspan: 2, field: 'bookingcode',       width: 95, align: 'left',   resizable: false, sortable: false, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}},
               {title: 'Linked Booking', rowspan: 2, field: 'linkedbookingcode', width: 110, align: 'left',   resizable: false, sortable: false, styler: function(value, row, index) {return 'color: ' + colour_blueviolet;}}
@@ -3967,89 +4099,200 @@
               index,
               function(row, index)
               {
-                r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
-                if(row.reportid == 0)
+                <?php
+                if (SharedIsAdmin())
                 {
-                  // console.log("this is an unassinged report, cannot allocate architect yet")
-                  noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
-                }
-                else if(row.reportid == 23)
-                {
-                  // console.log("this is an quote report");
-                  noty({text: 'This is a quote report, please assign an report type first', type: 'warning', timeout: 3000});
+                ?>
+                  r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+                  console.log("admin login");
+                  if(row.reportid == 0)
+                  {
+                    // console.log("this is an unassinged report, cannot allocate architect yet")
+                    noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
+                  }
+                  else if(row.reportid == 23)
+                  {
+                    // console.log("this is an quote report");
+                    noty({text: 'This is a quote report, please assign an report type first', type: 'warning', timeout: 3000});
+                  }
+                  else
+                  {
+                    switch (parseInt(row.reportid))
+                    {
+                      case 1:
+                        $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 2:
+                        $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 3:
+                        $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 4:
+                        $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 5:
+                        $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 6:
+                        $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 7:
+                        $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 8:
+                        $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 9:
+                        $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 10:
+                        $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 11:
+                        $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 12:
+                        $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 13:
+                        $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 14:
+                        $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;		
+                      case 15:
+                        $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 16:
+                        $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 17:
+                        $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 18:
+                        $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 19:
+                        $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      //case 20:
+                        //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        //break;
+                      case 21:
+                        $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 22:
+                        $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                    }
+                  }
+                <?php
                 }
                 else
                 {
-                  switch (parseInt(row.reportid))
-                  {
-                    case 1:
-                      $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 2:
-                      $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 3:
-                      $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 4:
-                      $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 5:
-                      $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 6:
-                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 7:
-                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 8:
-                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 9:
-                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 10:
-                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 11:
-                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 12:
-                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 13:
-                      $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 14:
-                      $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;		
-                    case 15:
-                      $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 16:
-                      $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 17:
-                      $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 18:
-                      $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 19:
-                      $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    //case 20:
-                      //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      //break;
-                    case 21:
-                      $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                    case 22:
-                      $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
-                      break;
-                  }
+                ?>
+                   console.log(row.archuuid);
+                   let uuid = '<?php echo $_SESSION['uuid']; ?>';
+                   console.log(uuid);
+                   if(_.isNull(row.archuuid) || row.archuuid != uuid)
+                   {
+                    noty({text: 'You are not assigned to this booking', type: 'warning', timeout: 3000});
+                   }
+                   else
+                   {
+                    r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+                    let uuid = '<?php echo $_SESSION['uuid']; ?>';
+                    //console.log(uuid);
+                    if(row.reportid == 0)
+                    {
+                      // console.log("this is an unassinged report, cannot allocate architect yet")
+                      noty({text: 'This is an unassinged report, please assign an report type first', type: 'warning', timeout: 3000});
+                    }
+                    else if(row.reportid == 23)
+                    {
+                      // console.log("this is an quote report");
+                      noty({text: 'This is a quote report, please assign an report type first', type: 'warning', timeout: 3000});
+                    }
+                    else
+                    {
+                      switch (parseInt(row.reportid))
+                      {
+                        case 1:
+                          $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 2:
+                          $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 3:
+                          $.redirect('TimberReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 4:
+                          $.redirect('MaintenanceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 5:
+                          $.redirect('ArchitectAdviceReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 6:
+                          $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 7:
+                          $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 8:
+                          $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 9:
+                          $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 10:
+                          $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 11:
+                          $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 12:
+                          $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 13:
+                          $.redirect('ConstructionReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 14:
+                          $.redirect('DesignConsultationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;		
+                        case 15:
+                          $.redirect('DilapidationSurveyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 16:
+                          $.redirect('HomeFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 17:
+                          $.redirect('RenovationFeasibilityReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 18:
+                          $.redirect('HOWReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 19:
+                          $.redirect('CommercialPropertyReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        //case 20:
+                          //$.redirect('CommercialDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          //break;
+                        case 21:
+                          $.redirect('HomeAccessReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 22:
+                          $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                      }
+                    }
+                   }
+                <?php
                 }
+                ?>
+                
+
+                
               }
             )
           }

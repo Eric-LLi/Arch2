@@ -2146,7 +2146,7 @@
                     return;
 
                 // If field already has value (probably populated from php), then leave alone if saved value is blank...
-                // if(d.id == 0)
+                // if(d.id == 'customer_mobile')
                 // {
                 //     console.log($(fld).val());
                 // }
