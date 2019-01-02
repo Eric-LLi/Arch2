@@ -147,6 +147,7 @@
 
                   "u1.firstname usercreatedfirstname," .
                   "u1.lastname usercreatedlastname," .
+                  "u1.itype usercreatetype, " .
 
                   "u2.firstname usermodifiedfirstname," .
                   "u2.lastname usermodifiedlastname," .
@@ -155,6 +156,7 @@
                   "u3.lastname archlastname," .
                   "u3.email archemail," .
                   "u3.mobile archmobile," .
+                  "u3.uuid archuuid," .
                   "u3.regno archregno," .
                   "u3.itype " .
 

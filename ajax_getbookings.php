@@ -87,12 +87,13 @@
 
                   "b1.userscreated_id usercreatedid," .
                   "b1.usersmodified_id usermdifiedid," .
-
+                  
                   // Linked booking fro combined reports... (if any)
                   "b2.id linked_bookingcode," .
 
                   "u1.firstname usercreatedfirstname," .
                   "u1.lastname usercreatedlastname," .
+                  "u1.itype usercreatetype, " .
 
                   "u2.firstname usermodifiedfirstname," .
                   "u2.lastname usermodifiedlastname," .
@@ -101,6 +102,7 @@
                   "u3.lastname archlastname," .
                   "u3.email archemail," .
                   "u3.mobile archmobile," .
+                  "u3.uuid archuuid," .
                   "u3.regno archregno," .
                   "u3.itype " .
 
