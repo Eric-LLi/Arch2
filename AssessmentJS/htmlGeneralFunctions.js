@@ -1442,9 +1442,9 @@ $(document).ready(function () {
     // console.log(String(name).replace(/\s+/g, " "));
     //document.getElementById('0').value = String(name).replace(/\s+/g, " ")
 
-    $('#assessmentSiteMajorRecommendations').combotree(
-        'reload', 'recommendations.json'
-    );
+    // $('#assessmentSiteMajorRecommendations').combotree(
+    //     'reload', 'recommendations.json'
+    // );
     // $('#assessmentServiceMinorRecommendations').combotree({
     //     url: 'recommendations.json'
     // });
@@ -1466,7 +1466,7 @@ $(document).ready(function () {
     // $('#assessmentServiceMinorRecommendations').combotree({
     //     url: 'recommendations.json'
     // });
-    // $('#assessmentSiteMajorRecommendations').combotree('loadData',recommendations1);
+    $('#assessmentSiteMajorRecommendations').combotree('loadData',recommendations1);
     $('#assessmentSiteMinorRecommendations').combotree('loadData',recommendations2);
     $('#assessmentPropertyExteriorMajorRecommendations').combotree('loadData',recommendations3);
     $('#assessmentPropertyExteriorMinorRecommendations').combotree('loadData',recommendations4);
@@ -1788,3 +1788,15 @@ function convertCodesToIndex(codes)
 
     return index;
 }
+
+$('#assessmentSiteMajorRecommendations').combotree({
+    onSelect: function(row){
+        if(row.id == 27)
+        {
+            console.log(row);
+            console.log("user selects other, need to display another input for typing");
+            $('#assessmentSiteMajorRecommendationsother').show();
+        }
+		
+	}
+});

@@ -144,1096 +144,1101 @@ var termsAndConditionsOL13 = 'These Terms and Conditions are in addition to, and
 var recommendations1= [
     {
         "id":0,
-        "text":"Architects",
+        "text":" Architects",
         "code":"AR"
     },
     {
         "id":1,
-        "text":"Building Contractors",
+        "text":" Building Contractors",
         "code":"BC"
     },
     {
         "id":2,
-        "text":"Brick Layers",
+        "text":" Brick Layers",
         "code":"BR"
     },
     {
         "id":3,
-        "text":"Concrete Contractors",
+        "text":" Concrete Contractors",
         "code":"CC"
     },
     {
         "id":4,
-        "text":"Carpenters and Joiners",
+        "text":" Carpenters and Joiners",
         "code":"CJ"
     },
     {
         "id":5,
-        "text":"Cabinet Makers",
+        "text":" Cabinet Makers",
         "code":"CM"
     },
     {
         "id":6,
-        "text":"Damp Houses",
+        "text":" Damp Houses",
         "code":"DH"
     },
     {
         "id":7,
-        "text":"Drainers",
+        "text":" Drainers",
         "code":"DR"
     },
     {
         "id":8,
-        "text":"Electrical Contractors",
+        "text":" Electrical Contractors",
         "code":"EL"
     },
     {
         "id":9,
-        "text":"Excavating Contractors",
+        "text":" Excavating Contractors",
         "code":"EX"
     },
     {
         "id":10,
-        "text":"Fencing Contractors",
+        "text":" Fencing Contractors",
         "code":"FC"
     },
     {
         "id":11,
-        "text":"Glass Merch / Glazier",
-        "code":"GL"
+        "text":" Glass Merch/Glazier",
+        "code":" GLGlassMerch/Glazier"
     },
     {
         "id":12,
-        "text":"Home Maint / Repair",
-        "code":"HM"
+        "text":" Home Maint/Repair",
+        "code":" HM"
     },
     {
         "id":13,
-        "text":"House Restump / Reblock",
-        "code":"HR"
+        "text":" House Restump/Reblock",
+        "code":" HR"
     },
     {
         "id":14,
-        "text":"Insulation Contractors",
-        "code":"IC"
+        "text":" Insulation Contractors",
+        "code":" IC"
     },
     {
         "id":15,
-        "text":"Landscape Architects",
+        "text":" Landscape Architects",
         "code":"LA"
     },
     {
         "id":16,
-        "text":"Landscape Gardeners & Contractors",
+        "text":" Landscape Gardeners & Contractors",
         "code":"LG"
     },
     {
         "id":17,
-        "text":"Underpinning Services",
+        "text":" Underpinning Services",
         "code":"UP"
     },
     {
         "id":18,
-        "text":"Pest Control",
+        "text":" Pest Control",
         "code":"PC"
     },
     {
         "id":19,
-        "text":"Painters & Decorators",
+        "text":" Painters & Decorators",
         "code":"PD"
     },
     {
         "id":20,
-        "text":"Plumbers & Gas fitters",
+        "text":" Plumbers & Gas fitters",
         "code":"PG"
     },
     {
         "id":21,
-        "text":"Plasterers",
+        "text":" Plasterers",
         "code":"PL"
     },
     {
         "id":22,
-        "text":"Paving - Various",
+        "text":" Paving - Various",
         "code":"PV"
     },
     {
         "id":23,
-        "text":"Roof Const / Repair / Clean",
+        "text":" Roof Const/Repair/Clean",
         "code":"RC"
     },
     {
         "id":24,
-        "text":"Structural Engineers",
+        "text":" Structural Engineers",
         "code":"SE"
     },
     {
         "id":25,
-        "text":"Tile Layers - Wall / Floor",
+        "text":" Tile Layers - Wall/Floor",
         "code":"TL"
     },
     {
         "id":26,
-        "text":"Tilers & Slaters",
+        "text":" Tilers & Slaters",
         "code":"TS"
+    },
+    {
+        "id":27,
+        "text":"Others",
+        "code":"others"
     }   
 ];
 var recommendations2= [
     {
         "id":0,
-        "text":"Architects",
+        "text":" Architects",
         "code":"AR"
     },
     {
         "id":1,
-        "text":"Building Contractors",
+        "text":" Building Contractors",
         "code":"BC"
     },
     {
         "id":2,
-        "text":"Brick Layers",
+        "text":" Brick Layers",
         "code":"BR"
     },
     {
         "id":3,
-        "text":"Concrete Contractors",
+        "text":" Concrete Contractors",
         "code":"CC"
     },
     {
         "id":4,
-        "text":"Carpenters and Joiners",
+        "text":" Carpenters and Joiners",
         "code":"CJ"
     },
     {
         "id":5,
-        "text":"Cabinet Makers",
+        "text":" Cabinet Makers",
         "code":"CM"
     },
     {
         "id":6,
-        "text":"Damp Houses",
+        "text":" Damp Houses",
         "code":"DH"
     },
     {
         "id":7,
-        "text":"Drainers",
+        "text":" Drainers",
         "code":"DR"
     },
     {
         "id":8,
-        "text":"Electrical Contractors",
+        "text":" Electrical Contractors",
         "code":"EL"
     },
     {
         "id":9,
-        "text":"Excavating Contractors",
+        "text":" Excavating Contractors",
         "code":"EX"
     },
     {
         "id":10,
-        "text":"Fencing Contractors",
+        "text":" Fencing Contractors",
         "code":"FC"
     },
     {
         "id":11,
-        "text":"Glass Merch / Glazier",
+        "text":" Glass Merch/Glazier",
         "code":"GL"
     },
     {
         "id":12,
-        "text":"Home Maint / Repair",
+        "text":" Home Maint/Repair",
         "code":"HM"
     },
     {
         "id":13,
-        "text":"House Restump / Reblock",
+        "text":" House Restump/Reblock",
         "code":"HR"
     },
     {
         "id":14,
-        "text":"Insulation Contractors",
+        "text":" Insulation Contractors",
         "code":"IC"
     },
     {
         "id":15,
-        "text":"Landscape Architects",
+        "text":" Landscape Architects",
         "code":"LA"
     },
     {
         "id":16,
-        "text":"Landscape Gardeners & Contractors",
+        "text":" Landscape Gardeners & Contractors",
         "code":"LG"
     },
     {
         "id":17,
-        "text":"Underpinning Services",
+        "text":" Underpinning Services",
         "code":"UP"
     },
     {
         "id":18,
-        "text":"Pest Control",
+        "text":" Pest Control",
         "code":"PC"
     },
     {
         "id":19,
-        "text":"Painters & Decorators",
+        "text":" Painters & Decorators",
         "code":"PD"
     },
     {
         "id":20,
-        "text":"Plumbers & Gas fitters",
+        "text":" Plumbers & Gas fitters",
         "code":"PG"
     },
     {
         "id":21,
-        "text":"Plasterers",
+        "text":" Plasterers",
         "code":"PL"
     },
     {
         "id":22,
-        "text":"Paving - Various",
+        "text":" Paving - Various",
         "code":"PV"
     },
     {
         "id":23,
-        "text":"Roof Const / Repair / Clean",
+        "text":" Roof Const/Repair/Clean",
         "code":"RC"
     },
     {
         "id":24,
-        "text":"Structural Engineers",
+        "text":" Structural Engineers",
         "code":"SE"
     },
     {
         "id":25,
-        "text":"Tile Layers - Wall / Floor",
+        "text":" Tile Layers - Wall/Floor",
         "code":"TL"
     },
     {
         "id":26,
-        "text":"Tilers & Slaters",
+        "text":" Tilers & Slaters",
         "code":"TS"
     }   
 ];
 var recommendations3= [
     {
         "id":0,
-        "text":"Architects",
+        "text":" Architects",
         "code":"AR"
     },
     {
         "id":1,
-        "text":"Building Contractors",
+        "text":" Building Contractors",
         "code":"BC"
     },
     {
         "id":2,
-        "text":"Brick Layers",
+        "text":" Brick Layers",
         "code":"BR"
     },
     {
         "id":3,
-        "text":"Concrete Contractors",
+        "text":" Concrete Contractors",
         "code":"CC"
     },
     {
         "id":4,
-        "text":"Carpenters and Joiners",
+        "text":" Carpenters and Joiners",
         "code":"CJ"
     },
     {
         "id":5,
-        "text":"Cabinet Makers",
+        "text":" Cabinet Makers",
         "code":"CM"
     },
     {
         "id":6,
-        "text":"Damp Houses",
+        "text":" Damp Houses",
         "code":"DH"
     },
     {
         "id":7,
-        "text":"Drainers",
+        "text":" Drainers",
         "code":"DR"
     },
     {
         "id":8,
-        "text":"Electrical Contractors",
+        "text":" Electrical Contractors",
         "code":"EL"
     },
     {
         "id":9,
-        "text":"Excavating Contractors",
+        "text":" Excavating Contractors",
         "code":"EX"
     },
     {
         "id":10,
-        "text":"Fencing Contractors",
+        "text":" Fencing Contractors",
         "code":"FC"
     },
     {
         "id":11,
-        "text":"Glass Merch / Glazier",
+        "text":" Glass Merch/Glazier",
         "code":"GL"
     },
     {
         "id":12,
-        "text":"Home Maint / Repair",
+        "text":" Home Maint/Repair",
         "code":"HM"
     },
     {
         "id":13,
-        "text":"House Restump / Reblock",
+        "text":" House Restump/Reblock",
         "code":"HR"
     },
     {
         "id":14,
-        "text":"Insulation Contractors",
+        "text":" Insulation Contractors",
         "code":"IC"
     },
     {
         "id":15,
-        "text":"Landscape Architects",
+        "text":" Landscape Architects",
         "code":"LA"
     },
     {
         "id":16,
-        "text":"Landscape Gardeners & Contractors",
+        "text":" Landscape Gardeners & Contractors",
         "code":"LG"
     },
     {
         "id":17,
-        "text":"Underpinning Services",
+        "text":" Underpinning Services",
         "code":"UP"
     },
     {
         "id":18,
-        "text":"Pest Control",
+        "text":" Pest Control",
         "code":"PC"
     },
     {
         "id":19,
-        "text":"Painters & Decorators",
+        "text":" Painters & Decorators",
         "code":"PD"
     },
     {
         "id":20,
-        "text":"Plumbers & Gas fitters",
+        "text":" Plumbers & Gas fitters",
         "code":"PG"
     },
     {
         "id":21,
-        "text":"Plasterers",
+        "text":" Plasterers",
         "code":"PL"
     },
     {
         "id":22,
-        "text":"Paving - Various",
+        "text":" Paving - Various",
         "code":"PV"
     },
     {
         "id":23,
-        "text":"Roof Const / Repair / Clean",
+        "text":" Roof Const/Repair/Clean",
         "code":"RC"
     },
     {
         "id":24,
-        "text":"Structural Engineers",
+        "text":" Structural Engineers",
         "code":"SE"
     },
     {
         "id":25,
-        "text":"Tile Layers - Wall / Floor",
+        "text":" Tile Layers - Wall/Floor",
         "code":"TL"
     },
     {
         "id":26,
-        "text":"Tilers & Slaters",
+        "text":" Tilers & Slaters",
         "code":"TS"
     }   
 ];
 var recommendations4= [
     {
         "id":0,
-        "text":"Architects",
+        "text":" Architects",
         "code":"AR"
     },
     {
         "id":1,
-        "text":"Building Contractors",
+        "text":" Building Contractors",
         "code":"BC"
     },
     {
         "id":2,
-        "text":"Brick Layers",
+        "text":" Brick Layers",
         "code":"BR"
     },
     {
         "id":3,
-        "text":"Concrete Contractors",
+        "text":" Concrete Contractors",
         "code":"CC"
     },
     {
         "id":4,
-        "text":"Carpenters and Joiners",
+        "text":" Carpenters and Joiners",
         "code":"CJ"
     },
     {
         "id":5,
-        "text":"Cabinet Makers",
+        "text":" Cabinet Makers",
         "code":"CM"
     },
     {
         "id":6,
-        "text":"Damp Houses",
+        "text":" Damp Houses",
         "code":"DH"
     },
     {
         "id":7,
-        "text":"Drainers",
+        "text":" Drainers",
         "code":"DR"
     },
     {
         "id":8,
-        "text":"Electrical Contractors",
+        "text":" Electrical Contractors",
         "code":"EL"
     },
     {
         "id":9,
-        "text":"Excavating Contractors",
+        "text":" Excavating Contractors",
         "code":"EX"
     },
     {
         "id":10,
-        "text":"Fencing Contractors",
+        "text":" Fencing Contractors",
         "code":"FC"
     },
     {
         "id":11,
-        "text":"Glass Merch / Glazier",
-        "code":"GL"
+        "text":" Glass Merch/Glazier",
+        "code":" GLGlassMerch/Glazier"
     },
     {
         "id":12,
-        "text":"Home Maint / Repair",
-        "code":"HM"
+        "text":" Home Maint/Repair",
+        "code":" HM"
     },
     {
         "id":13,
-        "text":"House Restump / Reblock",
-        "code":"HR"
+        "text":" House Restump/Reblock",
+        "code":" HR"
     },
     {
         "id":14,
-        "text":"Insulation Contractors",
-        "code":"IC"
+        "text":" Insulation Contractors",
+        "code":" IC"
     },
     {
         "id":15,
-        "text":"Landscape Architects",
+        "text":" Landscape Architects",
         "code":"LA"
     },
     {
         "id":16,
-        "text":"Landscape Gardeners & Contractors",
+        "text":" Landscape Gardeners & Contractors",
         "code":"LG"
     },
     {
         "id":17,
-        "text":"Underpinning Services",
+        "text":" Underpinning Services",
         "code":"UP"
     },
     {
         "id":18,
-        "text":"Pest Control",
+        "text":" Pest Control",
         "code":"PC"
     },
     {
         "id":19,
-        "text":"Painters & Decorators",
+        "text":" Painters & Decorators",
         "code":"PD"
     },
     {
         "id":20,
-        "text":"Plumbers & Gas fitters",
+        "text":" Plumbers & Gas fitters",
         "code":"PG"
     },
     {
         "id":21,
-        "text":"Plasterers",
+        "text":" Plasterers",
         "code":"PL"
     },
     {
         "id":22,
-        "text":"Paving - Various",
+        "text":" Paving - Various",
         "code":"PV"
     },
     {
         "id":23,
-        "text":"Roof Const / Repair / Clean",
+        "text":" Roof Const/Repair/Clean",
         "code":"RC"
     },
     {
         "id":24,
-        "text":"Structural Engineers",
+        "text":" Structural Engineers",
         "code":"SE"
     },
     {
         "id":25,
-        "text":"Tile Layers - Wall / Floor",
+        "text":" Tile Layers - Wall/Floor",
         "code":"TL"
     },
     {
         "id":26,
-        "text":"Tilers & Slaters",
+        "text":" Tilers & Slaters",
         "code":"TS"
-    }   
+    }  
 ];
 var recommendations5= [
     {
         "id":0,
-        "text":"Architects",
+        "text":" Architects",
         "code":"AR"
     },
     {
         "id":1,
-        "text":"Building Contractors",
+        "text":" Building Contractors",
         "code":"BC"
     },
     {
         "id":2,
-        "text":"Brick Layers",
+        "text":" Brick Layers",
         "code":"BR"
     },
     {
         "id":3,
-        "text":"Concrete Contractors",
+        "text":" Concrete Contractors",
         "code":"CC"
     },
     {
         "id":4,
-        "text":"Carpenters and Joiners",
+        "text":" Carpenters and Joiners",
         "code":"CJ"
     },
     {
         "id":5,
-        "text":"Cabinet Makers",
+        "text":" Cabinet Makers",
         "code":"CM"
     },
     {
         "id":6,
-        "text":"Damp Houses",
+        "text":" Damp Houses",
         "code":"DH"
     },
     {
         "id":7,
-        "text":"Drainers",
+        "text":" Drainers",
         "code":"DR"
     },
     {
         "id":8,
-        "text":"Electrical Contractors",
+        "text":" Electrical Contractors",
         "code":"EL"
     },
     {
         "id":9,
-        "text":"Excavating Contractors",
+        "text":" Excavating Contractors",
         "code":"EX"
     },
     {
         "id":10,
-        "text":"Fencing Contractors",
+        "text":" Fencing Contractors",
         "code":"FC"
     },
     {
         "id":11,
-        "text":"Glass Merch / Glazier",
-        "code":"GL"
+        "text":" Glass Merch/Glazier",
+        "code":" GLGlassMerch/Glazier"
     },
     {
         "id":12,
-        "text":"Home Maint / Repair",
-        "code":"HM"
+        "text":" Home Maint/Repair",
+        "code":" HM"
     },
     {
         "id":13,
-        "text":"House Restump / Reblock",
-        "code":"HR"
+        "text":" House Restump/Reblock",
+        "code":" HR"
     },
     {
         "id":14,
-        "text":"Insulation Contractors",
-        "code":"IC"
+        "text":" Insulation Contractors",
+        "code":" IC"
     },
     {
         "id":15,
-        "text":"Landscape Architects",
+        "text":" Landscape Architects",
         "code":"LA"
     },
     {
         "id":16,
-        "text":"Landscape Gardeners & Contractors",
+        "text":" Landscape Gardeners & Contractors",
         "code":"LG"
     },
     {
         "id":17,
-        "text":"Underpinning Services",
+        "text":" Underpinning Services",
         "code":"UP"
     },
     {
         "id":18,
-        "text":"Pest Control",
+        "text":" Pest Control",
         "code":"PC"
     },
     {
         "id":19,
-        "text":"Painters & Decorators",
+        "text":" Painters & Decorators",
         "code":"PD"
     },
     {
         "id":20,
-        "text":"Plumbers & Gas fitters",
+        "text":" Plumbers & Gas fitters",
         "code":"PG"
     },
     {
         "id":21,
-        "text":"Plasterers",
+        "text":" Plasterers",
         "code":"PL"
     },
     {
         "id":22,
-        "text":"Paving - Various",
+        "text":" Paving - Various",
         "code":"PV"
     },
     {
         "id":23,
-        "text":"Roof Const / Repair / Clean",
+        "text":" Roof Const/Repair/Clean",
         "code":"RC"
     },
     {
         "id":24,
-        "text":"Structural Engineers",
+        "text":" Structural Engineers",
         "code":"SE"
     },
     {
         "id":25,
-        "text":"Tile Layers - Wall / Floor",
+        "text":" Tile Layers - Wall/Floor",
         "code":"TL"
     },
     {
         "id":26,
-        "text":"Tilers & Slaters",
+        "text":" Tilers & Slaters",
         "code":"TS"
     }   
 ];
 var recommendations6= [
     {
         "id":0,
-        "text":"Architects",
+        "text":" Architects",
         "code":"AR"
     },
     {
         "id":1,
-        "text":"Building Contractors",
+        "text":" Building Contractors",
         "code":"BC"
     },
     {
         "id":2,
-        "text":"Brick Layers",
+        "text":" Brick Layers",
         "code":"BR"
     },
     {
         "id":3,
-        "text":"Concrete Contractors",
+        "text":" Concrete Contractors",
         "code":"CC"
     },
     {
         "id":4,
-        "text":"Carpenters and Joiners",
+        "text":" Carpenters and Joiners",
         "code":"CJ"
     },
     {
         "id":5,
-        "text":"Cabinet Makers",
+        "text":" Cabinet Makers",
         "code":"CM"
     },
     {
         "id":6,
-        "text":"Damp Houses",
+        "text":" Damp Houses",
         "code":"DH"
     },
     {
         "id":7,
-        "text":"Drainers",
+        "text":" Drainers",
         "code":"DR"
     },
     {
         "id":8,
-        "text":"Electrical Contractors",
+        "text":" Electrical Contractors",
         "code":"EL"
     },
     {
         "id":9,
-        "text":"Excavating Contractors",
+        "text":" Excavating Contractors",
         "code":"EX"
     },
     {
         "id":10,
-        "text":"Fencing Contractors",
+        "text":" Fencing Contractors",
         "code":"FC"
     },
     {
         "id":11,
-        "text":"Glass Merch / Glazier",
-        "code":"GL"
+        "text":" Glass Merch/Glazier",
+        "code":" GLGlassMerch/Glazier"
     },
     {
         "id":12,
-        "text":"Home Maint / Repair",
-        "code":"HM"
+        "text":" Home Maint/Repair",
+        "code":" HM"
     },
     {
         "id":13,
-        "text":"House Restump / Reblock",
-        "code":"HR"
+        "text":" House Restump/Reblock",
+        "code":" HR"
     },
     {
         "id":14,
-        "text":"Insulation Contractors",
-        "code":"IC"
+        "text":" Insulation Contractors",
+        "code":" IC"
     },
     {
         "id":15,
-        "text":"Landscape Architects",
+        "text":" Landscape Architects",
         "code":"LA"
     },
     {
         "id":16,
-        "text":"Landscape Gardeners & Contractors",
+        "text":" Landscape Gardeners & Contractors",
         "code":"LG"
     },
     {
         "id":17,
-        "text":"Underpinning Services",
+        "text":" Underpinning Services",
         "code":"UP"
     },
     {
         "id":18,
-        "text":"Pest Control",
+        "text":" Pest Control",
         "code":"PC"
     },
     {
         "id":19,
-        "text":"Painters & Decorators",
+        "text":" Painters & Decorators",
         "code":"PD"
     },
     {
         "id":20,
-        "text":"Plumbers & Gas fitters",
+        "text":" Plumbers & Gas fitters",
         "code":"PG"
     },
     {
         "id":21,
-        "text":"Plasterers",
+        "text":" Plasterers",
         "code":"PL"
     },
     {
         "id":22,
-        "text":"Paving - Various",
+        "text":" Paving - Various",
         "code":"PV"
     },
     {
         "id":23,
-        "text":"Roof Const / Repair / Clean",
+        "text":" Roof Const/Repair/Clean",
         "code":"RC"
     },
     {
         "id":24,
-        "text":"Structural Engineers",
+        "text":" Structural Engineers",
         "code":"SE"
     },
     {
         "id":25,
-        "text":"Tile Layers - Wall / Floor",
+        "text":" Tile Layers - Wall/Floor",
         "code":"TL"
     },
     {
         "id":26,
-        "text":"Tilers & Slaters",
+        "text":" Tilers & Slaters",
         "code":"TS"
-    }   
+    }    
 ];
 var recommendations7= [
     {
         "id":0,
-        "text":"Architects",
+        "text":" Architects",
         "code":"AR"
     },
     {
         "id":1,
-        "text":"Building Contractors",
+        "text":" Building Contractors",
         "code":"BC"
     },
     {
         "id":2,
-        "text":"Brick Layers",
+        "text":" Brick Layers",
         "code":"BR"
     },
     {
         "id":3,
-        "text":"Concrete Contractors",
+        "text":" Concrete Contractors",
         "code":"CC"
     },
     {
         "id":4,
-        "text":"Carpenters and Joiners",
+        "text":" Carpenters and Joiners",
         "code":"CJ"
     },
     {
         "id":5,
-        "text":"Cabinet Makers",
+        "text":" Cabinet Makers",
         "code":"CM"
     },
     {
         "id":6,
-        "text":"Damp Houses",
+        "text":" Damp Houses",
         "code":"DH"
     },
     {
         "id":7,
-        "text":"Drainers",
+        "text":" Drainers",
         "code":"DR"
     },
     {
         "id":8,
-        "text":"Electrical Contractors",
+        "text":" Electrical Contractors",
         "code":"EL"
     },
     {
         "id":9,
-        "text":"Excavating Contractors",
+        "text":" Excavating Contractors",
         "code":"EX"
     },
     {
         "id":10,
-        "text":"Fencing Contractors",
+        "text":" Fencing Contractors",
         "code":"FC"
     },
     {
         "id":11,
-        "text":"Glass Merch / Glazier",
-        "code":"GL"
+        "text":" Glass Merch/Glazier",
+        "code":" GLGlassMerch/Glazier"
     },
     {
         "id":12,
-        "text":"Home Maint / Repair",
-        "code":"HM"
+        "text":" Home Maint/Repair",
+        "code":" HM"
     },
     {
         "id":13,
-        "text":"House Restump / Reblock",
-        "code":"HR"
+        "text":" House Restump/Reblock",
+        "code":" HR"
     },
     {
         "id":14,
-        "text":"Insulation Contractors",
-        "code":"IC"
+        "text":" Insulation Contractors",
+        "code":" IC"
     },
     {
         "id":15,
-        "text":"Landscape Architects",
+        "text":" Landscape Architects",
         "code":"LA"
     },
     {
         "id":16,
-        "text":"Landscape Gardeners & Contractors",
+        "text":" Landscape Gardeners & Contractors",
         "code":"LG"
     },
     {
         "id":17,
-        "text":"Underpinning Services",
+        "text":" Underpinning Services",
         "code":"UP"
     },
     {
         "id":18,
-        "text":"Pest Control",
+        "text":" Pest Control",
         "code":"PC"
     },
     {
         "id":19,
-        "text":"Painters & Decorators",
+        "text":" Painters & Decorators",
         "code":"PD"
     },
     {
         "id":20,
-        "text":"Plumbers & Gas fitters",
+        "text":" Plumbers & Gas fitters",
         "code":"PG"
     },
     {
         "id":21,
-        "text":"Plasterers",
+        "text":" Plasterers",
         "code":"PL"
     },
     {
         "id":22,
-        "text":"Paving - Various",
+        "text":" Paving - Various",
         "code":"PV"
     },
     {
         "id":23,
-        "text":"Roof Const / Repair / Clean",
+        "text":" Roof Const/Repair/Clean",
         "code":"RC"
     },
     {
         "id":24,
-        "text":"Structural Engineers",
+        "text":" Structural Engineers",
         "code":"SE"
     },
     {
         "id":25,
-        "text":"Tile Layers - Wall / Floor",
+        "text":" Tile Layers - Wall/Floor",
         "code":"TL"
     },
     {
         "id":26,
-        "text":"Tilers & Slaters",
+        "text":" Tilers & Slaters",
         "code":"TS"
-    }   
+    }    
 ];
 var recommendations8= [
     {
         "id":0,
-        "text":"Architects",
+        "text":" Architects",
         "code":"AR"
     },
     {
         "id":1,
-        "text":"Building Contractors",
+        "text":" Building Contractors",
         "code":"BC"
     },
     {
         "id":2,
-        "text":"Brick Layers",
+        "text":" Brick Layers",
         "code":"BR"
     },
     {
         "id":3,
-        "text":"Concrete Contractors",
+        "text":" Concrete Contractors",
         "code":"CC"
     },
     {
         "id":4,
-        "text":"Carpenters and Joiners",
+        "text":" Carpenters and Joiners",
         "code":"CJ"
     },
     {
         "id":5,
-        "text":"Cabinet Makers",
+        "text":" Cabinet Makers",
         "code":"CM"
     },
     {
         "id":6,
-        "text":"Damp Houses",
+        "text":" Damp Houses",
         "code":"DH"
     },
     {
         "id":7,
-        "text":"Drainers",
+        "text":" Drainers",
         "code":"DR"
     },
     {
         "id":8,
-        "text":"Electrical Contractors",
+        "text":" Electrical Contractors",
         "code":"EL"
     },
     {
         "id":9,
-        "text":"Excavating Contractors",
+        "text":" Excavating Contractors",
         "code":"EX"
     },
     {
         "id":10,
-        "text":"Fencing Contractors",
+        "text":" Fencing Contractors",
         "code":"FC"
     },
     {
         "id":11,
-        "text":"Glass Merch / Glazier",
-        "code":"GL"
+        "text":" Glass Merch/Glazier",
+        "code":" GLGlassMerch/Glazier"
     },
     {
         "id":12,
-        "text":"Home Maint / Repair",
-        "code":"HM"
+        "text":" Home Maint/Repair",
+        "code":" HM"
     },
     {
         "id":13,
-        "text":"House Restump / Reblock",
-        "code":"HR"
+        "text":" House Restump/Reblock",
+        "code":" HR"
     },
     {
         "id":14,
-        "text":"Insulation Contractors",
-        "code":"IC"
+        "text":" Insulation Contractors",
+        "code":" IC"
     },
     {
         "id":15,
-        "text":"Landscape Architects",
+        "text":" Landscape Architects",
         "code":"LA"
     },
     {
         "id":16,
-        "text":"Landscape Gardeners & Contractors",
+        "text":" Landscape Gardeners & Contractors",
         "code":"LG"
     },
     {
         "id":17,
-        "text":"Underpinning Services",
+        "text":" Underpinning Services",
         "code":"UP"
     },
     {
         "id":18,
-        "text":"Pest Control",
+        "text":" Pest Control",
         "code":"PC"
     },
     {
         "id":19,
-        "text":"Painters & Decorators",
+        "text":" Painters & Decorators",
         "code":"PD"
     },
     {
         "id":20,
-        "text":"Plumbers & Gas fitters",
+        "text":" Plumbers & Gas fitters",
         "code":"PG"
     },
     {
         "id":21,
-        "text":"Plasterers",
+        "text":" Plasterers",
         "code":"PL"
     },
     {
         "id":22,
-        "text":"Paving - Various",
+        "text":" Paving - Various",
         "code":"PV"
     },
     {
         "id":23,
-        "text":"Roof Const / Repair / Clean",
+        "text":" Roof Const/Repair/Clean",
         "code":"RC"
     },
     {
         "id":24,
-        "text":"Structural Engineers",
+        "text":" Structural Engineers",
         "code":"SE"
     },
     {
         "id":25,
-        "text":"Tile Layers - Wall / Floor",
+        "text":" Tile Layers - Wall/Floor",
         "code":"TL"
     },
     {
         "id":26,
-        "text":"Tilers & Slaters",
+        "text":" Tilers & Slaters",
         "code":"TS"
     }   
 ];
