@@ -803,176 +803,131 @@ function generatePDF(mode) {
                     },
                     {
                         table: {
+                            widths: [110, 110, 140, '*'],
                             body: [
-                                [{
-                                    text: 'AR',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Architects',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'DR',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Drainers',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'IC',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Insulation Contractors',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'PL',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Plasterers',
-                                    style: 'tableText'
-                                }],
-                                [{
-                                    text: 'BC',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Building Contractors',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'EL',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Electrical Contractors',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'LA',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Landscape Architects',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'PV',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Paving-Various',
-                                    style: 'tableText'
-                                }],
-                                [{
-                                    text: 'BR',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Bricklayers',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'EX',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Excavating Contractors',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'LG',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Landscape Gardener & Contractors',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'RC',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Roof Const./Repair/Clean',
-                                    style: 'tableText'
-                                }],
-                                [{
-                                    text: 'CC',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Concrete Contractors',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'FC',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Fencing Contractors',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'UP',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Underpinning Services',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'SE',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Structural Engineers',
-                                    style: 'tableText'
-                                }],
-                                [{
-                                    text: 'CJ',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Carpenters & Joiners',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'GL',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Glass Merch/Glazier',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'PC',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Pest Control',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'TL',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Tile Layers-Wall/Floor',
-                                    style: 'tableText'
-                                }],
-                                [{
-                                    text: 'CM',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Cabinet Makers',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'HM',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Home Maint./Repair',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'PD',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Painters & Decorators',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'TS',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Tilers & Slaters',
-                                    style: 'tableText'
-                                }],
-                                [{
-                                    text: 'DH',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Damp Houses',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'HR',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'House Restump/Reblock',
-                                    style: 'tableText'
-                                }, {
-                                    text: 'PG',
-                                    style: "tableBoldTextAlignLeft"
-                                }, {
-                                    text: 'Plumbers & Gasfitters',
-                                    style: 'tableText'
-                                }, {}, {}]
+                                [
+                                    {
+                                        text: 'Architects',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Drainers',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Insulation Contractors',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Plasterers',
+                                        style: 'tableText'
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: 'Building Contractors',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Electrical Contractors',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Landscape Architects',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Paving-Various',
+                                        style: 'tableText'
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: 'Bricklayers',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Excavating Contractors',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Landscape Gardener & Contractors',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Roof Const./Repair/Clean',
+                                        style: 'tableText'
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: 'Concrete Contractors',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Fencing Contractors',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Underpinning Services',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Structural Engineers',
+                                        style: 'tableText'
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: 'Carpenters & Joiners',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Glass Merch/Glazier',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Pest Control',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Tile Layers-Wall/Floor',
+                                        style: 'tableText'
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: 'Cabinet Makers',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Home Maint./Repair',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Painters & Decorators',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Tilers & Slaters',
+                                        style: 'tableText'
+                                    }
+                                ],
+                                [
+                                    {
+                                        text: 'Damp Houses',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'House Restump/Reblock',
+                                        style: 'tableText'
+                                    },
+                                    {
+                                        text: 'Plumbers & Gasfitters',
+                                        style: 'tableText'
+                                    }, 
+                                    {}
+                                ]
                             ]
                         }
                     }
