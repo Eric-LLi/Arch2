@@ -4079,7 +4079,7 @@ function getPhotoTable(id) {
                                         width: 160,
                                         text: imgText,
                                         fontSize: 9,
-                                        margin:[0,5,0,20]
+                                        margin:[0,5,0,15]
                                     }
                                 ]
                                 
