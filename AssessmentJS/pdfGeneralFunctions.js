@@ -281,7 +281,7 @@ function determineFooter(mode) {
                                 image:footerImage,
                                 alignment:'left',
                                 width:80,
-                                height:34
+                                height:31
                             },
                             // {
                             //     rowSpan: 2,
@@ -294,7 +294,7 @@ function determineFooter(mode) {
                                 text:'NSW Nominated Architect B. Inwood Reg, No. 7108 \n © COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
-                                margin: [0, 10, 0, 0],
+                                margin: [0, 5, 0, 0],
                                 color: '#8E8B8B'
                             }
                         ]
@@ -312,7 +312,7 @@ function determineFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -4.5, 10, 0]
+                margin: [40, 0, 10, 0]
             };
             return result;
         } else {
@@ -327,7 +327,7 @@ function determineFooter(mode) {
                                 image: footerImage,
                                 alignment: 'left',
                                 width: 80,
-                                height: 34
+                                height: 31
                             },
                             {
                                 text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
@@ -341,7 +341,7 @@ function determineFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -4.5, 10, 0]
+                margin: [40, 0, 10, 0]
             };
             return result;
         }

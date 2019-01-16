@@ -2316,6 +2316,7 @@
                     <td colspan="2">
                         <div style="margin-bottom:20px">
                             <label class="sectionSubHead" style="color:black">Professional & Trade Recommendations:</label>
+                            <input id="assessmentSiteMajorRecommendationsother" style="display:none;marginTop:30px" placeholder="Other" type="text" class="form-control">
                             <input type="text" id="assessmentSiteMajorRecommendations" class="easyui-combotree" data-options=
                                         "
                                         multiple:true,
