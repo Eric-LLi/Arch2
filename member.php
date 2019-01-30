@@ -214,12 +214,18 @@
         function(result)
         {
           var response = JSON.parse(result);
-          //console.log(response.msg);
-          //console.log(response.rc)
 
           if (response.rc == 0)
           {
+            // console.log(response.rows);
             cache_bookings = response.rows;
+            $('#divBookingsG').datagrid('reload');
+          }
+          else if(response.rc == -1)
+          {
+            // console.log('no bookings yet');
+            // console.log(response.rows);
+            cache_bookings = [];
             $('#divBookingsG').datagrid('reload');
           }
         }
@@ -901,12 +907,12 @@
         $('#fldNewBookingReport').combobox('clear');
         $('#fldNewBookingReport').combobox('enable');
         $('#fldNewBookingReport').combobox('setValue', 0); // set the default report type is 'Unassigned', id is 0;
-
+        $('#fldNewBookingBudget').numberbox('clear');
         <?php
           if (SharedIsAdmin())
           {
         ?>
-            $('#fldNewBookingBudget').numberbox('clear');
+           
             $('#fldNewBookingCommission').numberbox('clear');
             $('#fldNewBookingTravel').numberbox('clear');
             $('#fldNewBookingSpotter').numberbox('clear');
@@ -1058,12 +1064,13 @@
                 var custpostcode = $('#fldNewBookingCustPostcode').textbox('getValue');
                 var custstate = $('#fldNewBookingCustState').combobox('getValue');
 
-                var reportid = $('#fldNewBookingReport').combobox('getValue');               
+                var reportid = $('#fldNewBookingReport').combobox('getValue');  
+                var budget = $('#fldNewBookingBudget').numberbox('getValue');             
                 <?php
                   if (SharedIsAdmin())
                   {
                 ?>
-                    var budget = $('#fldNewBookingBudget').numberbox('getValue');
+                   
                     var commission = $('#fldNewBookingCommission').numberbox('getValue');
                     var travel = $('#fldNewBookingTravel').numberbox('getValue');
                     var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
@@ -1123,11 +1130,11 @@
                             custstate: custstate,
 
                             reportid: reportid,
+                            budget: budget,
                             <?php
                               if (SharedIsAdmin())
                               {
                             ?>
-                                budget: budget,
                                 commission: commission,
                                 travel: travel,
                                 spotter: spotter,
@@ -1186,9 +1193,6 @@
                                   <?php
                                   }
                                 ?>
-                               
-                                
-
                                 noty({text: response.msg, type: 'success', timeout: 10000});
                                 $('#dlgBookingNew').dialog('close');
                               }
@@ -1278,7 +1282,7 @@
         $('#fldNewBookingCustCity').textbox('clear');
         $('#fldNewBookingCustPostcode').textbox('clear');
         $('#fldNewBookingQuoteDes').textbox('clear');
-
+        $('#fldNewBookingBudget').numberbox('clear');
 
         // Report TAB
         //$('#fldNewBookingReport').combobox('disable');
@@ -1287,7 +1291,7 @@
           if (SharedIsAdmin())
           {
         ?>
-            $('#fldNewBookingBudget').numberbox('clear');
+           
             $('#fldNewBookingCommission').numberbox('clear');
             $('#fldNewBookingTravel').numberbox('clear');
             $('#fldNewBookingSpotter').numberbox('clear');
@@ -1457,12 +1461,13 @@
                     }
                   }
                    $('#fldNewBookingReport').combobox('setValue', b.reportid);
+                   $('#fldNewBookingBudget').numberbox('setValue', b.budget);
 
                   <?php
                     if (SharedIsAdmin())
                     {
                   ?>
-                      $('#fldNewBookingBudget').numberbox('setValue', b.budget);
+                     
                       $('#fldNewBookingCommission').numberbox('setValue', b.commission);
                       $('#fldNewBookingTravel').numberbox('setValue', b.travel);
                       $('#fldNewBookingSpotter').numberbox('setValue', b.spotter);
@@ -1532,11 +1537,12 @@
                 var custstate = $('#fldNewBookingCustState').combobox('getValue');
 
                 var reportid = $('#fldNewBookingReport').combobox('getValue');
+                var budget = $('#fldNewBookingBudget').numberbox('getValue');
+                console.log("budget" + budget);
                 <?php
                   if (SharedIsAdmin())
                   {
                 ?>
-                    var budget = $('#fldNewBookingBudget').numberbox('getValue');
                     var commission = $('#fldNewBookingCommission').numberbox('getValue');
                     var travel = $('#fldNewBookingTravel').numberbox('getValue');
                     var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
@@ -1599,11 +1605,11 @@
                             custstate: custstate,
 
                             reportid: reportid,
+                            budget: budget,
                             <?php
                               if (SharedIsAdmin())
                               {
                             ?>
-                                budget: budget,
                                 commission: commission,
                                 travel: travel,
                                 spotter: spotter,
@@ -1651,8 +1657,19 @@
                               if (response.rc == 0)
                               {
                                 // doRefreshBookings();
-                                doSearchBookings(false);
-
+                                <?php
+                                  if (SharedIsAdmin())
+                                  {
+                                ?>
+                                     doSearchBookings(false);
+                                <?php
+                                  } else {
+                                    ?>
+                                     console.log("need to do something else");
+                                     doReloadBookings();
+                                  <?php
+                                  }
+                                ?>
                                 noty({text: response.msg, type: 'success', timeout: 10000});
                                 $('#dlgBookingNew').dialog('close');
                               }
@@ -3746,12 +3763,13 @@
       {
         var img = '';
         var lnk = '';
-        console.log(row.usercreatedid);
-        console.log(row.usercreatedfirstname);
-        console.log(row.usercreatedlastname);
+        // console.log(row.usercreatedid);
+        // console.log(row.usercreatedfirstname);
+        // console.log(row.usercreatedlastname);
 
         img = '<img src="images/boss.png" width="20" height="20">';
-        lnk = '<a href="#" title="Spotted by ' + row.usercreatedid + ' ' +row.usercreatedfirstname+ ' ' +  row.usercreatedlastname + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
+        //+ row.usercreatedid + ' '
+        lnk = '<a href="#" title="Spotted by '  +row.usercreatedfirstname+ ' ' +  row.usercreatedlastname + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
         console.log("not create by admin");
         return lnk;
       }
@@ -4468,7 +4486,8 @@
                 {
                   uuid: '<?php echo $_SESSION['uuid']; ?>',
                   bookingcode: row.bookingcode,
-                  archuuid: args.archuuid
+                  archuuid: args.archuuid,
+                  usercreateid:row.usercreatedid
                 },
                 function(result)
                 {
@@ -4508,7 +4527,8 @@
                   linkedbookingcode: row.linkedbookingcode,
                   linked_bookingcode: row.linked_bookingcode,
                   archuuid: args.archuuid,
-                  inspectoruuid: args.inspectoruuid
+                  inspectoruuid: args.inspectoruuid,
+                  usercreateid:row.usercreatedid
                 },
                 function(result)
                 {
@@ -4866,14 +4886,14 @@
               <td>Quote Type Description:</td>
               <td><div id="fldNewBookingQuoteDes" class="easyui-textbox" multiline="true" style="width: 300px;height:30px"></div></td>
             </tr>
+            <tr>
+                <td>Agreed Price:</td>
+                <td><input id="fldNewBookingBudget" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
+              </tr>
             <?php
               if (SharedIsAdmin())
               {
             ?>
-                <tr>
-                  <td>Agreed Price:</td>
-                  <td><input id="fldNewBookingBudget" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
-                </tr>
                 <tr>
                   <td>Commission:</td>
                   <td><input id="fldNewBookingCommission" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
