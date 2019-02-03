@@ -1253,9 +1253,9 @@ function generatePDF(mode) {
                     //     ],
                     //     columnGap: 20
                     // },
-                    makeAGap(),
-                    makeAGap(),
-                    makeAGap(),
+                    // makeAGap(),
+                    // makeAGap(),
+                    // makeAGap(),
                     drawNotesTable('AssessmentServiceNotesTable', 'AssessmentServiceLimitationSelect', 'AssessmentServiceLimitationNote',
                         'AssessmentServiceMajorFound', 'assessmentServiceMajorRecommendations', 'AssessmentServiceMinorFound',
                         'assessmentServiceMinorRecommendations', 'assessmentServiceGeneralNotes')

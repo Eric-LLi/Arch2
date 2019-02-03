@@ -43,7 +43,7 @@ require_once("loadbooking.php");
             <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
                 <strong>Saving PDF. Please don't close this page. It will take a while</strong>
             </div>
-            <h2 class="content-head text-center firstH1" style="font-size: 2rem">Home Acces & Services Report</h2>
+            <h2 class="content-head text-center firstH1" style="font-size: 2rem">Home Access & Services Report</h2>
             <br>
             <p>This Report provides independent advice from a registered architect about home access & services matters as they
                 relate to your dwelling.</p>

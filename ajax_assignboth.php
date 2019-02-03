@@ -21,9 +21,9 @@
     // $h = str_replace("XXX_ARCHITECTPHONE", $b['linked_mobile'], $h);
 
     $h = str_replace("XXX_BOOKINGCODE", $b['linked_bookingcode'], $h);
-//      ChromePhp::log($b);
-//      error_log($b);
-//    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['linked_bookingcode'], $h);
+    //      ChromePhp::log($b);
+    //      error_log($b);
+    //    $h = str_replace("XXX_COMBOBOOKINGCODE", $b['linked_bookingcode'], $h);
 
     $h = str_replace("XXX_CUSTFIRSTLASTNAME", $b['custfirstname'] . ' ' . $b['custlastname'], $h);
     $h = str_replace("XXX_CUSTFIRSTNAME", $b['custfirstname'], $h);
@@ -79,8 +79,14 @@
 
   try
   {
-    if (isset($_POST['uuid']) && isset($_POST['archuuid']) && isset($_POST['inspectoruuid']) && isset($_POST['bookingcode']))
+    if (isset($_POST['uuid']) && isset($_POST['archuuid']) && isset($_POST['inspectoruuid']) && isset($_POST['bookingcode']) && isset($_POST['usercreateid']))
     {
+      $usercreateid = SharedGetPostVar("usercreateid");
+      error_log("the created user is ");
+      error_log($usercreateid);
+      $spotteremail = "";
+      $spotterfirstname = "";
+      $spotterlastname = "";
       if(!empty($_POST['linkedbookingcode']))
       {
         error_log("combined reports, and select timber one, itype is 3,used the linkedbookingcode as id to the search");
@@ -108,13 +114,14 @@
       $uuid = SharedGetPostVar("uuid");
       $archuuid = SharedGetPostVar("archuuid");
       $inspectoruuid = SharedGetPostVar("inspectoruuid");
-//       $bookingcode = SharedGetPostVar("bookingcode");
-//       $linkedbookingcode = SharedGetPostVar("linkedbookingcode");
-
+      //$bookingcode = SharedGetPostVar("bookingcode");
+      //$linkedbookingcode = SharedGetPostVar("linkedbookingcode");
+     
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $archid = SharedGetUserIdFromUuid($archuuid, $dblink);
       $inspectorid = SharedGetUserIdFromUuid($inspectoruuid, $dblink);
-
+      error_log($archid);
+      error_log($inspectorid);
       if (($archid != 0) && ($inspectorid != 0))
       {
         $dbupdate1 = "update bookings set " .
@@ -228,29 +235,88 @@
                 $booking = $dbrow;
                //error_log(print_r($booking,TRUE));
                error_log($booking['commission']);
-//                ChromePhp::log($booking);
-              // Let customer know...
-              if ($booking['custemail'] != "")
-              {
-                $emailtemplate = $reportconfirmemails[$booking['itype']];
-                $html = file_get_contents('email_architectallocation.html');
-                //error_log($html);
-                $html = doMacros($html, $booking);
-                $custemail = explode(",",$booking['custemail']);
+                // ChromePhp::log($booking);
+                // Let customer know...
+                $dbselectspotter = "select " .
+                                    "email, ".
+                                    "firstname, ".
+                                    "lastname ".
+                                    "from users ".
+                                    "where ".
+                                    "id=$usercreateid";
+                error_log($dbselectspotter);
+                if($dbspotterresult = SharedQuery($dbselectspotter, $dblink))
+                {
+                  if ($numrows = SharedNumRows($dbspotterresult))
+                  {
+                    $rc = 0;
+                    while ($dbspotterrow = SharedFetchArray($dbspotterresult))
+                    {
+                      $spotter = $dbspotterrow;
+                      $spotteremail = $spotter['email'];
+                      $spotterfirstname = $spotter['firstname'];
+                      $spotterlastname = $spotter['lastname'];
+                      error_log($spotteremail);
+                      error_log($spotterfirstname);
+                      error_log($spotterlastname);
+                      if ($booking['custemail'] != "")
+                      {
+                        $emailtemplate = $reportconfirmemails[$booking['itype']];
+                        $html = file_get_contents('email_architectallocation.html');
+                        //error_log($html);
+                        $html = doMacros($html, $booking);
+                        $custemail = explode(",",$booking['custemail']);
 
-		            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['linked_itype']] . " Assessment/Inspection Confirmation", $html);
-              }
+                        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['linked_itype']] . " Assessment/Inspection Confirmation", $html);
+                      }
 
-              // Inspector notification...
-              $html1 = file_get_contents('email_comboinspectornotification.html');
-              $html1 = doMacros($html1, $booking);
-              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1);
+                        
+                        $html1 = file_get_contents('email_comboinspectornotification.html');
+                        $html1 = doMacros($html1, $booking);
+                        $html2 = file_get_contents('email_comboarchitectnotification.html');
+                        $html2 = doMacros($html2, $booking);
 
-              // Architect notification...
-              $html2 = file_get_contents('email_comboarchitectnotification.html');
-              $html2 = doMacros($html2, $booking);
-              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2);
+                        // Inspector notification...
+                        if($usercreateid == $inspectorid)
+                        {
+                          error_log("the assigned architect/inspector is the same spotter, don't need to cc");
+                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1);
 
+                        }
+                        else
+                        {
+                          error_log("the assigned architect/inspector is not the same as spooter, need to cc");
+                          error_log($spotteremail);
+                          error_log($booking['inspectoremail']);
+                          // SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html,$spotteremail,$spotterfirstname." ".$spotterlastname);
+                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1,$spotteremail,$spotterfirstname." ".$spotterlastname);
+
+                        }
+
+                         // Architect notification...
+                        if($usercreateid == $archid)
+                        {
+                          error_log("the assigned architect/inspector is the same spotter, don't need to cc");
+                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
+
+                        }
+                        else
+                        {
+                          error_log("the assigned architect/inspector is not the same as spooter, need to cc");
+                          error_log($spotteremail);
+                          error_log($booking['architectemail']);
+                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
+
+                        }
+
+                      }
+                  }
+                  else
+                  {
+                    $msg = "Unable to fetch booking details...";
+                  }
+             
+                }
             }
           }
         }
