@@ -16,11 +16,12 @@
 
       if ($itype != 99)
       {
-        $clause = $clause . " " .   "b1.users_id=$userid or b1.userscreated_id=$userid";
+        // $clause = $clause . " " .   "b1.users_id=$userid or b1.userscreated_id=$userid";
+        $clause = $clause . " " .   "b1.users_id=$userid and ";
       }
       else
       {
-        $clause = $clause . " " .  " b1.datepaid is null and b1.budget is not null and b1.dateapproved is null and b1.datecompleted is null and b1.datecancelled is null and b1.dateexpired is null ";
+        $clause = $clause . " " .  " b1.datepaid is null and b1.budget is not null and b1.dateapproved is null and b1.datecompleted is null and b1.datecancelled is null and b1.dateclosed is null and ";
       }
 
       error_log($clause);
@@ -87,7 +88,7 @@
 
                   "b1.userscreated_id usercreatedid," .
                   "b1.usersmodified_id usermdifiedid," .
-                  
+
                   // Linked booking fro combined reports... (if any)
                   "b2.id linked_bookingcode," .
 
@@ -114,12 +115,14 @@
                   //"where " .
                   // "b1.dateexpired is null " .
                   $clause . " " .
+                  "b1.dateexpired is null " .
                   "order by " .
                   "b1.id desc, ".
                   "b1.bookings_id desc,".
                   "b2.id desc ".
+                  "limit 300 ";
                   // "b1.datecreated desc " .
-                  "limit 500";
+                  // "limit $pageSize offset $offset";
       error_log($dbselect);
       if ($dbresult = SharedQuery($dbselect, $dblink))
       {
