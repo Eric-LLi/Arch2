@@ -16,8 +16,8 @@
 
       if ($itype != 99)
       {
-        // $clause = $clause . " " .   "b1.users_id=$userid or b1.userscreated_id=$userid";
-        $clause = $clause . " " .   "b1.users_id=$userid and ";
+        $clause = $clause . " " .   "(b1.users_id=$userid or b1.userscreated_id=$userid) and ";
+        // $clause = $clause . " " .   "b1.users_id=$userid and ";
       }
       else
       {

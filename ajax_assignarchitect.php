@@ -79,16 +79,21 @@
 
   try
   {
-    if (isset($_POST['uuid']) && isset($_POST['archuuid']) && isset($_POST['bookingcode']) && isset($_POST['usercreateid']))
+    if (isset($_POST['uuid']) && isset($_POST['archuuid']) && isset($_POST['bookingcode']) && isset($_POST['usercreateid']) && isset($_POST['usercreatetype']) )
     {
       $uuid = SharedGetPostVar("uuid");
       $archuuid = SharedGetPostVar("archuuid");
       $bookingcode = SharedGetPostVar("bookingcode");
       $usercreateid = SharedGetPostVar("usercreateid");
+      $usercreatetype = SharedGetPostVar("usercreatetype");
+
       error_log("the created user is ");
       error_log($usercreateid);
       error_log("the assigned architect uuid ");
       error_log($archuuid);
+
+      error_log("the created user type is ");
+      error_log($usercreatetype);
 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $archid = SharedGetUserIdFromUuid($archuuid, $dblink);
@@ -261,13 +266,18 @@
 
                         if($usercreateid == $archid)
                         {
-                          error_log("the assigned architect/inspector is the same spotter, don't need to cc");
+                          error_log("the assigned architect/inspector is the same spotter don't need to cc");
                           SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
 
                         }
+                        else if ($usercreateid != $archid && $usercreatetype == '99')
+                        {
+                          error_log("the assigned architect/inspector is the not same spotter and but the spotter is the admin, don't need to cc");
+                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
+                        }
                         else
                         {
-                          error_log("the assigned architect/inspector is not the same as spooter, need to cc");
+                          error_log("the assigned architect/inspector is not the same as spooter and the spotter is not the admin, need to cc");
                           error_log($spotteremail);
                           error_log($booking['archemail']);
                           SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html,$spotteremail,$spotterfirstname." ".$spotterlastname);
