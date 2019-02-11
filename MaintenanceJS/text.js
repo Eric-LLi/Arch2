@@ -39,7 +39,7 @@ var whatNotRecordedBulletList3 = 'The Report will not disclose defects in inacce
 
 var whatNotRecordedBulletList4 = 'This Report does not include a pest inspection.  Clients wishing to have a full timber pest infestation check should advise Archicentre Australia who will arrange for a separate timber pest inspection.';
 
-var whatNotRecordedBulletList5 = 'This Report does not include a pest inspection.  Clients wishing to have a full timber pest infestation check should advise Archicentre Australia who will arrange for a separate timber pest inspection.';
+// var whatNotRecordedBulletList5 = 'This Report does not include a pest inspection.  Clients wishing to have a full timber pest infestation check should advise Archicentre Australia who will arrange for a separate timber pest inspection.';
 
 var whatNotRecordedBulletList6 = 'Unless specifically and explicitly agreed in writing with the owner prior to the assessment, the Report does not cover the identification in the Property of:';
 
