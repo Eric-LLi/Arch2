@@ -117,114 +117,84 @@ function determineFrontPageFooter(mode) {
     var result;
     var state = document.getElementById('HA_State').value;
     if (mode == 'final' || mode == 'save') {
-        if (state === 'NSW') {
+        if (state === 'NSW') 
+        {
             result = {
                 width: '*',
-                table: {
+                table:{
+                    widths: [80,350],
                     body: [
-                        [{
+                        [
+                            {
+                                // rowSpan:2,
                                 image: footerImage,
                                 alignment: 'left',
                                 width: 75,
                                 height: 30
                             },
                             {
-                                text: '\nNSW Nominated Architect B. Inwood Reg, No. 7108',
-                                alignment: 'left',
-                                fontSize: 7,
-                                margin: [0, 10, 0, 0],
-                                color: '#8E8B8B'
+                                text:[
+                                    {text: 'NSW Nominated Architect B. Inwood Reg, No. 7108'},
+                                    '\n For further information please call Archicentre ',
+                                    {text:'Australia ', color:'#E06666'},
+                                    'on ',
+                                    {text:'1300 13 45 13',color: '3A3333',bold: true},
+                                    '\n or go to ',
+                                    {text: 'www.archicentreaustralia.com.au',color: '3A3333',bold: true}
+                                ],
+                                fontSize: 8,
+                                color: '#8E8B8B',
+                                margin:[0,5,0,0]
                             }
-                        ],
-                        [
-
-                            {
-                                text: ['For further information please call Archicentre ', {
-                                    text: 'Australia ',
-                                    color: '#E06666'
-                                }, 'on ', {
-                                    text: '1300 13 45 13',
-                                    color: '3A3333',
-                                    bold: true,
-                                    fontSize: 8
-                                }],
-                                alignment: 'left',
-                                fontSize: 7,
-                                colSpan: 2,
-                                color: '#8E8B8B'
-                            }
-                        ],
-                        [{
-                            text: ['or go to ', {
-                                text: 'www.archicentreaustralia.com.au',
-                                bold: true,
-                                color: '3A3333',
-                                fontSize: 8
-                            }],
-                            alignment: 'left',
-                            fontSize: 7,
-                            margin: [0, -4, 0, 0],
-                            colSpan: 2,
-                            color: '#8E8B8B'
-                        }]
+                        ]
 
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -25, 10, 0]
+                margin: [40, -3, 10, 0]
             };
             return result;
-        } else {
+        } 
+        else 
+        {
             result = {
                 width: '*',
-                table: {
+                table:{
+                    widths: [80,350],
                     body: [
-                        [{
-                            image: footerImage,
-                            alignment: 'left',
-                            width: 80,
-                            height: 34
-                        }],
                         [
-
                             {
-                                text: ['For further information please call Archicentre ', {
-                                    text: 'Australia ',
-                                    color: '#E06666'
-                                }, 'on ', {
-                                    text: '1300 13 45 13',
-                                    color: '3A3333',
-                                    bold: true,
-                                    fontSize: 8
-                                }],
+                                // rowSpan:2,
+                                image: footerImage,
                                 alignment: 'left',
-                                fontSize: 7,
-                                color: '#8E8B8B'
+                                width: 75,
+                                height: 30
+                            },
+                            {
+                                text:[
+                                    'For further information please call Archicentre ',
+                                    {text:'Australia ', color:'#E06666'},
+                                    'on ',
+                                    {text:'1300 13 45 13',color: '3A3333',bold: true},
+                                    '\n or go to ',
+                                    {text: 'www.archicentreaustralia.com.au',color: '3A3333',bold: true}
+                                ],
+                                fontSize: 8,
+                                color: '#8E8B8B',
+                                margin:[0,5,0,0]
                             }
-                        ],
-                        [{
-                            text: ['or go to ', {
-                                text: 'www.archicentreaustralia.com.au',
-                                bold: true,
-                                color: '3A3333',
-                                fontSize: 8
-                            }],
-                            alignment: 'left',
-                            fontSize: 7,
-                            margin: [0, -4, 0, 0],
-                            color: '#8E8B8B'
-                        }]
+                        ]
 
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -25, 10, 0]
-            };
+                margin: [40, -3, 10, 0]
+            }
             return result;
         }
     }
 
-    if (mode == 'preview') {
+    else if (mode == 'preview') {
         result = {
             width: '*',
             text: '*** THIS IS A DRAFT OF COPY OF THE REPORT ***',

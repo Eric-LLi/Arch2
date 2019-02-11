@@ -139,8 +139,8 @@ function generatePDF(mode) {
                 columns: [{
                         // Draw Cover Page image
                         image: coverPageLogo,
-                        width: 130,
-                        height: 130
+                        width: 100,
+                        height: 100
                     },
                     {
                         text: page2Header,
@@ -162,7 +162,7 @@ function generatePDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: ['auto', '*', '*', '*'],
+                    widths: [80, 'auto','*' , 100],
                     body: [
                         [{
                             colSpan: 4,
@@ -208,7 +208,7 @@ function generatePDF(mode) {
                             }, {}, {}
                         ],
                         [
-                            $('#HA_lbVerbalSummary').text(), $('#HA_VerbalSummary').val(), $('#HA_lbDate').text(), $('#HA_Date').val()
+                            {text:$('#HA_lbVerbalSummary').text()}, $('#HA_VerbalSummary').val(), $('#HA_lbDate').text(), $('#HA_Date').val()
                         ],
                         [{
                             colSpan: 4,
@@ -228,17 +228,21 @@ function generatePDF(mode) {
                             $('#HA_lbarchitectEmail').text(), $('#HA_architectEmail').val(), $('#HA_lbarchitectPhone').text(), $('#HA_architectPhone').val(),
                         ],
                         [
-                            $('#HA_lbarchitectRef').text() + $('#HA_architectRef').val(), {
-                                colSpan: 2,
-                                text: $('#HA_lbarchitectEmail2').text() + $('#HA_architectEmail2').val()
-                            }, {},
-                            $('#HA_lbarchitectPhone2').text() + $('#HA_architectPhone2').val()
+                            {
+                                colSpan:2,
+                                text:$('#HA_lbarchitectRef').text() + "\n"+ $('#HA_architectRef').val()
+                            },{},
+                            {
+                                text: $('#HA_lbarchitectEmail2').text() + "\n"+ $('#HA_architectEmail2').val()
+                            },
+                            $('#HA_lbarchitectPhone2').text() + "\n" + $('#HA_architectPhone2').val()
                         ]
                     ]
                 }
             },
             {
                 style: 'tableContent',
+                margin:[0,0,0,10],
                 table: {
                     widths: ['100%'],
                     body: [
@@ -247,12 +251,18 @@ function generatePDF(mode) {
                             text: $('#HA_DivDetailsSought').attr('data-title')
                         }],
                         [{
-                            text: $('#HA_AdviceSought').val()
+                            text: $('#HA_AdviceSought').val(),
+                            fontSize:9
                         }]
                     ]
                 } 
             },
             {
+               style:{
+                    fontSize: 8,
+                    //bold: true,
+                    margin: [0, 0, 0, 0]
+                },
                 table:{
                     widths: ['100%'],
                     body:[
@@ -267,8 +277,6 @@ function generatePDF(mode) {
                                         text: page2_2
                                     }
                                    ],
-                                   fontSize:8,
-                                   margin:[0,2,0,0]
                             }
                         ]
                     ]
@@ -665,10 +673,10 @@ function generatePDF(mode) {
         ],
         styles: {
             coverPageHeader: {
-                fontSize: 24,
+                fontSize: 22,
                 bold: true,
                 color: 'red',
-                margin: [15, 50, 0, 20]
+                margin: [15, 30, 0, 15]
             },
             pageTopHeader: {
                 fontSize: 20,
@@ -685,7 +693,7 @@ function generatePDF(mode) {
             tableContent: {
                 fontSize: 10,
                 //bold: true,
-                margin: [0, 0, 0, 20]
+                margin: [0, 0, 0, 15]
             },
             Contents: {
                 fontSize: 10
@@ -694,6 +702,7 @@ function generatePDF(mode) {
                 fontSize: 9
                 //margin:[0,5,0,5]
             },
+
         }
     };
     if (mode === 'save') {
