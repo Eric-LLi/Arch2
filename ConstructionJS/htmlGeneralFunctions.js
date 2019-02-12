@@ -105,6 +105,14 @@ function startNumber(id)
 function assignNumber(id)
 {
     var keycode = (event.keyCode ? event.keyCode : event.which);
+    var value = document.getElementById(id).value;
+    if(value == "") //empty input, need to assign '1.' first. 
+    {
+        var number = 1;
+        //console.log(getIt(id).split('\n').length);
+        document.getElementById(id).value += number + ". ";
+    }
+
     //if equal to 13, means user hit the "Return" key
     if (keycode == '13') {
         var number = getIt(id).split('\n').length + 1;

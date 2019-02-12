@@ -1117,9 +1117,14 @@ function getExternalElements()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('externalSites'),
-                        fontSize: 9
+                        ol:giveMeTheNumber('externalSites'),
+                        //text:getIt('listOfDefective'),
+                        style: 'tableText'
                     }
+                    // {
+                    //     text:getIt('externalSites'),
+                    //     fontSize: 9
+                    // }
 
                 ],
                 [
@@ -1128,9 +1133,14 @@ function getExternalElements()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('externalOutBuilding'),
-                        fontSize: 9
+                        ol:giveMeTheNumber('externalOutBuilding'),
+                        //text:getIt('listOfDefective'),
+                        style: 'tableText'
                     }
+                    // {
+                    //     text:getIt('externalOutBuilding'),
+                    //     fontSize: 9
+                    // }
 
                 ],
                 [
@@ -1139,9 +1149,14 @@ function getExternalElements()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('externalBuilding'),
-                        fontSize: 9
+                        ol:giveMeTheNumber('externalBuilding'),
+                        //text:getIt('listOfDefective'),
+                        style: 'tableText'
                     }
+                    // {
+                    //     text:getIt('externalBuilding'),
+                    //     fontSize: 9
+                    // }
 
                 ],
                 [
@@ -1150,9 +1165,14 @@ function getExternalElements()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('externalAccessLimitation'),
-                        fontSize: 9
+                        ol:giveMeTheNumber('externalAccessLimitation'),
+                        //text:getIt('listOfDefective'),
+                        style: 'tableText'
                     }
+                    // {
+                    //     text:getIt('externalAccessLimitation'),
+                    //     fontSize: 9
+                    // }
 
                 ]
 
@@ -1197,9 +1217,14 @@ function getInternalAreas()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('internalLiving'),
-                        fontSize:9
+                        ol:giveMeTheNumber('internalLiving'),
+                        //text:getIt('listOfDefective'),
+                        style: 'tableText'
                     }
+                    // {
+                    //     text:getIt('internalLiving'),
+                    //     fontSize:9
+                    // }
 
                 ],
                 [
@@ -1208,9 +1233,14 @@ function getInternalAreas()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('internalServiceAreas'),
-                        fontSize:9
+                        ol:giveMeTheNumber('internalServiceAreas'),
+                        //text:getIt('listOfDefective'),
+                        style: 'tableText'
                     }
+                    // {
+                    //     text:getIt('internalServiceAreas'),
+                    //     fontSize:9
+                    // }
 
                 ],
                 [
@@ -1219,9 +1249,14 @@ function getInternalAreas()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('internalServices'),
-                        fontSize:9
+                        ol:giveMeTheNumber('internalServices'),
+                        //text:getIt('listOfDefective'),
+                        style: 'tableText'
                     }
+                    // {
+                    //     text:getIt('internalServices'),
+                    //     fontSize:9
+                    // }
 
                 ],
                 [
@@ -1230,9 +1265,14 @@ function getInternalAreas()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
-                        text:getIt('internalAccessLimitations'),
-                        fontSize:9
+                        ol:giveMeTheNumber('internalAccessLimitations'),
+                        //text:getIt('listOfDefective'),
+                        style: 'tableText'
                     }
+                    // {
+                    //     text:getIt('internalAccessLimitations'),
+                    //     fontSize:9
+                    // }
 
                 ]
 
