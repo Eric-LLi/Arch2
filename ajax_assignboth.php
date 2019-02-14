@@ -280,51 +280,52 @@
                         $html2 = file_get_contents('email_comboarchitectnotification.html');
                         $html2 = doMacros($html2, $booking);
 
-                        // Inspector notification...
-                        if($usercreateid == $inspectorid)
+
+                        if($usercreatetype == '99')
                         {
-                          error_log("the assigned inspector is the same spotter don't need to cc");
+                          //The spotter is the admin, don't need to cc the email to him at all. 
+                          error_log("the spotter is the admin, don't need to cc at all. only send to the assigned inspector and architect");
+
+                          // Inspector notification...
                           SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1);
 
-                        }
-                        else if($usercreateid != $inspectorid && $usercreatetype == '99')
-                        {
-                          error_log("the assigned inspector is not the same spotter, but the spotter is the admin, don't need to cc");
-                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1);
-
+                          // Architect notification...
+                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2);
                         }
                         else
                         {
-                          error_log("the assigned inspector is not the same as spooter and the spotter is not the admin, need to cc");
-                          error_log($spotteremail);
-                          error_log($booking['inspectoremail']);
-                          // SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html,$spotteremail,$spotterfirstname." ".$spotterlastname);
-                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1,$spotteremail,$spotterfirstname." ".$spotterlastname);
+                            // the spotter is not the admin, so need to cc. 
+                            // Inspector notification...
+                            if($usercreateid == $inspectorid)
+                            {
+                              error_log("the assigned inspector is the same spotter don't need to cc");
+                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1);
 
+                            }
+                            else
+                            {
+                              error_log("the assigned inspector is not the same as spooter and the spotter is not the admin, need to cc");
+                              error_log($spotteremail);
+                              error_log($booking['inspectoremail']);
+                              // SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html,$spotteremail,$spotterfirstname." ".$spotterlastname);
+                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1,$spotteremail,$spotterfirstname." ".$spotterlastname);
+                            }
+                            // Architect notification...
+                            if($usercreateid == $archid)
+                            {
+                              error_log("the assigned architect is the same spotter don't need to cc");
+                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
+
+                            }
+                            else
+                            {
+                              error_log("the assigned architect is not the same as spooter  and the spotter is not the admin, need to cc");
+                              error_log($spotteremail);
+                              error_log($booking['architectemail']);
+                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
+
+                            }
                         }
-
-                         // Architect notification...
-                        if($usercreateid == $archid)
-                        {
-                          error_log("the assigned architect is the same spotter don't need to cc");
-                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
-
-                        }
-                        if($usercreateid != $archid && $usercreatetype == '99')
-                        {
-                          error_log("the assigned architect is not the same spotter, but the spotter is the admin, don't need to cc");
-                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
-
-                        }
-                        else
-                        {
-                          error_log("the assigned architect is not the same as spooter  and the spotter is not the admin, need to cc");
-                          error_log($spotteremail);
-                          error_log($booking['architectemail']);
-                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
-
-                        }
-
                       }
                   }
                   else
