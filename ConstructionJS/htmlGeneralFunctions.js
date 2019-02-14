@@ -4,6 +4,7 @@
 
 var firstRemove30th = true;
 
+
 function onload()
 {
     reorderImages();
@@ -104,21 +105,87 @@ function startNumber(id)
 }
 function assignNumber(id)
 {
+    var totalParagraphs;
     var keycode = (event.keyCode ? event.keyCode : event.which);
     var value = document.getElementById(id).value;
+    if(id == 'listOfDefective')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length;
+    }
+    else if(id == 'externalSites')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length
+    }
+    else if (id == 'externalOutBuilding')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
+    }
+    else if (id == 'externalBuilding')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
+                         + getIt('externalBuilding').split('\n').length 
+    }
+    else if (id == 'externalAccessLimitation')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
+                         + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length 
+    }
+    else if (id == 'internalLiving')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
+                        + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length  
+    }
+    else if (id == 'internalServiceAreas')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length  
+                        + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length  
+                        + getIt('internalServiceAreas').split('\n').length 
+    }
+    else if (id == 'internalServices')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
+                            + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length  
+                            + getIt('internalServiceAreas').split('\n').length + getIt('internalServices').split('\n').length
+    }
+    else if (id == 'internalAccessLimitations')
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
+                            + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length  
+                            + getIt('internalServiceAreas').split('\n').length + getIt('internalServices').split('\n').length +  getIt('internalAccessLimitations').split('\n').length
+    }
+  
     if(value == "") //empty input, need to assign '1.' first. 
     {
-        var number = 1;
         //console.log(getIt(id).split('\n').length);
-        document.getElementById(id).value += number + ". ";
+        document.getElementById(id).value += totalParagraphs + ".  ";
     }
 
     //if equal to 13, means user hit the "Return" key
     if (keycode == '13') {
-        var number = getIt(id).split('\n').length + 1;
+        //number = getIt(id).split('\n').length + 1;
+        totalParagraphs = totalParagraphs + 1;
         //console.log(getIt(id).split('\n').length);
-        document.getElementById(id).value += number + ". ";
+        document.getElementById(id).value += totalParagraphs + ".  ";
         //number = number + 1;
+        refreshExternalSiteNumber();
+        refreshExternalOutBuilingNumber();
+        refreshExternalBuilingNumber();
+        refreshExternalAccessNumber();
+        refreshInternalLivingNumber();
+        refreshInternalServiceAreasNumber();
+        refreshInternalServicessNumber();
+        refreshInternalAccessNumber();
+    }
+    if(keycode == 8)
+    {
+        refreshExternalSiteNumber();
+        refreshExternalOutBuilingNumber();
+        refreshExternalBuilingNumber();
+        refreshExternalAccessNumber();
+        refreshInternalLivingNumber();
+        refreshInternalServiceAreasNumber();
+        refreshInternalServicessNumber();
+        refreshInternalAccessNumber();
     }
     var txtval = document.getElementById(id).value;
     if (txtval.substr(txtval.length - 1) == '\n') {
@@ -127,7 +194,159 @@ function assignNumber(id)
 }
 
 
+/**
+ * Remove all the empty elements in an array
+ * */
+function cleanArray(actual) {
+    var newArray = [];
+    for (var i = 0; i < actual.length; i++)
+    {
+        if (actual[i])
+        {
+            newArray.push(actual[i]);
+        }
+    }
+    //console.log(newArray);
+    return newArray;
+}
 
+function refreshExternalSiteNumber()
+{
+    var externalSiteArray = cleanArray(getIt('externalSites').split('\n'))
+    var totalParagraphs = getIt('listOfDefective').split('\n').length;
+    var externalSiteText = ""; 
+    if(externalSiteArray.length>0)
+    {
+        for(var i = 0;i<externalSiteArray.length;i++)
+        {
+            let nextParagraphs = totalParagraphs + i + 1;
+            var text = nextParagraphs + ". " + externalSiteArray[i].slice(3).trim();
+            externalSiteText = externalSiteText + text + '\n';
+        }
+    }
+    document.getElementById('externalSites').value = externalSiteText;
+}
+function refreshExternalOutBuilingNumber()
+{
+    var externalOutArray = cleanArray(getIt('externalOutBuilding').split('\n'))
+    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length
+    var externalOutText = ""; 
+    if(externalOutArray.length>0)
+    {
+        for(var i = 0;i<externalOutArray.length;i++)
+        {
+            let nextParagraphs = totalParagraphs + i + 1;
+            var text = nextParagraphs + ". " + externalOutArray[i].slice(3).trim();
+            externalOutText = externalOutText + text + '\n';
+        }
+    }
+    document.getElementById('externalOutBuilding').value = externalOutText;
+}
+function refreshExternalBuilingNumber()
+{
+    var TextArray = cleanArray(getIt('externalBuilding').split('\n'))
+    var totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
+    var nextText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            let nextParagraphs = totalParagraphs + i + 1;
+            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+            nextText = nextText + text + '\n';
+        }
+    }
+    document.getElementById('externalBuilding').value = nextText;
+}
+function refreshExternalAccessNumber()
+{
+    var TextArray = cleanArray(getIt('externalAccessLimitation').split('\n'))
+    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
+                            + getIt('externalBuilding').split('\n').length 
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            let nextParagraphs = totalParagraphs + i + 1;
+            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+            newText = newText + text + '\n';
+        }
+    }
+    document.getElementById('externalAccessLimitation').value = newText;
+}
+
+function refreshInternalLivingNumber()
+{
+    var TextArray = cleanArray(getIt('internalLiving').split('\n'))
+    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
+                            + getIt('externalBuilding').split('\n').length  + getIt('externalAccessLimitation').split('\n').length 
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            let nextParagraphs = totalParagraphs + i + 1;
+            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+            newText = newText + text + '\n';
+        }
+    }
+    document.getElementById('internalLiving').value = newText;
+}
+
+function refreshInternalServiceAreasNumber()
+{
+    var TextArray = cleanArray(getIt('internalServiceAreas').split('\n'))
+    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
+                            + getIt('externalBuilding').split('\n').length  + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            let nextParagraphs = totalParagraphs + i + 1;
+            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+            newText = newText + text + '\n';
+        }
+    }
+    document.getElementById('internalServiceAreas').value = newText;
+}
+function refreshInternalServicessNumber()
+{
+    var TextArray = cleanArray(getIt('internalServices').split('\n'))
+    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
+                            + getIt('externalBuilding').split('\n').length  + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length
+                            + getIt('internalServiceAreas').split('\n').length
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            let nextParagraphs = totalParagraphs + i + 1;
+            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+            newText = newText + text + '\n';
+        }
+    }
+    document.getElementById('internalServices').value = newText;
+}
+function refreshInternalAccessNumber()
+{
+    var TextArray = cleanArray(getIt('internalAccessLimitations').split('\n'))
+    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
+                            + getIt('externalBuilding').split('\n').length  + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length
+                            + getIt('internalServiceAreas').split('\n').length  + getIt('internalServices').split('\n').length 
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            let nextParagraphs = totalParagraphs + i + 1;
+            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+            newText = newText + text + '\n';
+        }
+    }
+    document.getElementById('internalAccessLimitations').value = newText;
+}
 
 function moreConstructionSummary()
 {

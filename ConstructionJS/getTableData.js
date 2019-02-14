@@ -1117,6 +1117,7 @@ function getExternalElements()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('externalSites'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'
@@ -1133,6 +1134,7 @@ function getExternalElements()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('externalOutBuilding'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'
@@ -1149,6 +1151,7 @@ function getExternalElements()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('externalBuilding'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'
@@ -1165,6 +1168,7 @@ function getExternalElements()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('externalAccessLimitation'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'
@@ -1217,6 +1221,7 @@ function getInternalAreas()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('internalLiving'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'
@@ -1233,6 +1238,7 @@ function getInternalAreas()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('internalServiceAreas'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'
@@ -1249,6 +1255,7 @@ function getInternalAreas()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('internalServices'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'
@@ -1265,6 +1272,7 @@ function getInternalAreas()
                         style: 'tableBoldTextAlignLeft'
                     },
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('internalAccessLimitations'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'
@@ -1313,6 +1321,7 @@ function getListOfDefective()
                 ],
                 [
                     {
+                        start: getTotalParagraphs(),
                         ol:giveMeTheNumber('listOfDefective'),
                         //text:getIt('listOfDefective'),
                         style: 'tableText'

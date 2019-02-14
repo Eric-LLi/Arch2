@@ -544,7 +544,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="listOfDefective" rows="10" class="form-control" style="padding: 2px 2px; height: 200px" title="evident defective" onfocus="startNumber('listOfDefective')" onkeyup="assignNumber('listOfDefective')"></textarea>
+                        <textarea id="listOfDefective" rows="10" class="form-control" style="padding: 2px 2px; height: 200px" title="evident defective" onkeyup="assignNumber('listOfDefective')"></textarea>
                     </td>
                 </tr>
             </table>
