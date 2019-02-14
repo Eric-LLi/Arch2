@@ -544,7 +544,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="listOfDefective" rows="10" class="form-control" style="padding: 2px 2px; height: 200px" title="evident defective" onfocus="startNumber('listOfDefective')" onkeyup="assignNumber('listOfDefective')"></textarea>
+                        <textarea id="listOfDefective" rows="10" class="form-control" style="padding: 2px 2px; height: 200px" title="evident defective" onkeyup="assignNumber('listOfDefective')"></textarea>
                     </td>
                 </tr>
             </table>
@@ -558,7 +558,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="externalSites" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="External Sites"></textarea>
+                        <textarea id="externalSites" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="External Sites" onkeyup="assignNumber('externalSites')"></textarea>
                     </td>
                 </tr>
                 <tr style="width:100%">
@@ -566,7 +566,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="externalOutBuilding" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="External Out Building"></textarea>
+                        <textarea id="externalOutBuilding" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="External Out Building" onkeyup="assignNumber('externalOutBuilding')"></textarea>
                     </td>
                 </tr>
                 <tr style="width:100%">
@@ -574,7 +574,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="externalBuilding" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="external Building"></textarea>
+                        <textarea id="externalBuilding" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="external Building" onkeyup="assignNumber('externalBuilding')"></textarea>
                     </td>
                 </tr>
                 <tr style="width:100%">
@@ -582,7 +582,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="externalAccessLimitation" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="External Access Limitation"></textarea>
+                        <textarea id="externalAccessLimitation" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="External Access Limitation" onkeyup="assignNumber('externalAccessLimitation')"></textarea>
                     </td>
                 </tr>
             </table>
@@ -596,7 +596,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="internalLiving" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="Internal Living"></textarea>
+                        <textarea id="internalLiving" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="Internal Living" onkeyup="assignNumber('internalLiving')"></textarea>
                     </td>
                 </tr>
                 <tr style="width:100%">
@@ -604,7 +604,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="internalServiceAreas" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="Internal Service Areas"></textarea>
+                        <textarea id="internalServiceAreas" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="Internal Service Areas" onkeyup="assignNumber('internalServiceAreas')"></textarea>
                     </td>
                 </tr>
                 <tr style="width:100%">
@@ -612,7 +612,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="internalServices" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="Internal Services"></textarea>
+                        <textarea id="internalServices" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="Internal Services" onkeyup="assignNumber('internalServices')"></textarea>
                     </td>
                 </tr>
                 <tr style="width:100%">
@@ -620,7 +620,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <textarea id="internalAccessLimitations" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="Internal Access Limitation"></textarea>
+                        <textarea id="internalAccessLimitations" rows="10" class="form-control" style="padding: 2px 2px; height: 100px" title="Internal Access Limitation" onkeyup="assignNumber('internalAccessLimitations')"></textarea>
                     </td>
                 </tr>
             </table>

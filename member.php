@@ -4487,7 +4487,8 @@
                   uuid: '<?php echo $_SESSION['uuid']; ?>',
                   bookingcode: row.bookingcode,
                   archuuid: args.archuuid,
-                  usercreateid:row.usercreatedid
+                  usercreateid:row.usercreatedid,
+                  usercreatetype:row.usercreatetype
                 },
                 function(result)
                 {
@@ -4528,7 +4529,8 @@
                   linked_bookingcode: row.linked_bookingcode,
                   archuuid: args.archuuid,
                   inspectoruuid: args.inspectoruuid,
-                  usercreateid:row.usercreatedid
+                  usercreateid:row.usercreatedid,
+                  usercreatetype:row.usercreatetype
                 },
                 function(result)
                 {

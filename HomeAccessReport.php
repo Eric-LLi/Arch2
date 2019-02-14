@@ -1322,17 +1322,17 @@ require_once("loadbooking.php");
         <script src="HomeAccessJS/pdf.js"></script>
         <script src="HomeAccessJS/pdf.worker.js"></script>
         <!--Text-->
-        <script src="HomeAccessJS/text.js"></script>
+        <script src="HomeAccessJS/text.js?<?php echo time(); ?>"></script>
         <!--Scripts-->
         <script src="js/images.js"></script>
         <script src="js/loadImageJS/load-image.all.min.js"></script>
         <!--General Functions-->
-        <script type="text/javascript" src="HomeAccessJS/htmlGeneralFunctions.js"></script>
-        <script src="HomeAccessJS/pdfGeneralFunctions.js"></script>
+        <script type="text/javascript" src="HomeAccessJS/htmlGeneralFunctions.js?<?php echo time(); ?>"></script>
+        <script src="HomeAccessJS/pdfGeneralFunctions.js?<?php echo time(); ?>"></script>
         <!--PDF Generator-->
-        <script src="HomeAccessJS/PDFGenerator.js"></script>
+        <script src="HomeAccessJS/PDFGenerator.js?<?php echo time(); ?>"></script>
         <!--Table Data-->
-        <script src="HomeAccessJS/getTableData.js"></script>
+        <script src="HomeAccessJS/getTableData.js?<?php echo time(); ?>"></script>
         <?php require_once("saveloaddata.php"); ?>
     </body>
 

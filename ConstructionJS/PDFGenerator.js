@@ -11,6 +11,7 @@ function generatePDF(mode) {
     $("button").prop("disabled", true);
 
     resetImageCounting();
+    resetTotalParagraphs();
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isMobile = {

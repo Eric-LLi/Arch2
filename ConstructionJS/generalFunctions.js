@@ -8,6 +8,21 @@
 
 var ImageCounting = 1;
 
+var totalParagraphs = 1;
+
+/**
+ * Draw the key table - BetterTENG
+ * */
+function resetTotalParagraphs() {
+    totalParagraphs = 1;
+}
+
+function getTotalParagraphs()
+{
+    // console.log("the current total paragrahs: " + totalParagraphs);
+    return totalParagraphs;
+}
+
 function resetImageCounting()
 {
     ImageCounting = 1;
@@ -542,6 +557,7 @@ function giveMeTheNumber(id) {
     var data = [];
 
     makeItAnArr = cleanArray(getIt(id).split('\n'));
+    totalParagraphs = totalParagraphs + makeItAnArr.length;
     //console.log(makeItAnArr);
 
     if (makeItAnArr.length != 0)
@@ -551,7 +567,7 @@ function giveMeTheNumber(id) {
             //console.log(makeItAnArr[i].slice(2));
             var content =
             {
-                text:makeItAnArr[i].slice(2),
+                text:makeItAnArr[i].slice(3),
                 margin:[0,0,0,3],
                 alignment:'left'
             };

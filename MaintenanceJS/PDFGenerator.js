@@ -261,10 +261,10 @@ function generatePDF(mode) {
                                                 text: whatNotRecordedBulletList4,
                                                 style: 'bulletMargin'
                                             },
-                                            {
-                                                text: whatNotRecordedBulletList5,
-                                                style: 'bulletMargin'
-                                            },
+                                            // {
+                                            //     text: whatNotRecordedBulletList5,
+                                            //     style: 'bulletMargin'
+                                            // },
                                             {
                                                 text: whatNotRecordedBulletList6,
                                                 style: 'bulletMargin'
