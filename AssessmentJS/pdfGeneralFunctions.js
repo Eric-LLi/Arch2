@@ -3,6 +3,8 @@
  */
 
 var totalParagraphs = 1;
+var date = new Date();
+var currentYear = date.getFullYear();
 
 /**
  * Draw the key table - BetterTENG
@@ -267,6 +269,7 @@ function drawNotesTable(tableID, limitationSelectName, limitationNoteName, major
     2md determine whether it is a NSW report if it is the final mode
  */
 function determineFooter(mode) {
+    // console.log("current Year " + currentYear);
     var result;
     var state = document.getElementById('9').value;
     if (mode == 'final' || mode == 'save') {
@@ -291,24 +294,17 @@ function determineFooter(mode) {
                             //     height: 34
                             // },
                             {
-                                text:'NSW Nominated Architect B. Inwood Reg, No. 7108 \n © COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                                text:[
+                                    'NSW Nominated Architect B. Inwood Reg, No. 7108 \n © COPYRIGHT ',
+                                    {text:currentYear},
+                                    ' ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613'
+                                ],
                                 alignment: 'left',
                                 fontSize: 7,
                                 margin: [0, 5, 0, 0],
                                 color: '#8E8B8B'
                             }
                         ]
-                        // [
-                        //     '',
-                        //     {
-                        //         text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
-                        //         alignment: 'left',
-                        //         fontSize: 7,
-                        //         margin: [0, 0, 0, 0],
-                        //         color: '#8E8B8B'
-                        //     }
-                        // ]
-
                     ]
                 },
                 layout: 'noBorders',
@@ -330,7 +326,12 @@ function determineFooter(mode) {
                                 height: 31
                             },
                             {
-                                text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                                text:[
+                                    '© COPYRIGHT ',
+                                    {text:currentYear},
+                                    ' ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613'
+                                ],
+                                // text: '© COPYRIGHT 2019 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
                                 margin: [0, 22, 0, 0],

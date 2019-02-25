@@ -1,6 +1,8 @@
 /**
  * Created by Fafa Lai on 24/10/17.
  */
+var date = new Date();
+var currentYear = date.getFullYear();
 
 function reorderDrawings()
 {
@@ -114,7 +116,11 @@ function determineFooter(mode) {
                             //     height: 34
                             // },
                             {
-                                text:'\nNSW Nominated Architect B. Inwood Reg, No. 7108 \n\© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                                text:[
+                                    'NSW Nominated Architect B. Inwood Reg, No. 7108 \n © COPYRIGHT ',
+                                    {text:currentYear},
+                                    ' ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613'
+                                ],
                                 alignment: 'left',
                                 fontSize: 7,
                                 margin: [0, 5, 0, 0],
@@ -153,7 +159,12 @@ function determineFooter(mode) {
                                 height: 34
                             },
                             {
-                                text: '© COPYRIGHT 2016 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
+                                text:[
+                                    '© COPYRIGHT ',
+                                    {text:currentYear},
+                                    ' ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613'
+                                ],
+                                // text: '© COPYRIGHT 2019 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
                                 margin: [0, 22, 0, 0],
