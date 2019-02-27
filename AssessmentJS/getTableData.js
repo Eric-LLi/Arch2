@@ -2150,7 +2150,7 @@ function getAssessmentStairs() {
                         style: 'tableText'
                     }, {
                         border: [true, false, true, true],
-                        text: 'Walls',
+                        text: 'Floor Finish',
                         style: 'tableText'
                     }, {
                         border: [true, false, true, true],
@@ -2186,7 +2186,7 @@ function getAssessmentStairs() {
                     text: structureCheck,
                     style: 'tableText'
                 }, {
-                    text: 'Walls',
+                    text: 'Floor Finish',
                     style: 'tableText'
                 }, {
                     text: floorCheck,
