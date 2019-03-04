@@ -105,91 +105,91 @@ function startNumber(id)
 }
 function assignNumber(id)
 {
-    var totalParagraphs;
+    console.log(id);
     var keycode = (event.keyCode ? event.keyCode : event.which);
     var value = document.getElementById(id).value;
-    if(id == 'listOfDefective')
+    var totalParagraphs = 0;
+    if(getIt('listOfDefective') != "")
     {
-        totalParagraphs = getIt('listOfDefective').split('\n').length;
+        totalParagraphs = totalParagraphs + getIt('listOfDefective').split('\n').length;
     }
-    else if(id == 'externalSites')
+
+    if(getIt('externalSites') != "")
     {
-        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length
+        totalParagraphs = totalParagraphs + getIt('externalSites').split('\n').length;
     }
-    else if (id == 'externalOutBuilding')
+
+    if(getIt('externalOutBuilding') != "")
     {
-        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
+        totalParagraphs = totalParagraphs + getIt('externalOutBuilding').split('\n').length;
     }
-    else if (id == 'externalBuilding')
+    if(getIt('externalBuilding') != "")
     {
-        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
-                         + getIt('externalBuilding').split('\n').length 
-    }
-    else if (id == 'externalAccessLimitation')
+        totalParagraphs = totalParagraphs + getIt('externalBuilding').split('\n').length;
+    } 
+    if(getIt('externalAccessLimitation') != "")
     {
-        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
-                         + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length 
-    }
-    else if (id == 'internalLiving')
+        totalParagraphs = totalParagraphs + getIt('externalAccessLimitation').split('\n').length;
+    } 
+    if(getIt('internalLiving') != "")
     {
-        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
-                        + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length  
-    }
-    else if (id == 'internalServiceAreas')
+        totalParagraphs = totalParagraphs + getIt('internalLiving').split('\n').length;
+    } 
+    if(getIt('internalServiceAreas') != "")
     {
-        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length  
-                        + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length  
-                        + getIt('internalServiceAreas').split('\n').length 
-    }
-    else if (id == 'internalServices')
+        totalParagraphs = totalParagraphs + getIt('internalServiceAreas').split('\n').length;
+    } 
+    if(getIt('internalServices') != "")
     {
-        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
-                            + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length  
-                            + getIt('internalServiceAreas').split('\n').length + getIt('internalServices').split('\n').length
-    }
-    else if (id == 'internalAccessLimitations')
-    {
-        totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
-                            + getIt('externalBuilding').split('\n').length + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length  
-                            + getIt('internalServiceAreas').split('\n').length + getIt('internalServices').split('\n').length +  getIt('internalAccessLimitations').split('\n').length
-    }
+        totalParagraphs = totalParagraphs + getIt('internalServices').split('\n').length;
+    } 
   
     if(value == "") //empty input, need to assign '1.' first. 
     {
+        console.log("empty input");
         //console.log(getIt(id).split('\n').length);
         document.getElementById(id).value += totalParagraphs + ".  ";
     }
-
     //if equal to 13, means user hit the "Return" key
     if (keycode == '13') {
         //number = getIt(id).split('\n').length + 1;
         totalParagraphs = totalParagraphs + 1;
-        //console.log(getIt(id).split('\n').length);
+        // console.log(getIt(id).split('\n').length);
         document.getElementById(id).value += totalParagraphs + ".  ";
         //number = number + 1;
-        refreshExternalSiteNumber();
-        refreshExternalOutBuilingNumber();
-        refreshExternalBuilingNumber();
-        refreshExternalAccessNumber();
-        refreshInternalLivingNumber();
-        refreshInternalServiceAreasNumber();
-        refreshInternalServicessNumber();
-        refreshInternalAccessNumber();
+        refreshListOfDectiveSiteNumber(false);
+        refreshExternalSiteNumber(false);
+        refreshExternalOutBuilingNumber(false);
+        refreshExternalBuilingNumber(false);
+        refreshExternalAccessNumber(false);
+        refreshInternalLivingNumber(false);
+        refreshInternalServiceAreasNumber(false);
+        refreshInternalServicessNumber(false);
+        refreshInternalAccessNumber(false);
     }
+    //if equal to 8, measn user remove this line. 
     if(keycode == 8)
     {
-        refreshExternalSiteNumber();
-        refreshExternalOutBuilingNumber();
-        refreshExternalBuilingNumber();
-        refreshExternalAccessNumber();
-        refreshInternalLivingNumber();
-        refreshInternalServiceAreasNumber();
-        refreshInternalServicessNumber();
-        refreshInternalAccessNumber();
+        refreshListOfDectiveSiteNumber(true);
+        refreshExternalSiteNumber(true);
+        refreshExternalOutBuilingNumber(true);
+        refreshExternalBuilingNumber(true);
+        refreshExternalAccessNumber(true);
+        refreshInternalLivingNumber(true);
+        refreshInternalServiceAreasNumber(true);
+        refreshInternalServicessNumber(true);
+        refreshInternalAccessNumber(true);
     }
     var txtval = document.getElementById(id).value;
+    // document.getElementById(id).value = txtval;
     if (txtval.substr(txtval.length - 1) == '\n') {
-        document.getElementById(id).value = txtval.substring(0, txtval.length - 1);
+        // console.log("I am here");
+        // console.log(txtval);
+        // console.log(txtval.length);
+        var newTxtval = txtval.substring(0, txtval.length - 1);
+        // console.log(newTxtval);
+        
+        document.getElementById(id).value = newTxtval;
     }
 }
 
@@ -198,6 +198,7 @@ function assignNumber(id)
  * Remove all the empty elements in an array
  * */
 function cleanArray(actual) {
+    console.log(actual);
     var newArray = [];
     for (var i = 0; i < actual.length; i++)
     {
@@ -210,139 +211,947 @@ function cleanArray(actual) {
     return newArray;
 }
 
-function refreshExternalSiteNumber()
+function refreshListOfDectiveSiteNumber(minus)
 {
-    var externalSiteArray = cleanArray(getIt('externalSites').split('\n'))
-    var totalParagraphs = getIt('listOfDefective').split('\n').length;
-    var externalSiteText = ""; 
-    if(externalSiteArray.length>0)
-    {
-        for(var i = 0;i<externalSiteArray.length;i++)
-        {
-            let nextParagraphs = totalParagraphs + i + 1;
-            var text = nextParagraphs + ". " + externalSiteArray[i].slice(3).trim();
-            externalSiteText = externalSiteText + text + '\n';
-        }
-    }
-    document.getElementById('externalSites').value = externalSiteText;
-}
-function refreshExternalOutBuilingNumber()
-{
-    var externalOutArray = cleanArray(getIt('externalOutBuilding').split('\n'))
-    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length
-    var externalOutText = ""; 
-    if(externalOutArray.length>0)
-    {
-        for(var i = 0;i<externalOutArray.length;i++)
-        {
-            let nextParagraphs = totalParagraphs + i + 1;
-            var text = nextParagraphs + ". " + externalOutArray[i].slice(3).trim();
-            externalOutText = externalOutText + text + '\n';
-        }
-    }
-    document.getElementById('externalOutBuilding').value = externalOutText;
-}
-function refreshExternalBuilingNumber()
-{
-    var TextArray = cleanArray(getIt('externalBuilding').split('\n'))
-    var totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length 
-    var nextText = ""; 
-    if(TextArray.length>0)
-    {
-        for(var i = 0;i<TextArray.length;i++)
-        {
-            let nextParagraphs = totalParagraphs + i + 1;
-            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
-            nextText = nextText + text + '\n';
-        }
-    }
-    document.getElementById('externalBuilding').value = nextText;
-}
-function refreshExternalAccessNumber()
-{
-    var TextArray = cleanArray(getIt('externalAccessLimitation').split('\n'))
-    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
-                            + getIt('externalBuilding').split('\n').length 
+    console.log("refreshListOfDectiveSiteNumber");
+    console.log(getIt('listOfDefective'));
+    var TextArray = cleanArray(getIt('listOfDefective').split('\n'))
+    var  totalParagraphs = 0;
     var newText = ""; 
     if(TextArray.length>0)
     {
         for(var i = 0;i<TextArray.length;i++)
         {
-            let nextParagraphs = totalParagraphs + i + 1;
-            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
-            newText = newText + text + '\n';
+            
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        // console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
+            
+        }
+    }
+    document.getElementById('listOfDefective').value = newText;
+}
+
+function refreshExternalSiteNumber(minus)
+{
+    // console.log("refreshExternalSiteNumber");
+    var totalParagraphs = 0;
+    var TextArray = cleanArray(getIt('externalSites').split('\n'))
+    if(getIt('listOfDefective') != "")
+    {
+        totalParagraphs = getIt('listOfDefective').split('\n').length;
+    }
+
+    
+    // console.log(totalParagraphs);
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            // console.log(i);
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        // console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
+            
+        }
+    }
+    document.getElementById('externalSites').value = newText;
+}
+function refreshExternalOutBuilingNumber(minus)
+{
+    var TextArray = cleanArray(getIt('externalOutBuilding').split('\n'))
+    var totalParagraphs = 0;
+    if(getIt('listOfDefective') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('listOfDefective').split('\n').length;
+    }
+
+    if(getIt('externalSites') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalSites').split('\n').length;
+    }
+    
+    // console.log(totalParagraphs);
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        // console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
+            
+        }
+    }
+    document.getElementById('externalOutBuilding').value = newText;
+}
+function refreshExternalBuilingNumber(minus)
+{
+    var TextArray = cleanArray(getIt('externalBuilding').split('\n'))
+
+    var totalParagraphs = 0;
+    if(getIt('listOfDefective') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('listOfDefective').split('\n').length;
+    }
+
+    if(getIt('externalSites') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalSites').split('\n').length;
+    }
+
+    if(getIt('externalOutBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalOutBuilding').split('\n').length;
+    }
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        // console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
+            
+        }
+    }
+    document.getElementById('externalBuilding').value = newText;
+}
+function refreshExternalAccessNumber(minus)
+{
+    var TextArray = cleanArray(getIt('externalAccessLimitation').split('\n'))
+
+    var totalParagraphs = 0;
+    if(getIt('listOfDefective') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('listOfDefective').split('\n').length;
+    }
+
+    if(getIt('externalSites') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalSites').split('\n').length;
+    }
+
+    if(getIt('externalOutBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalOutBuilding').split('\n').length;
+    }
+    if(getIt('externalBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalBuilding').split('\n').length;
+    }
+
+    var newText = ""; 
+    if(TextArray.length>0)
+    {
+        for(var i = 0;i<TextArray.length;i++)
+        {
+            
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        // console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
+            
         }
     }
     document.getElementById('externalAccessLimitation').value = newText;
 }
 
-function refreshInternalLivingNumber()
+function refreshInternalLivingNumber(minus)
 {
     var TextArray = cleanArray(getIt('internalLiving').split('\n'))
-    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
-                            + getIt('externalBuilding').split('\n').length  + getIt('externalAccessLimitation').split('\n').length 
+   
+    var totalParagraphs = 0;
+    if(getIt('listOfDefective') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('listOfDefective').split('\n').length;
+    }
+
+    if(getIt('externalSites') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalSites').split('\n').length;
+    }
+
+    if(getIt('externalOutBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalOutBuilding').split('\n').length;
+    }
+    if(getIt('externalBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalBuilding').split('\n').length;
+    } 
+    if(getIt('externalAccessLimitation') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalAccessLimitation').split('\n').length;
+    }                      
     var newText = ""; 
     if(TextArray.length>0)
     {
         for(var i = 0;i<TextArray.length;i++)
         {
-            let nextParagraphs = totalParagraphs + i + 1;
-            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
-            newText = newText + text + '\n';
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        // console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
         }
     }
     document.getElementById('internalLiving').value = newText;
 }
 
-function refreshInternalServiceAreasNumber()
+function refreshInternalServiceAreasNumber(minus)
 {
     var TextArray = cleanArray(getIt('internalServiceAreas').split('\n'))
-    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
-                            + getIt('externalBuilding').split('\n').length  + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length
+   
+    var totalParagraphs = 0;
+    if(getIt('listOfDefective') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('listOfDefective').split('\n').length;
+    }
+
+    if(getIt('externalSites') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalSites').split('\n').length;
+    }
+
+    if(getIt('externalOutBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalOutBuilding').split('\n').length;
+    }
+    if(getIt('externalBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalBuilding').split('\n').length;
+    } 
+    if(getIt('externalAccessLimitation') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalAccessLimitation').split('\n').length;
+    } 
+    if(getIt('internalLiving') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('internalLiving').split('\n').length;
+    } 
     var newText = ""; 
     if(TextArray.length>0)
     {
         for(var i = 0;i<TextArray.length;i++)
         {
-            let nextParagraphs = totalParagraphs + i + 1;
-            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
-            newText = newText + text + '\n';
+            
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
         }
     }
     document.getElementById('internalServiceAreas').value = newText;
 }
-function refreshInternalServicessNumber()
+function refreshInternalServicessNumber(minus)
 {
     var TextArray = cleanArray(getIt('internalServices').split('\n'))
-    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
-                            + getIt('externalBuilding').split('\n').length  + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length
-                            + getIt('internalServiceAreas').split('\n').length
+    var totalParagraphs = 0;
+    if(getIt('listOfDefective') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('listOfDefective').split('\n').length;
+    }
+
+    if(getIt('externalSites') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalSites').split('\n').length;
+    }
+
+    if(getIt('externalOutBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalOutBuilding').split('\n').length;
+    }
+    if(getIt('externalBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalBuilding').split('\n').length;
+    } 
+    if(getIt('externalAccessLimitation') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalAccessLimitation').split('\n').length;
+    } 
+    if(getIt('internalLiving') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('internalLiving').split('\n').length;
+    } 
+    if(getIt('internalServiceAreas') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('internalServiceAreas').split('\n').length;
+    } 
     var newText = ""; 
     if(TextArray.length>0)
     {
         for(var i = 0;i<TextArray.length;i++)
         {
-            let nextParagraphs = totalParagraphs + i + 1;
-            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
-            newText = newText + text + '\n';
+            
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        // console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
+            
         }
     }
     document.getElementById('internalServices').value = newText;
 }
-function refreshInternalAccessNumber()
+function refreshInternalAccessNumber(minus)
 {
     var TextArray = cleanArray(getIt('internalAccessLimitations').split('\n'))
-    var  totalParagraphs = getIt('listOfDefective').split('\n').length + getIt('externalSites').split('\n').length + getIt('externalOutBuilding').split('\n').length
-                            + getIt('externalBuilding').split('\n').length  + getIt('externalAccessLimitation').split('\n').length + getIt('internalLiving').split('\n').length
-                            + getIt('internalServiceAreas').split('\n').length  + getIt('internalServices').split('\n').length 
+   
+    var totalParagraphs = 0;
+    if(getIt('listOfDefective') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('listOfDefective').split('\n').length;
+    }
+
+    if(getIt('externalSites') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalSites').split('\n').length;
+    }
+
+    if(getIt('externalOutBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalOutBuilding').split('\n').length;
+    }
+    if(getIt('externalBuilding') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalBuilding').split('\n').length;
+    } 
+    if(getIt('externalAccessLimitation') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('externalAccessLimitation').split('\n').length;
+    } 
+    if(getIt('internalLiving') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('internalLiving').split('\n').length;
+    } 
+    if(getIt('internalServiceAreas') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('internalServiceAreas').split('\n').length;
+    } 
+    if(getIt('internalServices') != "")
+    {
+        totalParagraphs = totalParagraphs + getIt('internalServices').split('\n').length;
+    } 
     var newText = ""; 
     if(TextArray.length>0)
     {
         for(var i = 0;i<TextArray.length;i++)
         {
-            let nextParagraphs = totalParagraphs + i + 1;
-            var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
-            newText = newText + text + '\n';
+            
+            if(i == 0)
+            {
+                if(minus)
+                {
+                    // console.log("remove a line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    let nextParagraphs = totalParagraphs+ i + 1;
+                    var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    newText = newText + text + '\n';
+                }
+                else
+                {
+                    // console.log("new line");
+                    // console.log((totalParagraphs + 1).toString() + '.');
+                    // console.log(TextArray[i].substr(0,2));
+                    if(TextArray[i].substring(1,2) == '.') //already has a number, need to remove the first two charter
+                    {
+                        // console.log("number less than 10, one digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else if (TextArray[i].substring(2,3) == '.')
+                    {
+                        // console.log("number greater than 10, two digits");
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                        newText = newText + text + '\n';
+                    }
+                    else
+                    {
+                        let nextParagraphs = totalParagraphs+ i + 1;
+                        var text = nextParagraphs + ". " + TextArray[i].trim();
+                        newText = newText + text + '\n';
+                    }
+                    // if(TextArray[i].substr(0,2) == (totalParagraphs + 1).toString() + '.')
+                    // {
+                    //     console.log("1");
+                    //     let nextParagraphs = totalParagraphs+ i + 1;
+                    //     var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //     newText = newText + text + '\n';
+                    // }
+                    // else
+                    // { 
+                    //     console.log("2");
+                    //     console.log(TextArray[i].substr(1,2));
+                    //     // if(TextArray[i].substr(1,2))
+                    //     if(TextArray[i].substr(1,2) == '. ') //already has a number, need to remove the first two charter
+                    //     {
+                    //         console.log("3");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("4");
+                    //         let nextParagraphs = totalParagraphs+ i + 1;
+                    //         var text = nextParagraphs + ". " + TextArray[i].trim();
+                    //         newText = newText + text + '\n';
+                    //     }
+                    // }
+                }
+            }
+            else
+            {
+                let nextParagraphs = totalParagraphs+ i + 1;
+                var text = nextParagraphs + ". " + TextArray[i].slice(3).trim();
+                newText = newText + text + '\n';
+            }
+            
         }
     }
     document.getElementById('internalAccessLimitations').value = newText;

@@ -559,7 +559,8 @@ function giveMeTheNumber(id) {
 
     makeItAnArr = cleanArray(getIt(id).split('\n'));
     totalParagraphs = totalParagraphs + makeItAnArr.length;
-    //console.log(makeItAnArr);
+    console.log(makeItAnArr);
+    console.log(totalParagraphs);
 
     if (makeItAnArr.length != 0)
     {
@@ -577,10 +578,10 @@ function giveMeTheNumber(id) {
 
         //data.push({text: makeItAnArr[makeItAnArr.length - 1], alignment: 'left'});
     }
-    else
-    {
-        data.push({text: 'NA'})
-    }
+    // else
+    // {
+    //     data.push({text: 'NA'})
+    // }
 
     //console.log(data);
     return data;
