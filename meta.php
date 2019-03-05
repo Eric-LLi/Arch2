@@ -109,13 +109,14 @@
 <script>
   var reports =
   [
+    {name: 'Architect\'s Advice', id: 5},
     {name:'Unassigned',id:0},
-    {name: 'Property Assessment Report', id: 1},
-    {name: 'Timber Pest Inspection Report', id: 2},
+    {name: 'Property Assessment', id: 1},
+    {name: 'Timber Pest Inspection', id: 2},
     //{name: 'Combined Timber Pest Inspection Report', id: 3},
     {name: 'Property and Timber Pest', id: 3},
     {name: 'Maintenance Advice', id: 4},
-    {name: 'Architect\'s Advice', id: 5},
+    
     {name: 'Construction Quality Assurance - Stage 1', id: 6},
 		{name: 'Construction Quality Assurance - Stage 2', id: 7},
 		{name: 'Construction Quality Assurance - Stage 3', id: 8},
@@ -124,23 +125,23 @@
 		{name: 'Construction Quality Assurance - Stage 6', id: 11},
 		{name: 'Construction Quality Assurance - Stage 7', id: 12},
 		{name: 'Construction Quality Assurance - Stage 8', id: 13},
-    {name: 'Design Consultation Report', id: 14},
+    {name: 'Design Consultation', id: 14},
 		{name: 'Dilapidation Survey', id: 15},
     {name: 'Home Feasibility', id: 16},
     {name: 'Renovation Feasibility', id: 17},
-    {name: 'Residential Home Warranty Report', id: 18},
-    {name: 'Commercial Property Assessment Report', id: 19},
+    {name: 'Home Warranty Inspection - Residential', id: 18},
+    {name: 'Property Assessment - Commercial', id: 19},
     // {name: 'Commercial Dilapidation Survey', id: 20},
-    {name: 'Residential Home Access & Services Report', id: 21},
-    {name: 'Post-Dilapidation Survey Report',id:22},
+    {name: 'Home Access & Services - Residential', id: 21},
+    {name: 'Post-Dilapidation Survey',id:22},
     {name: 'Quote Report',id:23}
   ];
   //This is the selected list for use to select when edit a report, cannot change a report combined report, so remove the combined one. 
   var editreports =
   [
     {name:'Unassigned',id:0},
-    {name: 'Property Assessment Report', id: 1},
-    {name: 'Timber Pest Inspection Report', id: 2},
+    {name: 'Property Assessment', id: 1},
+    {name: 'Timber Pest Inspection', id: 2},
     //{name: 'Combined Timber Pest Inspection Report', id: 3},
     // {name: 'Property and Timber Pest', id: 3},
     {name: 'Maintenance Advice', id: 4},
@@ -153,15 +154,15 @@
 		{name: 'Construction Quality Assurance - Stage 6', id: 11},
 		{name: 'Construction Quality Assurance - Stage 7', id: 12},
 		{name: 'Construction Quality Assurance - Stage 8', id: 13},
-    {name: 'Design Consultation Report', id: 14},
+    {name: 'Design Consultation', id: 14},
 		{name: 'Dilapidation Survey', id: 15},
     {name: 'Home Feasibility', id: 16},
     {name: 'Renovation Feasibility', id: 17},
-    {name: 'Residential Home Warranty Report', id: 18},
-    {name: 'Commercial Property Assessment Report', id: 19},
+    {name: 'Home Warranty Inspection - Residential', id: 18},
+    {name: 'Property Assessment - Commercial', id: 19},
     // {name: 'Commercial Dilapidation Survey', id: 20},
-    {name: 'Residential Home Access & Services Report', id: 21},
-    {name: 'Post-Dilapidation Survey Report',id:22},
+    {name: 'Home Access & Services - Residential', id: 21},
+    {name: 'Post-Dilapidation Survey',id:22},
     {name: 'Quote Report',id:23}
   ];
 
