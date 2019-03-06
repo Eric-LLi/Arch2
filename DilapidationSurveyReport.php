@@ -291,8 +291,8 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <label>Property Management Guide</label>
-            <select id="6000" style="width:100%" title="property management guide">
+            <label>Property Maintenance Guide</label>
+            <select id="6000" style="width:100%" title="property maintenance guide">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
                 </optgroup>
