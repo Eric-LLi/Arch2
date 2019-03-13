@@ -302,13 +302,15 @@ global $reportTypes;
         {
           error_log("remove the bookings based on the link booking id");
           $dbupdate2 = "update bookings set " .
-                      "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                      // "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                      "users_id=null," .
                       "datecancelled=CURRENT_TIMESTAMP," .
                       "userscancelled_id=$userid " .
                       "where " .
                       "id=$linkBookingID";
           $dbupdate = "update bookings set " .
-                      "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                      // "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                      "users_id=null," .
                       "datecancelled=CURRENT_TIMESTAMP," .
                       "userscancelled_id=$userid " .
                       "where " .
@@ -327,13 +329,15 @@ global $reportTypes;
         {
             error_log("remove the bookings based on the bookings_id");
             $dbupdate2 = "update bookings set " .
-                        "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                        // "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                        "users_id=null," .
                         "datecancelled=CURRENT_TIMESTAMP," .
                         "userscancelled_id=$userid " .
                         "where " .
                         "id=$bookings_id";
             $dbupdate = "update bookings set " .
-                        "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                        // "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                        "users_id=null," .
                         "datecancelled=CURRENT_TIMESTAMP," .
                         "userscancelled_id=$userid " .
                         "where " .
@@ -352,11 +356,12 @@ global $reportTypes;
         {
           error_log('not a combined report');
             $dbupdate = "update bookings set " .
-                        "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                        "users_id=null," .
                         "datecancelled=CURRENT_TIMESTAMP," .
                         "userscancelled_id=$userid " .
                         "where " .
                         "id=$bookingcode";
+            error_log($dbupdate);
             if ($dbresult2 = SharedQuery($dbupdate, $dblink))
             {
               $rc = 0;

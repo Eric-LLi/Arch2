@@ -276,12 +276,12 @@ var recommendations1= [
         "id":26,
         "text":" Tilers & Slaters",
         "code":"TS"
-    },
-    {
-        "id":27,
-        "text":"Others",
-        "code":"others"
-    }   
+    }
+    // {
+    //     "id":27,
+    //     "text":"Others",
+    //     "code":"others"
+    // }   
 ];
 var recommendations2= [
     {

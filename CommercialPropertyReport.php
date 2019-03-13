@@ -6,7 +6,7 @@ require_once("loadbooking.php");
 
 <head>
     <meta charset="UTF-8">
-    <title>Commercial Property Assessment Report</title>
+    <title>Commercial Property Assessment - <?php echo $bookingcode; ?></title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

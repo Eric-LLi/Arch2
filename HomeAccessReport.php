@@ -5,7 +5,7 @@ require_once("loadbooking.php");
 <html lang="en">
 
 <head>
-    <title>Home Access & Service Report</title>
+    <title>Home Access & Service - <?php echo $bookingcode; ?></title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

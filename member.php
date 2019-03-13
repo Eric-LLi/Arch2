@@ -197,6 +197,29 @@
       );
     }
 
+     // ************************************************************************************************************
+    // Sort Report arrays by alphabetically(AA-115)
+    function sortByName(array)
+    {
+      console.log('screenimng ');
+      var newArray;
+      newArray = array.sort(function(a, b) {
+      var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+        // names must be equal
+        return 0;
+      });
+      console.log(newArray);
+     return newArray;
+    }
+
+
     // ************************************************************************************************************
     // Data fetching...
     // function doRefreshBookings()
@@ -219,6 +242,7 @@
           {
             // console.log(response.rows);
             cache_bookings = response.rows;
+            // document.getElementById('totalbookings').innerHTML = cache_bookings.length;
             $('#divBookingsG').datagrid('reload');
           }
           else if(response.rc == -1)
@@ -1000,7 +1024,7 @@
                 valueField: 'id',
                 textField: 'name',
                 limitToList: true,
-                data: reports,
+                data: sortByName(reports),
                 // onSelect: function(record)
                 // {
                 //   $('#btnNewBookingAdd').linkbutton('enable');
@@ -1351,7 +1375,7 @@
                 valueField: 'id',
                 textField: 'name',
                 limitToList: true,
-                data: editreports,
+                data: sortByName(editreports),
                 // onSelect: function(record)
                 // {
                 //   $('#btnNewBookingAdd').linkbutton('enable');
@@ -3328,7 +3352,7 @@
                       valueField: 'id',
                       textField: 'name',
                       limitToList: true,
-                      data: reports,
+                      data: sortByName(reports),
                       // onSelect: function(record)
                       // {
                       //   $('#btnNewBookingAdd').linkbutton('enable');
@@ -3943,11 +3967,17 @@
         
     
     }
+
+    function BookingNumbers()
+    {
+      console.log(cache_bookings.length);
+    }
     // ************************************************************************************************************
     // Document ready...
 
     $(document).ready(function()
     {
+
       $.noty.defaults =
       {
         layout: 'top',
@@ -4029,7 +4059,7 @@
               }
             );
 
-            tformatted = '<span class="totals_footer">$' + _.niceformatnumber(total, 2, true) + '</span>';
+            // tformatted = '<span class="totals_footer">$' + _.niceformatnumber(total, 2, true) + '</span>';
             bformatted = '<span class="totals_footer">' + cache_bookings.length + ' Bookings</span>';
 
             $(this).datagrid('reloadFooter', [{status: '', bookingcode: bformatted, budget: tformatted}]);
@@ -4663,6 +4693,7 @@
             <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
             <a href="javascript:void(0)" onClick="doSearchBookings(true)" class="easyui-linkbutton" iconCls="icon-search" id="searchButton">Search</a>
             <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
+            <label id="totalbookings"> </label>
 
           </div>
       <?php
@@ -5025,7 +5056,7 @@
     <?php require_once("header.php"); ?>
     <?php require_once("footer.php"); ?>
 
-    <div id="p" data-options="region: 'west'" title="Reports" style="width: 30%; padding: 10px">
+    <div id="p" data-options="region: 'west,collapsed:true'" title="Reports" style="width: 30%; padding: 10px">
 
       <div class="easyui-accordion" data-options="selected: 0, fit: true" >
         <div title="Members" data-options="iconCls:'icon-people'" style="overflow: auto; padding: 10px;">

@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dilapidation Survey Report</title>
+    <title>Dilapidation Survey - <?php echo $bookingcode; ?></title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -291,8 +291,8 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <label>Property Management Guide</label>
-            <select id="6000" style="width:100%" title="property management guide">
+            <label>Property Maintenance Guide</label>
+            <select id="6000" style="width:100%" title="property maintenance guide">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
                 </optgroup>

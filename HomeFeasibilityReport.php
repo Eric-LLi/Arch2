@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Home Feasibility Report</title>
+    <title>New Home Feasibility - <?php echo $bookingcode; ?></title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -567,8 +567,8 @@ Unforeseeable costs for which it is wise to allow a 10-15% contingency sum</text
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <label>Property Management Guide</label>
-            <select id="propertyMaintenanceGuide" style="width:100%" title="property management guide">
+            <label>Property Maintenance Guide</label>
+            <select id="propertyMaintenanceGuide" style="width:100%" title="property maintenance guide">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
                 </optgroup>

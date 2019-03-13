@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-    <title>Design Consultation Report</title>
+    <title>Design Consultation - <?php echo $bookingcode; ?></title>
     
     <!-- Required meta tags -->
     <meta charset="utf-8">
