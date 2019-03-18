@@ -109,14 +109,13 @@
 <script>
   var reports =
   [
-    {name: 'Architect\'s Advice', id: 5},
     {name:'Unassigned',id:0},
     {name: 'Property Assessment', id: 1},
     {name: 'Timber Pest Inspection', id: 2},
     //{name: 'Combined Timber Pest Inspection Report', id: 3},
     {name: 'Property and Timber Pest', id: 3},
     {name: 'Maintenance Advice', id: 4},
-    
+    {name: 'Architect\'s Advice', id: 5},
     {name: 'Construction Quality Assurance - Stage 1', id: 6},
 		{name: 'Construction Quality Assurance - Stage 2', id: 7},
 		{name: 'Construction Quality Assurance - Stage 3', id: 8},

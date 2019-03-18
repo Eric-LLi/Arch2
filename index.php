@@ -8,7 +8,10 @@
 
   if (SharedIsLoggedIn())
   {
-    header("location: member.php");
+    if (SharedIsDev())
+      header("Location: member.php");
+    else    
+      header("Location: http://test.archicentreaustraliainspections.com/member.php");
     exit;
   }
 
@@ -19,8 +22,8 @@
 
     if (SharedLogin($email, $pwd))
     {
-      header("location: member.php");
-      exit;
+       header("location: member.php");
+        exit;
     }
     else
       $loginerr = true;
@@ -241,7 +244,7 @@
       $('#divRequestScope').panel('open');
     }
 
-  function doSubmitRequestReport()
+    function doSubmitRequestReport()
     {
       var firstname = $('#fldYourFirstname').val();
       var lastname = $('#fldYourLastname').val();
@@ -326,7 +329,6 @@
       else
         doMandatoryInputField('fldYourFirstname', 'Please specify your first name');
     }
-
     function doNewBooking()
     {
       function doReset()
@@ -588,6 +590,80 @@
       ).dialog('center').dialog('open');
     }
 
+    function doLogin()
+    {
+      // console.log("log in");
+      var uid = $('#fldEmail').textbox('getValue');
+      // console.log(uid);
+      var pwd = $('#fldLoginPassword').passwordbox('getValue');
+      // console.log(pwd);
+      if(!_.isBlank(uid))
+      {
+        if(!_.isBlank(pwd))
+        {
+          $('#fldUid').textbox('setValue',uid);
+          $('#fldPwd').textbox('setValue',pwd);
+          document.getElementById('frmLogin').submit();
+        }
+        else
+        {
+          doMandatoryInputField('fldPassword', 'Please enter password');
+        }
+      }
+      else
+      {
+        doMandatoryInputField('fldEmail', 'Please enter email');
+      }
+    }
+
+    function doOpenLoginDlg()
+    {
+      $('#dlgLogin').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#fldLoginPassword').passwordbox('textbox').bind
+            (
+              'keydown',
+              function(ev)
+              {
+                if (ev.keyCode == 13)
+                  doLogin();
+              }
+            );
+            
+            $('#fldEmail').textbox('textbox').bind
+            (
+              'keydown',
+              function(ev)
+              {
+                if (ev.keyCode == 13)
+                  doLogin();
+              }
+            );
+            doTextboxFocus('fldEmail');
+          },
+          buttons:
+          [
+            {
+              text: 'Login',
+              handler: function()
+              {
+                doLogin();
+              }
+            },
+            {
+              text:'Cancel',
+              handler:function()
+              {
+                $('#dlgLogin').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
     // ************************************************************************************************************
     // Document ready...
     $(document).ready(function()
@@ -623,12 +699,16 @@
         buttons: false
       };
 
+      // $('#fldUid').textbox('textbox').hide();
+
       $('#btnLogin').bind
       (
         'click',
         function()
         {
-          document.getElementById('frmLogin').submit();
+          console.log("click");
+          // document.getElementById('frmLogin').submit();
+          doOpenLoginDlg();
         }
       );
 
@@ -850,13 +930,26 @@
     </div>
   </div>
 
+  <div id="dlgLogin" class="easyui-dialog" title="Login to ArchiCenter" style="width: 375px; height: 175px;" data-options="resizable: false, modal: true, closable: false,closed: true">
+    <table>
+      <tr>
+        <td>Email:</td>
+        <td><input type="text" id="fldEmail" class="easyui-textbox" data-options="iconCls: 'icon-man'" style="width:250px"></td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input id="fldLoginPassword" class="easyui-passwordbox" style="width:250px"></td>
+      </tr>
+    </table>
+  </div>
+
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Main content...                                                                                                                                                              -->
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>
     <?php require_once("footer.php"); ?>
 
-    <div id="p" data-options="region: 'west'" title="Reports" style="width: 30%; padding: 10px">
+    <div id="p" data-options="region: 'west'" title="Reports" collapsed="true" style="width: 30%; padding: 10px">
       <div class="easyui-accordion" data-options="selected: 0, fit: true" >
         <?php
           if (!SharedIsLoggedIn())
