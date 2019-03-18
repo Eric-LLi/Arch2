@@ -4,7 +4,7 @@
     </div>
 
     <div data-options="region: 'east', border: false" style="width: 50%; height: 55px; padding: 5px">
-      &copy;Copyright 2017-2018 <a href="http://www.archicentreaustralia.com.au" target=_blank">Archicentre Australia</a> | All Rights Reserved | Designed and developed by <a href="http://www.adtalk.com.au" target=_blank">Adtalk Pty Ltd</a>.
+      &copy; Copyright <script>document.write((new Date().getFullYear()) - 2)</script> - <script>document.write(new Date().getFullYear())</script> <a href="http://www.archicentreaustralia.com.au" target=_blank">Archicentre Australia</a> | All Rights Reserved | Designed and developed by <a href="http://www.adtalk.com.au" target=_blank">Adtalk Pty Ltd</a>.
     </div>
   </div>
 </div>

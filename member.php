@@ -79,7 +79,6 @@
     var map_booking = null;
     var marker = null;
     var markerinfo = null;
-
     // ************************************************************************************************************
     // Mapping helpers
     function initMap()
@@ -201,7 +200,7 @@
     // Sort Report arrays by alphabetically(AA-115)
     function sortByName(array)
     {
-      console.log('screenimng ');
+      // console.log('screenimng ');
       var newArray;
       newArray = array.sort(function(a, b) {
       var nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -215,7 +214,7 @@
         // names must be equal
         return 0;
       });
-      console.log(newArray);
+      // console.log(newArray);
      return newArray;
     }
 
@@ -242,7 +241,7 @@
           {
             // console.log(response.rows);
             cache_bookings = response.rows;
-            // document.getElementById('totalbookings').innerHTML = cache_bookings.length;
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
             $('#divBookingsG').datagrid('reload');
           }
           else if(response.rc == -1)
@@ -402,6 +401,7 @@
                     function(row)
                     {
                       row.numrep = parseInt(row.numrep);
+                     
                     }
                   );
 
@@ -415,13 +415,14 @@
                         percentPrecision: 2,
                         customizeText: function()
                         {
-                          return this.argumentText + ' - ' + this.percentText;
+                          return this.argumentText + '(' + this.valueText + ')' + ' - ' + this.percentText ;
                         }
                       },
                       legend:
                       {
+                        orientation: "vertical",
                         horizontalAlignment: 'right',
-                        verticalAlignment: 'top',
+                        verticalAlignment: "bottom",
                         margin: 0
                       },
                       series:
@@ -3878,6 +3879,7 @@
           {
             cache_bookings = response.rows;
             // console.log(cache_bookings);
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
             $('#divBookingsG').datagrid('reload');
             // var bookingPager = $('#divBookingsG').datagrid('getPager').pagination({total:response.total}); 
           }
@@ -3886,7 +3888,8 @@
             cache_bookings = response.rows;
             // console.log(cache_bookings);
             $('#divBookingsG').datagrid('reload');
-            noty({text: response.msg, type: 'warning', timeout: 10000});
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
+            noty({text: response.msg, type: 'warning', timeout: 2000});
           }
         }
       );
@@ -4028,7 +4031,7 @@
           rownumbers: true,
           striped: true,
           toolbar: '#tbBookings',
-          showFooter: true,
+          showFooter: false,
           sortName: 'bookingcode',
           sortOrder: 'desc',
           remoteSort: false,
@@ -4693,8 +4696,11 @@
             <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
             <a href="javascript:void(0)" onClick="doSearchBookings(true)" class="easyui-linkbutton" iconCls="icon-search" id="searchButton">Search</a>
             <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
-            <label id="totalbookings"> </label>
-
+            
+          </div>
+          <div style="margin-top:5px;margin-bottom:5px;padding-top:10px">
+            <span style="font-weight:bold;color:brown">Total: </span>
+            <label id="totalbookings" style="font-weight:bold;color:brown"> </label>
           </div>
       <?php
         }
@@ -4739,12 +4745,12 @@
   </div>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Reports...                                                                                                                                                              -->
-  <div id="dlgNumReporsByType" class="easyui-dialog" title="#Reports by Type" style="width: 800px; height: 600px;" data-options="resizable: false, modal: false, closable: false, closed: true">
+  <div id="dlgNumReporsByType" class="easyui-dialog" title="#Reports by Type" style="width: 1000px; height: 800px;" data-options="resizable: true, modal: false, closable: false, closed: true">
     <div id="divNumReporsByTypeChart" style="width: 98%; height: 80%;"></div>
   </div>
 
-  <div id="dlgNumReporsByMember" class="easyui-dialog" title="#Reports by Member" style="width: 800px; height: 600px;" data-options="resizable: false, modal: false, closable: false, closed: true">
-    <div id="divNumReporsByMemberChart" style="width: 98%; height: 80%;"></div>
+  <div id="dlgNumReporsByMember" class="easyui-dialog" title="#Reports by Member" style="width: 1000px; height: 800px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <div id="divNumReporsByMemberChart" style="width: 100%; height: 80%;"></div>
   </div>
 
   <!-- *********************************************************************************************************************************************************************** -->
@@ -5056,12 +5062,12 @@
     <?php require_once("header.php"); ?>
     <?php require_once("footer.php"); ?>
 
-    <div id="p" data-options="region: 'west,collapsed:true'" title="Reports" style="width: 30%; padding: 10px">
+    <div id="p" data-options="region: 'west'" title="Administration Menu" collapsed="true" style="width: 25%; padding: 10px">
 
-      <div class="easyui-accordion" data-options="selected: 0, fit: true" >
+      <div class="easyui-accordion" data-options="selected: 0, fit: true">
         <div title="Members" data-options="iconCls:'icon-people'" style="overflow: auto; padding: 10px;">
-          <h3 style= "color:#0099FF;">Members</h3>
-          <div id="divMembersG" style="width: 98%;" ></div>
+          <!-- <h3 style= "color:#0099FF;">Members</h3> -->
+          <div id="divMembersG" style="width: 98%;height:auto" ></div>
         </div>
 
         <?php
@@ -5069,7 +5075,7 @@
           {
         ?>
             <div title="Reports" data-options="iconCls:'icon-barchart'" style="overflow: auto; padding: 10px;">
-              <h3 style= "color:#0099FF;">Select Report</h3>
+              <!-- <h3 style= "color:#0099FF;">Select Report</h3> -->
               <table>
                 <tr><td><a id="btnNumReportsByType" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 160" onclick="doReportNumReportsByType()">#Reports by Type</a></td></tr>
                 <tr><td><a id="btnNumReportsByMember" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 160" onclick="doReportNumReportsByMember()">#Reports by Member</a></td></tr>
