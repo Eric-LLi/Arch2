@@ -930,7 +930,7 @@
     </div>
   </div>
 
-  <div id="dlgLogin" class="easyui-dialog" title="Login to ArchiCenter" style="width: 375px; height: 175px;" data-options="resizable: false, modal: true, closable: false,closed: true">
+  <div id="dlgLogin" class="easyui-dialog" title="Login to ArchiCentre" style="width: 375px; height: 175px;" data-options="resizable: false, modal: true, closable: false,closed: true">
     <table>
       <tr>
         <td>Email:</td>
