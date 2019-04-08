@@ -522,7 +522,7 @@ function generatePDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, '*', 150],
+                    widths: [80, '*', 130, 80],
                     body: HSConcernsData
                 }
             },
@@ -530,7 +530,7 @@ function generatePDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, '*', 150],
+                    widths: [80, '*', 130, 80],
                     body: RepairMaintenanceData
                 }
             },
@@ -543,7 +543,7 @@ function generatePDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, '*', 150],
+                    widths: [80, '*', 130, 80],
                     body: EnergyEfficiencyData
                 }
             },

@@ -716,20 +716,21 @@ function getTableData_FieldNotes() {
 
 //Get all table ccells dat from Health & Safety Concerns
 function getTableData_HSConcerns() {
+    // console.log('getTableData_HSConcerns');
     var data = [],
         row = [],
         tdCount = 1;
 
     //First row.
     data.push([{
-        colSpan: 5,
+        colSpan: 4,
         text: $('#HA_DivHSConcerns').attr('data-title'),
         style: 'pageSubHeader',
         alignment: 'left'
-    }, {}, {}, {}, {}]);
+    }, {}, {}, {}]);
 
     var tableTr = $('#C_SolutionTable tr').get();
-    //    console.log(tableTr);
+    //  console.log(tableTr);
 
     //Second row. Caption
     data.push([{
@@ -752,43 +753,70 @@ function getTableData_HSConcerns() {
         bold: true,
         fontSize: 12,
         alignment: 'center'
-    }, {
-        text: tableTr[2].children[4].innerHTML,
-        bold: true,
-        fontSize: 12,
-        alignment: 'center'
     }]);
 
     //Start from third row.
     for (var i = 3; i < tableTr.length; i++) {
         //        $(tableTr[i]).children().each(function () {
         for (var j = 0; j < $(tableTr[i]).children().length; j++) {
+            // console.log( $(tableTr[i]).children().get(j));
             var cellElement = $(tableTr[i]).children().get(j).firstElementChild;
-            if (j == 3) {
-                cellElement = $(tableTr[i]).children().get(j).children[1];
+            if (j == 2) {
+                cellElement = $(tableTr[i]).children().get(j).children[0];
             }
+        // console.log(cellElement.tagName);
 
             switch (cellElement.tagName) {
                 case 'SELECT':
-                    if (tdCount == 6) {
+                 //Each row only has 4 column. If more than 4 then create new row.
+               
+                    if (tdCount == 5) {
                         tdCount = 1;
                         data.push(row);
                         row = [];
                     }
-                    row.push($(cellElement).find("option:selected").text());
+                    if(($(cellElement).find("option:selected").text()) == 'Other')
+                    {
+                        // console.log('other value');
+                        var inputElment =  $(tableTr[i]).children().get(j).children[1]
+                        // console.log($(inputElment).val());
+                        row.push($(inputElment).val());
+                    }
+                    else
+                    {
+                        // console.log($(cellElement).find("option:selected").text());
+                        row.push($(cellElement).find("option:selected").text());
+                    }
+                    
                     break;
                 case 'TEXTAREA':
-                    //                console.log($(cellString).val());
-                    //Each row only has 5 column. If more than 5 then create new row.
-                    if (tdCount == 6) {
+                                   //console.log($(cellString).val());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
                         tdCount = 1;
                         data.push(row);
                         row = [];
                     }
+                    // console.log($(cellElement).val());
                     row.push({
                         text: $(cellElement).val(),
                     });
                     break;
+                case 'INPUT':
+                {
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    // console.log('input');
+                    // console.log(cellElement.id);
+                    // console.log( $("#" + cellElement.id).combotree('getText'));
+                    row.push({
+                        text: $("#" + cellElement.id).combotree('getText')
+                    });
+                    break;
+                }
             }
             tdCount++;
         }
@@ -807,17 +835,18 @@ function getTableData_HSConcerns() {
 
 //Get all table ccells dat from Repair & Maintenance
 function getTableData_RepairMaintenance() {
+    // console.log('getTableData_RepairMaintenance');
     var data = [],
         row = [],
         tdCount = 1;
 
     //First row.
     data.push([{
-        colSpan: 5,
+        colSpan: 4,
         text: $('#HA_DivRMaintenance').attr('data-title'),
         style: 'pageSubHeader',
         alignment: 'left'
-    }, {}, {}, {}, {}]);
+    }, {}, {}, {}]);
 
     var tableTr = $('#M_SolutionTable tr').get();
     //    console.log(tableTr);
@@ -843,11 +872,6 @@ function getTableData_RepairMaintenance() {
         bold: true,
         fontSize: 12,
         alignment: 'center'
-    }, {
-        text: tableTr[2].children[4].innerHTML,
-        bold: true,
-        fontSize: 12,
-        alignment: 'center'
     }]);
 
     //Start from third row.
@@ -855,23 +879,35 @@ function getTableData_RepairMaintenance() {
         //        $(tableTr[i]).children().each(function () {
         for (var j = 0; j < $(tableTr[i]).children().length; j++) {
             var cellElement = $(tableTr[i]).children().get(j).firstElementChild;
-            if (j == 3) {
-                cellElement = $(tableTr[i]).children().get(j).children[1];
+            if (j == 2) {
+                cellElement = $(tableTr[i]).children().get(j).children[0];
             }
-
+            // console.log(cellElement.tagName);
             switch (cellElement.tagName) {
                 case 'SELECT':
-                    if (tdCount == 6) {
+                  //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
                         tdCount = 1;
                         data.push(row);
                         row = [];
                     }
                     //console.log($(cellElement));
-                    row.push($(cellElement).find("option:selected").text());
+                    if(($(cellElement).find("option:selected").text()) == 'Other')
+                    {
+                        // console.log('other value');
+                        var inputElment =  $(tableTr[i]).children().get(j).children[1]
+                        // console.log($(inputElment).val());
+                        row.push($(inputElment).val());
+                    }
+                    else
+                    {
+                        // console.log($(cellElement).find("option:selected").text());
+                        row.push($(cellElement).find("option:selected").text());
+                    }
                     break;
                 case 'TEXTAREA':
                     //Each row only has 5 column. If more than 5 then create new row.
-                    if (tdCount == 6) {
+                    if (tdCount == 5) {
                         tdCount = 1;
                         data.push(row);
                         row = [];
@@ -880,6 +916,21 @@ function getTableData_RepairMaintenance() {
                         text: $(cellElement).val(),
                     });
                     break;
+                case 'INPUT':
+                {
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    // console.log('input');
+                    // console.log(cellElement.id);
+                    // console.log( $("#" + cellElement.id).combotree('getText'));
+                    row.push({
+                        text: $("#" + cellElement.id).combotree('getText')
+                    });
+                    break;
+                }
             }
             tdCount++;
         }
@@ -897,64 +948,119 @@ function getTableData_RepairMaintenance() {
 
 //Get all table ccells dat from Energy Efficiency
 function getTableData_EnergyEfficiency() {
+    // console.log('getTableData_EnergyEfficiency');
     var data = [],
         row = [],
         tdCount = 1;
 
     //First row.
     data.push([{
-        colSpan: 5,
+        colSpan: 4,
         text: $('#HA_DivEnergyEfficiency').attr('data-title'),
         style: 'pageSubHeader',
         alignment: 'left'
-    }, {}, {}, {}, {}]);
+    }, {}, {}, {}]);
 
-    var tableTr = $('#E_SolutionTable tr'),
-        th = tableTr.children('th'),
-        td = tableTr.children('td');
+    var tableTr = $('#E_SolutionTable tr').get();
+
 
     //Second row. Caption
-    for (var i = 0; i < th.length; i++) {
-        row.push({
-            text: th[i].innerHTML,
-            bold: true,
-            fontSize: 12,
-            alignment: 'center'
-        });
-    }
-    //Add second row.
-    data.push(row);
-    //Initial row.
-    row = [];
+    data.push([{
+        text: tableTr[1].children[0].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }, {
+        text: tableTr[1].children[1].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }, {
+        text: tableTr[1].children[2].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }, {
+        text: tableTr[1].children[3].innerHTML,
+        bold: true,
+        fontSize: 12,
+        alignment: 'center'
+    }]);
 
-    //Skip first td, it is the add button.
-    for (i = 1; i < td.length; i++) {
-        switch (tdCount) {
-            case 1:
-                row.push({
-                    text: td[i].innerHTML
-                });
-                break;
-            case 2:
-                row.push({
-                    text: td.eq(i).children('select').find('option:selected').text()
-                });
-                break;
-            default:
-                row.push({
-                    text: td.eq(i).children('textarea').val()
-                });
-                break;
+    //Start from second row.
+    for (var i = 2; i < tableTr.length; i++) {
+        //        $(tableTr[i]).children().each(function () {
+        for (var j = 0; j < $(tableTr[i]).children().length; j++) {
+            // console.log( $(tableTr[i]).children().get(j).firstElementChild);
+            var cellElement = $(tableTr[i]).children().get(j).firstElementChild;
+            if (j == 2) {
+                cellElement = $(tableTr[i]).children().get(j).children[0];
+            }
+        //    console.log(cellElement);
+
+            switch (cellElement.tagName) {
+                case 'SELECT':
+                 //Each row only has 4 column. If more than 4 then create new row.
+               
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    if(($(cellElement).find("option:selected").text()) == 'Other')
+                    {
+                        // console.log('other value');
+                        var inputElment =  $(tableTr[i]).children().get(j).children[1]
+                        // console.log($(inputElment).val());
+                        row.push($(inputElment).val());
+                    }
+                    else
+                    {
+                        // console.log($(cellElement).find("option:selected").text());
+                        row.push($(cellElement).find("option:selected").text());
+                    }
+                    
+                    break;
+                case 'TEXTAREA':
+                                   //console.log($(cellString).val());
+                    //Each row only has 4 column. If more than 4 then create new row.
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    row.push({
+                        text: $(cellElement).val(),
+                    });
+                    break;
+                case 'INPUT':
+                {
+                    if (tdCount == 5) {
+                        tdCount = 1;
+                        data.push(row);
+                        row = [];
+                    }
+                    // console.log('input');
+                    // console.log(cellElement.id);
+                    // console.log( $("#" + cellElement.id).combotree('getText'));
+                    row.push({
+                        text: $("#" + cellElement.id).combotree('getText')
+                    });
+                    break;
+                    // var majorRecommendation =  $(majorfld).combotree('getText');
+                }
+            }
+            tdCount++;
         }
-        tdCount++;
-        if (tdCount == 6) {
-            //When fill in 5 column change new row.
-            data.push(row);
-            row = [];
-            tdCount = 1;
-        }
+
     }
-    //    console.log(data);
+    //Fill with empty colums, if the row does not have 4 columns.
+    for (var i = tdCount; i < 5; i++) {
+        row.push({});
+    }
+    //Fill in last row.
+    data.push(row);
+    //console.log(data);
     return data;
 }
 

@@ -105,7 +105,8 @@ var C_category = [
     "Smoke Alarms",
     "Steps",
     "Taps",
-    "WC Door"
+    "WC Door",
+    "Other"
 ];
 
 //Store Maintenance Category
@@ -116,9 +117,15 @@ var M_category = [
     "Gutters",
     "Hot Water Service",
     "Pest Inspection",
-    "Vents"
+    "Vents",
+    "Other"
 ];
 
+//Store Energy Efficiency Category
+var E_category = [
+    "Energy Efficiency",
+    "Other"
+]
 //Store 'Trade' in Architect's Solution
 var trade = [
     "AR",
@@ -213,12 +220,16 @@ var E_Code = [
     "X16"
 ];
 
+var recommendationArray = [];
+var HSRecommendationArray = [];
+var RMRecommendationArray = [];
+var EERecommendationArray = [];
 function onload() {
     reorderImages();
     reorderSketch();
     automaticNumbering('HA_ImgsContents', 'IMG');
     automaticNumbering('HA_PdfContents', 'Sketch');
-
+    loadARTradData();
 }
 
 function reorderImages() {
@@ -349,24 +360,10 @@ function createP_Option(nameid) {
     }
 }
 
-//Add Solution 'option'
+//Add Recommendations' 'option'
 function createS_Option() {
     "use strict";
-    //Get 'select' category
-    var selectCateID = document.getElementById("C0_category"),
-        selectM_CateID = document.getElementById("M0_category"),
-
-        //Get 'select' code
-        selectCodeID = document.getElementById("C0_code"),
-        selectM_CodeID = document.getElementById("M0_code"),
-        selectE_CodeID = document.getElementById("E0_code"),
-
-        //Get 'select' trade
-        selectTradeID = document.getElementById("C0_tradeSelect"),
-        selectM_TradeID = document.getElementById("M0_tradeSelect"),
-        selectE_TradeID = document.getElementById("E0_tradeSelect"),
-
-        C_opt = document.createElement("option"),
+    var C_opt = document.createElement("option"),
         M_opt = document.createElement("option"),
         E_opt = document.createElement("option"),
         i;
@@ -378,7 +375,7 @@ function createS_Option() {
         //Add category value
         C_opt.setAttribute("value", C_category[i]);
         //Add to html
-        selectCateID.appendChild(C_opt);
+        // selectCateID.appendChild(C_opt);
         C_opt = document.createElement("option");
     }
 
@@ -389,38 +386,18 @@ function createS_Option() {
         //Add category value
         M_opt.setAttribute("value", M_category[i]);
         //Add to html
-        selectM_CateID.appendChild(M_opt);
+        // selectM_CateID.appendChild(M_opt);
         M_opt = document.createElement("option");
     }
 
-    //Add Concern CODE option
-    for (i = 0; i < C_Code.length; i++) {
-        C_opt = document.createElement("option");
-
-        C_opt.innerHTML = C_Code[i];
-        C_opt.setAttribute("value", C_Code[i]);
-        selectCodeID.appendChild(C_opt);
-
-        C_opt = document.createElement("option");
-    }
-
-    //Add Maintenance CODE option
-    for (i = 0; i < M_Code.length; i++) {
-        M_opt = document.createElement("option");
-
-        M_opt.innerHTML = M_Code[i];
-        M_opt.setAttribute("value", M_Code[i]);
-        selectM_CodeID.appendChild(M_opt);
-
-        M_opt = document.createElement("option");
-    }
-    //Add Energy CODE option
-    for (i = 0; i < E_Code.length; i++) {
-        E_opt = document.createElement("option");
-        E_opt.innerHTML = E_Code[i];
-        E_opt.setAttribute("value", E_Code[i]);
-        selectE_CodeID.appendChild(E_opt);
-
+    //Add E_category option
+    for (i = 0; i < E_category.length; i++) {
+        //Add category name
+        E_opt.innerHTML = E_category[i];
+        //Add category value
+        E_opt.setAttribute("value", E_category[i]);
+        //Add to html
+        // selectM_CateID.appendChild(M_opt);
         E_opt = document.createElement("option");
     }
 
@@ -434,10 +411,6 @@ function createS_Option() {
         C_opt.setAttribute("value", trade[i]);
         M_opt.setAttribute("value", trade[i]);
         E_opt.setAttribute("value", trade[i]);
-
-        selectTradeID.appendChild(C_opt);
-        selectM_TradeID.appendChild(M_opt);
-        selectE_TradeID.appendChild(E_opt);
 
         C_opt = document.createElement("option");
         M_opt = document.createElement("option");
@@ -707,20 +680,20 @@ C means Health & Safety Concerns page
 M means Repair & Maintenance page
 E means Energy Efficiency - Optional page
 */
-var C_count = 1,
-    M_count = 1,
-    E_count = 1;
+var C_count = 0,
+    M_count = 0,
+    E_count = 0;
 //Add_button event
 var button_AddSolutionItem = function (id) {
     addSolutionItem(id);
 };
 
 function addSolutionItem(id) {
+    //console.log(id);
     if (id.charAt(1) !== "0") {
         //Decide which button C,M or E
         var btn_id = id.charAt(0);
-
-        //        console.log(btn_id);
+        //console.log(btn_id);
         //Get corresponding table
         var table = document.getElementById(btn_id + "_SolutionTable"),
             //Create new tr and td
@@ -729,7 +702,7 @@ function addSolutionItem(id) {
             newTd2 = document.createElement("td"),
             newTd3 = document.createElement("td"),
             newTd4 = document.createElement("td"),
-            newTd5 = document.createElement("td"),
+            // newTd5 = document.createElement("td"),
             count,
             category,
             code;
@@ -750,60 +723,191 @@ function addSolutionItem(id) {
                 break;
             case "E":
                 count = E_count;
-                category = "";
+                category = E_category;
                 code = E_Code;
                 E_count++;
                 break;
         }
 
+        //console.log(count);
         //Set each element id
         var newCateSelectID = btn_id + count + "_category",
-            newCodeSelectID = btn_id + count + "_code",
             newCommondTextID = btn_id + count + "_commentText",
             newTradeSelectID = btn_id + count + "_tradeSelect",
-            newTradeTextID = btn_id + count + "_mirrorText",
-            newTradeCleanID = btn_id + count + "_mirrorClean",
-            newCostID = btn_id + count + "_costText";
+            newCostID = btn_id + count + "_costText",
+            newCateOtherTextID = btn_id + count + "_categoryotherText";
 
-        var text = "<select id=\"" + newCateSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Choose an item</option></select>";
+        var text = "<select id=\"" + newCateSelectID + "\" class=\"form-control\" onchange= \"load_CategoryOther(this.id)\"><option value=\"-1\" disabled selected>Choose an item</option></select>" + 
+                "<textarea class=\"form-control\" id=\"" + newCateOtherTextID + "\" style=\" display:none\"></textarea>" ;
+        newTd1.innerHTML = text;
 
-        if (btn_id === "E")
-            newTd1.innerHTML = "Enenrgy Efficiency";
-        else
-            newTd1.innerHTML = text;
-
-        text = "<select id=\"" + newCodeSelectID + "\" class=\"form-control\"><option value=\"-1\" disabled selected>Internal use</option></select>";
+        var text = "<textarea id=\"" + newCommondTextID + "\" class=\"form-control\"></textarea>";
         newTd2.innerHTML = text;
-
-        text = "<textarea id=\"" + newCommondTextID + "\" placeholder=\"In addition to preset text only...\" class=\"form-control\"></textarea>";
-        newTd3.innerHTML = text;
-
-        text = "<select id=\"" + newTradeSelectID + "\" class=\"form-control\" onchange=\"tradeOnchange(this.id);\"><option value=\"-1\" disabled selected>--</option></select>" +
-            "<textarea disabled class=\"form-control\" id=\"" + newTradeTextID + "\"></textarea>" +
-            "<button class=\"btn btn-danger w-100\" id=\"" + newTradeCleanID + "\" onclick=\"tradeClear(this.id)\">Clear</button>";
+        
+        var combotext = "<input type='text' id=\"" + newTradeSelectID + "\"  style='width:300px;height:60px;fontsize:16px'>"
+        var combo = $(combotext).appendTo(newTd3);
+        combo.combotree({
+            multiple:true,
+            multiline:true, 
+            valueField:'text',
+            textField:'text',
+            panelMinWidth:200
+        })
+        combo.combotree('loadData',[
+            {
+                "id":0,
+                "text":" Architects",
+                "code":"AR"
+            },
+            {
+                "id":1,
+                "text":" Building Contractors",
+                "code":"BC"
+            },
+            {
+                "id":2,
+                "text":" Brick Layers",
+                "code":"BR"
+            },
+            {
+                "id":3,
+                "text":" Concrete Contractors",
+                "code":"CC"
+            },
+            {
+                "id":4,
+                "text":" Carpenters and Joiners",
+                "code":"CJ"
+            },
+            {
+                "id":5,
+                "text":" Cabinet Makers",
+                "code":"CM"
+            },
+            {
+                "id":6,
+                "text":" Damp Houses",
+                "code":"DH"
+            },
+            {
+                "id":7,
+                "text":" Drainers",
+                "code":"DR"
+            },
+            {
+                "id":8,
+                "text":" Electrical Contractors",
+                "code":"EL"
+            },
+            {
+                "id":9,
+                "text":" Excavating Contractors",
+                "code":"EX"
+            },
+            {
+                "id":10,
+                "text":" Fencing Contractors",
+                "code":"FC"
+            },
+            {
+                "id":11,
+                "text":" Glass Merch/Glazier",
+                "code":" GLGlassMerch/Glazier"
+            },
+            {
+                "id":12,
+                "text":" Home Maint/Repair",
+                "code":" HM"
+            },
+            {
+                "id":13,
+                "text":" House Restump/Reblock",
+                "code":" HR"
+            },
+            {
+                "id":14,
+                "text":" Insulation Contractors",
+                "code":" IC"
+            },
+            {
+                "id":15,
+                "text":" Landscape Architects",
+                "code":"LA"
+            },
+            {
+                "id":16,
+                "text":" Landscape Gardeners & Contractors",
+                "code":"LG"
+            },
+            {
+                "id":17,
+                "text":" Underpinning Services",
+                "code":"UP"
+            },
+            {
+                "id":18,
+                "text":" Pest Control",
+                "code":"PC"
+            },
+            {
+                "id":19,
+                "text":" Painters & Decorators",
+                "code":"PD"
+            },
+            {
+                "id":20,
+                "text":" Plumbers & Gas fitters",
+                "code":"PG"
+            },
+            {
+                "id":21,
+                "text":" Plasterers",
+                "code":"PL"
+            },
+            {
+                "id":22,
+                "text":" Paving - Various",
+                "code":"PV"
+            },
+            {
+                "id":23,
+                "text":" Roof Const/Repair/Clean",
+                "code":"RC"
+            },
+            {
+                "id":24,
+                "text":" Structural Engineers",
+                "code":"SE"
+            },
+            {
+                "id":25,
+                "text":" Tile Layers - Wall/Floor",
+                "code":"TL"
+            },
+            {
+                "id":26,
+                "text":" Tilers & Slaters",
+                "code":"TS"
+            }
+            // {
+            //     "id":27,
+            //     "text":"Others",
+            //     "code":"others"
+            // }   
+        ]);
+        var text = "<textarea id=\"" + newCostID + "\" class=\"form-control\"</textarea>";
         newTd4.innerHTML = text;
-
-        text = "<textarea id=\"" + newCostID + "\" class=\"form-control\"</textarea>";
-        newTd5.innerHTML = text;
 
         newTr.appendChild(newTd1);
         newTr.appendChild(newTd2);
         newTr.appendChild(newTd3);
         newTr.appendChild(newTd4);
-        newTr.appendChild(newTd5);
         table.appendChild(newTr);
 
         //Create option
         var C_opt = document.createElement("option"),
             //Get "select" category
             selectCateID = document.getElementById(newCateSelectID),
-
-            //Get 'select' code
-            selectCodeID = document.getElementById(newCodeSelectID),
-
-            //Get 'select' trade
-            selectTradeID = document.getElementById(newTradeSelectID),
-
             i;
 
         //Load category option
@@ -817,36 +921,6 @@ function addSolutionItem(id) {
 
             C_opt = document.createElement("option");
         }
-
-        //Load CODE option
-        for (i = 0; i < code.length; i++) {
-            C_opt = document.createElement("option");
-            C_opt.innerHTML = code[i];
-            C_opt.setAttribute("value", code[i]);
-            selectCodeID.appendChild(C_opt);
-
-            C_opt = document.createElement("option");
-        }
-
-        //Load Trade option
-        for (i = 0; i < trade.length; i++) {
-            C_opt = document.createElement("option");
-            C_opt.innerHTML = trade[i];
-            C_opt.setAttribute("value", trade[i]);
-
-            selectTradeID.appendChild(C_opt);
-        }
-        //        switch (btn_id) {
-        //            case "C":
-        //                C_count++;
-        //                break;
-        //            case "M":
-        //                M_count++;
-        //                break;
-        //            case "E":
-        //                E_count++;
-        //                break;
-        //        }
     }
 }
 //Solution's trade mirror onchange
@@ -866,6 +940,48 @@ var tradeClear = function (tid) {
         mirror = document.getElementById(mirrorID);
     mirror.value = "";
 };
+
+//Recommendation's Category 'Other' option, need to display an input area for typing
+function load_CategoryOther(id)
+{
+    var selectedvalue = document.getElementById(id).value;
+    //console.log(selectedvalue);
+    if(selectedvalue == "Other")
+    {
+        //console.log("need to load a input area");
+        if(id.charAt(2) == "_")
+        {
+            // console.log(id.charAt(2));
+            // console.log(id.slice(0,2));
+            var otherTextid = id.slice(0,2) + '_categoryotherText';
+            document.getElementById(otherTextid).style.display = 'block';
+        }
+        else if(id.charAt(3) == "_")
+        {
+            // console.log(id.charAt(3));
+            // console.log(id.slice(0,3));
+            var otherTextid = id.slice(0,3) + '_categoryotherText';
+            document.getElementById(otherTextid).style.display = 'block';
+        }
+        
+    }
+    else
+    {   
+        console.log('select no other value');
+
+        if(id.charAt(2) == "_")
+        {
+            var otherTextid = id.slice(0,2) + '_categoryotherText';
+            document.getElementById(otherTextid).style.display = 'none';
+        }
+        else if(id.charAt(3) == "_")
+        {
+
+            var otherTextid = id.slice(0,3) + '_categoryotherText';
+            document.getElementById(otherTextid).style.display = 'none';
+        }
+    }
+}
 
 //Upload photos button to trigger input file.
 $("#uploadImg_Btn").click(function () {
@@ -1304,10 +1420,169 @@ function isEmpty(val) {
     return false;
 }
 
+function getInfo(id,array)
+{
+    if(array[0] != undefined)
+    {
+        if(typeof array[0] == 'number')
+        {
+            recommendationArray = array;
+        }
+        else
+        {
+            //console.log("old reports data, need to conver first");
+            for(var i=0;i<array.length;i++)
+            {
+                //console.log(array[i]);
+                array[i] = convertCodesToIndex(array[i]);
+                //console.log(array[i]);
+            }
+            //console.log(array);
+            recommendationArray = array;
+        }
+        var recommendation = {id:id,array:recommendationArray};
+        if(id.charAt(0) == 'C')
+        {
+            HSRecommendationArray.push(recommendation);
+        }
+        if(id.charAt(0) == 'M')
+        {
+            RMRecommendationArray.push(recommendation);
+        }
+        if(id.charAt(0) == 'E')
+        {
+            EERecommendationArray.push(recommendation);
+        }
+       
+    }
+}
+
+/**
+ * AA-119
+ * This function is for the old reports stored th recommendations as codes, but the new checkbox need index as references to display proper texts. 
+ * so need to convert the codes to index for the checkbox to work. 
+ */
+function convertCodesToIndex(codes)
+{
+    var index;
+    switch(codes)
+    {
+        case 'AR':
+            index = 0;
+            break;
+        case 'BC':
+            index = 1;
+            break;
+        case 'BR':
+            index = 2;
+            break;
+        case 'CC':
+            index = 3;
+            break;
+        case 'CJ':
+            index = 4;
+            break;
+        case 'CM':
+            index = 5;
+            break;
+        case 'DH':
+            index = 6;
+            break;
+        case 'DR':
+            index = 7;
+            break;
+        case 'EL':
+            index = 8;
+            break;
+        case 'EX':
+            index = 9;
+            break;
+        case 'FC':
+            index = 10;
+            break;
+        case 'GL':
+            index = 11;
+            break;
+        case 'HM':
+            index = 12;
+            break;
+        case 'HR':
+            index = 13;
+            break;
+        case 'IC':
+            index = 14;
+            break;
+        case 'LA':
+            index = 15;
+            break;
+        case 'LG':
+            index = 16;
+            break;
+        case 'UP':
+            index = 17;
+            break;
+        case 'PC':
+            index = 18;
+            break;
+        case 'PD':
+            index = 19;
+            break;
+        case 'PG':
+            index = 20;
+            break;
+        case 'PL':
+            index = 21;
+            break;
+        case 'PV':
+            index = 22;
+            break;
+        case 'RC':
+            index = 23;
+            break;
+        case 'SE':
+            index = 24;
+            break;
+        case 'TL':
+            index = 25;
+            break;
+        case 'TS':
+            index = 26;
+            break;
+        default:
+            index = 0;
+    }
+
+    return index;
+}
+function loadARTradData()
+{
+    for(var i = 0;i<HSRecommendationArray.length;i++)
+    {
+        // console.log(HSRecommendationArray[i].id);
+        // console.log(HSRecommendationArray[i].array);
+
+        $('#' + HSRecommendationArray[i].id).combotree('setValues',HSRecommendationArray[i].array);
+    }
+    for(var i = 0;i<RMRecommendationArray.length;i++)
+    {
+        // console.log(RMRecommendationArray[i].id);
+        // console.log(RMRecommendationArray[i].array);
+
+        $('#' + RMRecommendationArray[i].id).combotree('setValues',RMRecommendationArray[i].array);
+    }
+    for(var i = 0;i<EERecommendationArray.length;i++)
+    {
+        // console.log(EERecommendationArray[i].id);
+        // console.log(EERecommendationArray[i].array);
+
+        $('#' + EERecommendationArray[i].id).combotree('setValues',EERecommendationArray[i].array);
+    }
+}
 $(document).ready(function () {
 
     loadPropertySelectData();
     loadSolutionSelectData();
+
     //    console.log("Current pdfs count: " + pdfCounts);
     //    console.log("Current photos count: " + photos_count);
 });
