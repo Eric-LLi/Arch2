@@ -1,4 +1,4 @@
-<div data-options="region: 'south'" style="width: 100%; height: 55px; padding: 5px">
+<div id="footer" data-options="region: 'south'" style="width: 100%; height: 55px; padding: 5px;display:none" >
   <div class="easyui-layout" data-options="fit: true">
     <div data-options="region: 'west', border: false" style="width: 50%; height: 55px; padding: 10px">
     </div>
