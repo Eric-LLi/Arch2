@@ -409,6 +409,7 @@
                   (
                     {
                       dataSource: response.data,
+                      // dataSource:testingdata,
                       tooltip:
                       {
                         enabled: true,
@@ -3895,10 +3896,47 @@
       );
     }
 
+    function doSearchBookingNo()
+    {
+      $('#divBookingsG').datagrid('loading');
+      console.log('***** Searching bookings Number...');
+      var bookingno = $('#fldSearchBookingNo').textbox('getValue');
+      console.log('the search booking number ' + bookingno );
+      $.post
+      (
+        'ajax_searchbybookingid.php',
+        {
+          uuid: '<?php echo $_SESSION['uuid']; ?>',
+          itype: <?php echo $_SESSION['itype']; ?>,
+          bookingno:bookingno
+        },
+        function(result)
+        {
+          var response = JSON.parse(result);
+          if(response.rc == 0)
+          {
+            cache_bookings = response.rows;
+            // console.log(cache_bookings);
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
+            $('#divBookingsG').datagrid('reload');
+          }
+          else
+          {
+            cache_bookings = response.rows;
+            // console.log(cache_bookings);
+            $('#divBookingsG').datagrid('reload');
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
+            noty({text: response.msg, type: 'warning', timeout: 2000});
+          }
+        }
+      )
+    }
+
     function doResetSearch()
     {
       //$('#cbSearchReportStatus').combobox('setValue',0);
       $('#fldSearchEmail').textbox('clear');
+      $('#fldSearchBookingNo').textbox('clear');
       doSearchBookings(false);
       //doRefreshBookings();
     }
@@ -4696,12 +4734,11 @@
             <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
             <a href="javascript:void(0)" onClick="doSearchBookings(true)" class="easyui-linkbutton" iconCls="icon-search" id="searchButton">Search</a>
             <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
-            
+            <span>Booking Number: </span>  
+            <input type="number" id="fldSearchBookingNo" class="easyui-textbox" style="width: 200px;">
+            <a href="javascript:void(0)" onClick="doSearchBookingNo()" class="easyui-linkbutton"  id="searchNoButton" data-options="iconCls:'icon-binoculars',width:'60px'">Find</a>
           </div>
-          <div style="margin-top:5px;margin-bottom:5px;padding-top:10px">
-            <span style="font-weight:bold;color:brown">Total: </span>
-            <label id="totalbookings" style="font-weight:bold;color:brown"> </label>
-          </div>
+
       <?php
         }
         else
@@ -4711,6 +4748,10 @@
     <?php
         }
       ?>
+      <div style="margin-top:5px;margin-bottom:5px;padding-top:10px">
+        <span style="font-weight:bold;color:brown">Total: </span>
+        <label id="totalbookings" style="font-weight:bold;color:brown"> </label>
+      </div>
 
       
       <!-- deprecated Functions -->
@@ -4749,7 +4790,7 @@
     <div id="divNumReporsByTypeChart" style="width: 98%; height: 80%;"></div>
   </div>
 
-  <div id="dlgNumReporsByMember" class="easyui-dialog" title="#Reports by Member" style="width: 1000px; height: 800px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+  <div id="dlgNumReporsByMember" class="easyui-dialog" title="#Reports by Member" style="width: 1500px; height: 800px;" data-options="resizable: true, modal: false, closable: false, closed: true">
     <div id="divNumReporsByMemberChart" style="width: 100%; height: 80%;"></div>
   </div>
 
