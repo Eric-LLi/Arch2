@@ -135,6 +135,16 @@
             $clause4 = SharedNullOrNum($spotter, $dblink) . "," ;
           }
         }
+        else //If selects combined report, timber one.set the budget to 0.0001, so its status can be 'Not Paid'/ .  
+        {
+          if($hasbudget = true)
+          {
+            $vars1 = "budget,";
+            $budget = 0.0001;
+            $clause1 = SharedNullOrNum($budget, $dblink) . "," ;
+          }
+        }
+          
         
 
         $dbinsert = "insert into bookings " .

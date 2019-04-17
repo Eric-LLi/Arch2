@@ -374,8 +374,10 @@ function isEmpty(val) {
   // Data helpers
   function doGetStringFromIdInObjArray(objarr, id)
   {
-    var result = $.grep(objarr, function(ev) {return ev.id == id;});
-
+    var result = $.grep(objarr, function(ev) 
+    {
+      return ev.id == id;
+    });
     return _.isNull(result) || (result.length == 0) ? '' : result[0].name;
   }
 

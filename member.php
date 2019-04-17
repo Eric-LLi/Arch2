@@ -200,23 +200,31 @@
     // Sort Report arrays by alphabetically(AA-115)
     function sortByName(array)
     {
-      // console.log('screenimng ');
+      // console.log('sortByName ');
+      // console.log(reports);
       //1st, remove the array index 3, it is the combined report - timber insepction report, no need to show to the user. 
-      array.splice(3,1);
+      // var sortlist = array;
       var newArray;
-      newArray = array.sort(function(a, b) {
-      var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-        // names must be equal
-        return 0;
+      //var remain = sortlist.splice(3,1);
+      var sortlist = array.filter(function(element){
+        return (element.id !== 3)
+      })
+
+      // console.log(remain);
+      newArray = sortlist.sort(function(a, b) 
+      {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+          // names must be equal
+          return 0;
       });
-      // console.log(newArray);
+      // console.log(reports);
      return newArray;
     }
 

@@ -311,37 +311,31 @@ global $reportTypes;
             }                    
         }
 
-        error_log($linkBookingID);
-        if($linkBookingID != '')
-        {
-          error_log("remove the bookings based on the link booking id");
-          $propertydbupdate = "update bookings set " .
+        $propertydbupdate = "update bookings set " .
                                 // "users_id=" . SharedNullOrNum($id, $dblink) . "," .
                                 "users_id=null," .
                                 "datecancelled=CURRENT_TIMESTAMP," .
                                 "userscancelled_id=$userid " .
                                 "where " .
                                 "id=$updatetimberid";
-          $timberupdate = "update bookings set " .
-                      // "users_id=" . SharedNullOrNum($id, $dblink) . "," .
-                      "users_id=null," .
-                      "datecancelled=CURRENT_TIMESTAMP," .
-                      "userscancelled_id=$userid " .
-                      "where " .
-                      "id=$updatepropertyid";
-          if ($timberresult = SharedQuery($timberupdate, $dblink) && $propertyresult = SharedQuery($propertydbupdate, $dblink))
-          {
-            $rc = 0;
-            $msg = "Booking has been cancelled";
-          }
-          else
-          {
-            $msg = "Error removing bookings...";
-          } 
-        }
-        error_log($dbupdate);
+        $timberupdate = "update bookings set " .
+                    // "users_id=" . SharedNullOrNum($id, $dblink) . "," .
+                    "users_id=null," .
+                    "datecancelled=CURRENT_TIMESTAMP," .
+                    "userscancelled_id=$userid " .
+                    "where " .
+                    "id=$updatepropertyid";
         error_log($propertydbupdate);
-         
+        error_log($timberupdate);
+        if ($timberresult = SharedQuery($timberupdate, $dblink) && $propertyresult = SharedQuery($propertydbupdate, $dblink))
+        {
+          $rc = 0;
+          $msg = "Booking has been cancelled";
+        }
+        else
+        {
+          $msg = "Error removing bookings...";
+        } 
       }
     }
     else
