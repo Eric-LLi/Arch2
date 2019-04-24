@@ -16,7 +16,7 @@ global $reportTypes;
       $timberid = $_POST['timberid'];
       $propertyid = $_POST['propertyid'];
       $reportid = $_POST['reportid'];
-      $oldreports = $_POST['oldreports'];;
+      $oldreports = $_POST['oldreports'];
       error_log("reportid: $reportid");
       error_log("propertyid: $propertyid ");
       error_log("timberid: $timberid ");
