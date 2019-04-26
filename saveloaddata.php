@@ -79,7 +79,7 @@
 
         $('textarea').each(
             function () {
-                if ((this.id != "") && (this.id != undefined)) {
+                if ((this.id != "") && (this.id != undefined) && (!this.id.includes('_easyui_textbox_input') )) {
                     data.push({
                         id: this.id,
                         value: this.value
@@ -2114,16 +2114,51 @@
                         break;
                     case "EWCheckNewValue":
                         break;
-                    case "categoty":
-                        break;
-                    case "code":
-
-                        addSolutionItem(elementsID[0]);
-                        break;
+                    case "category":
+                        {
+                            if(elementsID[0].charAt(0) == 'C')
+                            {
+                                // console.log('C');
+                                addSolutionItem('C_SolutionAddItem');
+                            }
+                            else if (elementsID[0].charAt(0) == 'M')
+                            {
+                                // console.log('D');
+                                addSolutionItem('M_SolutionAddItem');
+                            }
+                            else if(elementsID[0].charAt(0) == 'E')
+                            {
+                                // console.log('E');
+                                addSolutionItem('E_SolutionAddItem');
+                            }
+                            
+                            if(d.value == 'Other')
+                            {
+                                let otherTextid = elementsID[0] + '_categoryotherText';
+                                // console.log(otherTextid);
+                                document.getElementById(otherTextid).style.display = 'block';
+                            }
+                            break;
+                        }
                     case "commentText":
                         break;
                     case "tradeSelect":
+                    {
+                        var recommendations;
+                        if(!isNaN(d.value.charAt(0)))
+                        {
+                            recommendations = JSON.parse("[" + d.value + "]");
+                        }
+                        else 
+                        {
+                            d.value = d.value.trim();
+                            recommendations = d.value.split(' ');  
+                        } 
+                        // console.log(recommendations);
+                        getInfo(d.id,recommendations);
                         break;
+                    }
+                        
                     case "mirrorText":
                         break;
                     case "costText":

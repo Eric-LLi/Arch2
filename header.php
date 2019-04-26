@@ -1,4 +1,4 @@
-<div data-options="region: 'north'" style="width: 100%; height: 120px; padding: 5px">
+<div id="header" data-options="region: 'north'" style="width: 100%; height: 120px; padding: 5px;display:none">
   <div class="easyui-layout" data-options="fit: true">
     <div data-options="region: 'west', border: false" style="width: 10%;">
       <img src="images/logo1.jpg" width="110" height="110" />

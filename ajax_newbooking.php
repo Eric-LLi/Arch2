@@ -107,29 +107,45 @@
         $clause3 = "";
         $clause4 = "";
 
-        if ($hasbudget)
+        //If the report is Combined Report(id=3) - Timber Pest Report, don't need to store all this amount related info
+        //So if id != 3, then could insert with the amount details. 
+        if($repid != 3)
         {
-          $vars1 = "budget,";
-          $clause1 = SharedNullOrNum($budget, $dblink) . "," ;
+          if ($hasbudget)
+          {
+            $vars1 = "budget,";
+            $clause1 = SharedNullOrNum($budget, $dblink) . "," ;
+          }
+  
+          if ($hascommission)
+          {
+            $vars2 = "commission,";
+            $clause2 = SharedNullOrNum($commission, $dblink) . "," ;
+          }
+  
+          if ($hastravel)
+          {
+            $vars3 = "travel,";
+            $clause3 = SharedNullOrNum($travel, $dblink) . "," ;
+          }
+  
+          if ($hasspotter)
+          {
+            $vars4 = "spotter,";
+            $clause4 = SharedNullOrNum($spotter, $dblink) . "," ;
+          }
         }
-
-        if ($hascommission)
+        else //If selects combined report, timber one.set the budget to 0.0001, so its status can be 'Not Paid'/ .  
         {
-          $vars2 = "commission,";
-          $clause2 = SharedNullOrNum($commission, $dblink) . "," ;
+          if($hasbudget = true)
+          {
+            $vars1 = "budget,";
+            $budget = 0.0001;
+            $clause1 = SharedNullOrNum($budget, $dblink) . "," ;
+          }
         }
-
-        if ($hastravel)
-        {
-          $vars3 = "travel,";
-          $clause3 = SharedNullOrNum($travel, $dblink) . "," ;
-        }
-
-        if ($hasspotter)
-        {
-          $vars4 = "spotter,";
-          $clause4 = SharedNullOrNum($spotter, $dblink) . "," ;
-        }
+          
+        
 
         $dbinsert = "insert into bookings " .
                     "(" .
@@ -232,12 +248,13 @@
 
       $bookingid = 0;
       //Inform the customer booking has been made
-      if ($reportid == 3)
+      if ($reportid == 24) 
       {
-        // Combined assessment and timber reports
+        // reportid = 24 --> User selects combined report. 
+        // Need to create Timber (first, reportid == 3), then property asset report(reportid == 24)
         $html = file_get_contents('email_newbooking2.html');
-        $bookingid = doInsertBooking(1, null);
-        $bookingid2 = doInsertBooking(3, $bookingid);
+        $bookingid = doInsertBooking(3, null);
+        $bookingid2 = doInsertBooking(24, $bookingid);
 
         $msg = "Successfully created new bookings [$bookingid and $bookingid2]";
         $rc = 0;
@@ -255,6 +272,7 @@
       }
       else
       {
+        //Single Report
         $html = file_get_contents('email_newbooking.html');
         $bookingid = doInsertBooking($reportid, null);
 

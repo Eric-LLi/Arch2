@@ -87,18 +87,14 @@
       $usercreateid = SharedGetPostVar("usercreateid");
       $usercreatetype = SharedGetPostVar("usercreatetype");
 
-      error_log("the created user is ");
-      error_log($usercreateid);
-      error_log("the assigned architect uuid ");
-      error_log($archuuid);
+      error_log("the created user is $usercreateid");
+      error_log("the assigned architect uuid $archuuid");
 
-      error_log("the created user type is ");
-      error_log($usercreatetype);
+      error_log("the created user type is $usercreatetype");
 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $archid = SharedGetUserIdFromUuid($archuuid, $dblink);
-      error_log('archid');
-      error_log($archid);
+      error_log('archid: $archid');
       $spotteremail = "";
       $spotterfirstname = "";
       $spotterlastname = "";
@@ -134,9 +130,9 @@
                 $spotteremail = $spotter['email'];
                 $spotterfirstname = $spotter['firstname'];
                 $spotterlastname = $spotter['lastname'];
-                error_log($spotteremail);
-                error_log($spotterfirstname);
-                error_log($spotterlastname);
+                error_log("spotteremail: $spotteremail");
+                error_log("spotterfirstname: $spotterfirstname");
+                error_log("spotterlastname: $spotterlastname");
     
                 $rc = 0;
 
@@ -235,7 +231,7 @@
                       // Let customer know...
                       if ($booking['custemail'] != "")
                       {
-                        error_log($booking['itype']);
+                      
                         error_log( $reportconfirmemails[$booking['itype']]);
                         $emailtemplate = $reportconfirmemails[$booking['itype']];
                         // error_log('checking itype');
@@ -267,6 +263,8 @@
                         if($usercreatetype == '99')
                         {
                           error_log("the spotter is the admin, don't need to cc at all. only send to the assigned inspector and architect");
+                          $archemail = $booking['archemail'];
+                          error_log("archemail: $archemail");
                           SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
 
                         }
@@ -275,6 +273,8 @@
                           if($usercreateid == $archid)
                           {
                             error_log("the assigned architect/inspector is the same spotter don't need to cc");
+                            $archemail = $booking['archemail'];
+                            error_log("archemail: $archemail");
                             SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html);
   
                           }

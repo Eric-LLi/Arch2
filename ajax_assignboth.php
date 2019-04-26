@@ -83,31 +83,51 @@
     {
       $usercreateid = SharedGetPostVar("usercreateid");
       $usercreatetype = SharedGetPostVar("usercreatetype");
+      $timberid = SharedGetPostVar("timberid");
+      $propertyid = SharedGetPostVar("propertyid");
+      $reportid = SharedGetPostVar("reportid");
       error_log("the created user is ");
       error_log($usercreateid);
       error_log("the created user type is ");
       error_log($usercreatetype);
+      error_log("reportid: $reportid");
+      error_log("propertyid: $propertyid ");
+      error_log("timberid: $timberid ");
 
       $spotteremail = "";
       $spotterfirstname = "";
       $spotterlastname = "";
-      if(!empty($_POST['linkedbookingcode']))
+      if($reportid == 3)
       {
-        error_log("combined reports, and select timber one, itype is 3,used the linkedbookingcode as id to the search");
-        // error_log(SharedGetPostVar("bookingcode"));
-        $searchid = SharedGetPostVar("linkedbookingcode");
+        error_log("combined reports, and select timber one, itype is 3,used the propertyid as id to the search");
+        $searchid = $propertyid;
+        $updatepropertyid = $propertyid;
         $updatetimberid = SharedGetPostVar("bookingcode");
-        $updatepropertyid = SharedGetPostVar("linkedbookingcode");
       }
-      else if (!empty($_POST['linked_bookingcode']))
+      else if ($reportid == 24)
       {
-        error_log("combined reports, select the property one, itype is 1,use its own id to the search");
-        // error_log(SharedGetPostVar("bookingcode"));
+        error_log("combined reports, select the property one, itype is 24,use its own id to the search");
         $searchid = SharedGetPostVar("bookingcode");
         $updatepropertyid = SharedGetPostVar("bookingcode");
-        $updatetimberid = SharedGetPostVar("linked_bookingcode");
-
+        $updatetimberid = $timberid;
       }
+      // if(!empty($_POST['linkedbookingcode']))
+      // {
+      //   error_log("combined reports, and select timber one, itype is 3,used the linkedbookingcode as id to the search");
+      //   // error_log(SharedGetPostVar("bookingcode"));
+      //   $searchid = SharedGetPostVar("linkedbookingcode");
+      //   $updatetimberid = SharedGetPostVar("bookingcode");
+      //   $updatepropertyid = SharedGetPostVar("linkedbookingcode");
+      // }
+      // else if (!empty($_POST['linked_bookingcode']))
+      // {
+      //   error_log("combined reports, select the property one, itype is 1,use its own id to the search");
+      //   // error_log(SharedGetPostVar("bookingcode"));
+      //   $searchid = SharedGetPostVar("bookingcode");
+      //   $updatepropertyid = SharedGetPostVar("bookingcode");
+      //   $updatetimberid = SharedGetPostVar("linked_bookingcode");
+
+      // }
       error_log("the bookingid is going to use to the search is : ");
       error_log($searchid);
       error_log("update timber report id is: ");
@@ -225,7 +245,7 @@
 
                       "from " .
                       "bookings b1 left join users u1 on (b1.users_id=u1.id) " .
-                      "            left join arch.bookings b2 on (b2.bookings_id=b1.id) " .
+                      "            left join bookings b2 on (b2.id = $updatetimberid) " .
                       "            left join users u2 on (b2.users_id=u2.id) " .
                       "where " .
                       "b1.id=$searchid";
@@ -263,15 +283,29 @@
                       error_log($spotteremail);
                       error_log($spotterfirstname);
                       error_log($spotterlastname);
+                      $linked_bookingcode = $booking['linked_bookingcode'];
+                      $linked_itype = $booking['linked_itype'];
+                      if($linked_itype == null)
+                      {
+                        $linked_itype = 3;
+                      }
+                      if($linked_bookingcode == null)
+                      {
+                        $linked_bookingcode = $timberid;
+                      }
+
+                      error_log("linked_bookingcode: $linked_bookingcode");
+                      error_log("linked_itype: $linked_itype");
                       if ($booking['custemail'] != "")
                       {
+                        $itype = $booking['itype'];
+                        error_log("itype: $itype");
                         $emailtemplate = $reportconfirmemails[$booking['itype']];
                         $html = file_get_contents('email_architectallocation.html');
                         //error_log($html);
                         $html = doMacros($html, $booking);
                         $custemail = explode(",",$booking['custemail']);
-
-                        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$booking['linked_itype']] . " Assessment/Inspection Confirmation", $html);
+                        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$linked_itype] . " Assessment/Inspection Confirmation", $html);
                       }
 
                         
@@ -285,12 +319,15 @@
                         {
                           //The spotter is the admin, don't need to cc the email to him at all. 
                           error_log("the spotter is the admin, don't need to cc at all. only send to the assigned inspector and architect");
-
+                          $inspectoremail = $booking['inspectoremail'];
+                          $architectemail = $booking['architectemail'];
+                          error_log("inspectoremail: $inspectoremail");
+                          error_log("architectemail: $architectemail");
                           // Inspector notification...
-                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1);
+                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$linked_itype]. " Timber Inspection Confirmation", $html1);
 
                           // Architect notification...
-                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2);
+                          SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " .$reportTypes[$linked_itype] . " Assessment Report Confirmation", $html2);
                         }
                         else
                         {
@@ -299,7 +336,7 @@
                             if($usercreateid == $inspectorid)
                             {
                               error_log("the assigned inspector is the same spotter don't need to cc");
-                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1);
+                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$linked_itype] . " Timber Inspection Confirmation", $html1);
 
                             }
                             else
@@ -308,13 +345,13 @@
                               error_log($spotteremail);
                               error_log($booking['inspectoremail']);
                               // SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Assessment/Inspection Confirmation", $html,$spotteremail,$spotterfirstname." ".$spotterlastname);
-                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$booking['linked_itype']] . " Timber Inspection Confirmation", $html1,$spotteremail,$spotterfirstname." ".$spotterlastname);
+                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['inspectoremail'], $booking['inspectorfirstname'] . ' ' . $booking['inspectorlastname'], $updatetimberid . " - " . $reportTypes[$linked_itype] . " Timber Inspection Confirmation", $html1,$spotteremail,$spotterfirstname." ".$spotterlastname);
                             }
                             // Architect notification...
                             if($usercreateid == $archid)
                             {
                               error_log("the assigned architect is the same spotter don't need to cc");
-                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
+                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$linked_itype] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
 
                             }
                             else
@@ -322,7 +359,7 @@
                               error_log("the assigned architect is not the same as spooter  and the spotter is not the admin, need to cc");
                               error_log($spotteremail);
                               error_log($booking['architectemail']);
-                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$booking['linked_itype']] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
+                              SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['architectemail'], $booking['architectfirstname'] . ' ' . $booking['architectlastname'], $updatepropertyid . " - " . $reportTypes[$linked_itype] . " Assessment Report Confirmation", $html2,$spotteremail,$spotterfirstname." ".$spotterlastname);
 
                             }
                         }

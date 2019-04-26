@@ -107,13 +107,15 @@
 </style>
 
 <script>
+//id:3 --> Combined Report _ Timber Report;
+//id:24 --> Combined Report _ Porerty Assessetment Report;
   var reports =
   [
     {name:'Unassigned',id:0},
     {name: 'Property Assessment', id: 1},
     {name: 'Timber Pest Inspection', id: 2},
     //{name: 'Combined Timber Pest Inspection Report', id: 3},
-    {name: 'Property and Timber Pest', id: 3},
+    {name: 'Timber Pest Inspection', id: 3},
     {name: 'Maintenance Advice', id: 4},
     {name: 'Architect\'s Advice', id: 5},
     {name: 'Construction Quality Assurance - Stage 1', id: 6},
@@ -133,7 +135,8 @@
     // {name: 'Commercial Dilapidation Survey', id: 20},
     {name: 'Home Access & Services - Residential', id: 21},
     {name: 'Post-Dilapidation Survey',id:22},
-    {name: 'Quote Report',id:23}
+    {name: 'Quote Report',id:23},
+    {name: 'Combined Property Assessment & Timber Pest',id:24}
   ];
   //This is the selected list for use to select when edit a report, cannot change a report combined report, so remove the combined one. 
   var editreports =
@@ -141,8 +144,7 @@
     {name:'Unassigned',id:0},
     {name: 'Property Assessment', id: 1},
     {name: 'Timber Pest Inspection', id: 2},
-    //{name: 'Combined Timber Pest Inspection Report', id: 3},
-    // {name: 'Property and Timber Pest', id: 3},
+    {name: 'Timber Pest Inspection', id: 3},
     {name: 'Maintenance Advice', id: 4},
     {name: 'Architect\'s Advice', id: 5},
     {name: 'Construction Quality Assurance - Stage 1', id: 6},
@@ -163,6 +165,7 @@
     {name: 'Home Access & Services - Residential', id: 21},
     {name: 'Post-Dilapidation Survey',id:22},
     {name: 'Quote Report',id:23}
+    // {name: 'Combined Property Assessment & Timber Pest',id:24}
   ];
 
   //This is for the status select combox search
@@ -371,8 +374,10 @@ function isEmpty(val) {
   // Data helpers
   function doGetStringFromIdInObjArray(objarr, id)
   {
-    var result = $.grep(objarr, function(ev) {return ev.id == id;});
-
+    var result = $.grep(objarr, function(ev) 
+    {
+      return ev.id == id;
+    });
     return _.isNull(result) || (result.length == 0) ? '' : result[0].name;
   }
 

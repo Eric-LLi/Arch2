@@ -668,6 +668,10 @@
     // Document ready...
     $(document).ready(function()
     {
+      document.getElementById("dlgBookingNew").style.display = "block";
+      document.getElementById("dlgLogin").style.display = "block";
+      document.getElementById("footer").style.display = "block";
+      document.getElementById("header").style.display = "block";
       $.noty.defaults =
       {
         layout: 'top',
@@ -780,7 +784,7 @@
 <body>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Dialogs...                                                                                                                                                              -->
-  <div id="dlgBookingNew" class="easyui-dialog" title="New Booking" style="width: 800px; height: 640px;" data-options="resizable: false, modal: true, closable: false, closed: true">
+  <div id="dlgBookingNew" class="easyui-dialog" title="New Booking" style="width: 800px; height: 640px;display:none" data-options="resizable: false, modal: true, closable: false, closed: true">
     <div class="easyui-panel" title="Booking Details" data-options="fit: true">
       <div id="newbookingtabs" class="easyui-tabs" data-options="fit: true, pill: true">
         <div title="Customer Details" data-options="iconCls: 'icon-man'">
@@ -930,7 +934,7 @@
     </div>
   </div>
 
-  <div id="dlgLogin" class="easyui-dialog" title="Login to ArchiCenter" style="width: 375px; height: 175px;" data-options="resizable: false, modal: true, closable: false,closed: true">
+  <div id="dlgLogin" class="easyui-dialog" title="Login to ArchiCentre" style="width: 375px; height: 175px;display:none" data-options="resizable: false, modal: true, closable: false,closed: true">
     <table>
       <tr>
         <td>Email:</td>
@@ -948,7 +952,6 @@
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>
     <?php require_once("footer.php"); ?>
-
     <div id="p" data-options="region: 'west'" title="Reports" collapsed="true" style="width: 30%; padding: 10px">
       <div class="easyui-accordion" data-options="selected: 0, fit: true" >
         <?php

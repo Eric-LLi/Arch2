@@ -529,23 +529,25 @@ function createOneCell(tableID, name, select, textAreaName) {
     selectList.id = select + rowCount;
     selectList.style.width = "100%";
 
-    var selectOption = ["Choose an item", "√", 'X', '--', 'U', 'IW', 'R', 'P', 'N'];
-    var selectValue = [" ", "No Defects Evident", "Defect Evident", "Not Relevant", "Untested",
-        "Incomplete Work", "Reasonable Access", "Partial Access", 'Not Accessible'];
+    // var selectOption = ["Choose an item", "√", 'X', '--', 'U', 'IW', 'R', 'P', 'N'];
+    var selectOption = ["Choose an item", "√ - No Defects Evident", 'X - Defect Evident', '-- -  Not Relevant', 'U - Untested', 'IW - Incomplete Work','R- Reasonable Access', 'P - Partial Access', 'N - Not Accessible'];
 
+    // var selectValue = [" ", "No Defects Evident", "Defect Evident", "Not Relevant", "Untested",
+    //     "Incomplete Work", "Reasonable Access", "Partial Access", 'Not Accessible'];
 
+    var selectValue = ["Choose an item", "√", "X", "--", "U","IW","R", "P", 'N'];
     //Create and append the options
     for (var i = 0; i < selectOption.length; i++) {
         var option = document.createElement("option");
-        var group = document.createElement('optgroup');
-        group.label = selectValue[i];
+        // var group = document.createElement('optgroup');
+        // group.label = selectValue[i];
         option.text = selectOption[i];
         if (i === 0) {
             option.selected = true;
             option.disabled = true;
         }
-        group.appendChild(option);
-        selectList.appendChild(group);
+        //group.appendChild(option);
+        selectList.appendChild(option);
     }
 
     cell2.appendChild(selectList);
@@ -553,7 +555,8 @@ function createOneCell(tableID, name, select, textAreaName) {
     //create text area for notes
     var textArea = document.createElement('textarea');
     textArea.setAttribute('class', 'form-control');
-    textArea.setAttribute('placeholder', 'Notes');
+    // textArea.setAttribute('placeholder', 'Notes');
+    textArea.setAttribute('placeholder', 'Number/Letter');
     //textArea.id = "HOWSiteNotes" + rowCount;
     textArea.id = textAreaName + rowCount;
     textArea.style.height = '51px';
@@ -605,25 +608,74 @@ function createOneOutBuildingSpaceCell() {
 
 
             //Create and append the options
-            for (var a = 0; a < selectOption.length; a++) {
-                var option = document.createElement("option");
-                var group = document.createElement('optgroup');
-                group.label = selectValue[a];
-                option.text = selectOption[a];
-                if (a === 0) {
-                    option.selected = true;
-                    option.disabled = true;
+            if(i == columnCount - 1)
+            {
+                //load Access Select Option
+                var selectOption = ["Choose an item", 'R- Reasonable Access', 'P - Partial Access', 'N - Not Accessible'];
+                var selectValue = ["Choose an item", "R", "P", 'N'];
+            
+                for (var a = 0; a < selectValue.length; a++) {
+                    var option = document.createElement("option");
+                    // var group = document.createElement('optgroup');
+                    // group.label = selectValue[i];
+                    option.text = selectOption[a];
+                    option.value = selectValue[a];
+                    if (a === 0) {
+                        option.selected = true;
+                        option.disabled = true;
+                    }
+                    // group.appendChild(option);
+                    selectList.appendChild(option);
                 }
-                group.appendChild(option);
-                selectList.appendChild(group);
             }
+            else
+            {
+                // load Select Option
+                var selectOption = ["Choose an item", "√ - No Defects Evident", 'X - Defect Evident', '-- -  Not Relevant', 'U - Untested', 'IW - Incomplete Work'];
+                var selectValue = ["Choose an item", "√", "X", "--", "U","IW"];
+            
+            
+                //Create and append the options
+                for (var b = 0; b < selectOption.length; b++) {
+                    var option = document.createElement("option");
+                    // var group = document.createElement('optgroup');
+                    // group.label = selectValue[i];
+                    option.text = selectOption[b];
+                    option.value = selectValue[b];
+                    if (b === 0) {
+                        option.selected = true;
+                        option.disabled = true;
+                    }
+                    // group.appendChild(option);
+                    selectList.appendChild(option);
+                }
 
-
+            }
+            // for (var a = 0; a < selectOption.length; a++) {
+            //     var option = document.createElement("option");
+            //     var group = document.createElement('optgroup');
+            //     group.label = selectValue[a];
+            //     option.text = selectOption[a];
+            //     if (a === 0) {
+            //         option.selected = true;
+            //         option.disabled = true;
+            //     }
+            //     group.appendChild(option);
+            //     selectList.appendChild(group);
+            // }
 
             //create an name input for the cell1
             var textArea = document.createElement('textarea');
             textArea.setAttribute('class', 'form-control');
-            textArea.setAttribute('placeholder', 'Notes');
+            if(i == columnCount - 1)
+            {
+                textArea.setAttribute('placeholder', 'Letter');
+            }
+            else
+            {
+                textArea.setAttribute('placeholder', 'Number');
+            }
+            
             textArea.id = 'HOWOutBuildingPlace' + (rowCount - 1) + 'Text' + id;
             textArea.style.height = '50px';
             textArea.style.marginTop = '10px';
