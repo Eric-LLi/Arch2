@@ -3355,6 +3355,9 @@
                     case 22:
                       $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                       break;
+                    case 24:
+                      $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
                   }
                 }
               }
@@ -4663,7 +4666,6 @@
                    {
                     r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
                     let uuid = '<?php echo $_SESSION['uuid']; ?>';
-                    //console.log(uuid);
                     if(row.reportid == 0)
                     {
                       // console.log("this is an unassinged report, cannot allocate architect yet")
@@ -4743,6 +4745,9 @@
                           break;
                         case 22:
                           $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 24:
+                          $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                           break;
                       }
                     }
