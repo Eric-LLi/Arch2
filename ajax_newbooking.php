@@ -59,7 +59,6 @@
 
       $reportid = $_POST['reportid'];
       $notes = $_POST['notes'];
-
       $numstories = $_POST['numstories'];
       $numbedrooms = $_POST['numbedrooms'];
       $numbathrooms = $_POST['numbathrooms'];
@@ -89,13 +88,15 @@
 
       function doInsertBooking($repid, $linkedrepid = null)
       {
+        // error_log("doInsertBooking");
+        // error_log("reportid :$repid");
+        
         global $dblink;
         global $custfirstname, $custlastname, $custemail, $custmobile, $custphone, $custaddress1, $custaddress2, $custcity, $custpostcode, $custstate;
         global $budget, $commission, $travel, $spotter, $notes, $numstories, $numbedrooms, $numbathrooms, $numbuildings, $numrooms;
         global $address1, $address2, $city, $postcode, $state, $construction, $age, $meetingonsite, $renoadvice, $pestinspection;
         global $estateagentcompany, $estateagentcontact, $estateagentmobile, $estateagentphone, $userid, $hasbudget, $hascommission;
         global $hastravel,$hasspotter,$quotedescription;
-
         $bookingcode = SharedMakeUuid(8);
         $vars1 = "";
         $vars2 = "";
@@ -111,10 +112,13 @@
         //So if id != 3, then could insert with the amount details. 
         if($repid != 3)
         {
+          // error_log("report id is not 3");
           if ($hasbudget)
           {
+            $budget = $_POST['budget'];
             $vars1 = "budget,";
             $clause1 = SharedNullOrNum($budget, $dblink) . "," ;
+            // error_log("clause1: $clause1");
           }
   
           if ($hascommission)
@@ -137,13 +141,16 @@
         }
         else //If selects combined report, timber one.set the budget to 0.0001, so its status can be 'Not Paid'/ .  
         {
+          // error_log("report id is 3");
           if($hasbudget = true)
           {
             $vars1 = "budget,";
             $budget = 0.0001;
             $clause1 = SharedNullOrNum($budget, $dblink) . "," ;
+            // error_log("clause1: $clause1");
           }
         }
+        
           
         
 
