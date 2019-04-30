@@ -113,7 +113,7 @@
 
             $bookings_id = $booking["bookings_id"];
             $linkBookingID = $booking['linked_bookingcode'];
-            if(reportid == 24)
+            if($reportid == 24)
             {
               error_log("select combined report, report id = 24");
               $dbtimberselect =  "select " .
@@ -280,7 +280,7 @@
                 }
               }
             }
-            else if(reportid == 3)
+            else if($reportid == 3)
             {
               error_log("select combined report, report id = 3");
               $dbpropertyselect =  "select " .
