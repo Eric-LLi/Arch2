@@ -3836,6 +3836,9 @@
                       var estateagentcontact = $('#fldNewBookingEstateAgentContact').textbox('getValue');
                       var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                       var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
+
+                      var quotedescription = $('#fldNewBookingQuoteDes').textbox('getValue');
+
                       //console.log(custemail);
 
                       if (!_.isBlank(reportid))
@@ -3863,11 +3866,11 @@
                                   custstate: custstate,
 
                                   reportid: reportid,
+                                  budget: budget,
                                   <?php
                                     if (SharedIsAdmin())
                                     {
                                   ?>
-                                      budget: budget,
                                       commission: commission,
                                       travel: travel,
                                       spotter: spotter,
@@ -3896,7 +3899,9 @@
                                   estateagentcontact: estateagentcontact,
                                   estateagentmobile: estateagentmobile,
                                   estateagentphone: estateagentphone,
-                                  uuid: '<?php echo $_SESSION['uuid']; ?>'
+                                  uuid: '<?php echo $_SESSION['uuid']; ?>',
+
+                                  quotedescription:quotedescription
                                 };
                                 //console.log(data);
 
