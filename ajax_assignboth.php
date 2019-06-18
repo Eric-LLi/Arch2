@@ -303,10 +303,12 @@
                         $emailtemplate = $reportconfirmemails[$booking['itype']];
                         $html = file_get_contents('email_architectallocation.html');
                         //error_log($html);
+                        $html = str_replace("XXX_BOOKINGCODE", $updatepropertyid.'&'.$updatetimberid, $html);
                         $html = doMacros($html, $booking,$updatepropertyid);
+                        
                         $custemail = explode(",",$booking['custemail']);
                         // SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['linked_bookingcode'] . " - " . $reportTypes[$linked_itype] . " Assessment/Inspection Confirmation", $html);
-                        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $updatepropertyid . " - Combined Property Assessment & Timber Pest Inspection", $html);
+                        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $updatepropertyid.'&'.$updatetimberid . " - Combined Property Assessment & Timber Pest Inspection", $html);
 
                       }
 
