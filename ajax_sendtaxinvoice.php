@@ -118,6 +118,7 @@
 
                         if ($booking['custemail'] != "")
                         {
+                            $workstate = $booking['state'];
                             $emailcode = "";
                             $dbupdate1 = "";
                             $dbupdate2 = "";

@@ -126,7 +126,7 @@
 
                             error_log('the report type is '. $reportTypes[$booking['reportid']]);
 
-                            $html = file_get_contents('email_taxinvoice.html');
+                            $html = file_get_contents('email_paidconfirm.html');
                             $invoice_header = file_get_contents('invoice_header.html');
                             $invoice = file_get_contents('invoices_templates/paid.html');                           
                             $header = file_get_contents('Email_Header.html');
@@ -139,7 +139,7 @@
                             
                             $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['reportid']], $html);
                             $html = str_replace("XXX_PROPADDRESS1", $booking['address1'], $html);
-                            $html = str_replace("XXX_CUSTADDRESS2", $booking['custaddress2'], $html);
+                            $html = str_replace("XXX_PROPADDRESS2", $booking['address2'], $html);
                             $html = str_replace("XXX_PROPCITY", $booking['city'], $html);
                            
                             //Invoice Body
