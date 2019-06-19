@@ -113,7 +113,7 @@
 
             $bookings_id = $booking["bookings_id"];
             $linkBookingID = $booking['linked_bookingcode'];
-            if(reportid == 24)
+            if($reportid == 24)
             {
               error_log("select combined report, report id = 24");
               $dbtimberselect =  "select " .
@@ -280,7 +280,7 @@
                 }
               }
             }
-            else if(reportid == 3)
+            else if($reportid == 3)
             {
               error_log("select combined report, report id = 3");
               $dbpropertyselect =  "select " .
@@ -359,7 +359,7 @@
                                   "            left join bookings b2 on (b1.id=b2.bookings_id) " .
                                   "            left join users u2 on (b2.users_id=u2.id) " .
                                   "where " .
-                                  "b1.id=$timberid";
+                                  "b1.id=$propertyid";
               error_log($dbpropertyselect);
 
               if ($dbpropertyresult = SharedQuery($dbpropertyselect, $dblink))
@@ -435,8 +435,8 @@
                       $reportPath1 = './pdfreport/'.$bookingcode.".pdf";
                       error_log("the report path for the selected report is " . $reportPath1);
                       $linkBookingID = $booking['linked_bookingcode'];
-                      $reportPath2 = './pdfreport/'.$timberid.".pdf";
-                      error_log("the report path for the combined timber report is " . $reportPath2);
+                      $reportPath2 = './pdfreport/'.$propertyid.".pdf";
+                      error_log("the report path for the combined property report is " . $reportPath2);
                       $reportList = array($reportPath1,$reportPath2);
         
                       $custemail = explode(",",$booking['custemail']);

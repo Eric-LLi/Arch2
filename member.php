@@ -1302,10 +1302,11 @@
 
     function doUpdateBooking(booking)
     {
-      console.log(booking.bookingcode);
-      console.log(booking.linkedbookingcode);
-      console.log(booking.reportid);
-      console.log(booking.linked_bookingcode);
+      // console.log(booking.bookingcode);
+      // console.log(booking.linkedbookingcode);
+      // console.log(booking.reportid);
+      // console.log(booking.linked_bookingcode);
+      // console.log(booking.datepaid);
       function doReset()
       {
         // Customer TAB
@@ -1379,6 +1380,7 @@
           },
           onOpen: function()
           {
+            
             // Customer TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
 
@@ -1500,8 +1502,13 @@
                       $('#fldNewBookingReport').combobox('disable');
                     }
                   }
-                   $('#fldNewBookingReport').combobox('setValue', b.reportid);
-                   $('#fldNewBookingBudget').numberbox('setValue', b.budget);
+                    $('#fldNewBookingReport').combobox('setValue', b.reportid);
+                    $('#fldNewBookingBudget').numberbox('setValue', b.budget);
+                    //if the booking has been paid, the aggreed price cannot be changed any more ,set the text fields readonly
+                    if(booking.datepaid != null)
+                    {
+                      $('#fldNewBookingBudget').numberbox({readonly:true,disabled:true});
+                    }
 
                   <?php
                     if (SharedIsAdmin())
@@ -1852,6 +1859,7 @@
             console.log("row.bookingcode" + row.bookingcode);
             console.log("row.linkedbookingcode" +row.linkedbookingcode);
             console.log("row.linked_bookingcode" +row.linked_bookingcode);
+
             if(row.reportid == 24)
             {
               var timberid;
@@ -1908,94 +1916,7 @@
             else if (row.reportid == 3)
             {
               noty({text: "This is a linke timber pest report, please select the Combined Property Assessment & Timber Pest to cancel both of the reports ", type: 'warnning', timeout: 4000});
-
-              // var propertyid;
-              // if(row.linked_bookingcode != null)
-              // {
-              //   oldreports = false;
-              //   propertyid = row.linked_bookingcode;
-              // }
-              // else
-              // {
-              //   oldreports = true;
-              //   propertyid = row.linkedbookingcode;
-              // }
-              // console.log("report id is 3, the link property id is " + propertyid);
-              // doPromptOkCancel
-              // (
-              //   'Cancel booking ' + row.bookingcode + ' and ' + propertyid + ' ?',
-              //   function(result)
-              //   {
-              //     if (result)
-              //     {
-              //       $.post
-              //       (
-              //         'ajax_cancelbookings.php',
-              //         {
-              //           uuid: '<?php echo $_SESSION['uuid']; ?>',
-              //           bookingcode: row.bookingcode,
-              //           timberid:"",
-              //           propertyid:propertyid,
-              //           reportid:row.reportid,
-              //           oldreports: oldreports
-              //         },
-              //         function(result)
-              //         {
-              //           var response = JSON.parse(result);
-
-              //           if (response.rc == 0)
-              //           {
-              //             // doRefreshBookings();
-              //             doSearchBookings(false);
-              //             noty({text: response.msg, type: 'success', timeout: 3000});
-              //           }
-              //           else
-              //           {
-              //             noty({text: response.msg, type: 'error', timeout: 10000});
-              //           }
-
-              //         }
-              //       );
-              //     }
-              //   }
-              // );
             }
-            // else if (row.linked_bookingcode != null)
-            // {
-            //   doPromptOkCancel
-            //   (
-            //     'Cancel booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
-            //     function(result)
-            //     {
-            //       if (result)
-            //       {
-            //         $.post
-            //         (
-            //           'ajax_cancelbooking.php',
-            //           {
-            //             uuid: '<?php echo $_SESSION['uuid']; ?>',
-            //             bookingcode: row.bookingcode
-            //           },
-            //           function(result)
-            //           {
-            //             var response = JSON.parse(result);
-
-            //             if (response.rc == 0)
-            //             {
-            //               doRefreshBookings();
-            //               noty({text: response.msg, type: 'success', timeout: 3000});
-            //             }
-            //             else
-            //             {
-            //               noty({text: response.msg, type: 'error', timeout: 10000});
-            //             }
-
-            //           }
-            //         );
-            //       }
-            //     }
-            //   );
-            //}
             else
             {
               doPromptOkCancel
@@ -2010,7 +1931,7 @@
                       'ajax_cancelbooking.php',
                       {
                         uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode
+                        bookingcode: row.bookingcode,
                       },
                       function(result)
                       {
@@ -2942,7 +2863,28 @@
 
                       if (response.rc == 0)
                       {
-                        doSearchBookings(false);
+                        $.post
+                        (
+                          'ajax_sendreceipt.php',
+                          {
+                            uuid: '<?php echo $_SESSION['uuid']; ?>',
+                            bookingcode: row.bookingcode,
+                            timberid:timberid
+                          },
+                          function(result)
+                          {
+                            var response = JSON.parse(result);
+
+                            if (response.rc == 0)
+                            {
+                              doSearchBookings(false);
+                              noty({text: response.msg, type: 'success', timeout: 3000});
+                            }
+                              // doRefreshBookings();
+                            else
+                              noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
+                        );
                       }
                         // doRefreshBookings();
                       else
@@ -2977,7 +2919,28 @@
 
                       if (response.rc == 0)
                       {
-                        doSearchBookings(false);
+                        $.post
+                        (
+                          'ajax_sendreceipt.php',
+                          {
+                            uuid: '<?php echo $_SESSION['uuid']; ?>',
+                            bookingcode: row.bookingcode,
+                            timberid:""
+                          },
+                          function(result)
+                          {
+                            var response = JSON.parse(result);
+
+                            if (response.rc == 0)
+                            {
+                              doSearchBookings(false);
+                              noty({text: response.msg, type: 'success', timeout: 3000});
+                            }
+                              // doRefreshBookings();
+                            else
+                              noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
+                        );
                       }
                         // doRefreshBookings();
                       else
@@ -3156,6 +3119,114 @@
             );
           }
 
+        }
+      ))
+        noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
+    }
+
+    function doTaxInvoice()
+    {
+      if (!doGridGetSelectedRowData
+      (
+        'divBookingsG',
+        function(row)
+        {
+          if(row.reportid == 0)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet");
+            noty({text: 'This is an unassinged report, cannot send a tax invoice', type: 'warning', timeout: 4000});
+          }
+          else if(row.reportid == 23)
+          {
+            noty({text: 'This is a quote report, cannot send a tax invoice', type: 'warning', timeout: 4000});
+          }
+          else if (row.reportid == 3)
+          {
+            noty({text: "This is a linke timber pest report, please select the Combined Property Assessment & Timber Pest to send a tax invoice ", type: 'warnning', timeout: 4000});
+          }
+          else if (row.reportid == 24)
+          {
+            var timberid;
+            if(row.linkedbookingcode != null)
+            {
+              oldreports = false;
+              timberid = row.linkedbookingcode;
+            }
+            else
+            {
+              oldreports = true;
+              timberid = row.linked_bookingcode;
+            }
+            console.log("report id is 24, the link timber id is " + timberid);
+            doPromptOkCancel
+            (
+              'Send a tax invoice for the booking ' + row.bookingcode + ' and ' + timberid + ' ?',
+              function(result)
+              {
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_sendtaxinvoice.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      timberid:timberid
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
+
+                      if (response.rc == 0)
+                      {
+                        doSearchBookings(false);
+                        noty({text: response.msg, type: 'success', timeout: 3000});
+                      }
+                        // doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
+              }
+            );
+
+          }
+          else
+          {
+            doPromptOkCancel
+            (
+              'Send a tax invoice for the booking ' + row.bookingcode + ' ?',
+              function(result)
+              {
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_sendtaxinvoice.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      timberid:""
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
+
+                      if (response.rc == 0)
+                      {
+                        doSearchBookings(false);
+                        noty({text: response.msg, type: 'success', timeout: 3000});
+                      }
+                        // doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
+              }
+            );
+          }
         }
       ))
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
@@ -3836,6 +3907,9 @@
                       var estateagentcontact = $('#fldNewBookingEstateAgentContact').textbox('getValue');
                       var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                       var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
+
+                      var quotedescription = $('#fldNewBookingQuoteDes').textbox('getValue');
+
                       //console.log(custemail);
 
                       if (!_.isBlank(reportid))
@@ -3863,11 +3937,11 @@
                                   custstate: custstate,
 
                                   reportid: reportid,
+                                  budget: budget,
                                   <?php
                                     if (SharedIsAdmin())
                                     {
                                   ?>
-                                      budget: budget,
                                       commission: commission,
                                       travel: travel,
                                       spotter: spotter,
@@ -3896,7 +3970,9 @@
                                   estateagentcontact: estateagentcontact,
                                   estateagentmobile: estateagentmobile,
                                   estateagentphone: estateagentphone,
-                                  uuid: '<?php echo $_SESSION['uuid']; ?>'
+                                  uuid: '<?php echo $_SESSION['uuid']; ?>',
+
+                                  quotedescription:quotedescription
                                 };
                                 //console.log(data);
 
@@ -5151,6 +5227,7 @@
       ?>
           <a href="javascript:void(0)" onClick="doCopyBooking()" class="easyui-linkbutton" iconCls="icon-duplicate">Copy Booking</a>
           <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-upload">Upload PDF Report</a>
+          <a href="javascript:void(0)" onClick="doTaxInvoice()" class="easyui-linkbutton" iconCls="icon-payment">Tax Invoice</a>
           <a href="javascript:void(0)" onClick="doMarkPaid()" class="easyui-linkbutton" iconCls="icon-payment">Paid</a>
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
           <!-- <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Architect Reedit</a> -->
