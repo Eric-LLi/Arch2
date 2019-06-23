@@ -6,8 +6,11 @@
 function generatePDF(mode) {
      //Prevent multiple request.
      $("button").prop("disabled", true);
+    //  var text = $("#texteditor").texteditor("getValue");
+    //  console.log(text);
+    //  var list = document.getElementsByTagName("UL");
+    //  var listNO = document.getElementById("texteditor").getElementsByTagName("UL").length;
      
-    resetTotalImagesCaptions();
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var isMobile = {
@@ -125,7 +128,7 @@ function generatePDF(mode) {
                         }
                     },
                     {
-                        text: 'Inspection Details',
+                        text: 'Assessment Details',
                         style: 'pageTopHeader',
                         margin: [0, 30, 0, 5]
                     },
@@ -304,9 +307,10 @@ function generatePDF(mode) {
                                                     },
                                                     {
                                                         text: whatNotRecordedBulletList6i,
-                                                        style: 'bulletMargin'
+                                                        style: 'bulletMargin',
                                                     }
-                                                ]
+                                                ],
+                                                alignment: 'left',
                                             },
                                             whatNotRecordedBulletList7
                                         ]
@@ -546,36 +550,124 @@ function generatePDF(mode) {
                     getPropertySummaryTable(),
                     makeAGap(),
                     {
-                        text: 'INTRODUCTION:',
+                        text: 'Executive Summary:',
                         style: 'pageSubHeader'
                     },
                     getYMASSummary(),
                     makeAGap(),
                     {
-                        text: 'Major Defects:',
+                        text: 'Consequences:',
                         style: 'pageSubHeader'
                     },
                     getYMASMajorDefects(),
                     makeAGap(),
                     {
-                        text: 'Serious Structural Defects:',
+                        text: 'Recommendations:',
                         style: 'pageSubHeader'
                     },
-                    getYMASSeriousStructuralDefects()
+                    getTextBlock('YMAS-TEXT3'),
+                    //getYMASSeriousStructuralDefects(),
                 ],
                 pageBreak: 'after'
             },
             /**
-             * (7) Advice
+             * (7) Introduction
+             * */
+            {
+                stack: [{
+                        text: 'Introduction',
+                        style: 'pageTopHeader'
+                    },
+                    makeAGap(),
+                    {
+                        text: 'The property comprises:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('INTRO-TEXT1'),
+                    makeAGap(),
+                    {
+                        text: 'Client Motivation for this report:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('INTRO-TEXT2'),
+                    makeAGap(),
+                    {
+                        text: 'Externally:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('INTRO-TEXT3'),
+                    makeAGap(),
+                    {
+                        text: 'Internally:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('INTRO-TEXT4'),
+                ],
+                // pageBreak: 'after'
+                // stack: [
+                //     getAdviceTable()
+                // ]
+                //pageBreak: 'after'
+            },
+             /**
+             * (8) Advice
              * */
             {
                 stack: [
-                    getAdviceTable()
-                ]
+                    makeAGap(),
+                    makeAGap(),
+                    makeAGap(),
+                    makeAGap(),
+                    {
+                        text: 'Advice',
+                        style: 'pageTopHeader'
+                    },
+                    makeAGap(),
+                    {
+                        text: 'Document Retrieval:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('ADVICE-TEXT1'),
+                    makeAGap(),
+                    {
+                        text: 'Observations and Analysis:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('ADVICE-TEXT2'),
+                    makeAGap(),
+                    {
+                        text: 'Recommendations – Initial Scope:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('ADVICE-TEXT3'),
+                    makeAGap(),
+                    {
+                        text: 'Recommendations – Long Term Strategies:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('ADVICE-TEXT4'),
+                    makeAGap(),
+                    {
+                        text: 'Consequences:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('ADVICE-TEXT5'),
+                    makeAGap(),
+                    {
+                        text: 'Summary:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('ADVICE-TEXT6'),
+                   
+                ],
+                //pageBreak: 'after'
+                // stack: [
+                //     getAdviceTable()
+                // ]
                 //pageBreak: 'after'
             },
             /**
-             * (8) Photographs
+             * (9) Photographs
              * */
             {
                 stack: [
@@ -583,7 +675,7 @@ function generatePDF(mode) {
                 ]
             },
             /**
-             * (9) Drawings
+             * (10) Drawings
              * */
             {
                 stack: [
@@ -602,7 +694,7 @@ function generatePDF(mode) {
             },
             pageSubHeader: {
                 fontSize: 13,
-                color: 'red',
+                color: 'blue',
                 bold: true,
                 margin: [0, 0, 0, 5]
             },
