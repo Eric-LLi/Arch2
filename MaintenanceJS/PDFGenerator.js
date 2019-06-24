@@ -630,34 +630,40 @@ function generatePDF(mode) {
                     getTextBlock('ADVICE-TEXT1'),
                     makeAGap(),
                     {
-                        text: 'Observations and Analysis:',
+                        text: 'Priorities:',
                         style: 'pageSubHeader'
                     },
                     getTextBlock('ADVICE-TEXT2'),
                     makeAGap(),
                     {
-                        text: 'Recommendations – Initial Scope:',
+                        text: 'Observations and Analysis:',
                         style: 'pageSubHeader'
                     },
                     getTextBlock('ADVICE-TEXT3'),
                     makeAGap(),
                     {
-                        text: 'Recommendations – Long Term Strategies:',
+                        text: 'Recommendations – Initial Scope:',
                         style: 'pageSubHeader'
                     },
                     getTextBlock('ADVICE-TEXT4'),
                     makeAGap(),
                     {
-                        text: 'Consequences:',
+                        text: 'Recommendations – Long Term Strategies:',
                         style: 'pageSubHeader'
                     },
                     getTextBlock('ADVICE-TEXT5'),
                     makeAGap(),
                     {
-                        text: 'Summary:',
+                        text: 'Consequences:',
                         style: 'pageSubHeader'
                     },
                     getTextBlock('ADVICE-TEXT6'),
+                    makeAGap(),
+                    {
+                        text: 'Summary:',
+                        style: 'pageSubHeader'
+                    },
+                    getTextBlock('ADVICE-TEXT7'),
                    
                 ],
                 //pageBreak: 'after'

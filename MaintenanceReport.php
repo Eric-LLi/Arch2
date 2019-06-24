@@ -411,15 +411,15 @@
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="MaintenSectionSubHead" style="font-size: 20px">Observations and Analysis:</label>
-                <textarea id="ADVICE-TEXT2"
-                          placeholder=""
-                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Priorities: </label>
+                <textarea id="ADVICE-TEXT2" title="summary"
+                          class="autoExpand"
+                          style="border: 2px solid #000000;height: 200px" placeholder=""></textarea>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations – Initial Scope: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Observations and Analysis:</label>
                 <textarea id="ADVICE-TEXT3"
                           placeholder=""
                           class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
@@ -427,7 +427,7 @@
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations – Long Term Strategies: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations – Initial Scope: </label>
                 <textarea id="ADVICE-TEXT4"
                           placeholder=""
                           class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
@@ -435,7 +435,7 @@
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="MaintenSectionSubHead" style="font-size: 20px">Consequences: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations – Long Term Strategies: </label>
                 <textarea id="ADVICE-TEXT5"
                           placeholder=""
                           class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
@@ -443,8 +443,16 @@
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="MaintenSectionSubHead" style="font-size: 20px">Summary: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Consequences: </label>
                 <textarea id="ADVICE-TEXT6"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Summary: </label>
+                <textarea id="ADVICE-TEXT7"
                           placeholder=""
                           class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
             </div>
