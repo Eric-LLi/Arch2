@@ -146,6 +146,7 @@
                             $html = str_replace("XXX_PROPADDRESS2", $booking['address2'], $html);
                             $html = str_replace("XXX_PROPCITY", $booking['city'], $html);
                            
+                           
                             //Invoice Body
                             $budget = $booking['budget'];
                             $gst = number_format($budget - $budget/1.1,2);
@@ -164,6 +165,7 @@
                             $invoice = str_replace("XXX_PROPADDRESS1", $booking['address1'], $invoice);
                             $invoice = str_replace("XXX_PROPADDRESS2", $booking['address2'], $invoice);
                             $invoice = str_replace("XXX_PROPCITY", $booking['city'], $invoice);
+                            $invoice = str_replace("XXX_NOTES", $booking['notes'], $invoice);
                             if($timberid == "")
                             {
                                 error_log("timberid is empty, so single report");
