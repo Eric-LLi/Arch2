@@ -81,7 +81,7 @@
 <!-- Inspection Info -->
 <div id="MaintenanceCustomerDetails" class="container">
     <hr>
-    <h3 class="sectionSubHead">CUSTOMER DETAILS</h3>
+    <h3 class="sectionSubHead">CLIENT DETAILS</h3>
     <form>
         <div class="row">
             <div class="col-sm-6">
@@ -320,7 +320,7 @@
     <form>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="sectionSubHead" style="font-size: 20px">Introduction: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px;">Executive Summary: </label>
                 <label style="width:100%">The following summarizes our advice with respect to particular concerns identified at the property</label>
                 <textarea id="YMAS-TEXT1" title="summary"
                           class="autoExpand"
@@ -329,7 +329,7 @@
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="sectionSubHead" style="font-size: 20px">Major Defects: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Consequences: </label>
                 <label style="width:100%">Significant risk or cost consequences of not proceeding with this advice are as follows:</label>
                 <textarea id="YMAS-TEXT2"
                           placeholder="Please write down the brief consequences here..."
@@ -339,11 +339,14 @@
         <!--&#10;(Bullet points will be assigned automatically.) -->
         <div class="row form-group">
             <div class="col-sm">
-                <label class="sectionSubHead" style="font-size: 20px">Serious Structural Defects: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations:</label>
                 <label style="width:100%">Under the circumstances our recommendations are as follows</label>
                 <textarea id="YMAS-TEXT3"
                           placeholder="Please write down the brief recommendations here..."
-                          class="form-control" style="border: 2px solid #000000;height: 200px" onfocus="startBullet('YMAS-TEXT3')" onkeyup="assignBullet('YMAS-TEXT3')"></textarea>
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+                <!-- <textarea id="YMAS-TEXT3"
+                          placeholder="Please write down the brief recommendations here..."
+                          class="form-control" style="border: 2px solid #000000;height: 200px" onfocus="startBullet('YMAS-TEXT3')" onkeyup="assignBullet('YMAS-TEXT3')"></textarea> -->
             </div>
         </div>
     </form>
@@ -351,8 +354,118 @@
     <hr>
 </div>
 
-<!--Advice-->
 <div class="container">
+    <h2 class="content-head text-center firstH1">Introduction</h2><br>
+</div>
+<div class="container">
+    <form>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">The property comprises: </label>
+                <textarea id="INTRO-TEXT1" title="summary"
+                          class="autoExpand"
+                          style="border: 2px solid #000000;height: 200px" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Client Motivation for this report: </label>
+                <textarea id="INTRO-TEXT2"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Externally: </label>
+                <textarea id="INTRO-TEXT3"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Internally: </label>
+                <textarea id="INTRO-TEXT4"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+    </form>
+    <br>
+    <hr>
+</div>
+
+<div class="container">
+    <h2 class="content-head text-center firstH1">Advice</h2><br>
+</div>
+<div class="container">
+    <form>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Document Retrieval: </label>
+                <textarea id="ADVICE-TEXT1" title="summary"
+                          class="autoExpand"
+                          style="border: 2px solid #000000;height: 200px" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Priorities: </label>
+                <textarea id="ADVICE-TEXT2" title="summary"
+                          class="autoExpand"
+                          style="border: 2px solid #000000;height: 200px" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Observations and Analysis:</label>
+                <textarea id="ADVICE-TEXT3"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations – Initial Scope: </label>
+                <textarea id="ADVICE-TEXT4"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations – Long Term Strategies: </label>
+                <textarea id="ADVICE-TEXT5"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Consequences: </label>
+                <textarea id="ADVICE-TEXT6"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Summary: </label>
+                <textarea id="ADVICE-TEXT7"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <!-- <div class="easyui-texteditor" title="TextEditor" style="width:700px;height:300px;padding:20px" id="texteditor">
+           
+        </div> -->
+    </form>
+    <br>
+    <hr>
+</div>
+<!--Advice-->
+<!-- <div class="container">
     <h2 class="content-head text-center firstH1">Advice</h2><br>
 </div>
 <div class="container">
@@ -385,7 +498,7 @@
     </form>
     <br>
     <hr>
-</div>
+</div> -->
 
 <!--Photographs-->
 <div class="container">

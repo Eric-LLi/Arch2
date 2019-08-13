@@ -170,7 +170,7 @@ function getCustomerDetailsTable() {
             widths: [70, '*', 70, '*'],
             body: [
                 [{
-                    text: 'CUSTOMER DETAILS',
+                    text: 'CLIENT DETAILS',
                     style: 'tableHeader',
                     colSpan: 4,
                     border: [false, false, false, true]
@@ -237,7 +237,7 @@ function getInspectionDetailsTable() {
             widths: [100, '*', 25, '*', 40, '*'],
             body: [
                 [{
-                    text: 'INSPECTION DETAILS',
+                    text: 'ASSESSMENT DETAILS',
                     style: 'tableHeader',
                     colSpan: 6,
                     border: [false, false, false, true]
@@ -274,7 +274,7 @@ function getInspectionDetailsTable() {
                     border: [true, true, false, true]
                 }],
                 [{
-                    text: 'Date of Inspection',
+                    text: 'Date of Assessment',
                     style: 'tableBoldTextAlignLeft',
                     border: [false, true, true, true]
                 }, {
@@ -282,7 +282,7 @@ function getInspectionDetailsTable() {
                     style: 'tableText',
                     colSpan: 2
                 }, {}, {
-                    text: 'Time of Inspection',
+                    text: 'Time of Assessment',
                     style: 'tableBoldTextAlignLeft'
                 }, {
                     text: getIt('10'),
@@ -511,10 +511,10 @@ function getYMASSummary() {
                         //     text: getIt('ADVICE-TEXT4'),
                         //     margin: [0, 0, 0, 4]
                         // },
-                        {
-                            text: 'Further detail can be found within the body of this report and queries may be directed to the named architect or Archicentre Australia.',
-                            bold: true
-                        }
+                        // {
+                        //     text: 'Further detail can be found within the body of this report and queries may be directed to the named architect or Archicentre Australia.',
+                        //     bold: true
+                        // }
                     ],
                     style: 'tableText',
                     alignment: 'justify'
@@ -554,6 +554,28 @@ function getYMASMajorDefects() {
     return result;
 }
 
+function getTextBlock(id)
+{
+    var result;
+    result = {
+        table: {
+            widths: ['*'],
+            body: [
+                [{
+                    stack: [
+                        {
+                            text: getIt(id)
+                        }
+                    ],
+                    style: 'tableText',
+                    alignment: 'justify'
+                }]
+            ]
+        }
+    };
+    return result;
+}
+
 /**
  * Get Your Maintenance Advice Summary - Serious Structural Defects Table
  * */
@@ -577,8 +599,12 @@ function getYMASSeriousStructuralDefects() {
                                     margin: [0, 0, 0, 4]
                                 },
                                 {
-                                    ul: giveMeTheBullet('YMAS-TEXT3')
-                                }
+                                    text: getIt('YMAS-TEXT3'),
+                                    margin: [0, 0, 0, 4]
+                                },
+                                // {
+                                //     ul: giveMeTheBullet('YMAS-TEXT3')
+                                // }
                             ],
                             style: 'tableText',
                             alignment: 'justify'
