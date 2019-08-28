@@ -387,7 +387,7 @@ function determineFooter(mode) {
                                 image:footerImage,
                                 alignment:'left',
                                 width:80,
-                                height:34
+                                height:31
                             },
                             // {
                             //     rowSpan: 2,
@@ -411,7 +411,7 @@ function determineFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -3, 10, 0]
+                margin: [40, 0, 10, 0]
             };
             return result;
         } else {
@@ -426,7 +426,7 @@ function determineFooter(mode) {
                                 image: footerImage,
                                 alignment: 'left',
                                 width: 80,
-                                height: 34
+                                height: 31
                             },
                             {
                                 text:[
@@ -445,7 +445,7 @@ function determineFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -3, 10, 0]
+                margin: [40, 0, 10, 0]
             };
             return result;
         }

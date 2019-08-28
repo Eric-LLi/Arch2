@@ -563,65 +563,65 @@ function getAreaTable(areaID, nameID, rowID) {
     var areaNumber = $('#' + areaID).find('> div').length;
     //console.log(areaNumber);
 
-    if (areaID == 'InteriorDryArea') {
-        var firstRow = [
-            {
-                text: 'Area',
-                alignment: 'center',
-                fontSize: 10,
-                fillColor: '#CCCCCC',
-                bold: true
-            },
-            {
-                text: '',
-                fillColor: '#CCCCCC',
-            },
-            {
-                text: "Key",
-                alignment: 'center',
-                fontSize: 10,
-                fillColor: '#CCCCCC',
-                bold: true
-            },
-            {
-                text: '',
-                fillColor: '#CCCCCC',
-            },
-            {
-                text: "Key",
-                alignment: 'center',
-                fontSize: 10,
-                fillColor: '#CCCCCC',
-                bold: true
-            },
-            {
-                text: '',
-                fillColor: '#CCCCCC',
-            },
-            {
+    // if (areaID == 'InteriorDryArea') {
+    //     var firstRow = [
+    //         {
+    //             text: 'Area',
+    //             alignment: 'center',
+    //             fontSize: 10,
+    //             fillColor: '#CCCCCC',
+    //             bold: true
+    //         },
+    //         {
+    //             text: '',
+    //             fillColor: '#CCCCCC',
+    //         },
+    //         {
+    //             text: "Key",
+    //             alignment: 'center',
+    //             fontSize: 10,
+    //             fillColor: '#CCCCCC',
+    //             bold: true
+    //         },
+    //         {
+    //             text: '',
+    //             fillColor: '#CCCCCC',
+    //         },
+    //         {
+    //             text: "Key",
+    //             alignment: 'center',
+    //             fontSize: 10,
+    //             fillColor: '#CCCCCC',
+    //             bold: true
+    //         },
+    //         {
+    //             text: '',
+    //             fillColor: '#CCCCCC',
+    //         },
+    //         {
 
-                text: "Key",
-                alignment: 'center',
-                fontSize: 10,
-                fillColor: '#CCCCCC',
-                bold: true
-            },
-            {
-                text: '',
-                fillColor: '#CCCCCC',
-            },
-            {
+    //             text: "Key",
+    //             alignment: 'center',
+    //             fontSize: 10,
+    //             fillColor: '#CCCCCC',
+    //             bold: true
+    //         },
+    //         {
+    //             text: '',
+    //             fillColor: '#CCCCCC',
+    //         },
+    //         {
 
-                text: "Key",
-                alignment: 'center',
-                fontSize: 10,
-                fillColor: '#CCCCCC',
-                bold: true
-            }
+    //             text: "Key",
+    //             alignment: 'center',
+    //             fontSize: 10,
+    //             fillColor: '#CCCCCC',
+    //             bold: true
+    //         }
 
-        ];
-        data.push(firstRow);
-    }
+    //     ];
+    //     data.push(firstRow);
+    // }
 
 
     var firstInput = getIt(nameID + '0');
@@ -641,7 +641,7 @@ function getAreaTable(areaID, nameID, rowID) {
 
         tableBody = {
             table: {
-                widths: ['auto', '*', 'auto', '*', 'auto', '*', 'auto', '*', 'auto'],
+                widths: ['*', 'auto', 15, 'auto', 15, 'auto', 15, 'auto', 15],
                 body: data
             },
             margin: [0, 5, 0, 10]
@@ -986,6 +986,7 @@ function getMajorDefectsTable(tableID, itemNoID, imageRefID, notesID, recommenda
     tableBody = {
         table: {
             widths: ['auto', 'auto', 'auto', '*'],
+            dontBreakRows: true,
             body: data
         },
         margin: [0, 5, 0, 10]
@@ -1382,31 +1383,31 @@ function getImages() {
             var img = totalContainers.eq(i).children('img').get(0),
                 imgSrc = totalContainers.eq(i).children('img').attr('src'),
                 imgLabel = totalContainers.eq(i).children('label').text(),
-                imgText = totalContainers.eq(i).children('input').val(),
-                width = 0,
-                height = 0;
+                imgText = totalContainers.eq(i).children('input').val();
+                // width = 0,
+                // height = 0;
 
             if (imgSrc.includes("photos/") > 0) {
                 imgSrc = convertImgToBase64(img);
             }
 
-            if (img.width >= img.height) {
-                width = 250;
-                height = 187;
-            } else {
-                width = img.width * 187 / img.height;
-                height = 187;
-            }
+            // if (img.width >= img.height) {
+            //     width = 250;
+            //     height = 187;
+            // } else {
+            //     width = img.width * 187 / img.height;
+            //     height = 187;
+            // }
 
             row.push({
                 stack: [
                     {
                         image: imgSrc,
-                        width: width,
-                        height: height,
+                        height: 200,
+                        width: 250,
                         margin:[0,0,0,5],
                         //margin:[0,30,0,5]
-                        alignment: 'center'
+                        //alignment: 'center'
                     },
                     {
                         text: imgLabel,
@@ -1427,7 +1428,7 @@ function getImages() {
                         
                     }
                 ],
-                margin:[0,15,0,10]
+                margin:[0,5,0,10]
             });
             divCount++;
             if (divCount === 3) {
@@ -1453,6 +1454,7 @@ function getImages() {
             },
             //layout: 'noBorders',
             table: {
+                widths: [250, 250],
                 headerRows: 2,
                 dontBreakRows: true,
                 widths: ['*', '*'],
