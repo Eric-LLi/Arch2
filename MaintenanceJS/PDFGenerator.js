@@ -80,7 +80,7 @@ function generatePDF(mode) {
                                 width: 130
                             },
                             {
-                                text: 'Maintenance Advice Report',
+                                text: 'Maintenance Advice',
                                 fontSize: 24,
                                 bold: true,
                                 color: 'red',
@@ -550,23 +550,28 @@ function generatePDF(mode) {
                     getPropertySummaryTable(),
                     makeAGap(),
                     {
-                        text: 'Executive Summary:',
-                        style: 'pageSubHeader'
+                        ol:[
+                            'Executive Summary'
+                        ],
+                        style: 'pageTopHeader',
                     },
+                    makeAGap(),
                     getYMASSummary(),
                     makeAGap(),
                     {
                         text: 'Consequences:',
-                        style: 'pageSubHeader'
+                        style: 'pageSubHeader',
+                        color: 'red',
                     },
                     getYMASMajorDefects(),
                     makeAGap(),
                     {
                         text: 'Recommendations:',
-                        style: 'pageSubHeader'
+                        style: 'pageSubHeader',
+                        color: 'red',
                     },
-                    getTextBlock('YMAS-TEXT3'),
-                    //getYMASSeriousStructuralDefects(),
+                    // getTextBlock('YMAS-TEXT3'),
+                    getYMASSeriousStructuralDefects(),
                 ],
                 pageBreak: 'after'
             },
@@ -574,9 +579,13 @@ function generatePDF(mode) {
              * (7) Introduction
              * */
             {
-                stack: [{
-                        text: 'Introduction',
-                        style: 'pageTopHeader'
+                stack: [
+                    {
+                        start: 2,
+                        ol:[
+                            'Introduction'
+                        ],
+                        style: 'pageTopHeader',
                     },
                     makeAGap(),
                     {
@@ -603,7 +612,7 @@ function generatePDF(mode) {
                     },
                     getTextBlock('INTRO-TEXT4'),
                 ],
-                // pageBreak: 'after'
+                pageBreak: 'after'
                 // stack: [
                 //     getAdviceTable()
                 // ]
@@ -614,13 +623,12 @@ function generatePDF(mode) {
              * */
             {
                 stack: [
-                    makeAGap(),
-                    makeAGap(),
-                    makeAGap(),
-                    makeAGap(),
                     {
-                        text: 'Advice',
-                        style: 'pageTopHeader'
+                        start: 3,
+                        ol:[
+                            'Advice'
+                        ],
+                        style: 'pageTopHeader',
                     },
                     makeAGap(),
                     {
@@ -697,6 +705,12 @@ function generatePDF(mode) {
                 fontSize: 17,
                 color: 'red',
                 bold: true
+            },
+            pageSecondHeader:{
+                fontSize: 13,
+                color: 'red',
+                bold: true,
+                margin: [0, 0, 0, 5]
             },
             pageSubHeader: {
                 fontSize: 13,

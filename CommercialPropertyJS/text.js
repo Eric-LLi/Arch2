@@ -5,7 +5,7 @@
 /*
  Define variables
  */
-var PropertyAssessmentReport = "This pre-lease / pre-purchase Property Assessment Report is a visual assessment of the conditions of the reasonably accessible areas of the property at the time of the assessment, including the subject premises and associated areas where the property is a unit.";
+var PropertyAssessmentReport = "This pre-lease / pre-purchase Property Assessment Report is a visual assessment of the conditions of the reasonably accessible areas of the property at the time of the assessment.";
 
 var ScopeOfAssessment1 = "This Report is prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and in accordance with Australian Standard 4349.1-2007 Inspection of Buildings Part 1: Pre-purchase inspections – Residential Buildings (pending release of Australian Standard for pre-purchase inspections of non-residential buildings) and any other Australian Standards, definitions or referenced documents cited in the Terms and Conditions.";
 
