@@ -351,6 +351,7 @@
 
         //$('#fldNewBookingBudget').numberbox('clear');
         $('#fldNewBookingNotes').textbox('clear');
+        $('#fldNewBookingClientNotes').textbox('clear');
 
         // Properties TAB
         $('#fldNewBookingState').combobox('clear');
@@ -446,6 +447,7 @@
                 var reportid = $('#fldNewBookingReport').combobox('getValue');
                 //var budget = $('#fldNewBookingBudget').numberbox('getValue');
                 var notes = $('#fldNewBookingNotes').textbox('getValue');
+                var clientnotes = $('#fldNewBookingClientNotes').textbox('getValue');
 
                 var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                 var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
@@ -496,6 +498,7 @@
                             reportid: reportid,
                             //budget: budget,
                             notes: notes,
+                            clientnotes:notes,
 
                             numstories: numstories,
                             numbedrooms: numbedrooms,
@@ -841,6 +844,10 @@
             <tr>
               <td style="vertical-align: top;">Notes:</td>
               <td><input id="fldNewBookingNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 300px"></td>
+            </tr>
+            <tr style="margin-top:5px">
+              <td style="vertical-align: top">Client Notes:</td>
+              <td><input id="fldNewBookingClientNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 150px"></td>
             </tr>
           </table>
         </div>

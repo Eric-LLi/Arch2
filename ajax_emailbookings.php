@@ -113,6 +113,15 @@
 
             $bookings_id = $booking["bookings_id"];
             $linkBookingID = $booking['linked_bookingcode'];
+            $workstate = $booking['state'];//the property's state, not the client's living state. 
+            if($workstate == 'NSW')
+            {
+                $footer = file_get_contents('Email_Footer_NSW.html');
+            }
+            else
+            {
+                $footer = file_get_contents('Email_Footer.html'); 
+            }
             if($reportid == 24)
             {
               error_log("select combined report, report id = 24");
@@ -209,7 +218,7 @@
 
                     //Get the contents of the footer and header to the variables. 
                     $header = file_get_contents('Email_Header.html');
-                    $footer = file_get_contents('Email_Footer.html'); 
+                    //$footer = file_get_contents('Email_Footer.html'); 
                     $html = str_replace("XXX_HEADER", $header, $html);
                     $html = str_replace("XXX_FOOTER", $footer, $html);
 
@@ -376,7 +385,7 @@
         
                       //Get the contents of the footer and header to the variables. 
                       $header = file_get_contents('Email_Header.html');
-                      $footer = file_get_contents('Email_Footer.html'); 
+                      //$footer = file_get_contents('Email_Footer.html'); 
                       $html = str_replace("XXX_HEADER", $header, $html);
                       $html = str_replace("XXX_FOOTER", $footer, $html);
         

@@ -1284,7 +1284,212 @@
         <?php
         }
         ?>
+        <?php
+        if (basename($_SERVER['SCRIPT_NAME']) == 'AssessmentReportTypeA.php')
+        {
+        ?>
+        var count_defect = 0;
+        var count_siteLimitation = 0;
+        var count_servicelimitation = 0;
+        var count_exteriorLimitation = 0;
+        var count_interiorLimitation = 0;
+        var SiteMajorRecommendations = [];
+        var SiteMinorRecommendations = [];
+        var ExteriorMajorRecommendations = [];
+        var ExteriorMinorRecommendations = [];
+        var InteriorMajorRecommendations = [];
+        var InteriorMinorRecommendations = [];
+        var ServiceMajorRecommendations = [];
+        var ServiceMinorRecommendations = [];
+        data.forEach(
+            function (d) {
+                //console.log(d.id.substr(0,8));
+                if (d.id.substr(0, 8) == 'EDSelect') {
+                    count_defect++;
+                    //console.log("inside");
+                }
+                if (d.id.substr(0, 30) == 'AssessmentSiteLimitationSelect') {
+                    count_siteLimitation++;
+                }
 
+                if (d.id.substr(0, 33) == 'AssessmentServiceLimitationSelect') {
+                    count_servicelimitation++;
+                }
+                if (d.id.substr(0, 42) == 'AssessmentPropertyExteriorLimitationSelect') {
+                    count_exteriorLimitation++;
+                }
+
+                if (d.id.substr(0, 42) == 'AssessmentPropertyInteriorLimitationSelect') {
+                    count_interiorLimitation++;
+                }
+                if(d.id.substr(0,34)== 'assessmentSiteMajorRecommendations')
+                {
+                    // console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        SiteMajorRecommendationsArray = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        SiteMajorRecommendationsArray = d.value.split(' ');
+                        console.log(SiteMajorRecommendationsArray);
+                    }
+                }
+                if(d.id.substr(0,34)== 'assessmentSiteMinorRecommendations')
+                {
+                    // console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        SiteMinorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        SiteMinorRecommendations = d.value.split(' ');
+                        console.log(SiteMinorRecommendations);
+                    }
+                    
+                }
+                if(d.id.substr(0,46)== 'assessmentPropertyExteriorMajorRecommendations')
+                {
+                    // console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        ExteriorMajorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        ExteriorMajorRecommendations = d.value.split(' ');
+                        console.log(ExteriorMajorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,46)== 'assessmentPropertyExteriorMinorRecommendations')
+                {
+                    // console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        ExteriorMinorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        ExteriorMinorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,46)== 'assessmentPropertyInteriorMajorRecommendations')
+                {
+                    //console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        InteriorMajorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        InteriorMajorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,46)== 'assessmentPropertyInteriorMinorRecommendations')
+                {
+                    //console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        InteriorMinorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        InteriorMinorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,37)== 'assessmentServiceMajorRecommendations')
+                {
+                    //console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        ServiceMajorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        ServiceMajorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+                if(d.id.substr(0,37)== 'assessmentServiceMinorRecommendations')
+                {
+                    //console.log(d.value);
+                    // console.log(isNaN(d.value.charAt(0)));
+                    if(!isNaN(d.value.charAt(0)))
+                    {
+                        ServiceMinorRecommendations = JSON.parse("[" + d.value + "]");
+                    }
+                    else 
+                    {
+                        d.value = d.value.trim();
+                        ServiceMinorRecommendations = d.value.split(' ');
+                        //console.log(ExteriorMinorRecommendations);
+                    }  
+                }
+            }
+        )
+        getInfo('assessmentSiteMajorRecommendations',SiteMajorRecommendations);
+        getInfo('assessmentSiteMinorRecommendations',SiteMinorRecommendations);
+        getInfo('assessmentPropertyExteriorMajorRecommendations',ExteriorMajorRecommendations);
+        getInfo('assessmentPropertyExteriorMinorRecommendations',ExteriorMinorRecommendations);
+        getInfo('assessmentPropertyInteriorMajorRecommendations',InteriorMajorRecommendations);
+        getInfo('assessmentPropertyInteriorMinorRecommendations',InteriorMinorRecommendations);
+        getInfo('assessmentServiceMajorRecommendations',ServiceMajorRecommendations);
+        getInfo('assessmentServiceMinorRecommendations',ServiceMinorRecommendations);
+        
+        //console.log(count_siteLimitation);
+        //console.log(count_defect);
+
+        // ***** Add extra fields in reports that have dynamic fields...
+        if (count_defect > 9) {
+            count_defect -= 9;
+            for (var i = 0; i < count_defect; i++)
+                moreEvidentDefect();
+        }
+        if (count_siteLimitation > 1) {
+            count_siteLimitation -= 1;
+            for (var i = 0; i < count_siteLimitation; i++)
+                addAccessLimitation('AssessmentSiteNotesTable', 'AssessmentSiteLimitationSelect',
+                    'AssessmentSiteLimitationNote');
+        }
+        if (count_servicelimitation > 1) {
+            count_servicelimitation -= 1;
+            for (var i = 0; i < count_servicelimitation; i++)
+                addAccessLimitation('AssessmentServiceNotesTable', 'AssessmentServiceLimitationSelect',
+                    'AssessmentServiceLimitationNote');
+        }
+        if (count_exteriorLimitation > 1) {
+            count_exteriorLimitation -= 1;
+            for (var i = 0; i < count_exteriorLimitation; i++)
+                addAccessLimitation('AssessmentPropertyExteriorNotesTable',
+                    'AssessmentPropertyExteriorLimitationSelect', 'AssessmentPropertyExteriorLimitationNote');
+        }
+        if (count_interiorLimitation > 1) {
+            count_interiorLimitation -= 1;
+            for (var i = 0; i < count_interiorLimitation; i++)
+                addAccessLimitation('AssessmentPropertyInteriorNotesTable',
+                    'AssessmentPropertyInteriorLimitationSelect', 'AssessmentPropertyInteriorLimitationNote');
+        }
+        <?php
+        }
+        ?>
         <?php
         if (basename($_SERVER['SCRIPT_NAME']) == 'DesignConsultationReport.php')
         {

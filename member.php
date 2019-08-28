@@ -952,11 +952,13 @@
             $('#fldNewBookingCommission').numberbox('clear');
             $('#fldNewBookingTravel').numberbox('clear');
             $('#fldNewBookingSpotter').numberbox('clear');
+            $('#fldNewBookingCancellationFee').numberbox('setValue',0.00);
 
         <?php
           }
         ?>
         $('#fldNewBookingNotes').textbox('clear');
+        $('#fldNewBookingClientNotes').textbox('clear');
 
         // Properties TAB
         $('#fldNewBookingState').combobox('clear');
@@ -1110,11 +1112,12 @@
                     var commission = $('#fldNewBookingCommission').numberbox('getValue');
                     var travel = $('#fldNewBookingTravel').numberbox('getValue');
                     var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
+                    var cancellationfee = $('#fldNewBookingCancellationFee').numberbox('getValue');
                 <?php
                   }
                 ?>
                 var notes = $('#fldNewBookingNotes').textbox('getValue');
-
+                var clientnotes = $('#fldNewBookingClientNotes').textbox('getText');
                 var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                 var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
                 var numbathrooms = $('#fldNewBookingNumBathRooms').combobox('getValue');
@@ -1174,10 +1177,12 @@
                                 commission: commission,
                                 travel: travel,
                                 spotter: spotter,
+                                cancellationfee:cancellationfee,
                             <?php
                               }
                             ?>
                             notes: notes,
+                            clientnotes:clientnotes,
 
                             numstories: numstories,
                             numbedrooms: numbedrooms,
@@ -1306,7 +1311,7 @@
       // console.log(booking.linkedbookingcode);
       // console.log(booking.reportid);
       // console.log(booking.linked_bookingcode);
-      // console.log(booking.datepaid);
+      console.log(booking.clientnotes);
       function doReset()
       {
         // Customer TAB
@@ -1336,10 +1341,12 @@
             $('#fldNewBookingCommission').numberbox('clear');
             $('#fldNewBookingTravel').numberbox('clear');
             $('#fldNewBookingSpotter').numberbox('clear');
+            $('#fldNewBookingCancellationFee').numberbox('setValue',0.00);
         <?php
           }
         ?>
         $('#fldNewBookingNotes').textbox('clear');
+        $('#fldNewBookingClientNotes').textbox('clear');
 
         // Properties TAB
         $('#fldNewBookingState').combobox('clear');
@@ -1505,10 +1512,10 @@
                     $('#fldNewBookingReport').combobox('setValue', b.reportid);
                     $('#fldNewBookingBudget').numberbox('setValue', b.budget);
                     //if the booking has been paid, the aggreed price cannot be changed any more ,set the text fields readonly
-                    if(booking.datepaid != null)
-                    {
-                      $('#fldNewBookingBudget').numberbox({readonly:true,disabled:true});
-                    }
+                    // if(booking.datepaid != null)
+                    // {
+                    //   $('#fldNewBookingBudget').numberbox({readonly:true,disabled:true});
+                    // }
 
                   <?php
                     if (SharedIsAdmin())
@@ -1518,12 +1525,21 @@
                       $('#fldNewBookingCommission').numberbox('setValue', b.commission);
                       $('#fldNewBookingTravel').numberbox('setValue', b.travel);
                       $('#fldNewBookingSpotter').numberbox('setValue', b.spotter);
+                      console.log(b.cancellationfee);
+                      if(b.cancellationfee == null)
+                      {
+                        $('#fldNewBookingCancellationFee').numberbox('setValue',0.00);
+                      }
+                      else
+                      {
+                        $('#fldNewBookingCancellationFee').numberbox('setValue', b.cancellationfee);
+                      }
                   <?php
                     }
                   ?>
                   $('#fldNewBookingNotes').textbox('setValue', b.notes);
+                  $('#fldNewBookingClientNotes').textbox('setValue', b.clientnotes);
                   $('#fldNewBookingQuoteDes').textbox('setValue', b.quote_description);
-
                   // Properties TAB
                   $('#fldNewBookingState').combobox('setValue', b.state);
                   $('#fldNewBookingNumStories').combobox('setValue', b.numstories);
@@ -1593,11 +1609,13 @@
                     var commission = $('#fldNewBookingCommission').numberbox('getValue');
                     var travel = $('#fldNewBookingTravel').numberbox('getValue');
                     var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
+                    var cancellationfee = $('#fldNewBookingCancellationFee').numberbox('getValue');
                 <?php
                   }
                 ?>
                 var notes = $('#fldNewBookingNotes').textbox('getValue');
-
+                var clientnotes = $('#fldNewBookingClientNotes').textbox('getText');
+                console.log(clientnotes);
                 var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                 var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
                 var numbathrooms = $('#fldNewBookingNumBathRooms').combobox('getValue');
@@ -1660,10 +1678,12 @@
                                 commission: commission,
                                 travel: travel,
                                 spotter: spotter,
+                                cancellationfee:cancellationfee,
                             <?php
                               }
                             ?>
                             notes: notes,
+                            clientnotes:clientnotes,
 
                             numstories: numstories,
                             numbedrooms: numbedrooms,
@@ -1768,7 +1788,14 @@
               {
                 $('#dlgBookingNew').dialog('close');
               }
-            }
+            },
+            // {
+            //   text:'Print',
+            //   handler:function()
+            //   {
+            //     printJS('dlgBookingNew', 'html')
+            //   }
+            // }
           ]
         }
       ).dialog('center').dialog('open');
@@ -2963,53 +2990,63 @@
         'divBookingsG',
         function(row)
         {
-          if(row.reportid == 0)
+          console.log(row.datecompleted);
+          console.log(row.dateapproved);
+          if(row.datecompleted == null && row.dateapproved == null)
           {
-            // console.log("this is an unassinged report, cannot allocate architect yet");
-            noty({text: 'This is an unassinged report, cannot mark it as completed', type: 'warning', timeout: 4000});
-          }
-          else if(row.reportid == 23)
-          {
-            noty({text: 'This is a quote report, cannot mark it as completed, please select a report type first', type: 'warning', timeout: 4000});
+            if(row.reportid == 0)
+            {
+              // console.log("this is an unassinged report, cannot allocate architect yet");
+              noty({text: 'This is an unassinged report, cannot mark it as completed', type: 'warning', timeout: 4000});
+            }
+            else if(row.reportid == 23)
+            {
+              noty({text: 'This is a quote report, cannot mark it as completed, please select a report type first', type: 'warning', timeout: 4000});
+            }
+            else
+            {
+              doPromptOkCancel
+              (
+                'Mark booking ' + row.bookingcode + ' as completed?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_setbookingstatus.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode,
+                        status: 3
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doReloadBookings(); //Complete only visible to architect/inspector, always get all bookings, so use reload. search toolbar is not availabel for them. 
+                          //doSearchBookings();
+                        }
+                        else
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                      }
+                    );
+                  }
+                }
+              );
+            }
           }
           else
           {
-            doPromptOkCancel
-            (
-              'Mark booking ' + row.bookingcode + ' as completed?',
-              function(result)
-              {
-                if (result)
-                {
-                  $.post
-                  (
-                    'ajax_setbookingstatus.php',
-                    {
-                      uuid: '<?php echo $_SESSION['uuid']; ?>',
-                      bookingcode: row.bookingcode,
-                      status: 3
-                    },
-                    function(result)
-                    {
-                      var response = JSON.parse(result);
-
-                      if (response.rc == 0)
-                      {
-                        doReloadBookings(); //Complete only visible to architect/inspector, always get all bookings, so use reload. search toolbar is not availabel for them. 
-                        //doSearchBookings();
-                      }
-                      else
-                        noty({text: response.msg, type: 'error', timeout: 10000});
-                    }
-                  );
-                }
-              }
-            );
+            noty({text: 'This booking has already completed. No changes allowed', type: 'warning', timeout: 5000});
           }
+          
 
         }
       ))
-        noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
+        noty({text: 'Please select a booking', type: 'warning', timeout: 5000});
     }
 
     function doMarkUnCompleted()
@@ -3329,6 +3366,9 @@
                 case 24:
                   $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                   break;
+                case 25:
+                  $.redirect('AssessmentReportTypeA.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
               }
             }
           <?php
@@ -3336,7 +3376,7 @@
           else
           {
           ?>
-              console.log(row.archuuid);
+              //console.log(row.archuuid);
               let uuid = '<?php echo $_SESSION['uuid']; ?>';
               console.log(uuid);
               if(_.isNull(row.archuuid) || row.archuuid != uuid)
@@ -3429,6 +3469,9 @@
                     case 24:
                       $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                       break;
+                    case 25:
+                      $.redirect('AssessmentReportTypeA.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
                   }
                 }
               }
@@ -3456,6 +3499,7 @@
             console.log("row.bookingcode" + row.bookingcode);
             console.log("row.linkedbookingcode" +row.linkedbookingcode);
             console.log("row.linked_bookingcode" +row.linked_bookingcode);
+            console.log("row.dateapproved " + row.dateapproved);
             if(row.reportid == 0)
             {
               // console.log("this is an unassinged report, cannot allocate architect yet")
@@ -3469,141 +3513,121 @@
             else if (row.reportid == 24)
             {
               console.log("combined report, select property assessment report");
-              var timberid;
-              if(row.linkedbookingcode != null)
+              if(!_.isNull(row.dateapproved))
               {
-                timberid = row.linkedbookingcode;
+                var timberid;
+                if(row.linkedbookingcode != null)
+                {
+                  timberid = row.linkedbookingcode;
+                }
+                else
+                {
+                  timberid = row.linked_bookingcode;
+                }
+                console.log("report id is 24, the link timber id is " + timberid);
+                doPromptOkCancel
+                (
+                  'Email customer booking ' + row.bookingcode + ' and ' +timberid + ' ?',
+                  function(result)
+                  {
+                    if (result)
+                    {
+                      $.post
+                      (
+                        'ajax_emailbookings.php',
+                        {
+                          uuid: '<?php echo $_SESSION['uuid']; ?>',
+                          bookingcode: row.bookingcode,
+                          timberid:timberid,
+                          propertyid:"",
+                          reportid:row.reportid
+                        },
+                        function(result)
+                        {
+                          var response = JSON.parse(result);
+
+                          if (response.rc == 0)
+                          {
+                            // doRefreshBookings();
+                            doSearchBookings(false);
+                            noty({text: response.msg, type: 'success', timeout: 3000});
+                          }
+                          else
+                          {
+                            noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
+
+                        }
+                      );
+                    }
+                  }
+                );
               }
               else
               {
-                timberid = row.linked_bookingcode;
+                noty({text: 'This booking has not been approved, cannot send email to customer!', type: 'warning', timeout: 4000});
               }
-              console.log("report id is 24, the link timber id is " + timberid);
-              doPromptOkCancel
-              (
-                'Email customer booking ' + row.bookingcode + ' and ' +timberid + ' ?',
-                function(result)
-                {
-                  if (result)
-                  {
-                    $.post
-                    (
-                      'ajax_emailbookings.php',
-                      {
-                        uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode,
-                        timberid:timberid,
-                        propertyid:"",
-                        reportid:row.reportid
-                      },
-                      function(result)
-                      {
-                        var response = JSON.parse(result);
-
-                        if (response.rc == 0)
-                        {
-                          // doRefreshBookings();
-                          doSearchBookings(false);
-                          noty({text: response.msg, type: 'success', timeout: 3000});
-                        }
-                        else
-                        {
-                          noty({text: response.msg, type: 'error', timeout: 10000});
-                        }
-
-                      }
-                    );
-                  }
-                }
-              );
             }
             else if (row.reportid == 3)
             {
-              var propertyid;
-              if(row.linked_bookingcode != null)
+              if(!_.isNull(row.dateapproved))
               {
-                propertyid = row.linked_bookingcode;
-              }
-              else
-              {
-                propertyid = row.linkedbookingcode;
-              }
-              doPromptOkCancel
-              (
-                'Email customer booking ' + row.bookingcode + ' and ' +propertyid + ' ?',
-                function(result)
+                var propertyid;
+                if(row.linked_bookingcode != null)
                 {
-                  if (result)
-                  {
-                    $.post
-                    (
-                      'ajax_emailbookings.php',
-                      {
-                        uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode,
-                        timberid:"",
-                        propertyid:propertyid,
-                        reportid:row.reportid
-                      },
-                      function(result)
-                      {
-                        var response = JSON.parse(result);
-
-                        if (response.rc == 0)
-                        {
-                          // doRefreshBookings();
-                          doSearchBookings(false);
-                          noty({text: response.msg, type: 'success', timeout: 3000});
-                        }
-                        else
-                        {
-                          noty({text: response.msg, type: 'error', timeout: 10000});
-                        }
-
-                      }
-                    );
-                  }
+                  propertyid = row.linked_bookingcode;
                 }
-              );
-            }
-            // else if (row.linked_bookingcode != null)
-            // {
-            //   doPromptOkCancel
-            //   (
-            //     'Email customer booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
-            //     function(result)
-            //     {
-            //       if (result)
-            //       {
-            //         $.post
-            //         (
-            //           'ajax_emailbooking.php',
-            //           {
-            //             uuid: '<?php echo $_SESSION['uuid']; ?>',
-            //             bookingcode: row.bookingcode
-            //           },
-            //           function(result)
-            //           {
-            //             var response = JSON.parse(result);
+                else
+                {
+                  propertyid = row.linkedbookingcode;
+                }
+                doPromptOkCancel
+                (
+                  'Email customer booking ' + row.bookingcode + ' and ' +propertyid + ' ?',
+                  function(result)
+                  {
+                    if (result)
+                    {
+                      $.post
+                      (
+                        'ajax_emailbookings.php',
+                        {
+                          uuid: '<?php echo $_SESSION['uuid']; ?>',
+                          bookingcode: row.bookingcode,
+                          timberid:"",
+                          propertyid:propertyid,
+                          reportid:row.reportid
+                        },
+                        function(result)
+                        {
+                          var response = JSON.parse(result);
 
-            //             if (response.rc == 0)
-            //             {
-            //               // doRefreshBookings();
-            //               doSearchBookings(false);
-            //               noty({text: response.msg, type: 'success', timeout: 3000});
-            //             }
-            //             else
-            //             {
-            //               noty({text: response.msg, type: 'error', timeout: 10000});
-            //             }
+                          if (response.rc == 0)
+                          {
+                            // doRefreshBookings();
+                            doSearchBookings(false);
+                            noty({text: response.msg, type: 'success', timeout: 3000});
+                          }
+                          else
+                          {
+                            noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
 
-            //           }
-            //         );
-            //       }
-            //     }
-            //   );
-            // }
+                        }
+                      );
+                    }
+                  }
+                );
+              }
               else
+              {
+                noty({text: 'This booking has not been approved, cannot send email to customer!', type: 'warning', timeout: 4000});
+              }
+             
+            }
+            else
+            {
+              if(!_.isNull(row.dateapproved))
               {
                 doPromptOkCancel
                 (
@@ -3639,7 +3663,13 @@
                     }
                   }
                 );
-              }  
+              }
+              else
+              {
+                noty({text: 'This booking has not been approved, cannot send email to customer!', type: 'warning', timeout: 4000});
+              }
+              
+            }  
           }
         )
       )
@@ -3715,11 +3745,13 @@
                   $('#fldNewBookingCommission').numberbox('clear');
                   $('#fldNewBookingTravel').numberbox('clear');
                   $('#fldNewBookingSpotter').numberbox('clear');
+                  $('#fldNewBookingCancellationFee').numberbox('clear');
 
               <?php
                 }
               ?>
               $('#fldNewBookingNotes').textbox('clear');
+              $('#fldNewBookingClientNotes').textbox('clear');
 
               // Properties TAB
               $('#fldNewBookingState').combobox('clear');
@@ -3880,10 +3912,12 @@
                           var commission = $('#fldNewBookingCommission').numberbox('getValue');
                           var travel = $('#fldNewBookingTravel').numberbox('getValue');
                           var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
+                          var cancellationfee = $('#fldNewBookingCancellationFee').numberbox('getValue');
                       <?php
                         }
                       ?>
                       var notes = $('#fldNewBookingNotes').textbox('getValue');
+                      var clientnotes = $('#fldNewBookingClientNotes').textbox('getValue');
 
                       var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                       var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
@@ -3945,10 +3979,12 @@
                                       commission: commission,
                                       travel: travel,
                                       spotter: spotter,
+                                      cancellationfee:cancellationfee,
                                   <?php
                                     }
                                   ?>
                                   notes: notes,
+                                  clientnotes:clientnotes,
 
                                   numstories: numstories,
                                   numbedrooms: numbedrooms,
@@ -4243,7 +4279,7 @@
         img = '<img src="images/boss.png" width="20" height="20">';
         //+ row.usercreatedid + ' '
         lnk = '<a href="#" title="Spotted by '  +row.usercreatedfirstname+ ' ' +  row.usercreatedlastname + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
-        console.log("not create by admin");
+        //console.log("not create by admin");
         return lnk;
       }
 
@@ -4724,6 +4760,9 @@
                       case 24:
                         $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                         break;
+                      case 25:
+                        $.redirect('AssessmentReportTypeA.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
                     }
                   }
                 <?php
@@ -4824,6 +4863,9 @@
                           break;
                         case 24:
                           $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 25:
+                          $.redirect('AssessmentReportTypeA.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                           break;
                       }
                     }
@@ -5227,7 +5269,7 @@
       ?>
           <a href="javascript:void(0)" onClick="doCopyBooking()" class="easyui-linkbutton" iconCls="icon-duplicate">Copy Booking</a>
           <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-upload">Upload PDF Report</a>
-          <a href="javascript:void(0)" onClick="doTaxInvoice()" class="easyui-linkbutton" iconCls="icon-payment">Tax Invoice</a>
+          <a href="javascript:void(0)" onClick="doTaxInvoice()" class="easyui-linkbutton" iconCls="icon-receipt">Tax Invoice</a>
           <a href="javascript:void(0)" onClick="doMarkPaid()" class="easyui-linkbutton" iconCls="icon-payment">Paid</a>
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
           <!-- <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Architect Reedit</a> -->
@@ -5495,13 +5537,21 @@
                   <td>Spotter Fee:</td>
                   <td><input id="fldNewBookingSpotter" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
                 </tr>
+                <tr>
+                  <td>Cancellation Fee:</td>
+                  <td><input id="fldNewBookingCancellationFee" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
+                </tr>
                 
             <?php
               }
             ?>
             <tr>
               <td style="vertical-align: top;">Notes:</td>
-              <td><input id="fldNewBookingNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 300px"></td>
+              <td><input id="fldNewBookingNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 150px"></td>
+            </tr>
+            <tr style="margin-top:5px">
+              <td style="vertical-align: top">Client Notes:</td>
+              <td><input id="fldNewBookingClientNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 150px"></td>
             </tr>
           </table>
         </div>

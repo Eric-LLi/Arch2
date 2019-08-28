@@ -32,7 +32,9 @@
                   "b1.commission," .
                   "b1.travel," .
                   "b1.spotter," .
+                  "b1.cancellationfee," .
                   "b1.notes," .
+                  "b1.clientnotes,".
 
                   "b1.numstories," .
                   "b1.numbedrooms," .

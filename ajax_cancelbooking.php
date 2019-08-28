@@ -17,7 +17,7 @@ global $reportTypes;
       $uuid = $_POST['uuid'];
       $bookingcode = $_POST['bookingcode'];
       $header = file_get_contents('Email_Header.html');
-      $footer = file_get_contents('Email_Footer.html'); 
+      //$footer = file_get_contents('Email_Footer.html'); 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $linkBookingID = '';
       $bookings_id = '';
@@ -40,6 +40,7 @@ global $reportTypes;
                   "b1.commission," .
                   "b1.travel," .
                   "b1.spotter," .
+                  "b1.cancellationfee," .
                   "b1.notes," .
 
                   "b1.numstories," .
@@ -103,7 +104,7 @@ global $reportTypes;
                   "u2.regno linked_archregno," .
                   "u2.company linked_regcompany," .
                   "u2.phone linked_archphone," .
-                  "u2.mobile linked_archmobile " .
+                  "u2.mobile linked_archmobile, " .
 
                   "u3.firstname archfirstname," .
                   "u3.lastname archlastname," .
@@ -133,6 +134,15 @@ global $reportTypes;
               //error_log($booking['archemail']);
             
               $linkBookingID = $booking['linked_bookingcode'];
+              $workstate = $booking['state'];//the property's state, not the client's living state. 
+              if($workstate == 'NSW')
+              {
+                  $footer = file_get_contents('Email_Footer_NSW.html');
+              }
+              else
+              {
+                  $footer = file_get_contents('Email_Footer.html'); 
+              }
 
               // Let customer know, with the attached refund pdf...
                if ($booking['custemail'] != "")
@@ -154,13 +164,14 @@ global $reportTypes;
                 $invoice = file_get_contents('invoices_templates/refund.html');
                 $invoice_header = file_get_contents('invoice_header.html');
                 $budget = $booking['budget'];
-                $cancellationfee = 0;
-                $gst = number_format($budget - $budget/1.1,2);
+                $cancellationfee = $booking['cancellationfee'];
+                $refund = $budget - $cancellationfee;
+                $gst = $refund - ($refund/1.1);
                 error_log('gst is '. $gst);
                 
                 $invoice = str_replace("XXX_HEADER", $invoice_header, $invoice);
                 $invoice = str_replace("XXX_FOOTER", $footer, $invoice);
-                $invoice = str_replace("XXX_DATE", date("jS M\, Y"), $invoice);
+                $invoice = str_replace("XXX_DATE", date("j F\, Y"), $invoice);
                 $invoice = str_replace("XXX_CUSTEMAIL", $booking['custemail'], $invoice);
                 $invoice = str_replace("XXX_CUSTFIRSTLASTNAME", $booking['custfirstname'] . ' ' . $booking['custlastname'], $invoice);
                 $invoice = str_replace("XXX_CUSTADDRESS1", $booking['custaddress1'], $invoice);
@@ -172,10 +183,12 @@ global $reportTypes;
                 $invoice = str_replace("XXX_PROPADDRESS2", $booking['address2'], $invoice);
                 $invoice = str_replace("XXX_PROPCITY", $booking['city'], $invoice);
                 $invoice = str_replace("XXX_BUDGET", $budget, $invoice);
-                $invoice = str_replace("XXX_GST", $gst, $invoice);
-                $invoice = str_replace("XXX_REFUND", $budget, $invoice);
+                $invoice = str_replace("XXX_GST", number_format($gst,2), $invoice);
+                $invoice = str_replace("XXX_REFUND", number_format($refund,2), $invoice);
                 $invoice = str_replace("XXX_CANCELLATIONFEE", $cancellationfee, $invoice);
                 $invoice = str_replace("XXX_BOOKINGCODE", $bookingcode, $invoice);
+                $invoice = str_replace("XXX_REPORTTYPECAP", strtoupper($reportTypes[$booking['reportid']]), $invoice);
+                $invoice = str_replace("XXX_REPORTTYPE", $reportTypes2[$booking['reportid']], $invoice);
               
                 //Convert the invoice to pdf
                 error_log("converting html to pdf");
@@ -193,7 +206,7 @@ global $reportTypes;
                 error_log($attachmentPath);
 
 
-                SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $bookingcode . " - " . $reportTypes[$booking['itype']] . " Booking Cancellation Notification", $html,'','',$attachmentPath);
+                SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $bookingcode . " - " . $reportTypes[$booking['reportid']] . " Booking Cancellation Notification", $html,'','',$attachmentPath);
               }
 
               //let architect/insespector knows
@@ -204,10 +217,10 @@ global $reportTypes;
                   $html = file_get_contents('email_architectcancelnotification.html');
                   $html = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . ' ' . $booking['archlastname'], $html);
                   $html = str_replace("XXX_BOOKINGCODE", $booking['bookingcode'], $html);
-                  $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html);
+                  $html = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['reportid']], $html);
                   $html = str_replace("XXX_HEADER", $header, $html);
                   $html = str_replace("XXX_FOOTER", $footer, $html);
-                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Booking Cancellation Notification", $html);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $reportTypes[$booking['reportid']] ." Booking Cancellation Notification", $html);
               }       
         }
 

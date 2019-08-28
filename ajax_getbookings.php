@@ -16,7 +16,7 @@
 
       if ($itype != 99)
       {
-        $clause = $clause . " " .   "(b1.users_id=$userid or b1.userscreated_id=$userid) and ";
+        $clause = $clause . " " .   "(b1.users_id=$userid or b1.userscreated_id=$userid) and b1.dateclosed is null and ";
         // $clause = $clause . " " .   "b1.users_id=$userid and ";
       }
       else
@@ -45,8 +45,10 @@
                   "b1.budget," .
                   "b1.commission," .
 				          "b1.travel," .
-				          "b1.spotter," .
+                  "b1.spotter," .
+                  "b1.cancellationfee," .
                   "b1.notes," .
+                  "b1.clientnotes,".
 
                   "b1.numstories," .
                   "b1.numbedrooms," .
