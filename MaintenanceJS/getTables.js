@@ -572,7 +572,7 @@ function getTextBlock(id)
                 }]
             ]
         }
-    };
+    };    
     return result;
 }
 
