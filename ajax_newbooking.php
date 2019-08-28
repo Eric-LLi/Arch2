@@ -59,6 +59,7 @@
 
       $reportid = $_POST['reportid'];
       $notes = $_POST['notes'];
+      $clientnotes = $_POST['clientnotes'];
       $numstories = $_POST['numstories'];
       $numbedrooms = $_POST['numbedrooms'];
       $numbathrooms = $_POST['numbathrooms'];
@@ -93,7 +94,7 @@
         
         global $dblink;
         global $custfirstname, $custlastname, $custemail, $custmobile, $custphone, $custaddress1, $custaddress2, $custcity, $custpostcode, $custstate;
-        global $budget, $commission, $travel, $spotter, $notes, $numstories, $numbedrooms, $numbathrooms, $numbuildings, $numrooms;
+        global $budget, $commission, $travel, $spotter, $notes, $clientnotes, $numstories, $numbedrooms, $numbathrooms, $numbuildings, $numrooms;
         global $address1, $address2, $city, $postcode, $state, $construction, $age, $meetingonsite, $renoadvice, $pestinspection;
         global $estateagentcompany, $estateagentcontact, $estateagentmobile, $estateagentphone, $userid, $hasbudget, $hascommission;
         global $hastravel,$hasspotter,$quotedescription;
@@ -175,6 +176,7 @@
                     $vars3 .
                     $vars4 .
                     "notes," .
+                    "clientnotes,".
 
                     "numstories," .
                     "numbedrooms," .
@@ -221,6 +223,7 @@
                     $clause3 .
                     $clause4 .
                     SharedNullOrQuoted($notes, 1000, $dblink) . "," .
+                    SharedNullOrQuoted($clientnotes, 1000, $dblink) . "," .
 
                     SharedNullOrNum($numstories, $dblink) . "," .
                     SharedNullOrNum($numbedrooms, $dblink) . "," .

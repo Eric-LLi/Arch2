@@ -11,6 +11,7 @@
   $photos = Array();
   $bookingcode = 0;
   $iscompleted = false;
+  $isapproved = false;
   $bc = "";
   $isuserlink = false;
 
@@ -73,6 +74,7 @@
                 "b1.datecompleted," .
                 "b1.datecreated," .
                 "b1.datemodified," .
+                "b1.dateapproved,".
 
                 "b1.userscreated_id usercreatedid," .
                 "b1.usersmodified_id usermdifiedid," .
@@ -115,7 +117,11 @@
           $bookingcode = $booking['id'];
 
         $iscompleted = $booking['datecompleted'] != "";
-
+        $isapproved = $booking['dateapproved'] != "";
+        // error_log("isapproved ". $isapproved);
+        // error_log("isapproved ". !$isapproved);
+        // error_log("iscompleted ". !$iscompleted);
+        // error_log("iscompleted ". $iscompleted);
         $dbselect = "select " .
                     "p1.id," .
                     "p1.filename," .

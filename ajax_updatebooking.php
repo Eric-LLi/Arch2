@@ -49,6 +49,8 @@
       $vars2 = "";
       $vars3 = "";
       $vars4 = "";
+      $vars5 = "";
+
 
       if (isset($_POST['budget']))
         $vars1 = "budget=" . SharedNullOrQuoted($_POST['budget'], 50, $dblink) . ",";
@@ -62,10 +64,15 @@
 	  	if (isset($_POST['spotter']))
         $vars4 = "spotter=" . SharedNullOrQuoted($_POST['spotter'], 50, $dblink) . ",";
 
+      
+      if (isset($_POST['cancellationfee']))
+        $vars4 = "cancellationfee=" . SharedNullOrQuoted($_POST['cancellationfee'], 50, $dblink) . ",";
+
       $reportid = $_POST['reportid'];
       $combinedtimberid = $_POST['combinedtimberid'];
       $combinedpropertyid = $_POST['combinedpropertyid'];
       $notes = $_POST['notes'];
+      $clientnotes = $_POST['clientnotes'];
       error_log("bookingcode");
       error_log($bookingcode);
       error_log("combinedpropertyid: ");
@@ -115,7 +122,9 @@
                   $vars2 .
                   $vars3 .
                   $vars4 .
+                  $vars5 .
                   "notes=" . SharedNullOrQuoted($notes, 1000, $dblink) . "," .
+                  "clientnotes=" . SharedNullOrQuoted($clientnotes, 1000, $dblink) . "," .
 
                   "numstories=" . SharedNullOrNum($numstories, $dblink) . "," .
                   "numbedrooms=" . SharedNullOrNum($numbedrooms, $dblink) . "," .

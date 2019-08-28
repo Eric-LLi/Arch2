@@ -13,7 +13,16 @@
     
     //Get the contents of the footer and header to the variables. 
     $header = file_get_contents('Email_Header.html');
-    $footer = file_get_contents('Email_Footer.html'); 
+    $workstate = $b['state'];
+    if($workstate == 'NSW')
+    {
+        $footer = file_get_contents('Email_Footer_NSW.html');
+    }
+    else
+    {
+        $footer = file_get_contents('Email_Footer.html'); 
+    }
+    // $footer = file_get_contents('Email_Footer.html'); 
     $h = str_replace("XXX_HEADER", $header, $h);
     $h = str_replace("XXX_FOOTER", $footer, $h);
     

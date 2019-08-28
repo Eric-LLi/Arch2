@@ -41,6 +41,7 @@
                         "b1.travel," .
                         "b1.spotter," .
                         "b1.notes," .
+                        "b1.clientnotes," .
 
                         "b1.numstories," .
                         "b1.numbedrooms," .
@@ -118,7 +119,7 @@
 
                         if ($booking['custemail'] != "")
                         {
-                            $workstate = $booking['state'];
+                            $workstate = $booking['state'];//the property's state, not the client's living state. 
                             $emailcode = "";
                             $dbupdate1 = "";
                             $dbupdate2 = "";
@@ -127,14 +128,21 @@
                             if($workstate == 'NSW')
                             {
                                 $invoice = file_get_contents('invoices_templates/prepaid_nsw.html');
+                                $footer = file_get_contents('Email_Footer_NSW.html');
+                            }
+                            else if ($workstate == 'VIC')
+                            {
+                                $invoice = file_get_contents('invoices_templates/prepaid_vic.html');
+                                $footer = file_get_contents('Email_Footer.html'); 
                             }
                             else
                             {
                                 $invoice = file_get_contents('invoices_templates/prepaid.html');
+                                $footer = file_get_contents('Email_Footer.html'); 
                             }
                            
                             $header = file_get_contents('Email_Header.html');
-                            $footer = file_get_contents('Email_Footer.html'); 
+                            //$footer = file_get_contents('Email_Footer.html'); 
                             
                             //Email Body
                             $html = str_replace("XXX_HEADER", $header, $html);
@@ -151,10 +159,10 @@
                             $budget = $booking['budget'];
                             $gst = number_format($budget - $budget/1.1,2);
                             error_log('gst is '. $gst);
-                            
+                            error_log($booking['clientnotes']);
                             $invoice = str_replace("XXX_HEADER", $invoice_header, $invoice);
                             $invoice = str_replace("XXX_FOOTER", $footer, $invoice);
-                            $invoice = str_replace("XXX_DATE", date("jS M\, Y"), $invoice);
+                            $invoice = str_replace("XXX_DATE", date("j F\, Y"), $invoice);
                             $invoice = str_replace("XXX_CUSTEMAIL", $booking['custemail'], $invoice);
                             $invoice = str_replace("XXX_CUSTFIRSTLASTNAME", $booking['custfirstname'] . ' ' . $booking['custlastname'], $invoice);
                             $invoice = str_replace("XXX_CUSTADDRESS1", $booking['custaddress1'], $invoice);
@@ -165,14 +173,16 @@
                             $invoice = str_replace("XXX_PROPADDRESS1", $booking['address1'], $invoice);
                             $invoice = str_replace("XXX_PROPADDRESS2", $booking['address2'], $invoice);
                             $invoice = str_replace("XXX_PROPCITY", $booking['city'], $invoice);
-                            $invoice = str_replace("XXX_NOTES", $booking['notes'], $invoice);
+                            $invoice = str_replace("XXX_NOTES", $booking['clientnotes'], $invoice);
+                            $invoice = str_replace("XXX_REPORTTYPECAP", strtoupper($reportTypes[$booking['reportid']]), $invoice);
+                            $invoice = str_replace("XXX_REPORTTYPE", $reportTypes2[$booking['reportid']], $invoice);
                             if($timberid == "")
                             {
                                 error_log("timberid is empty, so single report");
                                 $emailcode = $bookingcode;
                                 $invoice = str_replace("XXX_BOOKINGCODE", $bookingcode, $invoice);
                                 $html = str_replace("XXX_BOOKINGCODE", $bookingcode, $html);
-                                $dbupdate1 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
+                                //$dbupdate1 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
                             }
                             else
                             {
@@ -180,8 +190,8 @@
                                 $emailcode = $bookingcode.'&'.$timberid;
                                 $invoice = str_replace("XXX_BOOKINGCODE", $bookingcode.'&'.$timberid, $invoice);
                                 $html = str_replace("XXX_BOOKINGCODE", $bookingcode.'&'.$timberid, $html);
-                                $dbupdate1 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
-                                $dbupdate2 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$timberid";
+                                //$dbupdate1 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
+                                //$dbupdate2 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$timberid";
                             }
                             
                             $invoice = str_replace("XXX_BUDGET", $budget, $invoice);
@@ -206,15 +216,15 @@
                             SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $emailcode . " - " . $reportTypes[$booking['reportid']] . " Booking Tax Invoice", $html,"","",$attachmentPath);
                             
                   
-                            if($dbupdate2 == "")
-                            {
-                                SharedQuery($dbupdate1, $dblink);
-                            }
-                            else
-                            {
-                                SharedQuery($dbupdate1, $dblink);
-                                SharedQuery($dbupdate2, $dblink);
-                            }
+                            // if($dbupdate2 == "")
+                            // {
+                            //     SharedQuery($dbupdate1, $dblink);
+                            // }
+                            // else
+                            // {
+                            //     SharedQuery($dbupdate1, $dblink);
+                            //     SharedQuery($dbupdate2, $dblink);
+                            // }
                             $rc = 0;
                             $msg = "Send the tax invoice to customer successfully";
                         }
