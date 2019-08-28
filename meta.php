@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/animate.min.css?<?php echo time(); ?>">
 <link rel="stylesheet" href="js/easyui/themes/default/easyui.css?<?php echo time(); ?>">
 <link rel="stylesheet" href="js/easyui/themes/icon.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="js/easyui/texteditor.css?<?php echo time(); ?>">
 
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
@@ -21,6 +22,7 @@
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="js/easyui/datagrid-filter.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="js/easyui/plugins/jquery.tagbox.js?<?php echo time(); ?>"></script>
+<script type="text/javascript" src="js/easyui/plugins/jquery.texteditor.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/underscore.string.js"></script>
 <script type="text/javascript" src="js/moment.min.js"></script>
@@ -31,7 +33,7 @@
 <script type="text/javascript" src="js/decimal.min.js"></script>
 <script src="js/images.js"></script>
 <script src="js/loadImageJS/load-image.all.min.js"></script>
-
+<script src="js/PrintJS/print.min.js"></script>
 <style>
   .button-rounded
   {
@@ -136,9 +138,10 @@
     {name: 'Home Access & Services - Residential', id: 21},
     {name: 'Post-Dilapidation Survey',id:22},
     {name: 'Quote Report',id:23},
-    {name: 'Combined Property Assessment & Timber Pest',id:24}
+    {name: 'Combined Property Assessment & Timber Pest',id:24},
+    {name: 'Property Assessment - Type A',id:25}
   ];
-  //This is the selected list for use to select when edit a report, cannot change a report combined report, so remove the combined one. 
+  //This is the selected list for use to select when edit a report, can change a booking from one report type to another. but cannot change a report combined report, so remove the combined one.
   var editreports =
   [
     {name:'Unassigned',id:0},
@@ -164,8 +167,10 @@
     // {name: 'Commercial Dilapidation Survey', id: 20},
     {name: 'Home Access & Services - Residential', id: 21},
     {name: 'Post-Dilapidation Survey',id:22},
-    {name: 'Quote Report',id:23}
+    {name: 'Quote Report',id:23},
     // {name: 'Combined Property Assessment & Timber Pest',id:24}
+    {name: 'Property Assessment - Type A Report',id:25}
+    
   ];
 
   //This is for the status select combox search
@@ -218,7 +223,9 @@
     // {name: 'Commercial Dilapidation Survey Scope', id: 20},
     {name: 'Residential Home Access & Services Scope', id: 21},
     {name: 'Post-Dilapidation Survey Scope',id:22},
-    {name: 'Quote Report Scope',id:23}
+    {name: 'Quote Report Scope',id:23},
+    {name: 'Combined Property Assessment & Timber Pest',id:24},
+    {name: 'Property Assessment - Type A',id:25}
   ];
   var states =
   [
