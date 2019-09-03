@@ -212,8 +212,8 @@
                             $attachmentPath = "invoices_pdf/prepaid/$bookingcode.pdf";
                             error_log($attachmentPath);
 
-                            
-                            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $emailcode . " - " . $reportTypes[$booking['reportid']] . " Booking Tax Invoice", $html,"","",$attachmentPath);
+                            $custemail = explode(",",$booking['custemail']);
+                            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $emailcode . " - " . $reportTypes[$booking['reportid']] . " Booking Tax Invoice", $html,"","",$attachmentPath);
                             
                   
                             // if($dbupdate2 == "")

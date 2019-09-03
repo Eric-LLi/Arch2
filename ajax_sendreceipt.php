@@ -209,8 +209,9 @@
                             $attachmentPath = "invoices_pdf/paid/$bookingcode.pdf";
                             error_log($attachmentPath);
 
+                            $custemail = explode(",",$booking['custemail']);
                             
-                            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $emailcode . " - " . $reportTypes[$booking['reportid']] . " Receipt", $html,"","",$attachmentPath);
+                            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $emailcode . " - " . $reportTypes[$booking['reportid']] . " Receipt", $html,"","",$attachmentPath);
                         
                             // if($dbupdate2 == "")
                             // {
