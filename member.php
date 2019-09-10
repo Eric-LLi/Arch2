@@ -1883,20 +1883,22 @@
           function(row, index)
           {
             console.log("row.reportid " + row.reportid);
-            console.log("row.bookingcode" + row.bookingcode);
-            console.log("row.linkedbookingcode" +row.linkedbookingcode);
-            console.log("row.linked_bookingcode" +row.linked_bookingcode);
-
+            console.log("row.bookingcode " + row.bookingcode);
+            console.log("row.linkedbookingcode " +row.linkedbookingcode);
+            console.log("row.linked_bookingcode " +row.linked_bookingcode);
+            var oldreports;
             if(row.reportid == 24)
             {
               var timberid;
               if(row.linkedbookingcode != null)
               {
+                // console.log("new reports");
                 oldreports = false;
                 timberid = row.linkedbookingcode;
               }
               else
               {
+                // console.log("old reports");
                 oldreports = true;
                 timberid = row.linked_bookingcode;
               }
@@ -1915,7 +1917,7 @@
                         uuid: '<?php echo $_SESSION['uuid']; ?>',
                         bookingcode: row.bookingcode,
                         timberid:timberid,
-                        propertyid:"",
+                        propertyid:row.bookingcode,
                         reportid:row.reportid,
                         oldreports:oldreports
                       },
