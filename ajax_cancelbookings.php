@@ -8,7 +8,7 @@
   $msg = "";
   global $footer; 
   global $header;
-global $reportTypes;
+  global $reportTypes;
 
   try
   {
@@ -150,7 +150,7 @@ global $reportTypes;
           while ($dbrow = SharedFetchArray($dbresult))
               $booking = $dbrow;
               //error_log($booking['archemail']);
-              $bookings_id = $booking["bookings_id"];
+              $bookings_id = $booking["bookingcode"];
               $linkBookingID = $booking['linked_bookingcode'];
               $workstate = $booking['state'];//the property's state, not the client's living state. 
               if($workstate == 'NSW')
@@ -227,84 +227,49 @@ global $reportTypes;
              }
 
               //let architect/insespector knows
-              if($oldreports == true)
+              $architectemail = $booking['archemail'];
+              $archfirstname = $booking['archfirstname'];
+              $archlastname = $booking['archlastname'];
+              $inspectoremail = $booking['linked_archemail'];
+              $inspectorfirstname = $booking['linked_archfirstname'];
+              $inspectorlastname = $booking['linked_archlastname'];
+              error_log("archfirstname: ".$archfirstname . ' ' . $archlastname);
+              error_log("archemail: $architectemail");
+              error_log("inspector: ".  $inspectorfirstname . ' ' . $inspectorlastname );
+              error_log("inspectoremail: $inspectoremail");
+
+              if($architectemail != "")
               {
-                  error_log('reportid is 24, select the property assessment report in the combined report need to send two emails, and these are the old types combined');
-                  $architectemail = $booking['linked_archemail'];
-                  $archfirstname = $booking['linked_archfirstname'];
-                  $archlastname = $booking['linked_archlastname'];
-                  
-                  $inspectoremail = $booking['archemail'];
-                  $inspectorfirstname = $booking['archfirstname'];
-                  $inspectorlastname = $booking['archlastname'];
-
-                  error_log("archfirstname: $archfirstname");
-                  error_log("archlastname: $archlastname");
-                  error_log("linked_archfirstname: $inspectorfirstname");
-                  error_log("linked_archlastname: $inspectorlastname");
-                  error_log("archemail: $architectemail");
-                  error_log("inspectoremail: $inspectoremail");
-
-                  if($architectemail != "")
-                  {
-                      $html2 = file_get_contents('email_architectcancelnotification.html');
-                      $html2 = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . ' ' . $booking['archlastname'], $html2);
-                      $html2 = str_replace("XXX_BOOKINGCODE", $bookingcode, $html2);
-                      $html2 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html2);
-                      $html2 = str_replace("XXX_HEADER", $header, $html2);
-                      $html2 = str_replace("XXX_FOOTER", $footer, $html2);
-                      SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $architectemail, $archfirstname . ' ' . $archlastname, $bookingcode . " - Combined Property Assessment & Timber Pest Booking Cancellation Notification", $html2);
-                  }
-                  if($inspectoremail != "")
-                  {
-                      $html2 = file_get_contents('email_architectcancelnotification.html');
-                      $html2 = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . ' ' . $booking['archlastname'], $html2);
-                      $html2 = str_replace("XXX_BOOKINGCODE", $timberid, $html2);
-                      $html2 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html2);
-                      $html2 = str_replace("XXX_HEADER", $header, $html2);
-                      $html2 = str_replace("XXX_FOOTER", $footer, $html2);
-                      SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $inspectoremail, $inspectorfirstname . ' ' . $inspectorlastname, $timberid . " -  Timber Pest Inspection Booking Cancellation Notification", $html2);
-                  }
+                  $html2 = file_get_contents('email_architectcancelnotification.html');
+                  $html2 = str_replace("XXX_ARCHITECTNAME", $archfirstname . ' ' . $archlastname, $html2);
+                  $html2 = str_replace("XXX_BOOKINGCODE", $bookingcode, $html2);
+                  $html2 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html2);
+                  $html2 = str_replace("XXX_HEADER", $header, $html2);
+                  $html2 = str_replace("XXX_FOOTER", $footer, $html2);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $architectemail, $archfirstname . ' ' . $archlastname, $bookingcode . " - Property Assessment Booking Cancellation Notification", $html2);
               }
-              else
+              if($inspectoremail != "")
               {
-                  error_log('reportid is 24, select the property assessment report in the combined report need to send two emails, and these are the new types combined');
-                  $architectemail = $booking['archemail'];
-                  $archfirstname = $booking['archfirstname'];
-                  $archlastname = $booking['archlastname'];
-                  $inspectoremail = $booking['linked_archemail'];
-                  $inspectorfirstname = $booking['linked_archfirstname'];
-                  $inspectorlastname = $booking['linked_archlastname'];
-                  error_log("archfirstname: $archfirstname");
-                  error_log("archlastname: $archlastname");
-                  error_log("linked_archfirstname: $inspectorfirstname");
-                  error_log("linked_archlastname: $inspectorlastname");
-                  error_log("archemail: $architectemail");
-                  error_log("inspectoremail: $inspectoremail");
-
-                  if($architectemail != "")
-                  {
-                      $html2 = file_get_contents('email_architectcancelnotification.html');
-                      $html2 = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . ' ' . $booking['archlastname'], $html2);
-                      $html2 = str_replace("XXX_BOOKINGCODE", $bookingcode, $html2);
-                      $html2 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html2);
-                      $html2 = str_replace("XXX_HEADER", $header, $html2);
-                      $html2 = str_replace("XXX_FOOTER", $footer, $html2);
-                      SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $bookingcode . " - " . $reportTypes[$booking['reportid']] . " Booking Cancellation Notification", $html2);
-                  }
-                  if($inspectoremail != "")
-                  {
-                      $html2 = file_get_contents('email_architectcancelnotification.html');
-                      $html2 = str_replace("XXX_ARCHITECTNAME", $booking['archfirstname'] . ' ' . $booking['archlastname'], $html2);
-                      $html2 = str_replace("XXX_BOOKINGCODE", $timberid, $html2);
-                      $html2 = str_replace("XXX_REPORTTYPE", $reportTypes[$booking['itype']], $html2);
-                      $html2 = str_replace("XXX_HEADER", $header, $html2);
-                      $html2 = str_replace("XXX_FOOTER", $footer, $html2);
-                      SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['archemail'], $booking['archfirstname'] . ' ' . $booking['archlastname'], $timberid . " - " . $reportTypes[$booking['reportid']] . " Booking Cancellation Notification", $html2);
-                  }
+                  $html2 = file_get_contents('email_architectcancelnotification.html');
+                  $html2 = str_replace("XXX_ARCHITECTNAME", $inspectorfirstname . ' ' . $inspectorlastname, $html2);
+                  $html2 = str_replace("XXX_BOOKINGCODE", $timberid, $html2);
+                  $html2 = str_replace("XXX_REPORTTYPE", "Timber Pest Inspection Report", $html2);
+                  $html2 = str_replace("XXX_HEADER", $header, $html2);
+                  $html2 = str_replace("XXX_FOOTER", $footer, $html2);
+                  SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $inspectoremail, $inspectorfirstname . ' ' . $inspectorlastname, $timberid . " -  Timber Pest Inspection Booking Cancellation Notification", $html2);
               }
-                
-                               
+
+
+              // if($oldreports)
+              // {
+              //     error_log('reportid is 24, select the property assessment report in the combined report need to send two emails, and these are the old types combined');
+              //     $architectemail = $booking['linked_archemail'];
+              //     $archfirstname = $booking['linked_archfirstname'];
+              //     $archlastname = $booking['linked_archlastname'];
+              //     $inspectoremail = $booking['archemail'];
+              //     $inspectorfirstname = $booking['archfirstname'];
+              //     $inspectorlastname = $booking['archlastname'];
+              // }                 
         }
 
         $propertydbupdate = "update bookings set " .
