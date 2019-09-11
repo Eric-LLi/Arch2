@@ -12,7 +12,7 @@ function getCustomerDetailsTable() {
             widths: [85, '*', 70, '*', 40, '*'],
             body: [
                 [{
-                    text: 'CUSTOMER DETAILS',
+                    text: 'CLIENT DETAILS',
                     border: [false, false, false, true],
                     style: 'tableHeader',
                     colSpan: 6
@@ -373,26 +373,33 @@ function getCostTable()
     var tableBody;
 
     var firstRow = [
+        // {
+        //     rowSpan:2,
+        //     alignment:'center',
+        //     text:'\nITEM',
+        //     style:'tableBoldTextAlignLeft',
+        //     border:[false,true,false,true],
+        //     color: 'red'
+        // },
         {
-            rowSpan:2,
-            alignment:'center',
-            text:'\nITEM',
-            style:'tableBoldTextAlignLeft',
-            border:[false,true,false,true],
-            color: 'red'
-        },
-        {
-            colSpan:2,
+            colSpan:3,
             text:'BROAD OPINION OF COST',
             color: 'red',
+            alignment:'center',
             border:[false,true,false,true],
             style:'tableBoldTextAlignLeft'
-        },''
+        },'',''
     ];
     data.push(firstRow);
 
     var secondRow = [
-        '',
+        {
+            alignment:'center',
+            text:'ITEM',
+            style:'tableBoldTextAlignLeft',
+            border:[false,true,false,true],
+            color: 'red'
+        },
         {
             text:'Low Range',
             color: 'red',
