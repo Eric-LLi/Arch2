@@ -9,7 +9,8 @@
 
     $rc = -1;
     $msg = "";
-	$booking = Array();
+    $booking = Array();
+    
 
     try
     {
@@ -142,8 +143,12 @@
                             }
                            
                             $header = file_get_contents('Email_Header.html');
-                            //$footer = file_get_contents('Email_Footer.html'); 
-                            
+
+                            //Footer , get current year. 
+                            $currentyear = date("Y");
+                            $footer = str_replace("XXX_YEAR",$currentyear,$footer);
+
+
                             //Email Body
                             $html = str_replace("XXX_HEADER", $header, $html);
                             $html = str_replace("XXX_FOOTER", $footer, $html);

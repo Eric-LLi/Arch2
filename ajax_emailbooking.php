@@ -117,6 +117,10 @@
             {
                 $footer = file_get_contents('Email_Footer.html'); 
             }
+            //Footer , get current year. 
+            $currentyear = date("Y");
+            $footer = str_replace("XXX_YEAR",$currentyear,$footer);
+
             if($booking['linked_bookingcode'] != "")//select the property assessment report in the combined report.after joined select, the result contains the linked timber report.  
             {
               error_log('select the property assessment report in the combined report need to send two emails');
@@ -127,7 +131,6 @@
 
               //Get the contents of the footer and header to the variables. 
               $header = file_get_contents('Email_Header.html');
-              //$footer = file_get_contents('Email_Footer.html'); 
               $html = str_replace("XXX_HEADER", $header, $html);
               $html = str_replace("XXX_FOOTER", $footer, $html);
 
@@ -205,7 +208,6 @@
               $html2 = file_get_contents("email_second.html");
               //Get the contents of the footer and header to the variables. 
               $header = file_get_contents('Email_Header.html');
-              //$footer = file_get_contents('Email_Footer.html'); 
               $html = str_replace("XXX_HEADER", $header, $html);
               $html = str_replace("XXX_FOOTER", $footer, $html);
 
@@ -280,7 +282,6 @@
 
               //Get the contents of the footer and header to the variables. 
               $header = file_get_contents('Email_Header.html');
-              //$footer = file_get_contents('Email_Footer.html'); 
               $html = str_replace("XXX_HEADER", $header, $html);
               $html = str_replace("XXX_FOOTER", $footer, $html);
 

@@ -132,7 +132,10 @@
                             {
                                 $footer = file_get_contents('Email_Footer.html'); 
                             }
-                            
+
+                            //Footer , get current year. 
+                            $currentyear = date("Y");
+                            $footer = str_replace("XXX_YEAR",$currentyear,$footer);
 
                             error_log('the report type is '. $reportTypes[$booking['reportid']]);
 
@@ -140,7 +143,6 @@
                             $invoice_header = file_get_contents('invoice_header.html');
                             $invoice = file_get_contents('invoices_templates/paid.html');                           
                             $header = file_get_contents('Email_Header.html');
-                            // $footer = file_get_contents('Email_Footer.html'); 
                             
                             //Email Body
                             $html = str_replace("XXX_HEADER", $header, $html);

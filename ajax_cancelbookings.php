@@ -25,7 +25,6 @@
       error_log("timberid: $timberid ");
       error_log("old reports: $oldreports");
       $header = file_get_contents('Email_Header.html');
-      //$footer = file_get_contents('Email_Footer.html'); 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
 
       error_log("combined reports, select the property one, itype is 24,use its own id to the search");
@@ -161,6 +160,9 @@
               {
                   $footer = file_get_contents('Email_Footer.html'); 
               }
+              //Footer , get current year. 
+              $currentyear = date("Y");
+              $footer = str_replace("XXX_YEAR",$currentyear,$footer);
              // Let customer know, with the attached refund pdf...
              if ($booking['custemail'] != "")
              {
