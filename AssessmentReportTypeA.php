@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         <?php require_once("meta.php"); ?>
         <!-- Customized CSS -->
-        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/general.css?<?php echo time(); ?>">
         <link rel="stylesheet" href="css/viewPDF.css">
 
         <!--  Import JQuery  -->
@@ -13692,11 +13692,11 @@
         </div>
 
         <div title="Attachment" style="padding: 10px;font-size: 18px">
-            <div class="container" style="margin-top: 20px" >
+            <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
-                        <label>Property Management Guide</label>
-                        <select id="propertyMaintenanceGuide" style="width:100%" title="property management guide">
+                        <label class="attachmentlabel">Property Maintenance Guide</label>
+                        <select id="propertyMaintenanceGuide" style="width:100%" title="Property Maintenance Guide">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="√">✔</option>
                             </optgroup>
@@ -13706,7 +13706,7 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <label>Cracking in Masonry</label>
+                        <label class="attachmentlabel">Cracking in Masonry</label>
                         <select id="crackingInMasonry" style="width:100%" title="cracking in masonry">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="√">✔</option>
@@ -13717,7 +13717,7 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <label>Treatment of Dampness </label>
+                        <label class="attachmentlabel">Treatment of Dampness </label>
                         <select id="treatmentOfDampness" style="width:100%" title="treatment of dampness">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="√">✔</option>
@@ -13727,8 +13727,8 @@
                             </optgroup>
                         </select>
                     </div>
-                    <div class="col-sm-4">
-                        <label>Health & Safety Warning</label>
+                    <div class="col-sm-4" style="margin-top:20px">
+                        <label class="attachmentlabel">Health & Safety Warning</label>
                         <select id='healthSafetyWarning' style="width:100%" title="health and safety warning">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="√">✔</option>
@@ -13738,8 +13738,8 @@
                             </optgroup>
                         </select>
                     </div>
-                    <div class="col-sm-4">
-                        <label>Roofing & Guttering </label>
+                    <div class="col-sm-4" style="margin-top:20px">
+                        <label class="attachmentlabel">Roofing & Guttering </label>
                         <select id="roofingGuttering" style="width:100%" title="Roofing & Guttering">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="√">✔</option>
@@ -13749,8 +13749,8 @@
                             </optgroup>
                         </select>
                     </div>
-                    <div class="col-sm-4">
-                        <label>Re-stumping </label>
+                    <div class="col-sm-4" style="margin-top:20px">
+                        <label class="attachmentlabel">Re-stumping </label>
                         <select id="reStumping" style="width:100%" title="Roofing & Guttering">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="√">✔</option>
@@ -13761,8 +13761,8 @@
                         </select>
                     </div>
 
-                    <div class="col-sm-4">
-                        <label>Termites & Borers</label>
+                    <div class="col-sm-4" style="margin-top:20px">
+                        <label class="attachmentlabel">Termites & Borers</label>
                         <select id='termitesBorers' style="width:100%" title="health and safety warning">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="√">✔</option>
@@ -13773,8 +13773,8 @@
                         </select>
                     </div>
 
-                    <div class="col-sm-4">
-                        <label>Cost Guide</label>
+                    <div class="col-sm-4" style="margin-top:20px">
+                        <label class="attachmentlabel">Cost Guide</label>
                         <select id='costGuide' style="width:100%" title="Home Safety Checklist">
                             <optgroup label="No Visible Significant Defect">
                                 <option value="√">✔</option>

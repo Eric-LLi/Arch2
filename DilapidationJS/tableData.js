@@ -338,7 +338,7 @@ function getAttachmentDTable() {
                     text: ''
                 }],
                 [{
-                    text: 'Property Management Guide',
+                    text: 'Property Maintenance Guide',
                     style: 'tableText'
                 }, {
                     text: getIt('6000'),

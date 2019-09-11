@@ -96,7 +96,7 @@ function getAttachmentsTable() {
                     alignment: 'center'
                 }, {}],
                 [{
-                    text: 'Property Management Guide',
+                    text: 'Property Maintenance Guide',
                     style: 'tableText'
                 }, {
                     text: getIt('6000'),
