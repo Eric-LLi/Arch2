@@ -21,7 +21,7 @@
             $userid = SharedGetUserIdFromUuid($uuid, $dblink);
             $timberid = SharedGetPostVar("timberid");
            
-            // Fetch booking details so we can email customer...
+            // Fetch booking details so we can email client...
             $dbselect = "select " .
                         "b1.id bookingcode," .
                         "b1.bookings_id linkedbookingcode," .
@@ -231,11 +231,11 @@
                             //     SharedQuery($dbupdate2, $dblink);
                             // }
                             $rc = 0;
-                            $msg = "Send the tax invoice to customer successfully";
+                            $msg = "Send the tax invoice to client successfully";
                         }
                         else
                         {
-                            $msg = "Please enter customer email first";
+                            $msg = "Please enter client email first";
                         }
                 }
             }

@@ -475,7 +475,7 @@
           SharedQuery($dbupdate, $dblink);
 
           $rc = 0;
-          $msg = "Send email to customer successfully";
+          $msg = "Send email to client successfully";
         }
         else
           $msg = "Unable to fetch booking details...";

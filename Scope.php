@@ -579,19 +579,19 @@
                       else
                       {
                         $('#newbookingtabs').tabs('select', 0);
-                        doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                        doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                       }
                     }
                     else
                     {
                       $('#newbookingtabs').tabs('select', 0);
-                      doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                      doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                     }
                   }
                   else
                   {
                     $('#newbookingtabs').tabs('select', 0);
-                    doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                    doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                   }
                 }
                 else

@@ -97,7 +97,7 @@ function drawPageOne() {
      * Subtitles of the tables
      * */
     setTableTitleStyle();
-    doc.text(17, 39, 'CUSTOMER DETAILS');
+    doc.text(17, 39, 'CLIENT DETAILS');
     doc.text(17, 104, 'ARCHITECT DETAILS');
     doc.text(17, 152, 'PROPERTY SUMMARY - Primary construction materials and site conditions');
 

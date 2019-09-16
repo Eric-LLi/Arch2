@@ -166,7 +166,7 @@
              // Let customer know, with the attached refund pdf...
              if ($booking['custemail'] != "")
              {
-               error_log('i am in sending cancel notification email to customer');
+               error_log('i am in sending cancel notification email to client');
                $emailcode = $bookingcode.'&'.$timberid;
                //Email Body
                $html = file_get_contents('email_cancelreportnotification.html');

@@ -255,7 +255,7 @@
       }
 
       $bookingid = 0;
-      //Inform the customer booking has been made
+      //Inform the client booking has been made
       if ($reportid == 24) 
       {
         // reportid = 24 --> User selects combined report. 

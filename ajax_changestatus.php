@@ -121,10 +121,10 @@ global $reportTypes;
               $currentyear = date("Y");
               $footer = str_replace("XXX_YEAR",$currentyear,$footer);
               
-              // Let customer know...
+              // Let client know...
                if ($booking['custemail'] != "")
               {
-                error_log('i am in sending email to customer');
+                error_log('i am in sending email to client');
                 error_log($booking['custemail']);
                 $html = file_get_contents('email_cancelreportnotification.html');
                 $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);

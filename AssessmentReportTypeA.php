@@ -79,7 +79,7 @@
         <!--Details-->
         <div class="container">
             <hr>
-            <h3 class="sectionSubHead">CUSTOMER DETAILS</h3>
+            <h3 class="sectionSubHead">CLIENT DETAILS</h3>
             <form>
                 <div class="row">
                     <div class="col-sm-6">
@@ -13826,7 +13826,7 @@
     ?>
                 <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
                 <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-                <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
+                <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Client</button> -->
                 <?php
         }
         else

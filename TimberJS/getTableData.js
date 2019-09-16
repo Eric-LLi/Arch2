@@ -43,7 +43,7 @@ function getCustomerDetailsTable() {
                 //     border: [true, true, false, true]
                 // }],
                 [{
-                    text: 'CUSTOMER DETAILS',
+                    text: 'CLIENT DETAILS',
                     style: 'tableHeader',
                     colSpan: 4,
                     border: [false, false, false, true]
