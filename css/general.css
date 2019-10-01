@@ -207,3 +207,7 @@ input[type="submit"] {
     line-height:12px;
     padding-top:5px;
 }
+
+.attachmentlabel{
+    margin-bottom:0px;
+}

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <!-- Customized CSS -->
-    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/general.css?<?php echo time(); ?>">
     <!--  Import JQuery  -->
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -77,7 +77,7 @@
 <!--Details-->
 <div id="clientDetails" class="container">
     <hr>
-    <h3 class="sectionSubHead">CUSTOMER DETAILS</h3>
+    <h3 class="sectionSubHead">CLIENT DETAILS</h3>
     <form>
         <div class="row">
             <div class="col-sm-6">
@@ -291,8 +291,8 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm">
-            <label>Property Maintenance Guide</label>
+        <div class="col-sm-4">
+            <label class="attachmentlabel">Property Maintenance Guide</label>
             <select id="6000" style="width:100%" title="property maintenance guide">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -302,8 +302,8 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm">
-            <label>Cracking in Masonry</label>
+        <div class="col-sm-4">
+            <label class="attachmentlabel">Cracking in Masonry</label>
             <select id="6001" style="width:100%" title="cracking in masonry">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -313,8 +313,8 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm">
-            <label>Treatment of Dampness </label>
+        <div class="col-sm-4">
+            <label class="attachmentlabel">Treatment of Dampness </label>
             <select id="6002" style="width:100%" title="treatment of dampness">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -325,9 +325,9 @@
             </select>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm">
-            <label>Health & Safety Warning</label>
+    <div class="row" style="margin-top:20px">
+        <div class="col-sm-4">
+            <label class="attachmentlabel">Health & Safety Warning</label>
             <select id='6003' style="width:100%" title="health and safety warning">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -337,8 +337,8 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm">
-            <label>Roofing & Guttering</label>
+        <div class="col-sm-4">
+            <label class="attachmentlabel">Roofing & Guttering</label>
             <select id="6004" style="width:100%" title="Roofing & Guttering">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -348,8 +348,8 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm">
-            <label>Re-stumping</label>
+        <div class="col-sm-4">
+            <label class="attachmentlabel">Re-stumping</label>
             <select id="6005" style="width:100%" title="Home Safety Checklist">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -360,9 +360,9 @@
             </select>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm">
-            <label>Termites & Borers</label>
+    <div class="row" style="margin-top:20px">
+        <div class="col-sm-4">
+            <label class="attachmentlabel">Termites & Borers</label>
             <select id='6006' style="width:100%" title="health and safety warning">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -373,8 +373,8 @@
             </select>
         </div>
 
-        <div class="col-sm">
-            <label>Cost Guide</label>
+        <div class="col-sm-4">
+            <label class="attachmentlabel">Cost Guide</label>
             <select  id='6008' style="width:100%" title="Home Safety Checklist">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -383,8 +383,6 @@
                     <option value="NA">Not applicable, no such item</option>
                 </optgroup>
             </select>
-        </div>
-        <div class="col-sm">
         </div>
     </div>
 </div>
@@ -401,7 +399,7 @@
     ?>
             <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
             <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-            <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
+            <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Client</button> -->
     <?php
         }
         else

@@ -9,7 +9,8 @@
 
     $rc = -1;
     $msg = "";
-	$booking = Array();
+    $booking = Array();
+    
 
     try
     {
@@ -20,7 +21,7 @@
             $userid = SharedGetUserIdFromUuid($uuid, $dblink);
             $timberid = SharedGetPostVar("timberid");
            
-            // Fetch booking details so we can email customer...
+            // Fetch booking details so we can email client...
             $dbselect = "select " .
                         "b1.id bookingcode," .
                         "b1.bookings_id linkedbookingcode," .
@@ -142,8 +143,12 @@
                             }
                            
                             $header = file_get_contents('Email_Header.html');
-                            //$footer = file_get_contents('Email_Footer.html'); 
-                            
+
+                            //Footer , get current year. 
+                            $currentyear = date("Y");
+                            $footer = str_replace("XXX_YEAR",$currentyear,$footer);
+
+
                             //Email Body
                             $html = str_replace("XXX_HEADER", $header, $html);
                             $html = str_replace("XXX_FOOTER", $footer, $html);
@@ -226,11 +231,11 @@
                             //     SharedQuery($dbupdate2, $dblink);
                             // }
                             $rc = 0;
-                            $msg = "Send the tax invoice to customer successfully";
+                            $msg = "Send the tax invoice to client successfully";
                         }
                         else
                         {
-                            $msg = "Please enter customer email first";
+                            $msg = "Please enter client email first";
                         }
                 }
             }

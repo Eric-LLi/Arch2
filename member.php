@@ -924,7 +924,7 @@
     {
       function doReset()
       {
-        // Customer TAB
+        // Client TAB
         $('#fldNewBookingCustState').combobox('clear');
 
         $('#fldNewBookingCustFirstName').textbox('clear');
@@ -999,7 +999,7 @@
           },
           onOpen: function()
           {
-            // Customer TAB
+            // Client TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
             
             $('#fldNewBookingQuoteDesTR').hide();
@@ -1251,19 +1251,19 @@
                       else
                       {
                         $('#newbookingtabs').tabs('select', 0);
-                        doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                        doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                       }
                     }
                     else
                     {
                       $('#newbookingtabs').tabs('select', 0);
-                      doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                      doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                     }
                   }
                   else
                   {
                     $('#newbookingtabs').tabs('select', 0);
-                    doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                    doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                   }
                 }
                 else
@@ -1314,7 +1314,7 @@
       console.log(booking.clientnotes);
       function doReset()
       {
-        // Customer TAB
+        // Client TAB
         $('#fldNewBookingCustState').combobox('clear');
 
         $('#fldNewBookingCustFirstName').textbox('clear');
@@ -1388,7 +1388,7 @@
           onOpen: function()
           {
             
-            // Customer TAB
+            // Client TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
 
             // Properties TAB
@@ -1472,7 +1472,7 @@
                 if (response.rc == 0)
                 {
                   var b = response.booking;
-                  // Customer TAB
+                  // Client TAB
                   $('#fldNewBookingCustState').combobox('setValue', b.custstate);
 
                   $('#fldNewBookingCustFirstName').textbox('setValue', b.custfirstname);
@@ -1755,19 +1755,19 @@
                       else
                       {
                         $('#newbookingtabs').tabs('select', 0);
-                        doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                        doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                       }
                     }
                     else
                     {
                       $('#newbookingtabs').tabs('select', 0);
-                      doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                      doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                     }
                   }
                   else
                   {
                     $('#newbookingtabs').tabs('select', 0);
-                    doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                    doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                   }
                 }
                 else
@@ -3505,12 +3505,12 @@
             if(row.reportid == 0)
             {
               // console.log("this is an unassinged report, cannot allocate architect yet")
-              noty({text: 'This is an unassinged report, cannot send report to customer', type: 'warning', timeout: 3000});
+              noty({text: 'This is an unassinged report, cannot send report to client', type: 'warning', timeout: 3000});
             }
             
             else if(row.reportid == 23)
             {
-              noty({text: 'This is a quote report, cannot send report to customer', type: 'warning', timeout: 4000});
+              noty({text: 'This is a quote report, cannot send report to client', type: 'warning', timeout: 4000});
             }
             else if (row.reportid == 24)
             {
@@ -3529,7 +3529,7 @@
                 console.log("report id is 24, the link timber id is " + timberid);
                 doPromptOkCancel
                 (
-                  'Email customer booking ' + row.bookingcode + ' and ' +timberid + ' ?',
+                  'Email client booking ' + row.bookingcode + ' and ' +timberid + ' ?',
                   function(result)
                   {
                     if (result)
@@ -3567,7 +3567,7 @@
               }
               else
               {
-                noty({text: 'This booking has not been approved, cannot send email to customer!', type: 'warning', timeout: 4000});
+                noty({text: 'This booking has not been approved, cannot send email to client!', type: 'warning', timeout: 4000});
               }
             }
             else if (row.reportid == 3)
@@ -3585,7 +3585,7 @@
                 }
                 doPromptOkCancel
                 (
-                  'Email customer booking ' + row.bookingcode + ' and ' +propertyid + ' ?',
+                  'Email client booking ' + row.bookingcode + ' and ' +propertyid + ' ?',
                   function(result)
                   {
                     if (result)
@@ -3623,7 +3623,7 @@
               }
               else
               {
-                noty({text: 'This booking has not been approved, cannot send email to customer!', type: 'warning', timeout: 4000});
+                noty({text: 'This booking has not been approved, cannot send email to client!', type: 'warning', timeout: 4000});
               }
              
             }
@@ -3633,7 +3633,7 @@
               {
                 doPromptOkCancel
                 (
-                  'Email customer booking ' + row.bookingcode + '?',
+                  'Email client booking ' + row.bookingcode + '?',
                   function(result)
                   {
                     if (result)
@@ -3668,7 +3668,7 @@
               }
               else
               {
-                noty({text: 'This booking has not been approved, cannot send email to customer!', type: 'warning', timeout: 4000});
+                noty({text: 'This booking has not been approved, cannot send email to client!', type: 'warning', timeout: 4000});
               }
               
             }  
@@ -3679,7 +3679,7 @@
     }
 
     /**
-     * Copy Booking, the open dialogue similiar to the new booking dialogue, but the customer details have been populated in advanced. 
+     * Copy Booking, the open dialogue similiar to the new booking dialogue, but the client details have been populated in advanced. 
      */
 
     function doCopyBooking()
@@ -3706,7 +3706,7 @@
            
             function doReset()
             {
-              // Customer TAB
+              // Client TAB
               // $('#fldNewBookingCustState').combobox('clear');
             
               // $('#fldNewBookingCustFirstName').textbox('clear');
@@ -3720,7 +3720,7 @@
               // $('#fldNewBookingCustCity').textbox('clear');
               // $('#fldNewBookingCustPostcode').textbox('clear');
 
-              //Populate the customer details fields. 
+              //Populate the client details fields. 
               $('#fldNewBookingCustFirstName').textbox('setValue',selectedCustFirstName);
               $('#fldNewBookingCustLastName').textbox('setValue',selectedCustLastName);
               $('#fldNewBookingCustMobile').textbox('setValue',selectedCustMobile);
@@ -3794,7 +3794,7 @@
                 },
                 onOpen: function()
                 {
-                  // Customer TAB
+                  // Client TAB
                   $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
                   
                   $('#fldNewBookingCustEmail2').tagbox
@@ -4044,19 +4044,19 @@
                             else
                             {
                               $('#newbookingtabs').tabs('select', 0);
-                              doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                              doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                             }
                           }
                           else
                           {
                             $('#newbookingtabs').tabs('select', 0);
-                            doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                            doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                           }
                         }
                         else
                         {
                           $('#newbookingtabs').tabs('select', 0);
-                          doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                          doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                         }
                       }
                       else
@@ -4152,7 +4152,7 @@
       {
         var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
         img = '<img src="images/led/ball-yellow.png" width="20" height="20">';
-        tooltip = 'Customer has been emailed ';
+        tooltip = 'Client has been emailed ';
         if (row.emailcount == 1)
           tooltip += ' on ' + lastemailed;
         else
@@ -4195,7 +4195,7 @@
       // {
       //   var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
       //   img = '<img src="images/led/ball-yellow.png" width="24" height="24">';
-      //   tooltip = 'Customer has been emailed ';
+      //   tooltip = 'Client has been emailed ';
       //   if (row.emailcount == 1)
       //     tooltip += ' on ' + lastemailed;
       //   else
@@ -4607,7 +4607,7 @@
           [
             [
               {title: 'Report',         colspan: 5},
-              {title: 'Customer',       colspan: 4},
+              {title: 'Client',       colspan: 4},
               {title: 'Property',       colspan: 12},
               {title: 'Architect',      colspan: 4},
               {title: 'Completed',      rowspan: 2, field: 'datecompleted',     width: 150, align: 'right',  resizable: false, sortable: false},
@@ -5276,14 +5276,14 @@
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
           <!-- <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Architect Reedit</a> -->
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
-          <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Customer</a>
+          <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Client</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
           <a href="javascript:void(0)" onClick="doChangeStatus()" class="easyui-linkbutton" iconCls="icon-move">Change Status</a>
           <br/>
           <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
             <span>Status: </span> 
             <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 230px;">	
-            <span>Customer Email: </span>  
+            <span>Client Email: </span>  
             <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
             <a href="javascript:void(0)" onClick="doSearchBookings(true)" class="easyui-linkbutton" iconCls="icon-search" id="searchButton">Search</a>
             <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
@@ -5459,7 +5459,7 @@
   <div id="dlgBookingNew" class="easyui-dialog" title="New Booking" style="width: 800px; height: 640px;" data-options="resizable: false, modal: true, closable: false, closed: true">
     <div class="easyui-panel" title="Booking Details" data-options="fit: true">
       <div id="newbookingtabs" class="easyui-tabs" data-options="fit: true, pill: true">
-        <div title="Customer Details" data-options="iconCls: 'icon-man'">
+        <div title="Client Details" data-options="iconCls: 'icon-man'">
           <table>
             <tr>
               <td>First Name:</td>

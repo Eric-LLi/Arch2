@@ -3,7 +3,7 @@
  */
 
 /**
- * Get CUSTOMER DETAILS Table
+ * Get CLIENT DETAILS Table
  * */
 function getClientDetailsTable() {
     var result;

@@ -28,11 +28,14 @@
       $hascommission = false;
       $hastravel = false;
       $hasspotter = false;
+      $hascancellation = false;
 
       $budget = null;
       $commission = null;
       $travel = null;
       $spotter = null;
+      $cancellationfee = null;
+
 
       //$msg = "[$custemail]";
 
@@ -55,6 +58,11 @@
       {
         $spotter = $_POST['spotter'];
         $hasspotter = true;
+      }
+      if (isset($_POST['cancellationfee']))
+      {
+        $cancellationfee = $_POST['cancellationfee'];
+        $hascancellation = true;
       }
 
       $reportid = $_POST['reportid'];
@@ -94,20 +102,22 @@
         
         global $dblink;
         global $custfirstname, $custlastname, $custemail, $custmobile, $custphone, $custaddress1, $custaddress2, $custcity, $custpostcode, $custstate;
-        global $budget, $commission, $travel, $spotter, $notes, $clientnotes, $numstories, $numbedrooms, $numbathrooms, $numbuildings, $numrooms;
+        global $budget, $commission, $travel, $spotter, $cancellationfee,$notes, $clientnotes, $numstories, $numbedrooms, $numbathrooms, $numbuildings, $numrooms;
         global $address1, $address2, $city, $postcode, $state, $construction, $age, $meetingonsite, $renoadvice, $pestinspection;
         global $estateagentcompany, $estateagentcontact, $estateagentmobile, $estateagentphone, $userid, $hasbudget, $hascommission;
-        global $hastravel,$hasspotter,$quotedescription;
+        global $hastravel,$hascancellation,$hasspotter,$quotedescription;
         $bookingcode = SharedMakeUuid(8);
         $vars1 = "";
         $vars2 = "";
         $vars3 = "";
         $vars4 = "";
+        $vars5 = "";
 
         $clause1 = "";
         $clause2 = "";
         $clause3 = "";
         $clause4 = "";
+        $clause5 = "";
 
         //If the report is Combined Report(id=3) - Timber Pest Report, don't need to store all this amount related info
         //So if id != 3, then could insert with the amount details. 
@@ -139,11 +149,17 @@
             $vars4 = "spotter,";
             $clause4 = SharedNullOrNum($spotter, $dblink) . "," ;
           }
+
+          if($hascancellation)
+          {
+            $vars5 = "cancellationfee,";
+            $clause5 = SharedNullOrNum($cancellationfee, $dblink) . "," ;
+          }
         }
         else //If selects combined report, timber one.set the budget to 0.0001, so its status can be 'Not Paid'/ .  
         {
           // error_log("report id is 3");
-          if($hasbudget = true)
+          if($hasbudget)
           {
             $vars1 = "budget,";
             $budget = 0.0001;
@@ -175,6 +191,7 @@
                     $vars2 .
                     $vars3 .
                     $vars4 .
+                    $vars5 .
                     "notes," .
                     "clientnotes,".
 
@@ -222,6 +239,7 @@
                     $clause2 .
                     $clause3 .
                     $clause4 .
+                    $clause5 .
                     SharedNullOrQuoted($notes, 1000, $dblink) . "," .
                     SharedNullOrQuoted($clientnotes, 1000, $dblink) . "," .
 
@@ -257,7 +275,7 @@
       }
 
       $bookingid = 0;
-      //Inform the customer booking has been made
+      //Inform the client booking has been made
       if ($reportid == 24) 
       {
         // reportid = 24 --> User selects combined report. 

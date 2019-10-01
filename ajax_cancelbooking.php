@@ -17,7 +17,6 @@ global $reportTypes;
       $uuid = $_POST['uuid'];
       $bookingcode = $_POST['bookingcode'];
       $header = file_get_contents('Email_Header.html');
-      //$footer = file_get_contents('Email_Footer.html'); 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $linkBookingID = '';
       $bookings_id = '';
@@ -143,6 +142,10 @@ global $reportTypes;
               {
                   $footer = file_get_contents('Email_Footer.html'); 
               }
+              
+              //Footer , get current year. 
+              $currentyear = date("Y");
+              $footer = str_replace("XXX_YEAR",$currentyear,$footer);
 
               // Let customer know, with the attached refund pdf...
                if ($booking['custemail'] != "")

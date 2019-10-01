@@ -12,7 +12,7 @@ var archHomeFeasibilityNotes1 = 'Further detailed work outside the scope of this
 
 var archHomeFeasibilityNotes2 = 'This further detailed work may also include structural engineering, development/planning consent and/or building construction approval, assessment of ground conditions, energy, asbestos (and other latent factors), as well as other investigations and/or considerations.';
 
-var archHomeFeasibilityNotes3 = 'Once this further work is completed, the sets of documents/drawings required for permits/approvals application and for the builder to commence construction works can be completed. This further work and construction documentation is not covered in the Report, but can be provided independently by your Archicentre Australia Architect.  This further work is explained in more detail later in this Report.';
+var archHomeFeasibilityNotes3 = 'Once this further work is completed, the sets of documents/drawings required for permits/approvals application and for the builder to commence construction works can be completed. This further work and construction documentation is not covered in the Report, but can be provided independently by your Archicentre Australia Architect.';
 
 var archHomeApprovals1 = 'The construction of the Design presented in this Report will require a number of statutory or regulatory approvals and/or permits.  If you decide to proceed, further investigation into the nature and extent of work required to make application for these permits will form part of the further detailed work.';
 

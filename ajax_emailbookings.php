@@ -122,6 +122,10 @@
             {
                 $footer = file_get_contents('Email_Footer.html'); 
             }
+            //Footer , get current year. 
+            $currentyear = date("Y");
+            $footer = str_replace("XXX_YEAR",$currentyear,$footer);
+
             if($reportid == 24)
             {
               error_log("select combined report, report id = 24");
@@ -218,7 +222,6 @@
 
                     //Get the contents of the footer and header to the variables. 
                     $header = file_get_contents('Email_Header.html');
-                    //$footer = file_get_contents('Email_Footer.html'); 
                     $html = str_replace("XXX_HEADER", $header, $html);
                     $html = str_replace("XXX_FOOTER", $footer, $html);
 
@@ -385,7 +388,6 @@
         
                       //Get the contents of the footer and header to the variables. 
                       $header = file_get_contents('Email_Header.html');
-                      //$footer = file_get_contents('Email_Footer.html'); 
                       $html = str_replace("XXX_HEADER", $header, $html);
                       $html = str_replace("XXX_FOOTER", $footer, $html);
         
@@ -473,7 +475,7 @@
           SharedQuery($dbupdate, $dblink);
 
           $rc = 0;
-          $msg = "Send email to customer successfully";
+          $msg = "Send email to client successfully";
         }
         else
           $msg = "Unable to fetch booking details...";

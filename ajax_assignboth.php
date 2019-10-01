@@ -22,8 +22,9 @@
     {
         $footer = file_get_contents('Email_Footer.html'); 
     }
-    //error_log("the work state is:".$workstate);
-    //$footer = file_get_contents('Email_Footer.html');
+    $currentyear = date("Y");
+    $footer = str_replace("XXX_YEAR",$currentyear,$footer);
+    
     $h = str_replace("XXX_HEADER", $header, $h);
     $h = str_replace("XXX_FOOTER", $footer, $h);
 
