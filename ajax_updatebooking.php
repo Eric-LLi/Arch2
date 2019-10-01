@@ -19,8 +19,15 @@
       $custfirstname = $_POST['custfirstname'];
       $custlastname = $_POST['custlastname'];
       $custemail = $_POST['custemail'];
-      error_log($custemail);
-
+      $reportid = $_POST['reportid'];
+      $combinedtimberid = $_POST['combinedtimberid'];
+      $combinedpropertyid = $_POST['combinedpropertyid'];
+      $notes = $_POST['notes'];
+      $clientnotes = $_POST['clientnotes'];
+      error_log("bookingcode: ".$bookingcode);
+      error_log("combinedpropertyid: ".$combinedpropertyid);
+      error_log('combinedtimberid: '.$combinedtimberid);
+      error_log('reportid: '.$reportid);
       // error_log($custemail);
       // split("\,",$custemail);
       // error_log(print_r(explode(',',$custemail),TRUE));
@@ -39,46 +46,101 @@
       $hascommission = false;
       $hastravel = false;
       $hasspotter = false;
+      $hascancellation = false;
 	  
       $budget = null;
       $commission = null;
       $travel = null;
       $spotter = null;
+      $cancellationfee = null;
 
       $vars1 = "";
       $vars2 = "";
       $vars3 = "";
       $vars4 = "";
       $vars5 = "";
+      $vars6 = "";
 
-
+      error_log(isset($_POST['budget']));
       if (isset($_POST['budget']))
-        $vars1 = "budget=" . SharedNullOrQuoted($_POST['budget'], 50, $dblink) . ",";
-
+      {
+        $budget = SharedNullOrQuoted($_POST['budget'], 50, $dblink);
+        error_log("1 budget: ".$budget);
+        if($budget != "null")
+        {
+          $hasbudget = true;
+        }
+        error_log("1 has budget ".$hasbudget);
+        
+      }
       if (isset($_POST['commission']))
-        $vars2 = "commission=" . SharedNullOrQuoted($_POST['commission'], 50, $dblink) . ",";
-		
-		  if (isset($_POST['travel']))
-        $vars3 = "travel=" . SharedNullOrQuoted($_POST['travel'], 50, $dblink) . ",";
-		
-	  	if (isset($_POST['spotter']))
-        $vars4 = "spotter=" . SharedNullOrQuoted($_POST['spotter'], 50, $dblink) . ",";
-
-      
+      {
+        $commission = SharedNullOrQuoted($_POST['commission'], 50, $dblink);
+        $hascommission = true;
+      }
+      if (isset($_POST['travel']))
+      {
+        $travel = SharedNullOrQuoted($_POST['travel'], 50, $dblink);
+        $hastravel = true;
+      }
+      if (isset($_POST['spotter']))
+      {
+        $spotter = SharedNullOrQuoted($_POST['spotter'], 50, $dblink);
+        $hasspotter = true;
+      }
       if (isset($_POST['cancellationfee']))
-        $vars4 = "cancellationfee=" . SharedNullOrQuoted($_POST['cancellationfee'], 50, $dblink) . ",";
+      {
+        $cancellationfee = SharedNullOrQuoted($_POST['cancellationfee'], 50, $dblink);
+        $hascancellation = true;
+      }
 
-      $reportid = $_POST['reportid'];
-      $combinedtimberid = $_POST['combinedtimberid'];
-      $combinedpropertyid = $_POST['combinedpropertyid'];
-      $notes = $_POST['notes'];
-      $clientnotes = $_POST['clientnotes'];
-      error_log("bookingcode");
-      error_log($bookingcode);
-      error_log("combinedpropertyid: ");
-      error_log($combinedpropertyid);
-      error_log('combinedtimberid');
-      error_log($combinedtimberid);
+     
+      if($reportid != 3)
+      {
+        error_log("report id is not 3");
+        if ($hasbudget)
+        {
+          $vars1 = "budget=" .$budget. ",";
+        }
+        else
+        {
+          $vars1 = "budget=null,";
+        }
+
+        if ($hascommission)
+        {
+          $vars2 = "commission=".$commission. ",";
+        }
+
+        if ($hastravel)
+        {
+          $vars3 = "travel=".$travel. ",";
+        }
+
+        if ($hasspotter)
+        {
+          $vars4 = "spotter=".$spotter. ",";
+        }
+
+        if ($hascancellation)
+        {
+          $vars5 = "cancellationfee=".$cancellationfee. ",";
+        }
+      }
+      else //If selects combined report, timber one.set the budget to 0.0001, so its status can be 'Not Paid'/ .  
+      {
+        error_log("report id is 3");
+        if($hasbudget == true)
+        {
+          $vars1 = "budget=".SharedNullOrNum(0.0001, $dblink). ",";
+        }
+        else
+        {
+          $vars1 = "budget=null,";
+        }
+      }
+      
+      
 
       $numstories = $_POST['numstories'];
       $numbedrooms = $_POST['numbedrooms'];
@@ -157,6 +219,10 @@
 
       //check if the report is combined report _ property assessment report(reportid == 24). 
       //If it is, needs to change its link timber pest booking as well. 
+     
+      $reportid = number_format($reportid,0);
+      error_log(gettype($reportid));
+      error_log($reportid);
       if($reportid == 24)
       {
         error_log("select combined report-property assessment report, after update property, need to udpate timber without the amount related fileds");
@@ -167,6 +233,17 @@
             error_log("select combined report-propety assessment report, but this is created before the new method update, need to use another id to update the timber pest report, because the old system, these two reports' id are in reverse order");
             $combinedtimberid = $combinedpropertyid;
           }
+          error_log("has budget ".$hasbudget);
+          error_log("budget: ".$budget);
+          if($hasbudget)
+          {
+            $vars6 = "budget=0.0001,";
+          }
+          else
+          {
+            $vars6 = "budget=null,";
+          }
+          error_log($vars6);
           $dbinsert2 = "update bookings set " .
                       "custfirstname=" . SharedNullOrQuoted($custfirstname, 50, $dblink) . "," .
                       "custlastname=" . SharedNullOrQuoted($custlastname, 50, $dblink) . "," .
@@ -204,6 +281,8 @@
                       "estateagentmobile=" . SharedNullOrQuoted($estateagentmobile, 20, $dblink) . "," .
                       "estateagentphone=" . SharedNullOrQuoted($estateagentphone, 20, $dblink) . "," .
                       "quote_description=" . SharedNullOrQuoted($quotedescription, 1000, $dblink) . "," .
+
+                      $vars6.
 
                       "datemodified=CURRENT_TIMESTAMP," .
                       "usersmodified_id=$userid " .
