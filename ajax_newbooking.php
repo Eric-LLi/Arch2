@@ -275,7 +275,7 @@
       }
 
       $bookingid = 0;
-      //Inform the client booking has been made
+      //Inform the client booking has been made, and record the activity to the audit_log table. 
       if ($reportid == 24) 
       {
         // reportid = 24 --> User selects combined report. 
@@ -304,8 +304,22 @@
         $html = file_get_contents('email_newbooking.html');
         $bookingid = doInsertBooking($reportid, null);
 
-        $msg = "Successfully created new booking [$bookingid]";
-        $rc = 0;
+        $recordsql = "insert into audit_log ".
+                     "(bookings_id," .
+                     "event, ".
+                     "userscreated_id".
+                     ")".
+                     "values ".
+                     "(".
+                     $bookingid ."," .
+                     1 ."," .
+                     SharedNullOrNum($userid, $dblink) .
+                     ")";
+        error_log($recordsql);
+        if($dbresult = SharedQuery($recordsql, $dblink))
+        {
+          $msg = "Successfully created new booking [$bookingid]";
+          $rc = 0;
 
         if (($isuser == 1) && ([$custemail] != ""))
         {
@@ -316,10 +330,12 @@
           SharedSendHtmlMail($gConfig['adminemail'], "Web Enquiry", $custemail, $custfirstname . ' ' . $custlastname, "Online Booking Request", $html);
           //SharedSendHtmlMail($custemail, $custfirstname . ' ' . $custlastname, $gConfig['adminemail'], "Web Enquiry", "Online Booking Request", $body);
         }
+        
+        }
         else
         {
           //$msg = "Successfully created new booking [$bookingid], The isuser is [$isuser]";
-          $msg = "Successfully created new booking [$bookingid]";
+          $msg = "Could not recrod booking [$bookingid] to audit log";
         }
       }
     }

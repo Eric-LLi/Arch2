@@ -1,6 +1,6 @@
 <?php
   require_once("shared.php");
-  
+
   if (isset($_POST['fldLogout']))
   {
     SharedLogout();
@@ -305,6 +305,418 @@
 
     <!-- *********************************************************************************************************************************************************************** -->
     <!-- Report handlers...                                                                                                                                                              -->
+    function doSalesReportBatch()
+    {
+      var batches = [];
+      $('#dlgSalesReportBatch').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#fldSelectSalesBatch').combobox({valueField: 'value', textField: 'label'});
+
+            $.post
+            (
+              'ajax_report_getsalesbatches.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>'
+              },
+              function(result)
+              {
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
+                {
+                  if (response.rows.length == 1)
+                  {
+                    $('#btnRunReportSales').linkbutton('disable');
+                  }
+                  else
+                  {
+                    $('#btnRunReportSales').linkbutton('enable');
+                    response.rows.forEach
+                    (
+                      function(row, ndx)
+                      {
+                        if (ndx > 0)
+                          batches.push({label: row.batchno, value: row.batchno});
+                      }
+                    );
+
+                    $('#fldSelectSalesBatch').combobox('loadData', batches);
+                  }
+                }
+              }
+            );
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              id: 'btnRunReportSales',
+              handler: function()
+              {
+                $.post
+                (
+                  'ajax_report_sales.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: $('#fldSelectSalesBatch').combobox('getValue')
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'New Batch',
+              handler: function()
+              {
+                $.post
+                (
+                  'ajax_report_sales.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: 0
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReport').dialog('close');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSalesReportBatch').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSalesReportDateRange()
+    {
+      $('#dlgSalesReportDateRange').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#dtSalesReportDateFrom').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            $('#dtSalesReportDateTo').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            // Default to this month...
+            $('#dtSalesReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+            $('#dtSalesReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              handler: function()
+              {
+                var datefrom = $('#dtSalesReportDateFrom').datebox('getValue');
+                var dateto = $('#dtSalesReportDateTo').datebox('getValue');
+                var now = moment();
+
+                if (_.isBlank(datefrom) && _.isBlank(dateto))
+                {
+                  doMandatoryTextbox('Please select a start and end date for the report', 'dtSalesReportDateFrom');
+                  return;
+                }
+
+                if (!_.isBlank(datefrom) && !_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(dateto))
+                  {
+                    doMandatoryTextbox('Start date can not be after end date...', 'dtSalesReportDateFrom');
+                    return;
+                  }
+                }
+
+                if (_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(now))
+                  {
+                    doMandatoryTextbox('Start date can not be after today...', 'dtSalesReportDateFrom');
+                      return;
+                  }
+                  dateto = now.format('YYYY-MM-DD 23:59:59');
+                }
+
+                if (_.isBlank(datefrom))
+                {
+                  if (moment(dateto).isBefore(now))
+                  {
+                    doMandatoryTextbox('End date can not be before today...', 'dtSalesReportDateTo');
+                    return;
+                  }
+                  datefrom = now.format('YYYY-MM-DD 00:00:00');
+                }
+
+                $.post
+                (
+                  'ajax_report_salesdt.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    datefrom: datefrom,
+                    dateto: dateto
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReportDateRange').dialog('close');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSalesReportDateRange').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSuppliersReportBatch()
+    {
+      var batches = [];
+      $('#dlgSuppliersReportBatch').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#fldSelectSuppliersBatch').combobox({valueField: 'value', textField: 'label'});
+
+            $.post
+            (
+              'ajax_report_getsuppliersbatches.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>'
+              },
+              function(result)
+              {
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
+                {
+                  if (response.rows.length == 1)
+                  {
+                    $('#btnRunReportSsuppliers').linkbutton('disable');
+                  }
+                  else
+                  {
+                    $('#btnRunReportSsuppliers').linkbutton('enable');
+                    response.rows.forEach
+                    (
+                      function(row, ndx)
+                      {
+                        if (ndx > 0)
+                          batches.push({label: row.batchno, value: row.batchno});
+                      }
+                    );
+
+                    $('#fldSelectSuppliersBatch').combobox('loadData', batches);
+                  }
+                }
+              }
+            );
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              id: 'btnRunReportSuppliers',
+              handler: function()
+              {
+                $.post
+                (
+                  'ajax_report_suppliers.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: $('#fldSelectSuppliersBatch').combobox('getValue')
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'New Batch',
+              handler: function()
+              {
+                $.post
+                (
+                  'ajax_report_sales.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: 0
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSuppliersReportDateRange()
+    {
+      $('#dlgSuppliersReportDateRange').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#dtSuppliersReportDateFrom').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            $('#dtSuppliersReportDateTo').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            // Default to this month...
+            $('#dtSuppliersReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+            $('#dtSuppliersReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              handler: function()
+              {
+                var datefrom = $('#dtSuppliersReportDateFrom').datebox('getValue');
+                var dateto = $('#dtSuppliersReportDateTo').datebox('getValue');
+                var now = moment();
+
+                if (_.isBlank(datefrom) && _.isBlank(dateto))
+                {
+                  doMandatoryTextbox('Please select a start and end date for the report', 'dtSuppliersReportDateFrom');
+                  return;
+                }
+
+                if (!_.isBlank(datefrom) && !_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(dateto))
+                  {
+                    doMandatoryTextbox('Start date can not be after end date...', 'dtSuppliersReportDateFrom');
+                    return;
+                  }
+                }
+
+                if (_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(now))
+                  {
+                    doMandatoryTextbox('Start date can not be after today...', 'dtSuppliersReportDateFrom');
+                      return;
+                  }
+                  dateto = now.format('YYYY-MM-DD 23:59:59');
+                }
+
+                if (_.isBlank(datefrom))
+                {
+                  if (moment(dateto).isBefore(now))
+                  {
+                    doMandatoryTextbox('End date can not be before today...', 'dtSuppliersReportDateTo');
+                    return;
+                  }
+                  datefrom = now.format('YYYY-MM-DD 00:00:00');
+                }
+
+                $.post
+                (
+                  'ajax_report_suppliersdt.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    datefrom: datefrom,
+                    dateto: dateto
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSuppliersReportDateRange').dialog('close');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSuppliersReportDateRange').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
     function doReportNumReportsByType()
     {
       $('#dlgNumReporsByType').dialog
@@ -5347,6 +5759,50 @@
     <div id="divNumReporsByMemberChart" style="width: 100%; height: 80%;"></div>
   </div>
 
+  <div id="dlgSalesReportBatch" class="easyui-dialog" title="Sales Report by Batch" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td>Batch:</td>
+        <td><div id="fldSelectSalesBatch" style="width: 100px;"></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSalesReportDateRange" class="easyui-dialog" title="Sales Report by Date Range" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td style="width: 100px;">Date From:</td>
+        <td><input id="dtSalesReportDateFrom" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Date To:</td>
+        <td><input id="dtSalesReportDateTo" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSuppliersReportBatch" class="easyui-dialog" title="Suppliers Report by Batch" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td>Batch:</td>
+        <td><div id="fldSelectSuppliersBatch" style="width: 100px;"></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSuppliersReportDateRange" class="easyui-dialog" title="Suppliers Report by Date Range" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td style="width: 100px;">Date From:</td>
+        <td><input id="dtSuppliersReportDateFrom" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Date To:</td>
+        <td><input id="dtSuppliersReportDateTo" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+    </table>
+  </div>
+
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Dialogs...                                                                                                                                                              -->
   <div id="dlgChangePassword" class="easyui-dialog" title="Change Password" style="width: 300px; height: 200px;" data-options="resizable: false, modal: true, closable: false, closed: true">
@@ -5679,8 +6135,12 @@
             <div title="Reports" data-options="iconCls:'icon-barchart'" style="overflow: auto; padding: 10px;">
               <!-- <h3 style= "color:#0099FF;">Select Report</h3> -->
               <table>
-                <tr><td><a id="btnNumReportsByType" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 160" onclick="doReportNumReportsByType()">#Reports by Type</a></td></tr>
-                <tr><td><a id="btnNumReportsByMember" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 160" onclick="doReportNumReportsByMember()">#Reports by Member</a></td></tr>
+                <tr><td><a id="btnNumReportsByType" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 240" onclick="doReportNumReportsByType()">#Reports by Type</a></td></tr>
+                <tr><td><a id="btnNumReportsByMember" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 240" onclick="doReportNumReportsByMember()">#Reports by Member</a></td></tr>
+                <tr><td><a id="btnSalesReportBatch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-product', width: 240" onclick="doSalesReportBatch()">Sales Report by Batch</a></td></tr>
+                <tr><td><a id="btnSalesReportDateRange" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-calendar', width: 240" onclick="doSalesReportDateRange()">Sales Report by Date</a></td></tr>
+                <tr><td><a id="btnSupplierReportBatch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-product', width: 240" onclick="doSuppliersReportBatch()">Supplier Report by Batch</a></td></tr>
+                <tr><td><a id="btnSupplierReportDateRange" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-calendar', width: 240" onclick="doSuppliersReportDateRange()">Supplier Report by Date</a></td></tr>
               </table>
             </div>
         <?php
