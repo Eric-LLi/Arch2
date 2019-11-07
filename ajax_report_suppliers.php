@@ -56,7 +56,7 @@
 
               if ($myfile !== false)
               {
-                fwrite($myfile, '"Member","Booking #","Type","Date Approved","Spotter\'s Fee","Commission","Travel","Name","Email","Address 1","Address 2","City","Postcode","State"');
+                fwrite($myfile, '"Member","State","Date Approved","Booking #","Type","Name","Spotter\'s Fee","Commission","Travel","Email","Address 1","Address 2","City","Postcode"');
                 fwrite($myfile, "\n");
 
                 foreach ($rows as $row)
@@ -64,20 +64,20 @@
                   fwrite
                   (
                     $myfile,
-                    '"' . $row['memberfirstname'] .  $row['memberlastname'] . '",' .
+                    '"' . $row['memberfirstname'] . " " . $row['memberlastname'] . '",' .
+                    '"' . $row['custstate'] . '",' .
+                    '"' . $row['dateapproved'] . '",' .
                     '"' . $row['id'] . '",' .
                     '"' . $reportTypes[$row['itype']] . '",' .
-                    '"' . $row['dateapproved'] . '",' .
+                    '"' . $row['custfirstname'] .  " " . $row['custlastname'] . '",' .
+                    '"' . $row['spotter'] . '",' .
                     '"' . $row['commission'] . '",' .
                     '"' . $row['travel'] . '",' .
-                    '"' . $row['spotter'] . '",' .
-                    '"' . $row['custfirstname'] .  $row['custlastname'] . '",' .
                     '"' . $row['custemail'] . '",' .
                     '"' . $row['custaddress1'] . '",' .
                     '"' . $row['custaddress2'] . '",' .
                     '"' . $row['custcity'] . '",' .
                     '"' . $row['custpostcode'] . '",' .
-                    '"' . $row['custstate'] . '",' .
                     ''
                   );
                   fwrite($myfile, "\n");

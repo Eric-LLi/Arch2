@@ -471,11 +471,31 @@
           //SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $booking['custemail'], $booking['custfirstname'] . ' ' . $booking['custlastname'], $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Architect/Inspector Report ", $html);
 
           // Now update email count and date...
-          $dbupdate = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
-          SharedQuery($dbupdate, $dblink);
+          $dbupdate1 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
+          $dbupdate2 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$timberid";
+          $recordsql1 = "insert into audit_log (bookings_id,event, userscreated_id) values (".
+                        $bookingcode ."," .
+                        10 ."," .
+                        SharedNullOrNum($userid, $dblink) .
+                        ")";
+          $recordsql2 = "insert into audit_log (bookings_id,event, userscreated_id) values (".
+                        $timberid ."," .
+                        10 ."," .
+                        SharedNullOrNum($userid, $dblink) .
+                        ")";
+          error_log($recordsql2);
+          error_log($recordsql1);
+          $dbresult1 = SharedQuery($dbupdate1, $dblink);
+          $dbresult2 = SharedQuery($dbupdate2, $dblink);
+          $dbresult3 = SharedQuery($recordsql1, $dblink);
+          $dbresult4 = SharedQuery($recordsql2, $dblink);
 
-          $rc = 0;
-          $msg = "Send email to client successfully";
+          if ($dbresult1 && $dbresult2 && $dbresult3 && $dbresult4)
+          {
+            $rc = 0;
+            $msg = "Send email to client successfully";
+          }
+          
         }
         else
           $msg = "Unable to fetch booking details...";

@@ -21,6 +21,8 @@
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $b1archid = "";
       $b2archid = "";
+      $recordsql1 = "";
+      $recordsql2 = "";
       
       if($reportid == 3)
       {
@@ -109,6 +111,30 @@
                       "datemodified=CURRENT_TIMESTAMP " .
                       "where " .
                       "id=$updatetimberid";
+        $recordsql1 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatepropertyid ."," .
+                      4 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        $recordsql2 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatetimberid ."," .
+                      4 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        error_log($recordsql1);
+        error_log($recordsql2);
       }
       if($selectedstatus == 1) // status == 1 --> aggree price is not set
       {
@@ -124,6 +150,30 @@
                       "datemodified=CURRENT_TIMESTAMP " .
                       "where " .
                       "id=$updatetimberid";
+        $recordsql1 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatepropertyid ."," .
+                      5 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        $recordsql2 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatetimberid ."," .
+                      5 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        error_log($recordsql1);
+        error_log($recordsql2);
       }
       if($selectedstatus == 2) // status == 2 --> approved
       {
@@ -133,10 +183,34 @@
                       "where " .
                       "id=$updatepropertyid";
         $dbupdate2 = "update bookings set " . 
-                    "dateapproved=CURRENT_TIMESTAMP," .
-                    "usersmodified_id=$userid " .
-                    "where " .
-                    "id=$updatetimberid";
+                      "dateapproved=CURRENT_TIMESTAMP," .
+                      "usersmodified_id=$userid " .
+                      "where " .
+                      "id=$updatetimberid";
+        $recordsql1 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatepropertyid ."," .
+                      9 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        $recordsql2 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatetimberid ."," .
+                      9 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        error_log($recordsql1);
+        error_log($recordsql2);
       }
       if($selectedstatus == 3) // status == 3 --> completed
       {
@@ -152,6 +226,30 @@
                       "usersmodified_id=$userid " .
                       "where " .
                       "id=$updatetimberid";
+        $recordsql1 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatepropertyid ."," .
+                      8 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        $recordsql2 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatetimberid ."," .
+                      8 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        error_log($recordsql1);
+        error_log($recordsql2);
       }
       if($selectedstatus == 4) // status == 4 --> paid
       {
@@ -165,6 +263,30 @@
                     "usersmodified_id=$userid " .
                     "where " .
                     "id=$updatetimberid";
+        $recordsql1 = "insert into audit_log ".
+                    "(bookings_id," .
+                    "event, ".
+                    "userscreated_id".
+                    ")".
+                    "values ".
+                    "(".
+                    $updatepropertyid ."," .
+                    3 ."," .
+                    SharedNullOrNum($userid, $dblink) .
+                    ")";
+        $recordsql2 = "insert into audit_log ".
+                    "(bookings_id," .
+                    "event, ".
+                    "userscreated_id".
+                    ")".
+                    "values ".
+                    "(".
+                    $updatetimberid ."," .
+                    3 ."," .
+                    SharedNullOrNum($userid, $dblink) .
+                    ")";
+        error_log($recordsql1);
+        error_log($recordsql2);
       }
       if($selectedstatus == 6) // status == 6 --> Work Started
       {
@@ -182,6 +304,30 @@
                       "users_id=$b2archid " .
                       "where " .
                       "id=$updatetimberid";
+        $recordsql1 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatepropertyid ."," .
+                      6 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        $recordsql2 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatetimberid ."," .
+                      6 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        error_log($recordsql1);
+        error_log($recordsql2);
       }
       if($selectedstatus == 7) // status == 7 --> Work Closed
       {
@@ -195,6 +341,30 @@
                       "usersclosed_id=$userid " .
                       "where " .
                       "id=$updatetimberid";
+        $recordsql1 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatepropertyid ."," .
+                      11 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+          $recordsql2 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatetimberid ."," .
+                      11 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        error_log($recordsql1);
+        error_log($recordsql2);
       }
       
 
@@ -202,10 +372,15 @@
       
       $dbresult1 = SharedQuery($dbupdate1, $dblink);
       $dbresult2 = SharedQuery($dbupdate2, $dblink);
+      $dbresult3 = SharedQuery($recordsql1, $dblink);
+      $dbresult4 = SharedQuery($recordsql2, $dblink);
 
       
-      if ($dbresult1 && $dbresult2)
+      if ($dbresult1 && $dbresult2 && $dbresult3 && $dbresult4)
+      {
         $rc = 0;
+      }
+        
       else
         $msg = "Error setting booking status...";
     }

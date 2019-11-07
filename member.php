@@ -4910,6 +4910,63 @@
     {
       console.log(cache_bookings.length);
     }
+
+    function doPrintSummary()
+    {
+      if (!doGridGetSelectedRowData
+        (
+          'divBookingsG',
+          function(row, index)
+          {
+            //console.log(row);
+            // console.log("row.reportid " + row.reportid);
+            // console.log("row.bookingcode " + row.bookingcode);
+            // console.log("row.linkedbookingcode " +row.linkedbookingcode);
+            // console.log("row.linked_bookingcode " +row.linked_bookingcode);
+            var oldreports;
+           
+            doPromptOkCancel
+            (
+              'Print booking ' + row.bookingcode + "'s summary ?",
+              function(result)
+              {
+                if (result)
+                {
+                  
+                  $.post
+                  (
+                    'ajax_printbooking.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
+
+                      if (response.rc == 0)
+                      {
+                        //console.log(response.logs);
+                        var logevents = response.logs;
+                        generatePDF(row,reports,auditevents,logevents);
+                        // doRefreshBookings();
+                        // doSearchBookings(false);
+                        //noty({text: response.msg, type: 'success', timeout: 3000});
+                      }
+                      else
+                      {
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                      }
+
+                    }
+                  );
+                }
+              }
+            );            
+          }
+        ))
+        noty({text: 'Please select a booking to print the summary', type: 'warning', timeout: 4000});
+    }
     // ************************************************************************************************************
     // Document ready...
 
@@ -5691,6 +5748,7 @@
           <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Client</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
           <a href="javascript:void(0)" onClick="doChangeStatus()" class="easyui-linkbutton" iconCls="icon-move">Change Status</a>
+          <a href="javascript:void(0)" onClick="doPrintSummary()" class="easyui-linkbutton" iconCls="icon-orderform">Booking Summary</a>
           <br/>
           <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
             <span>Status: </span> 

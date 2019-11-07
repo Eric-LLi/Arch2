@@ -234,8 +234,23 @@ global $reportTypes;
                     "userscancelled_id=$userid " .
                     "where " .
                     "id=$bookingcode";
+        $recordsql = "insert into audit_log ".
+                    "(bookings_id," .
+                    "event, ".
+                    "userscreated_id".
+                    ")".
+                    "values ".
+                    "(".
+                    $bookingcode ."," .
+                    12 ."," .
+                    SharedNullOrNum($userid, $dblink) .
+                    ")";
         error_log($dbupdate);
-        if ($dbresult2 = SharedQuery($dbupdate, $dblink))
+        error_log($recordsql);
+        $dbupdate = "update bookings set " .
+        $dbresult1 = SharedQuery($dbupdate, $dblink);
+        $dbresult2 = SharedQuery($recordsql, $dblink);;
+        if ($dbresult1 && $dbresult2 )
         {
           $rc = 0;
           $msg = "Booking has been cancelled";

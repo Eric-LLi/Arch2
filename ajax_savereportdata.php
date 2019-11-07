@@ -23,8 +23,22 @@
                   "usersmodified_id=$userid " .
                   "where " .
                   "id=$bookingcode";
+      $recordsql = "insert into audit_log ".
+                  "(bookings_id," .
+                  "event, ".
+                  "userscreated_id".
+                  ")".
+                  "values ".
+                  "(".
+                  $bookingcode ."," .
+                  7 ."," .
+                  SharedNullOrNum($userid, $dblink) .
+                  ")";
       error_log($dbupdate);
-      if ($dbresult = SharedQuery($dbupdate, $dblink))
+      error_log($recordsql);
+      $dbresult1 = SharedQuery($dbupdate, $dblink);
+      $dbresult2 = SharedQuery($recordsql, $dblink);
+      if ($dbresult1 && $dbresult2)
       {
         $rc = 0;
         $msg = "Succesfully saved report...";

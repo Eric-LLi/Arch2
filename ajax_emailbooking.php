@@ -364,10 +364,19 @@
 
           // Now update email count and date...
           $dbupdate = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
-          SharedQuery($dbupdate, $dblink);
+          $recordsql = "insert into audit_log (bookings_id,event, userscreated_id) values (".
+                        $bookingcode ."," .
+                        10 ."," .
+                        SharedNullOrNum($userid, $dblink) .
+                        ")";
+          $dbresult1 =  SharedQuery($dbupdate, $dblink);
+          $dbresult2 =  SharedQuery($recordsql, $dblink);
 
-          $rc = 0;
-          $msg = "Send email to client successfully";
+          if ($dbresult1 && $dbresult2)
+          {
+            $rc = 0;
+            $msg = "Send email to client successfully";
+          }          
         }
         else
           $msg = "Unable to fetch booking details...";
