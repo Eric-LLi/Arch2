@@ -25,6 +25,17 @@ function readAmount(text)
     }
     return result;
 }
+
+function readNumber(text)
+{
+    var result = text;
+    if(result == null)
+    {
+        result = '0';
+    }
+    return result;
+}
+
 function determinStatus(bookingdetail)
 {
     var status = 'No Agreed Price';
@@ -210,7 +221,7 @@ function createAuditLogTable(auditevents,logevents,bookingdetail)
         //5.send report row
         var sent = [
             {
-                text:'eport is sent to the customer',
+                text:'report is sent to the customer',
                 style:'tableTitle'
             },
             {
@@ -610,11 +621,31 @@ function generatePDF(bookingdetail,reports,auditevents,logevents)
                                 ],
                                 [
                                     {
+                                        text:'Cancellation Fee: ',
+                                        style:'tableTitle',
+                                    },
+                                    {
+                                        text:['$',readAmount(bookingdetail.cancellationfee)],
+                                        style:'tableContents'
+                                    }
+                                ],
+                                [
+                                    {
                                         text:'Notes: ',
                                         style:'tableTitle',
                                     },
                                     {
                                         text:[readText(bookingdetail.notes)],
+                                        style:'tableContents'
+                                    }
+                                ],
+                                [
+                                    {
+                                        text:'Client Notes: ',
+                                        style:'tableTitle',
+                                    },
+                                    {
+                                        text:[readText(bookingdetail.clientnotes)],
                                         style:'tableContents'
                                     }
                                 ]
@@ -661,11 +692,11 @@ function generatePDF(bookingdetail,reports,auditevents,logevents)
                                     },
                                     {
                                         text:[
-                                                'Storeys:',readText(bookingdetail.numstories),', ',
-                                                'Bedrooms:',readText(bookingdetail.numbedrooms),', ',
-                                                'Bathrooms:',readText(bookingdetail.numbathrooms),', ',
-                                                'Total Rooms:',readText(bookingdetail.numrooms),', ',
-                                                'Outbuildings:',readText(bookingdetail.numoutbuildings)
+                                                'Storeys:',readNumber(bookingdetail.numstories),', ',
+                                                'Bedrooms:',readNumber(bookingdetail.numbedrooms),', ',
+                                                'Bathrooms:',readNumber(bookingdetail.numbathrooms),', ',
+                                                'Total Rooms:',readNumber(bookingdetail.numrooms),', ',
+                                                'Outbuildings:',readNumber(bookingdetail.numoutbuildings)
                                             ],
                                         style:'tableContents'
                                     }
@@ -793,7 +824,7 @@ function generatePDF(bookingdetail,reports,auditevents,logevents)
                             [
                                 [
                                     {
-                                        text:'Architect',
+                                        text:'Architect/Inspector',
                                         style:'tableHeader',
                                         colSpan:2
                                     },
