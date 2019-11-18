@@ -76,6 +76,7 @@
     var cache_architects = [];
     var cache_inspectors = [];
     var cache_members = [];
+    var logevents = [];
     var map_booking = null;
     var marker = null;
     var markerinfo = null;
@@ -301,6 +302,11 @@
           }
         }
       );
+    }
+
+    function doSendTrigger(ev)
+    {
+      $('#divEvents').trigger(ev);
     }
 
     <!-- *********************************************************************************************************************************************************************** -->
@@ -616,9 +622,26 @@
 
     function doSuppliersReportDateRange()
     {
+      function doSuppliersReportSelectAll(ev, args)
+      {
+        cache_members.forEach
+        (
+          function(m)
+          {
+            $('#fldSuppliersReportDateRangeMember').combobox('select', m.uuid);
+          }
+        );
+      }
+
+      $('#divEvents').on('suppliersdaterangeallmembers', doSuppliersReportSelectAll);
+
       $('#dlgSuppliersReportDateRange').dialog
       (
         {
+          onClose: function()
+          {
+            $('#divEvents').off('suppliersdaterangeallmembers', doSuppliersReportSelectAll);
+          },
           onOpen: function()
           {
             $('#dtSuppliersReportDateFrom').datebox
@@ -637,9 +660,22 @@
               }
             );
 
+            $('#fldSuppliersReportDateRangeMember').combobox
+            (
+              {
+                valueField: 'uuid',
+                textField: 'name',
+                limitToList: true,
+                multiple: true,
+                data: cache_members
+              }
+            );
+
             // Default to this month...
             $('#dtSuppliersReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
             $('#dtSuppliersReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+
+            doSuppliersReportSelectAll(null, null);
           },
           buttons:
           [
@@ -649,7 +685,10 @@
               {
                 var datefrom = $('#dtSuppliersReportDateFrom').datebox('getValue');
                 var dateto = $('#dtSuppliersReportDateTo').datebox('getValue');
+                var members = $('#fldSuppliersReportDateRangeMember').combobox('getValues');
                 var now = moment();
+
+                console.log(members);
 
                 if (_.isBlank(datefrom) && _.isBlank(dateto))
                 {
@@ -692,17 +731,36 @@
                   {
                     uuid: '<?php echo $_SESSION['uuid']; ?>',
                     datefrom: datefrom,
-                    dateto: dateto
+                    dateto: dateto,
+                    members: members
                   },
                   function(result)
                   {
                     var response = JSON.parse(result);
 
                     if (response.rc == 0)
-                      window.open(response.filename, '_blank');
+                    {
+                      noty({text:response.reports.length + ' reports found...', type: 'success', timeout: 10000});
+                      response.reports.forEach
+                      (
+                        function(r)
+                        {
+                          window.open(r, '_blank');
+                        }
+                      );
+                    }
                   }
                 );
                 $('#dlgSuppliersReportDateRange').dialog('close');
+              }
+            },
+            {
+              text: 'Reset',
+              handler: function()
+              {
+                $('#dtSuppliersReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+                $('#dtSuppliersReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+                $('#fldSuppliersReportDateRangeMember').combobox('clear');
               }
             },
             {
@@ -716,6 +774,7 @@
         }
       ).dialog('center').dialog('open');
     }
+
 
     function doReportNumReportsByType()
     {
@@ -1723,7 +1782,7 @@
       // console.log(booking.linkedbookingcode);
       // console.log(booking.reportid);
       // console.log(booking.linked_bookingcode);
-      console.log(booking.clientnotes);
+      //console.log(booking.clientnotes);
       function doReset()
       {
         // Client TAB
@@ -4918,51 +4977,79 @@
           'divBookingsG',
           function(row, index)
           {
-            //console.log(row);
+            var combinedreport = false;
+            var oldreports = false;
+            var timbercode,propertycode,linkedbookingcode=null;
             // console.log("row.reportid " + row.reportid);
             // console.log("row.bookingcode " + row.bookingcode);
             // console.log("row.linkedbookingcode " +row.linkedbookingcode);
             // console.log("row.linked_bookingcode " +row.linked_bookingcode);
-            var oldreports;
-           
-            doPromptOkCancel
+            if(row.reportid == 3)
+            {
+              console.log("This is a linked timber pest report,need to get the linked property report code");
+              combinedreport = true;
+              if(row.linkedbookingcode != null)
+              {
+                propertycode = row.linkedbookingcode;
+                linkedbookingcode = row.linkedbookingcode;
+              }
+              else
+              {
+                oldreports = true;
+                propertycode = row.linked_bookingcode;
+                linkedbookingcode = row.linked_bookingcode;
+              }
+            }
+            else if (row.reportid == 24)
+            {
+              console.log("This is a linked combined property report,need to get the linked timber pest report code");
+              combinedreport = true;
+              if(row.linkedbookingcode != null)
+              {
+                timbercode = row.linkedbookingcode;
+                linkedbookingcode = row.linkedbookingcode;
+              }
+              else
+              {
+                oldreports = true;
+                timbercode = row.linked_bookingcode;
+                linkedbookingcode = row.linked_bookingcode;
+              }
+              
+            }
+            $.post
             (
-              'Print booking ' + row.bookingcode + "'s summary ?",
+              'ajax_printbooking.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>',
+                bookingcode: row.bookingcode,
+                combinedreport:combinedreport,
+                linkedbookingcode:linkedbookingcode,
+              },
               function(result)
               {
-                if (result)
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
                 {
-                  
-                  $.post
-                  (
-                    'ajax_printbooking.php',
-                    {
-                      uuid: '<?php echo $_SESSION['uuid']; ?>',
-                      bookingcode: row.bookingcode,
-                    },
-                    function(result)
-                    {
-                      var response = JSON.parse(result);
-
-                      if (response.rc == 0)
-                      {
-                        //console.log(response.logs);
-                        var logevents = response.logs;
-                        generatePDF(row,reports,auditevents,logevents);
-                        // doRefreshBookings();
-                        // doSearchBookings(false);
-                        //noty({text: response.msg, type: 'success', timeout: 3000});
-                      }
-                      else
-                      {
-                        noty({text: response.msg, type: 'error', timeout: 10000});
-                      }
-
-                    }
-                  );
+                  //console.log(response.logs);
+                  logevents = response.logs;
+                  var linkedreport = response.linkedreport;
+                  //console.log(response);
+                  //console.log(linkedreport.length);
+                  doDlgSummary(row,reports,auditevents,logevents,linkedreport);
+                  //generatePDF(row,reports,auditevents,logevents);
+                  // doRefreshBookings();
+                  // doSearchBookings(false);
+                  //noty({text: response.msg, type: 'success', timeout: 3000});
                 }
+                else
+                {
+                  noty({text: response.msg, type: 'error', timeout: 10000});
+                }
+
               }
-            );            
+            );          
           }
         ))
         noty({text: 'Please select a booking to print the summary', type: 'warning', timeout: 4000});
@@ -5462,6 +5549,28 @@
         }
       );
 
+      $('#divBookingSummaryG').datagrid
+      (
+          {
+              idField:'logid',
+              fitColumns:true,
+              singleSelect:false,
+              striped:true,
+              autoRowHeight: false,
+              // data:logevents,
+              loader: function(param, success, error)
+              {
+                  success({total: logevents.length, rows: logevents});
+              },
+              columns:[
+                  [
+                      {title:'Action',field:'eventid',width:150,align:'left',resizable:true,formatter:function(value,row,index){return logevent(row.eventid,auditevents).event}},
+                      {title:'Time',field:'datecreated',width:150,align:'left',resizable:true}
+                  ]
+              ]
+          }
+      )
+      
 
       // ************************************************************************************************************
       // Populate data...
@@ -5848,7 +5957,7 @@
     </table>
   </div>
 
-  <div id="dlgSuppliersReportDateRange" class="easyui-dialog" title="Suppliers Report by Date Range" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+  <div id="dlgSuppliersReportDateRange" class="easyui-dialog" title="Suppliers Report by Date Range" style="width: 500px; height: 250px;" data-options="resizable: true, modal: false, closable: false, closed: true">
     <table>
       <tr>
         <td style="width: 100px;">Date From:</td>
@@ -5857,6 +5966,10 @@
       <tr>
         <td>Date To:</td>
         <td><input id="dtSuppliersReportDateTo" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Member:</td>
+        <td><div id="fldSuppliersReportDateRangeMember" style="width: 300px;"></div><a id="btnSuppliersReportDateRangeAllMembers" href="javascript:doSendTrigger('suppliersdaterangeallmembers');" class="easyui-linkbutton">Select All</a></td>
       </tr>
     </table>
   </div>
@@ -6174,6 +6287,170 @@
     </div>
   </div>
 
+  <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;" data-options="resizable: false, modal: true, closable: false, closed: true">
+    <!-- <div class="easyui-panel" data-options="fit: true"> -->
+      <div id="bookingsummarytabs" class="easyui-tabs" data-options="fit: true, pill: true">
+        <div title="Customer Details" data-options="iconCls: 'icon-man'">
+          <table class="summary">
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryCustName" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryCustEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryCustMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Phone:</td>
+              <td><label id="fldSummaryCustPhone" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Address: </td>
+              <td><label id="fldSummaryCustAddress" class="summary"></label></td>
+            </tr>
+          </table>
+        </div>
+        <div title="Report Details" data-options="iconCls: 'icon-notes'">
+          <table class="summary">
+              <tr>
+                <td class="summary">Agreed Price:</td>
+                <td><label id="fldSummaryAgreedPrice" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Commission:</td>
+                <td><label id="fldSummaryCommission" class="summary"></label></td>
+              </tr>
+              <tr> 
+                <td class="summary">Travel Costs:</td>
+                <td><label id="fldSummaryTravelCost" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Spotter Fee:</td>
+                <td><label id="fldSummarySpotterFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Cancellation Fee:</td>
+                <td><label id="fldSummaryCancellationFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;" ><label id="fldSummaryNotes" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Client Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;"><label id="fldSummaryClientNotes" class="summary"></label></td>
+              </tr>
+          </table>
+        </div>
+        <div title="Property Details" data-options="iconCls: 'icon-warehouse'">
+          <table class="summary">
+              <tr>
+                <td class="summary">Address:</td>
+                <td><label id="fldSummaryPropertyAddress" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Rooms:</td>
+                <td>
+                  <label id="fldSummaryRoomsStoreys" class="summary"></label>
+                  <label id="fldSummaryRoomsBedrooms" class="summary"></label>
+                  <label id="fldSummaryRoomsBathrooms" class="summary"></label>
+                  <label id="fldSummaryRoomstotal" class="summary"></label>
+                  <label id="fldSummaryRoomsoutbuildings" class="summary"></label>
+                </td>
+              </tr>
+              <tr>
+                <td class="summary">Construction:</td>
+                <td><label id="fldSummaryPropertyConstruction" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Age:</td>
+                <td><label id="fldSummaryPropertyAge" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Required:</td>
+                <td>
+                  <label id="fldSummaryRequiredMeeting" class="summary"></label>
+                  <label id="fldSummaryRequiredAdvice" class="summary"></label>
+                  <label id="fldSummaryRequiredInspection" class="summary"></label>
+                </td>
+              </tr>
+
+          </table>
+        </div>
+        <div title="Estate Agent" data-options="iconCls: 'icon-users'">
+          <table class="summary">
+            <tr class="summary">
+              <td class="summary">Company:</td>
+              <td><label id="fldSummaryAgentCompany" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryAgentEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryAgentMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryAgentPhone" class="summary"></label></td>
+            </tr>
+          </table>
+
+
+        </div>
+        <div title="Architect" data-options="iconCls: 'icon-man'">
+          <table class="summary" id="summaryArchTabl1">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle1" class="summary">Architect</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno1" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil1" class="summary"></label></td>
+            </tr>
+          </table>
+
+          <table class="summary" id="summaryArchTabl2" style="display:none">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle2" class="summary">Inspector</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno2" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
+            </tr>
+          </table>
+
+        </div>
+        <div title="Audit History" data-options="iconCls: 'icon-inventory'">
+          <div id="divBookingSummaryG" data-option="fit:true"></div>
+        </div>
+      </div>
+  </div>
+
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>
     <?php require_once("footer.php"); ?>
@@ -6211,6 +6488,9 @@
       <div id="divBookingsG" data-options="fit: true" ></div>
     </div>
   </div>
+
+  
+
   <div id="divEvents" style="display: none;"></div>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=initMap&key=AIzaSyCcXBPESLUxA846ZL6JoUefrlclXKFv4zg" async defer></script>
 </body>
