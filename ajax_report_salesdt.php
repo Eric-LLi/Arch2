@@ -32,7 +32,7 @@
 
             if ($myfile !== false)
             {
-              fwrite($myfile, '"Booking #","Type","Date Paid","Agreed Price","Name","Email","Address 1","Address 2","City","Postcode","State"');
+              fwrite($myfile, '"Booking #","Type","Date Paid","Name","Address","Agreed Price"');
               fwrite($myfile, "\n");
 
               foreach ($rows as $row)
@@ -43,14 +43,9 @@
                   '"' . $row['id'] . '",' .
                   '"' . $reportTypes[$row['itype']] . '",' .
                   '"' . $row['datepaid'] . '",' .
+                  '"' . $row['custfirstname'] .  " " . $row['custlastname'] . '",' .
+                  '"' . $row['custaddress1'] . " " . $row['custaddress2'] . " " . $row['custcity'] . " " . $row['custstate'] . " " . $row['custpostcode'] . '",' .
                   '"' . $row['budget'] . '",' .
-                  '"' . $row['custfirstname'] .  $row['custlastname'] . '",' .
-                  '"' . $row['custemail'] . '",' .
-                  '"' . $row['custaddress1'] . '",' .
-                  '"' . $row['custaddress2'] . '",' .
-                  '"' . $row['custcity'] . '",' .
-                  '"' . $row['custpostcode'] . '",' .
-                  '"' . $row['custstate'] . '"' .
                   ''
                 );
                 fwrite($myfile, "\n");
