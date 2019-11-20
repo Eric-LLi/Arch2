@@ -4,7 +4,6 @@
   $rc = -1;
   $msg = "";
   $rows = Array();
-  $filename = "";
 
   try
   {
@@ -18,12 +17,23 @@
       $reports = [];
       $df = explode(" ", $datefrom);
       $dt = explode(" ", $dateto);
+      $headings = '"Date Approved","Booking #","Type","Name","Address","Amount","Tax","Paid"';
+      //
+      $filename = "";
+      $superfilename = "";
+      //
       $myfile = false;
+      $mysuperfile = false;
+      //
       $totalamount = 0.0;
       $totaltax = 0.0;
       $totalpaid = 0.0;
+      //
+      $supertotalamount = 0.0;
+      $supertotaltax = 0.0;
+      $supertotalpaid = 0.0;
 
-      $dbselect = "select b1.id,b1.itype,b1.dateapproved,b1.commission,b1.travel,b1.spotter,b1.custfirstname,b1.custlastname,b1.custemail,b1.custaddress1,b1.custaddress2,b1.custcity,b1.custpostcode,b1.custstate,u1.uuid,u1.firstname memberfirstname,u1.lastname memberlastname from bookings b1 left join users u1 on (b1.users_id=u1.id) where b1.dateapproved is not null and b1.datecancelled is null and b1.dateclosed is null and b1.dateexpired is null and b1.datecreated between '$datefrom' and '$dateto' and u1.uuid in ('$members') group by u1.uuid order by u1.uuid,b1.id";
+      $dbselect = "select b1.id,b1.itype,date_format(b1.dateapproved, '%d/%m/%Y') dateapproved,b1.commission,b1.travel,b1.spotter,b1.custfirstname,b1.custlastname,b1.custemail,b1.custaddress1,b1.custaddress2,b1.custcity,b1.custpostcode,b1.custstate,u1.uuid,u1.firstname memberfirstname,u1.lastname memberlastname from bookings b1 left join users u1 on (b1.users_id=u1.id) where b1.dateapproved is not null and b1.datecancelled is null and b1.dateclosed is null and b1.dateexpired is null and b1.datecreated between '$datefrom' and '$dateto' and u1.uuid in ('$members') order by u1.firstname,u1.lastname,b1.id";
       error_log($dbselect);
       if ($dbresult = SharedQuery($dbselect, $dblink))
       {
@@ -35,72 +45,93 @@
           // If anything to do...
           if (sizeof($rows) > 0)
           {
-            foreach ($rows as $row)
-            {
-              $membername = str_replace(" ", "_", $row['memberfirstname']) . "_" . str_replace(" ", "_", $row['memberlastname']);
-              $spotter = $row['spotter'];
-              $commission = $row['commission'];
-              $travel = $row['travel'];
+            $superfilename = "./tmp/Suppliers_" . $df[0] . "-" . $dt[0] . ".csv";
+            $reports[] = $superfilename;
+            $mysuperfile = fopen($superfilename, "w");
 
-              // Start new file for each member
-              if ($previousuuid != $row['uuid'])
+            if ($mysuperfile !== false)
+            {
+              fwrite($mysuperfile, '"Member",' . $headings);
+              fwrite($mysuperfile, "\n");
+
+              foreach ($rows as $row)
               {
-                $previousuuid = $row['uuid'];
-                if ($myfile !== false)
+                $membername = str_replace(" ", "_", $row['memberfirstname']) . "_" . str_replace(" ", "_", $row['memberlastname']);
+                $spotter = $row['spotter'];
+                $commission = $row['commission'];
+                $travel = $row['travel'];
+
+                // Start new file for each member
+                if ($previousuuid != $row['uuid'])
                 {
-                  fwrite($myfile, '"","","","","Total","' . $totalamount . '","' . $totaltax . '","' . $totalpaid . '"');
-                  fclose($myfile);
+                  $previousuuid = $row['uuid'];
+                  if ($myfile !== false)
+                  {
+                    fwrite($myfile, '"","","","","Total","$' . number_format($totalamount, 2) . '","$' . number_format($totaltax, 2) . '","$' . number_format($totalpaid, 2) . '"');
+                    fclose($myfile);
+                  }
+
+                  $filename = "./tmp/" . $membername . "_" . $df[0] . "-" . $dt[0] . ".csv";
+                  $reports[] = $filename;
+                  $myfile = fopen($filename, "w");
+
+                  // Headings...
+                  if ($myfile !== false)
+                  {
+                    fwrite($myfile, $headings);
+                    fwrite($myfile, "\n");
+                  }
+
+                  $totalamount = 0.0;
+                  $totaltax = 0.0;
+                  $totalpaid = 0.0;
                 }
 
-                $filename = "./tmp/" . $membername . "_" . $df[0] . "-" . $dt[0] . ".csv";
-                $reports[] = $filename;
-                $myfile = fopen($filename, "w");
-
-                // Headings...
                 if ($myfile !== false)
                 {
-                  fwrite($myfile, '"Date Approved","Booking #","Type","Name","Address","Amount","Tax","Paid"');
+                  $amount = floatval($spotter) + floatval($commission) + floatval($travel);
+                  $tax = $amount * 0.1;
+                  $paid = $amount + $tax;
+
+                  $totalamount += $amount;
+                  $totaltax += $tax;
+                  $totalpaid += $paid;
+
+                  $supertotalamount += $amount;
+                  $supertotaltax += $tax;
+                  $supertotalpaid += $paid;
+
+                  $lineitem = '"' . $row['dateapproved'] . '",' .
+                              '"' . $row['id'] . '",' .
+                              '"' . $reportTypes[$row['itype']] . '",' .
+                              '"' . $row['custfirstname'] .  " " . $row['custlastname'] . '",' .
+                              '"' . $row['custaddress1'] . " " . $row['custaddress2'] . " " . $row['custcity'] . " " . $row['custstate'] . " " . $row['custpostcode'] . '",' .
+                              '"$' . number_format($amount, 2) . '",' .
+                              '"$' . number_format($tax, 2) . '",' .
+                              '"$' . number_format($paid, 2) . '"' .
+                              '';
+
+                  fwrite($myfile, $lineitem);
                   fwrite($myfile, "\n");
                 }
 
-                $totalamount = 0.0;
-                $totaltax = 0.0;
-                $totalpaid = 0.0;
+                fwrite($mysuperfile, '"' . $row['memberfirstname'] . " " . $row['memberlastname'] . '",' . $lineitem);
+                fwrite($mysuperfile, "\n");
               }
 
               if ($myfile !== false)
               {
-                $amount = floatval($spotter) + floatval($commission) + floatval($travel);
-                $tax = $amount * 0.1;
-                $paid = $amount + $tax;
-
-                $totalamount += $amount;
-                $totaltax += $tax;
-                $totalpaid += $paid;
-
-                fwrite
-                (
-                  $myfile,
-                  '"' . $row['dateapproved'] . '",' .
-                  '"' . $row['id'] . '",' .
-                  '"' . $reportTypes[$row['itype']] . '",' .
-                  '"' . $row['custfirstname'] .  " " . $row['custlastname'] . '",' .
-                  '"' . $row['custaddress1'] . " " . $row['custaddress2'] . " " . $row['custcity'] . " " . $row['custstate'] . " " . $row['custpostcode'] . '",' .
-                  '"' . $amount . '",' .
-                  '"' . $tax . '",' .
-                  '"' . $paid . '",' .
-                  ''
-                );
-                fwrite($myfile, "\n");
+                fwrite($myfile, '"","","","","Total","$' . number_format($totalamount, 2) . '","$' . number_format($totaltax, 2) . '","$' . number_format($totalpaid, 2) . '"');
+                fclose($myfile);
               }
-            }
 
-            if ($myfile !== false)
-            {
-              fwrite($myfile, '"","","","","Total","' . $totalamount . '","' . $totaltax . '","' . $totalpaid . '"');
-              fclose($myfile);
+              fwrite($mysuperfile, '"","","","","","Total","$' . number_format($supertotalamount, 2) . '","$' . number_format($supertotaltax, 2) . '","$' . number_format($supertotalpaid, 2) . '"');
+              fclose($mysuperfile);
+
+              $rc = 0;
             }
-            $rc = 0;
+            else
+              $msg = "Unable to create totals report";
           }
           else
             $msg = "No matching bookings";
