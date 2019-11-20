@@ -327,7 +327,17 @@ function doDlgSummary(bookingdetail,reports,auditevents,logevents,linkedreport)
                     text:'Print',
                     handler: function()
                     {
-                        generatePDF(bookingdetail,reports,auditevents,logevents,linkedreport);
+                        doPromptOkCancel
+                        (
+                            'Print the booking summary? ',
+                            function(result)
+                            {
+                                if(result)
+                                {
+                                    generatePDF(bookingdetail,reports,auditevents,logevents,linkedreport);
+                                }
+                            }
+                        );
                     }
                 },
                 {

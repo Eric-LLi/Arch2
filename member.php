@@ -6287,11 +6287,11 @@
     </div>
   </div>
 
-  <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;" data-options="resizable: false, modal: true, closable: false, closed: true">
-    <!-- <div class="easyui-panel" data-options="fit: true"> -->
-      <div id="bookingsummarytabs" class="easyui-tabs" data-options="fit: true, pill: true">
-        <div title="Customer Details" data-options="iconCls: 'icon-man'">
-          <table class="summary">
+  <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;overflow:auto" data-options="resizable: true, modal: true, closable: false, closed: true">
+          <table class="summary" id="summaryCustomerTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Customer Details</label></td>
+            </tr>
             <tr class="summary">
               <td class="summary">Name:</td>
               <td><label id="fldSummaryCustName" class="summary"></label></td>
@@ -6312,9 +6312,10 @@
               <td><label id="fldSummaryCustAddress" class="summary"></label></td>
             </tr>
           </table>
-        </div>
-        <div title="Report Details" data-options="iconCls: 'icon-notes'">
-          <table class="summary">
+          <table class="summary" id="summaryReportTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Report Details</label></td>
+            </tr>
               <tr>
                 <td class="summary">Agreed Price:</td>
                 <td><label id="fldSummaryAgreedPrice" class="summary"></label></td>
@@ -6344,9 +6345,10 @@
                 <td style="padding-top: .5em;padding-bottom: .5em;"><label id="fldSummaryClientNotes" class="summary"></label></td>
               </tr>
           </table>
-        </div>
-        <div title="Property Details" data-options="iconCls: 'icon-warehouse'">
-          <table class="summary">
+          <table class="summary" id="summaryPropertyTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Property Details</label></td>
+            </tr>
               <tr>
                 <td class="summary">Address:</td>
                 <td><label id="fldSummaryPropertyAddress" class="summary"></label></td>
@@ -6379,9 +6381,10 @@
               </tr>
 
           </table>
-        </div>
-        <div title="Estate Agent" data-options="iconCls: 'icon-users'">
-          <table class="summary">
+          <table class="summary" id="summaryAgentTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Estate Agent</label></td>
+            </tr>
             <tr class="summary">
               <td class="summary">Company:</td>
               <td><label id="fldSummaryAgentCompany" class="summary"></label></td>
@@ -6398,10 +6401,6 @@
               <td><label id="fldSummaryAgentPhone" class="summary"></label></td>
             </tr>
           </table>
-
-
-        </div>
-        <div title="Architect" data-options="iconCls: 'icon-man'">
           <table class="summary" id="summaryArchTabl1">
             <tr class="summary">
               <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle1" class="summary">Architect</label></td>
@@ -6422,7 +6421,6 @@
               <td><label id="fldSummaryArchMobil1" class="summary"></label></td>
             </tr>
           </table>
-
           <table class="summary" id="summaryArchTabl2" style="display:none">
             <tr class="summary">
               <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle2" class="summary">Inspector</label></td>
@@ -6443,12 +6441,8 @@
               <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
             </tr>
           </table>
-
-        </div>
-        <div title="Audit History" data-options="iconCls: 'icon-inventory'">
+          <label class="summary" style="font-weight: bold;padding:15px">Audit History</label>
           <div id="divBookingSummaryG" data-option="fit:true"></div>
-        </div>
-      </div>
   </div>
 
   <div class="easyui-layout" data-options="fit: true">
