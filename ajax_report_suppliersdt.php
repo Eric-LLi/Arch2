@@ -47,6 +47,7 @@
           {
             $superfilename = "./tmp/Suppliers_" . $df[0] . "-" . $dt[0] . ".csv";
             $reports[] = $superfilename;
+            error_log($superfilename);
             $mysuperfile = fopen($superfilename, "w");
 
             if ($mysuperfile !== false)
