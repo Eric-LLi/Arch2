@@ -52,8 +52,17 @@ function clearFields()
 
 }
 
-function populateAuditTable(logevents,bookingdetail)
+function populateAuditTable(logevents,bookingdetail,linkedreport)
 {    
+    if(linkedreport.length > 0)
+    {
+        console.log('combined report');
+        document.getElementById('divBookingSummaryGTitle').innerHTML = "Audit History (" + bookingdetail.bookingcode +")";
+    }
+    else
+    {
+        document.getElementById('divBookingSummaryGTitle').innerHTML = "Audit History";
+    }
     //1. need to sort out if can use the logevents right away. 
     if(logevents.length == 0)
     {
@@ -88,28 +97,28 @@ function populateAuditTable(logevents,bookingdetail)
         //4.completed log
         if(bookingdetail.datecompleted != null)
         {
-            var completed = {bookingcode:bookingdetail.bookingcode,eventid:8,datecreated:bookingdetail.datepaid};
+            var completed = {bookingcode:bookingdetail.bookingcode,eventid:8,datecreated:bookingdetail.datecompleted};
             logevents.push(completed);
         }
 
         //5.approved log
         if(bookingdetail.dateapproved != null)
         {
-            var approved = {bookingcode:bookingdetail.bookingcode,eventid:9,datecreated:bookingdetail.datecreated};
+            var approved = {bookingcode:bookingdetail.bookingcode,eventid:9,datecreated:bookingdetail.dateapproved};
             logevents.push(approved);
         }
 
         //6.sent log
         if(bookingdetail.lastemailed != null)
         {
-            var sent = {bookingcode:bookingdetail.bookingcode,eventid:10,datecreated:bookingdetail.datepaid};
+            var sent = {bookingcode:bookingdetail.bookingcode,eventid:10,datecreated:bookingdetail.lastemailed};
             logevents.push(sent);
         }
 
         //7.closed log
         if(bookingdetail.dateclosed != null)
         {
-            var closed = {bookingcode:bookingdetail.bookingcode,eventid:11,datecreated:bookingdetail.datecreated};
+            var closed = {bookingcode:bookingdetail.bookingcode,eventid:11,datecreated:bookingdetail.dateclosed};
             logevents.push(closed);
         }
 
@@ -239,16 +248,17 @@ function createArchTable(bookingdetail,linkedreport)
     }
     else
     {
+        // console.log(linkedreport);
         document.getElementById("summaryArchTabl2").style.display = "block";
         if(bookingdetail.reportid == 3)
         {
-            document.getElementById('fldSummaryArchTitle1').innerHTML = "Inspector";
-            document.getElementById('fldSummaryArchTitle2').innerHTML = "Architect";
+            document.getElementById('fldSummaryArchTitle1').innerHTML = "Inspector (" + bookingdetail.bookingcode +")";
+            document.getElementById('fldSummaryArchTitle2').innerHTML = "Architect (" + linkedreport[0].bookingcode + ")";
         }
         else if (bookingdetail.reportid == 24)
         {
-            document.getElementById('fldSummaryArchTitle1').innerHTML = "Architect";
-            document.getElementById('fldSummaryArchTitle2').innerHTML = "Inspector";
+            document.getElementById('fldSummaryArchTitle1').innerHTML = "Architect (" + bookingdetail.bookingcode +")";
+            document.getElementById('fldSummaryArchTitle2').innerHTML = "Inspector (" + linkedreport[0].bookingcode + ")";
         }
 
         document.getElementById('fldSummaryArchName1').innerHTML = readText(bookingdetail.archfirstname) + ' ' +  readText(bookingdetail.archlastname);
@@ -279,7 +289,7 @@ function doDlgSummary(bookingdetail,reports,auditevents,logevents,linkedreport)
                 document.getElementById('fldSummaryCustEmail').innerHTML = readText(bookingdetail.custemail);
                 document.getElementById('fldSummaryCustMobile').innerHTML = readText(bookingdetail.custmobile);
                 document.getElementById('fldSummaryCustPhone').innerHTML = readText(bookingdetail.custphone);
-                document.getElementById('fldSummaryCustAddress').innerHTML = readText(bookingdetail.custaddress1) + ' ' + readText(bookingdetail.custaddress2)+  ',' + readText(bookingdetail.custcity)+ ' ' + readText(bookingdetail.custstate)+ ' ' + readText(bookingdetail.custpostcode);
+                document.getElementById('fldSummaryCustAddress').innerHTML = (readText(bookingdetail.custaddress1) + ' ' + readText(bookingdetail.custaddress2)).trim()+  ', ' + readText(bookingdetail.custcity)+ ' ' + readText(bookingdetail.custstate)+ ' ' + readText(bookingdetail.custpostcode);
 
                 //2. Report Details
                 document.getElementById('fldSummaryAgreedPrice').innerHTML = "$" + readAmount(bookingdetail.budget);
@@ -291,14 +301,14 @@ function doDlgSummary(bookingdetail,reports,auditevents,logevents,linkedreport)
                 document.getElementById('fldSummaryClientNotes').innerHTML = readText(bookingdetail.clientnotes);
 
                 //3. Property Details
-                document.getElementById('fldSummaryPropertyAddress').innerHTML = readText(bookingdetail.address1) + ' ' + readText(bookingdetail.address2)+  ',' + readText(bookingdetail.city)+ ' ' + readText(bookingdetail.state)+ ' ' + readText(bookingdetail.postcode);
+                document.getElementById('fldSummaryPropertyAddress').innerHTML = (readText(bookingdetail.address1) + ' ' + readText(bookingdetail.address2)).trim()+  ', ' + readText(bookingdetail.city)+ ' ' + readText(bookingdetail.state)+ ' ' + readText(bookingdetail.postcode);
                 document.getElementById('fldSummaryRoomsStoreys').innerHTML = "Storeys:" + readNumber(bookingdetail.numstories) + ", ";
                 document.getElementById('fldSummaryRoomsBedrooms').innerHTML = "Bedrooms:" + readNumber(bookingdetail.numbedrooms) + ", ";
                 document.getElementById('fldSummaryRoomsBathrooms').innerHTML = "Bathrooms:" + readNumber(bookingdetail.numbathrooms) + ", ";
                 document.getElementById('fldSummaryRoomstotal').innerHTML = "Total Rooms:" + readNumber(bookingdetail.numrooms) + ", ";
                 document.getElementById('fldSummaryRoomsoutbuildings').innerHTML = "Outbuildings:" + readNumber(bookingdetail.numoutbuildings);
                 document.getElementById('fldSummaryPropertyConstruction').innerHTML = readText(bookingdetail.construction);
-                document.getElementById('fldSummaryPropertyAge').innerHTML = readText(bookingdetail.age);
+                document.getElementById('fldSummaryPropertyAge').innerHTML = readText(bookingdetail.age); 
                 document.getElementById('fldSummaryRequiredMeeting').innerHTML = "Meeting on site?" + readYesOrNo(bookingdetail.meetingonsite) + ", ";
                 document.getElementById('fldSummaryRequiredAdvice').innerHTML = "Renovation advice?" + readYesOrNo(bookingdetail.renoadvice) + ", ";
                 document.getElementById('fldSummaryRequiredInspection').innerHTML = "Pest Inspection Also?" + readYesOrNo(bookingdetail.pestinspection);
@@ -313,7 +323,7 @@ function doDlgSummary(bookingdetail,reports,auditevents,logevents,linkedreport)
                 createArchTable(bookingdetail,linkedreport);
 
                 //6.Populate Audit History Table
-                populateAuditTable(logevents,bookingdetail);
+                populateAuditTable(logevents,bookingdetail,linkedreport);
                 
 
             },

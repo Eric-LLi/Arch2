@@ -91,7 +91,7 @@ function generatePDF(bookingdetail,reports,auditevents,logevents,linkedreport)
                                         style:'tableTitle',
                                     },
                                     {
-                                        text:[readText(bookingdetail.custaddress1) , ' ' , readText(bookingdetail.custaddress2), ',' , readText(bookingdetail.custcity), ' ' , readText(bookingdetail.custstate), ' ' , readText(bookingdetail.custpostcode)],
+                                        text:[trimAddress(readText(bookingdetail.custaddress1) , ' ' , readText(bookingdetail.custaddress2)), ', ' , readText(bookingdetail.custcity), ' ' , readText(bookingdetail.custstate), ' ' , readText(bookingdetail.custpostcode)],
                                         style:'tableContents'
                                     }
                                 ]
@@ -223,7 +223,7 @@ function generatePDF(bookingdetail,reports,auditevents,logevents,linkedreport)
                                         style:'tableTitle',
                                     },
                                     {
-                                        text:[readText(bookingdetail.address1) , ' ' , readText(bookingdetail.address2), ',' , readText(bookingdetail.city), ' ' , readText(bookingdetail.state), ' ' , readText(bookingdetail.postcode)],
+                                        text:[trimAddress(readText(bookingdetail.address1) , ' ' , readText(bookingdetail.address2)), ', ' , readText(bookingdetail.city), ' ' , readText(bookingdetail.state), ' ' , readText(bookingdetail.postcode)],
                                         style:'tableContents'
                                     }
                                 ],
@@ -271,9 +271,9 @@ function generatePDF(bookingdetail,reports,auditevents,logevents,linkedreport)
                                     {
                                         text:[
                                                 {text:'Meeting on site? ',style:'tableContentsQ'},
-                                                readYesOrNo(bookingdetail.meetingonsite),', ',
+                                                readYesOrNo(bookingdetail.meetingonsite),' ',
                                                 {text:'Renovation advice? ',style:'tableContentsQ'},
-                                                readYesOrNo(bookingdetail.renoadvice),', ',
+                                                readYesOrNo(bookingdetail.renoadvice),' ',
                                                 {text:'Pest Inspection Also? ',style:'tableContentsQ'},
                                                 readYesOrNo(bookingdetail.pestinspection),
                                             ],
@@ -370,7 +370,7 @@ function generatePDF(bookingdetail,reports,auditevents,logevents,linkedreport)
                 margin:[0,5,0,0],
                 stack:
                 [
-                    createAuditLogTable(auditevents,logevents,bookingdetail)
+                    createAuditLogTable(auditevents,logevents,bookingdetail,linkedreport)
                 ],
                 margin:[0,0,0,10]
             }

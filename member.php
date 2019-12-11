@@ -6508,7 +6508,7 @@
           <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
         </tr>
       </table>
-      <label class="summary" style="font-weight: bold;padding:15px">Audit History</label>
+      <label class="summary" style="font-weight: bold;padding:15px" id="divBookingSummaryGTitle">Audit History</label>
       <div id="divBookingSummaryG" data-option="fit:true"></div>
     </div>
 

@@ -5,8 +5,23 @@ function readText(text)
     {
         result = '';
     }
+    // else
+    // {
+    //     result = result.trim();
+    // }
     return result;
 }
+
+function trimAddress(address1,space,address2)
+{
+    console.log(address1);
+    console.log(space);
+    console.log(address2);
+    var address = (address1 + space + address2).trim();
+    console.log(address);
+    return address;
+}
+
 function readYesOrNo(text)
 {
     var result = 'No';
@@ -94,21 +109,37 @@ function foundevent(logevents,auditeventid)
     }
     return found; 
 }
-function createAuditLogTable(auditevents,logevents,bookingdetail)
+function createAuditLogTable(auditevents,logevents,bookingdetail,linkedreport)
 {
     var body = [];
+    var title = [];
 
     /*
         Title Row
     */
-    var title =  [
-        {
-            text:'Audit History',
-            style:'tableHeader',
-            colSpan:2
-        },
-        {},
-    ];
+   if(linkedreport.length == 0)
+   {
+        title =  [
+            {
+                text:'Audit History',
+                style:'tableHeader',
+                colSpan:2
+            },
+            {},
+        ];
+   }
+   else
+   {
+        title =  [
+            {
+                text:['Audit History (', bookingdetail.bookingcode, ')'],
+                style:'tableHeader',
+                colSpan:2
+            },
+            {},
+        ];
+   }
+    
     body.push(title);
 
     /**
@@ -221,7 +252,7 @@ function createAuditLogTable(auditevents,logevents,bookingdetail)
         
 
         //5.approved row
-        if(bookingdetail.datecompleted != null)
+        if(bookingdetail.dateapproved != null)
         {
             var approved = [
                 {
@@ -551,14 +582,14 @@ function createArchitectTable(bookingdetail,linkedreport)
         {
             title = [
                 {
-                    text:'Timber Pest Inspector',
+                    text:['Timber Pest Inspector (',bookingdetail.bookingcode, ')'],
                     style:'tableHeader',
                     alignment: 'left',
                     colSpan:2
                 },
                 {},
                 {
-                    text:'Architect',
+                    text:['Architect (', linkedreport[0].bookingcode, ')'],
                     style:'archTableHeader',
                     colSpan:2
                 },
@@ -569,14 +600,14 @@ function createArchitectTable(bookingdetail,linkedreport)
         {
             title = [
                 {
-                    text:'Architect',
+                    text:['Architect (',bookingdetail.bookingcode,')'],
                     style:'tableHeader',
                     alignment: 'left',
                     colSpan:2
                 },
                 {},
                 {
-                    text:'Timber Pest Inspector',
+                    text:['Timber Pest Inspector (', linkedreport[0].bookingcode , ')'],
                     style:'archTableHeader',
                     colSpan:2
                 },

@@ -39,6 +39,8 @@
                         "audit_log a1 left join users u1 on (a1.userscreated_id = u1.id) ". 
                         "where ". 
                         "a1.bookings_id = $bookingcode ". 
+                        "and a1.event <> 2 ".
+                        "and a1.event <> 7 ".
                         "order by a1.datecreated asc";
             //2. get the linked booking details
             $linkeddbselect = "select " .
@@ -164,28 +166,38 @@
                 else
                 {
                     //even this booking doesn't have log event, still need to check if it has linked booking to fetch details
-                    //2. get the linked booking's assinged inspector/architect details if it is a combined report
-                    $dblinkedresult = SharedQuery($linkeddbselect, $dblink);
-                    if($dblinkedresult)
+
+                    if($combinedreport)
                     {
-                        error_log("can get the linked report details");
-                        //the selected one is a combined report, need to find the details of other report. 
-                        if ($numrows = SharedNumRows($dblinkedresult))
+                        //2. get the linked booking's assinged inspector/architect details if it is a combined report
+                        $dblinkedresult = SharedQuery($linkeddbselect, $dblink);
+                        if($dblinkedresult)
                         {
-                            while ($report = SharedFetchArray($dblinkedresult))
-                                $linkedreport[] = $report;
-                            $rc = 0;
+                            error_log("can get the linked report details");
+                            //the selected one is a combined report, need to find the details of other report. 
+                            if ($numrows = SharedNumRows($dblinkedresult))
+                            {
+                                while ($report = SharedFetchArray($dblinkedresult))
+                                    $linkedreport[] = $report;
+                                $rc = 0;
+                            }
+                            else
+                            {
+                                $rc = -1;
+                                $msg = "2. Unable to fetch the linked booking details...";
+                            }
                         }
                         else
                         {
-                            $rc = -1;
-                            $msg = "2. Unable to fetch the linked booking details...";
+                            $rc = 0;
                         }
                     }
                     else
                     {
+                        error_log("single report");
                         $rc = 0;
                     }
+                    
                     
                 }
             }
