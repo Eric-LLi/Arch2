@@ -165,12 +165,13 @@ function generatePDF(mode) {
                             }
                         }
                     },
-
-                    {
-                        text: "Client's Details",
-                        style: 'pageTopHeader',
-                        margin: [0, 30, 0, 5]
-                    },
+                    makeAGap(),
+                    makeAGap(),
+                    // {
+                    //     text: "Client's Details",
+                    //     style: 'pageTopHeader',
+                    //     margin: [0, 30, 0, 5]
+                    // },
                      getCustomerDetailsTable(),
                      makeAGap(),
                      getAssessmentDetailsTable(),
@@ -272,6 +273,7 @@ function generatePDF(mode) {
                         fontSize:9,
                         margin:[0,5,0,0]
                     },
+                    makeAGap(),
                     {
                         ul: [
                             'Project Requirements',
