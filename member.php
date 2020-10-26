@@ -1,6 +1,6 @@
 <?php
   require_once("shared.php");
-  
+
   if (isset($_POST['fldLogout']))
   {
     SharedLogout();
@@ -76,6 +76,7 @@
     var cache_architects = [];
     var cache_inspectors = [];
     var cache_members = [];
+    var logevents = [];
     var map_booking = null;
     var marker = null;
     var markerinfo = null;
@@ -303,8 +304,541 @@
       );
     }
 
+    function doSendTrigger(ev)
+    {
+      $('#divEvents').trigger(ev);
+    }
+
     <!-- *********************************************************************************************************************************************************************** -->
     <!-- Report handlers...                                                                                                                                                              -->
+    function doSalesReportBatch()
+    {
+      var batches = [];
+      $('#dlgSalesReportBatch').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#fldSelectSalesBatch').combobox({valueField: 'value', textField: 'label'});
+
+            $.post
+            (
+              'ajax_report_getsalesbatches.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>'
+              },
+              function(result)
+              {
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
+                {
+                  if (response.rows.length == 1)
+                  {
+                    $('#btnRunReportSales').linkbutton('disable');
+                  }
+                  else
+                  {
+                    $('#btnRunReportSales').linkbutton('enable');
+                    response.rows.forEach
+                    (
+                      function(row, ndx)
+                      {
+                        if (ndx > 0)
+                          batches.push({label: row.batchno, value: row.batchno});
+                      }
+                    );
+
+                    $('#fldSelectSalesBatch').combobox('loadData', batches);
+                  }
+                }
+              }
+            );
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              id: 'btnRunReportSales',
+              handler: function()
+              {
+                $.post
+                (
+                  'ajax_report_sales.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: $('#fldSelectSalesBatch').combobox('getValue')
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'New Batch',
+              handler: function()
+              {
+                $.post
+                (
+                  'ajax_report_sales.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: 0
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReport').dialog('close');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSalesReportBatch').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSalesReportDateRange()
+    {
+      $('#dlgSalesReportDateRange').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#dtSalesReportDateFrom').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            $('#dtSalesReportDateTo').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            // Default to this month...
+            $('#dtSalesReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+            $('#dtSalesReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              handler: function()
+              {
+                var datefrom = $('#dtSalesReportDateFrom').datebox('getValue');
+                var dateto = $('#dtSalesReportDateTo').datebox('getValue');
+                var now = moment();
+
+                if (_.isBlank(datefrom) && _.isBlank(dateto))
+                {
+                  doMandatoryTextbox('Please select a start and end date for the report', 'dtSalesReportDateFrom');
+                  return;
+                }
+
+                if (!_.isBlank(datefrom) && !_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(dateto))
+                  {
+                    doMandatoryTextbox('Start date can not be after end date...', 'dtSalesReportDateFrom');
+                    return;
+                  }
+                }
+
+                if (_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(now))
+                  {
+                    doMandatoryTextbox('Start date can not be after today...', 'dtSalesReportDateFrom');
+                      return;
+                  }
+                  dateto = now.format('YYYY-MM-DD 23:59:59');
+                }
+
+                if (_.isBlank(datefrom))
+                {
+                  if (moment(dateto).isBefore(now))
+                  {
+                    doMandatoryTextbox('End date can not be before today...', 'dtSalesReportDateTo');
+                    return;
+                  }
+                  datefrom = now.format('YYYY-MM-DD 00:00:00');
+                }
+
+                $.post
+                (
+                  'ajax_report_salesdt.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    datefrom: datefrom,
+                    dateto: dateto
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReportDateRange').dialog('close');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSalesReportDateRange').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSuppliersReportBatch()
+    {
+      var batches = [];
+
+      function doSuppliersReportSelectAll(ev, args)
+      {
+        cache_members.forEach
+        (
+          function(m)
+          {
+            $('#fldSuppliersReportBatchMember').combobox('select', m.uuid);
+          }
+        );
+      }
+
+      $('#divEvents').off('suppliersbatchallmembers', doSuppliersReportSelectAll);
+
+      $('#dlgSuppliersReportBatch').dialog
+      (
+        {
+          onClose: function()
+          {
+            $('#divEvents').off('suppliersbatchallmembers', doSuppliersReportSelectAll);
+          },
+          onOpen: function()
+          {
+            $('#fldSelectSuppliersBatch').combobox({valueField: 'value', textField: 'label'});
+
+            $('#fldSuppliersReportBatchMember').combobox
+            (
+              {
+                valueField: 'uuid',
+                textField: 'name',
+                limitToList: true,
+                multiple: true,
+                data: cache_members
+              }
+            );
+
+            $.post
+            (
+              'ajax_report_getsuppliersbatches.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>'
+              },
+              function(result)
+              {
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
+                {
+                  if (response.rows.length == 1)
+                  {
+                    $('#btnRunReportSsuppliers').linkbutton('disable');
+                  }
+                  else
+                  {
+                    $('#btnRunReportSsuppliers').linkbutton('enable');
+                    response.rows.forEach
+                    (
+                      function(row, ndx)
+                      {
+                        if (ndx > 0)
+                          batches.push({label: row.batchno, value: row.batchno});
+                      }
+                    );
+
+                    $('#fldSelectSuppliersBatch').combobox('loadData', batches);
+                  }
+                }
+              }
+            );
+
+            doSuppliersReportSelectAll(null, null);
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              id: 'btnRunReportSuppliers',
+              handler: function()
+              {
+                var members = $('#fldSuppliersReportBatchMember').combobox('getValues');
+
+                $.post
+                (
+                  'ajax_report_suppliers.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: $('#fldSelectSuppliersBatch').combobox('getValue'),
+                    members: members
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                    {
+                      noty({text:response.reports.length + ' reports found...', type: 'success', timeout: 10000});
+                      response.reports.forEach
+                      (
+                        function(r)
+                        {
+                          window.open(r, '_blank');
+                        }
+                      );
+                    }
+                  }
+                );
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'New Batch',
+              handler: function()
+              {
+                var members = $('#fldSuppliersReportBatchMember').combobox('getValues');
+
+                $.post
+                (
+                  'ajax_report_suppliers.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: 0,
+                    members: members
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                    {
+                      noty({text:response.reports.length + ' reports found...', type: 'success', timeout: 10000});
+                      response.reports.forEach
+                      (
+                        function(r)
+                        {
+                          window.open(r, '_blank');
+                        }
+                      );
+                    }
+                  }
+                );
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'Reset',
+              handler: function()
+              {
+                $('#fldSelectSuppliersBatch').combobox('clear');
+                $('#fldSuppliersReportBatchMember').combobox('clear');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSuppliersReportDateRange()
+    {
+      function doSuppliersReportSelectAll(ev, args)
+      {
+        cache_members.forEach
+        (
+          function(m)
+          {
+            $('#fldSuppliersReportDateRangeMember').combobox('select', m.uuid);
+          }
+        );
+      }
+
+      $('#divEvents').on('suppliersdaterangeallmembers', doSuppliersReportSelectAll);
+
+      $('#dlgSuppliersReportDateRange').dialog
+      (
+        {
+          onClose: function()
+          {
+            $('#divEvents').off('suppliersdaterangeallmembers', doSuppliersReportSelectAll);
+          },
+          onOpen: function()
+          {
+            $('#dtSuppliersReportDateFrom').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            $('#dtSuppliersReportDateTo').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            $('#fldSuppliersReportDateRangeMember').combobox
+            (
+              {
+                valueField: 'uuid',
+                textField: 'name',
+                limitToList: true,
+                multiple: true,
+                data: cache_members
+              }
+            );
+
+            // Default to this month...
+            $('#dtSuppliersReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+            $('#dtSuppliersReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+
+            doSuppliersReportSelectAll(null, null);
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              handler: function()
+              {
+                var datefrom = $('#dtSuppliersReportDateFrom').datebox('getValue');
+                var dateto = $('#dtSuppliersReportDateTo').datebox('getValue');
+                var members = $('#fldSuppliersReportDateRangeMember').combobox('getValues');
+                var now = moment();
+
+                console.log(members);
+
+                if (_.isBlank(datefrom) && _.isBlank(dateto))
+                {
+                  doMandatoryTextbox('Please select a start and end date for the report', 'dtSuppliersReportDateFrom');
+                  return;
+                }
+
+                if (!_.isBlank(datefrom) && !_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(dateto))
+                  {
+                    doMandatoryTextbox('Start date can not be after end date...', 'dtSuppliersReportDateFrom');
+                    return;
+                  }
+                }
+
+                if (_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(now))
+                  {
+                    doMandatoryTextbox('Start date can not be after today...', 'dtSuppliersReportDateFrom');
+                      return;
+                  }
+                  dateto = now.format('YYYY-MM-DD 23:59:59');
+                }
+
+                if (_.isBlank(datefrom))
+                {
+                  if (moment(dateto).isBefore(now))
+                  {
+                    doMandatoryTextbox('End date can not be before today...', 'dtSuppliersReportDateTo');
+                    return;
+                  }
+                  datefrom = now.format('YYYY-MM-DD 00:00:00');
+                }
+
+                $.post
+                (
+                  'ajax_report_suppliersdt.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    datefrom: datefrom,
+                    dateto: dateto,
+                    members: members
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                    {
+                      noty({text:response.reports.length + ' reports found...', type: 'success', timeout: 10000});
+                      response.reports.forEach
+                      (
+                        function(r)
+                        {
+                          window.open(r, '_blank');
+                        }
+                      );
+                    }
+                  }
+                );
+                $('#dlgSuppliersReportDateRange').dialog('close');
+              }
+            },
+            {
+              text: 'Reset',
+              handler: function()
+              {
+                $('#dtSuppliersReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+                $('#dtSuppliersReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+                $('#fldSuppliersReportDateRangeMember').combobox('clear');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSuppliersReportDateRange').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+
     function doReportNumReportsByType()
     {
       $('#dlgNumReporsByType').dialog
@@ -1311,7 +1845,7 @@
       // console.log(booking.linkedbookingcode);
       // console.log(booking.reportid);
       // console.log(booking.linked_bookingcode);
-      console.log(booking.clientnotes);
+      //console.log(booking.clientnotes);
       function doReset()
       {
         // Client TAB
@@ -4498,6 +5032,91 @@
     {
       console.log(cache_bookings.length);
     }
+
+    function doPrintSummary()
+    {
+      if (!doGridGetSelectedRowData
+        (
+          'divBookingsG',
+          function(row, index)
+          {
+            var combinedreport = false;
+            var oldreports = false;
+            var timbercode,propertycode,linkedbookingcode=null;
+            // console.log("row.reportid " + row.reportid);
+            // console.log("row.bookingcode " + row.bookingcode);
+            // console.log("row.linkedbookingcode " +row.linkedbookingcode);
+            // console.log("row.linked_bookingcode " +row.linked_bookingcode);
+            if(row.reportid == 3)
+            {
+              console.log("This is a linked timber pest report,need to get the linked property report code");
+              combinedreport = true;
+              if(row.linkedbookingcode != null)
+              {
+                propertycode = row.linkedbookingcode;
+                linkedbookingcode = row.linkedbookingcode;
+              }
+              else
+              {
+                oldreports = true;
+                propertycode = row.linked_bookingcode;
+                linkedbookingcode = row.linked_bookingcode;
+              }
+            }
+            else if (row.reportid == 24)
+            {
+              console.log("This is a linked combined property report,need to get the linked timber pest report code");
+              combinedreport = true;
+              if(row.linkedbookingcode != null)
+              {
+                timbercode = row.linkedbookingcode;
+                linkedbookingcode = row.linkedbookingcode;
+              }
+              else
+              {
+                oldreports = true;
+                timbercode = row.linked_bookingcode;
+                linkedbookingcode = row.linked_bookingcode;
+              }
+              
+            }
+            $.post
+            (
+              'ajax_printbooking.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>',
+                bookingcode: row.bookingcode,
+                combinedreport:combinedreport,
+                linkedbookingcode:linkedbookingcode,
+              },
+              function(result)
+              {
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
+                {
+                  //console.log(response.logs);
+                  logevents = response.logs;
+                  var linkedreport = response.linkedreport;
+                  //console.log(response);
+                  //console.log(linkedreport.length);
+                  doDlgSummary(row,reports,auditevents,logevents,linkedreport);
+                  //generatePDF(row,reports,auditevents,logevents);
+                  // doRefreshBookings();
+                  // doSearchBookings(false);
+                  //noty({text: response.msg, type: 'success', timeout: 3000});
+                }
+                else
+                {
+                  noty({text: response.msg, type: 'error', timeout: 10000});
+                }
+
+              }
+            );          
+          }
+        ))
+        noty({text: 'Please select a booking to print the summary', type: 'warning', timeout: 4000});
+    }
     // ************************************************************************************************************
     // Document ready...
 
@@ -4993,6 +5612,28 @@
         }
       );
 
+      $('#divBookingSummaryG').datagrid
+      (
+          {
+              idField:'logid',
+              fitColumns:true,
+              singleSelect:false,
+              striped:true,
+              autoRowHeight: false,
+              // data:logevents,
+              loader: function(param, success, error)
+              {
+                  success({total: logevents.length, rows: logevents});
+              },
+              columns:[
+                  [
+                      {title:'Action',field:'eventid',width:150,align:'left',resizable:true,formatter:function(value,row,index){return logevent(row.eventid,auditevents).event}},
+                      {title:'Time',field:'datecreated',width:150,align:'left',resizable:true}
+                  ]
+              ]
+          }
+      )
+      
 
       // ************************************************************************************************************
       // Populate data...
@@ -5279,6 +5920,7 @@
           <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Client</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
           <a href="javascript:void(0)" onClick="doChangeStatus()" class="easyui-linkbutton" iconCls="icon-move">Change Status</a>
+          <a href="javascript:void(0)" onClick="doPrintSummary()" class="easyui-linkbutton" iconCls="icon-orderform">Booking Summary</a>
           <br/>
           <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
             <span>Status: </span> 
@@ -5345,6 +5987,58 @@
 
   <div id="dlgNumReporsByMember" class="easyui-dialog" title="#Reports by Member" style="width: 1500px; height: 800px;" data-options="resizable: true, modal: false, closable: false, closed: true">
     <div id="divNumReporsByMemberChart" style="width: 100%; height: 80%;"></div>
+  </div>
+
+  <div id="dlgSalesReportBatch" class="easyui-dialog" title="Sales Report by Batch" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td>Batch:</td>
+        <td><div id="fldSelectSalesBatch" style="width: 100px;"></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSalesReportDateRange" class="easyui-dialog" title="Sales Report by Date Range" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td style="width: 100px;">Date From:</td>
+        <td><input id="dtSalesReportDateFrom" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Date To:</td>
+        <td><input id="dtSalesReportDateTo" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSuppliersReportBatch" class="easyui-dialog" title="Suppliers Report by Batch" style="width: 500px; height: 250px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td>Batch:</td>
+        <td><div id="fldSelectSuppliersBatch" style="width: 100px;"></div></td>
+      </tr>
+      <tr>
+        <td>Member:</td>
+        <td><div id="fldSuppliersReportBatchMember" style="width: 300px;"></div><a id="btnSuppliersReportBatchAllMembers" href="javascript:doSendTrigger('suppliersbatchallmembers');" class="easyui-linkbutton">Select All</a></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSuppliersReportDateRange" class="easyui-dialog" title="Suppliers Report by Date Range" style="width: 500px; height: 250px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td style="width: 100px;">Date From:</td>
+        <td><input id="dtSuppliersReportDateFrom" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Date To:</td>
+        <td><input id="dtSuppliersReportDateTo" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Member:</td>
+        <td><div id="fldSuppliersReportDateRangeMember" style="width: 300px;"></div><a id="btnSuppliersReportDateRangeAllMembers" href="javascript:doSendTrigger('suppliersdaterangeallmembers');" class="easyui-linkbutton">Select All</a></td>
+      </tr>
+    </table>
   </div>
 
   <!-- *********************************************************************************************************************************************************************** -->
@@ -5660,6 +6354,164 @@
     </div>
   </div>
 
+    <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;overflow:auto" data-options="resizable: true, modal: true, closable: false, closed: true">
+      <table class="summary" id="summaryCustomerTable">
+        <tr class="summary">
+          <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Customer Details</label></td>
+        </tr>
+        <tr class="summary">
+          <td class="summary">Name:</td>
+          <td><label id="fldSummaryCustName" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Email:</td>
+          <td><label id="fldSummaryCustEmail" class="summary"></label></td>
+        </tr>
+          <td class="summary">Mobile:</td>
+          <td><label id="fldSummaryCustMobile" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Phone:</td>
+          <td><label id="fldSummaryCustPhone" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Address: </td>
+          <td><label id="fldSummaryCustAddress" class="summary"></label></td>
+        </tr>
+      </table>
+      <table class="summary" id="summaryReportTable">
+        <tr class="summary">
+          <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Report Details</label></td>
+        </tr>
+          <tr>
+            <td class="summary">Agreed Price:</td>
+            <td><label id="fldSummaryAgreedPrice" class="summary"></label></td>
+          </tr>
+          <tr>
+            <td class="summary">Commission:</td>
+            <td><label id="fldSummaryCommission" class="summary"></label></td>
+          </tr>
+          <tr> 
+            <td class="summary">Travel Costs:</td>
+            <td><label id="fldSummaryTravelCost" class="summary"></label></td>
+          </tr>
+          <tr>
+            <td class="summary">Spotter Fee:</td>
+            <td><label id="fldSummarySpotterFee" class="summary"></label></td>
+          </tr>
+          <tr>
+            <td class="summary">Cancellation Fee:</td>
+            <td><label id="fldSummaryCancellationFee" class="summary"></label></td>
+          </tr>
+          <tr>
+            <td class="summary">Notes: </td>
+            <td style="padding-top: .5em;padding-bottom: .5em;" ><label id="fldSummaryNotes" class="summary"></label></td>
+          </tr>
+          <tr>
+            <td class="summary">Client Notes: </td>
+            <td style="padding-top: .5em;padding-bottom: .5em;"><label id="fldSummaryClientNotes" class="summary"></label></td>
+          </tr>
+      </table>
+      <table class="summary" id="summaryPropertyTable">
+        <tr class="summary">
+          <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Property Details</label></td>
+        </tr>
+          <tr>
+            <td class="summary">Address:</td>
+            <td><label id="fldSummaryPropertyAddress" class="summary"></label></td>
+          </tr>
+          <tr>
+            <td class="summary">Rooms:</td>
+            <td>
+              <label id="fldSummaryRoomsStoreys" class="summary"></label>
+              <label id="fldSummaryRoomsBedrooms" class="summary"></label>
+              <label id="fldSummaryRoomsBathrooms" class="summary"></label>
+              <label id="fldSummaryRoomstotal" class="summary"></label>
+              <label id="fldSummaryRoomsoutbuildings" class="summary"></label>
+            </td>
+          </tr>
+          <tr>
+            <td class="summary">Construction:</td>
+            <td><label id="fldSummaryPropertyConstruction" class="summary"></label></td>
+          </tr>
+          <tr>
+            <td class="summary">Age:</td>
+            <td><label id="fldSummaryPropertyAge" class="summary"></label></td>
+          </tr>
+          <tr>
+            <td class="summary">Required:</td>
+            <td>
+              <label id="fldSummaryRequiredMeeting" class="summary"></label>
+              <label id="fldSummaryRequiredAdvice" class="summary"></label>
+              <label id="fldSummaryRequiredInspection" class="summary"></label>
+            </td>
+          </tr>
+
+      </table>
+      <table class="summary" id="summaryAgentTable">
+        <tr class="summary">
+          <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Estate Agent</label></td>
+        </tr>
+        <tr class="summary">
+          <td class="summary">Company:</td>
+          <td><label id="fldSummaryAgentCompany" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Email:</td>
+          <td><label id="fldSummaryAgentEmail" class="summary"></label></td>
+        </tr>
+          <td class="summary">Mobile:</td>
+          <td><label id="fldSummaryAgentMobile" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Office Phone:</td>
+          <td><label id="fldSummaryAgentPhone" class="summary"></label></td>
+        </tr>
+      </table>
+      <table class="summary" id="summaryArchTabl1">
+        <tr class="summary">
+          <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle1" class="summary">Architect</label></td>
+        </tr>
+        <tr class="summary">
+          <td class="summary">Name:</td>
+          <td><label id="fldSummaryArchName1" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Reg. No.</td>
+          <td><label id="fldSummaryArchRegno1" class="summary"></label></td>
+        </tr>
+          <td class="summary">Email:</td>
+          <td><label id="fldSummaryArchEmail1" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Office Phone:</td>
+          <td><label id="fldSummaryArchMobil1" class="summary"></label></td>
+        </tr>
+      </table>
+      <table class="summary" id="summaryArchTabl2" style="display:none">
+        <tr class="summary">
+          <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle2" class="summary">Inspector</label></td>
+        </tr>
+        <tr class="summary">
+          <td class="summary">Name:</td>
+          <td><label id="fldSummaryArchName2" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Reg. No.</td>
+          <td><label id="fldSummaryArchRegno2" class="summary"></label></td>
+        </tr>
+          <td class="summary">Email:</td>
+          <td><label id="fldSummaryArchEmail2" class="summary"></label></td>
+        </tr>
+        <tr>
+          <td class="summary">Office Phone:</td>
+          <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
+        </tr>
+      </table>
+      <label class="summary" style="font-weight: bold;padding:15px" id="divBookingSummaryGTitle">Audit History</label>
+      <div id="divBookingSummaryG" data-option="fit:true"></div>
+    </div>
+
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>
     <?php require_once("footer.php"); ?>
@@ -5679,8 +6531,12 @@
             <div title="Reports" data-options="iconCls:'icon-barchart'" style="overflow: auto; padding: 10px;">
               <!-- <h3 style= "color:#0099FF;">Select Report</h3> -->
               <table>
-                <tr><td><a id="btnNumReportsByType" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 160" onclick="doReportNumReportsByType()">#Reports by Type</a></td></tr>
-                <tr><td><a id="btnNumReportsByMember" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 160" onclick="doReportNumReportsByMember()">#Reports by Member</a></td></tr>
+                <tr><td><a id="btnNumReportsByType" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 240" onclick="doReportNumReportsByType()">#Reports by Type</a></td></tr>
+                <tr><td><a id="btnNumReportsByMember" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 240" onclick="doReportNumReportsByMember()">#Reports by Member</a></td></tr>
+                <tr><td><a id="btnSalesReportBatch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-product', width: 240" onclick="doSalesReportBatch()">Sales Report by Batch</a></td></tr>
+                <tr><td><a id="btnSalesReportDateRange" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-calendar', width: 240" onclick="doSalesReportDateRange()">Sales Report by Date</a></td></tr>
+                <tr><td><a id="btnSupplierReportBatch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-product', width: 240" onclick="doSuppliersReportBatch()">Supplier Report by Batch</a></td></tr>
+                <tr><td><a id="btnSupplierReportDateRange" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-calendar', width: 240" onclick="doSuppliersReportDateRange()">Supplier Report by Date</a></td></tr>
               </table>
             </div>
         <?php
@@ -5693,6 +6549,9 @@
       <div id="divBookingsG" data-options="fit: true" ></div>
     </div>
   </div>
+
+  
+
   <div id="divEvents" style="display: none;"></div>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=initMap&key=AIzaSyCcXBPESLUxA846ZL6JoUefrlclXKFv4zg" async defer></script>
 </body>

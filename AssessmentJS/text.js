@@ -9,6 +9,8 @@
 
 var scopeOfAssessment1 = 'This Report is prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and in accordance with Australian Standard 4349.1-2007 Assessment of Buildings Part 1: Pre-purchase Inspections – Residential Buildings and any other Australian Standards and definitions cited in the Terms and Conditions.';
 
+var scopeOfAssessmentSA1 = 'This Report is prepared by Archicentre Australia – a trading name of ArchiAdvisorySA Pty Ltd – and in accordance with Australian Standard 4349.1-2007 Assessment of Buildings Part 1: Pre-purchase Inspections – Residential Buildings and any other Australian Standards and definitions cited in the Terms and Conditions.';
+
 var scopeOfAssessment2 = 'This Report is a subjective assessment prepared by the appraising architect on a visual assessment of the condition of the reasonably accessible parts of the property and on the basis of the prevailing structural, soil and weather conditions at the time of the assessment and does not cover enquiries of councils or other authorities. It is not a certificate of compliance for the property within the requirements of any Act, regulation, ordinance or local by-law.';
 
 var scopeOfAssessment3 = 'Prolonged periods of wet or dry weather may cause structural changes to the property as described in the Property Maintenance Guide which you can download from the link found in the body of your Report and in the Report cover letter.';
@@ -103,7 +105,9 @@ var generalAdviceList6 = 'If you are purchasing the property, Archicentre Austra
 
 var generalAdviceText = 'The Assessment is limited to the nominated individual property including associated private open space. It is not the scope of this assessment to include all common or other adjacent property. Legal advice should be obtained as to the liability to contribute to the cost of repairs in respect of any common property.';
 
-var termsAndConditionsP1 = 'Report has been prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and the named architect and is supplied to you (the named customer) on the basis of and subject to the Scope of Assessment and the Terms and Conditions of the Contract and the Assessment and Archicentre Australia accepts no responsibility to other persons relying on the report.';
+var termsAndConditionsP1 = 'This Report has been prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope of Assessment and the Terms and Conditions of the Contract and the Assessment and Archicentre Australia accepts no responsibility to other persons relying on the report.';
+
+var termsAndConditionsSAP1 = 'This Report has been prepared by Archicentre Australia – a trading name of ArchiadvisorySA Pty Ltd – and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope of Assessment and the Terms and Conditions of the Contract and the Assessment and Archicentre Australia accepts no responsibility to other persons relying on the report.';
 
 var termsAndConditionsP2 = 'This Report has been prepared in accordance with Australian Standard 4349.1-2007 Assessment of Buildings Part 1: Pre-purchase Inspections – Residential Buildings and to any other Australian Standards and definitions cited in the Terms and Conditions.';
 
@@ -113,7 +117,7 @@ var termsAndConditionsP4 = 'The Report is to be read in conjunction with all oth
 
 var termsAndConditionsP5 = 'The Scope of Assessment and the Terms and Conditions take precedence over any oral or written representations by Archicentre Australia, to the extent of any inconsistency.';
 
-var termsAndConditionsOL1 = 'After making the booking, the customer is deemed to have accepted these Terms and Conditions and Scope of Assessment upon the architect arriving on site.';
+var termsAndConditionsOL1 = 'After making the booking, the client is deemed to have accepted these Terms and Conditions and Scope of Assessment upon the architect arriving on site.';
 
 var termsAndConditionsOL2 = 'The Report is not a guarantee but is an opinion of the condition of the assessed property relative to the average condition of well-maintained similar properties of a similar age.';
 

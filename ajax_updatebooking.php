@@ -291,8 +291,38 @@
           error_log($dbinsert2);
           if($dbresult = SharedQuery($dbinsert2, $dblink))
           {
-            $msg = "Successfully updated booking [$bookingid] and [$combinedtimberid]";
-            $rc = 0;
+            $recordsql1 = "insert into audit_log ".
+                          "(bookings_id," .
+                          "event, ".
+                          "userscreated_id".
+                          ")".
+                          "values ".
+                          "(".
+                          $bookingid ."," .
+                          2 ."," .
+                          SharedNullOrNum($userid, $dblink) .
+                          ")";
+            error_log($recordsql1);
+            if($dbresult = SharedQuery($recordsql1, $dblink))
+            {
+              $recordsql2 = "insert into audit_log ".
+                            "(bookings_id," .
+                            "event, ".
+                            "userscreated_id".
+                            ")".
+                            "values ".
+                            "(".
+                            $combinedtimberid ."," .
+                            2 ."," .
+                            SharedNullOrNum($userid, $dblink) .
+                            ")";
+              error_log($recordsql2);
+              if($dbresult = SharedQuery($recordsql2, $dblink))
+              {
+                $msg = "Successfully updated booking [$bookingid] and [$combinedtimberid]";
+                $rc = 0;
+              }
+            }
           }
           else
           {
@@ -310,8 +340,23 @@
         error_log("single report, combined report but select timber report. ");
         if ($dbresult = SharedQuery($dbinsert1, $dblink))
         {
-          $msg = "Successfully updated booking [$bookingid]";
-          $rc = 0;
+          $recordsql = "insert into audit_log ".
+                     "(bookings_id," .
+                     "event, ".
+                     "userscreated_id".
+                     ")".
+                     "values ".
+                     "(".
+                     $bookingid ."," .
+                     2 ."," .
+                     SharedNullOrNum($userid, $dblink) .
+                     ")";
+          error_log($recordsql);
+          if($dbresult = SharedQuery($recordsql, $dblink))
+          {
+            $msg = "Successfully updated booking [$bookingid]";
+            $rc = 0;
+          }
         }
         else
         {

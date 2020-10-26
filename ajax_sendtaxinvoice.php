@@ -136,6 +136,11 @@
                                 $invoice = file_get_contents('invoices_templates/prepaid_vic.html');
                                 $footer = file_get_contents('Email_Footer.html'); 
                             }
+                            else if($workstate == 'SA')
+                            {
+                                $invoice = file_get_contents('invoices_templates/prepaid.html');
+                                $footer = file_get_contents('Email_Footer_SA.html');
+                            }
                             else
                             {
                                 $invoice = file_get_contents('invoices_templates/prepaid.html');

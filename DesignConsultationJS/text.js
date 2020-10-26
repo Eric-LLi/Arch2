@@ -152,6 +152,11 @@ var TermsNConditions1 = 'This Report, which includes any appendices and referenc
     'the basis of and subject to these Terms and Conditions and the Scope of this service as described above. Archicentre ' +
     'Australia accepts no responsibility to other persons. '
 
+var TermsNConditionsSA1 = 'This Report, which includes any appendices and referenced documents, has been prepared by  Archicentre' +
+    ' Australia – a trading name of ArchiadvisorySA Pty Ltd – and the named architect and is supplied to you (the named client) on ' +
+    'the basis of and subject to these Terms and Conditions and the Scope of this service as described above. Archicentre ' +
+    'Australia accepts no responsibility to other persons. '
+
 var TermsNConditions2 = 'The visual assessment undertaken during the course of the consultation will only include areas of ' +
     'the property that are safe and reasonably accessible.  These will be determined by the architect at the time of the visual ' +
     'assessment. Workplace Health and Safety access conditions apply subject to relevant State and Territory regulations. '

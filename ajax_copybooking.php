@@ -264,42 +264,90 @@
         $bookingid = doInsertBooking(3, null);
         $bookingid2 = doInsertBooking(24, $bookingid);
 
-        $msg = "Successfully created new bookings [$bookingid and $bookingid2]";
-        $rc = 0;
-
-        if (($isuser == 1) && ($custemail != ""))
+        $recordsql1 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $bookingid ."," .
+                      1 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        
+        $recordsql2 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $bookingid2 ."," .
+                      1 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        $dbresult1 = SharedQuery($recordsql1, $dblink);
+        $dbresult2 = SharedQuery($recordsql2, $dblink);
+        if ($dbresult1 && $dbresult2)
         {
-          $html = str_replace("XXX_CUSTFIRSTNAME", $custfirstname . " " . $custlastname, $html);
-          $html = str_replace("XXX_BOOKINGCODE1", $bookingid, $html);
-          $html = str_replace("XXX_BOOKINGCODE2", $bookingid2, $html);
-
-          //SharedSendHtmlMail($gConfig['adminemail'], "Web Enquiry", $booking['custemail'], $custfirstname . ' ' . $custlastname, "Online Booking Request", $html);
-          SharedSendHtmlMail($gConfig['adminemail'], "Web Enquiry", $custemail, $custfirstname . ' ' . $custlastname, "Online Booking Request", $html);
-          //SharedSendHtmlMail($custemail, $custfirstname . ' ' . $custlastname, $gConfig['adminemail'], "Web Enquiry", "Online Booking Request", $body);
+          $msg = "Successfully created new bookings [$bookingid and $bookingid2]";
+          $rc = 0;
+  
+          if (($isuser == 1) && ($custemail != ""))
+          {
+            $html = str_replace("XXX_CUSTFIRSTNAME", $custfirstname . " " . $custlastname, $html);
+            $html = str_replace("XXX_BOOKINGCODE1", $bookingid, $html);
+            $html = str_replace("XXX_BOOKINGCODE2", $bookingid2, $html);
+  
+            //SharedSendHtmlMail($gConfig['adminemail'], "Web Enquiry", $booking['custemail'], $custfirstname . ' ' . $custlastname, "Online Booking Request", $html);
+            SharedSendHtmlMail($gConfig['adminemail'], "Web Enquiry", $custemail, $custfirstname . ' ' . $custlastname, "Online Booking Request", $html);
+            //SharedSendHtmlMail($custemail, $custfirstname . ' ' . $custlastname, $gConfig['adminemail'], "Web Enquiry", "Online Booking Request", $body);
+          }
         }
+        else
+        {
+          $msg = "Could not recrod booking [$bookingid and $bookingid2] to audit log";
+        }
+        
       }
       else
       {
         //Single Report
         $html = file_get_contents('email_newbooking.html');
         $bookingid = doInsertBooking($reportid, null);
-
-        $msg = "Successfully created new booking [$bookingid]";
-        $rc = 0;
-
-        if (($isuser == 1) && ([$custemail] != ""))
+        $recordsql = "insert into audit_log ".
+                    "(bookings_id," .
+                    "event, ".
+                    "userscreated_id".
+                    ")".
+                    "values ".
+                    "(".
+                    $bookingid ."," .
+                    1 ."," .
+                    SharedNullOrNum($userid, $dblink) .
+                    ")";
+        error_log($recordsql);
+        if($dbresult = SharedQuery($recordsql, $dblink))
         {
-          $html = str_replace("XXX_CUSTFIRSTNAME", $custfirstname . " " . $custlastname, $html);
-          $html = str_replace("XXX_BOOKINGCODE", $bookingid, $html);
-
-
-          SharedSendHtmlMail($gConfig['adminemail'], "Web Enquiry", $custemail, $custfirstname . ' ' . $custlastname, "Online Booking Request", $html);
-          //SharedSendHtmlMail($custemail, $custfirstname . ' ' . $custlastname, $gConfig['adminemail'], "Web Enquiry", "Online Booking Request", $body);
+          $msg = "Successfully created new booking [$bookingid]";
+          $rc = 0;
+  
+          if (($isuser == 1) && ([$custemail] != ""))
+          {
+            $html = str_replace("XXX_CUSTFIRSTNAME", $custfirstname . " " . $custlastname, $html);
+            $html = str_replace("XXX_BOOKINGCODE", $bookingid, $html);
+  
+  
+            SharedSendHtmlMail($gConfig['adminemail'], "Web Enquiry", $custemail, $custfirstname . ' ' . $custlastname, "Online Booking Request", $html);
+            //SharedSendHtmlMail($custemail, $custfirstname . ' ' . $custlastname, $gConfig['adminemail'], "Web Enquiry", "Online Booking Request", $body);
+          }
         }
+       
         else
         {
           //$msg = "Successfully created new booking [$bookingid], The isuser is [$isuser]";
-          $msg = "Successfully created new booking [$bookingid]";
+          $msg = "Could not recrod booking [$bookingid] to audit log";
         }
       }
     }

@@ -7,6 +7,15 @@
  * detect Safari on iOS learn from http://jsfiddle.net/jlubean/dL5cLjxt/ 
  * */
 function generatePDF(mode) {
+    console.log(mode);
+    // getAdviceImage();
+    // html2canvas(document.getElementById("Advice")).then(function(canvas){
+    //     console.log(canvas.toDataURL("image/jpet",0.9));
+    // });
+    // html2canvas(document.getElementById("capture")).then(canvas => {
+    //     //console.log(canvas.toDataURL('image/png'));
+    //     document.body.appendChild(canvas)
+    // });
     //Prevent multiple request.
     $("button").prop("disabled", true);
 
@@ -414,7 +423,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: termConditionText1,
+                                        text: getSSTCText1(),
                                         style: 'paragraphMargin'
                                     },
                                     {

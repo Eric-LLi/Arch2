@@ -205,7 +205,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: reportStandardP1,
+                                        text: getReportStandard1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -467,7 +467,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                             stack: [{
-                                    text: termConditionP1M,
+                                    text: getTermsAndConditionsP1M(),
                                     style: 'paragraphMargin'
                                 },
                                 {

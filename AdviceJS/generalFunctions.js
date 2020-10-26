@@ -138,7 +138,42 @@ function determineFooter(mode) {
                 margin: [40, -3, 10, 0]
             };
             return result;
-        } else {
+        } 
+        else if (state === 'SA')
+        {
+            result = {
+                width: '*',
+                table: {
+                    widths: [80,350],
+                    body: [
+                        [
+                            {
+                                image:footerImage,
+                                alignment:'left',
+                                width:80,
+                                height:34
+                            },
+                            {
+                                text:[
+                                    '© COPYRIGHT ',
+                                    {text:currentYear},
+                                    ' ARCHICENTRE AUSTRALIA, \na trading name of ArchiadvisorySA Pty Ltd ABN 65 644 777 159, \na division of ARCHIADVISORY PTY LTD ABN 51 614 712 613'
+                                ],
+                                alignment: 'left',
+                                fontSize: 7,
+                                margin: [0, 5, 0, 0],
+                                color: '#8E8B8B'
+                            }
+                        ]
+                    ]
+                },
+                layout: 'noBorders',
+                margin: [40, -3, 10, 0]
+            };
+            return result;
+        }
+    
+        else {
             result = {
                 width: '*',
                 table: {
@@ -464,4 +499,25 @@ function getPhoto(id)
 
     return imageSection;
 
+}
+
+/**
+ * To get the state of the property, to determin the text 1 in the scope of service and Terms & Conditions. 
+ * State SA requires different text 1
+ */
+function getSSTCText1()
+{
+    console.log('getSSTCText1');
+    var text1;
+    var state = document.getElementById('state').value;
+    if(state == 'SA')
+    {
+        text1 = termConditionTextSA1;
+    }
+    else
+    {
+        text1 = termConditionText1;
+    }
+
+    return text1;
 }

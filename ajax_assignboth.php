@@ -18,6 +18,10 @@
     {
         $footer = file_get_contents('Email_Footer_NSW.html');
     }
+    elseif($workstate == 'SA')
+    {
+      $footer = file_get_contents('Email_Footer_SA.html');
+    }
     else
     {
         $footer = file_get_contents('Email_Footer.html'); 
@@ -172,11 +176,37 @@
                      "usersmodified_id=$userid " .
                      "where " .
                      "id=$updatepropertyid";
+        $recordsql1 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatepropertyid ."," .
+                      6 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        $recordsql2 = "insert into audit_log ".
+                      "(bookings_id," .
+                      "event, ".
+                      "userscreated_id".
+                      ")".
+                      "values ".
+                      "(".
+                      $updatetimberid ."," .
+                      6 ."," .
+                      SharedNullOrNum($userid, $dblink) .
+                      ")";
+        error_log($recordsql1);
+        error_log($recordsql2);
 
         $dbresult1 = SharedQuery($dbupdate1, $dblink);
         $dbresult2 = SharedQuery($dbupdate2, $dblink);
+        $dbresult3 = SharedQuery($recordsql1, $dblink);
+        $dbresult4 = SharedQuery($recordsql2, $dblink);
 
-        if ($dbresult1 && $dbresult2)
+        if ($dbresult1 && $dbresult2 && $dbresult3 && $dbresult4)
         {
           $rc = 0;
 

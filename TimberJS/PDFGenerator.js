@@ -160,7 +160,7 @@ function generatePDF(mode) {
                             {
                                 stack: [
                                     {
-                                        text: scopeOfInspectionP1,
+                                        text: getSSTCText1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -819,7 +819,7 @@ function generatePDF(mode) {
                             {
                                 stack: [
                                     {
-                                        text: termConditionP1,
+                                        text: getTermsAndConditionsP1(),
                                         style: 'paragraphMargin'
                                     },
                                     {

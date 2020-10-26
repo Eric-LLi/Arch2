@@ -32,6 +32,8 @@ var attachmentsDText2 = ' - or by referring to the Report cover email for downlo
 
 var termsAndConditionsDP1 = 'The Report has been prepared by Archicentre Australia, a division of ArchiAdvisory Pty Ltd and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope and these Terms and Conditions. Archicentre Australia accepts no responsibility to other persons relying on the Report.';
 
+var termsAndConditionsDPSA1 = 'The Report has been prepared by Archicentre Australia, a trading name of ArchiadvisorySA Pty Ltd and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope and these Terms and Conditions. Archicentre Australia accepts no responsibility to other persons relying on the Report.';
+
 var termsAndConditionsDP2 = 'The Report has been prepared in accordance with Australian Standard 4349.0-2007 Inspection of Buildings Part 0: General Requirements and to any other Australian Standards cited in these Terms and Conditions.';
 
 var termsAndConditionsDP3 = 'This Report is prepared on a visual inspection of the condition of the reasonably accessible parts of the property and on the basis of the prevailing structural, soil and weather conditions at the time of the inspection and does not cover enquiries of councils or other authorities.';

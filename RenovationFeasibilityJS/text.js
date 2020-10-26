@@ -45,6 +45,8 @@ var thankYou = 'We thank you for the opportunity to prepare a Renovation Feasibi
 
 var termConditionText1 = 'This Report, which includes any appendices and referenced documents, has been prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd - and the named architect and is supplied to you (the named client) on the basis of and subject to these Terms and Conditions and the Scope of this Report as described above.  Archicentre Australia accepts no responsibility to other persons.';
 
+var termConditionTextSA1 = 'This Report, which includes any appendices and referenced documents, has been prepared by Archicentre Australia – a trading name of ArchiadvisorySA Pty Ltd - and the named architect and is supplied to you (the named client) on the basis of and subject to these Terms and Conditions and the Scope of this Report as described above.  Archicentre Australia accepts no responsibility to other persons.';
+
 var termConditionText2 = 'The visual assessment undertaken for this Report will only include areas of the property that are safe and reasonably accessible.  These areas will be determined by the architect at the time of visual assessment. Workplace Health and Safety access conditions apply subject to relevant State and Territory regulations.';
 
 var termConditionText3 = 'The Report is a preliminary feasibility study and must not be relied upon to proceed with the proposed construction.  Significant further work will be required before proceeding including, for example, structural, engineering, development/planning consent and/or building construction approval, ground conditions assessment, energy, asbestos (and other latent factor) investigations and/or considerations.';

@@ -119,6 +119,8 @@ var NormalViewingPosition2 = "For the purposes of this inspection Archicentre Au
 
 var TermsNConditions1 = "This Report is prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – for the person to whom it is addressed (the Customer) and Archicentre Australia accepts no responsibility to other persons.";
 
+var TermsNConditionsSA1 = "This Report is prepared by Archicentre Australia – a trading name of ArchiadvisorySA Pty Ltd – for the person to whom it is addressed (the Customer) and Archicentre Australia accepts no responsibility to other persons.";
+
 var TermsNConditions2 = "The Report has been prepared in accordance with Australian Standard 4349.0-2007 Inspection of Buildings Part 0: General Requirements and to any other Australian Standards and definitions cited in the Terms and Conditions.";
 
 var TermsNConditions3 = "The Report is not a certificate of compliance for the property within the requirements of any Act, regulation, ordinance or local by-law. ";

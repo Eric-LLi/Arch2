@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="js/easyui/themes/default/easyui.css?<?php echo time(); ?>">
 <link rel="stylesheet" href="js/easyui/themes/icon.css?<?php echo time(); ?>">
 <link rel="stylesheet" href="js/easyui/texteditor.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="css/index.css?<?php echo time(); ?>">
 
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
@@ -34,6 +35,11 @@
 <script src="js/images.js"></script>
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 <script src="js/PrintJS/print.min.js"></script>
+<script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
+<script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
+<script type="text/javascript" src="SummaryJS/dlg-summary.js?<?php echo time(); ?>"></script>
+<script type="text/javascript" src="SummaryJS/PDFGenerator.js?<?php echo time(); ?>"></script>
+<script type="text/javascript" src="SummaryJS/generalFunctions.js?<?php echo time(); ?>"></script>
 <style>
   .button-rounded
   {
@@ -106,6 +112,11 @@
   .totals_footer {font-weight: bold; color: #cd853f}
 
   #divNewBookingsMap {width: 100%; height: 100%; display: block;}
+
+  .textbox-text .textbox-readonly{
+    font-size: 15px;
+  }
+
 </style>
 
 <script>
@@ -238,6 +249,24 @@
     {name: 'ACT'},
     {name: 'NT'}
   ];
+
+  //This is auditing,record activities of each booking. 
+  var auditevents = 
+  [
+    {event:'booking is created',id:1},
+    {event:'booking is edited', id:2},
+    {event:'booking is paid',id:3},
+    {event:'booking is set to unpaid',id:4},
+    {event:'booking is set no agreed priced',id:5},
+    {event:'booking is assigned, the work started', id:6},
+    {event:'report is edited and saved',id:7},
+    {event:'report is completed', id:8},
+    {event:'report is approved', id:9},
+    {event:'report is sent to the customer', id:10},
+    {event:'booking is closed', id:11},
+    {event:'booking is cancelled', id:12},
+  ];
+
   var numitems =
   [
     {name: 1},

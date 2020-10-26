@@ -156,6 +156,10 @@
               {
                   $footer = file_get_contents('Email_Footer_NSW.html');
               }
+              elseif($workstate == 'SA')
+              {
+                $footer = file_get_contents('Email_Footer_SA.html');
+              }
               else
               {
                   $footer = file_get_contents('Email_Footer.html'); 
@@ -288,9 +292,38 @@
                         "userscancelled_id=$userid " .
                         "where " .
                         "id=$timberid";
+        $recordsql1 = "insert into audit_log ".
+                        "(bookings_id," .
+                        "event, ".
+                        "userscreated_id".
+                        ")".
+                        "values ".
+                        "(".
+                        $bookingcode ."," .
+                        12 ."," .
+                        SharedNullOrNum($userid, $dblink) .
+                        ")";
+        $recordsql2 = "insert into audit_log ".
+                        "(bookings_id," .
+                        "event, ".
+                        "userscreated_id".
+                        ")".
+                        "values ".
+                        "(".
+                        $timberid ."," .
+                        12 ."," .
+                        SharedNullOrNum($userid, $dblink) .
+                        ")";
         error_log($propertydbupdate);
         error_log($timberupdate);
-        if ($timberresult = SharedQuery($timberupdate, $dblink) && $propertyresult = SharedQuery($propertydbupdate, $dblink))
+        error_log($recordsql1);
+        error_log($recordsql2);
+
+        $dbresult1 = SharedQuery($propertydbupdate, $dblink);
+        $dbresult2 = SharedQuery($timberupdate, $dblink);
+        $dbresult3 = SharedQuery($recordsql1, $dblink);
+        $dbresult4 = SharedQuery($recordsql2, $dblink);
+        if ($dbresult1 && $dbresult2 && $dbresult3 && $dbresult4)
         {
           $rc = 0;
           $msg = "Bookings have been cancelled";

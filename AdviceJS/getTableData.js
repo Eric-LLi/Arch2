@@ -2,6 +2,7 @@
  * Created by Fafa on 8/10/17.
  */
 
+
 /**
  * Get Client DETAILS Table
  * */
@@ -234,10 +235,100 @@ function getAssessorDetailsTable() {
  * Get advice table
  */
 
+// function getAdviceImage()
+// {
+//     console.log("getAdviceImage");
+//     html2canvas(document.querySelector("#capture")).then(function(canvas) {
+        
+//              imagedata = canvas.toDataURL('image/png');
+//              console.log(imagedata);
+//              imgdata = imagedata.replace(/^data:image\/(png|jpg);base64,/, "");
+//             //ajax call to save image inside folder
+//             document.getElementById('adviceimg').setAttribute('src',imagedata);
+            
+//         }
+        
+//     );
+//     // var imageDisplay = {};
+//     // html2canvas($('#adviceSummary').then(function(canvas) {
+        
+//     //         var imgData = canvas.toDataURL(
+//     //             'image/png'); 
+//     //         console.log(imgData);             
+            
+        
+//     // }));
+
+
+//     //console.log(document.getElementsByClassName('note-editing-area')[0]);
+//     // html2canvas([document.getElementsByClassName('note-editing-area')[0]], {
+//     //     onrendered: function (canvas) {
+//     //         var imagedata = canvas.toDataURL('image/png');
+//     //         var imgdata = imagedata.replace(/^data:image\/(png|jpg);base64,/, "");
+//     //         //ajax call to save image inside folder
+//     //         imageDisplay = {
+//     //             image:imagedata
+//     //         }
+//     //         return imageDisplay;
+//     //     }
+        
+//     // })
+
+//     // html2canvas(document.querySelector("#adviceSummary")).then(function(canvas) {
+//     //     // Export the canvas to its data URI representation
+//     //     var base64image = canvas.toDataURL("image/png");
+//     //     console.log(base64image);
+
+//     //     imageDisplay =
+//     //     {
+//     //         image: base64image,
+//     //         width:500
+          
+//     //     }
+
+//     //     return imageDisplay;
+        
+//     // });
+// }
 function getAdviceTable()
 {
     var result;
+    let advice = $('#adviceSummary').val();
+    var imagedata,imgdata;
 
+    // html2canvas([document.getElementsByClassName('note-editing-area')[0]], {
+    //     onrendered: function (canvas) {
+    //          imagedata = canvas.toDataURL('image/png');
+    //          imgdata = imagedata.replace(/^data:image\/(png|jpg);base64,/, "");
+    //         //ajax call to save image inside folder
+    //         document.getElementById('adviceimg').setAttribute('src',imagedata);
+            
+    //     }
+        
+    // });
+    // imagedata = html2canvas(document.querySelector("#adviceSummary")).then(canvas => {
+    //     return imagedata = canvas.toDataURL('image/png');
+    // });
+    
+    // html2canvas(document.querySelector("#adviceSummary")).then(canvas => {
+    //     imagedata = canvas.toDataURL('image/png');
+    //     imgdata = imagedata.replace(/^data:image\/(png|jpg);base64,/, "");
+    //     console.log(imgdata);
+    // });
+    // console.log(imgdata);
+
+    var canvas = document.createElement("canvas");
+    canvas.width = 620;
+    canvas.height = 80;
+    var ctx = canvas.getContext('2d');
+    // ctx.font = "30px Arial";
+    // var text = $("#the_text").text();
+    ctx.fillText(advice,10,50);
+    
+    //$("body").append(canvas);
+    
+
+    console.log(document.getElementById('adviceimg'));
     result = {
         table:{
             body: [
@@ -265,7 +356,8 @@ function getAdviceTable()
                 ],
                 [
                     {
-                        text:getIt('adviceSummary'),
+                        // text:getIt('adviceSummary'),
+                        text:advice,
                         fontSize:9,
                         margin:[0,0,0,5],
                         border: [false, false, false, true]
@@ -291,8 +383,10 @@ function getAdviceTable()
         }
 }
     };
-
     return result;
+
+
+    
 }
 
 
