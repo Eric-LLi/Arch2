@@ -4033,53 +4033,78 @@ function getPhotoTable(id) {
                 var img = totalContainers.eq(i).children('img').get(0),
                     imgSrc = totalContainers.eq(i).children('img').attr('src'),
                     imgLabel = totalContainers.eq(i).children('label').text(),
-                    imgText = totalContainers.eq(i).children('input').eq(0).val()
-                    // width = 0,
-                    // height = 0;
-                    //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
-                    //console.log(totalContainers.eq(i).children('div').eq(0).children('img').attr('src'));
-                    //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
-                    //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
-    
-                //console.log(imgLabel);
-                //console.log(imgSrc);
+                    imgText = totalContainers.eq(i).children('input').eq(0).val(),
+                    imgAngle = totalContainers.eq(i).children('input').eq(1).val(),
+                    width = 0,
+                    height = 0,
+                    alignment = 'left'
+                    margin = [0,5,0,15];
+
+                if(imgAngle == null || imgAngle == "undefined" || imgAngle == "")
+                {
+                    imgAngle = 0;
+                }
+                else
+                {
+                    imgAngle = parseInt(imgAngle);
+                }
+
+                // console.log(id + "  " + imgAngle);
     
                 if (typeof imgSrc  != "undefined")
                 {
-                    if (imgSrc.includes("photos/") > 0) 
-                    {
-                        imgSrc = convertImgToBase64(img);
-                    }
-        
-                    // if (img.width >= img.height) {
-                    //     width = 250;
-                    //     height = 187;
-                    // } else {
-                    //     width = img.width * 187 / img.height;
-                    //     height = 187;
+                    //console.log("I am in");
+                    //Work on the image anlge. 
+                    var canvas = document.createElement("canvas");
+                    canvas.width = img.naturalWidth + img.naturalHeight*1/2;
+                    canvas.height = img.naturalHeight + img.naturalWidth*1/2;
+                    // console.log(canvas.width);
+                    // console.log(canvas.height);
+                    var ctx = canvas.getContext("2d");
+                    //ctx.drawImage(myImage, 0,0);
+                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    //ctx.save();
+                    ctx.translate(canvas.width/2,canvas.height/2);
+                    ctx.rotate(imgAngle*Math.PI/180);
+                    
+                    //ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.drawImage(img,-img.naturalWidth/2,-img.naturalHeight/2);
+                    ctx.restore();
+                    imgSrc = canvas.toDataURL("image/jpeg");
+
+                    // if (imgSrc.includes("photos/") > 0) 
+                    // {
+                    //     imgSrc = convertImgToBase64(img);
                     // }
+        
+                    if (img.width >= img.height) {
+                        width = 175;
+                        height = 160;
+                        margin = [10,5,0,10];
+                    } else {
+                        width = img.width * 160 / img.height;
+                        height = 160;
+                        margin = [10,5,0,10];
+                    }
         
                     row.push({
                         stack: [
                             {
                                 image: imgSrc,
-                                height: 120,
-                                width: 160,
-                                margin:[0,0,0,5]
-                                //alignment: 'center'
+                                height: height,
+                                width: width,
+                                margin:[0,0,0,5],
+                                alignment: 'center'
                             },
-                            // {
-                            //     text: imgLabel,
-                            //     margin: [0, 5],
-                            //     alignment: 'center'
-                            // },
                             {
                                 columns:[
                                     {
                                         width: 160,
                                         text: imgText,
                                         fontSize: 9,
-                                        margin:[0,5,0,15]
+                                        margin:margin
                                     }
                                 ]
                                 
@@ -4147,3 +4172,5 @@ function convertImgToBase64(img) {
 
     return src;
 }
+
+

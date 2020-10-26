@@ -72,6 +72,8 @@ var definitions4 = 'Workplace Health and Safety access conditions apply subject 
 
 var termConditionText1 = 'The Report has been prepared by Archicentre Australia, a division of ArchiAdvisory Pty Ltd (Archicentre Australia) and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope and these Terms and Conditions. Archicentre Australia accepts no responsibility to other persons relying on the Report.';
 
+var termConditionTextSA1 = 'The Report has been prepared by Archicentre Australia, a division of ArchiAdvisorySA Pty Ltd (Archicentre Australia) and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope and these Terms and Conditions. Archicentre Australia accepts no responsibility to other persons relying on the Report.';
+
 var termConditionText2 = 'The Report has been prepared in accordance with Australian Standard 4349.0-2007 Inspection of Buildings Part 0: General Requirements and to any other Australian Standards and definitions cited in the Terms and Conditions.';
 
 var termConditionText3 = 'The Report should be read in conjunction with any other Archicentre Australia Reports issued concurrently for the Property.';

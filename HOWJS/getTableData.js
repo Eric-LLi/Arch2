@@ -2058,6 +2058,7 @@ function createInternalOnePartTable(cellText, rowCount, placeID, selectID, noteI
                 select = getIt(selectID + a);
                 note = getIt(noteID + a);
             } else {
+                console.log(placeID + a);
                 place = document.getElementById(placeID + a);
                 select = document.getElementById(selectID + a);
                 note = document.getElementById(noteID + a);

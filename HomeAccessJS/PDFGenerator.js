@@ -609,7 +609,8 @@ function generatePDF(mode) {
                 columns: [{
                     width: 250,
                     stack: [
-                        page11_body,
+                        //page11_body,
+                        getTermsAndConditionsP1(),
                         {
                             margin: [20, 0, 0, 0],
                             ol: [

@@ -118,6 +118,10 @@
             {
                 $footer = file_get_contents('Email_Footer_NSW.html');
             }
+            elseif($workstate == 'SA')
+            {
+              $footer = file_get_contents('Email_Footer_SA.html');
+            }
             else
             {
                 $footer = file_get_contents('Email_Footer.html'); 

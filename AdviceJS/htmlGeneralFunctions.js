@@ -8,6 +8,18 @@ function onload() {
     reorderImages();
     automaticNumbering();
     addNewImageForm();
+    // $('#adviceSummary').summernote();
+    // $('#adviceSummary').summernote({
+    //     toolbar: [
+    //       // [groupName, [list of button]]
+    //       ['style', ['bold', 'italic', 'underline', 'clear']],
+    //       ['font', ['strikethrough', 'superscript', 'subscript']],
+    //       ['fontsize', ['fontsize']],
+    //       ['color', ['color']],
+    //       ['para', ['ul', 'ol', 'paragraph']],
+    //       ['height', ['height']]
+    //     ]
+    //   });
 }
 
 function reorderImages() {
@@ -671,5 +683,5 @@ function convertBase64UrlToBlob(urlData, type) {
 }
 
 $(document).ready(() => {
-    
+    // $('#adviceSummary').summernote();
 });

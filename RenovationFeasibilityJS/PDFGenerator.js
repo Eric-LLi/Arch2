@@ -558,7 +558,7 @@ function generatePDF(mode) {
                             {
                                 stack:[
                                     {
-                                        text:termConditionText1,
+                                        text:getTermsAndConditionsP1(),
                                         style: 'paragraphMargin'
                                     },
                                     {

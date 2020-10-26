@@ -351,7 +351,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: scopeOfAssessment1,
+                                        text: getSSTCText1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -1372,7 +1372,7 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: termsAndConditionsP1,
+                        text: getTermsAndConditionsP1(),
                         style: 'paragraphMargin',
                         alignment: 'justify'
                     },

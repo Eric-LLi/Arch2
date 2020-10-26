@@ -6,6 +6,8 @@ var ConstructionReportText = 'The Archicentre Australia Construction Quality Ass
 
 var scopeOfInspectionP1 = 'Your Report is prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – in accordance with Australian Standard 4349.0-2007-Assessment of Buildings Part 0: General Requirements and any other Australian Standards, definitions and reference documents cited.';
 
+var scopeOfInspectionSAP1 = 'Your Report is prepared by Archicentre Australia – a trading name of ArchiAdvisorySA Pty Ltd – in accordance with Australian Standard 4349.0-2007-Assessment of Buildings Part 0: General Requirements and any other Australian Standards, definitions and reference documents cited.';
+
 var scopeOfInspectionP2 = 'Your Report is prepared based upon a visual Assessment of the condition of the reasonably accessible parts of the property and on the basis of the prevailing structural, soil and weather conditions at the time of the inspection. It does not cover enquiries of councils or other authorities, nor is it a certificate of compliance for the property within the requirements of any Act, regulation, ordinance or local by-law.';
 
 var scopeOfInspectionP3 = 'Your Report will not disclose defects in inaccessible areas, defects that are concealed and/or not reasonably visible, defects that may be apparent in other weather conditions or defects that have not yet arisen. Changes in usage can cause defects and any abuse of the premises is likely to do so.';
@@ -40,6 +42,8 @@ var generalAdviceP2 = 'The Inspection is limited to the nominated individual pro
 
 
 var termsConditionsP1 = 'This Report is prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope of Service and the Terms and Conditions of Assessment and accepts no responsibility to other persons.';
+
+var termsConditionsSAP1 = 'This Report is prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope of Service and the Terms and Conditions of Assessment and accepts no responsibility to other persons.';
 
 var termsConditionsP2 = 'The Report has been prepared in accordance with Australian Standard 4349.0-2007 Assessment of Buildings Part 0: General Requirements and to any other Australian Standards, definitions and reference documents cited in the Scope and Terms and Conditions.';
 

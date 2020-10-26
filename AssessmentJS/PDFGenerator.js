@@ -104,7 +104,7 @@ function generatePDF(mode) {
                                     {
                                         border: [false, true, true, true],
                                         stack: [
-                                            getCoverImage('AssessmentCoverImage')
+                                            getCoverImage("AssessmentCoverImage","AssessmentCoverImageAngle")
                                         ],
                                         margin: [10, 10, 10, 10]
                                     }
@@ -350,7 +350,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: scopeOfAssessment1,
+                                        text: getSSTCText1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -758,7 +758,7 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: 'key',
+                        text: 'Key',
                         style: 'key'
                     },
                     getKeyTable(),
@@ -1353,7 +1353,7 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: termsAndConditionsP1,
+                        text: getTermsAndConditionsP1(),
                         style: 'paragraphMargin',
                         alignment: 'justify'
                     },

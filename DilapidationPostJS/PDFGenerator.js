@@ -246,7 +246,7 @@ function generatePDF(mode) {
                     {
 
                         stack: [{
-                                text: termsAndConditionsDP1,
+                                text: getTermsAndConditionsP1(),
                                 style: 'paragraphMargin',
                                 alignment: 'justify'
                             },
