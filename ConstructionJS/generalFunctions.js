@@ -164,14 +164,14 @@ function determineFooter(mode) {
                                 ],
                                 alignment: 'left',
                                 fontSize: 7,
-                                margin: [0, 5, 0, 0],
+                                margin: [0, 15, 0, 0],
                                 color: '#8E8B8B'
                             }
                         ]
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -4.5, 10, 0]
+                margin: [40, 1, 10, 0]
             };
             return result;
         } 
@@ -197,14 +197,14 @@ function determineFooter(mode) {
                                 ],
                                 alignment: 'left',
                                 fontSize: 7,
-                                margin: [0, 5, 0, 0],
+                                margin: [0, 15, 0, 0],
                                 color: '#8E8B8B'
                             }
                         ]
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -3, 10, 0]
+                margin: [40, 1, 10, 0]
             };
             return result;
         } 
@@ -231,7 +231,7 @@ function determineFooter(mode) {
                                 // text: '© COPYRIGHT 2019 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
-                                margin: [0, 22, 0, 0],
+                                margin: [0, 15, 0, 0],
                                 color: '#8E8B8B'
                             }
                         ]
@@ -239,7 +239,7 @@ function determineFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -4.5, 10, 0]
+                margin: [40, 1, 10, 0]
             };
             return result;
         }
@@ -604,7 +604,7 @@ function giveMeTheNumber(id) {
             var content =
             {
                 text:makeItAnArr[i].slice(3),
-                margin:[0,0,0,3],
+                margin:[0,0,0,2],
                 alignment:'left'
             };
             data.push(content);
