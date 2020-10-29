@@ -27,7 +27,7 @@
       $postcode = $_POST['postcode'];
       $state = $_POST['state'];
       $company = $_POST['company'];
-      $comments = $_POST['comments'];
+      $gstinc = $_POST['gstinc'];
 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
 
@@ -45,7 +45,7 @@
                   "postcode=" . SharedNullOrQuoted($postcode, 50, $dblink) . "," .
                   "state=" . SharedNullOrQuoted($state, 50, $dblink) . "," .
                   "company=" . SharedNullOrQuoted($company, 50, $dblink) . "," .
-                  "comments=" . SharedNullOrQuoted($comments, 1000, $dblink) . "," .
+                  "gstinc=" . SharedNullOrNum($gstinc, $dblink) . "," .
                   "datemodified=CURRENT_TIMESTAMP," .
                   "usersmodified_id=$userid " .
                   "where " .

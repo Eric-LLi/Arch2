@@ -1298,9 +1298,9 @@ function getInternalAreas()
             vLineColor: function (i, node) {
                 return (i === 0 || i === node.table.widths.length) ? '#D9D7D7' : '#D9D7D7';
             },
-            paddingBottom: function(i, node) { return 6; },
+            paddingBottom: function(i, node) { return 8; },
             paddingTop:function(i,node){
-                return 6;
+                return 8;
             }
         }
     };
