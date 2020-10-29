@@ -29,6 +29,7 @@
                   "u1.postcode," .
                   "u1.state," .
                   "u1.comments," .
+                  "u1.gstinc," .
                   "u1.datecreated," .
                   "u1.datemodified " .
                   "from " .

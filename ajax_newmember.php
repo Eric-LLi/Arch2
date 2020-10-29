@@ -27,6 +27,7 @@
       $state = SharedGetPostVar("state");
       $company = SharedGetPostVar("company");
       $comments = SharedGetPostVar("comments");
+      $gstinc = SharedGetPostVar("gstinc");
 
       $pwd = SharedMakeUuid(8);
       $useruuid = SharedMakeUuid(20);
@@ -50,6 +51,7 @@
                   "state," .
                   "active," .
                   "company," .
+                  "gstinc," .
                   "comments," .
 
                   "userscreated_id" .
@@ -72,6 +74,7 @@
                   SharedNullOrQuoted($state, 50, $dblink) . "," .
                   "1," .
                   SharedNullOrQuoted($company, 50, $dblink) . "," .
+                  SharedNullOrNum($gstinc, $dblink) . "," .
                   SharedNullOrQuoted($comments, 1000, $dblink) . "," .
 
                   SharedNullOrNum($userid, $dblink) .
@@ -90,7 +93,7 @@
 
         //SharedSendHtmlMail(gConfig['adminemail'], "Web Enquiry", $email, $firstname . ' ' . $lastname, "Online Booking Request", $body);
         // SharedSendHtmlMail($email, $firstname . ' ' . $lastname, $gConfig['adminemail'], "Archicentre Membership", "Your new Archicentre Australia member account", $body);
-        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Membership",$email, $firstname . ' ' . $lastname,  $booking['bookingcode'] . " - " . $reportTypes[$booking['itype']] . " Your new Archicentre Australia member account", $body);
+        SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Membership",$email, $firstname . ' ' . $lastname,  "Your new Archicentre Australia member account", $body);
       }
       else
         $msg = "Error processing new member please try again...";
