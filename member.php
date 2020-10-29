@@ -1006,6 +1006,41 @@
       ).dialog('center').dialog('open');
     }
 
+    function doAuditHistoryReport()
+    {
+      if (!doGridGetSelectedRowData
+        (
+          'divBookingsG',
+          function(row, index)
+          {
+            if (!_.isNull(row.datecompleted))
+            {
+              $.post
+              (
+                'ajax_report_audithistory.php',
+                {
+                  uuid: '<?php echo $_SESSION['uuid']; ?>',
+                  bookingcode: row.bookingcode
+                },
+                function(result)
+                {
+                  console.log(result);
+                  var response = JSON.parse(result);
+
+                  if (response.rc == 0)
+                    window.open(response.filename, '_blank');
+                  else
+                    noty({text: response.msg, type: 'error', timeout: 10000});
+                }
+              );          
+            }
+            else
+              noty({text: 'Can only audit completed reports - please select another report', type: 'warning', timeout: 4000});
+          }
+        ))
+        noty({text: 'Please select a booking to view audit history report', type: 'warning', timeout: 4000});
+    }
+
     // ************************************************************************************************************
     // Dialog handlers
     function doDlgChangePassword(uuid)
@@ -1107,6 +1142,7 @@
         $('#fldNewMemberPhone').textbox('clear');
         $('#fldNewMemberRegno').textbox('clear');
         $('#fldNewMemberCompany').textbox('clear');
+        $('#cbNewMemberGSTinc').switchbutton('check');
 
         // Address TAB
         $('#fldNewMemberAddress1').textbox('clear');
@@ -1153,6 +1189,7 @@
                 var phone = $('#fldNewMemberPhone').textbox('getValue');
                 var regno = $('#fldNewMemberRegno').textbox('getValue');
                 var company = $('#fldNewMemberCompany').textbox('getValue');
+                var gstinc = doSwitchButtonChecked('cbNewMemberGSTinc');
 
                 var address1 = $('#fldNewMemberAddress1').textbox('getValue');
                 var address2 = $('#fldNewMemberAddress2').textbox('getValue');
@@ -1181,6 +1218,7 @@
                         city: city,
                         postcode: postcode,
                         state: state,
+                        gstinc: gstinc,
 
                         uuid: '<?php echo $_SESSION['uuid']; ?>'
                       };
@@ -1271,6 +1309,7 @@
         $('#fldNewMemberPhone').textbox('clear');
         $('#fldNewMemberRegno').textbox('clear');
         $('#fldNewMemberCompany').textbox('clear');
+        $('#cbNewMemberGSTinc').switchbutton('check');
 
         // Address TAB
         $('#fldNewMemberAddress1').textbox('clear');
@@ -1323,6 +1362,8 @@
                   $('#fldNewMemberRegno').textbox('setValue', m.regno);
                   $('#fldNewMemberCompany').textbox('setValue', m.company);
 
+                  $('#cbNewMemberGSTinc').switchbutton((m.gstinc == 1) ? 'check' : 'uncheck');
+
                   // Address TAB
                   $('#fldNewMemberAddress1').textbox('setValue', m.address1);
                   $('#fldNewMemberAddress2').textbox('setValue', m.address2);
@@ -1350,6 +1391,7 @@
                 var phone = $('#fldNewMemberPhone').textbox('getValue');
                 var regno = $('#fldNewMemberRegno').textbox('getValue');
                 var company = $('#fldNewMemberCompany').textbox('getValue');
+                var gstinc = doSwitchButtonChecked('cbNewMemberGSTinc');
 
                 var address1 = $('#fldNewMemberAddress1').textbox('getValue');
                 var address2 = $('#fldNewMemberAddress2').textbox('getValue');
@@ -1379,6 +1421,7 @@
                         city: city,
                         postcode: postcode,
                         state: state,
+                        gstinc: gstinc,
 
                         uuid: '<?php echo $_SESSION['uuid']; ?>'
                       };
@@ -5921,6 +5964,7 @@
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
           <a href="javascript:void(0)" onClick="doChangeStatus()" class="easyui-linkbutton" iconCls="icon-move">Change Status</a>
           <a href="javascript:void(0)" onClick="doPrintSummary()" class="easyui-linkbutton" iconCls="icon-orderform">Booking Summary</a>
+          <a href="javascript:void(0)" onClick="doAuditHistoryReport()" class="easyui-linkbutton" iconCls="icon-calendar">Audit History</a>
           <br/>
           <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
             <span>Status: </span> 
@@ -6088,7 +6132,7 @@
         <div title="Details" data-options="iconCls: 'icon-man'">
           <table>
             <tr>
-              <td>First Name:</td>
+              <td width="120">First Name:</td>
               <td><input id="fldNewMemberFirstName" class="easyui-textbox" data-options="" style="width: 300px;"></td>
             </tr>
             <tr>
@@ -6119,6 +6163,10 @@
               <td>Type:</td>
               <td><div id="fldNewMemberType" style="width: 300px;"></div></td>
             </tr>
+            <tr>
+              <td>GST Included?:</td>
+              <td><input id="cbNewMemberGSTinc" class="easyui-switchbutton" data-options="width: 60, checked: true, onText: 'Yes', offText: 'No'"></td>
+            </tr>
           </table>
         </div>
 
@@ -6128,7 +6176,7 @@
               <td>Address 1:</td>
               <td><input id="fldNewMemberAddress1" class="easyui-textbox" style="width: 300px;" data-options="prompt: 'Enter address, cursor up/down for selection'"></td>
             </tr>
-            <tr>
+            <tr style="display:none">
               <td>Address 2:</td>
               <td><input id="fldNewMemberAddress2" class="easyui-textbox" style="width: 300px;"></td>
             </tr>
@@ -6354,163 +6402,325 @@
     </div>
   </div>
 
-    <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;overflow:auto" data-options="resizable: true, modal: true, closable: false, closed: true">
-      <table class="summary" id="summaryCustomerTable">
-        <tr class="summary">
-          <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Customer Details</label></td>
-        </tr>
-        <tr class="summary">
-          <td class="summary">Name:</td>
-          <td><label id="fldSummaryCustName" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Email:</td>
-          <td><label id="fldSummaryCustEmail" class="summary"></label></td>
-        </tr>
-          <td class="summary">Mobile:</td>
-          <td><label id="fldSummaryCustMobile" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Phone:</td>
-          <td><label id="fldSummaryCustPhone" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Address: </td>
-          <td><label id="fldSummaryCustAddress" class="summary"></label></td>
-        </tr>
-      </table>
-      <table class="summary" id="summaryReportTable">
-        <tr class="summary">
-          <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Report Details</label></td>
-        </tr>
-          <tr>
-            <td class="summary">Agreed Price:</td>
-            <td><label id="fldSummaryAgreedPrice" class="summary"></label></td>
-          </tr>
-          <tr>
-            <td class="summary">Commission:</td>
-            <td><label id="fldSummaryCommission" class="summary"></label></td>
-          </tr>
-          <tr> 
-            <td class="summary">Travel Costs:</td>
-            <td><label id="fldSummaryTravelCost" class="summary"></label></td>
-          </tr>
-          <tr>
-            <td class="summary">Spotter Fee:</td>
-            <td><label id="fldSummarySpotterFee" class="summary"></label></td>
-          </tr>
-          <tr>
-            <td class="summary">Cancellation Fee:</td>
-            <td><label id="fldSummaryCancellationFee" class="summary"></label></td>
-          </tr>
-          <tr>
-            <td class="summary">Notes: </td>
-            <td style="padding-top: .5em;padding-bottom: .5em;" ><label id="fldSummaryNotes" class="summary"></label></td>
-          </tr>
-          <tr>
-            <td class="summary">Client Notes: </td>
-            <td style="padding-top: .5em;padding-bottom: .5em;"><label id="fldSummaryClientNotes" class="summary"></label></td>
-          </tr>
-      </table>
-      <table class="summary" id="summaryPropertyTable">
-        <tr class="summary">
-          <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Property Details</label></td>
-        </tr>
-          <tr>
-            <td class="summary">Address:</td>
-            <td><label id="fldSummaryPropertyAddress" class="summary"></label></td>
-          </tr>
-          <tr>
-            <td class="summary">Rooms:</td>
-            <td>
-              <label id="fldSummaryRoomsStoreys" class="summary"></label>
-              <label id="fldSummaryRoomsBedrooms" class="summary"></label>
-              <label id="fldSummaryRoomsBathrooms" class="summary"></label>
-              <label id="fldSummaryRoomstotal" class="summary"></label>
-              <label id="fldSummaryRoomsoutbuildings" class="summary"></label>
-            </td>
-          </tr>
-          <tr>
-            <td class="summary">Construction:</td>
-            <td><label id="fldSummaryPropertyConstruction" class="summary"></label></td>
-          </tr>
-          <tr>
-            <td class="summary">Age:</td>
-            <td><label id="fldSummaryPropertyAge" class="summary"></label></td>
-          </tr>
-          <tr>
-            <td class="summary">Required:</td>
-            <td>
-              <label id="fldSummaryRequiredMeeting" class="summary"></label>
-              <label id="fldSummaryRequiredAdvice" class="summary"></label>
-              <label id="fldSummaryRequiredInspection" class="summary"></label>
-            </td>
-          </tr>
+  <!-- <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;" data-options="resizable: false, modal: true, closable: false, closed: true">
+      <div id="bookingsummarytabs" class="easyui-tabs" data-options="fit: true, pill: true">
+        <div title="Customer Details" data-options="iconCls: 'icon-man'">
+          <table class="summary">
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryCustName" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryCustEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryCustMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Phone:</td>
+              <td><label id="fldSummaryCustPhone" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Address: </td>
+              <td><label id="fldSummaryCustAddress" class="summary"></label></td>
+            </tr>
+          </table>
+        </div>
+        <div title="Report Details" data-options="iconCls: 'icon-notes'">
+          <table class="summary">
+              <tr>
+                <td class="summary">Agreed Price:</td>
+                <td><label id="fldSummaryAgreedPrice" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Commission:</td>
+                <td><label id="fldSummaryCommission" class="summary"></label></td>
+              </tr>
+              <tr> 
+                <td class="summary">Travel Costs:</td>
+                <td><label id="fldSummaryTravelCost" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Spotter Fee:</td>
+                <td><label id="fldSummarySpotterFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Cancellation Fee:</td>
+                <td><label id="fldSummaryCancellationFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;" ><label id="fldSummaryNotes" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Client Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;"><label id="fldSummaryClientNotes" class="summary"></label></td>
+              </tr>
+          </table>
+        </div>
+        <div title="Property Details" data-options="iconCls: 'icon-warehouse'">
+          <table class="summary">
+              <tr>
+                <td class="summary">Address:</td>
+                <td><label id="fldSummaryPropertyAddress" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Rooms:</td>
+                <td>
+                  <label id="fldSummaryRoomsStoreys" class="summary"></label>
+                  <label id="fldSummaryRoomsBedrooms" class="summary"></label>
+                  <label id="fldSummaryRoomsBathrooms" class="summary"></label>
+                  <label id="fldSummaryRoomstotal" class="summary"></label>
+                  <label id="fldSummaryRoomsoutbuildings" class="summary"></label>
+                </td>
+              </tr>
+              <tr>
+                <td class="summary">Construction:</td>
+                <td><label id="fldSummaryPropertyConstruction" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Age:</td>
+                <td><label id="fldSummaryPropertyAge" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Required:</td>
+                <td>
+                  <label id="fldSummaryRequiredMeeting" class="summary"></label>
+                  <label id="fldSummaryRequiredAdvice" class="summary"></label>
+                  <label id="fldSummaryRequiredInspection" class="summary"></label>
+                </td>
+              </tr>
 
-      </table>
-      <table class="summary" id="summaryAgentTable">
-        <tr class="summary">
-          <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Estate Agent</label></td>
-        </tr>
-        <tr class="summary">
-          <td class="summary">Company:</td>
-          <td><label id="fldSummaryAgentCompany" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Email:</td>
-          <td><label id="fldSummaryAgentEmail" class="summary"></label></td>
-        </tr>
-          <td class="summary">Mobile:</td>
-          <td><label id="fldSummaryAgentMobile" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Office Phone:</td>
-          <td><label id="fldSummaryAgentPhone" class="summary"></label></td>
-        </tr>
-      </table>
-      <table class="summary" id="summaryArchTabl1">
-        <tr class="summary">
-          <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle1" class="summary">Architect</label></td>
-        </tr>
-        <tr class="summary">
-          <td class="summary">Name:</td>
-          <td><label id="fldSummaryArchName1" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Reg. No.</td>
-          <td><label id="fldSummaryArchRegno1" class="summary"></label></td>
-        </tr>
-          <td class="summary">Email:</td>
-          <td><label id="fldSummaryArchEmail1" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Office Phone:</td>
-          <td><label id="fldSummaryArchMobil1" class="summary"></label></td>
-        </tr>
-      </table>
-      <table class="summary" id="summaryArchTabl2" style="display:none">
-        <tr class="summary">
-          <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle2" class="summary">Inspector</label></td>
-        </tr>
-        <tr class="summary">
-          <td class="summary">Name:</td>
-          <td><label id="fldSummaryArchName2" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Reg. No.</td>
-          <td><label id="fldSummaryArchRegno2" class="summary"></label></td>
-        </tr>
-          <td class="summary">Email:</td>
-          <td><label id="fldSummaryArchEmail2" class="summary"></label></td>
-        </tr>
-        <tr>
-          <td class="summary">Office Phone:</td>
-          <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
-        </tr>
-      </table>
-      <label class="summary" style="font-weight: bold;padding:15px" id="divBookingSummaryGTitle">Audit History</label>
-      <div id="divBookingSummaryG" data-option="fit:true"></div>
-    </div>
+          </table>
+        </div>
+        <div title="Estate Agent" data-options="iconCls: 'icon-users'">
+          <table class="summary">
+            <tr class="summary">
+              <td class="summary">Company:</td>
+              <td><label id="fldSummaryAgentCompany" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryAgentEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryAgentMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryAgentPhone" class="summary"></label></td>
+            </tr>
+          </table>
+
+
+        </div>
+        <div title="Architect" data-options="iconCls: 'icon-man'">
+          <table class="summary" id="summaryArchTabl1">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle1" class="summary">Architect</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno1" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil1" class="summary"></label></td>
+            </tr>
+          </table>
+
+          <table class="summary" id="summaryArchTabl2" style="display:none">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle2" class="summary">Inspector</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno2" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
+            </tr>
+          </table>
+
+        </div>
+        <div title="Audit History" data-options="iconCls: 'icon-inventory'">
+          <div id="divBookingSummaryG" data-option="fit:true"></div>
+        </div>
+      </div>
+  </div> -->
+  <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;overflow:auto" data-options="resizable: true, modal: true, closable: false, closed: true">
+          <table class="summary" id="summaryCustomerTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Customer Details</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryCustName" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryCustEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryCustMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Phone:</td>
+              <td><label id="fldSummaryCustPhone" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Address: </td>
+              <td><label id="fldSummaryCustAddress" class="summary"></label></td>
+            </tr>
+          </table>
+          <table class="summary" id="summaryReportTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Report Details</label></td>
+            </tr>
+              <tr>
+                <td class="summary">Agreed Price:</td>
+                <td><label id="fldSummaryAgreedPrice" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Commission:</td>
+                <td><label id="fldSummaryCommission" class="summary"></label></td>
+              </tr>
+              <tr> 
+                <td class="summary">Travel Costs:</td>
+                <td><label id="fldSummaryTravelCost" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Spotter Fee:</td>
+                <td><label id="fldSummarySpotterFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Cancellation Fee:</td>
+                <td><label id="fldSummaryCancellationFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;" ><label id="fldSummaryNotes" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Client Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;"><label id="fldSummaryClientNotes" class="summary"></label></td>
+              </tr>
+          </table>
+          <table class="summary" id="summaryPropertyTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Property Details</label></td>
+            </tr>
+              <tr>
+                <td class="summary">Address:</td>
+                <td><label id="fldSummaryPropertyAddress" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Rooms:</td>
+                <td>
+                  <label id="fldSummaryRoomsStoreys" class="summary"></label>
+                  <label id="fldSummaryRoomsBedrooms" class="summary"></label>
+                  <label id="fldSummaryRoomsBathrooms" class="summary"></label>
+                  <label id="fldSummaryRoomstotal" class="summary"></label>
+                  <label id="fldSummaryRoomsoutbuildings" class="summary"></label>
+                </td>
+              </tr>
+              <tr>
+                <td class="summary">Construction:</td>
+                <td><label id="fldSummaryPropertyConstruction" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Age:</td>
+                <td><label id="fldSummaryPropertyAge" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Required:</td>
+                <td>
+                  <label id="fldSummaryRequiredMeeting" class="summary"></label>
+                  <label id="fldSummaryRequiredAdvice" class="summary"></label>
+                  <label id="fldSummaryRequiredInspection" class="summary"></label>
+                </td>
+              </tr>
+
+          </table>
+          <table class="summary" id="summaryAgentTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Estate Agent</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Company:</td>
+              <td><label id="fldSummaryAgentCompany" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryAgentEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryAgentMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryAgentPhone" class="summary"></label></td>
+            </tr>
+          </table>
+          <table class="summary" id="summaryArchTabl1">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle1" class="summary">Architect</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno1" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil1" class="summary"></label></td>
+            </tr>
+          </table>
+          <table class="summary" id="summaryArchTabl2" style="display:none">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle2" class="summary">Inspector</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno2" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
+            </tr>
+          </table>
+          <label class="summary" style="font-weight: bold;padding:15px">Audit History</label>
+          <div id="divBookingSummaryG" data-option="fit:true"></div>
+  </div>
 
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>
