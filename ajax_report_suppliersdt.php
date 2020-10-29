@@ -33,7 +33,7 @@
       $supertotaltax = 0.0;
       $supertotalpaid = 0.0;
 
-      $dbselect = "select b1.id,b1.itype,date_format(b1.dateapproved, '%d/%m/%Y') dateapproved,b1.commission,b1.travel,b1.spotter,b1.custfirstname,b1.custlastname,b1.custemail,b1.custaddress1,b1.custaddress2,b1.custcity,b1.custpostcode,b1.custstate,u1.uuid,u1.firstname memberfirstname,u1.lastname memberlastname from bookings b1 left join users u1 on (b1.users_id=u1.id) where b1.dateapproved is not null and b1.datecancelled is null and b1.dateclosed is null and b1.dateexpired is null and b1.datecreated between '$datefrom' and '$dateto' and u1.uuid in ('$members') order by u1.firstname,u1.lastname,b1.id";
+      $dbselect = "select b1.id,b1.itype,date_format(b1.dateapproved, '%d/%m/%Y') dateapproved,b1.commission,b1.travel,b1.spotter,b1.custfirstname,b1.custlastname,b1.custemail,b1.custaddress1,b1.custaddress2,b1.custcity,b1.custpostcode,b1.custstate,u1.uuid,u1.firstname memberfirstname,u1.lastname memberlastname,u1.gstinc from bookings b1 left join users u1 on (b1.users_id=u1.id) where b1.dateapproved is not null and b1.datecancelled is null and b1.dateclosed is null and b1.dateexpired is null and b1.datecreated between '$datefrom' and '$dateto' and u1.uuid in ('$members') order by u1.firstname,u1.lastname,b1.id";
       error_log($dbselect);
       if ($dbresult = SharedQuery($dbselect, $dblink))
       {
@@ -47,7 +47,6 @@
           {
             $superfilename = "./tmp/Suppliers_" . $df[0] . "-" . $dt[0] . ".csv";
             $reports[] = $superfilename;
-            error_log($superfilename);
             $mysuperfile = fopen($superfilename, "w");
 
             if ($mysuperfile !== false)
@@ -69,6 +68,9 @@
                   if ($myfile !== false)
                   {
                     fwrite($myfile, '"","","","","Total","$' . number_format($totalamount, 2) . '","$' . number_format($totaltax, 2) . '","$' . number_format($totalpaid, 2) . '"');
+
+
+
                     fclose($myfile);
                   }
 
@@ -86,12 +88,15 @@
                   $totalamount = 0.0;
                   $totaltax = 0.0;
                   $totalpaid = 0.0;
+
+                  $totalspotter = 0.0;
+                  $totaltrasvel = 0.0;
                 }
 
                 if ($myfile !== false)
                 {
-                  $amount = floatval($spotter) + floatval($commission) + floatval($travel);
-                  $tax = $amount * 0.1;
+                  $amount = floatval($commission);
+                  $tax = ($row['gstinc'] == 1) ? $amount * 0.1 : 0.0;
                   $paid = $amount + $tax;
 
                   $totalamount += $amount;
@@ -114,6 +119,63 @@
 
                   fwrite($myfile, $lineitem);
                   fwrite($myfile, "\n");
+
+                  $spotter = floatval($spotter);
+                  $travel = floatval($travel);
+
+                  if ($spotter > 0.0)
+                  {
+                    $tax = ($row['gstinc'] == 1) ? $spotter * 0.1 : 0.0;
+                    $paid = $spotter + $tax;
+
+                    $totalamount += $spotter;
+                    $totaltax += $tax;
+                    $totalpaid += $paid;
+
+                    $supertotalamount += $spotter;
+                    $supertotaltax += $tax;
+                    $supertotalpaid += $paid;
+
+                    $lineitem = '"' . $row['dateapproved'] . '",' .
+                                '"' . $row['id'] . '",' .
+                                '"Spotter",' .
+                                '"' . $row['custfirstname'] .  " " . $row['custlastname'] . '",' .
+                                '"' . $row['custaddress1'] . " " . $row['custaddress2'] . " " . $row['custcity'] . " " . $row['custstate'] . " " . $row['custpostcode'] . '",' .
+                                '"$' . number_format($spotter, 2) . '",' .
+                                '"$' . number_format($tax, 2) . '",' .
+                                '"$' . number_format($paid, 2) . '"' .
+                                '';
+
+                    fwrite($myfile, $lineitem);
+                    fwrite($myfile, "\n");
+                  }
+
+                  if ($travel > 0.0)
+                  {
+                    $tax = ($row['gstinc'] == 1) ? $travel * 0.1 : 0.0;
+                    $paid = $travel + $tax;
+
+                    $totalamount += $travel;
+                    $totaltax += $tax;
+                    $totalpaid += $paid;
+
+                    $supertotalamount += $travel;
+                    $supertotaltax += $tax;
+                    $supertotalpaid += $paid;
+
+                    $lineitem = '"' . $row['dateapproved'] . '",' .
+                                '"' . $row['id'] . '",' .
+                                '"Travel",' .
+                                '"' . $row['custfirstname'] .  " " . $row['custlastname'] . '",' .
+                                '"' . $row['custaddress1'] . " " . $row['custaddress2'] . " " . $row['custcity'] . " " . $row['custstate'] . " " . $row['custpostcode'] . '",' .
+                                '"$' . number_format($travel, 2) . '",' .
+                                '"$' . number_format($tax, 2) . '",' .
+                                '"$' . number_format($paid, 2) . '"' .
+                                '';
+
+                    fwrite($myfile, $lineitem);
+                    fwrite($myfile, "\n");
+                  }
                 }
 
                 fwrite($mysuperfile, '"' . $row['memberfirstname'] . " " . $row['memberlastname'] . '",' . $lineitem);
