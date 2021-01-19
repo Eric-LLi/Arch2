@@ -11,6 +11,8 @@
     $imageid = $_POST["imageid"];
     $textid = $_POST["textid"];
     $removeid = $_POST["removeid"];
+    $rotateid = $_POST["rotateid"];
+    $angleid = $_POST["angleid"];
     $addid = $_POST["addid"];
     $tableName = $_POST["tableName"];
     $imageAltName = $_POST["imageAltName"];
@@ -52,6 +54,8 @@
                       "imageid," .
                       "textid," .
                       "removeid," .
+                      "rotateid," .
+                      "angleid,".
                       "addid," .
                       "filetype," .
                       "filesize," .
@@ -72,6 +76,8 @@
                       SharedNullOrQuoted($imageid, 50, $dblink) . "," .
                       SharedNullOrQuoted($textid, 50, $dblink) . "," .
                       SharedNullOrQuoted($removeid, 50, $dblink) . "," .
+                      SharedNullOrQuoted($rotateid, 50, $dblink) . "," .
+                      SharedNullOrQuoted($angleid, 50, $dblink) . "," .
                       SharedNullOrQuoted($addid, 50, $dblink) . "," .
                       SharedNullOrQuoted($filetype, 50, $dblink) . "," .
                       $filesize .",".

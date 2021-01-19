@@ -3,82 +3,13 @@
  */
 var firstRemove4th = true;
 function onload()
- {
-     reorderImages();
-     automaticNumbering();
-     addNewImageForm();
- }
-
-function reorderImages()
 {
-    console.log("need to reorder the images");
-    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
-    var BigContainer = document.getElementById('homeFeasibilityDrawings');
-    console.log(totalContainers);
-    // for (var i=0;i<totalContainers.length;i++)
-    // {
-    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
-    //     console.log((totalContainers[i].id));
-    // }
-    totalContainers.sort(function(a,b)
-    {
-        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
-    });
-
-    console.log(totalContainers);
-
-    $("#homeFeasibilityDrawings").empty();
-    for (var i=0;i<totalContainers.length;i++)
-    {
-       BigContainer.appendChild(totalContainers[i]);
-    }
+    reorderImages();
+    automaticNumbering();
+    addNewImageForm();
+    RotateSavedCoverImage();
 }
 
-
-function automaticNumbering()
-{
-    console.log("need to refresh the image number");
-    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
-    for(var i=0;i<totalContainers.length;i++)
-    {
-        //console.log(i);
-        //console.log(totalContainers.eq(i).children('div').eq(1).children('label').get(0));
-        totalContainers.eq(i).children('div').eq(1).children('label').get(0).innerHTML = "Drawing " + (i+1);
-    }
-}
-function addNewImageForm()
-{
-    maxImage = 4;
-    var idGroup = [];
-    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
-    console.log("the current form in the report homeFeasibilityDrawings is " + totalContainers.length);
-    for (var i = 0; i < totalContainers.length; i++)
-    {
-        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-        var id = Number(idStr);
-        idGroup.push(id);
-    }
-    //console.log(idGroup);
-    idGroup.sort(function(a, b){return a - b;});
-    //console.log(idGroup);
-    console.log("the last ID is " + idGroup[idGroup.length-1]);
-    var lastID = idGroup[idGroup.length-1];
-    var newID = Number(lastID) + 1;
-    var altID = Number(lastID) + 2;
-    if(totalContainers.length < maxImage && totalContainers.length != 0)
-    {
-        console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
-        nextAltName = 'image ' + altID;
-        //console.log("I am here!!! need another image element ,the next id  " + newID);
-        var nextImageID = 'homeDrawing' + newID;
-        var nextTextID = 'homeDrawingText' + newID;
-        var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
-        var nextAddButtonID = 'homeDrawingAddButton' + newID;
-        var nextUploadID = 'homeDrawingUpload' + newID;
-        addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-            'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-    }
-}
 
 function countWord(click_id)
 {
@@ -245,8 +176,6 @@ function calculateHomeHigh()
 }
 
 
-
-
 function moreHomeCost() {
     // console.log('your are in');
     var table = document.getElementById('homeFeasibilityTable');
@@ -294,500 +223,148 @@ function moreHomeCost() {
 
 
 
-function HomeFeasibilityUploadDrawings() {
-    document.getElementById('HomeFeasibilityUploadDrawings').click();
-}
 
-$('#HomeFeasibilityUploadDrawings').click(function()
+
+function reorderImages()
 {
-    //console.log(this.value);
-    this.value = null;
-});
-
-$('#HomeFeasibilityUploadDrawings').change(function(){
-    firstRemove4th == true
-    var imageIDs = $("#homeFeasibilityDrawingsTable form");
-    for (var i = 0; i < imageIDs.length; i++) {
-        var id = imageIDs.eq(i).children("div").eq(0).children("img").attr("id");
-        doRemovePhoto(id);
-    }
-    $("#homeFeasibilityDrawings").empty();
-    var table = document.getElementById("homeFeasibilityDrawingsTable");
-    table.style.display = 'block';
-    var count = this.files.length;
-    var imageFile = this.files;
-    console.log(count);
-    if (count > 4) {
-        alert("You can only select 4 drawings. It will only display the first 4 drawings");
-    }
-
-    if(count < 4)
-    {
-        for (var i = 0; i<count;i++)
-        {
-            try {
-                //noinspection ExceptionCaughtLocallyJS
-                throw i;
-            }
-            catch (ii) {
-                setTimeout(function ()
-                {
-                    var nameID = ii + 1;
-                    var altName = 'drawing  ' + nameID;
-                    var imageID = 'homeDrawing' + ii;
-                    var textID = 'homeDrawingText' + ii;
-                    var removeButtonID = 'homeDrawingRemoveButton' + ii;
-                    var addButtonID = 'homeDrawingAddButton' + ii;
-                    var uploadID = 'homeDrawingUpload' + ii;
-                    var imgLabelID = "imageCaption" + ii;
-
-                    //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
-                    addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                        'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-
-
-                   //addDrawing();
-
-                    loadImage.parseMetaData(imageFile[ii], function (data) {
-                        //console.log('I am in loadImage function');
-                        var orientation = 0;
-                        var date = new Date();
-                        var imageName = imageFile[ii].name;
-                        var imageType = imageFile[ii].type;
-                        var image = document.getElementById(imageID);
-                        var removeButton = document.getElementById(removeButtonID);
-                        var description  = document.getElementById(textID);
-                        var addButton = document.getElementById(addButtonID);
-                        //if exif data available, update orientation
-                        if (data.exif) {
-                            orientation = data.exif.get('Orientation');
-                        }
-                        var loadingImage = loadImage(imageFile[ii], function (canvas) {
-                                var base64data = canvas.toDataURL(imageType);
-                                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                                image.setAttribute('src',base64data);
-                                //$(selectionImage).attr('src',base64data);
-                                removeButton.style.display = 'block';
-                                removeButton.style.width = '100%';
-                                addButton.style.display = 'none';
-                                addButton.style.width = '100%';
-                                description.style.display = 'block';
-                                image.style.display = 'block';
-                                image.style.width = '100%';
-                                image.style.height = '100%';
-                                description.style.width = '100%';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                // image.style.height = '250px';
-                                var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                                //console.log(file);
-                                //doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'homeFeasibilityDrawingsTable',altName,'','',uploadID,'','100%','100%');
-                                doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'homeFeasibilityDrawingsTable',altName,'',uploadID,'removeOneHomeDrawing(this.id)','addOneHomeDrawing(this.id)','100%','100%');
-
-
-                            },
-                            {
-                                canvas: true,
-                                orientation: orientation,
-                                maxWidth:1500,
-                                maxHeight:1200
-                            }
-                        );
-                    });
-
-                }, 200);
-            }
-        }
-        setTimeout(function(){
-            var altID= count + 1;
-            var altName = 'Image' + altID;
-            var imageID = 'homeDrawing' + count;
-            var textID = 'homeDrawingText' + count;
-            var removeButtonID = 'homeDrawingRemoveButton' + count;
-            var addButtonID = 'homeDrawingAddButton' + count;
-            var uploadID = 'homeDrawingUpload' + count;
-            addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-            automaticNumbering();
-
-        },400);
-    }
-    else
-    {
-        for (var i = 0; i<4;i++)
-        {
-            try {
-                //noinspection ExceptionCaughtLocallyJS
-                throw i;
-            }
-            catch (ii) {
-                setTimeout(function () {
-                    var nameID = ii + 1;
-                    var altName = 'drawing  ' + nameID;
-                    var imageID = 'homeDrawing' + ii;
-                    var textID = 'homeDrawingText' + ii;
-                    var removeButtonID = 'homeDrawingRemoveButton' + ii;
-                    var addButtonID = 'homeDrawingAddButton' + ii;
-                    var uploadID = 'homeDrawingUpload' + ii;
-                    var imgLabelID = "imageCaption" + ii;
-                    //var removeFunction = 'RemoveDilapidationImage' + ii + '()';
-
-                    addImageElements(altName, imageID, textID, removeButtonID, addButtonID, uploadID,
-                        'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-                    //addDrawing();
-
-                    loadImage.parseMetaData(imageFile[ii], function (data) {
-                        console.log('I am in loadImage function');
-                        var orientation = 0;
-                        var date = new Date();
-                        var selectionImage = '#AdviceImage' + ii;
-                        var imageName = imageFile[ii].name;
-                        var imageType = imageFile[ii].type;
-                        var image = document.getElementById(imageID);
-                        var removeButton = document.getElementById(removeButtonID);
-                        var description  = document.getElementById(textID);
-                        var addButton = document.getElementById(addButtonID);
-                        //if exif data available, update orientation
-                        if (data.exif) {
-                            orientation = data.exif.get('Orientation');
-                        }
-                        var loadingImage = loadImage(imageFile[ii], function (canvas) {
-                                var base64data = canvas.toDataURL(imageType);
-                                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                                image.setAttribute('src',base64data);
-                                //$(selectionImage).attr('src',base64data);
-                                removeButton.style.display = 'block';
-                                removeButton.style.width = '100%';
-                                addButton.style.display = 'none';
-                                description.style.display = 'block';
-                                image.style.display = 'block';
-                                image.style.width = '100%';
-                                image.style.height = '100%';
-                                document.getElementById(imgLabelID).style.display = 'block';
-                                // image.style.height = '250px';
-                                var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                                //console.log(file);
-                                //doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'homeFeasibilityDrawingsTable',altName,'','','','','100%','100%');
-                                doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'homeFeasibilityDrawingsTable',altName,'',uploadID,'removeOneHomeDrawing(this.id)','addOneHomeDrawing(this.id)','100%','100%');
-                            },
-                            {
-                                canvas: true,
-                                orientation: orientation,
-                                maxWidth:1500,
-                                maxHeight:1200
-                            }
-                        );
-                    });
-                    //f, imageid, textid, removeid, addid, table = '',imageAltName = '', divID = '', uploadID = '',removeFunction = '',addFunction = '',imageSize = '',width = ''
-                    //doUploadFile(imageFile[ii],imageID, textID, removeButtonID, addButtonID,'DilapidationImagesTable',altName,'DilapidationPhotographs',uploadID,'RemoveOneDilapidationImage(this.id)','addOneDilapidationImage(this.id)','510px','510px');
-                }, 500);
-            }
-        }
-        setTimeout(function(){
-            automaticNumbering();
-
-        },1000)
-    }
-
-});
-
-//add an image element into the <form>, need a divID, imageID, imageTextID, uploadID, removeID
-function addImageElements(imageAltName, imageID, imageTextID, removeButtonID, addButtonID, uploadFileID, removeFunction, addFunction, imageSize,width) {
-    var table = document.getElementById('homeFeasibilityDrawingsTable');
-    table.style.display = 'block';
-    var currentID = imageID.replace(/[^\d.]/g, '');
-    var BigContainer = document.getElementById('homeFeasibilityDrawings');
-    //console.log(BigContainer);
-    // var rowCount = table.rows.length;
-    // console.log(rowCount);
-    // var row = table.insertRow(rowCount);
-    // var cell1 = row.insertCell(0);
-
-
-    //var BigContainer = document.getElementById(divID);
-    var form = document.createElement("form");
-    form.id = "imageForm" + currentID;
-    form.style.width = '100%';
-    //console.log(form);
-    // console.log(form);
-    //form.setAttribute("class","divForm");
-    //need four dividends in a form
-    var container1 = document.createElement("div");
-    var container2 = document.createElement("div");
-    var container3 = document.createElement("div");
-    var container4 = document.createElement("div");
-    var container5 = document.createElement("div");
-    container1.setAttribute("class", "col-sm");
-    container2.setAttribute("class", "col-sm");
-    container2.style.textAlign = "center";
-    container3.setAttribute("class", "col-sm");
-    container4.setAttribute("class", "col-sm");
-    container5.setAttribute("class", "col-sm");
-
-    //crate an image area
-    var img = document.createElement('img');
-    // img.src = "#";
-    // img.alt = imageAltName;
-    img.id = imageID;
-    // img.style.display = 'none';
-    img.style.width = '0px';
-    img.style.height = '0px';
-    img.style.paddingTop = '10px';
-
-    //create an input for the text
-    var textInput = document.createElement('INPUT');
-    textInput.setAttribute("type", "text");
-    textInput.style.width = imageSize;
-    textInput.style.height = "10px";
-    textInput.style.display = 'none';
-    textInput.id = imageTextID;
-
-    //create an input for the remove button
-    var removeButton = document.createElement('INPUT');
-    removeButton.setAttribute("type", "button");
-    removeButton.setAttribute("class", "btn btn-danger");
-    removeButton.setAttribute("value", "Remove");
-    removeButton.setAttribute("onclick", removeFunction);
-    removeButton.id = removeButtonID;
-    //removeButton.onclick = removeFunction;
-    removeButton.style.width = imageSize;
-    // removeButton.style.height = "25px";
-    removeButton.style.display = "none";
-
-
-    //create an input for add button
-    var addButton = document.createElement('INPUT');
-    addButton.setAttribute("type", "button");
-    addButton.setAttribute("class", "btn btn-secondary");
-    addButton.setAttribute("value", "Add");
-    addButton.setAttribute("onclick", addFunction);
-    addButton.id = addButtonID;
-    addButton.style.width = '100%';
-    // addButton.style.height = "25px";
-    addButton.style.display = 'block';
-    addButton.style.marginTop = '20px';
-
-    //create an input for file, to upload images, this is the one with upload action
-    var uploadFile = document.createElement('INPUT');
-    uploadFile.setAttribute("type", "file");
-    uploadFile.id = uploadFileID;
-    uploadFile.setAttribute("class", "inputImage");
-    uploadFile.setAttribute("accept", "image/x-png,image/jpeg");
-    uploadFile.style.display = 'none';
-
-    //create the image label for image caption number. 
-    var imgLabel = document.createElement("label");
-    var imgLabelID = "imageCaption" + currentID;
-    imgLabel.setAttribute("id", imgLabelID);
-    imgLabel.style.display = "none";
-    imgLabel.innerHTML = "Drawing " + (Number(currentID)+1);
-
-
-    //put all elements into the correct container
-    //BigContainer.appendChild(form);
-    BigContainer.appendChild(form);
-    form.appendChild(container1);
-    form.appendChild(container2);
-    form.appendChild(container3);
-    form.appendChild(container4);
-    form.appendChild(container5);
-    container1.appendChild(img);
-    container2.appendChild(imgLabel);
-    container3.appendChild(textInput);
-    container4.appendChild(removeButton);
-    container5.appendChild(addButton);
-    container5.appendChild(uploadFile);
-}
-
-function removeOneHomeDrawing(click_id)
-{
-    var selectedID = String(click_id);
-    var id = selectedID.replace ( /[^\d.]/g, '' );
-    var imageID = 'homeDrawing' + id;
-    var removeButtonID = 'homeDrawingRemoveButton' + id;
-    var addButtonID = 'homeDrawingAddButton' + id;
-    var descriptionID = 'homeDrawingText' + id;
-    var formID = 'imageForm' + id;
+    //console.log("reorderImages");
     var totalContainers = $('#homeFeasibilityDrawings').find('> form');
-    var idGroup = [];
-    console.log("the current total image number is: " + totalContainers.length);
-    for (var i = 0; i < totalContainers.length; i++)
+    var BigContainer = document.getElementById('homeFeasibilityDrawings');
+    //console.log(totalContainers);
+    // for (var i=0;i<totalContainers.length;i++)
+    // {
+    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
+    //     console.log((totalContainers[i].id));
+    // }
+    totalContainers.sort(function (a, b) {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+
+
+    $("#homeFeasibilityDrawings").empty();
+    for (var i = 0; i < totalContainers.length; i++) {
+        console.log(i);
+        // console.log(totalContainers.eq(i).children('img').get(0));
+        BigContainer.appendChild(totalContainers[i]);
+        var myImage = totalContainers.eq(i).children('img').get(0);
+        //console.log(myImage);
+        var imgID = totalContainers.eq(i).children('img').get(0).id;
+        var labelID = totalContainers.eq(i).children('label').get(0).id;
+        //console.log(labelID);
+        var textID = totalContainers.eq(i).children('input').eq(0).get(0).id;
+
+        var angleID = totalContainers.eq(i).children('input').eq(1).get(0).id;
+        //console.log(textID);
+        var rmBtnID = totalContainers.eq(i).children('input').eq(2).get(0).id;
+        //console.log(rmBtnID);
+        var addBtnID = totalContainers.eq(i).children('input').eq(3).get(0).id;
+
+        var rotateBtnID = totalContainers.eq(i).children('input').eq(4).get(0).id;
+        // console.log(rotateBtnID);
+        var formID = totalContainers[i].id;
+        //console.log(formID);
+        var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+
+        //Rotate the images if it is rotated during the last saved. based on the angle. 
+        var originalAngle = parseInt(document.getElementById(angleID).value);
+        if(originalAngle > 0)
+        {
+            if(originalAngle == 90 || originalAngle == 270)
+            {
+                console.log("the degree is 90 or 270");
+                myImage.style.marginTop = "195px";
+                myImage.style.marginBottom = "195px";
+                $("#" + imgID).rotate(originalAngle);            }
+            else
+            {
+                myImage.style.marginTop = "35px";
+                myImage.style.marginBottom = "35px";
+                $("#" + imgID).rotate(originalAngle);
+            }
+
+        }
+        else
+        {
+            myImage.style.marginTop = "35px";
+            myImage.style.marginBottom = "35px";
+        }
+        var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID,'homeFeasibilityDrawingsTable',rotateBtnID,angleID,'homeFeasibilityDrawings'];
+
+        var removeBtn = document.getElementById(totalContainers.eq(i).children('input').eq(2).get(0).id);
+        var rotateBtn = document.getElementById(totalContainers.eq(i).children('input').eq(4).get(0).id);
+
+        var removeFunction  = "DeleteOneImg(['" + imgID + "','" + labelID+"','" + textID + "','" + rmBtnID +"','" +  addBtnID + "','" + formID + "','" + 'homeFeasibilityDrawingsTable' + "','"+ rotateBtnID +  "','" + angleID +  "','"+'homeFeasibilityDrawings' + "'])";
+        var rotateFunction = "RotateOneImage(['" + imgID + "','" + labelID+"','" + textID + "','" + rmBtnID +"','" +  addBtnID + "','" + formID + "','" + 'homeFeasibilityDrawingsTable' + "','"+ rotateBtnID +  "','" + angleID + "','"+'homeFeasibilityDrawings' + "'])";
+
+        //console.log(removeFunction);
+        $("#" + addBtnID).click(function () {
+            global_Img = element;
+            //console.log(global_Img);
+            $("#HomeFeasibilityUploadOneImage").click();
+        });
+        removeBtn.setAttribute("onclick", removeFunction);
+        rotateBtn.setAttribute("onclick", rotateFunction);
+    }  
+} 
+
+
+function automaticNumbering()
+{
+    console.log("need to refresh the image number");
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    for(var i=0;i<totalContainers.length;i++)
     {
-        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-       // console.log(idStr);
+        totalContainers.eq(i).children('label').get(0).innerHTML = "IMG " + (i + 1);
+    }
+}
+function addNewImageForm()
+{
+    maxImage = 4;
+    var idGroup = [];
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    console.log("the current form in the report homeFeasibilityDrawings is " + totalContainers.length);
+    for (var i = 0; i < totalContainers.length; i++) 
+    {
+        var idStr = totalContainers.eq(i).children('img').attr('id').replace(/[^\d.]/g, '');
         var id = Number(idStr);
         idGroup.push(id);
     }
-    idGroup.sort(function(a, b){return a - b});
-    var lastID = idGroup[idGroup.length-1]
-    console.log("this last id is " + lastID);
-
-
-    var imageSelect = '#' + imageID;
-    $(imageSelect).attr('src', '#');
-    var image = document.getElementById(imageID);
-    var button = document.getElementById(removeButtonID);
-    var addButton = document.getElementById(addButtonID);
-    var description = document.getElementById(descriptionID);
-
-    button.style.display = 'none';
-    addButton.style.display = 'block';
-    //addButton.style.width = '100%';
-    description.value = "";
-    description.style.display = 'none';
-    //image.style.width = '0px';
-    image.style.display = 'none';
-    doRemovePhoto(imageID);
-    $('#' + formID).remove();
-
-    //has four drawing but, remove one, no additional 'add' button
-    if(totalContainers.length == 4 && firstRemove4th == true)
+    //console.log(idGroup);
+    idGroup.sort(function(a, b){return a - b;});
+    //console.log(idGroup);
+    console.log("the last ID is " + idGroup[idGroup.length-1]);
+    var lastID = idGroup[idGroup.length-1];
+    var newID = Number(lastID) + 1;
+    var altID = Number(lastID) + 2;
+    if(totalContainers.length < maxImage && totalContainers.length != 0)
     {
-        console.log("need to create a new add button");
-        var newID = Number(lastID) + 1;
-        var altID = Number(lastID) + 2;
+        console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
         nextAltName = 'image ' + altID;
         //console.log("I am here!!! need another image element ,the next id  " + newID);
         var nextImageID = 'homeDrawing' + newID;
         var nextTextID = 'homeDrawingText' + newID;
+        var nextLabelID = 'homeDrawingLable' + newID;
+        var nextLableValue = 'homeDrawing' + (parseInt(newID) + 1);
         var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
-        var nextAddButtonID = 'homeDrawingAddButton' + newID;
-        var nextUploadID = 'homeDrawingUpload' + newID;
-        addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-            'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-        firstRemove4th = false;
+        var nextAddButtonID = 'AddHomeDrawingButton' + newID;
+        var nextUploadID = 'homeDrawingUploadImage' + newID;
+        var nextRotateBtnID = 'homeDrawingRotateButton' + newID;
+        var nextAngelInputID = 'homeDrawingAngle' + newID;
+        var nextFormID = "homedrawingForm" + newID;
+       
+        var emptyElement = createImagesElements('homeFeasibilityDrawingsTable', nextImageID, nextLabelID, nextLableValue, 
+                                                nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'homeFeasibilityDrawings');
+
+        //The new form only show add button.
+        $("#" + emptyElement[0]).hide();
+        $("#" + emptyElement[1]).hide();
+        $("#" + emptyElement[2]).val("");
+        $("#" + emptyElement[2]).hide();
+        $("#" + emptyElement[3]).hide();
+        $("#" + emptyElement[4]).show();
+        $("#" + emptyElement[7]).hide();
+        $("#" + emptyElement[8]).hide();
     }
-
-     //update the totalConaintainers after removing one form, If remove all the images one by one, don't leave a signle 'add' button
-     totalContainers = $('#homeFeasibilityDrawings').find('> form');
-     //console.log(totalContainers);
-     //console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'))
-     if (totalContainers.length == 1 && typeof totalContainers.eq(0).children('div').eq(0).children('img').attr('src') == 'undefined')
-     {
-         console.log("it does not have any images, emtpy the div");
-         $("#homeFeasibilityDrawings").empty();
-         document.getElementById('homeFeasibilityDrawingsTable').style.display = 'none';
-     }
-
-    automaticNumbering();
-}
-
-function addOneHomeDrawing(click_id)
-{
-    //console.log(click_id);
-
-    var id;
-    var selectedID = String(click_id).replace ( /[^\d.]/g, '' );
-    var idGroup = [];
-    console.log("the selectedID " + selectedID);
-    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
-    console.log("the current total image number is: " + totalContainers.length);
-    // id = selectedID.replace ( /[^\d.]/g, '' );
-    var nameID = Number(selectedID) + 1;
-    var altName = 'drawing  ' + nameID;
-    var imageID = 'homeDrawing' + selectedID;
-    var textID = 'homeDrawingText' + selectedID;
-    var removeButtonID = 'homeDrawingRemoveButton' + selectedID;
-    var addButtonID = 'homeDrawingAddButton' + selectedID;
-    var uploadID = 'homeDrawingUpload' + selectedID;
-    var imgLabelID = "imageCaption" + selectedID;
-    for (var i = 0; i < totalContainers.length; i++)
-    {
-        var idStr = totalContainers.eq(i).children('div').eq(0).children('img').attr('id').replace(/[^\d.]/g, '');
-        console.log(idStr);
-        var id = Number(idStr);
-        idGroup.push(id);
-    }
-    idGroup.sort(function(a, b){return a - b});
-    var lastID = idGroup[idGroup.length-1]
-    console.log("this last id is " + lastID);
-    // console.log(uploadID);
-    var x = document.getElementById(uploadID);
-    // x.click();
-    $("#"+uploadID).unbind().click();
-    $('#'+uploadID).change(function(){
-        //console.log("Hi 0");
-        if (this.files && this.files[0]) {
-
-            //console.log(this.files.length);
-            //console.log("Hi 1");
-            if(totalContainers.length == 4)
-            {
-                console.log("add the last 4th image, need to reset the firstRemovetth");
-                firstRemove4th = true;
-            }
-            if (totalContainers.length <= 4)
-            {
-                //console.log("Hi 2");
-                //if the total number of image is less than 30, then need to create a new image element to allow user to upload another one.
-                var imageFile = this.files[0];
-                //document.getElementById(imgLabelID).style.display = 'block';
-               
-                loadImage.parseMetaData(imageFile, function (data) {
-                    //console.log('I am in loadImage function');
-                    var orientation = 0;
-                    var date = new Date();
-                    // var selectionImage = '#AdviceImage' + ii;
-                    var imageName = imageFile.name;
-                    var imageType = imageFile.type;
-                    var image = document.getElementById(imageID);
-                    var removeButton = document.getElementById(removeButtonID);
-                    var description  = document.getElementById(textID);
-                    var addButton = document.getElementById(addButtonID);
-                    var imageLable = document.getElementById(imgLabelID);
-                    //if exif data available, update orientation
-                    if (data.exif) {
-                        orientation = data.exif.get('Orientation');
-                    }
-                    var loadingImage = loadImage(imageFile, function (canvas) {
-                            var base64data = canvas.toDataURL(imageType);
-                            //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                            image.setAttribute('src',base64data);
-                            //$(selectionImage).attr('src',base64data);
-                            removeButton.style.display = 'block';
-                            removeButton.style.width = '100%';
-                            addButton.style.display = 'none';
-                            description.style.display = 'block';
-                            image.style.display = 'block';
-                            image.style.width = '100%';
-                            image.style.height = '100%';
-                            imageLable.style.display = 'block';
-                            // image.style.height = '250px';
-                            var file = new File([convertBase64UrlToBlob(base64data,imageType)], imageName, {type: imageType, lastModified:date.getTime()});
-                            //console.log(file);
-                            doUploadFile(file,imageID, textID, removeButtonID, addButtonID,'homeFeasibilityDrawingsTable',nextAltName,'homeFeasibilityDrawings',uploadID,'removeOneHomeDrawing(this.id)','addOneHomeDrawing(this.id)','100%','100%');
-
-                        },
-                        {
-                            canvas: true,
-                            orientation: orientation,
-                            maxWidth:1500,
-                            maxHeight:1200
-                        }
-                    );
-                });
-                automaticNumbering();
-                if (Number(selectedID) == Number(lastID))
-                {
-                    if (totalContainers.length < 4)
-                    {
-                        console.log("you are adding an image to the last id block");
-                        var newID = Number(lastID) + 1;
-                        var altID = Number(lastID) + 2;
-                        nextAltName = 'image ' + altID;
-                        //console.log("I am here!!! need another image element ,the next id  " + newID);
-                        var nextImageID = 'homeDrawing' + newID;
-                        var nextTextID = 'homeDrawingText' + newID;
-                        var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
-                        var nextAddButtonID = 'homeDrawingAddButton' + newID;
-                        var nextUploadID = 'homeDrawingUpload' + newID;
-                        addImageElements(nextAltName, nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
-                            'removeOneHomeDrawing(this.id)', 'addOneHomeDrawing(this.id)', '100%', '0px');
-                    }
-                   
-                }
-            }
-        }
-    });
 }
 
 
@@ -810,23 +387,29 @@ $('#HomeFeasibilityUploadCoverImage').change(function(){
             var orientation = 0;
             var image = document.getElementById('HomeFeasibilityCoverImage');
             var removeButton = document.getElementById('HomeFeasibilityCoverImageRemoveButton');
+            var rotateButton = document.getElementById('HomeFeasibilityCoverImageRotateButton');
+
             //if exif data available, update orientation
             if (data.exif) {
                 orientation = data.exif.get('Orientation');
             }
             var loadingImage = loadImage(imageFile, function (canvas) {
-                    var base64data = canvas.toDataURL(imageType);
-                    //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
-                    image.setAttribute('src',base64data);
-                    removeButton.style.display = 'block';
-                    //removeButton.style.width = '100%';
-                    image.alt = 'Cover Image';
-                    image.style.display = 'block';
-                    image.style.width = '100%';
-                    image.style.height = '100%';
-                    var file = new File([convertBase64UrlToBlob(base64data)], imageName, {type: imageType, lastModified:date.getTime()});
-                    //console.log(file);
-                    doUploadFile(file,'HomeFeasibilityCoverImage', '', 'HomeFeasibilityCoverImageRemoveButton', '','','cover image','','','','','100%','100%');
+                var base64data = canvas.toDataURL(imageType);
+                //var img_src = base64data.replace(/^data\:image\/\w+\;base64\,/, '');
+                image.setAttribute('src', base64data);
+                removeButton.style.display = 'block';
+                //removeButton.style.width = '400px';
+                rotateButton.style.display = 'block';
+                //rotateButton.style.width = '400px';
+                image.style.display = 'block';
+                //image.style.width = '400px';
+                // image.style.height = '250px';
+                var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
+                    type: imageType,
+                    lastModified: date.getTime()
+                });
+                doUploadFile(file, 'HomeFeasibilityCoverImage', '', 'HomeFeasibilityCoverImageRemoveButton', '', '', 'cover image', '', '', '', '', '265px', '400px',
+                            'HomeFeasibilityCoverImageRotateButton',"HomeFeasibilityCoverImageAngle");
 
                 },
                 {
@@ -841,19 +424,551 @@ $('#HomeFeasibilityUploadCoverImage').change(function(){
 });
 
 
-function RemoveHomeFeasibilityCover(){
 
-    var imageSelect = '#' + 'HomeFeasibilityCoverImage';
-    $(imageSelect).attr('src', '#');
+function RemoveHomeFeasibilityCover()
+{
     var image = document.getElementById('HomeFeasibilityCoverImage');
-    var button = document.getElementById('HomeFeasibilityCoverImageRemoveButton');
-    
+    var removeButton = document.getElementById('HomeFeasibilityCoverImageRemoveButton');
+    var rotatebutton = document.getElementById('HomeFeasibilityCoverImageRotateButton');
 
-    button.style.display = 'none';
-    image.style.width = '0px';
+
+    image.setAttribute('src', '#');
     image.style.display = 'none';
-
+    rotatebutton.style.display = 'none';
+    //image.style.width = 0;
+    removeButton.style.display = 'none';
+    document.getElementById("HomeFeasibilityCoverImageAngle").value = "";
     doRemovePhoto('HomeFeasibilityCoverImage');
+
+}
+
+
+function RotateHomeFeasibilityCoverImage()
+{
+    var rotateAngle;
+    var originalAngle = document.getElementById('HomeFeasibilityCoverImageAngle').value;
+    console.log(originalAngle);
+    if(originalAngle == null || originalAngle == "undefined" || originalAngle == "")
+    {
+        originalAngle = 0;
+    }
+
+
+    var myImage = document.getElementById('HomeFeasibilityCoverImage');
+    
+    var rotateAngle = parseInt(originalAngle) + 90
+
+    console.log(rotateAngle);
+
+    //Set the image margin based on the degre to aovide overlapping with other objects/elements
+    if(rotateAngle == 90 || rotateAngle == 270)
+    {
+        console.log("the degree is 90 or 270");
+        myImage.style.marginTop = "100px";
+        myImage.style.marginBottom = "100px";
+        $("#HomeFeasibilityCoverImage").rotate(rotateAngle);
+    }
+    else
+    {
+        myImage.style.marginTop = "30px";
+        myImage.style.marginBottom = "30px";
+        $("#HomeFeasibilityCoverImage").rotate(rotateAngle);
+    }
+
+       
+    if(rotateAngle==360)
+    {
+        rotateAngle = 0;
+    }
+    document.getElementById('HomeFeasibilityCoverImageAngle').value = rotateAngle
+}
+
+
+/**
+ * Use this to rotate the cover image when the HTML report is loaded. 
+ */
+function RotateSavedCoverImage()
+{
+    console.log("RotateSavedCoverImage");
+    var myImage = document.getElementById('HomeFeasibilityCoverImage');
+    var originalAngle = parseInt(document.getElementById('HomeFeasibilityCoverImageAngle').value);
+    var rotateBtn = document.getElementById('HomeFeasibilityCoverImageRotateButton');
+
+    //Check if there is save cover image from the last time. 
+    if (myImage.src.includes("photos/") > 0) 
+    {
+        console.log("there is saved cover image,need to dispaly the rotate button");
+        rotateBtn.style.display = 'block';
+        //check if the cover image need to be rotated;            
+        console.log("in");
+        if(originalAngle == 90 || originalAngle == 270)
+        {
+            // console.log("the degree is 90 or 270");
+            myImage.style.marginTop = "100px";
+            myImage.style.marginBottom = "100px";
+            $("#HomeFeasibilityCoverImage").rotate(originalAngle);
+        }
+        else if(originalAngle == 180)
+        {
+            myImage.style.marginTop = "30px";
+            myImage.style.marginBottom = "30px";
+            $("#HomeFeasibilityCoverImage").rotate(originalAngle);
+        }
+        else 
+        {
+            myImage.style.marginTop = "30px";
+            myImage.style.marginBottom = "30px";
+        }
+
+    }
+
+}
+
+
+
+
+function HomeFeasibilityUploadDrawings() {
+    document.getElementById('HomeFeasibilityUploadDrawings').click();
+}
+
+$('#HomeFeasibilityUploadDrawings').click(function()
+{
+    //console.log(this.value);
+    this.value = null;
+});
+
+$('#HomeFeasibilityUploadDrawings').change(function () {
+    firstRemove30th = true;
+    var imageIDs = $("#homeFeasibilityDrawingsTable form");
+    //Clear all images
+    if (!isEmpty(imageIDs)) 
+    {
+        for (var i = 0; i < imageIDs.length; i++) {
+            var imgID = imageIDs.eq(i).children("img").attr("id");
+            doRemovePhoto(imgID);
+        }
+        $("#homeFeasibilityDrawings").empty();
+    }
+
+    
+    var table = document.getElementById("homeFeasibilityDrawingsTable");
+    table.style.display = 'block';
+    var count = this.files.length;
+    var imageFile = this.files;
+    console.log(count);
+    //check the number of image
+    var allImages = [];
+    if (this.files.length >=4) 
+    {
+        if(this.files.length > 4)
+        {
+            alert("You can only select 4 images. It will only display the first 4 drawing");
+        }
+        for (let i = 0; i < 4; i++) 
+        {
+            allImages.push(this.files[i]);
+        }
+        Object.keys(allImages).forEach(i => 
+        {
+            const file = allImages[i];
+            elementID = parseInt(i) + 1;
+            var altName = 'drawing' + elementID;
+            var imageID = 'homeDrawing' + elementID;
+            var labelID = 'homeDrawingLable' + elementID;
+            var labelValue = 'Drawing' + elementID;
+            var textID = 'drawDrawingText' + elementID;
+            var removeButtonID = 'homeDrawingRemoveButton' + elementID;
+            var addButtonID = 'AddHomeDrawingButton' + elementID;
+            var uploadID = 'homeDrawingUploadImage' + elementID;
+            //var imgLabelID = "imageCaption" + newid;
+            var rotateButtonID = 'homeDrawingRotateButton' + elementID;
+            var imgAngleInputID = "homeDrawingAngle" + elementID;
+            var formID = "homedrawingForm" + elementID;
+            //Create elements
+            //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
+            var element = createImagesElements("homeFeasibilityDrawingsTable", imageID, labelID, labelValue,
+            textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'homeFeasibilityDrawings');
+    
+            //console.log(element);
+            loadImage.parseMetaData(file, function (data) {
+                var orientation = 0;
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
+    
+                var loadingImage = loadImage(file, function (canvas) {
+                    var data = canvas.toDataURL('image/jpeg');
+                    var image = new Image();
+                    image.onload = function () {
+                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                        if (!isEmpty(code)) {
+                            $("#" + element[0]).attr("src", code);
+    
+                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                type: file.type,
+                                lastModified: file.lastModifiedDate
+                            });
+    
+                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                        }
+                    };
+                    image.src = data;
+                }, {
+                    canvas: true,
+                    orientation: orientation
+                });
+            });
+    
+        });
+        setTimeout(function () {
+            automaticNumbering();
+        }, 2000);
+    } 
+    else 
+    {
+        allImages = this.files;
+        Object.keys(allImages).forEach(i => 
+        {
+            const file = allImages[i];
+            elementID = parseInt(i) + 1;
+            // var newid = ii + 1;
+            // var nameID = ii + 1;
+            var altName = 'drawing' + elementID;
+            var imageID = 'homeDrawing' + elementID;
+            var labelID = 'homeDrawingLable' + elementID;
+            var labelValue = 'Drawing ' + elementID;
+            var textID = 'homeDrawingText' + elementID;
+            var removeButtonID = 'homeDrawingRemoveButton' + elementID;
+            var addButtonID = 'AddHomeDrawingButton' + elementID;
+            var uploadID = 'homeDrawingUploadImage' + elementID;
+            //var imgLabelID = "imageCaption" + newid;
+            var rotateButtonID = 'homeDrawingRotateButton' + elementID;
+            var imgAngleInputID = "homeDrawingAngle" + elementID;
+            var formID = "homedrawingForm" + elementID;
+            //Create elements
+            //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
+            var element = createImagesElements("homeFeasibilityDrawingsTable", imageID, labelID, labelValue,
+            textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'homeFeasibilityDrawings');
+    
+            //console.log(element);
+            loadImage.parseMetaData(file, function (data) {
+                //console.log("I am in");
+                var orientation = 0;
+                if (data.exif) {
+                    orientation = data.exif.get('Orientation');
+                }
+    
+                var loadingImage = loadImage(file, function (canvas) {
+
+                    var data = canvas.toDataURL('image/jpeg');
+                    var image = new Image();
+                    image.onload = function () {
+                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                        if (!isEmpty(code)) {
+                            $("#" + element[0]).attr("src", code);
+    
+                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                type: file.type,
+                                lastModified: file.lastModifiedDate
+                            });
+    
+                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                        }
+                    };
+                    image.src = data;
+                }, {
+                    canvas: true,
+                    orientation: orientation
+                });
+            });
+    
+        });
+    
+        setTimeout(function () {
+            var nextID = count + 1;
+            createEmptElementForAddingImg(nextID);
+            automaticNumbering();
+        }, 2000);
+    }
+});
+
+
+/** 
+    General Function for adding one image when the user click the "add" button
+    by getting the id of the clicked button
+    get the number of the id to generate other ids
+    then use readOneImageURL function to add image on specific field.
+*/
+
+$('#HomeFeasibilityUploadOneDrawing').click(function () {
+   
+    this.value = null;
+});
+$("#HomeFeasibilityUploadOneDrawing").on('change', function (e) {
+    console.log("HomeFeasibilityUploadOneDrawing onchange");
+    var file = e.currentTarget.files;
+    //console.log(global_Img);
+    if (!isEmpty(global_Img) && !isEmpty(file)) {
+        var element = global_Img;
+
+        //console.log(element);
+
+        $("#" + element[0]).show();
+        $("#" + element[1]).show();
+        $("#" + element[2]).val("");
+        $("#" + element[2]).show();
+        $("#" + element[3]).show();
+        $("#" + element[4]).hide();
+        $("#" + element[7]).show();
+        $("#" + element[8]).hide();
+
+        loadImage.parseMetaData(file[0], function (data) {
+            var orientation = 0;
+            if (data.exif) {
+                orientation = data.exif.get('Orientation');
+            }
+
+            var loadingImage = loadImage(file[0], function (canvas) {
+                var data = canvas.toDataURL('image/jpeg');
+                var image = new Image();
+                image.onload = function () {
+                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                    if (!isEmpty(code)) {
+                        $("#" + element[0]).attr("src", code);
+                        var imgFile = new File([convertBase64UrlToBlob(code, file[0].type)], file[0].name, {
+                            type: file[0].type,
+                            lastModified: file[0].lastModifiedDate
+                        });
+                        doRemovePhoto(element[0]);
+                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                    }
+                };
+                image.src = data;
+            }, {
+                canvas: true,
+                orientation: orientation
+            });
+        });
+
+        automaticNumbering();
+
+        //check if it need Add empty element
+        //if there are less than 30 forms, then create a new empty element. 
+        var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+        var imgscount = totalContainers.length;
+        if(imgscount < 4)
+        {
+            var selectedID = String(element[0]).replace(/[^\d.]/g, '');
+            var nextID = parseInt(selectedID) + 1;
+            createEmptElementForAddingImg(nextID);
+        }
+    }
+
+});
+
+
+function DeleteOneImg(element) {
+    
+    //1. Remove the photos
+    document.getElementById(element[8]).value = 0;
+    doRemovePhoto(element[0]);
+    $("#" + element[5]).remove();
+   
+    //2. Get the updated form status to see if need to crate a new img form. 
+    //create a new img form if there are less than 30 images, and there are no empty form. 
+    var totalContainers = $('#homeFeasibilityDrawings').find('> form');
+    //console.log(totalContainers);
+    totalContainers.sort(function (a, b) {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+    var imgscount = totalContainers.length;
+    // console.log("The current img number is " + imgscount);
+
+    var myImage = totalContainers.eq(imgscount-1).children('img').get(0);
+    var imgID = totalContainers.eq(imgscount-1).children('img').get(0).id;
+    var lastid = imgID.match(/\d+/g).map(Number);
+    var nextid = parseInt(lastid) + 1;
+
+    // console.log(myImage.style.display);
+    // console.log(imgID);
+    // console.log(lastid);
+    
+    if(myImage.style.display == 'none')
+    {
+        console.log("the last img form is empty, no need to add a new img form, only refresh the img number")
+        //3. Refresh img number
+        automaticNumbering();
+    }
+    else if(imgscount < 4 && myImage.style.display != 'none' )
+    {
+        console.log("less than 4 drawings and the last img form is full, create a new img form and refresh img number");
+        createEmptElementForAddingImg(nextid);
+        automaticNumbering();
+    }
+    
+}
+
+function RotateOneImage(element)
+{
+    var originalAngle = document.getElementById(element[8]).value;
+    var myImage = document.getElementById(element[0])
+    var currentWidth = myImage.width;
+    var currentHeight = myImage.height;
+    //console.log("orginalAngle: " + originalAngle);
+    if(originalAngle == null || originalAngle == "undefined" || originalAngle == "")
+    {
+        originalAngle = 0;
+    }
+    var rotateAngle = parseInt(originalAngle) + 90
+
+    //Set the image margin based on the degre to aovide overlapping with other objects/elements
+    if(rotateAngle == 90 || rotateAngle == 270)
+    {
+        //console.log("the degree is 90 or 270");
+        myImage.style.marginTop = "195px";
+        myImage.style.marginBottom = "195px";
+        $("#" + element[0]).rotate(rotateAngle);
+    }
+    else
+    {
+        myImage.style.marginTop = "35px";
+        myImage.style.marginBottom = "35px";
+        $("#" + element[0]).rotate(rotateAngle);
+    }
+
+    if(rotateAngle==360)
+    {
+        rotateAngle = 0;
+    }
+    document.getElementById(element[8]).value = rotateAngle;
+    
+}
+
+/**
+ * Create Image Elements dynamtically when image(s) are uploaded
+ * create
+ * image, label, image text, remove Button, Add Button, Rotate Button, Angle Input, A form to contain all 
+ */
+
+function createImagesElements(tableID, imgID, labelID = "", labelValue = "", textID, rmBtnID, addBtnID, formID,rotateBtnID,angleInputID,divID) {
+    //console.log(lastElementID);
+    var form = document.createElement("form"),
+        img = document.createElement("img"),
+        text = document.createElement("input"),
+        rmBtn = document.createElement("input"),
+        addBtn = document.createElement("input"),
+        rotateBtn = document.createElement("input"),
+        label = document.createElement("label"),
+        angleInput = document.createElement("input");
+
+    form.setAttribute("id", formID);
+    form.setAttribute("class", "col text-center my-2");
+
+    img.setAttribute("id", imgID);
+    img.style.marginTop = "35px";
+    img.style.marginBottom = "35px";
+
+    // img.setAttribute("margin-top","35px");
+    // img.setAttribute("margin-bottom","35px");
+
+    text.setAttribute("id", textID);
+    text.setAttribute("type", "text");
+    text.setAttribute("placeholder", "name");
+    text.style.width = "100%";
+
+    rmBtn.setAttribute("id", rmBtnID);
+    rmBtn.setAttribute("class","btn btn-danger");
+    rmBtn.setAttribute("type", "button");
+    rmBtn.setAttribute("value", "Remove");
+    rmBtn.style.width = "100%";
+
+    addBtn.setAttribute("id", addBtnID);
+    addBtn.setAttribute("class","btn btn-secondary");
+    addBtn.setAttribute("type", "button");
+    addBtn.setAttribute("value", "Add");
+    addBtn.style.width = "100%";
+    addBtn.style.display = "none";
+
+    rotateBtn.setAttribute("id", rotateBtnID);
+    rotateBtn.setAttribute("class","btn btn-info");
+    rotateBtn.setAttribute("type", "button");
+    rotateBtn.setAttribute("value", "Rotate");
+    rotateBtn.setAttribute("style","margin-top: 5px;margin-bottom: 5px")
+    rotateBtn.style.width = "100%";
+
+    angleInput.setAttribute("id", angleInputID);
+    angleInput.setAttribute("type", "text");
+    angleInput.style.width = "100%";
+    angleInput.style.display = "none";
+
+
+    label.setAttribute("id", labelID);
+    label.style.marginBottom = "0px";
+
+
+    $("#" + divID).append(form);
+    $("#" + formID).append(img);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(label);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(text);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(angleInput);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(rmBtn);
+    $("#" + formID).append(addBtn);
+    $("#" + formID).append(rotateBtn);
+
+    //console.log(form);
+
+    var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID,tableID,rotateBtnID,angleInputID,divID];
+    //console.log(element);
+    $("#" + rmBtnID).click(function () {
+        // DeleteImage(formID, imgID, textID);
+        DeleteOneImg(element);
+    });
+    $("#" + addBtnID).click(function () {
+        console.log("click");
+        global_Img = element;
+        //console.log(global_Img);
+        $("#HomeFeasibilityUploadOneDrawing").click();
+
+    });
+
+    $("#" + rotateBtnID).click(function () {
+        RotateOneImage(element);
+    });
+
+
+    return element;
+}
+
+/**
+ * Create Empty Image Elements for the next image, when a image is uploaded. Prepare for the next. 
+ */
+function createEmptElementForAddingImg(newID)
+{
+    var nextImageID = 'homeDrawing' + newID;
+    var nextTextID = 'homeDrawingText' + newID;
+    var nextLabelID = 'homeDrawingLable' + newID;
+    var nextLableValue = 'Drawing ' + (parseInt(newID) + 1);
+    var nextRemoveButtonID = 'homeDrawingRemoveButton' + newID;
+    var nextAddButtonID = 'AddHomeDrawingButton' + newID;
+    var nextUploadID = 'homeDrawingUploadImage' + newID;
+    var nextRotateBtnID = 'homeDrawingRotateButton' + newID;
+    var nextAngelInputID = 'homeDrawingAngle' + newID;
+    var nextFormID = "homedrawingForm" + newID;
+    var emptyElement = createImagesElements('homeFeasibilityDrawingsTable', nextImageID, nextLabelID, nextLableValue, nextTextID, 
+                                            nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'homeFeasibilityDrawings');
+    //The new form only show add button.
+    $("#" + emptyElement[0]).hide();
+    $("#" + emptyElement[1]).hide();
+    $("#" + emptyElement[2]).val("");
+    $("#" + emptyElement[2]).hide();
+    $("#" + emptyElement[3]).hide();
+    $("#" + emptyElement[4]).show();
+    $("#" + emptyElement[7]).hide();
+    $("#" + emptyElement[8]).show();
 
 }
 
@@ -870,5 +985,39 @@ function convertBase64UrlToBlob(urlData,type){
     }
 
     return new Blob( [ab] , {type : type});
+}
+
+/**
+ * Single Action, image related
+ * Resize the Image
+ */
+function resizeImage_Canvas(img) {
+    var MAX_WIDTH = 1536,
+        MAX_HEIGHT = 1024,
+        width = img.width,
+        height = img.height,
+        canvas = document.createElement('canvas');
+
+    if (width >= height) {
+        if (width > MAX_WIDTH) {
+            //height *= MAX_WIDTH / width;
+            //width = MAX_WIDTH;
+            height = MAX_HEIGHT;
+            width = MAX_WIDTH;
+        }
+    } else {
+        if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            //height = MAX_HEIGHT;
+            height = MAX_HEIGHT;
+
+        }
+    }
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+
+    return canvas;
 }
 

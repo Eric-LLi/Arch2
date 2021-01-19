@@ -3076,119 +3076,201 @@ function getImagesTable(divid)
     }
     else
     {
-        // var firstRow = [
-        //     {
-        //         text:"ARCHITECT'S ADVICE REPORT(continued)",
-        //         style:'tableHeader',
-        //         margin: [0, 0, 0, 5],
-        //         colSpan:2
-        //     },{}
-        // ];
-        // data.push(firstRow);
-    
-        // var secondRow = [
-        //     {
-        //         text:'Address: ' + getIt('adviceAddress'),
-        //         style: 'tableBoldTextAlignLeft',
-        //         margin: [0, 0, 0, 10],
-        //         colSpan:2
-        //     },{}
-        // ];
-        // data.push(secondRow);
-        for (var i = 0; i < totalContainers.length; i++) 
+        var firstImgSrc = totalContainers.eq(0).children('img').attr('src');
+        if (totalContainers.length == 1 && typeof firstImgSrc == "undefined")
         {
-            var img = totalContainers.eq(i).children('div').eq(0).children('img').get(0),
-                imgSrc = totalContainers.eq(i).children('div').eq(0).children('img').attr('src'),
-                imgLabel = totalContainers.eq(i).children('div').eq(1).children('label').text(),
-                imgText = totalContainers.eq(i).children('div').eq(2).children('input').val()
-                // width = 0,
-                // height = 0;
-                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
-                //console.log(totalContainers.eq(i).children('div').eq(0).children('img').attr('src'));
-                //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
-                //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
-
-            //console.log(imgLabel);
-            //console.log(imgSrc);
-
-            if (typeof imgSrc  != "undefined")
+            console.log("only has one container, and this container is emtpy");
+            tableBody = {
+                text:''
+            };
+        }
+        else
+        {
+            for (var i = 0; i < totalContainers.length; i++)
             {
-                if (imgSrc.includes("photos/") > 0) 
+                var img = totalContainers.eq(i).children('img').get(0),
+                    imgSrc = totalContainers.eq(i).children('img').attr('src'),
+                    imgLabel = totalContainers.eq(i).children('label').text(),
+                    imgText = totalContainers.eq(i).children('input').eq(0).val(),
+                    imgAngle = totalContainers.eq(i).children('input').eq(1).val(),
+                    width = 0,
+                    height = 0,
+                    alignment = 'left'
+                    margin = [0,5,0,15];
+
+                if(imgAngle == null || imgAngle == "undefined" || imgAngle == "")
                 {
-                    imgSrc = convertImgToBase64(img);
+                    imgAngle = 0;
                 }
-    
-                // if (img.width >= img.height) {
-                //     width = 250;
-                //     height = 187;
-                // } else {
-                //     width = img.width * 187 / img.height;
-                //     height = 187;
-                // }
-    
-                row.push({
-                    stack: [
-                        {
-                            image: imgSrc,
-                            height: 110,
-                            width: 160,
-                            margin:[0,0,0,5]
-                            // margin:[5,20,0,5],
-                            // alignment: 'center'
-                        },
-                        // {
-                        //     text: imgLabel,
-                        //     bold:'true',
-                        //     fontSize:10,
-                        //     margin: [0, 2],
-                        //     alignment: 'center'
-                        // },
-                        {
-                            columns:[
-                                {
-                                    width: 160,
-                                    text: imgText,
-                                    fontSize: 9,
-                                    margin:[0,4,0,20]
-                                }
-                            ]
-                            
-                        }
-                    ],
-                    margin:[0,5,0,10]
-                })
-                divCount++;
-                //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
-                if (divCount === 4) {
-                    data.push(row);
-                    row = [];
-                    divCount = 1;
+                else
+                {
+                    imgAngle = parseInt(imgAngle);
                 }
+
+                // console.log(id + "  " + imgAngle);
+    
+                if (typeof imgSrc  != "undefined")
+                {
+                    //console.log("I am in");
+                    //Work on the image anlge. 
+                    var canvas = document.createElement("canvas");
+                    canvas.height = canvas.width = 0;
+                    var context = canvas.getContext('2d');
+                    // var imgwidth = img.offsetWidth;
+                    // var imgheight = img.offsetHeight;
+                    var imgwidth = img.width;
+                    var imgheight = img.height;
+                    canvas.width = imgwidth ;
+                    canvas.height = imgheight;
+
+                    if(imgAngle == 90)
+                    {
+                        canvas.width = imgheight ;
+                        canvas.height = imgwidth;
+                        var scale = imgheight/imgwidth;
+                        console.log("scale: " + scale);
+                        console.log("canvas.width: " + canvas.width);
+                        console.log("canvas.height: " + canvas.height);
+                        context.save();
+                        context.fillStyle = "white";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        //context.translate(imgwidth/2, imgheight/2);
+                        context.rotate(imgAngle*Math.PI/180);
+                        context.drawImage(img,canvas.width/scale,0, -(imgheight)/scale, -(imgwidth)*scale);
+                        context.restore();
+                    }
+                    else if (imgAngle == 180)
+                    {
+                        canvas.width = imgwidth ;
+                        canvas.height = imgheight;
+                        var scale = imgwidth/imgheight;
+                        console.log("scale: " + scale);
+                        console.log("canvas.width: " + canvas.width);
+                        console.log("canvas.height: " + canvas.height);
+                        context.save();
+                        context.fillStyle = "white";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        // context.translate(imgwidth/2, imgheight/2);
+                        context.rotate(imgAngle*Math.PI/180);
+                        context.drawImage(img,0,0, -(imgwidth), -(imgheight));
+                        context.restore();
+                    }
+                    else if(imgAngle == 270)
+                    {
+                        canvas.width = imgheight ;
+                        canvas.height = imgwidth;
+                        var scale = imgheight/imgwidth;
+                        console.log("scale: " + scale);
+                        console.log("canvas.width: " + canvas.width);
+                        console.log("canvas.height: " + canvas.height);
+                        context.save();
+                        context.fillStyle = "white";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        // context.translate(imgwidth/2, imgheight/2);
+                        context.rotate(imgAngle*Math.PI/180);
+                        context.drawImage(img,0,canvas.height*scale, -(imgheight)/scale, -(imgwidth)*scale);
+                        context.restore();
+                    }
+                    else
+                    {
+                        canvas.width = imgwidth ;
+                        canvas.height = imgheight;
+                        var scale = imgwidth/imgheight;
+                        console.log("scale: " + scale);
+                        console.log("canvas.width: " + canvas.width);
+                        console.log("canvas.height: " + canvas.height);
+                        context.save();
+                        context.fillStyle = "white";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        // context.translate(imgwidth/2, imgheight/2);
+                        context.rotate(imgAngle*Math.PI/180);
+                        context.drawImage(img,canvas.width,canvas.height, -(imgwidth), -(imgheight));
+                        context.restore();
+                    }
+                    imgSrc = canvas.toDataURL("image/jpeg");
+
+                    // if (imgSrc.includes("photos/") > 0) 
+                    // {
+                    //     imgSrc = convertImgToBase64(img);
+                    // }
+        
+                    if (img.width >= img.height) {
+                        width = 175;
+                        height = 160;
+                        margin = [10,5,0,10];
+                    } else {
+                        width = img.width * 160 / img.height;
+                        height = 160;
+                        margin = [10,5,0,10];
+                    }
+        
+                    row.push({
+                        stack: [
+                            {
+                                image: imgSrc,
+                                //height: 160,
+                                width: 160,
+                                margin:[0,0,0,5],
+                                // alignment: 'center'
+                            },
+                            {
+                                columns:[
+                                    {
+                                        width: 160,
+                                        text: imgText,
+                                        fontSize: 9,
+                                        margin:[0,5,0,20]
+                                    }
+                                ]
+                                
+                            }
+                        ],
+                        margin:[0,5,0,10]
+                    })
+                    divCount++;
+                    //the row has three cells, this row is completed, need to reset the row, and put this row into the table data
+                    if (divCount === 4) {
+                        data.push(row);
+                        row = [];
+                        divCount = 1;
+                    }
+                }
+            }
+            //console.log(divCount);
+             //the last row only has one cell, need to put an empty cell to this row. 
+            if (divCount == 2) {
+                console.log("the last row only has one cell, need to put two empty cells to this row.")
+                row.push({});
+                row.push({});
+                data.push(row);
+            }
+            if (divCount == 3)
+            {
+                console.log("the last row only has two cell, need to put one empty cells to this row.")
+                row.push({});
+                data.push(row);
             }
             
-        }
+        
+            //console.log(data);
 
-        //the last row only has one cell, need to put an empty cell to this row. 
-        if (divCount == 2 || divCount == 3) {
-            console.log("the last row only has one or two cell, need to put an empty cell to this row.")
-            row.push({});
-            data.push(row);
-        }
-
-        tableBody = {
-            layout: {
-                hLineColor: function (i, node) {
-                    return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+            tableBody = {
+                layout: {
+                    hLineColor: function (i, node) {
+                        return (i === 0 || i === node.table.body.length) ? '#FFFFFF' : '#FFFFFF';
+                    },
+                    vLineColor: function (i, node) {
+                        return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                    }
                 },
-                vLineColor: function (i, node) {
-                    return (i === 0 || i === node.table.widths.length) ? '#FFFFFF' : '#FFFFFF';
+                table: {
+                    width:[160,160,160],
+                    dontBreakRows: true,
+                    // headerRows: ,
+                    // keepWithHeaderRows: 1,
+                    body: data
                 }
-            },
-            table: {
-                width:[160,160,160],
-                dontBreakRows: true,
-                body: data
-            }
+            } 
         }
     }
     return tableBody;

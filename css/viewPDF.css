@@ -60,6 +60,7 @@
 
 #HA_PdfContents button {
     margin: 5px 0px 0px 0px;
+    width: 100%;
     /*    display: none;*/
 }
 
@@ -67,6 +68,7 @@
 #CPImagesTable button,
 #HOWImagesTable button {
     margin: 5px 0px 0px 0px;
+    width: 100%;
 }
 
 #HA_PdfContents input {
@@ -112,8 +114,19 @@
     margin-left: 20px;
     text-align: center;
     width: 500px;
-    height: 500px;
+    margin-top:30px;
+    /* height: 500px; */
 }
+
+/* #CPImagesTable div
+{
+    float: left;
+    display: inline;
+    margin-left: 20px;
+    text-align: center;
+    width: 500px;
+    height: 500px;
+} */
 
 /*
 #img_table td,

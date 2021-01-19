@@ -236,26 +236,6 @@ function reorderImages() {
     console.log("need to reorder the images");
     var totalContainers = $("#HA_ImgsContents").children('div');
     var BigContainer = document.getElementById('HA_ImgsContents');
-    //console.log(totalContainers);
-    // for (var i=0;i<totalContainers.length;i++)
-    // {
-    //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
-    //     var imgContainerID = id + "_CPimgContainer";
-    //     var ImgID = totalContainers.eq(i).children('img').get(0).id;
-
-    //     console.log(imgContainerID);
-    //     console.log(id);
-    //     console.log(ImgID);
-    //     // console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
-    //     //console.log((totalContainers[i].id));
-    //     console.log(totalContainers.eq(i).children('button').get(0).onclick);
-    //     var imgRmBtnID = totalContainers.eq(i).children('button').get(0).id;
-    //     // $("#" + imgRmBtnID).click(function () {
-    //     //     imagesRemoveBtn(imgContainerID, newImgID);
-    //     // });
-    //     totalContainers.eq(i).children('button').get(0).onclick = function(){imagesRemoveBtn(imgContainerID, ImgID)};
-
-    // }
     totalContainers.sort(function (a, b) {
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
@@ -265,17 +245,47 @@ function reorderImages() {
     $("#HA_ImgsContents").empty();
     for (var i = 0; i < totalContainers.length; i++) {
         BigContainer.appendChild(totalContainers[i]);
+        //console.log(totalContainers.eq(i).children('button'));
+        //console.log(totalContainers.eq(i).children('input'));
         var id = totalContainers[i].id.replace(/[^\d.]/g, '');
         var imgContainerID = id + "_imgContainer";
+        var myImage = totalContainers.eq(i).children('img').get(0);
         var ImgID = totalContainers.eq(i).children('img').get(0).id;
-        // console.log(imgContainerID);
-        // console.log(id);
-        // console.log(ImgID);
+        var rotateBtnID = totalContainers.eq(i).children('button').eq(1).get(0).id;
+        var angleID = totalContainers.eq(i).children('input').eq(1).get(0).id;
         var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
+        var rotateBnt = document.getElementById(rotateBtnID);
         var removeFunction = "imagesRemoveBtn('" + imgContainerID + "', '" + ImgID + "')";
+        var rotateFunction = "rotateOneImage('" + id + "')";
+        var originalAngle = parseInt(document.getElementById(angleID).value);
+
+        if(originalAngle > 0)
+        {
+            if(originalAngle == 90 || originalAngle == 270)
+            {
+                console.log("the degree is 90 or 270");
+                myImage.style.marginTop = "75px";
+                myImage.style.marginBottom = "75px";
+                $("#" + ImgID).rotate(originalAngle);            }
+            else
+            {
+                myImage.style.marginTop = "35px";
+                myImage.style.marginBottom = "35px";
+                $("#" + ImgID).rotate(originalAngle);
+            }
+
+        }
+        else
+        {
+            myImage.style.marginTop = "35px";
+            myImage.style.marginBottom = "35px";
+        }
+
+
         //console.log(removeFunction);
         removeBtn.setAttribute("onclick", removeFunction);
-        //console.log(removeBtn);
+        rotateBnt.setAttribute("onclick", rotateFunction);
+        //console.log(rotateBnt);
 
     }
 }
@@ -284,26 +294,7 @@ function reorderSketch() {
     console.log("need to reorder the images");
     var totalContainers = $("#HA_PdfContents").children('div');
     var BigContainer = document.getElementById('HA_PdfContents');
-    //console.log(totalContainers);
-    // for (var i=0;i<totalContainers.length;i++)
-    // {
-    //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
-    //     var imgContainerID = id + "_CPimgContainer";
-    //     var ImgID = totalContainers.eq(i).children('img').get(0).id;
-
-    //     console.log(imgContainerID);
-    //     console.log(id);
-    //     console.log(ImgID);
-    //     // console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
-    //     //console.log((totalContainers[i].id));
-    //     console.log(totalContainers.eq(i).children('button').get(0).onclick);
-    //     var imgRmBtnID = totalContainers.eq(i).children('button').get(0).id;
-    //     // $("#" + imgRmBtnID).click(function () {
-    //     //     imagesRemoveBtn(imgContainerID, newImgID);
-    //     // });
-    //     totalContainers.eq(i).children('button').get(0).onclick = function(){imagesRemoveBtn(imgContainerID, ImgID)};
-
-    // }
+   
     totalContainers.sort(function (a, b) {
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
@@ -313,18 +304,57 @@ function reorderSketch() {
     $("#HA_PdfContents").empty();
     for (var i = 0; i < totalContainers.length; i++) {
         BigContainer.appendChild(totalContainers[i]);
-        //var id = totalContainers[i].id.replace(/[^\d.]/g, '');
-        //var imgContainerID = id + "_HOWimgContainer";
-        //var ImgID = totalContainers.eq(i).children('img').get(0).id;
+        // var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+        // var imgContainerID = id + "_HOWimgContainer";
+        // var ImgID = totalContainers.eq(i).children('img').get(0).id;
         // console.log(imgContainerID);
         // console.log(id);
         // console.log(ImgID);
-        //var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
-        //console.log(removeBtn);
-        //var removeFunction = "deleteImg(this.id)";
+        // var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
+        // console.log(removeBtn);
+        // var removeFunction = "deleteImg(this.id)";
+        // console.log(removeFunction);
+        // removeBtn.setAttribute("onclick", removeFunction);
+        // console.log(removeBtn);
+        var id = totalContainers[i].id.replace(/[^\d.]/g, '');
+        var imgContainerID = id + "_imgContainer";
+        var myImage = totalContainers.eq(i).children('img').get(0);
+        var ImgID = totalContainers.eq(i).children('img').get(0).id;
+        var rotateBtnID = totalContainers.eq(i).children('button').eq(1).get(0).id;
+        var angleID = totalContainers.eq(i).children('input').eq(1).get(0).id;
+        var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
+        var rotateBnt = document.getElementById(rotateBtnID);
+        var removeFunction = "deleteImg(this.id)";
+        var rotateFunction = "rotateOnePDF('" + id + "')";
+        var originalAngle = parseInt(document.getElementById(angleID).value);
+
+        if(originalAngle > 0)
+        {
+            if(originalAngle == 90 || originalAngle == 270)
+            {
+                console.log("the degree is 90 or 270");
+                myImage.style.marginTop = "75px";
+                myImage.style.marginBottom = "75px";
+                $("#" + ImgID).rotate(originalAngle);            }
+            else
+            {
+                myImage.style.marginTop = "35px";
+                myImage.style.marginBottom = "35px";
+                $("#" + ImgID).rotate(originalAngle);
+            }
+
+        }
+        else
+        {
+            myImage.style.marginTop = "35px";
+            myImage.style.marginBottom = "35px";
+        }
+
+
         //console.log(removeFunction);
-        //removeBtn.setAttribute("onclick", removeFunction);
-        //console.log(removeBtn);
+        removeBtn.setAttribute("onclick", removeFunction);
+        rotateBnt.setAttribute("onclick", rotateFunction);
+        //console.log(rotateBnt);
 
     }
 }
@@ -1016,6 +1046,7 @@ $("#Imgs_Upload").change(function (e) {
             //Create elements for img.
             //element[imgContainerID, newImgID, imgTextID, imgRmBtnID]
             const element = createPhoto(photos_count);
+            //console.log(element);
             photos_count++;
 
             //FileReader() only support new version of browser.
@@ -1041,7 +1072,7 @@ $("#Imgs_Upload").change(function (e) {
                                 lastModified: file.lastModifiedDate
                             });
 
-                            doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
+                            doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents", element[4], element[0],'','','','','',element[5],element[6]);
 
                             $("#Imgpage-loader").hide();
                             $("#HA_ImgsContents").show();
@@ -1053,30 +1084,6 @@ $("#Imgs_Upload").change(function (e) {
                     orientation: orientation
                 });
             });
-            // var reader = new FileReader();
-            // reader.onload = function (e) {
-            //     var data = e.target.result;
-            //     var image = new Image();
-            //     image.onload = function () {
-            //         var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-
-            //         if (!isEmpty(code)) {
-            //             $("#" + element[1]).attr("src", code);
-
-            //             var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-            //                 type: file.type,
-            //                 lastModified: file.lastModifiedDate
-            //             });
-
-            //             doUploadFile(imgFile, element[1], element[2], element[3], "", "HA_ImgsContents");
-
-            //             $("#Imgpage-loader").hide();
-            //             $("#HA_ImgsContents").show();
-            //         }
-            //     };
-            //     image.src = data;
-            // };
-            // reader.readAsDataURL(file);
         });
 
         setTimeout(function () {
@@ -1092,16 +1099,22 @@ function createPhoto(id) {
         imgText = document.createElement("input"),
         imgRmBtn = document.createElement("button"),
         lastContainer = document.getElementById("HA_ImgsContents"),
+        rotateBtn = document.createElement("button"),
+        angleInput = document.createElement("input"),
         imgContainerID = id + "_imgContainer",
         newImgID = id + "_AddImg",
         imgLabelID = "imageCaption" + id,
         imgTextID = id + "_imgText",
-        imgRmBtnID = id + "_imgRmBtn";
+        imgRmBtnID = id + "_imgRmBtn",
+        rotateBtnID = id + "_imgRotateBtn",
+        angleInputID = id + "_imgAngle";
 
     //Setting element's attribute.
     imgContainer.setAttribute("id", imgContainerID);
 
     newImg.setAttribute("id", newImgID);
+    newImg.style.width = '500px';
+    newImg.style.height = '500px';
     //    newImg.setAttribute("width", 200);
     //    newImg.setAttribute("height", 200);
 
@@ -1115,20 +1128,40 @@ function createPhoto(id) {
     imgRmBtn.setAttribute("id", imgRmBtnID);
     imgRmBtn.setAttribute("class", "btn btn-danger");
 
+
+    rotateBtn.setAttribute("id", rotateBtnID);
+    rotateBtn.setAttribute("class","btn btn-info");
+    rotateBtn.setAttribute("type", "button");
+
+
+    angleInput.setAttribute("id", angleInputID);
+    angleInput.setAttribute("type", "text");
+    angleInput.style.display = "none";
+
     lastContainer.appendChild(imgContainer);
     document.getElementById(imgContainerID).appendChild(newImg);
     document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgLabel);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgText);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
+    document.getElementById(imgContainerID).appendChild(angleInput);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgRmBtn);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
+    document.getElementById(imgContainerID).appendChild(rotateBtn);
 
-    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID, imgLabelID];
+    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID, imgLabelID,rotateBtnID,angleInputID];
 
     $("#" + imgLabelID).html("IMG " + id);
     $("#" + imgRmBtnID).html("Remove");
+    $("#" + rotateBtnID).html("Rotate");
     //Photos images remove button listerner.
     $("#" + imgRmBtnID).click(function () {
         imagesRemoveBtn(imgContainerID, newImgID);
+    });
+    $("#" + rotateBtnID).click(function () {
+        rotateOneImage(id);
     });
     return elements;
 }
@@ -1158,6 +1191,45 @@ function imagesRemoveBtn(containerID, imgID) {
         automaticNumbering('HA_ImgsContents', 'IMG');
     }
 }
+
+//Photos page: imgae rotate button action.
+function rotateOneImage(ID)
+{
+    console.log("click");
+    var angelInputID = ID + "_imgAngle";
+    var imgID = ID + "_AddImg";
+    var originalAngle = document.getElementById(angelInputID).value;
+    var rotateAngle = parseInt(originalAngle) + 90;
+    var myImage = document.getElementById(imgID);
+    if(originalAngle == null || originalAngle == "undefined" || originalAngle == "")
+    {
+        originalAngle = 0;
+    }
+    var rotateAngle = parseInt(originalAngle) + 90
+
+    //Set the image margin based on the degre to aovide overlapping with other objects/elements
+    if(rotateAngle == 90 || rotateAngle == 270)
+    {
+        //console.log("the degree is 90 or 270");
+        myImage.style.marginTop = "75px";
+        myImage.style.marginBottom = "75px";
+        $("#" + imgID).rotate(rotateAngle);
+    }
+    else
+    {
+        myImage.style.marginTop = "35px";
+        myImage.style.marginBottom = "35px";
+        $("#" + imgID).rotate(rotateAngle);
+    }
+
+    if(rotateAngle==360)
+    {
+        rotateAngle = 0;
+    }
+
+    document.getElementById(angelInputID).value = rotateAngle;
+}
+
 
 var __PDF_DOC,
     __CANVAS = $('#pdf-canvas').get(0),
@@ -1193,14 +1265,18 @@ function createPDFImg(id) {
         btnElement = document.createElement("button"),
         container = document.createElement("div"),
         caption = document.createElement("input"),
-        label = document.createElement("label");
+        label = document.createElement("label"),
+        rotateBtn = document.createElement("button"),
+        angleInput = document.createElement("input");
 
     var tr = document.getElementById("HA_PdfContents"),
         captionID = id + "_Cap",
         containerID = id + "_DIV",
         imgID = id + "_IMG",
         labelID = id + "Sketch",
-        btnID = id + "_btnDel";
+        btnID = id + "_btnDel",
+        rotateBtnID = id + "_pdfRotateBtn",
+        angleInputID = id + "_pdfAngle";
 
 
     container.setAttribute("id", containerID);
@@ -1216,6 +1292,8 @@ function createPDFImg(id) {
 
     imgElement.setAttribute("id", imgID);
     imgElement.setAttribute("src", "");
+    imgElement.style.width = '1000px';
+    imgElement.style.height = '1000px';
 
     btnElement.setAttribute("id", btnID);
     btnElement.setAttribute("type", "button");
@@ -1223,16 +1301,35 @@ function createPDFImg(id) {
     btnElement.setAttribute("onclick", "deleteImg(this.id)");
     btnElement.innerHTML = "Remove";
 
+    rotateBtn.setAttribute("id", rotateBtnID);
+    rotateBtn.setAttribute("class","btn btn-info");
+    rotateBtn.setAttribute("type", "button");
+    rotateBtn.innerHTML = "Rotate";
+
+
+    angleInput.setAttribute("id", angleInputID);
+    angleInput.setAttribute("type", "text");
+    angleInput.style.display = "none";
+
+
     tr.appendChild(container);
     document.getElementById(containerID).appendChild(imgElement);
     document.getElementById(containerID).appendChild(document.createElement("br"));
     document.getElementById(containerID).appendChild(label);
     document.getElementById(containerID).appendChild(document.createElement("br"));
     document.getElementById(containerID).appendChild(caption);
+    document.getElementById(containerID).appendChild(document.createElement("br"));
+    document.getElementById(containerID).appendChild(angleInput);
+    document.getElementById(containerID).appendChild(document.createElement("br"));
     document.getElementById(containerID).appendChild(btnElement);
+    document.getElementById(containerID).appendChild(document.createElement("br"));
+    document.getElementById(containerID).appendChild(rotateBtn);
 
+    $("#" + rotateBtnID).click(function () {
+        rotateOnePDF(id);
+    });
 
-    var combine = [imgID, btnID, captionID, containerID];
+    var combine = [imgID, btnID, captionID, containerID,labelID,rotateBtnID,angleInputID];
     return combine;
 }
 
@@ -1263,6 +1360,43 @@ var deleteImg = function (bid) {
     }
 };
 
+function rotateOnePDF(id)
+{
+    console.log("click");
+    var angelInputID = id + "_pdfAngle";
+    var imgID = id + "_IMG";
+    var originalAngle = document.getElementById(angelInputID).value;
+    var rotateAngle = parseInt(originalAngle) + 90;
+    var myImage = document.getElementById(imgID);
+    if(originalAngle == null || originalAngle == "undefined" || originalAngle == "")
+    {
+        originalAngle = 0;
+    }
+    var rotateAngle = parseInt(originalAngle) + 90
+
+    //Set the image margin based on the degre to aovide overlapping with other objects/elements
+    if(rotateAngle == 90 || rotateAngle == 270)
+    {
+        //console.log("the degree is 90 or 270");
+        myImage.style.marginTop = "75px";
+        myImage.style.marginBottom = "75px";
+        $("#" + imgID).rotate(rotateAngle);
+    }
+    else
+    {
+        myImage.style.marginTop = "35px";
+        myImage.style.marginBottom = "35px";
+        $("#" + imgID).rotate(rotateAngle);
+    }
+
+    if(rotateAngle==360)
+    {
+        rotateAngle = 0;
+    }
+
+    document.getElementById(angelInputID).value = rotateAngle;
+
+}
 function showPage(page_no) {
     // While page is being rendered hide the canvas and show a loading message
     $("#page-loader").show();
@@ -1310,8 +1444,9 @@ function showPage(page_no) {
                     type: fileType,
                     lastModified: uploadPDFfile[0].lastModifiedDate
                 });
+            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents", imgbtnID[4], imgbtnID[3],'','','','','',imgbtnID[5],imgbtnID[6]);
 
-            doUploadFile(file, imgbtnID[0], imgbtnID[2], imgbtnID[1], "", "HA_PdfContents");
+
         });
     });
 }

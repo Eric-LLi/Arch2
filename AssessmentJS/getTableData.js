@@ -4053,26 +4053,114 @@ function getPhotoTable(id) {
     
                 if (typeof imgSrc  != "undefined")
                 {
+                    var canvas = document.createElement("canvas");
+                    canvas.height = canvas.width = 0;
+                    var context = canvas.getContext('2d');
+                    // var imgwidth = img.offsetWidth;
+                    // var imgheight = img.offsetHeight;
+                    var imgwidth = img.width;
+                    var imgheight = img.height;
+                    canvas.width = imgwidth ;
+                    canvas.height = imgheight;
+
+                    if(imgAngle == 90)
+                    {
+                        canvas.width = imgheight ;
+                        canvas.height = imgwidth;
+                        var scale = imgheight/imgwidth;
+                        console.log("scale: " + scale);
+                        console.log("canvas.width: " + canvas.width);
+                        console.log("canvas.height: " + canvas.height);
+                        context.save();
+                        context.fillStyle = "white";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        //context.translate(imgwidth/2, imgheight/2);
+                        context.rotate(imgAngle*Math.PI/180);
+                        context.drawImage(img,canvas.width/scale,0, -(imgheight)/scale, -(imgwidth)*scale);
+                        context.restore();
+                    }
+                    else if (imgAngle == 180)
+                    {
+                        canvas.width = imgwidth ;
+                        canvas.height = imgheight;
+                        var scale = imgwidth/imgheight;
+                        console.log("scale: " + scale);
+                        console.log("canvas.width: " + canvas.width);
+                        console.log("canvas.height: " + canvas.height);
+                        context.save();
+                        context.fillStyle = "white";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        // context.translate(imgwidth/2, imgheight/2);
+                        context.rotate(imgAngle*Math.PI/180);
+                        context.drawImage(img,0,0, -(imgwidth), -(imgheight));
+                        context.restore();
+                    }
+                    else if(imgAngle == 270)
+                    {
+                        canvas.width = imgheight ;
+                        canvas.height = imgwidth;
+                        var scale = imgheight/imgwidth;
+                        console.log("scale: " + scale);
+                        console.log("canvas.width: " + canvas.width);
+                        console.log("canvas.height: " + canvas.height);
+                        context.save();
+                        context.fillStyle = "white";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        // context.translate(imgwidth/2, imgheight/2);
+                        context.rotate(imgAngle*Math.PI/180);
+                        context.drawImage(img,0,canvas.height*scale, -(imgheight)/scale, -(imgwidth)*scale);
+                        context.restore();
+                    }
+                    else
+                    {
+                        canvas.width = imgwidth ;
+                        canvas.height = imgheight;
+                        var scale = imgwidth/imgheight;
+                        console.log("scale: " + scale);
+                        console.log("canvas.width: " + canvas.width);
+                        console.log("canvas.height: " + canvas.height);
+                        context.save();
+                        context.fillStyle = "white";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        // context.translate(imgwidth/2, imgheight/2);
+                        context.rotate(imgAngle*Math.PI/180);
+                        context.drawImage(img,canvas.width,canvas.height, -(imgwidth), -(imgheight));
+                        context.restore();
+                    }
+                    imgSrc = canvas.toDataURL("image/jpeg");
+                    // context.save();
+                    // context.fillStyle = "#ffffff";
+                    // context.fillRect(0, 0, canvas.width, canvas.height);
+                    // context.translate(imgwidth/2, imgheight/2);
+                    // context.rotate(imgAngle*Math.PI/180);
+                    // context.drawImage(img,canvas.width/2,canvas.height/2, -(imgwidth), -(imgheight));
+                    // context.restore();
+                   
                     //console.log("I am in");
                     //Work on the image anlge. 
-                    var canvas = document.createElement("canvas");
-                    canvas.width = img.naturalWidth + img.naturalHeight*1/2;
-                    canvas.height = img.naturalHeight + img.naturalWidth*1/2;
-                    // console.log(canvas.width);
-                    // console.log(canvas.height);
-                    var ctx = canvas.getContext("2d");
-                    //ctx.drawImage(myImage, 0,0);
-                    ctx.clearRect(0,0,canvas.width,canvas.height);
-                    ctx.fillStyle = "#ffffff";
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    //ctx.save();
-                    ctx.translate(canvas.width/2,canvas.height/2);
-                    ctx.rotate(imgAngle*Math.PI/180);
+                    // var canvas = document.createElement("canvas");
+                    // canvas.width = img.naturalWidth + img.naturalHeight*1/2;
+                    // canvas.height = img.naturalHeight + img.naturalWidth*1/2;
+                    // // console.log(canvas.width);
+                    // // console.log(canvas.height);
+                    // var ctx = canvas.getContext("2d");
+                    // //ctx.drawImage(myImage, 0,0);
+                    // ctx.clearRect(0,0,canvas.width,canvas.height);
+                    // ctx.fillStyle = "#ffffff";
+                    // ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    // //ctx.save();
+                    // ctx.translate(canvas.width/2,canvas.height/2);
+                    // ctx.rotate(imgAngle*Math.PI/180);
                     
-                    //ctx.clearRect(0,0,canvas.width,canvas.height);
-                    ctx.drawImage(img,-img.naturalWidth/2,-img.naturalHeight/2);
-                    ctx.restore();
-                    imgSrc = canvas.toDataURL("image/jpeg");
+                    // //ctx.clearRect(0,0,canvas.width,canvas.height);
+                    // ctx.drawImage(img,-img.naturalWidth/2,-img.naturalHeight/2);
+                    // ctx.restore();
+                    // imgSrc = canvas.toDataURL("image/jpeg");
+                    
+
+                    // canvas.width = imgwidth + imgheight * 1/2;
+                    // canvas.height = imgheight + imgwidth*1/2
+                   
 
                     // if (imgSrc.includes("photos/") > 0) 
                     // {
@@ -4093,8 +4181,9 @@ function getPhotoTable(id) {
                         stack: [
                             {
                                 image: imgSrc,
-                                height: height,
-                                width: width,
+                                //height: 160,
+                                width: 160,
+                                //fit:[160,140],
                                 margin:[0,0,0,5],
                                 alignment: 'center'
                             },
@@ -4104,7 +4193,7 @@ function getPhotoTable(id) {
                                         width: 160,
                                         text: imgText,
                                         fontSize: 9,
-                                        margin:margin
+                                        margin:[0,5,0,20]
                                     }
                                 ]
                                 

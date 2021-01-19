@@ -1322,45 +1322,18 @@ function getImages() {
     var data = [],
         row = [],
         tableBody, divCount = 1;
-    //    var finalImageNumber = 0;
-    //    var supposedImageNumber = 0;
-    //    var totalImageNumber = $('#CPImagesDIV').find('> form').length;
-    var totalContainers = $("#CPImagesTable").children('div');
-    //    console.log("The total number of forms are: " + totalImageNumber);
-    //
-    //    if (totalImageNumber != 0) {
-    //        var lastImage = document.getElementById('CPImagesDIV').lastElementChild.lastChild.firstChild;
-    //        //console.log(lastImage);
-    //        supposedImageNumber = lastImage.id.replace(/[^\d.]/g, ''); //this is the image number based on the id of last image on the form
-    //        console.log("The supposed number of images based on id is " + supposedImageNumber);
-    //    }
-    //
-    //    if (totalImageNumber > supposedImageNumber) {
-    //        finalImageNumber = totalImageNumber;
-    //    } else {
-    //        finalImageNumber = supposedImageNumber;
-    //    }
 
-    if (isEmpty(totalContainers.length)) {
+    var totalContainers = $("#CPImagesTable").children('div');
+   
+
+    if (isEmpty(totalContainers.length)) 
+    {
         tableBody = {
             text:''
         };
-        // tableBody = {
-        //     layout: 'noBorders',
-        //     table: {
-        //         body: [
-        //             [
-        //                 {
-        //                     text: 'PHOTOGRAPHS',
-        //                     color: 'red',
-        //                     fontSize: 11,
-        //                     bold: 'true'
-        //                 }
-        //             ]
-        //         ]
-        //     }
-        // }
-    } else {
+    } 
+    else 
+    {
         row.push({
             text: 'PHOTOGRAPHS',
             color: 'red',
@@ -1380,61 +1353,157 @@ function getImages() {
         row = [];
 
         for (var i = 0; i < totalContainers.length; i++) {
-            var img = totalContainers.eq(i).children('img').get(0),
+            var imgContainer = totalContainers.eq(i).children('img');
+                img = totalContainers.eq(i).children('img').get(0),
                 imgSrc = totalContainers.eq(i).children('img').attr('src'),
                 imgLabel = totalContainers.eq(i).children('label').text(),
                 imgText = totalContainers.eq(i).children('input').val();
+                imgAngle = totalContainers.eq(i).children('input').eq(1).val(),
+                width = 0,
+                height = 0,
+                alignment = 'left'
+                margin = [0,5,0,15];
                 // width = 0,
                 // height = 0;
-
-            if (imgSrc.includes("photos/") > 0) {
-                imgSrc = convertImgToBase64(img);
+            if(imgAngle == null || imgAngle == "undefined" || imgAngle == "")
+            {
+                imgAngle = 0;
+            }
+            else
+            {
+                imgAngle = parseInt(imgAngle);
             }
 
-            // if (img.width >= img.height) {
-            //     width = 250;
-            //     height = 187;
-            // } else {
-            //     width = img.width * 187 / img.height;
-            //     height = 187;
-            // }
+            if (typeof imgSrc  != "undefined")
+            {
+            
+                var canvas = document.createElement("canvas");
+                canvas.height = canvas.width = 0;
+                var context = canvas.getContext('2d');
+                var imgwidth = img.naturalWidth;
+                var imgheight = img.naturalHeight;
+                // console.log("imgwidith:" + imgwidth);
+                // console.log("imgheight:" + imgheight);
+                canvas.width = imgwidth ;
+                canvas.height = imgheight;
+                if(imgAngle == 90)
+                {
+                    canvas.width = imgheight ;
+                    canvas.height = imgwidth;
+                    var scale = imgheight/imgwidth;
+                    // console.log("scale: " + scale);
+                    // console.log("canvas.width: " + canvas.width);
+                    // console.log("canvas.height: " + canvas.height);
+                    context.save();
+                    context.fillStyle = "white";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    //context.translate(imgwidth/2, imgheight/2);
+                    context.rotate(imgAngle*Math.PI/180);
+                    context.drawImage(img,canvas.width/scale,0, -(imgheight)/scale, -(imgwidth)*scale);
+                    context.restore();
+                }
+                else if (imgAngle == 180)
+                {
+                    canvas.width = imgwidth ;
+                    canvas.height = imgheight;
+                    var scale = imgwidth/imgheight;
+                    // console.log("scale: " + scale);
+                    // console.log("canvas.width: " + canvas.width);
+                    // console.log("canvas.height: " + canvas.height);
+                    context.save();
+                    context.fillStyle = "white";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    // context.translate(imgwidth/2, imgheight/2);
+                    context.rotate(imgAngle*Math.PI/180);
+                    context.drawImage(img,0,0, -(imgwidth), -(imgheight));
+                    context.restore();
+                }
+                else if(imgAngle == 270)
+                {
+                    canvas.width = imgheight ;
+                    canvas.height = imgwidth;
+                    var scale = imgheight/imgwidth;
+                    // console.log("scale: " + scale);
+                    // console.log("canvas.width: " + canvas.width);
+                    // console.log("canvas.height: " + canvas.height);
+                    context.save();
+                    context.fillStyle = "white";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    // context.translate(imgwidth/2, imgheight/2);
+                    context.rotate(imgAngle*Math.PI/180);
+                    context.drawImage(img,0,canvas.height*scale, -(imgheight)/scale, -(imgwidth)*scale);
+                    context.restore();
+                }
+                else
+                {
+                    canvas.width = imgwidth ;
+                    canvas.height = imgheight;
+                    var scale = imgwidth/imgheight;
+                    // console.log("scale: " + scale);
+                    // console.log("canvas.width: " + canvas.width);
+                    // console.log("canvas.height: " + canvas.height);
+                    context.save();
+                    context.fillStyle = "white";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    // context.translate(imgwidth/2, imgheight/2);
+                    context.rotate(imgAngle*Math.PI/180);
+                    context.drawImage(img,canvas.width,canvas.height, -(imgwidth), -(imgheight));
+                    context.restore();
+                }
+                imgSrc = canvas.toDataURL("image/jpeg");
 
-            row.push({
-                stack: [
-                    {
-                        image: imgSrc,
-                        height: 200,
-                        width: 250,
-                        margin:[0,0,0,5],
-                        //margin:[0,30,0,5]
-                        //alignment: 'center'
-                    },
-                    {
-                        text: imgLabel,
-                        bold:'true',
-                        fontSize:10,
-                        margin: [0, 2],
-                        alignment: 'center'
-                    },
-                    {
-                        columns:[
-                            {
-                                width: 250,
-                                text: imgText,
-                                fontSize: 9,
-                                margin:[0,5,0,20]
-                            }
-                        ]
-                        
-                    }
-                ],
-                margin:[0,5,0,10]
-            });
-            divCount++;
-            if (divCount === 3) {
-                data.push(row);
-                row = [];
-                divCount = 1;
+                // if (imgSrc.includes("photos/") > 0) 
+                // {
+                //     imgSrc = convertImgToBase64(img);
+                // }
+    
+                if (img.width >= img.height) {
+                    width = 175;
+                    height = 160;
+                    margin = [10,5,0,10];
+                } else {
+                    width = img.width * 160 / img.height;
+                    height = 160;
+                    margin = [10,5,0,10];
+                }
+    
+                row.push({
+                    stack: [
+                        {
+                            image: imgSrc,
+                            //height: 250,
+                            width: 250,
+                            margin:[5,0,0,5],
+                            alignment: 'center'
+                        },
+                        {
+                            text: imgLabel,
+                            bold:'true',
+                            fontSize:10,
+                            margin: [0, 2],
+                            alignment: 'center'
+                        },
+                        {
+                            columns:[
+                                {
+                                    width: 250,
+                                    text: imgText,
+                                    fontSize: 9,
+                                    margin:[0,5,0,20]
+                                }
+                            ]
+                            
+                        }
+                    ],
+                    margin:[0,5,0,10]
+                })
+                divCount++;
+                //the row has two cells, this row is completed, need to reset the row, and put this row into the table data
+                if (divCount === 3) {
+                    data.push(row);
+                    row = [];
+                    divCount = 1;
+                }
             }
         }
 

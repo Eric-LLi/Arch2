@@ -25,7 +25,8 @@
         <script src='../node_modules/pdfmake/build/vfs_fonts.js'></script> -->
         <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
         <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
-
+<!--         <script type="text/javascript" src="http://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.min.js"></script>
+ -->
         <script type="text/javascript">
             function stopRKey(evt) {
                 var evt = (evt) ? evt : ((event) ? event : null);
@@ -402,18 +403,26 @@
                 <div class="col-sm-6">
                     <div class="row">
                         <div class="col-sm">
-                            <input type="button" value="Upload Cover Image" class="uploadCoverImageButton" onclick="AssessmentCoverImage()">
+                            <input type="button" value="Upload Cover Image" class="uploadCoverImageButton" onclick="AssessmentCoverImage()" style="width: 500px">
                             <input type="file" id="AssessmentUploadCoverImage" class="inputImage" accept="image/x-png,image/jpeg">
                         </div>
                     </div>
 
                     <div class="row">
                         <form>
-                            <div class="col-sm">
-                                <img id="AssessmentCoverImage" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
+                            <div class="col-sm" id="AssessmentCoverImageDiv" style="">
+                                <img id="AssessmentCoverImage" src="#" alt="Image1" style="width:500px;display: none"/>
                             </div>
                             <div class="col-sm">
-                                <input class="btn btn-danger" type="button" value="Remove" id="AssessmentCoverImageRemoveButton" onclick="RemoveAssessmentCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
+                                <input class="btn btn-danger" type="button" value="Remove" id="AssessmentCoverImageRemoveButton" onclick="RemoveAssessmentCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px; width: 500px">
+                                <br>
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" id="AssessmentCoverImageAngle" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 500px">
+                                <br>
+                            </div>
+                            <div class="col-sm">
+                                <input class="btn btn-info" type="button" value="Rotate" id="AssessmentCoverImageRotateButton" onclick="RotateAssessmentCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px; width: 500px">
                                 <br>
                             </div>
                         </form>
@@ -2221,63 +2230,11 @@
                         <br>
                         <input type="button" value="Upload Image" class="uploadImageButton" onclick="AssessmentSiteUploadImages()">
                         <input type="file" id="AssessmentSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
-                        <input type="file" id="AssessmentSiteSingleImage" accept="image/x-png,image/jpeg" class="inputImage">
+                        <input type="file" id="AssessmentUploadOneImage" accept="image/x-png,image/jpeg" class="inputImage">
                     </th>
                     <th class="container">
                         <div id="AccessmentSiteImagesContainer" class="row"></div>
                     </th>
-                    <!-- <div class="row">
-                            &nbsp;
-                            <form class="col-sm">
-                                <div class="col-sm">
-                                <img id="AssessmentSiteImage0" src="#" alt="Image1" style="width:265px;height:265px;display:none" />
-                                </div>
-                                <div class="col-sm">
-                                <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText0" style="width:265px;height:10px;display:none">
-                                </div>
-                                <div class="col-sm">
-                                <input type="button" value="Remove" id="AssessmentSiteRemoveButton0" onclick="RemoveAssessmentSiteImage0()" style="width:265px;display:none">
-                                <br>
-                                </div>
-                                <div class="col-sm">
-                                <input type="button" value="Add" id="AddAssessmentSiteImageButton0" onclick="AddAssessmentSiteImage0()" style="width:265px;display:none">
-                                <input type="file" id="AssessmentSiteUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
-                                <br>
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentSiteImage1" src="#" alt="Image2" style="width:265px;height:265px;display:none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText1" style="width:265px;height:10px;display:none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentSiteRemoveButton1" onclick="RemoveAssessmentSiteImage1()" style="width:265px;display:none">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentSiteImageButton1" onclick="AddAssessmentSiteImage1()" style="width:265px;display:none">
-                                    <input type="file" id="AssessmentSiteUploadImage1" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentSiteImage2" src="#" alt="Image3" style="width:265px;height:265px;display:none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText2" style="width:265px;height:10px;display:none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentSiteRemoveButton2" onclick="RemoveAssessmentSiteImage2()" style="width:265px;display:none">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentSiteImageButton2" onclick="AddAssessmentSiteImage2()" style="width:265px;display:none">
-                                    <input type="file" id="AssessmentSiteUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
-                                </div>
-                            </form>
-                        </div> -->
                 </tr>
             </table>
         </div>
@@ -2287,12 +2244,12 @@
             <button type="button" class="btn btn-primary" style="margin:10px 0 10px 0" onclick="addAccessLimitation('AssessmentSiteNotesTable','AssessmentSiteLimitationSelect','AssessmentSiteLimitationNote')">Add One Access Limitation</button>
             <table id="AssessmentSiteNotesTable">
                 <tr>
-                    <td class="sectionSubHead" width="35%">Access Limitations</td>
-                    <td class="sectionSubHead">Access Notes:</td>
+                    <td class="sectionSubHead">Access Limitations</td>
+                    <td class="sectionSubHead" width="650px">Access Notes:</td>
                 </tr>
                 <tr>
                     <td height="30%">
-                        <select style="width:100%" title="AssessmentSiteLimitationSelect" id="AssessmentSiteLimitationSelect0">
+                        <select title="AssessmentSiteLimitationSelect" id="AssessmentSiteLimitationSelect0">
                             <option value="Reasonably Accessible">Reasonably Accessible</option>
                             <option value="Partially Accessible - Obstructed">Partially Accessible - Obstructed</option>
                             <option value="Partially Accessible - Inspection Safety Hazard">Partially Accessible - Inspection Safety Hazard</option>
@@ -2301,7 +2258,7 @@
                         </select>
                     </td>
                     <td height="30%">
-                        <textarea class="form-control" style="height:91px" title="AssessmentSiteLimitationNote" id="AssessmentSiteLimitationNote0"></textarea>
+                        <textarea class="form-control" style="height:90px" title="AssessmentSiteLimitationNote" id="AssessmentSiteLimitationNote0"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -5582,12 +5539,12 @@
             <button type="button" class="btn btn-primary" style="margin:10px 0 10px 0" onclick="addAccessLimitation('AssessmentPropertyExteriorNotesTable','AssessmentPropertyExteriorLimitationSelect','AssessmentPropertyExteriorLimitationNote')">Add One Access Limitation</button>
             <table id="AssessmentPropertyExteriorNotesTable">
                 <tr>
-                    <td class="sectionSubHead" width="35%">Access Limitations</td>
-                    <td class="sectionSubHead">Access Notes:</td>
+                    <td class="sectionSubHead">Access Limitations</td>
+                    <td class="sectionSubHead" width="650px">Access Notes:</td>
                 </tr>
                 <tr>
-                    <td height="30%">
-                        <select style="width:100%" title="Limitation Select" id="AssessmentPropertyExteriorLimitationSelect0">
+                    <td height="30%" >
+                        <select title="Limitation Select" id="AssessmentPropertyExteriorLimitationSelect0">
                             <option value="Reasonably Accessible">Reasonably Accessible</option>
                             <option value="Partially Accessible - Obstructed">Partially Accessible - Obstructed</option>
                             <option value="Partially Accessible - Inspection Safety Hazard">Partially Accessible - Inspection Safety Hazard</option>
@@ -5596,7 +5553,7 @@
                         </select>
                     </td>
                     <td height="30%">
-                        <textarea class="form-control" style="height:91px" title="AssessmentSiteLimitationNote" id="AssessmentPropertyExteriorLimitationNote0"></textarea>
+                        <textarea class="form-control" style="height:90px" title="AssessmentSiteLimitationNote" id="AssessmentPropertyExteriorLimitationNote0"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -9228,12 +9185,12 @@
             <button type="button" class="btn btn-primary" style="margin:10px 0 10px 0" onclick="addAccessLimitation('AssessmentPropertyInteriorNotesTable','AssessmentPropertyInteriorLimitationSelect','AssessmentPropertyInteriorLimitationNote')">Add One Access Limitation</button>
             <table id="AssessmentPropertyInteriorNotesTable">
                 <tr>
-                    <td class="sectionSubHead" width="35%">Access Limitations</td>
-                    <td class="sectionSubHead">Access Notes:</td>
+                    <td class="sectionSubHead">Access Limitations</td>
+                    <td class="sectionSubHead" width="650px">Access Notes:</td>
                 </tr>
                 <tr>
                     <td height="30%">
-                        <select style="width:100%" title="Limitation Select" id="AssessmentPropertyInteriorLimitationSelect0">
+                        <select title="Limitation Select" id="AssessmentPropertyInteriorLimitationSelect0">
                             <option value="Reasonably Accessible">Reasonably Accessible</option>
                             <option value="Partially Accessible - Obstructed">Partially Accessible - Obstructed</option>
                             <option value="Partially Accessible - Inspection Safety Hazard">Partially Accessible - Inspection Safety Hazard</option>
@@ -9242,7 +9199,7 @@
                         </select>
                     </td>
                     <td height="30%">
-                        <textarea class="form-control" style="height:91px" title="AssessmentSiteLimitationNote" id="AssessmentPropertyInteriorLimitationNote0"></textarea>
+                        <textarea class="form-control" style="height:90px" title="AssessmentSiteLimitationNote" id="AssessmentPropertyInteriorLimitationNote0"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -13593,12 +13550,12 @@
             <button type="button" class="btn btn-primary" style="margin:10px 0 10px 0" onclick="addAccessLimitation('AssessmentServiceNotesTable','AssessmentServiceLimitationSelect','AssessmentServiceLimitationNote')">Add One Access Limitation</button>
             <table id="AssessmentServiceNotesTable">
                 <tr>
-                    <td class="sectionSubHead" width="35%">Access Limitations</td>
-                    <td class="sectionSubHead">Access Notes:</td>
+                    <td class="sectionSubHead">Access Limitations</td>
+                    <td class="sectionSubHead" width="650px">Access Notes:</td>
                 </tr>
                 <tr>
                     <td height="30%">
-                        <select style="width:100%" title="Limitation Select" id="AssessmentServiceLimitationSelect0">
+                        <select title="Limitation Select" id="AssessmentServiceLimitationSelect0">
                             <option value="Reasonably Accessible">Reasonably Accessible</option>
                             <option value="Partially Accessible - Obstructed">Partially Accessible - Obstructed</option>
                             <option value="Partially Accessible - Inspection Safety Hazard">Partially Accessible - Inspection Safety Hazard</option>
@@ -13607,7 +13564,7 @@
                         </select>
                     </td>
                     <td height="30%">
-                        <textarea class="form-control" style="height:91px" title="AssessmentSiteLimitationNote" id="AssessmentServiceLimitationNote0"></textarea>
+                        <textarea class="form-control" style="height:90px" title="AssessmentSiteLimitationNote" id="AssessmentServiceLimitationNote0"></textarea>
                     </td>
                 </tr>
                 <tr>

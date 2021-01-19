@@ -125,7 +125,7 @@ function generatePDF(mode) {
                                         rowSpan:3,
                                         border: [false, false, true, true],
                                         stack: [
-                                            getCoverImage('HomeFeasibilityCoverImage')
+                                            getCoverImage('HomeFeasibilityCoverImage','HomeFeasibilityCoverImageAngle')
                                         ]
                                         //margin:[10,10,10,10]
                                     }
@@ -144,7 +144,8 @@ function generatePDF(mode) {
                                     {
                                         text: archHomeFeasibilityReportText3,
                                         border: [true, false, false, true],
-                                        fontSize: 9
+                                        fontSize: 9,
+                                        margin:[0,0,0,5]
                                     },
                                     ''
                                 ]

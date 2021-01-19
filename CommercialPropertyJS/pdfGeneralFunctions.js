@@ -908,7 +908,7 @@ function getSSTCText1()
     }
     else
     {
-        text1 = scopeOfAssessment1;
+        text1 = ScopeOfAssessment1;
     }
 
     return text1;

@@ -1096,7 +1096,6 @@ require_once("loadbooking.php");
                     <div id="Img-main-container">
                         <div id="Img-loader">Loading document ...</div>
                         <div id="HA_ImgsContents"></div>
-                        <!--                    HA_ImgsContents HA_ImgsCA_indicateText-->
                         <div id="Imgpage-loader">Loading page ...</div>
                     </div>
                 </div>
