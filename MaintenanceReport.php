@@ -300,11 +300,19 @@
             <div class="col-sm-6">
                 <div class="col-sm">
                     <img id="MaintenanceCoverImage" src="#" alt="Image1"
-                         style="width:100%;height:100%;display: none"/>
+                         style="width:400px;display: none"/>
                 </div>
                 <div class="col-sm">
                     <input class="btn btn-danger" type="button" value="Remove" id="MaintenanceCoverImageRemoveButton"
-                           onclick="RemoveMaintenanceCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width:100%">
+                           onclick="RemoveMaintenanceCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width:400px">
+                    <br>
+                </div>
+                <div class="col-sm">
+                    <input type="text" id="MaintenanceCoverImageAngle" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
+                <br>
+                </div>
+                <div class="col-sm">
+                    <input class="btn btn-info" type="button" value="Rotate" id="MaintenanceCoverImageRotateButton" onclick="RotateCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
                     <br>
                 </div>
             </div>
@@ -508,6 +516,8 @@
     <input type="button" id="get_image" value="Upload Images (Max 40 images)" class="uploadImageButton"
            onclick="MaintenanceUploadImages()" style="white-space: normal; width: 15%">
     <input type="file" id="MaintenanceUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    <input type="file" id="MaintenanceUploadOneImage" class="inputImage" accept="image/x-png,image/jpeg">
+
 </div>
 <div class="container">
     <table id="MaintenanceImagesTable" style="display: none">
@@ -531,6 +541,8 @@
     <input type="button" id="get_drawing" value="Upload Drawings (Max 6 drawings)" class="uploadImageButton"
            onclick="MaintenanceUploadDrawings()" style="white-space: normal; width: 15%">
     <input type="file" id="MaintenanceUploadDrawings" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    <input type="file" id="MaintenanceUploadOneDrawing" class="inputImage" accept="image/x-png,image/jpeg">
+
 </div>
 <div class="container">
     <table id="MaintenanceDrawingsTable" style="display: none">

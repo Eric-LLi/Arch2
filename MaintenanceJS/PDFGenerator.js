@@ -103,7 +103,7 @@ function generatePDF(mode) {
                                     {
                                         border: [false, true, true, true],
                                         stack: [
-                                            getCoverImage('MaintenanceCoverImage')
+                                            getCoverImage('MaintenanceCoverImage','MaintenanceCoverImageAngle')
                                         ],
                                         margin: [5, 5, 5, 5]
                                         //margin:[10,10,10,10]

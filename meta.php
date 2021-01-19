@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="js/easyui/themes/icon.css?<?php echo time(); ?>">
 <link rel="stylesheet" href="js/easyui/texteditor.css?<?php echo time(); ?>">
 <link rel="stylesheet" href="css/index.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="js/summernote/summernote.css?<?php echo time(); ?>">
+
 
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
@@ -32,6 +34,10 @@
 <script type="text/javascript" src="js/dx.chartjs.js"></script>
 <script type="text/javascript" src="js/accounting.min.js"></script>
 <script type="text/javascript" src="js/decimal.min.js"></script>
+<script type="text/javascript" src="js/summernote/summernote.js"></script>
+<script type="text/javascript" src="js/html2canvas.min.js"></script>
+<script type="text/javascript" src="js/html2canvas.js"></script>
+
 <script src="js/images.js"></script>
 <script src="js/loadImageJS/load-image.all.min.js"></script>
 <script src="js/PrintJS/print.min.js"></script>
@@ -40,6 +46,9 @@
 <script type="text/javascript" src="SummaryJS/dlg-summary.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="SummaryJS/PDFGenerator.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="SummaryJS/generalFunctions.js?<?php echo time(); ?>"></script>
+
+<script type="text/javascript" src="https://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.min.js"></script>
+
 <style>
   .button-rounded
   {

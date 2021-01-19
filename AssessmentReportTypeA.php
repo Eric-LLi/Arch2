@@ -402,7 +402,7 @@
                 <div class="col-sm-6">
                     <div class="row">
                         <div class="col-sm">
-                            <input type="button" value="Upload Cover Image" class="uploadCoverImageButton" onclick="AssessmentCoverImage()">
+                            <input type="button" value="Upload Cover Image" class="uploadCoverImageButton" onclick="AssessmentCoverImage()" style="width: 500px">
                             <input type="file" id="AssessmentUploadCoverImage" class="inputImage" accept="image/x-png,image/jpeg">
                         </div>
                     </div>
@@ -410,10 +410,18 @@
                     <div class="row">
                         <form>
                             <div class="col-sm">
-                                <img id="AssessmentCoverImage" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
+                                <img id="AssessmentCoverImage" src="#" alt="Image1" style="width:500px;display: none" />
                             </div>
                             <div class="col-sm">
-                                <input class="btn btn-danger" type="button" value="Remove" id="AssessmentCoverImageRemoveButton" onclick="RemoveAssessmentCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
+                                <input class="btn btn-danger" type="button" value="Remove" id="AssessmentCoverImageRemoveButton" onclick="RemoveAssessmentCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 500px">
+                                <br>
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" id="AssessmentCoverImageAngle" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 500px">
+                                <br>
+                            </div>
+                            <div class="col-sm">
+                                <input class="btn btn-info" type="button" value="Rotate" id="AssessmentCoverImageRotateButton" onclick="RotateAssessmentCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 500px">
                                 <br>
                             </div>
                         </form>
@@ -2221,63 +2229,14 @@
                         <br>
                         <input type="button" value="Upload Image" class="uploadImageButton" onclick="AssessmentSiteUploadImages()">
                         <input type="file" id="AssessmentSiteUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
-                        <input type="file" id="AssessmentSiteSingleImage" accept="image/x-png,image/jpeg" class="inputImage">
+                        <!-- <input type="file" id="AssessmentSiteSingleImage" accept="image/x-png,image/jpeg" class="inputImage"> -->
+                        <input type="file" id="AssessmentUploadOneImage" accept="image/x-png,image/jpeg" class="inputImage">
+
                     </th>
                     <th class="container">
                         <div id="AccessmentSiteImagesContainer" class="row"></div>
                     </th>
-                    <!-- <div class="row">
-                            &nbsp;
-                            <form class="col-sm">
-                                <div class="col-sm">
-                                <img id="AssessmentSiteImage0" src="#" alt="Image1" style="width:265px;height:265px;display:none" />
-                                </div>
-                                <div class="col-sm">
-                                <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText0" style="width:265px;height:10px;display:none">
-                                </div>
-                                <div class="col-sm">
-                                <input type="button" value="Remove" id="AssessmentSiteRemoveButton0" onclick="RemoveAssessmentSiteImage0()" style="width:265px;display:none">
-                                <br>
-                                </div>
-                                <div class="col-sm">
-                                <input type="button" value="Add" id="AddAssessmentSiteImageButton0" onclick="AddAssessmentSiteImage0()" style="width:265px;display:none">
-                                <input type="file" id="AssessmentSiteUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
-                                <br>
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentSiteImage1" src="#" alt="Image2" style="width:265px;height:265px;display:none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText1" style="width:265px;height:10px;display:none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentSiteRemoveButton1" onclick="RemoveAssessmentSiteImage1()" style="width:265px;display:none">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentSiteImageButton1" onclick="AddAssessmentSiteImage1()" style="width:265px;display:none">
-                                    <input type="file" id="AssessmentSiteUploadImage1" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentSiteImage2" src="#" alt="Image3" style="width:265px;height:265px;display:none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentSiteImageText2" style="width:265px;height:10px;display:none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentSiteRemoveButton2" onclick="RemoveAssessmentSiteImage2()" style="width:265px;display:none">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentSiteImageButton2" onclick="AddAssessmentSiteImage2()" style="width:265px;display:none">
-                                    <input type="file" id="AssessmentSiteUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display:none">
-                                </div>
-                            </form>
-                        </div> -->
+                    
                 </tr>
             </table>
         </div>
@@ -2287,8 +2246,8 @@
             <button type="button" class="btn btn-primary" style="margin:10px 0 10px 0" onclick="addAccessLimitation('AssessmentSiteNotesTable','AssessmentSiteLimitationSelect','AssessmentSiteLimitationNote')">Add One Access Limitation</button>
             <table id="AssessmentSiteNotesTable">
                 <tr>
-                    <td class="sectionSubHead" width="35%">Access Limitations</td>
-                    <td class="sectionSubHead">Access Notes:</td>
+                    <td class="sectionSubHead">Access Limitations</td>
+                    <td class="sectionSubHead" width="650px">Access Notes:</td>
                 </tr>
                 <tr>
                     <td height="30%">
@@ -2301,7 +2260,7 @@
                         </select>
                     </td>
                     <td height="30%">
-                        <textarea class="form-control" style="height:91px" title="AssessmentSiteLimitationNote" id="AssessmentSiteLimitationNote0"></textarea>
+                        <textarea class="form-control" style="height:90px" title="AssessmentSiteLimitationNote" id="AssessmentSiteLimitationNote0"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -5469,108 +5428,6 @@
 
                     <th class="container">
                         <div id="AccessmentExteriorImagesContainer" class="row"></div>
-                        <!-- <div class="row form-group">
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentExteriorImage0" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentExteriorImageText0" style="width:265px;height:10px; display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentExteriorRemoveButton0" onclick="RemoveAssessmentExteriorImage0()" style="display: none ; width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentExteriorImageButton0" onclick="AddAssessmentExteriorImage0()" style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentExteriorUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                    <br>
-                                </div>
-
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentExteriorImage1" src="#" alt="Image2" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentExteriorImageText1" style="width:265px;height:10px ;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentExteriorRemoveButton1" onclick="RemoveAssessmentExteriorImage1()" style="width:265px;display: none ">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentExteriorImageButton1" onclick="AddAssessmentExteriorImage1()" style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentExteriorUploadImage1" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                </div>
-
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentExteriorImage2" src="#" alt="Image3" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentExteriorImageText2" style="width:265px;height:10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentExteriorRemoveButton2" onclick="RemoveAssessmentExteriorImage2()" style="display:none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentExteriorImageButton2" onclick="AddAssessmentExteriorImage2()" style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentExteriorUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentExteriorImage3" src="#" alt="Image4" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image4" placeholder="name" id="AssessmentExteriorImageText3" style="width:265px;height:10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentExteriorRemoveButton3" onclick="RemoveAssessmentExteriorImage3()" style="display: none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentExteriorImageButton3" onclick="AddAssessmentExteriorImage3()" style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentExteriorUploadImage3" class="inputImage" style="display: none">
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentExteriorImage4" src="#" alt="Image5" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image5" placeholder="name" id="AssessmentExteriorImageText4" style="width:265px;height:10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentExteriorRemoveButton4" onclick="RemoveAssessmentExteriorImage4()" style="display:none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentExteriorImageButton4" onclick="AddAssessmentExteriorImage4()" style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentExteriorUploadImage4" class="inputImage" style="display: none">
-
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentExteriorImage5" src="#" alt="Image6" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image5" placeholder="name" id="AssessmentExteriorImageText5" style="width:265px;height: 10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentExteriorRemoveButton5" onclick="RemoveAssessmentExteriorImage5()" style="display:none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentExteriorImageButton5" onclick="AddAssessmentExteriorImage5()" style="width:265px;display:none ">
-                                    <input type="file" id="AssessmentExteriorUploadImage5" class="inputImage" style="display: none">
-                                </div>
-                            </form>
-                        </div> -->
                     </th>
                 </tr>
             </table>
@@ -5582,8 +5439,8 @@
             <button type="button" class="btn btn-primary" style="margin:10px 0 10px 0" onclick="addAccessLimitation('AssessmentPropertyExteriorNotesTable','AssessmentPropertyExteriorLimitationSelect','AssessmentPropertyExteriorLimitationNote')">Add One Access Limitation</button>
             <table id="AssessmentPropertyExteriorNotesTable">
                 <tr>
-                    <td class="sectionSubHead" width="35%">Access Limitations</td>
-                    <td class="sectionSubHead">Access Notes:</td>
+                    <td class="sectionSubHead">Access Limitations</td>
+                    <td class="sectionSubHead" width="650px">Access Notes:</td>
                 </tr>
                 <tr>
                     <td height="30%">
@@ -5596,7 +5453,7 @@
                         </select>
                     </td>
                     <td height="30%">
-                        <textarea class="form-control" style="height:91px" title="AssessmentSiteLimitationNote" id="AssessmentPropertyExteriorLimitationNote0"></textarea>
+                        <textarea class="form-control" style="height:90px" title="AssessmentSiteLimitationNote" id="AssessmentPropertyExteriorLimitationNote0"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -7871,121 +7728,6 @@
                     <th>
                         <div id="AccessmentInteriorLivingImagesContainer" class="row"></div>
                     </th>
-                    <!-- <div class="row form-group">
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorLivingImage0" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorLivingImageText0" style="width:265px;height:10px; display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorLivingRemoveButton0" onclick="RemoveAssessmentInteriorLivingImage0()"
-                                        style="display:none ; width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorLivingImageButton0" onclick="AddAssessmentInteriorLivingImage0()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorLivingUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                    <br>
-                                </div>
-
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorLivingImage1" src="#" alt="Image2" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorLivingImageText1" style="width:265px;height:10px ;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorLivingRemoveButton1" onclick="RemoveAssessmentInteriorLivingImage1()"
-                                        style="width:265px;display: none ">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorLivingImageButton1" onclick="AddAssessmentInteriorLivingImage1()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorLivingUploadImage1" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                </div>
-
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorLivingImage2" src="#" alt="Image3" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorLivingImageText2" style="width:265px;height:10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorLivingRemoveButton2" onclick="RemoveAssessmentInteriorLivingImage2()"
-                                        style="display:none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorLivingImageButton2" onclick="AddAssessmentInteriorLivingImage2()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorLivingUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorLivingImage3" src="#" alt="Image4" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image4" placeholder="name" id="AssessmentInteriorLivingImageText3" style="width:265px;height: 10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorLivingRemoveButton3" onclick="RemoveAssessmentInteriorLivingImage3()"
-                                        style="display: none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorLivingImageButton3" onclick="AddAssessmentInteriorLivingImage3()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorLivingUploadImage3" class="inputImage" style="display: none">
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorLivingImage4" src="#" alt="Image5" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image5" placeholder="name" id="AssessmentInteriorLivingImageText4" style="width:265px;height: 10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorLivingRemoveButton4" onclick="RemoveAssessmentInteriorLivingImage4()"
-                                        style="display: none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorLivingImageButton4" onclick="AddAssessmentInteriorLivingImage4()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorLivingUploadImage4" class="inputImage" style="display: none">
-
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorLivingImage5" src="#" alt="Image6" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image5" placeholder="name" id="AssessmentInteriorLivingImageText5" style="width:265px;height: 10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorLivingRemoveButton5" onclick="RemoveAssessmentInteriorLivingImage5()"
-                                        style="display: none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorLivingImageButton5" onclick="AddAssessmentInteriorLivingImage5()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorLivingUploadImage5" class="inputImage" style="display: none">
-                                </div>
-                            </form>
-                        </div> -->
-
                 </tr>
             </table>
         </div>
@@ -9097,125 +8839,6 @@
                     </th>
                     <th>
                         <div id="AccessmentInteriorBedroomImagesContainer" class="row"></div>
-                        <!-- <div class="row form-group">
-
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorBedroomImage0" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorBedroomImageText0" style="width:265px;height:10px; display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorBedroomRemoveButton0" onclick="RemoveAssessmentInteriorBedroomImage0()"
-                                        style="display: none ; width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorBedroomImageButton0" onclick="AddAssessmentInteriorBedroomImage0()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorBedroomUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                    <br>
-                                </div>
-
-                            </form>
-
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorBedroomImage1" src="#" alt="Image2" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorBedroomImageText1" style="width:265px;height:10px ;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorBedroomRemoveButton1" onclick="RemoveAssessmentInteriorBedroomImage1()"
-                                        style="width:265px;display: none ">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorBedroomImageButton1" onclick="AddAssessmentInteriorBedroomImage1()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorBedroomUploadImage1" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                </div>
-
-                            </form>
-
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorBedroomImage2" src="#" alt="Image3" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorBedroomImageText2" style="width:265px;height:10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorBedroomRemoveButton2" onclick="RemoveAssessmentInteriorBedroomImage2()"
-                                        style="display:none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorBedroomImageButton2" onclick="AddAssessmentInteriorBedroomImage2()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorBedroomUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorBedroomImage3" src="#" alt="Image4" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image4" placeholder="name" id="AssessmentInteriorBedroomImageText3" style="width:265px;height: 10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorBedroomRemoveButton3" onclick="RemoveAssessmentInteriorBedroomImage3()"
-                                        style="display:none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorBedroomImageButton3" onclick="AddAssessmentInteriorBedroomImage3()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorBedroomUploadImage3" class="inputImage" style="display: none">
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorBedroomImage4" src="#" alt="Image5" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image5" placeholder="name" id="AssessmentInteriorBedroomImageText4" style="width:265px;height:10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorBedroomRemoveButton4" onclick="RemoveAssessmentInteriorBedroomImage4()"
-                                        style="display: none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorBedroomImageButton4" onclick="AddAssessmentInteriorBedroomImage4()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorBedroomUploadImage4" class="inputImage" style="display: none">
-
-                                </div>
-                            </form>
-
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorBedroomImage5" src="#" alt="Image6" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image5" placeholder="name" id="AssessmentInteriorBedroomImageText5" style="width:265px;height:10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorBedroomRemoveButton5" onclick="RemoveAssessmentInteriorBedroomImage5()"
-                                        style="display: none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorBedroomImageButton5" onclick="AddAssessmentInteriorBedroomImage5()"
-                                        style="width:265px;display:none">
-                                    <input type="file" id="AssessmentInteriorBedroomUploadImage5" class="inputImage" style="display: none">
-                                </div>
-                            </form>
-                        </div> -->
-
                     </th>
                 </tr>
             </table>
@@ -9228,8 +8851,8 @@
             <button type="button" class="btn btn-primary" style="margin:10px 0 10px 0" onclick="addAccessLimitation('AssessmentPropertyInteriorNotesTable','AssessmentPropertyInteriorLimitationSelect','AssessmentPropertyInteriorLimitationNote')">Add One Access Limitation</button>
             <table id="AssessmentPropertyInteriorNotesTable">
                 <tr>
-                    <td class="sectionSubHead" width="35%">Access Limitations</td>
-                    <td class="sectionSubHead">Access Notes:</td>
+                    <td class="sectionSubHead">Access Limitations</td>
+                    <td class="sectionSubHead" width="650px">Access Notes:</td>
                 </tr>
                 <tr>
                     <td height="30%">
@@ -9242,7 +8865,7 @@
                         </select>
                     </td>
                     <td height="30%">
-                        <textarea class="form-control" style="height:91px" title="AssessmentSiteLimitationNote" id="AssessmentPropertyInteriorLimitationNote0"></textarea>
+                        <textarea class="form-control" style="height:90px" title="AssessmentSiteLimitationNote" id="AssessmentPropertyInteriorLimitationNote0"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -13521,66 +13144,6 @@
                     </th>
                     <th>
                         <div id="AccessmentInteriorServiceImagesContainer" class="row"></div>
-                        <!-- <div class="row form-group">
-                            &nbsp;
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorServiceImage0" src="#" alt="Image1" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorServiceImageText0" style="width:265px;height:10px; display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorServiceRemoveButton0" onclick="RemoveAssessmentInteriorServiceImage0()"
-                                        style="display: none ; width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorServiceImageButton0" onclick="AddAssessmentInteriorServiceImage0()"
-                                        style="width:265px;display:none ">
-                                    <input type="file" id="AssessmentInteriorServiceUploadImage0" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                    <br>
-                                </div>
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorServiceImage1" src="#" alt="Image2" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorServiceImageText1" style="width:265px;height:10px ;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorServiceRemoveButton1" onclick="RemoveAssessmentInteriorServiceImage1()"
-                                        style="width:265px;display: none ">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorServiceImageButton1" onclick="AddAssessmentInteriorServiceImage1()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorServiceUploadImage1" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                </div>
-
-                            </form>
-                            <form>
-                                <div class="col-sm">
-                                    <img id="AssessmentInteriorServiceImage2" src="#" alt="Image3" style="width:265px;height:265px;display: none" />
-                                </div>
-                                <div class="col-sm">
-                                    <input type="text" name="image1" placeholder="name" id="AssessmentInteriorServiceImageText2" style="width:265px;height:10px;display: none">
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Remove" id="AssessmentInteriorServiceRemoveButton2" onclick="RemoveAssessmentInteriorServiceImage2()"
-                                        style="display:none;width:265px">
-                                    <br>
-                                </div>
-                                <div class="col-sm">
-                                    <input type="button" value="Add" id="AddAssessmentInteriorServiceImageButton2" onclick="AddAssessmentInteriorServiceImage2()"
-                                        style="width:265px;display: none ">
-                                    <input type="file" id="AssessmentInteriorServiceUploadImage2" class="inputImage" accept="image/x-png,image/jpeg" style="display: none">
-                                </div>
-                            </form>
-                        </div> -->
-
                     </th>
                 </tr>
             </table>
@@ -13593,8 +13156,8 @@
             <button type="button" class="btn btn-primary" style="margin:10px 0 10px 0" onclick="addAccessLimitation('AssessmentServiceNotesTable','AssessmentServiceLimitationSelect','AssessmentServiceLimitationNote')">Add One Access Limitation</button>
             <table id="AssessmentServiceNotesTable">
                 <tr>
-                    <td class="sectionSubHead" width="35%">Access Limitations</td>
-                    <td class="sectionSubHead">Access Notes:</td>
+                    <td class="sectionSubHead">Access Limitations</td>
+                    <td class="sectionSubHead" width="650px">Access Notes:</td>
                 </tr>
                 <tr>
                     <td height="30%">
@@ -13607,7 +13170,7 @@
                         </select>
                     </td>
                     <td height="30%">
-                        <textarea class="form-control" style="height:91px" title="AssessmentSiteLimitationNote" id="AssessmentServiceLimitationNote0"></textarea>
+                        <textarea class="form-control" style="height:90px" title="AssessmentSiteLimitationNote" id="AssessmentServiceLimitationNote0"></textarea>
                     </td>
                 </tr>
                 <tr>

@@ -21,6 +21,12 @@
     <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+
      <script type="text/javascript"> 
         function stopRKey(evt) { 
         var evt = (evt) ? evt : ((event) ? event : null); 
@@ -231,11 +237,19 @@
             <div class="col-sm">
                 <div class="col-sm">
                     <img id="AdviceCoverImage" src="#" alt="Image1"
-                         style="width:0;height:265px;display: none"/>
+                         style="width:400px;display: none"/>
                 </div>
                 <div class="col-sm">
                     <input class="btn btn-danger" type="button" value="Remove" id="AdviceCoverImageRemoveButton"
-                           onclick="RemoveAdviceCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px">
+                           onclick="RemoveAdviceCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
+                    <br>
+                </div>
+                <div class="col-sm">
+                    <input type="text" id="AdviceCoverImageAngle" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
+                    <br>
+                </div>
+                <div class="col-sm">
+                    <input class="btn btn-info" type="button" value="Rotate" id="AdviceCoverImageRotateButton" onclick="RotateAdviceCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
                     <br>
                 </div>
             </div>
@@ -268,11 +282,20 @@
     <hr>
 </div>
 
+<!-- <div id="capture" style="padding: 10px; background: #f5da55">
+    <h4 style="color: #000; ">Hello world!</h4>
+</div> -->
+
+<!-- <div>
+    <img id="adviceimg" src="" />
+</div> -->
+
 <div class="container">
     <div class="container">
         <input type="button" id="get_ConstructionImage" value="Upload Images (Max 30 images)" class="uploadImageButton"
-               onclick="AdviceUploadImage()" style="white-space: normal; width: 15%">
+               onclick="AdviceUploadImages()" style="white-space: normal; width: 15%">
         <input type="file" id="AdviceUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+        <input type="file" id="AdviceUploadOneImage" class="inputImage" accept="image/x-png,image/jpeg">
     </div>
     <div class="container">
         <table id="AdviceImagesTable" style="display: none">

@@ -86,7 +86,7 @@ function generatePDF(mode) {
                                 margin: [0, 50, 0, 0]
                             }
                         ],
-                        margin: [0, 0, 0, 30]
+                        margin: [0, 0, 0, 15]
                     },
                     giveMeHugeDraft(mode),
                     {
@@ -103,7 +103,7 @@ function generatePDF(mode) {
                                     {
                                         border: [false, true, true, true],
                                         stack: [
-                                            getCoverImage('DilapidationCoverImage')
+                                            getCoverImage('DilapidationCoverImage','DilapidationCoverImageAngle')
                                         ],
                                         margin: [5, 5, 5, 5]
                                         //margin:[10,10,10,10]
@@ -131,7 +131,7 @@ function generatePDF(mode) {
                     {
                         text: 'Inspection Details',
                         style: 'pageTopHeader',
-                        margin: [0, 30, 0, 5]
+                        margin: [0, 15, 0, 5]
                     },
                     getCustomerDetailsTable(),
                     makeAGap(),

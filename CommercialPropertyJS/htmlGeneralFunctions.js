@@ -20,7 +20,7 @@ function reorderImages()
     console.log("need to reorder the images");
     var totalContainers = $("#CPImagesTable").children('div');
     var BigContainer = document.getElementById('CPImagesTable');
-    console.log(totalContainers);
+    //console.log(totalContainers);
     // for (var i=0;i<totalContainers.length;i++)
     // {
     //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
@@ -45,7 +45,7 @@ function reorderImages()
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
 
-    console.log(totalContainers);
+    //console.log(totalContainers);
 
     $("#CPImagesTable").empty();
     for (var i=0;i<totalContainers.length;i++)
@@ -53,14 +53,39 @@ function reorderImages()
         BigContainer.appendChild(totalContainers[i]);
         var id = totalContainers[i].id.replace(/[^\d.]/g, '');
         var imgContainerID = id + "_CPimgContainer";
+        var myImage = totalContainers.eq(i).children('img').get(0);
         var ImgID = totalContainers.eq(i).children('img').get(0).id;
-        // console.log(imgContainerID);
-        // console.log(id);
-        // console.log(ImgID);
+        var rotateBtnID = totalContainers.eq(i).children('button').eq(1).get(0).id;
+        var angleID = totalContainers.eq(i).children('input').eq(1).get(0).id;
         var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
+        var rotateBnt = document.getElementById(rotateBtnID);
         var removeFunction = "imagesRemoveBtn('"+imgContainerID+"', '"+ImgID+"')";
-        // console.log(removeFunction);
+        var rotateFunction = "rotateOneImage('" + id + "')";
+        var originalAngle = parseInt(document.getElementById(angleID).value);
+        if(originalAngle > 0)
+        {
+            if(originalAngle == 90 || originalAngle == 270)
+            {
+                console.log("the degree is 90 or 270");
+                myImage.style.marginTop = "75px";
+                myImage.style.marginBottom = "75px";
+                $("#" + ImgID).rotate(originalAngle);            }
+            else
+            {
+                myImage.style.marginTop = "35px";
+                myImage.style.marginBottom = "35px";
+                $("#" + ImgID).rotate(originalAngle);
+            }
+
+        }
+        else
+        {
+            myImage.style.marginTop = "35px";
+            myImage.style.marginBottom = "35px";
+        }
         removeBtn.setAttribute("onclick", removeFunction);
+        rotateBnt.setAttribute("onclick", rotateFunction);
+
         // console.log(removeBtn);
         
     }
@@ -744,8 +769,8 @@ $("#CP_ImgsUpload").change(function (e) {
                                     lastModified: file.lastModifiedDate
                                 });
     
-                                doUploadFile(imgFile, element[1], element[2], element[3], "", "CPImagesTable", element[4]);
-    
+                                doUploadFile(imgFile, element[1], element[2], element[3], "", "CPImagesTable", element[4], element[0],'','','','','',element[5],element[6]);
+
                                 $("#CPImagesTable").show();
                             }
                         };
@@ -799,15 +824,20 @@ function createPhoto(id) {
         imgLabel = document.createElement("label"),
         imgRmBtn = document.createElement("button"),
         lastContainer = document.getElementById("CPImagesTable"),
-        imgContainerID = id + "_CPimgContainer",
+        rotateBtn = document.createElement("button"),
+        angleInput = document.createElement("input"),
         //        newImgID = id + "_CPAddImg",
         //        imgTextID = id + "_CPimgText",
         //        imgLabelID = id + "_CPimgLabel",
         //        imgRmBtnID = id + "_CPimgRmBtn";
+        imgContainerID = id + "_CPimgContainer",
         newImgID = 'CPImage' + id,
         imgTextID = "CPImageText" + id,
         imgLabelID = "imageCaption" + id,
-        imgRmBtnID = "CPImageRemoveButton" + id;
+        imgRmBtnID = "CPImageRemoveButton" + id
+        rotateBtnID = "CPImgRotateBtn" + id,
+        angleInputID = "CPImgAngle" + id;
+
 
     //Setting element's attribute.
     imgContainer.setAttribute("id", imgContainerID);
@@ -826,21 +856,41 @@ function createPhoto(id) {
 
     imgRmBtn.setAttribute("id", imgRmBtnID);
     imgRmBtn.setAttribute("class", "btn btn-danger");
+    imgRmBtn.innerHTML = "Remove";
+    
+
+    rotateBtn.setAttribute("id", rotateBtnID);
+    rotateBtn.setAttribute("class","btn btn-info");
+    rotateBtn.setAttribute("type", "button");
+    rotateBtn.innerHTML = "Rotate";
+
+
+    angleInput.setAttribute("id", angleInputID);
+    angleInput.setAttribute("type", "text");
+    angleInput.style.display = "none";
 
     lastContainer.appendChild(imgContainer);
     document.getElementById(imgContainerID).appendChild(newImg);
-    document.getElementById(imgContainerID).appendChild(document.createElement('br'));
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgLabel);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgText);
+    document.getElementById(imgContainerID).appendChild(angleInput);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgRmBtn);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
+    document.getElementById(imgContainerID).appendChild(rotateBtn);
 
-    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID, imgLabelID];
+    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID, imgLabelID,rotateBtnID,angleInputID];
 
     //$("#" + imgLabelID).html("IMG " + id);
-    $("#" + imgRmBtnID).html("Remove");
+    
     //Photos images remove button listerner.
     $("#" + imgRmBtnID).click(function () {
         imagesRemoveBtn(imgContainerID, newImgID);
+    });
+    $("#" + rotateBtnID).click(function () {
+        rotateOneImage(id);
     });
     return elements;
 }
@@ -852,6 +902,43 @@ function imagesRemoveBtn(containerID, imgID) {
     //    console.log("Remove ID: " + imgID);
     doRemovePhoto(imgID);
     automaticNumbering();
+}
+
+function rotateOneImage(ID)
+{
+    console.log("click");
+    var angelInputID = "CPImgAngle" + ID;
+    var imgID = 'CPImage' + ID;
+    var originalAngle = document.getElementById(angelInputID).value;
+    var rotateAngle = parseInt(originalAngle) + 90;
+    var myImage = document.getElementById(imgID);
+    if(originalAngle == null || originalAngle == "undefined" || originalAngle == "")
+    {
+        originalAngle = 0;
+    }
+    var rotateAngle = parseInt(originalAngle) + 90
+
+    //Set the image margin based on the degre to aovide overlapping with other objects/elements
+    if(rotateAngle == 90 || rotateAngle == 270)
+    {
+        //console.log("the degree is 90 or 270");
+        myImage.style.marginTop = "75px";
+        myImage.style.marginBottom = "75px";
+        $("#" + imgID).rotate(rotateAngle);
+    }
+    else
+    {
+        myImage.style.marginTop = "35px";
+        myImage.style.marginBottom = "35px";
+        $("#" + imgID).rotate(rotateAngle);
+    }
+
+    if(rotateAngle==360)
+    {
+        rotateAngle = 0;
+    }
+
+    document.getElementById(angelInputID).value = rotateAngle;
 }
 
 //Resize an image

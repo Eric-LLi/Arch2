@@ -202,7 +202,7 @@
     function sortByName(array)
     {
       // console.log('sortByName ');
-      // console.log(reports);
+      //console.log(array);
       //1st, remove the array index 3, it is the combined report - timber insepction report, no need to show to the user. 
       // var sortlist = array;
       var newArray;
@@ -211,7 +211,14 @@
         return (element.id !== 3)
       })
 
-      // console.log(remain);
+      //2nd, remove the array index 6 - 13, it is all the construction reports, no longer be offered (AA-162)
+      
+      sortlist = sortlist.filter(function(element){
+        return (element.id <6 || element.id >13)
+      })
+
+      //console.log(sortlist);
+
       newArray = sortlist.sort(function(a, b) 
       {
         var nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -1520,12 +1527,11 @@
         $('#fldNewBookingReport').combobox('clear');
         $('#fldNewBookingReport').combobox('enable');
         $('#fldNewBookingReport').combobox('setValue', 0); // set the default report type is 'Unassigned', id is 0;
-        $('#fldNewBookingBudget').numberbox('clear');
         <?php
           if (SharedIsAdmin())
           {
         ?>
-           
+            $('#fldNewBookingBudget').numberbox('clear');
             $('#fldNewBookingCommission').numberbox('clear');
             $('#fldNewBookingTravel').numberbox('clear');
             $('#fldNewBookingSpotter').numberbox('clear');
@@ -1680,12 +1686,11 @@
                 var custstate = $('#fldNewBookingCustState').combobox('getValue');
 
                 var reportid = $('#fldNewBookingReport').combobox('getValue');  
-                var budget = $('#fldNewBookingBudget').numberbox('getValue');             
                 <?php
                   if (SharedIsAdmin())
                   {
                 ?>
-                   
+                    var budget = $('#fldNewBookingBudget').numberbox('getValue');             
                     var commission = $('#fldNewBookingCommission').numberbox('getValue');
                     var travel = $('#fldNewBookingTravel').numberbox('getValue');
                     var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
@@ -1746,11 +1751,12 @@
                             custstate: custstate,
 
                             reportid: reportid,
-                            budget: budget,
+                            
                             <?php
                               if (SharedIsAdmin())
                               {
                             ?>
+                                budget: budget,
                                 commission: commission,
                                 travel: travel,
                                 spotter: spotter,
@@ -1905,7 +1911,7 @@
         $('#fldNewBookingCustCity').textbox('clear');
         $('#fldNewBookingCustPostcode').textbox('clear');
         $('#fldNewBookingQuoteDes').textbox('clear');
-        $('#fldNewBookingBudget').numberbox('clear');
+       
 
         // Report TAB
         //$('#fldNewBookingReport').combobox('disable');
@@ -1914,7 +1920,7 @@
           if (SharedIsAdmin())
           {
         ?>
-           
+            $('#fldNewBookingBudget').numberbox('clear');
             $('#fldNewBookingCommission').numberbox('clear');
             $('#fldNewBookingTravel').numberbox('clear');
             $('#fldNewBookingSpotter').numberbox('clear');
@@ -2067,13 +2073,15 @@
 
                   // Report TAB
                   //$('#fldNewBookingReport').combobox('setValue', b.reportid);
+                  console.log(b.reportid);
                   if(b.reportid == 3 || booking.linked_bookingcode !== null || b.reportid == 24)
                   {
                     console.log("this is a combined report, select the timber one or the property one,cannot change report type, regardless whether there is save report data");
                     $('#fldNewBookingReport').combobox({data: reports});
                     $('#fldNewBookingReport').combobox('disable');
                   }
-                  else
+                  
+                  else if(b.reportid < 6 || b.reportid > 13)
                   {
                     if(b.reportdata  === null)
                     {
@@ -2086,8 +2094,17 @@
                       $('#fldNewBookingReport').combobox('disable');
                     }
                   }
-                    $('#fldNewBookingReport').combobox('setValue', b.reportid);
-                    $('#fldNewBookingBudget').numberbox('setValue', b.budget);
+                  else
+                  {
+                    {
+                      //AA-162, the construction report is not longer offered. so any existing construction report will not be allowed to change report type no matter what. 
+                      console.log("AA-162, the construction report is not longer offered. so any existing construction report will not be allowed to change report type no matter what. ");
+                      $('#fldNewBookingReport').combobox({data: reports});
+                      $('#fldNewBookingReport').combobox('disable');
+                    }
+                  }
+                  $('#fldNewBookingReport').combobox('setValue', b.reportid);
+                    
                     //if the booking has been paid, the aggreed price cannot be changed any more ,set the text fields readonly
                     // if(booking.datepaid != null)
                     // {
@@ -2098,7 +2115,7 @@
                     if (SharedIsAdmin())
                     {
                   ?>
-                     
+                      $('#fldNewBookingBudget').numberbox('setValue', b.budget);
                       $('#fldNewBookingCommission').numberbox('setValue', b.commission);
                       $('#fldNewBookingTravel').numberbox('setValue', b.travel);
                       $('#fldNewBookingSpotter').numberbox('setValue', b.spotter);
@@ -2175,18 +2192,18 @@
                 var custcity = $('#fldNewBookingCustCity').textbox('getValue');
                 var custpostcode = $('#fldNewBookingCustPostcode').textbox('getValue');
                 var custstate = $('#fldNewBookingCustState').combobox('getValue');
-
                 var reportid = $('#fldNewBookingReport').combobox('getValue');
-                var budget = $('#fldNewBookingBudget').numberbox('getValue');
-                console.log("budget" + budget);
+                
                 <?php
                   if (SharedIsAdmin())
                   {
                 ?>
+                    var budget = $('#fldNewBookingBudget').numberbox('getValue');
                     var commission = $('#fldNewBookingCommission').numberbox('getValue');
                     var travel = $('#fldNewBookingTravel').numberbox('getValue');
                     var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
                     var cancellationfee = $('#fldNewBookingCancellationFee').numberbox('getValue');
+                    console.log("budget" + budget);
                 <?php
                   }
                 ?>
@@ -2245,13 +2262,12 @@
                             custcity: custcity,
                             custpostcode: custpostcode,
                             custstate: custstate,
-
                             reportid: reportid,
-                            budget: budget,
                             <?php
                               if (SharedIsAdmin())
                               {
                             ?>
+                                budget: budget,
                                 commission: commission,
                                 travel: travel,
                                 spotter: spotter,
@@ -4724,6 +4740,8 @@
       var img = '';
       var tooltip = '';
       var lnk = '';
+
+      //console.log(row.datepaid);
       
       if (!_.isNull(row.lastemailed))
       {
@@ -6261,14 +6279,15 @@
               <td>Quote Type Description:</td>
               <td><div id="fldNewBookingQuoteDes" class="easyui-textbox" multiline="true" style="width: 300px;height:30px"></div></td>
             </tr>
-            <tr>
-                <td>Agreed Price:</td>
-                <td><input id="fldNewBookingBudget" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
-              </tr>
+            
             <?php
               if (SharedIsAdmin())
               {
             ?>
+                <tr>
+                    <td>Agreed Price:</td>
+                    <td><input id="fldNewBookingBudget" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
+                </tr>
                 <tr>
                   <td>Commission:</td>
                   <td><input id="fldNewBookingCommission" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>

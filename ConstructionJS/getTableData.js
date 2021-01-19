@@ -1624,18 +1624,17 @@ function getListOfDefective()
 function getConstructionImagesTable()
 {
 
-    var result;
     var row = [];
     var data = [];
     var tableBody, divCount = 1;
     var totalContainers = $('#ConstructionPhotographs').find('> form');
     var fullAddress = document.getElementById('address').value.trim() + " " + document.getElementById('suburb').value.trim();
+
     // console.log(totalContainers.eq(0).children('div').eq(0).children('img').get(0));
     // console.log(totalContainers.eq(0).children('div').eq(0).children('img').attr('src'));
     // console.log(totalContainers.eq(0).children('div').eq(1).children('label').text());
     // console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
     console.log("the current total image form is: " + totalContainers.length + ", image number need to -1, the last one is only a form, no image");
-
     if (totalContainers.length == 0) {
         tableBody = {
             text:''
@@ -1660,17 +1659,21 @@ function getConstructionImagesTable()
                 style: 'tableBoldTextAlignLeft',
                 margin: [0, 0, 0, 20],
                 colSpan:2
-
             },{}
         ];
         data.push(secondRow);
-
         for (var i = 0; i < totalContainers.length; i++) 
         {
-            var img = totalContainers.eq(i).children('div').eq(0).children('img').get(0),
-                imgSrc = totalContainers.eq(i).children('div').eq(0).children('img').attr('src'),
-                imgLabel = totalContainers.eq(i).children('div').eq(1).children('label').text(),
-                imgText = totalContainers.eq(i).children('div').eq(2).children('input').val()
+            var img = totalContainers.eq(i).children('img').get(0);
+                imgSrc = totalContainers.eq(i).children('img').attr('src'),
+                imgLabel = totalContainers.eq(i).children('label').text(),
+                imgText = totalContainers.eq(i).children('input').eq(0).val(),
+                imgAngle = totalContainers.eq(i).children('input').eq(1).val(),
+                width = 0,
+                height = 0,
+                alignment = 'left'
+                margin = [0,5,0,15];
+           
                 // width = 0,
                 // height = 0;
                 //console.log(totalContainers.eq(i).children('div').eq(0).children('img').get(0));
@@ -1678,33 +1681,113 @@ function getConstructionImagesTable()
                 //console.log(totalContainers.eq(i).children('div').eq(1).children('label').text());
                 //console.log(totalContainers.eq(0).children('div').eq(2).children('input').val())
 
-            //console.log(imgLabel);
-            //console.log(imgSrc);
-
+            if(imgAngle == null || imgAngle == "undefined" || imgAngle == "")
+            {
+                imgAngle = 0;
+            }
+            else
+            {
+                imgAngle = parseInt(imgAngle);
+            }
             if (typeof imgSrc  != "undefined")
             {
-                if (imgSrc.includes("photos/") > 0) 
+                var canvas = document.createElement("canvas");
+                canvas.height = canvas.width = 0;
+                var context = canvas.getContext('2d');
+                var imgwidth = img.offsetWidth;
+                var imgheight = img.offsetHeight;
+                canvas.width = imgwidth ;
+                canvas.height = imgheight;
+                if(imgAngle == 90)
                 {
-                    imgSrc = convertImgToBase64(img);
+                    canvas.width = imgheight ;
+                    canvas.height = imgwidth;
+                    var scale = imgheight/imgwidth;
+                    // console.log("scale: " + scale);
+                    // console.log("canvas.width: " + canvas.width);
+                    // console.log("canvas.height: " + canvas.height);
+                    context.save();
+                    context.fillStyle = "white";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    //context.translate(imgwidth/2, imgheight/2);
+                    context.rotate(imgAngle*Math.PI/180);
+                    context.drawImage(img,canvas.width/scale,0, -(imgheight)/scale, -(imgwidth)*scale);
+                    context.restore();
                 }
-    
-                // if (img.width >= img.height) {
-                //     width = 250;
-                //     height = 187;
-                // } else {
-                //     width = img.width * 187 / img.height;
-                //     height = 187;
+                else if (imgAngle == 180)
+                {
+                    canvas.width = imgwidth ;
+                    canvas.height = imgheight;
+                    var scale = imgwidth/imgheight;
+                    // console.log("scale: " + scale);
+                    // console.log("canvas.width: " + canvas.width);
+                    // console.log("canvas.height: " + canvas.height);
+                    context.save();
+                    context.fillStyle = "white";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    // context.translate(imgwidth/2, imgheight/2);
+                    context.rotate(imgAngle*Math.PI/180);
+                    context.drawImage(img,0,0, -(imgwidth), -(imgheight));
+                    context.restore();
+                }
+                else if(imgAngle == 270)
+                {
+                    canvas.width = imgheight ;
+                    canvas.height = imgwidth;
+                    var scale = imgheight/imgwidth;
+                    // console.log("scale: " + scale);
+                    // console.log("canvas.width: " + canvas.width);
+                    // console.log("canvas.height: " + canvas.height);
+                    context.save();
+                    context.fillStyle = "white";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    // context.translate(imgwidth/2, imgheight/2);
+                    context.rotate(imgAngle*Math.PI/180);
+                    context.drawImage(img,0,canvas.height*scale, -(imgheight)/scale, -(imgwidth)*scale);
+                    context.restore();
+                }
+                else
+                {
+                    canvas.width = imgwidth ;
+                    canvas.height = imgheight;
+                    var scale = imgwidth/imgheight;
+                    // console.log("scale: " + scale);
+                    // console.log("canvas.width: " + canvas.width);
+                    // console.log("canvas.height: " + canvas.height);
+                    context.save();
+                    context.fillStyle = "white";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    // context.translate(imgwidth/2, imgheight/2);
+                    context.rotate(imgAngle*Math.PI/180);
+                    context.drawImage(img,canvas.width,canvas.height, -(imgwidth), -(imgheight));
+                    context.restore();
+                }
+                imgSrc = canvas.toDataURL("image/jpeg");
+
+                // if (imgSrc.includes("photos/") > 0) 
+                // {
+                //     imgSrc = convertImgToBase64(img);
                 // }
+    
+                if (img.width >= img.height) {
+                    width = 350;
+                    height = 250;
+                    margin = [0,0,0,0];
+                } else {
+                    width = img.width * 250 / img.height;
+                    height = 250;
+                    margin = [0,0,0,0];
+                }
     
                 row.push({
                     stack: [
                         {
                             image: imgSrc,
-                            height: 200,
+                           // height: height,
                             width: 250,
-                            margin:[0,0,0,5]
-                            // margin:[10,30,0,5],
-                            // alignment: 'center'
+                            margin:[0,0,0,5],
+                            //fit:[350,250],
+                            alignment: 'center'
                         },
                         {
                             text: imgLabel,
@@ -1722,7 +1805,7 @@ function getConstructionImagesTable()
                                     margin:[0,5,0,20]
                                 }
                             ]
-                        
+                            
                         }
                     ],
                     margin:[0,5,0,10]
@@ -1737,6 +1820,7 @@ function getConstructionImagesTable()
             }
             
         }
+
         //the last row only has one cell, need to put an empty cell to this row. 
         if (divCount == 2) {
             //console.log("the last row only has one cell, need to put an empty cell to this row.")

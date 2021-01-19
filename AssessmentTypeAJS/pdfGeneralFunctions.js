@@ -620,13 +620,27 @@ function checkImage(id) {
 }
 
 /**
- * Images
- * */
-function getCoverImage(id) {
-    var imageSection;
-    var myImage = document.getElementById(id);
+ * 
+ * @param {*} imgid 
+ * @param {*} angleid 
+ * New method to get the Cover Image, will rotate the image display if it is rotated on the HTML page. 
+ */
+function getCoverImage(imgid,angleid)
+{
+    var imageSection,imgSrc;
+    var myImage = document.getElementById(imgid);
     var myWidth = myImage.width;
-
+    var imgangle = document.getElementById(angleid).value;
+    if(imgangle == null || imgangle == "undefined" || imgangle == "")
+    {
+        imgangle = 0;
+    }
+    else
+    {
+        imgangle = parseInt(imgangle);
+    }
+    //console.log("the angle of the cover img is " + imgangle);
+    
     if (myWidth == 0) {
         console.log('not cover');
         imageSection = {
@@ -634,33 +648,94 @@ function getCoverImage(id) {
             width: 0,
             height: 0
         }
-    } else {
+    } 
+    else 
+    {
         console.log('has cover');
-        if (checkImage(id) >= 0) {
-            console.log('reload');
-            var canvas = document.createElement("canvas");
-            canvas.width = myImage.naturalWidth;
-            canvas.height = myImage.naturalHeight;
-            var ctx = canvas.getContext("2d");
-            ctx.drawImage(myImage, 0, 0);
-            var src = canvas.toDataURL("image/jpeg");
+        var canvas = document.createElement("canvas");
+        canvas.height = canvas.width = 0;
+        var context = canvas.getContext('2d');
+        var imgwidth = myImage.width;
+        var imgheight = myImage.height;
+     
+        if(imgangle == 90)
+        {
+            canvas.width = imgheight ;
+            canvas.height = imgwidth;
+            var scale = imgheight/imgwidth;
+            console.log("scale: " + scale);
+            console.log("canvas.width: " + canvas.width);
+            console.log("canvas.height: " + canvas.height);
+            context.save();
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            //context.translate(imgwidth/2, imgheight/2);
+            context.rotate(imgangle*Math.PI/180);
+            context.drawImage(myImage,canvas.width/scale,0, -(imgheight)/scale, -(imgwidth)*scale);
+            context.restore();
+        }
+        else if (imgangle == 180)
+        {
+            canvas.width = imgwidth ;
+            canvas.height = imgheight;
+            var scale = imgwidth/imgheight;
+            console.log("scale: " + scale);
+            console.log("canvas.width: " + canvas.width);
+            console.log("canvas.height: " + canvas.height);
+            context.save();
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            // context.translate(imgwidth/2, imgheight/2);
+            context.rotate(imgangle*Math.PI/180);
+            context.drawImage(myImage,0,0, -(imgwidth), -(imgheight));
+            context.restore();
+        }
+        else if(imgangle == 270)
+        {
+            canvas.width = imgheight ;
+            canvas.height = imgwidth;
+            var scale = imgheight/imgwidth;
+            console.log("scale: " + scale);
+            console.log("canvas.width: " + canvas.width);
+            console.log("canvas.height: " + canvas.height);
+            context.save();
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            // context.translate(imgwidth/2, imgheight/2);
+            context.rotate(imgangle*Math.PI/180);
+            context.drawImage(myImage,0,canvas.height*scale, -(imgheight)/scale, -(imgwidth)*scale);
+            context.restore();
+        }
+        else
+        {
+            canvas.width = imgwidth ;
+            canvas.height = imgheight;
+            var scale = imgwidth/imgheight;
+            console.log("scale: " + scale);
+            console.log("canvas.width: " + canvas.width);
+            console.log("canvas.height: " + canvas.height);
+            context.save();
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            // context.translate(imgwidth/2, imgheight/2);
+            context.rotate(imgangle*Math.PI/180);
+            context.drawImage(myImage,canvas.width,canvas.height, -(imgwidth), -(imgheight));
+            context.restore();
+        }
+        
+        imgSrc = canvas.toDataURL("image/jpeg");
 
-            imageSection = {
-                image: src,
-                height: 150,
-                width: 200
-            }
-        } else {
-            console.log('just upload');
-            imageSection = {
-                image: myImage.src,
-                height: 150,
-                width: 200
-            }
+        imageSection = {
+            image: imgSrc,
+            // height: 180,
+            width: 220,
+            //fit:[220,180]
         }
 
     }
     return imageSection;
+
+
 }
 
 function displayThreeImg(id) {

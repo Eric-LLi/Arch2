@@ -235,12 +235,20 @@
         <div class="col-sm-6">
             <div class="col-sm">
                 <img id="PostDilapidationCoverImage" src="#" alt="Image1"
-                     style="width:265px;height:265px;display: none"/>
+                     style="width:400px;display: none"/>
             </div>
             <div class="col-sm">
                 <input class="btn btn-danger" type="button" value="Remove" id="PostDilapidationCoverImageRemoveButton"
-                       onclick="PostRemoveDilapidationCover()"
-                       style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
+                       onclick="RemoveCoverImg()"
+                       style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
+                <br>
+            </div>
+            <div class="col-sm">
+                <input type="text" id="PostDilapidationCoverImageAngle" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
+                <br>
+            </div>
+            <div class="col-sm">
+                <input class="btn btn-info" type="button" value="Rotate" id="PostDilapidationCoverImageRotateButton" onclick="RotateCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
                 <br>
             </div>
         </div>
@@ -259,6 +267,8 @@
         <input type="button" id="get_PostDilapidationImage" value="Upload Images (Max 60 images)" class="uploadImageButton"
                onclick="PostDilapidationUploadImage()" style="white-space: normal; width: 15%">
         <input type="file" id="PostDilapidationUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+        <input type="file" id="PostDilapidationUploadOneImage" class="inputImage" accept="image/x-png,image/jpeg">
+
     </div>
     <br>
     <div class="container">

@@ -124,12 +124,15 @@
         // error_log("iscompleted ". $iscompleted);
         $dbselect = "select " .
                     "p1.id," .
+                    "p1.name," .
                     "p1.filename," .
                     "p1.filetype," .
                     "p1.filesize," .
                     "p1.imageid," .
                     "p1.textid," .
                     "p1.removeid," .
+                    "p1.rotateid," .
+                    'p1.angleid,'.
                     "p1.addid," .
                     "p1.tableName," .
                     "p1.imageAltName,".

@@ -654,7 +654,7 @@ function generatePDF(mode) {
             /**
              * (10) Report Detail Page ten
              */
-            giveMeHugeDraft(mode),
+            //giveMeHugeDraft(mode),
             //            //Sketch title
             //            {
             //                text: $('#HA_DIVSketchs').attr('data-title'),

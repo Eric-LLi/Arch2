@@ -11,7 +11,7 @@ var InteriorMajorRecommendationsArray = [];
 var InteriorMinorRecommendationsArray = [];
 var ServiceMajorRecommendationsArray = [];
 var ServiceMinorRecommendationsArray = [];
-
+var global_Img;
 
 /**
  *
@@ -52,6 +52,7 @@ function addAccessLimitation(tableID, selectIDName, noteIDName) {
     var textArea = document.createElement('textarea');
     textArea.setAttribute('class', 'form-control');
     textArea.setAttribute('title', 'limitationNotes');
+    textArea.setAttribute('style', 'height:90px');
     textArea.id = noteIDName + id;
     cell2.appendChild(textArea);
 
@@ -597,197 +598,11 @@ function changeOther(id1,id2)
     }
 }
 
-/**
- * Create Image Elements dynamtically when image(s) are uploaded
- * create
- * image, label, image text, remove Button, Add Button, Rotate Button, Angle Input, A form to contain all 
- */
 
-function createImagesElements(lastElementID, imgID, labelID = "", labelValue = "", textID, rmBtnID, addBtnID, formID,rotateBtnID,angleInputID) {
-    //console.log(lastElementID);
-    var id = imgID.split("_")[1],
-        form = document.createElement("form"),
-        img = document.createElement("img"),
-        text = document.createElement("input"),
-        rmBtn = document.createElement("input"),
-        addBtn = document.createElement("input"),
-        rotateBtn = document.createElement("input"),
-        label = document.createElement("label");
-        angleInput = document.createElement("input"),
-
-    form.setAttribute("id", formID);
-    form.setAttribute("class", "col text-center my-2");
-
-    img.setAttribute("id", imgID);
-
-    text.setAttribute("id", textID);
-    text.setAttribute("type", "text");
-    text.setAttribute("placeholder", "name");
-    text.style.width = "265px";
-
-    rmBtn.setAttribute("id", rmBtnID);
-    rmBtn.setAttribute("class","btn btn-danger");
-    rmBtn.setAttribute("type", "button");
-    rmBtn.setAttribute("value", "Remove");
-    rmBtn.style.width = "265px";
-
-    addBtn.setAttribute("id", addBtnID);
-    addBtn.setAttribute("class","btn btn-secondary");
-    addBtn.setAttribute("type", "button");
-    addBtn.setAttribute("value", "Add");
-    addBtn.style.width = "265px";
-    addBtn.style.display = "none";
-
-    rotateBtn.setAttribute("id", rotateBtnID);
-    rotateBtn.setAttribute("class","btn btn-info");
-    rotateBtn.setAttribute("type", "button");
-    rotateBtn.setAttribute("value", "Rotate");
-    rotateBtn.setAttribute("style","margin-top: 5px;margin-bottom: 5px")
-    rotateBtn.style.width = "265px";
-
-    angleInput.setAttribute("id", angleInputID);
-    angleInput.setAttribute("type", "text");
-    angleInput.style.width = "265px";
-    angleInput.style.display = "none";
-
-
-    label.setAttribute("id", labelID);
-    label.style.marginBottom = "0px";
-    //label.innerHTML = "IMG_" + id;
-
-
-    $("#" + lastElementID).append(form);
-    $("#" + formID).append(img);
-    $("#" + formID).append("<br>");
-    $("#" + formID).append(label);
-    $("#" + formID).append("<br>");
-    $("#" + formID).append(text);
-    $("#" + formID).append("<br>");
-    $("#" + formID).append(angleInput);
-    $("#" + formID).append("<br>");
-    $("#" + formID).append(rmBtn);
-    $("#" + formID).append(addBtn);
-    $("#" + formID).append(rotateBtn);
-
-    //console.log(form);
-
-    
-    
-    var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID,lastElementID,rotateBtnID,angleInputID];
-    // console.log(element);
-    $("#" + rmBtnID).click(function () {
-        // DeleteImage(formID, imgID, textID);
-        DeleteOneImg(element);
-    });
-    $("#" + addBtnID).click(function () {
-        global_Img = element;
-        $("#AssessmentUploadOneImage").click();
-    });
-
-    $("#" + rotateBtnID).click(function () {
-        RotateOneImage(element);
-    });
-
-
-    return element;
-}
 
 /**
- * Create Empty Image Elements for the next image, when a image is uploaded. Prepare for the next. 
- */
-
-function createEmptElementForAddingImg(MaxImagesnumber = 6) {
-    //5 upload container.
-    //MaxImagesnumber = 6;
-    //console.log(MaxImagesnumber);
-    //console.log("i am inside createEmptElementForAddingImg");
-    const container = ["AccessmentSiteImagesContainer", "AccessmentExteriorImagesContainer", "AccessmentInteriorLivingImagesContainer", "AccessmentInteriorBedroomImagesContainer", "AccessmentInteriorServiceImagesContainer"];
-    for (var i = 0; i < container.length; i++) {
-        //console.log(i);
-        var element = $("#" + container[i] + " form");
-        //console.log(element);
-        //Check if contained hidden form.
-        var emt = element.find("img:hidden");
-        //console.log(emt);
-        //console.log(emt.length);
-
-        //Only add one empty element when there is no hidden form.
-        if (emt.length == 0) {
-            //console.log("I am in");
-
-            //Different uploads have different limitation.
-            if (i === 0 || i === 4) {
-                //Max image is 3, default is 6
-                //console.log("setting the MaxImagesnumber to 3");
-                MaxImagesnumber = 3;
-            }
-            else
-            {
-                MaxImagesnumber = 6;
-            }
-            
-            //console.log(MaxImagesnumber);
-            //console.log(element.length);
-
-            //do not run when there is no form or reached limitation already.
-            if (element.length < MaxImagesnumber && element.length != 0) {
-                //console.log("need to create one more");
-                //console.log(element);
-                var maxid = [];
-                for (var j = 0; j < element.length; j++) {
-                    //save id in array.
-                    maxid.push(element.eq(j).attr("id"));
-                }
-                //The last one in array is the largest one.
-                maxid.sort(function (a, b) {
-                    return Number(a.replace(/[^\d.]/g, '')) - Number(b.replace(/[^\d.]/g, ''));
-                });
-                //maxid.sort();
-                //console.log(maxid);
-
-                //The existing max id plus one
-                var num = parseInt(maxid[maxid.length - 1].replace(/\D+/, "")) + 1;
-                //console.log(num);
-                //console.log(num);
-
-                //Create elements id.
-                var imgID = (element.eq(0).children("img").attr("id")).replace(/\d+/, "") + num;
-
-                var textID = (element.eq(0).children("input[type=text]").eq(0).attr("id")).replace(/\d+/, "") + num;
-                var angleInputID = (element.eq(0).children("input[type=text]").eq(1).attr("id")).replace(/\d+/, "") + num;
-
-                var labelID = (element.eq(0).children("label").attr("id")).replace(/\d+/, "") + num;
-                var labelValue = "IMG" + (parseInt(element.length) + 1);
-
-                var removeBtnID = (element.eq(0).children("input[type=button]").eq(0).attr("id")).replace(/\d+/, "") + num;
-                var addBtnID = (element.eq(0).children("input[type=button]").eq(1).attr("id")).replace(/\d+/, "") + num;
-                var rotateBtnID = (element.eq(0).children("input[type=button]").eq(2).attr("id")).replace(/\d+/, "") + num;
-                
-
-                var formID = element.eq(0).attr("id").replace(/\d+/, "") + num;
-
-                // console.log(formID);
-                var emptyElement = createImagesElements(container[i], imgID, labelID, labelValue, textID, removeBtnID, addBtnID, formID,rotateBtnID,angleInputID);
-                //console.log(emptyElement);
-
-                //The new form only show add button.
-                $("#" + emptyElement[0]).hide();
-                $("#" + emptyElement[1]).hide();
-                $("#" + emptyElement[2]).val("");
-                $("#" + emptyElement[2]).hide();
-                $("#" + emptyElement[3]).hide();
-                $("#" + emptyElement[4]).show();
-                $("#" + emptyElement[7]).hide();
-                $("#" + emptyElement[8]).show();
-
-            }
-        }
-    }
-}
-
-/**
- * Cover Image Related
- */
+* Cover Image Related
+*/
 
 function AssessmentCoverImage() {
     document.getElementById('AssessmentUploadCoverImage').click();
@@ -811,17 +626,18 @@ $("#AssessmentUploadCoverImage").change(function () {
                 var base64data = canvas.toDataURL(imageType);
                 image.setAttribute('src', base64data);
                 removeButton.style.display = 'block';
+
                 rotateButton.style.display = 'block';
                 //removeButton.style.width = '100%';
                 image.alt = 'Cover Image';
                 image.style.display = 'block';
-                image.style.width = '100%';
-                image.style.height = '100%';
+                image.style.width = '500px';
+                // image.style.height = '198px';
                 var file = new File([convertBase64UrlToBlob(base64data)], imageName, {
                     type: imageType,
                     lastModified: date.getTime()
                 });
-                doUploadFile(file, 'AssessmentCoverImage', '', 'AssessmentCoverImageRemoveButton', '', '', 'cover image', '', '', '', '', '100%', '100%','AssessmentCoverImageRotateButton',"AssessmentCoverImageAngle");
+                doUploadFile(file, 'AssessmentCoverImage', '', 'AssessmentCoverImageRemoveButton', '', '', 'cover image', '', '', '', '', '', '','AssessmentCoverImageRotateButton',"AssessmentCoverImageAngle");
 
             }, {
                 canvas: true,
@@ -843,7 +659,7 @@ function RemoveAssessmentCoverImage() {
 
     button.style.display = 'none';
     rotatebutton.style.display = 'none';
-    image.style.width = '0px';
+    //image.style.width = '0px';
     image.style.display = 'none';
     document.getElementById("AssessmentCoverImageAngle").value = "";
 
@@ -871,8 +687,8 @@ function RotateAssessmentCoverImage()
     if(rotateAngle == 90 || rotateAngle == 270)
     {
         console.log("the degree is 90 or 270");
-        myImage.style.marginTop = "100px";
-        myImage.style.marginBottom = "100px";
+        myImage.style.marginTop = "130px";
+        myImage.style.marginBottom = "130px";
         $("#AssessmentCoverImage").rotate(rotateAngle);
     }
     else
@@ -888,8 +704,6 @@ function RotateAssessmentCoverImage()
         rotateAngle = 0;
     }
     document.getElementById('AssessmentCoverImageAngle').value = rotateAngle
-   
-   
 }
 
 /**
@@ -897,7 +711,7 @@ function RotateAssessmentCoverImage()
  */
 function RotateSavedCoverImage()
 {
-    console.log("RotateSavedCoverImage");
+    //console.log("RotateSavedCoverImage");
     var myImage = document.getElementById('AssessmentCoverImage');
     var originalAngle = parseInt(document.getElementById('AssessmentCoverImageAngle').value);
     var rotateBtn = document.getElementById('AssessmentCoverImageRotateButton');
@@ -905,10 +719,10 @@ function RotateSavedCoverImage()
     //Check if there is save cover image from the last time. 
     if (myImage.src.includes("photos/") > 0) 
     {
-        console.log("there is saved cover image,need to dispaly the rotate button");
+        //console.log("there is saved cover image,need to dispaly the rotate button");
         rotateBtn.style.display = 'block';
         //check if the cover image need to be rotated;            
-        console.log("in");
+        //console.log("in");
         if(originalAngle == 90 || originalAngle == 270)
         {
             // console.log("the degree is 90 or 270");
@@ -929,214 +743,8 @@ function RotateSavedCoverImage()
         }
 
     }
-    
-
-    
-
 }
 
-/**
- * 
- * Single Actions, image related
- * Remove Images
- */
-
-function DeleteImage(formID, imgID, textID) {
-    if (!isEmpty(formID) && !isEmpty(imgID)) {
-        $("#" + textID).val("");
-        doRemovePhoto(imgID);
-        $("#" + formID).remove();
-    }
-}
-
-function DeleteOneImg(element) {
-    //console.log(element);
-    document.getElementById(element[8]).value = 0;
-    doRemovePhoto(element[0]);
-    $("#" + element[5]).remove();
-    automaticNumbering(element[6]);
-    createEmptElementForAddingImg();
-}
-var global_Img;
-
-/**
- * Single Action, image related
- * Add One Image
- */
-$('#AssessmentUploadOneImage').click(function () {
-    //console.log(this.value);
-    this.value = null;
-});
-$("#AssessmentUploadOneImage").on('change', function (e) {
-    console.log("need to upload a single image");
-    var file = e.currentTarget.files;
-
-    if (!isEmpty(global_Img) && !isEmpty(file)) {
-        var element = global_Img;
-
-        console.log(element);
-
-        $("#" + element[0]).show();
-        $("#" + element[1]).show();
-        $("#" + element[2]).val("");
-        $("#" + element[2]).show();
-        $("#" + element[3]).show();
-        $("#" + element[4]).hide();
-        $("#" + element[7]).show();
-        $("#" + element[8]).hide();
-
-        loadImage.parseMetaData(file[0], function (data) {
-            var orientation = 0;
-            if (data.exif) {
-                orientation = data.exif.get('Orientation');
-            }
-
-            var loadingImage = loadImage(file[0], function (canvas) {
-                var data = canvas.toDataURL('image/jpeg');
-                var image = new Image();
-                image.onload = function () {
-                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                    if (!isEmpty(code)) {
-                        $("#" + element[0]).attr("src", code);
-                        var imgFile = new File([convertBase64UrlToBlob(code, file[0].type)], file[0].name, {
-                            type: file[0].type,
-                            lastModified: file[0].lastModifiedDate
-                        });
-                        doRemovePhoto(element[0]);
-                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
-                    }
-                };
-                image.src = data;
-            }, {
-                canvas: true,
-                orientation: orientation
-            });
-        });
-
-        automaticNumbering(element[6]);
-
-        //Add empty element
-        createEmptElementForAddingImg();
-
-    }
-
-});
-
-/**
- * Single Action, image related
- * Rotate One Image
- */
-var imageangle = 0;
-$('#AssessmentRotateSingleImage').click(function () {
-    //console.log(this.value);
-    this.value = null;
-});
-function RotateOneImage(element)
-{
-   //console.log(element);
-    var originalAngle = document.getElementById(element[8]).value;
-    var myImage = document.getElementById(element[0])
-    //console.log("orginalAngle: " + originalAngle);
-    if(originalAngle == null || originalAngle == "undefined" || originalAngle == "")
-    {
-        originalAngle = 0;
-    }
-    var rotateAngle = parseInt(originalAngle) + 90
-
-    //Set the image margin based on the degre to aovide overlapping with other objects/elements
-    if(rotateAngle == 90 || rotateAngle == 270)
-    {
-        console.log("the degree is 90 or 270");
-        myImage.style.marginTop = "35px";
-        myImage.style.marginBottom = "35px";
-        $("#" + element[0]).rotate(rotateAngle);
-    }
-    else
-    {
-        myImage.style.marginTop = "0px";
-        myImage.style.marginBottom = "0px";
-        $("#" + element[0]).rotate(rotateAngle);
-    }
-
-    if(rotateAngle==360)
-    {
-        rotateAngle = 0;
-    }
-    document.getElementById(element[8]).value = rotateAngle;
-    
-}
-
-/**
- * Single Action, image related
- * Resize the Image
- */
-function resizeImage_Canvas(img) {
-    var MAX_WIDTH = 265,
-        MAX_HEIGHT = 198,
-        width = img.width,
-        height = img.height,
-        canvas = document.createElement('canvas');
-
-    if (width >= height) {
-        if (width > MAX_WIDTH) {
-            //height *= MAX_WIDTH / width;
-            //width = MAX_WIDTH;
-            height = MAX_HEIGHT;
-            width = MAX_WIDTH;
-        }
-    } else {
-        if (height > MAX_HEIGHT) {
-            width *= MAX_HEIGHT / height;
-            //height = MAX_HEIGHT;
-            height = 198;
-
-        }
-    }
-    canvas.width = width;
-    canvas.height = height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, width, height);
-
-    return canvas;
-}
-
-/**
- * Single Action, image related
- * Convert the Base64 to Blob for uploading the image to the server
- * Source from http://www.blogjava.net/jidebingfeng/articles/406171.html
- */
-function convertBase64UrlToBlob(urlData, type) {
-
-    var bytes = window.atob(urlData.split(',')[1]); //remove url, convert to byte
-
-    //deal with anomaly, change the ASCI code less than = 0 to great than zero
-    var ab = new ArrayBuffer(bytes.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < bytes.length; i++) {
-        ia[i] = bytes.charCodeAt(i);
-    }
-
-    return new Blob([ab], {
-        type: type
-    });
-}
-
-/**
- * Single Action, image related
- * Call it every time a image is uploaded/removed, or the HTML is reloaded. 
- * auto number the image
- * display the number under the images. 
- */
-function automaticNumbering(divid) {
-    //console.log("need to refresh the image number");
-    var totalContainers = $('#' + divid).find('> form');
-
-    for (var i = 0; i < totalContainers.length; i++) {
-        //console.log(totalContainers.eq(i).children('label').get(0));
-        //console.log(totalContainers.eq(i).children('form').eq(1).children('label').get(0));
-        totalContainers.eq(i).children('label').get(0).innerHTML = "IMG " + (i + 1);
-    }    
-}
 
 /**
  * Each Image Section Actions. 
@@ -1206,9 +814,15 @@ $('#AssessmentSiteUploadImages').click(function () {
     this.value = null;
 });
 $("#AssessmentSiteUploadImages").change(function () {
-    if (!isEmpty(this.files)) {
+    if (!isEmpty(this.files)) 
+    {
         //Check exitsing images
+        var count = this.files.length;
         var imageIDs = $("#AccessmentSiteImagesContainer form");
+
+        var allImages = [];
+
+        var elementID;
 
         //Clear all images.
         if (!isEmpty(imageIDs)) {
@@ -1218,66 +832,137 @@ $("#AssessmentSiteUploadImages").change(function () {
             }
             $("#AccessmentSiteImagesContainer").empty();
         }
-
-        var allImages = [];
-        if (this.files.length > 3) {
-            alert("You can only selected three images maximum");
+        if (count >= 3) 
+        {
+            if(count > 3)
+            {
+                alert("You can only select 3 images. It will only display the first 3 photos");
+            }
             //Only save 3 files.
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 3; i++)
+            {
                 allImages.push(this.files[i]);
             }
-        } else {
-            allImages = this.files;
-        }
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
+                var imageID = 'AssessmentSiteImage' + elementID;
+                var textID = 'AssessmentSiteImageText' + elementID;
+                var labelID = 'AssessmentSiteImageLable' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentSiteRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentSiteImageButton' + elementID;
+                var uploadID = 'AssessmentSiteUploadImage' + elementID;
+                var rotateButtonID = 'AssessmentSiteRotateImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentSiteImageAngle' + elementID;
+                var formID = "SiteGardonForm" + elementID;
 
-        var elementID;
-        Object.keys(allImages).forEach(i => {
-            const file = allImages[i];
-            elementID = parseInt(i) + 1;
-            //Create elements
-            //[imgID, labelID, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentSiteImagesContainer", "AssessmentSiteImage_" + elementID, "SiteGardenlabel" + elementID, 
-            "IMG" + elementID, "AssessmentSiteImageText" + elementID, "AssessmentSiteRemoveButton" + elementID, "AddAssessmentSiteImageButton" + elementID, 
-            "SiteGardonForm" + elementID,"RotateAssessmentSiteImageButton" + elementID,"AssessmentSiteImageAngle" + elementID);
+                var element = createImagesElements("AccessmentSiteImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentSiteImagesContainer');
 
-            loadImage.parseMetaData(file, function (data) {
-                var orientation = 0;
-                if (data.exif) {
-                    orientation = data.exif.get('Orientation');
-                }
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
 
-                var loadingImage = loadImage(file, function (canvas) {
-                    var data = canvas.toDataURL('image/jpeg');
-                    var image = new Image();
-                    image.onload = function () {
-                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                        if (!isEmpty(code)) {
-                            $("#" + element[0]).attr("src", code);
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
 
-                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                                type: file.type,
-                                lastModified: file.lastModifiedDate
-                            });
-                            //console.log(element);
-                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
-                        }
-                    };
-                    image.src = data;
-                }, {
-                    canvas: true,
-                    orientation: orientation
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
                 });
             });
 
+            setTimeout(function () {
+                automaticNumbering('AccessmentSiteImagesContainer');
+            }, 800);
+        } 
+        else
+        {
+            allImages = this.files;
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
 
-        });
+                var imageID = 'AssessmentSiteImage' + elementID;
+                var textID = 'AssessmentSiteImageText' + elementID;
+                var labelID = 'AssessmentSiteImageLable' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentSiteRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentSiteImageButton' + elementID;
+                var uploadID = 'AssessmentSiteUploadImage' + elementID;
+                var rotateButtonID = 'AssessmentSiteRotateImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentSiteImageAngle' + elementID;
+                var formID = "SiteGardonForm" + elementID;
 
-        setTimeout(function () {
-            automaticNumbering('AccessmentSiteImagesContainer');
-        }, 800);
+                var element = createImagesElements("AccessmentSiteImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentSiteImagesContainer');
 
-        //Add empty element
-        createEmptElementForAddingImg();
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
+
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
+
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
+                });
+            });
+
+            setTimeout(function () {
+                automaticNumbering('AccessmentSiteImagesContainer');
+                var nextID = count + 1;
+                createEmptElementForAddingImg("AccessmentSiteImagesContainer",nextID);
+            }, 800);
+        }
     }
 });
 
@@ -1287,9 +972,15 @@ $('#AssessmentExteriorUploadImages').click(function () {
 });
 $("#AssessmentExteriorUploadImages").change(function () {
 
-    if (!isEmpty(this.files)) {
+    if (!isEmpty(this.files)) 
+    {
         //Check exitsing images
+        var count = this.files.length;
         var imageIDs = $("#AccessmentExteriorImagesContainer form");
+
+        var allImages = [];
+
+        var elementID;
 
         //Clear all images.
         if (!isEmpty(imageIDs)) {
@@ -1299,66 +990,138 @@ $("#AssessmentExteriorUploadImages").change(function () {
             }
             $("#AccessmentExteriorImagesContainer").empty();
         }
-
-        var allImages = [];
-        if (this.files.length > 6) {
-            alert("You can only selected Six images maximum");
-            //Only save 6 files.
-            for (let i = 0; i < 6; i++) {
+        if (count >= 6) 
+        {
+            if(count > 6)
+            {
+                alert("You can only select 3 images. It will only display the first 3 photos");
+            }
+            //Only save 3 files.
+            for (let i = 0; i < 6; i++)
+            {
                 allImages.push(this.files[i]);
             }
-        } else {
-            allImages = this.files;
-        }
-        var elementID;
-        Object.keys(allImages).forEach(i => {
-            const file = allImages[i];
-            elementID = parseInt(i) + 1;
-            //Create elements
-            //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentExteriorImagesContainer", "AssessmentExteriorImage_" + elementID, 
-            "Exteriorlabel" + elementID, "IMG" + elementID, "AssessmentExteriorImageText" + elementID, "AssessmentExteriorRemoveButton" + elementID, 
-            "AddAssessmentExteriorImageButton" + elementID, "ExteriorForm" + elementID,"RotateAssessmentExteriorImageButton" + elementID,"AssessmentExteriorImageAngle" + elementID);
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
+                var imageID = 'AssessmentExteriorImage' + elementID;
+                var textID = 'AssessmentExteriorImageText' + elementID;
+                var labelID = 'AssessmentExteriorImageLable' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentExteriorRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentExteriorImageButton' + elementID;
+                var uploadID = 'AssessmentExteriorUploadImage' + elementID;
+                var rotateButtonID = 'AssessmentExteriorRotateImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentExteriorImageAngle' + elementID;
+                var formID = "ExteriorForm" + elementID;
 
-            loadImage.parseMetaData(file, function (data) {
-                var orientation = 0;
-                if (data.exif) {
-                    orientation = data.exif.get('Orientation');
-                }
+                var element = createImagesElements("AccessmentExteriorImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentExteriorImagesContainer');
 
-                var loadingImage = loadImage(file, function (canvas) {
-                    var data = canvas.toDataURL('image/jpeg');
-                    var image = new Image();
-                    image.onload = function () {
-                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                        if (!isEmpty(code)) {
-                            $("#" + element[0]).attr("src", code);
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
 
-                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                                type: file.type,
-                                lastModified: file.lastModifiedDate
-                            });
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
 
-                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentExteriorImagesContainer", element[1], element[5],'','','','','',element[7],element[8]);
-                        }
-                    };
-                    image.src = data;
-                }, {
-                    canvas: true,
-                    orientation: orientation
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
                 });
             });
 
-        });
+            setTimeout(function () {
+                automaticNumbering('AccessmentExteriorImagesContainer');
+            }, 800);
+        } 
+        else
+        {
+            allImages = this.files;
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
 
-        setTimeout(function () {
-            automaticNumbering('AccessmentExteriorImagesContainer');
-        }, 1000);
+                var imageID = 'AssessmentExteriorImage' + elementID;
+                var textID = 'AssessmentExteriorImageText' + elementID;
+                var labelID = 'AssessmentExteriorImageLable' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentExteriorRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentExteriorImageButton' + elementID;
+                var uploadID = 'AssessmentExteriorUploadImage' + elementID;
+                var rotateButtonID = 'AssessmentExteriorRotateImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentExteriorImageAngle' + elementID;
+                var formID = "ExteriorForm" + elementID;
 
-        //Add empty element
-        createEmptElementForAddingImg();
+                var element = createImagesElements("AccessmentExteriorImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentExteriorImagesContainer');
+
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
+
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
+
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
+                });
+            });
+
+            setTimeout(function () {
+                automaticNumbering('AccessmentExteriorImagesContainer');
+                var nextID = count + 1;
+                createEmptElementForAddingImg("AccessmentExteriorImagesContainer",nextID);
+            }, 800);
+        }
     }
-
 });
 
 $('#AssessmentInteriorLivingUploadImages').click(function () {
@@ -1366,11 +1129,16 @@ $('#AssessmentInteriorLivingUploadImages').click(function () {
     this.value = null;
 });
 $("#AssessmentInteriorLivingUploadImages").change(function () {
-    // read6ImagesURL(this, 'AddAssessmentInteriorLivingImageButton0', 'AddAssessmentInteriorLivingImageButton1', 'AddAssessmentInteriorLivingImageButton2', 'AddAssessmentInteriorLivingImageButton3', 'AddAssessmentInteriorLivingImageButton4', 'AddAssessmentInteriorLivingImageButton5', 'AssessmentInteriorLivingImage0', 'AssessmentInteriorLivingImage1', 'AssessmentInteriorLivingImage2', 'AssessmentInteriorLivingImage3', 'AssessmentInteriorLivingImage4', 'AssessmentInteriorLivingImage5', 'AssessmentInteriorLivingImageText0', 'AssessmentInteriorLivingImageText1', 'AssessmentInteriorLivingImageText2', 'AssessmentInteriorLivingImageText3', 'AssessmentInteriorLivingImageText4', 'AssessmentInteriorLivingImageText5', 'AssessmentInteriorLivingRemoveButton0', 'AssessmentInteriorLivingRemoveButton1', 'AssessmentInteriorLivingRemoveButton2', 'AssessmentInteriorLivingRemoveButton3', 'AssessmentInteriorLivingRemoveButton4', 'AssessmentInteriorLivingRemoveButton5');
 
-    if (!isEmpty(this.files)) {
+    if (!isEmpty(this.files)) 
+    {
         //Check exitsing images
+        var count = this.files.length;
         var imageIDs = $("#AccessmentInteriorLivingImagesContainer form");
+
+        var allImages = [];
+
+        var elementID;
 
         //Clear all images.
         if (!isEmpty(imageIDs)) {
@@ -1380,68 +1148,138 @@ $("#AssessmentInteriorLivingUploadImages").change(function () {
             }
             $("#AccessmentInteriorLivingImagesContainer").empty();
         }
-
-        var allImages = [];
-        if (this.files.length > 6) {
-            alert("You can only selected Six images maximum");
-            //Only save 6 files.
-            for (let i = 0; i < 6; i++) {
+        if (count >= 6) 
+        {
+            if(count > 6)
+            {
+                alert("You can only select 6 images. It will only display the first 6 photos");
+            }
+            //Only save 3 files.
+            for (let i = 0; i < 6; i++)
+            {
                 allImages.push(this.files[i]);
             }
-        } else {
-            allImages = this.files;
-        }
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
+                var imageID = 'AssessmentInteriorLivingImage' + elementID;
+                var textID = 'AssessmentInteriorLivingImageText' + elementID;
+                var labelID = 'Livinglabel' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentInteriorLivingRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentInteriorLivingImageButton' + elementID;
+                var uploadID = 'AssessmentExteriorUploadImage' + elementID;
+                var rotateButtonID = 'RotateAssessmentInteriorLivingImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentInteriorLivingImageAngle' + elementID;
+                var formID = "LivingForm" + elementID;
 
-        var elementID;
-        Object.keys(allImages).forEach(i => {
-            const file = allImages[i];
-            elementID = parseInt(i) + 1;
-            //Create elements
-            //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentInteriorLivingImagesContainer", "AssessmentInteriorLivingImage_" + elementID, 
-            "Livinglabel" + elementID, "IMG" + elementID, "AssessmentInteriorLivingImageText" + elementID, "AssessmentInteriorLivingRemoveButton" + elementID, 
-            "AddAssessmentInteriorLivingImageButton" + elementID, "LivingForm" + elementID,"RotateAssessmentInteriorLivingImageButton" + elementID ,"AssessmentInteriorLivingImageAngle" + elementID );
+                var element = createImagesElements("AccessmentInteriorLivingImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentInteriorLivingImagesContainer');
+            
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
 
-            loadImage.parseMetaData(file, function (data) {
-                var orientation = 0;
-                if (data.exif) {
-                    orientation = data.exif.get('Orientation');
-                }
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
 
-                var loadingImage = loadImage(file, function (canvas) {
-                    var data = canvas.toDataURL('image/jpeg');
-                    var image = new Image();
-                    image.onload = function () {
-                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                        if (!isEmpty(code)) {
-                            $("#" + element[0]).attr("src", code);
-
-                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                                type: file.type,
-                                lastModified: file.lastModifiedDate
-                            });
-
-                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorLivingImagesContainer", element[1], element[5],'','','','','',element[7],element[8]);
-                        }
-                    };
-                    image.src = data;
-                }, {
-                    canvas: true,
-                    orientation: orientation
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
                 });
             });
 
+            setTimeout(function () {
+                automaticNumbering('AccessmentInteriorLivingImagesContainer');
+            }, 800);
+        } 
+        else
+        {
+            allImages = this.files;
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
 
-        });
+                var imageID = 'AssessmentInteriorLivingImage' + elementID;
+                var textID = 'AssessmentInteriorLivingImageText' + elementID;
+                var labelID = 'Livinglabel' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentInteriorLivingRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentInteriorLivingImageButton' + elementID;
+                var uploadID = 'AssessmentExteriorUploadImage' + elementID;
+                var rotateButtonID = 'RotateAssessmentInteriorLivingImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentInteriorLivingImageAngle' + elementID;
+                var formID = "LivingForm" + elementID;
 
-        setTimeout(function () {
-            automaticNumbering('AccessmentInteriorLivingImagesContainer');
-        }, 1000);
+                var element = createImagesElements("AccessmentInteriorLivingImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentInteriorLivingImagesContainer');
+            
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
 
-        //Add empty element
-        createEmptElementForAddingImg();
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
+
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
+                });
+            });
+
+            setTimeout(function () {
+                automaticNumbering('AccessmentInteriorLivingImagesContainer');
+                var nextID = count + 1;
+                createEmptElementForAddingImg("AccessmentInteriorLivingImagesContainer",nextID);
+            }, 800);
+        }
     }
-
 });
 
 $('#AssessmentInteriorBedroomUploadImages').click(function () {
@@ -1449,9 +1287,16 @@ $('#AssessmentInteriorBedroomUploadImages').click(function () {
     this.value = null;
 });
 $("#AssessmentInteriorBedroomUploadImages").change(function () {
-    if (!isEmpty(this.files)) {
+
+    if (!isEmpty(this.files)) 
+    {
         //Check exitsing images
+        var count = this.files.length;
         var imageIDs = $("#AccessmentInteriorBedroomImagesContainer form");
+
+        var allImages = [];
+
+        var elementID;
 
         //Clear all images.
         if (!isEmpty(imageIDs)) {
@@ -1461,66 +1306,139 @@ $("#AssessmentInteriorBedroomUploadImages").change(function () {
             }
             $("#AccessmentInteriorBedroomImagesContainer").empty();
         }
-
-        var allImages = [];
-        if (this.files.length > 6) {
-            alert("You can only selected Six images maximum");
-            //Only save 6 files.
-            for (let i = 0; i < 6; i++) {
+        if (count >= 6) 
+        {
+            if(count > 6)
+            {
+                alert("You can only select 6 images. It will only display the first 6 photos");
+            }
+            //Only save 3 files.
+            for (let i = 0; i < 6; i++)
+            {
                 allImages.push(this.files[i]);
             }
-        } else {
-            allImages = this.files;
-        }
-        var elementID;
-        Object.keys(allImages).forEach(i => {
-            const file = allImages[i];
-            elementID = parseInt(i) + 1;
-            //Create elements
-            //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentInteriorBedroomImagesContainer", "AssessmentInteriorBedroomImage_" + elementID, 
-            "Bedroomlabel" + elementID, "IMG" + elementID, "AssessmentInteriorBedroomImageText" + elementID, "AssessmentInteriorBedroomRemoveButton" + elementID, 
-            "AddAssessmentInteriorBedroomImageButton" + elementID, "BedroomForm" + elementID,"RotateAssessmentInteriorBedroomImageButton" + elementID ,"AssessmentInteriorBedroomImageAngle" + elementID);
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
+                var imageID = 'AssessmentInteriorBedroomImage' + elementID;
+                var textID = 'AssessmentInteriorBedroomImageText' + elementID;
+                var labelID = 'Bedroomlabel' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentInteriorBedroomRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentInteriorBedroomImageButton' + elementID;
+                var uploadID = 'AssessmentInteriorBedroomUploadImage' + elementID;
+                var rotateButtonID = 'RotateAssessmentInteriorBedroomImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentInteriorBedroomImageAngle' + elementID;
+                var formID = "BedroomForm" + elementID;
 
-            loadImage.parseMetaData(file, function (data) {
-                var orientation = 0;
-                if (data.exif) {
-                    orientation = data.exif.get('Orientation');
-                }
+                var element = createImagesElements("AccessmentInteriorBedroomImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentInteriorBedroomImagesContainer');
+            
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
 
-                var loadingImage = loadImage(file, function (canvas) {
-                    var data = canvas.toDataURL('image/jpeg');
-                    var image = new Image();
-                    image.onload = function () {
-                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                        if (!isEmpty(code)) {
-                            $("#" + element[0]).attr("src", code);
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
 
-                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                                type: file.type,
-                                lastModified: file.lastModifiedDate
-                            });
-
-                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorBedroomImagesContainer", element[1], element[5],'','','','','',element[7],element[8]);
-                        }
-                    };
-                    image.src = data;
-                }, {
-                    canvas: true,
-                    orientation: orientation
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
                 });
             });
 
+            setTimeout(function () {
+                automaticNumbering('AccessmentInteriorBedroomImagesContainer');
+            }, 800);
+        } 
+        else
+        {
+            allImages = this.files;
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
 
-        });
+                var imageID = 'AssessmentInteriorBedroomImage' + elementID;
+                var textID = 'AssessmentInteriorBedroomImageText' + elementID;
+                var labelID = 'Bedroomlabel' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentInteriorBedroomRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentInteriorBedroomImageButton' + elementID;
+                var uploadID = 'AssessmentInteriorBedroomUploadImage' + elementID;
+                var rotateButtonID = 'RotateAssessmentInteriorBedroomImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentInteriorBedroomImageAngle' + elementID;
+                var formID = "BedroomForm" + elementID;
 
-        setTimeout(function () {
-            automaticNumbering('AccessmentInteriorBedroomImagesContainer');
-        }, 1000);
+                var element = createImagesElements("AccessmentInteriorBedroomImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentInteriorBedroomImagesContainer');
+            
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
 
-        //Add empty element
-        createEmptElementForAddingImg();
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
+
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
+                });
+            });
+
+            setTimeout(function () {
+                automaticNumbering('AccessmentInteriorBedroomImagesContainer');
+                var nextID = count + 1;
+                createEmptElementForAddingImg("AccessmentInteriorBedroomImagesContainer",nextID);
+            }, 800);
+        }
     }
+
 });
 
 $('#AssessmentInteriorServiceUploadImages').click(function () {
@@ -1528,10 +1446,15 @@ $('#AssessmentInteriorServiceUploadImages').click(function () {
     this.value = null;
 });
 $("#AssessmentInteriorServiceUploadImages").change(function () {
-    // read3ImagesURL(this, 'AddAssessmentInteriorServiceImageButton0', 'AddAssessmentInteriorServiceImageButton1', 'AddAssessmentInteriorServiceImageButton2', 'AssessmentInteriorServiceImage0', 'AssessmentInteriorServiceImage1', 'AssessmentInteriorServiceImage2', 'AssessmentInteriorServiceImageText0', 'AssessmentInteriorServiceImageText1', 'AssessmentInteriorServiceImageText2', 'AssessmentInteriorServiceRemoveButton0', 'AssessmentInteriorServiceRemoveButton1', 'AssessmentInteriorServiceRemoveButton2');
-    if (!isEmpty(this.files)) {
+    if (!isEmpty(this.files)) 
+    {
         //Check exitsing images
+        var count = this.files.length;
         var imageIDs = $("#AccessmentInteriorServiceImagesContainer form");
+
+        var allImages = [];
+
+        var elementID;
 
         //Clear all images.
         if (!isEmpty(imageIDs)) {
@@ -1541,69 +1464,655 @@ $("#AssessmentInteriorServiceUploadImages").change(function () {
             }
             $("#AccessmentInteriorServiceImagesContainer").empty();
         }
-
-
-        var allImages = [];
-        if (this.files.length > 3) {
-            alert("You can only selected three images maximum");
+        if (count >= 3) 
+        {
+            if(count > 3)
+            {
+                alert("You can only select 3 images. It will only display the first 3 photos");
+            }
             //Only save 3 files.
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 3; i++)
+            {
                 allImages.push(this.files[i]);
             }
-        } else {
-            allImages = this.files;
-        }
-        var elementID;
-        Object.keys(allImages).forEach(i => {
-            const file = allImages[i];
-            elementID = parseInt(i) + 1;
-            //Create elements
-            //[containerID,imgID, labelID, labelValue, textID, rmBtnID, addBtnID, formID]
-            var element = createImagesElements("AccessmentInteriorServiceImagesContainer", "AssessmentInteriorServiceImage_" + elementID, 
-            "Servicelabel" + elementID, "IMG" + elementID, "AssessmentInteriorServiceImageText" + elementID, "AssessmentInteriorServiceRemoveButton" + elementID, 
-            "AddAssessmentInteriorServiceImageButton" + elementID, "ServiceForm" + elementID,"RotateAssessmentInteriorServiceImageButton" + elementID,"AssessmentInteriorServiceImageAngle"+elementID);
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
+                var imageID = 'AssessmentInteriorServiceImage' + elementID;
+                var textID = 'AssessmentInteriorServiceImageText' + elementID;
+                var labelID = 'Servicelabel' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentInteriorServiceRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentInteriorServiceImageButton' + elementID;
+                var uploadID = 'AssessmentInteriorServiceUploadImage' + elementID;
+                var rotateButtonID = 'RotateAssessmentInteriorServiceImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentInteriorServiceImageAngle' + elementID;
+                var formID = "ServiceForm" + elementID;
 
-            loadImage.parseMetaData(file, function (data) {
-                var orientation = 0;
-                if (data.exif) {
-                    orientation = data.exif.get('Orientation');
-                }
+                var element = createImagesElements("AccessmentInteriorServiceImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentInteriorServiceImagesContainer');
 
-                var loadingImage = loadImage(file, function (canvas) {
-                    var data = canvas.toDataURL('image/jpeg');
-                    var image = new Image();
-                    image.onload = function () {
-                        var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
-                        if (!isEmpty(code)) {
-                            $("#" + element[0]).attr("src", code);
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
 
-                            var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                                type: file.type,
-                                lastModified: file.lastModifiedDate
-                            });
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
 
-                            doUploadFile(imgFile, element[0], element[2], element[3], element[4], "AccessmentInteriorServiceImagesContainer", element[1], element[5],'','','','','',element[7],element[8]);
-                        }
-                    };
-                    image.src = data;
-                }, {
-                    canvas: true,
-                    orientation: orientation
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
                 });
             });
-        });
 
-        setTimeout(function () {
-            automaticNumbering('AccessmentInteriorServiceImagesContainer');
-        }, 1000);
+            setTimeout(function () {
+                automaticNumbering('AccessmentInteriorServiceImagesContainer');
+            }, 800);
+        } 
+        else
+        {
+            allImages = this.files;
+                   
+            Object.keys(allImages).forEach(i => {
+                const file = allImages[i];
+                elementID = parseInt(i) + 1;
+                //Create elements
 
-        //Add empty element
-        createEmptElementForAddingImg();
+                var imageID = 'AssessmentInteriorServiceImage' + elementID;
+                var textID = 'AssessmentInteriorServiceImageText' + elementID;
+                var labelID = 'Servicelabel' + elementID;
+                var labelValue = 'IMG' + (parseInt(elementID) + 1);
+                var removeButtonID = 'AssessmentInteriorServiceRemoveButton' + elementID;
+                var addButtonID = 'AddAssessmentInteriorServiceImageButton' + elementID;
+                var uploadID = 'AssessmentInteriorServiceUploadImage' + elementID;
+                var rotateButtonID = 'RotateAssessmentInteriorServiceImageButton' + elementID;
+                var imgAngleInputID = 'AssessmentInteriorServiceImageAngle' + elementID;
+                var formID = "ServiceForm" + elementID;
+
+                var element = createImagesElements("AccessmentInteriorServiceImages", imageID, labelID, labelValue,
+                                                    textID, removeButtonID, addButtonID, formID,rotateButtonID,imgAngleInputID,'AccessmentInteriorServiceImagesContainer');
+
+                //console.log(element);
+                loadImage.parseMetaData(file, function (data) {
+                    var orientation = 0;
+                    if (data.exif) {
+                        orientation = data.exif.get('Orientation');
+                    }
+
+                    var loadingImage = loadImage(file, function (canvas) {
+                        var data = canvas.toDataURL('image/jpeg');
+                        var image = new Image();
+                        image.onload = function () {
+                            var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                            if (!isEmpty(code)) {
+                                $("#" + element[0]).attr("src", code);
+
+                                var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
+                                    type: file.type,
+                                    lastModified: file.lastModifiedDate
+                                });
+                                //console.log(element);
+                                
+                            //doUploadFile  (imgFile, imageid,    textid,    removeid    addid,      table   ,   imageAltName, divID,                  , rotateid, angleid
+                                doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                                //element            , imgID      textID      rmBtnID,    addBtnID,    tableID,    labelID,   formID,                   , rotateBtnID, angleInputID);
+                            }
+                        };
+                        image.src = data;
+                    }, {
+                        canvas: true,
+                        orientation: orientation
+                    });
+                });
+            });
+
+            setTimeout(function () {
+                automaticNumbering('AccessmentInteriorServiceImagesContainer');
+                var nextID = count + 1;
+                createEmptElementForAddingImg("AccessmentInteriorServiceImagesContainer",nextID);
+            }, 800);
+        }
     }
 });
 
 
+/**
+ * Single Action, image related
+ * Add One Image
+ */
+$('#AssessmentUploadOneImage').click(function () {
+    //console.log(this.value);
+    this.value = null;
+});
+$("#AssessmentUploadOneImage").on('change', function (e) {
+    console.log("need to upload a single image");
+    var file = e.currentTarget.files;
 
+    if (!isEmpty(global_Img) && !isEmpty(file)) {
+        var element = global_Img;
+
+        //console.log(element);
+
+        $("#" + element[0]).show();
+        $("#" + element[1]).show();
+        $("#" + element[2]).val("");
+        $("#" + element[2]).show();
+        $("#" + element[3]).show();
+        $("#" + element[4]).hide();
+        $("#" + element[7]).show();
+        $("#" + element[8]).hide();
+
+        loadImage.parseMetaData(file[0], function (data) {
+            var orientation = 0;
+            if (data.exif) {
+                orientation = data.exif.get('Orientation');
+            }
+
+            var loadingImage = loadImage(file[0], function (canvas) {
+                var data = canvas.toDataURL('image/jpeg');
+                var image = new Image();
+                image.onload = function () {
+                    var code = resizeImage_Canvas(image).toDataURL('image/jpeg');
+                    if (!isEmpty(code)) {
+                        $("#" + element[0]).attr("src", code);
+                        var imgFile = new File([convertBase64UrlToBlob(code, file[0].type)], file[0].name, {
+                            type: file[0].type,
+                            lastModified: file[0].lastModifiedDate
+                        });
+                        doRemovePhoto(element[0]);
+                        doUploadFile(imgFile, element[0], element[2], element[3], element[4], element[6], element[1], element[5],'','','','','',element[7],element[8]);
+                    }
+                };
+                image.src = data;
+            }, {
+                canvas: true,
+                orientation: orientation
+            });
+        });
+
+        //console.log(element[9]);
+        setTimeout(function () {
+            automaticNumbering(element[9]);
+
+            //Add empty element,check divid to know the max image no. 
+            console.log(element[9]);
+            var totalContainers = $('#' + element[9]).find('> form');
+            var imgscount = totalContainers.length;
+            if(element[9] === 'AccessmentSiteImagesContainer' || element[9] === 'AccessmentInteriorServiceImagesContainer'  )
+            {
+                //console.log("I am in");
+                if(imgscount < 3)
+                {
+                    console.log("need to add new image form");
+                    var selectedID = String(element[0]).replace(/[^\d.]/g, '');
+                    var nextID = parseInt(selectedID) + 1; 
+                    createEmptElementForAddingImg(element[9],nextID);
+                }
+            }   
+            else
+            {
+                //console.log("I am in");
+                if(imgscount < 6)
+                {
+                    console.log("need to add new image form");
+                    var selectedID = String(element[0]).replace(/[^\d.]/g, '');
+                    var nextID = parseInt(selectedID) + 1; 
+                    createEmptElementForAddingImg(element[9],nextID);
+                }
+            }
+        }, 100);
+
+    }
+
+});
+
+/**
+ * Single Action, image related
+ * Rotate One Image
+ */
+
+function RotateOneImage(element)
+{
+   //console.log(element);
+    var originalAngle = document.getElementById(element[8]).value;
+    var myImage = document.getElementById(element[0])
+    //console.log("orginalAngle: " + originalAngle);
+    if(originalAngle == null || originalAngle == "undefined" || originalAngle == "")
+    {
+        originalAngle = 0;
+    }
+    var rotateAngle = parseInt(originalAngle) + 90
+
+    //Set the image margin based on the degre to aovide overlapping with other objects/elements
+    if(rotateAngle == 90 || rotateAngle == 270)
+    {
+        console.log("the degree is 90 or 270");
+        myImage.style.marginTop = "35px";
+        myImage.style.marginBottom = "35px";
+        $("#" + element[0]).rotate(rotateAngle);
+    }
+    else
+    {
+        myImage.style.marginTop = "0px";
+        myImage.style.marginBottom = "0px";
+        $("#" + element[0]).rotate(rotateAngle);
+    }
+
+    if(rotateAngle==360)
+    {
+        rotateAngle = 0;
+    }
+    document.getElementById(element[8]).value = rotateAngle;
+    
+}
+
+/**
+ * Single Action, image related
+ * Remove One Image
+ */
+function DeleteOneImg(element) {
+    //console.log('deleting');
+    //document.getElementById(element[8]).value = 0;
+    doRemovePhoto(element[0]);
+    $("#" + element[5]).remove();
+    var totalContainers = $('#' + element[9]).find('> form');
+    totalContainers.sort(function (a, b) {
+        return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
+    });
+    var imgscount = totalContainers.length;
+    var myImage = totalContainers.eq(imgscount-1).children('img').get(0);
+    var imgID = totalContainers.eq(imgscount-1).children('img').get(0).id;
+    var lastid = imgID.match(/\d+/g).map(Number);
+    var nextid = parseInt(lastid) + 1;
+
+    //console.log(nextid);
+
+    automaticNumbering(element[9]);
+    if(myImage.style.display != 'none')
+    {
+        console.log("the last img form is full, check if need to create a new img form and refresh img number");
+        if(element[9] === 'AccessmentSiteImagesContainer' || element[9] === 'AccessmentInteriorServiceImagesContainer'  )
+        {
+            //console.log("I am in");
+            if(imgscount < 3)
+            {
+                console.log("need to add new image form");
+                var selectedID = String(element[0]).replace(/[^\d.]/g, '');
+                var nextID = parseInt(selectedID) + 1; 
+                createEmptElementForAddingImg(element[9],nextid);
+            }
+        }   
+        else
+        {
+            //console.log("I am in");
+            if(imgscount < 6)
+            {
+                console.log("need to add new image form");
+                var selectedID = String(element[0]).replace(/[^\d.]/g, '');
+                var nextID = parseInt(selectedID) + 1; 
+                createEmptElementForAddingImg(element[9],nextid);
+            }
+        }
+    }    
+}
+
+
+
+
+/**
+ * Create Image Elements dynamtically when image(s) are uploaded
+ * create
+ * image, label, image text, remove Button, Add Button, Rotate Button, Angle Input, A form to contain all 
+ */
+
+function createImagesElements(tableID, imgID, labelID = "", labelValue = "", textID, rmBtnID, addBtnID, formID,rotateBtnID,angleInputID,divID) 
+{
+    var id = imgID.split("_")[1],
+        form = document.createElement("form"),
+        img = document.createElement("img"),
+        text = document.createElement("input"),
+        rmBtn = document.createElement("input"),
+        addBtn = document.createElement("input"),
+        rotateBtn = document.createElement("input"),
+        label = document.createElement("label"),
+        angleInput = document.createElement("input");
+
+    form.setAttribute("id", formID);
+    form.setAttribute("class", "col text-center my-2");
+
+    img.setAttribute("id", imgID);
+    img.style.marginTop = "35px";
+    img.style.marginBottom = "35px";
+    //img.style.width = '265px';
+    //img.style.height = '198px';
+
+    text.setAttribute("id", textID);
+    text.setAttribute("type", "text");
+    text.setAttribute("placeholder", "name");
+    text.style.width = "265px";
+
+    rmBtn.setAttribute("id", rmBtnID);
+    rmBtn.setAttribute("class","btn btn-danger");
+    rmBtn.setAttribute("type", "button");
+    rmBtn.setAttribute("value", "Remove");
+    rmBtn.style.width = "265px";
+
+    addBtn.setAttribute("id", addBtnID);
+    addBtn.setAttribute("class","btn btn-secondary");
+    addBtn.setAttribute("type", "button");
+    addBtn.setAttribute("value", "Add");
+    addBtn.style.width = "265px";
+    addBtn.style.display = "none";
+
+    rotateBtn.setAttribute("id", rotateBtnID);
+    rotateBtn.setAttribute("class","btn btn-info");
+    rotateBtn.setAttribute("type", "button");
+    rotateBtn.setAttribute("value", "Rotate");
+    rotateBtn.setAttribute("style","margin-top: 5px;margin-bottom: 5px")
+    rotateBtn.style.width = "265px";
+
+    angleInput.setAttribute("id", angleInputID);
+    angleInput.setAttribute("type", "text");
+    angleInput.style.width = "265px";
+    angleInput.style.display = "none";
+
+
+    label.setAttribute("id", labelID);
+    label.style.marginBottom = "0px";
+    //label.innerHTML = "IMG_" + id;
+
+
+    $("#" + divID).append(form);
+    $("#" + formID).append(img);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(label);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(text);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(angleInput);
+    $("#" + formID).append("<br>");
+    $("#" + formID).append(rmBtn);
+    $("#" + formID).append(addBtn);
+    $("#" + formID).append(rotateBtn);
+
+    //console.log(form);
+
+    
+    
+    var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID,tableID,rotateBtnID,angleInputID,divID];
+    // console.log(element);
+    $("#" + rmBtnID).click(function () {
+        DeleteOneImg(element);
+    });
+    $("#" + addBtnID).click(function () {
+        global_Img = element;
+        $("#AssessmentUploadOneImage").click();
+    });
+
+    $("#" + rotateBtnID).click(function () {
+        RotateOneImage(element);
+    });
+
+
+    return element;
+}
+
+/**
+ * Create Empty Image Elements for the next image, when a image is uploaded. Prepare for the next. 
+ */
+function createEmptElementForAddingImg(divID,nextID) {
+    console.log(nextID);
+    var nextImageID,nextTextID,nextLabelID,nextLableValue,nextRemoveButtonID,nextAddButtonID,nextUploadID,nextRotateBtnID,nextAngelInputID,nextFormID,emptyElement;
+
+    if(divID == "AccessmentSiteImagesContainer")
+    {
+        nextAltName = 'image ' + nextID;
+        //console.log("I am here!!! need another image element ,the next id  " + newID);
+        nextImageID = 'AssessmentSiteImage' + nextID;
+        nextTextID = 'AssessmentSiteImageText' + nextID;
+        nextLabelID = 'AssessmentSiteImageLable' + nextID;
+        nextLableValue = 'IMG' + (parseInt(nextID) + 1);
+        nextRemoveButtonID = 'AssessmentSiteRemoveButton' + nextID;
+        nextAddButtonID = 'AddAssessmentSiteImageButton' + nextID;
+        nextUploadID = 'AssessmentSiteUploadImage' + nextID;
+        nextRotateBtnID = 'AssessmentSiteRotateImageButton' + nextID;
+        nextAngelInputID = 'AssessmentSiteImageAngle' + nextID;
+        nextFormID = "SiteGardonForm" + nextID;
+        // addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+        //     'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px',nextRotateBtnID,nextAngelInputID);
+        emptyElement = createImagesElements('AccessmentSiteImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentSiteImagesContainer');
+
+    }
+    else if(divID == 'AccessmentExteriorImagesContainer')
+    {
+        nextImageID = 'AssessmentExteriorImage' + nextID;
+        nextTextID = 'AssessmentExteriorImageText' + nextID;
+        nextLabelID = 'AssessmentExteriorImageLable' + nextID;
+        nextLableValue = 'IMG' + (parseInt(nextID) + 1);
+        nextRemoveButtonID = 'AssessmentExteriorRemoveButton' + nextID;
+        nextAddButtonID = 'AddAssessmentExteriorImageButton' + nextID;
+        nextUploadID = 'AssessmentExteriorUploadImage' + nextID;
+        nextRotateBtnID = 'AssessmentExteriorRotateImageButton' + nextID;
+        nextAngelInputID = 'AssessmentExteriorImageAngle' + nextID;
+        nextFormID = "ExteriorForm" + nextID;
+
+        emptyElement = createImagesElements('AccessmentExteriorImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentExteriorImagesContainer');
+
+    }
+    else if(divID == 'AccessmentInteriorLivingImagesContainer')
+    {
+        nextImageID = 'AssessmentInteriorLivingImage' + nextID;
+        nextTextID = 'AssessmentInteriorLivingImageText' + nextID;
+        nextLabelID = 'Livinglabel' + nextID;
+        nextLableValue = 'IMG' + (parseInt(nextID) + 1);
+        nextRemoveButtonID = 'AssessmentInteriorLivingRemoveButton' + nextID;
+        nextAddButtonID = 'AddAssessmentInteriorLivingImageButton' + nextID;
+        nextUploadID = 'AssessmentExteriorUploadImage' + nextID;
+        nextRotateBtnID = 'RotateAssessmentInteriorLivingImageButton' + nextID;
+        nextAngelInputID = 'AssessmentInteriorLivingImageAngle' + nextID;
+        nextFormID = "LivingForm" + nextID;
+
+        emptyElement = createImagesElements('AccessmentInteriorLivingImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentInteriorLivingImagesContainer');
+
+    }
+    else if(divID == 'AccessmentInteriorBedroomImagesContainer')
+    {
+        nextImageID = 'AssessmentInteriorBedroomImage' + nextID;
+        nextTextID = 'AssessmentInteriorBedroomImageText' + nextID;
+        nextLabelID = 'Bedroomlabel' + nextID;
+        nextLableValue = 'IMG' + (parseInt(nextID) + 1);
+        nextRemoveButtonID = 'AssessmentInteriorBedroomRemoveButton' + nextID;
+        nextAddButtonID = 'AddAssessmentInteriorBedroomImageButton' + nextID;
+        nextUploadID = 'AssessmentInteriorBedroomUploadImage' + nextID;
+        nextRotateBtnID = 'RotateAssessmentInteriorBedroomImageButton' + nextID;
+        nextAngelInputID = 'AssessmentInteriorBedroomImageAngle' + nextID;
+        nextFormID = "BedroomForm" + nextID;
+
+        emptyElement = createImagesElements('AccessmentInteriorBedroomImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentInteriorBedroomImagesContainer');
+
+    }
+    else if(divID == 'AccessmentInteriorServiceImagesContainer')
+    {
+        nextImageID = 'AssessmentInteriorServiceImage' + nextID;
+        nextTextID = 'AssessmentInteriorServiceImageText' + nextID;
+        nextLabelID = 'Servicelabel' + nextID;
+        nextLableValue = 'IMG' + (parseInt(nextID) + 1);
+        nextRemoveButtonID = 'AssessmentInteriorServiceRemoveButton' + nextID;
+        nextAddButtonID = 'AddAssessmentInteriorServiceImageButton' + nextID;
+        nextUploadID = 'AssessmentInteriorServiceUploadImage' + nextID;
+        nextRotateBtnID = 'RotateAssessmentInteriorServiceImageButton' + nextID;
+        nextAngelInputID = 'AssessmentInteriorServiceImageAngle' + nextID;
+        nextFormID = "ServiceForm" + nextID;
+
+        emptyElement = createImagesElements('AccessmentInteriorServiceImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentInteriorServiceImagesContainer');
+
+    }
+    //console.log(emptyElement);
+    //The new form only show add button.
+    $("#" + emptyElement[0]).hide();
+    $("#" + emptyElement[1]).hide();
+    $("#" + emptyElement[2]).val("");
+    $("#" + emptyElement[2]).hide();
+    $("#" + emptyElement[3]).hide();
+    $("#" + emptyElement[4]).show();
+    $("#" + emptyElement[7]).hide();
+    $("#" + emptyElement[8]).show();
+}
+
+function AddNewImageForm(divID,maxImage)
+{
+    var idGroup = [];
+    //console.log('#' + divID);
+    var totalContainers = $('#' + divID).find('> form');
+    // console.log("the current form in the report " + divID + " is " + totalContainers.length);
+    // console.log("the max Image is " + maxImage);
+
+    if (totalContainers.length < maxImage && totalContainers.length != 0) 
+    {
+        for (var i = 0; i < totalContainers.length; i++) {
+            var idStr = totalContainers.eq(i).children('img').attr('id').replace(/[^\d.]/g, '');
+            var id = Number(idStr);
+            idGroup.push(id);
+        }
+        //console.log(idGroup);
+        idGroup.sort(function (a, b) {
+            return a - b;
+        });
+        //console.log(idGroup);
+        //console.log("the last ID is " + idGroup[idGroup.length - 1]);
+        var lastID = idGroup[idGroup.length - 1];
+        var newID = Number(lastID) + 1;
+        var altID = Number(lastID) + 2;
+        //console.log("have loaded all the image from database, and the total number of image has not exceed the max number need to create a add button for user to upload the next image");
+
+        var nextImageID,nextTextID,nextLabelID,nextLableValue,nextRemoveButtonID,nextAddButtonID,nextUploadID,nextRotateBtnID,nextAngelInputID,nextFormID,emptyElement;
+
+        if(divID === "AccessmentSiteImagesContainer")
+        {
+            //console.log("I am in AccessmentSiteImagesContainer");
+            nextAltName = 'image ' + altID;
+            //console.log("I am here!!! need another image element ,the next id  " + newID);
+             nextImageID = 'AssessmentSiteImage' + newID;
+             nextTextID = 'AssessmentSiteImageText' + newID;
+             nextLabelID = 'AssessmentSiteImageLable' + newID;
+             nextLableValue = 'IMG' + (parseInt(newID) + 1);
+             nextRemoveButtonID = 'AssessmentSiteRemoveButton' + newID;
+             nextAddButtonID = 'AddAssessmentSiteImageButton' + newID;
+             nextUploadID = 'AssessmentSiteUploadImage' + newID;
+             nextRotateBtnID = 'AssessmentSiteRotateImageButton' + newID;
+             nextAngelInputID = 'AssessmentSiteImageAngle' + newID;
+             nextFormID = "SiteGardonForm" + newID;
+            // addImageElements(nextAltName, 'AdvicePhotographs', nextImageID, nextTextID, nextRemoveButtonID, nextAddButtonID, nextUploadID,
+            //     'RemoveOneAdviceImage(this.id)', 'addOneAdviceImage(this.id)', '500px', '0px',nextRotateBtnID,nextAngelInputID);
+             emptyElement = createImagesElements('AccessmentSiteImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentSiteImagesContainer');
+    
+        }
+        else if(divID === "AccessmentExteriorImagesContainer")
+        {
+            //console.log("I am in AccessmentExteriorImagesContainer");
+            nextAltName = 'image ' + altID;
+            //console.log("I am here!!! need another image element ,the next id  " + newID);
+            nextImageID = 'AssessmentExteriorImage' + newID;
+            nextTextID = 'AssessmentExteriorImageText' + newID;
+            nextLabelID = 'AssessmentExteriorImageLable' + newID;
+            nextLableValue = 'IMG' + (parseInt(newID) + 1);
+            nextRemoveButtonID = 'AssessmentExteriorRemoveButton' + newID;
+            nextAddButtonID = 'AddAssessmentExteriorImageButton' + newID;
+            nextUploadID = 'AssessmentExteriorUploadImage' + newID;
+            nextRotateBtnID = 'AssessmentExteriorRotateImageButton' + newID;
+            nextAngelInputID = 'AssessmentExteriorImageAngle' + newID;
+            nextFormID = "ExteriorForm" + newID;
+            
+            emptyElement = createImagesElements('AccessmentExteriorImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentExteriorImagesContainer');
+    
+        }
+        else if(divID == 'AccessmentInteriorLivingImagesContainer')
+        {
+            nextImageID = 'AssessmentInteriorLivingImage' + newID;
+            nextTextID = 'AssessmentInteriorLivingImageText' + newID;
+            nextLabelID = 'Livinglabel' + newID;
+            nextLableValue = 'IMG' + (parseInt(newID) + 1);
+            nextRemoveButtonID = 'AssessmentInteriorLivingRemoveButton' + newID;
+            nextAddButtonID = 'AddAssessmentInteriorLivingImageButton' + newID;
+            nextUploadID = 'AssessmentExteriorUploadImage' + newID;
+            nextRotateBtnID = 'RotateAssessmentInteriorLivingImageButton' + newID;
+            nextAngelInputID = 'AssessmentInteriorLivingImageAngle' + newID;
+            nextFormID = "LivingForm" + newID;
+    
+            emptyElement = createImagesElements('AccessmentInteriorLivingImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentInteriorLivingImagesContainer');
+    
+        }
+        else if(divID == 'AccessmentInteriorBedroomImagesContainer')
+        {
+            nextImageID = 'AssessmentInteriorBedroomImage' + newID;
+            nextTextID = 'AssessmentInteriorBedroomImageText' + newID;
+            nextLabelID = 'Bedroomlabel' + newID;
+            nextLableValue = 'IMG' + (parseInt(newID) + 1);
+            nextRemoveButtonID = 'AssessmentInteriorBedroomRemoveButton' + newID;
+            nextAddButtonID = 'AddAssessmentInteriorBedroomImageButton' + newID;
+            nextUploadID = 'AssessmentInteriorBedroomUploadImage' + newID;
+            nextRotateBtnID = 'RotateAssessmentInteriorBedroomImageButton' + newID;
+            nextAngelInputID = 'AssessmentInteriorBedroomImageAngle' + newID;
+            nextFormID = "BedroomForm" + newID;
+
+            emptyElement = createImagesElements('AccessmentInteriorBedroomImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentInteriorBedroomImagesContainer');
+
+        }
+        else if(divID == 'AccessmentInteriorServiceImagesContainer')
+        {
+            nextImageID = 'AssessmentInteriorServiceImage' + newID;
+            nextTextID = 'AssessmentInteriorServiceImageText' + newID;
+            nextLabelID = 'Servicelabel' + newID;
+            nextLableValue = 'IMG' + (parseInt(newID) + 1);
+            nextRemoveButtonID = 'AssessmentInteriorServiceRemoveButton' + newID;
+            nextAddButtonID = 'AddAssessmentInteriorServiceImageButton' + newID;
+            nextUploadID = 'AssessmentInteriorServiceUploadImage' + newID;
+            nextRotateBtnID = 'RotateAssessmentInteriorServiceImageButton' + newID;
+            nextAngelInputID = 'AssessmentInteriorServiceImageAngle' + newID;
+            nextFormID = "ServiceForm" + newID;
+
+            emptyElement = createImagesElements('AccessmentInteriorServiceImages', nextImageID, nextLabelID, nextLableValue, nextTextID, nextRemoveButtonID, nextAddButtonID, nextFormID,nextRotateBtnID,nextAngelInputID,'AccessmentInteriorServiceImagesContainer');
+
+        }
+       
+        //The new form only show add button.
+        $("#" + emptyElement[0]).hide();
+        $("#" + emptyElement[1]).hide();
+        $("#" + emptyElement[2]).val("");
+        $("#" + emptyElement[2]).hide();
+        $("#" + emptyElement[3]).hide();
+        $("#" + emptyElement[4]).show();
+        $("#" + emptyElement[7]).hide();
+        $("#" + emptyElement[8]).show();
+    }
+    // else
+    // {
+    //     console.log(divID + ' there is no saved images at all, no need to create for next image form');
+    // }
+}
 
 /**
  * To reorder the images when the HTML report is reloaded
@@ -1614,12 +2123,7 @@ function reorderImages(divid) {
     var totalContainers = $('#' + divid).find('> form');
     //console.log(totalContainers);
     var BigContainer = document.getElementById(divid);
-    //console.log(totalContainers);
-    // for (var i=0;i<totalContainers.length;i++)
-    // {
-    //     console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
-    //     console.log((totalContainers[i].id));
-    // }
+
     totalContainers.sort(function (a, b) {
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
     });
@@ -1656,7 +2160,7 @@ function reorderImages(divid) {
         {
             if(originalAngle == 90 || originalAngle == 270)
             {
-                console.log("the degree is 90 or 270");
+                //console.log("the degree is 90 or 270");
                 myImage.style.marginTop = "30px";
                 myImage.style.marginBottom = "35px";
                 $("#" + imgID).rotate(originalAngle);            }
@@ -1669,14 +2173,14 @@ function reorderImages(divid) {
 
         }
 
-        var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID,divid,rotateBtnID,angleID];
+        var element = [imgID, labelID, textID, rmBtnID, addBtnID, formID,divid,rotateBtnID,angleID,divid];
 
         var removeBtn = document.getElementById(totalContainers.eq(i).children('input').eq(2).get(0).id);
         var rotateBtn = document.getElementById(totalContainers.eq(i).children('input').eq(4).get(0).id);
 
-        var removeFunction = "DeleteOneImg(['" + imgID + "','" + labelID+"','" + textID + "','" + rmBtnID +"','" +  addBtnID + "','" + formID + "','" + divid + "','" + rotateBtnID +  "','" + angleID + "'])";
+        var removeFunction = "DeleteOneImg(['" + imgID + "','" + labelID+"','" + textID + "','" + rmBtnID +"','" +  addBtnID + "','" + formID + "','" + divid + "','" + rotateBtnID +  "','" + angleID +  "','" + divid + "'])";
 
-        var rotateFunction = "RotateOneImage(['" + imgID + "','" + labelID+"','" + textID + "','" + rmBtnID +"','" +  addBtnID + "','" + formID + "','" + divid + "','"+ rotateBtnID +  "','" + angleID +"'])";
+        var rotateFunction = "RotateOneImage(['" + imgID + "','" + labelID+"','" + textID + "','" + rmBtnID +"','" +  addBtnID + "','" + formID + "','" + divid + "','"+ rotateBtnID +  "','" + angleID + "','" + divid + "'])";
         //console.log(removeFunction);
         $("#" + addBtnID).click(function () {
             global_Img = element;
@@ -1686,6 +2190,80 @@ function reorderImages(divid) {
         rotateBtn.setAttribute("onclick", rotateFunction);
     }
 }
+
+
+/**
+ * Single Action, image related
+ * Call it every time a image is uploaded/removed, or the HTML is reloaded. 
+ * auto number the image
+ * display the number under the images. 
+ */
+function automaticNumbering(divid) {
+    //console.log("need to refresh the image number");
+    var totalContainers = $('#' + divid).find('> form');
+
+    for (var i = 0; i < totalContainers.length; i++) {
+        //console.log(totalContainers.eq(i).children('label').get(0));
+        //console.log(totalContainers.eq(i).children('form').eq(1).children('label').get(0));
+        totalContainers.eq(i).children('label').get(0).innerHTML = "IMG " + (i + 1);
+    }    
+}
+
+/**
+ * Single Action, image related
+ * Resize the Image
+ */
+function resizeImage_Canvas(img) {
+    var MAX_WIDTH = 265,
+        MAX_HEIGHT = 198,
+        width = img.width,
+        height = img.height,
+        canvas = document.createElement('canvas');
+
+    if (width >= height) {
+        if (width > MAX_WIDTH) {
+            //height *= MAX_WIDTH / width;
+            //width = MAX_WIDTH;
+            height = MAX_HEIGHT;
+            width = MAX_WIDTH;
+        }
+    } else {
+        if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            //height = MAX_HEIGHT;
+            height = 198;
+
+        }
+    }
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+
+    return canvas;
+}
+
+/**
+ * Single Action, image related
+ * Convert the Base64 to Blob for uploading the image to the server
+ * Source from http://www.blogjava.net/jidebingfeng/articles/406171.html
+ */
+function convertBase64UrlToBlob(urlData, type) {
+
+    var bytes = window.atob(urlData.split(',')[1]); //remove url, convert to byte
+
+    //deal with anomaly, change the ASCI code less than = 0 to great than zero
+    var ab = new ArrayBuffer(bytes.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < bytes.length; i++) {
+        ia[i] = bytes.charCodeAt(i);
+    }
+
+    return new Blob([ab], {
+        type: type
+    });
+}
+
 
 
 //AA-106, make sure these fields get the date from the database related fields. even after the user update in the booking system, 
@@ -1705,37 +2283,20 @@ $(document).ready(function () {
     automaticNumbering('AccessmentInteriorLivingImagesContainer');
     automaticNumbering('AccessmentInteriorBedroomImagesContainer');
     automaticNumbering('AccessmentInteriorServiceImagesContainer');
-    createEmptElementForAddingImg();
+    //createEmptElementForAddingImg();
 
+    //createEmptElementForAddingImg2('AccessmentSiteImages','AccessmentSiteImagesContainer',3);
+    AddNewImageForm('AccessmentSiteImagesContainer',3);
+    AddNewImageForm('AccessmentExteriorImagesContainer',6);
+    AddNewImageForm('AccessmentInteriorLivingImagesContainer',6);
+    AddNewImageForm('AccessmentInteriorBedroomImagesContainer',6);
+    AddNewImageForm('AccessmentInteriorServiceImagesContainer',3);
     // var name = document.getElementById('0').value;
     // console.log(name);
     // console.log(String(name).replace(/\s+/g, " "));
     //document.getElementById('0').value = String(name).replace(/\s+/g, " ")
 
-    // $('#assessmentSiteMajorRecommendations').combotree(
-    //     'reload', 'recommendations.json'
-    // );
-    // $('#assessmentServiceMinorRecommendations').combotree({
-    //     url: 'recommendations.json'
-    // });
-    // $('#assessmentPropertyExteriorMajorRecommendations').combotree({
-    //     url: 'recommendations.json'
-    // });
-    // $('#assessmentPropertyExteriorMinorRecommendations').combotree({
-    //     url: 'recommendations.json'
-    // });
-    // $('#assessmentPropertyInteriorMajorRecommendations').combotree({
-    //     url: 'recommendations.json'
-    // });
-    // $('#assessmentPropertyInteriorMinorRecommendations').combotree({
-    //     url: 'recommendations.json'
-    // });
-    // $('#assessmentServiceMajorRecommendations').combotree({
-    //     url: 'recommendations.json'
-    // });
-    // $('#assessmentServiceMinorRecommendations').combotree({
-    //     url: 'recommendations.json'
-    // });
+
     $('#assessmentSiteMajorRecommendations').combotree('loadData',recommendations1);
     $('#assessmentSiteMinorRecommendations').combotree('loadData',recommendations2);
     $('#assessmentPropertyExteriorMajorRecommendations').combotree('loadData',recommendations3);
