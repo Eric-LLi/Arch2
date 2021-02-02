@@ -54,14 +54,15 @@ function clearFields()
 
 function populateAuditTable(logevents,bookingdetail,linkedreport)
 {    
+    console.log("populateAuditTable");
     if(linkedreport.length > 0)
     {
         console.log('combined report');
-        document.getElementById('divBookingSummaryGTitle').innerHTML = "Audit History (" + bookingdetail.bookingcode +")";
+        document.getElementById('summaryHistoryTableTitle').innerHTML = "Action History (" + bookingdetail.bookingcode +")";
     }
     else
     {
-        document.getElementById('divBookingSummaryGTitle').innerHTML = "Audit History";
+        document.getElementById('summaryHistoryTableTitle').innerHTML = "Action History";
     }
     //1. need to sort out if can use the logevents right away. 
     if(logevents.length == 0)
@@ -127,7 +128,14 @@ function populateAuditTable(logevents,bookingdetail,linkedreport)
         {
             var cancelled = {bookingcode:bookingdetail.bookingcode,eventid:12,datecreated:bookingdetail.datecancelled};
             logevents.push(cancelled);
-        } 
+        }
+        
+        //9.sent tax invoice log
+        if(bookingdetail.lastinvoiced != null)
+        {
+            var invoiced = {bookingcode:bookingdetail.bookingcode,eventid:13,datecreated:bookingdetail.lastinvoiced};
+            logevents.push(invoiced);
+        }
     }
     else
     {
@@ -213,6 +221,18 @@ function populateAuditTable(logevents,bookingdetail,linkedreport)
                 logevents.push(cancelledlog);
             }
 
+            //7.sent tax invoice log
+            if(foundevent(logevents,13) == false && bookingdetail.lastinvoiced != null)
+            {
+                //the log events doesn't have the invoiced record, and the bookingdetail has, need to use the booking detail to do it. 
+                invoicedlog = {
+                    bookingcode:bookingdetail.bookingcode,
+                    datecreated:bookingdetail.lastinvoiced,
+                    eventid:"13",
+                }
+                logevents.push(invoicedlog);
+            }
+
             //7.Sort the logevents by datecreated after pushing all new log events. 
             logevents.sort(function(a,b){
                 var dateA = new Date(a.datecreated);
@@ -221,6 +241,12 @@ function populateAuditTable(logevents,bookingdetail,linkedreport)
                 if(dateA > dateB) return 1;
                 return 0;
             });
+
+        }
+        else
+        {
+            console.log("when this booking is created, the audit table is exited, so it has have full entry, use logevents to show the full audit history")
+            console.log(logevents);
 
         }
     }

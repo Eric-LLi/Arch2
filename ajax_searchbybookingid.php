@@ -85,6 +85,8 @@
 
                   "b1.emailcount," .
                   "b1.lastemailed," .
+                  "b1.invoicecount," .
+                  "b1.lastinvoiced," .
                   "b1.datecompleted," .
                   "b1.datecancelled,".
                   "b1.dateapproved," .
@@ -185,6 +187,8 @@
 
                         "b1.emailcount," .
                         "b1.lastemailed," .
+                        "b1.invoicecount," .
+                        "b1.lastinvoiced," .
                         "b1.datecompleted," .
                         "b1.datecancelled,".
                         "b1.dateapproved," .

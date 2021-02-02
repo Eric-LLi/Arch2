@@ -72,6 +72,8 @@
 
                         "b1.emailcount," .
                         "b1.lastemailed," .
+                        "b1.invoicecount," .
+                        "b1.lastinvoiced," .
                         "b1.datecompleted," .
                         "b1.datecancelled,".
                         "b1.dateapproved," .
@@ -194,6 +196,7 @@
                                 $html = str_replace("XXX_BOOKINGCODE", $bookingcode.'&'.$timberid, $html);
                                 //$dbupdate1 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
                                 //$dbupdate2 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$timberid";
+                                
                             }
                             
                             $invoice = str_replace("XXX_BUDGET", $budget, $invoice);
