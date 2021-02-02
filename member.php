@@ -4743,8 +4743,20 @@
 
       //console.log(row.datepaid);
       
-      if (!_.isNull(row.lastemailed))
+      if(!_.isNull(row.lastinvoiced) && _.isNull(row.lastemailed))
       {
+        //has sent an tax invoice, but not sent report to the client
+        var lastinvoiced = moment(row.lastinvoiced).format('dddd, MMMM Do YYYY, h:mm:ss a');
+        img = '<img src="images/led/ball-darkblue.png" width="20" height="20">';
+        tooltip = 'A tax invoice has been sent ';
+        if (row.invoicecount == 1)
+          tooltip += ' on ' + lastinvoiced;
+        else
+          tooltip += row.invoicecount + ' times, the last being on ' + lastinvoiced;
+      }
+      else if (!_.isNull(row.lastemailed))
+      {
+        //has sent the report to the client
         var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
         img = '<img src="images/led/ball-yellow.png" width="20" height="20">';
         tooltip = 'Client has been emailed ';
@@ -6737,7 +6749,7 @@
               <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
             </tr>
           </table>
-          <label class="summary" style="font-weight: bold;padding:15px">Audit History</label>
+          <label class="summary" style="font-weight: bold;padding:15px" id="summaryHistoryTableTitle">Action History</label>
           <div id="divBookingSummaryG" data-option="fit:true"></div>
   </div>
 

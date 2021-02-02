@@ -121,7 +121,7 @@ function createAuditLogTable(auditevents,logevents,bookingdetail,linkedreport)
    {
         title =  [
             {
-                text:'Audit History',
+                text:'Action History',
                 style:'tableHeader',
                 colSpan:2
             },
@@ -132,7 +132,7 @@ function createAuditLogTable(auditevents,logevents,bookingdetail,linkedreport)
    {
         title =  [
             {
-                text:['Audit History (', bookingdetail.bookingcode, ')'],
+                text:['Action History (', bookingdetail.bookingcode, ')'],
                 style:'tableHeader',
                 colSpan:2
             },
@@ -345,6 +345,8 @@ function createAuditLogTable(auditevents,logevents,bookingdetail,linkedreport)
         {
             //when this booking is created, the audit table has exited, so the table have full entry, just use the table to display the history. 
             console.log("when this booking is created, the audit table has exited, so the table have full entry, just use the table to display the history. ");
+            // console.log(logevent);
+            // console.log(auditevents);
             for(var i = 0;i<logevents.length;i++)
             {
                 var log = logevent(logevents[i].eventid,auditevents);

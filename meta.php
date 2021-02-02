@@ -274,6 +274,8 @@
     {event:'report is sent to the customer', id:10},
     {event:'booking is closed', id:11},
     {event:'booking is cancelled', id:12},
+    {event:'tax invoice is sent to the customer', id:13},
+
   ];
 
   var numitems =

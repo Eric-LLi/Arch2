@@ -73,6 +73,8 @@
 
                         "b1.emailcount," .
                         "b1.lastemailed," .
+                        "b1.invoicecount," .
+                        "b1.lastinvoiced," .
                         "b1.datecompleted," .
                         "b1.datecancelled,".
                         "b1.dateapproved," .
@@ -193,6 +195,40 @@
                                 $invoice = str_replace("XXX_BOOKINGCODE", $bookingcode, $invoice);
                                 $html = str_replace("XXX_BOOKINGCODE", $bookingcode, $html);
                                 //$dbupdate1 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
+                                $dbupdate1 = "update bookings set lastinvoiced=current_timestamp,invoicecount=invoicecount+1 where id=$bookingcode";
+                                $recordsql1 = "insert into audit_log (bookings_id,event, userscreated_id) values (".
+                                                $bookingcode ."," .
+                                                13 ."," .
+                                                SharedNullOrNum($userid, $dblink) .
+                                                ")";
+                                $dbresult1 = SharedQuery($dbupdate1, $dblink);
+                                $dbresult2 = SharedQuery($recordsql1, $dblink);
+
+                                if($dbresult1 && $dbresult2)
+                                {
+                                    $invoice = str_replace("XXX_BUDGET", $budget, $invoice);
+                                    $invoice = str_replace("XXX_GST", $gst, $invoice);
+        
+                                    //Convert the invoice to pdf
+                                    error_log("converting html to pdf");
+                                    $dompdf = new Dompdf();
+                                    $dompdf->loadHtml($invoice);
+                                    // (Optional) Setup the paper size and orientation
+                                    $dompdf->setPaper('A4', 'portrait');
+                                    // Render the HTML as PDF
+                                    $dompdf->render();
+                                    //Output the pdf
+                                    $invoicePDF = $dompdf -> output();
+                                    file_put_contents("invoices_pdf/prepaid/$bookingcode.pdf",$invoicePDF);
+                                    // file_put_contents("quotes/$clientid.html",$emailtemplate);
+                                    $attachmentPath = "invoices_pdf/prepaid/$bookingcode.pdf";
+                                    error_log($attachmentPath);
+        
+                                    $custemail = explode(",",$booking['custemail']);
+                                    SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $emailcode . " - " . $reportTypes[$booking['reportid']] . " Booking Tax Invoice", $html,"","",$attachmentPath);
+                                    $rc = 0;
+                                    $msg = "Send the tax invoice to client successfully";
+                                }
                             }
                             else
                             {
@@ -200,43 +236,52 @@
                                 $emailcode = $bookingcode.'&'.$timberid;
                                 $invoice = str_replace("XXX_BOOKINGCODE", $bookingcode.'&'.$timberid, $invoice);
                                 $html = str_replace("XXX_BOOKINGCODE", $bookingcode.'&'.$timberid, $html);
+                                $dbupdate1 = "update bookings set lastinvoiced=current_timestamp,invoicecount=invoicecount+1 where id=$bookingcode";
+                                $dbupdate2 = "update bookings set lastinvoiced=current_timestamp,invoicecount=invoicecount+1 where id=$timberid";
+                               
+                                $recordsql1 = "insert into audit_log (bookings_id,event, userscreated_id) values (".
+                                                $bookingcode ."," .
+                                                13 ."," .
+                                                SharedNullOrNum($userid, $dblink) .
+                                                ")";
+                                $recordsql2 = "insert into audit_log (bookings_id,event, userscreated_id) values (".
+                                                $timberid ."," .
+                                                13 ."," .
+                                                SharedNullOrNum($userid, $dblink) .
+                                                ")";
+
+                                $dbresult1 = SharedQuery($dbupdate1, $dblink);
+                                $dbresult2 = SharedQuery($dbupdate2, $dblink);
+                                $dbresult3 = SharedQuery($recordsql1, $dblink);
+                                $dbresult4 = SharedQuery($recordsql2, $dblink);
                                 //$dbupdate1 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$bookingcode";
                                 //$dbupdate2 = "update bookings set lastemailed=current_timestamp,emailcount=emailcount+1 where id=$timberid";
+                                if ($dbresult1 && $dbresult2 && $dbresult3 && $dbresult4)
+                                {
+                                    $invoice = str_replace("XXX_BUDGET", $budget, $invoice);
+                                    $invoice = str_replace("XXX_GST", $gst, $invoice);
+        
+                                    //Convert the invoice to pdf
+                                    error_log("converting html to pdf");
+                                    $dompdf = new Dompdf();
+                                    $dompdf->loadHtml($invoice);
+                                    // (Optional) Setup the paper size and orientation
+                                    $dompdf->setPaper('A4', 'portrait');
+                                    // Render the HTML as PDF
+                                    $dompdf->render();
+                                    //Output the pdf
+                                    $invoicePDF = $dompdf -> output();
+                                    file_put_contents("invoices_pdf/prepaid/$bookingcode.pdf",$invoicePDF);
+                                    // file_put_contents("quotes/$clientid.html",$emailtemplate);
+                                    $attachmentPath = "invoices_pdf/prepaid/$bookingcode.pdf";
+                                    error_log($attachmentPath);
+        
+                                    $custemail = explode(",",$booking['custemail']);
+                                    SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $emailcode . " - " . $reportTypes[$booking['reportid']] . " Booking Tax Invoice", $html,"","",$attachmentPath);
+                                    $rc = 0;
+                                    $msg = "Send the tax invoice to client successfully";
+                                }
                             }
-                            
-                            $invoice = str_replace("XXX_BUDGET", $budget, $invoice);
-                            $invoice = str_replace("XXX_GST", $gst, $invoice);
-
-                            //Convert the invoice to pdf
-                            error_log("converting html to pdf");
-                            $dompdf = new Dompdf();
-                            $dompdf->loadHtml($invoice);
-                            // (Optional) Setup the paper size and orientation
-                            $dompdf->setPaper('A4', 'portrait');
-                            // Render the HTML as PDF
-                            $dompdf->render();
-                            //Output the pdf
-                            $invoicePDF = $dompdf -> output();
-                            file_put_contents("invoices_pdf/prepaid/$bookingcode.pdf",$invoicePDF);
-                            // file_put_contents("quotes/$clientid.html",$emailtemplate);
-                            $attachmentPath = "invoices_pdf/prepaid/$bookingcode.pdf";
-                            error_log($attachmentPath);
-
-                            $custemail = explode(",",$booking['custemail']);
-                            SharedSendHtmlMail($gConfig['adminemail'], "Archicentre Australia", $custemail, $booking['custfirstname'] . ' ' . $booking['custlastname'], $emailcode . " - " . $reportTypes[$booking['reportid']] . " Booking Tax Invoice", $html,"","",$attachmentPath);
-                            
-                  
-                            // if($dbupdate2 == "")
-                            // {
-                            //     SharedQuery($dbupdate1, $dblink);
-                            // }
-                            // else
-                            // {
-                            //     SharedQuery($dbupdate1, $dblink);
-                            //     SharedQuery($dbupdate2, $dblink);
-                            // }
-                            $rc = 0;
-                            $msg = "Send the tax invoice to client successfully";
                         }
                         else
                         {
