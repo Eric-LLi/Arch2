@@ -385,8 +385,11 @@ function getCoverImage(imgid,angleid) {
         var canvas = document.createElement("canvas");
         canvas.height = canvas.width = 0;
         var context = canvas.getContext('2d');
-        var imgwidth = myImage.width;
-        var imgheight = myImage.height;
+        var imgwidth = myImage.naturalWidth;
+        var imgheight = myImage.naturalHeight;
+     
+        console.log("the cover image height is: " + imgheight);
+        console.log("the cover image width is: " + imgwidth);
      
         if(imgangle == 90)
         {
@@ -455,12 +458,58 @@ function getCoverImage(imgid,angleid) {
         
         imgSrc = canvas.toDataURL("image/jpeg");
 
-        imageSection = {
-            image: imgSrc,
-            // height: 180,
-            width: 220,
-            //fit:[220,180]
+        if(imgangle == 0 || imgangle == 180)
+        {
+            console.log("1. image angle is 0 or 180,landscape");
+            if(imgheight >= 750)
+            {
+                console.log("1.1 height is greater than 750, will separate the page, need to set the height")
+                imageSection = {
+                    image: imgSrc,
+                    height: 260,
+                    width: 210,
+                }
+            }
+            else
+            {
+                console.log("1.2 height is smaller than 750,don't need to set the height, only set the width")
+                imageSection = {
+                    image: imgSrc,
+                    width: 210,
+                }
+            }
         }
+        else
+        {
+            console.log("2. image angle is 90 or 270, vertical. need to check its width if it is beyond limit");
+            imageSection = {
+                image: imgSrc,
+                width: 210
+            }
+            // if(imgwidth >= 750)
+            // {
+            //     console.log("1.1 width is greater than 750, will separate the page, need to set the height")
+            //     imageSection = {
+            //         image: imgSrc,
+            //         height: 260,
+            //         width: 210,
+            //     }
+            // }
+            // else
+            // {
+            //     console.log("1.2 width is smaller than 750,don't need to set the height, only set the width")
+            //     imageSection = {
+            //         image: imgSrc,
+            //         width: 210
+            //     }
+            // }
+        }
+        // imageSection = {
+        //     image: imgSrc,
+        //     // height: 180,
+        //     width: 220,
+        //     //fit:[220,180]
+        // }
 
     }
     return imageSection;
