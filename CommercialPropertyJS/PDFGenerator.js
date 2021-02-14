@@ -39,6 +39,7 @@ function generatePDF(mode) {
     // Page start drawing from here...
 
     var docDefinition = {
+        pageSize: 'A4',
         footer: function (currentPage, pageCount) {
             if (currentPage === 1) {
                 return {
@@ -79,148 +80,124 @@ function generatePDF(mode) {
             {
 
                 stack: [
-
-                    [{
-                            // Draw Cover Page image
-                            image: coverPageLogo,
-                            width: 160,
-                            height: 160
+                    {
+                        columns: 
+                        [
+                            {
+                                // Draw Cover Page image
+                                image: coverPageLogo,
+                                width: 130,
+                                height: 130
+                            },
+                            {
+                                text:[
+                                    'Property Assessment Report\n',
+                                    {
+                                        text: '- Commercial, Industrial & Institutional',
+                                        fontSize: 16,
+                                        color:'black',
+                                        bold:false,
+                                        alignment: 'right'
+                                    }
+                                ],
+                                style: 'coverPageHeader'
+                            }
+                        ]
+                    },
+                    giveMeHugeDraft(mode),
+                    {
+                        table: {
+                            // widths: ['*', '*'],
+                            body: [
+                                [
+                                    {
+                                        border: [true, true, true, true],
+                                        text: PropertyAssessmentReport,
+                                        alignment: 'justify',
+                                        fontSize: 9,
+                                        margin: [10, 10, 10, 10]
+                                    }
+                                ]
+                            ]
                         },
-                        giveMeHugeDraft(mode),
-                        {
-                            text: [
-                                'Archicentre ',
-                                {
-                                    text: 'Australia \n',
-                                    color: 'red'
-                                },
-                                {
-                                    text: 'Property \nAssessment \n',
-                                    bold: true
-                                },
-                                'Report\n',
-                                {
-                                    text: '- Commercial, Industrial & Institutional',
-                                    fontSize: 22
-                                }
-                            ],
-                            style: 'coverPageHeader'
+                        layout: {
+                            hLineWidth: function (i, node) {
+                                return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                            },
+                            vLineWidth: function (i, node) {
+                                return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+                            },
+                            hLineColor: function (i, node) {
+                                return (i === 0 || i === node.table.body.length) ? '#FFE599' : '#FFE599';
+                            },
+                            vLineColor: function (i, node) {
+                                return (i === 0 || i === node.table.widths.length) ? '#FFE599' : '#FFE599';
+                            }
                         }
 
-                    ]
-                    // {
-                    //     text:'New Home Design',
-                    //     style: 'pageTopHeader'
-                    // },
-                    // makeAGap(),
-                    // {
-                    //     text:'Feasibility Study',
-                    //     style:'thirdHeader'
-                    //
-                    // },
-                    // giveMeHugeDraft(mode),
-                    // {
-                    //     alignment: 'justify',
-                    //     columns: [
-                    //         {
-                    //             stack:[
-                    //
-                    //                 makeAGap(),
-                    //                 {
-                    //                     text: archHomeFeasibilityReportText1,
-                    //                     fontSize: 9
-                    //                 },
-                    //                 makeAGap(),
-                    //                 {
-                    //                     text: archHomeFeasibilityReportText2,
-                    //                     fontSize: 9
-                    //                 },
-                    //                 makeAGap(),
-                    //                 {
-                    //                     text: archHomeFeasibilityReportText3,
-                    //                     fontSize: 9
-                    //                 }
-                    //             ]
-                    //
-                    //         },
-                    //         //ConstructionCoverImage
-                    //         {
-                    //             stack: [
-                    //                 makeAGap(),
-                    //                 displayCoverImage('HomeFeasibilityCoverImage')
-                    //             ]
-                    //
-                    //         }
-                    //
-                    //         // displayImage('ConstructionCoverImage')
-                    //     ],
-                    //     columnGap: 20
-                    // },
-                    // {
-                    //     text: "Client's Details",
-                    //     style: 'pageTopHeader',
-                    //     margin: [0, 40, 0, 5]
-                    // },
-                    //  getCustomerDetailsTable(),
-                    //  makeAGap(),
-                    //  getAssessmentDetailsTable(),
-                    //  makeAGap(),
-                    //  getAssessorDetailsTable()
+
+                    },
+                    makeAGap(),
+                    getClientDetailsTable(),
+                    getAssessmentDetailsTable(),
+                    getArchitectDetailsTable(),
+                    makeAGap(),
+                    getPropertySummary()
                 ],
                 pageBreak: 'after'
             },
             /**
              * (2) Report Detail Page
              */
-            {
-                stack: [
-                    giveMeHugeDraft(mode),
-                    {
+            // {
+            //     stack: [
+            //         giveMeHugeDraft(mode),
+            //         {
 
-                        text: [{
-                                text: 'Property Assessment Report',
-                                color: 'red'
-                            },
-                            {
-                                text: ' - Commercial Industrial & Institutional',
-                                bold: false,
-                                fontSize: 12,
-                                color: 'black'
-                            }
-                        ],
-                        style: 'pageTopHeader',
-                        margin: [0, 5, 0, 10]
+            //             text: [{
+            //                     text: 'Property Assessment Report',
+            //                     color: 'red'
+            //                 },
+            //                 {
+            //                     text: ' - Commercial Industrial & Institutional',
+            //                     bold: false,
+            //                     fontSize: 12,
+            //                     color: 'black'
+            //                 }
+            //             ],
+            //             style: 'pageTopHeader',
+            //             margin: [0, 5, 0, 10]
 
-                    },
-                    {
-                        text: PropertyAssessmentReport,
-                        fontSize: 10,
-                        margin: [0, 5, 0, 20]
-                    },
-                    getClientDetailsTable(),
-                    getAssessmentDetailsTable(),
-                    getArchitectDetailsTable(),
-                    getPropertySummary()
-                    // getInspectionDetailsTable(),
-                    // getInspectorDetailsTable(),
-                    // getReportAuthorisation(),
-                    // getDoneWork(),
-                    // {
-                    //     text:'Inspection Summary',
-                    //     style:'pageTopHeader',
-                    //     margin:[0,20,0,5]
-                    //
-                    // },
-                    // getInspectionSummary(),
-                    // {
-                    //     text:'Descriptive Summary of Work done by Owner-Builder',
-                    //     style:'pageTopHeader',
-                    //     margin:[0,20,0,5]
-                    // },
-                    // getDescriptiveSummary()
-                ],
-                pageBreak: 'after'
-            },
+            //         },
+            //         {
+            //             text: PropertyAssessmentReport,
+            //             fontSize: 10,
+            //             margin: [0, 5, 0, 20]
+            //         },
+            //         getClientDetailsTable(),
+            //         getAssessmentDetailsTable(),
+            //         getArchitectDetailsTable(),
+            //         getPropertySummary()
+            //         // getInspectionDetailsTable(),
+            //         // getInspectorDetailsTable(),
+            //         // getReportAuthorisation(),
+            //         // getDoneWork(),
+            //         // {
+            //         //     text:'Inspection Summary',
+            //         //     style:'pageTopHeader',
+            //         //     margin:[0,20,0,5]
+            //         //
+            //         // },
+            //         // getInspectionSummary(),
+            //         // {
+            //         //     text:'Descriptive Summary of Work done by Owner-Builder',
+            //         //     style:'pageTopHeader',
+            //         //     margin:[0,20,0,5]
+            //         // },
+            //         // getDescriptiveSummary()
+            //     ],
+            //     pageBreak: 'after'
+            // },
 
             /**
              * (3) The Scope of Page
@@ -231,48 +208,51 @@ function generatePDF(mode) {
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 0]
                     },
+                    makeAGap(),
                     {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: ScopeOfAssessment1,
-                                        style: 'colText'
+                                        text:   getSSTCText1(),
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: ScopeOfAssessment2,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: ScopeOfAssessment3,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: ScopeOfAssessment4,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: ScopeOfAssessment5,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: ScopeOfAssessment6,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: ScopeOfAssessment7,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: ScopeOfAssessment8,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     }
-                                ]
+                                ],
+                                style: 'colText'
                             },
                             {
                                 stack: [{
                                         text: ScopeOfAssessment9,
                                         style: 'colText'
                                     },
+                                    makeAGap(),
                                     {
                                         text: 'What is included in this report',
                                         style: 'pageSubHeader'
@@ -280,70 +260,72 @@ function generatePDF(mode) {
                                     {
                                         ul: [{
                                                 text: ReportIncluded1,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportIncluded2,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportIncluded3,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportIncluded4,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportIncluded5,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             }
                                         ]
                                     },
+                                    makeAGap(),
                                     {
                                         text: 'What is not included in this report',
                                         style: 'pageSubHeader'
                                     },
                                     {
                                         text: ReportNotRecorded0,
-                                        style: 'colText'
+                                        style: 'bulletMargin'
                                     },
                                     {
                                         ul: [{
                                                 text: ReportNotRecorded1,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportNotRecorded2,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportNotRecorded3,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportNotRecorded4,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportNotRecorded5,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportNotRecorded6,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportNotRecorded7,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: ReportNotRecorded8,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             }
                                         ]
                                     }
-                                ]
+                                ],
+                                style: 'colText'
                             }
                         ],
                         columnGap: 20
@@ -360,6 +342,7 @@ function generatePDF(mode) {
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 5]
                     },
+                    makeAGap(),
                     {
                         text: [{
                                 text: Attachments1,
@@ -380,51 +363,56 @@ function generatePDF(mode) {
                             }
                         ]
                     },
+                    makeAGap(),
                     getAttachmentTable(),
+                    makeAGap(),
                     {
                         text: 'General Advice',
                         style: 'pageTopHeader',
                         margin: [0, 10, 0, 5]
                     },
+                    makeAGap(),
                     {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
                                     ul: [{
                                             text: GeneralAdvice1,
-                                            style: 'colText'
+                                            style: 'bulletMargin'
                                         },
                                         {
                                             text: GeneralAdvice2,
-                                            style: 'colText'
+                                            style: 'bulletMargin'
                                         },
                                         {
                                             text: GeneralAdvice3,
-                                            style: 'colText'
+                                            style: 'bulletMargin'
                                         },
                                         {
                                             text: GeneralAdvice4,
-                                            style: 'colText'
+                                            style: 'bulletMargin'
                                         },
                                         {
                                             text: GeneralAdvice5,
-                                            style: 'colText'
+                                            style: 'bulletMargin'
                                         }
                                     ]
-                                }]
+                                }],
+                                style: 'colText'
                             },
                             {
                                 stack: [{
                                         ul: [{
                                                 text: GeneralAdvice6,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             },
                                             {
                                                 text: GeneralAdvice7,
-                                                style: 'colText'
+                                                style: 'bulletMargin'
                                             }
                                         ]
                                     },
+                                    makeAGap(),
                                     {
                                         text: 'For Strata, Stratum and Company Title Properties',
                                         fontSize: 10,
@@ -436,7 +424,8 @@ function generatePDF(mode) {
                                         text: GeneralAdvice8,
                                         style: 'colText'
                                     }
-                                ]
+                                ],
+                                style: 'colText'
                             }
                         ],
                         columnGap: 20
@@ -454,54 +443,50 @@ function generatePDF(mode) {
                         style: 'pageTopHeader',
                         margin: [0, 5, 0, 0]
                     },
-
+                    makeAGap(),
                     {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: Conditions1,
-                                        style: 'colText'
+                                        text: getTermsAndConditionsP1(),
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: Conditions2,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: Conditions3,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: Conditions4,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: Conditions5,
                                         italics: true,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
+                                    makeAGap(),
                                     {
                                         ol: [{
                                                 text: ConditionsNumber1,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
+                                                style: 'bulletMargin',
                                             },
                                             {
                                                 text: ConditionsNumber2,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
+                                                style: 'bulletMargin',
                                             },
                                             {
                                                 text: ConditionsNumber3,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
+                                                style: 'bulletMargin',
                                             },
                                             {
                                                 text: ConditionsNumber4,
-                                                style: 'colText',
-                                                margin: [5, 0, 0, 0]
+                                                style: 'bulletMargin',
                                             }
                                         ],
-                                        fontSize: 10
                                     }
                                 ]
                             },
@@ -510,60 +495,50 @@ function generatePDF(mode) {
                                     start: 4,
                                     ol: [{
                                             text: ConditionsNumber4,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber5,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber6,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber7,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber8,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber9,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber10,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber11,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber12,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         },
                                         {
                                             text: ConditionsNumber13,
-                                            style: 'colText',
-                                            margin: [5, 0, 0, 0]
+                                            style: 'bulletMargin',
                                         }
                                     ],
-                                    fontSize: 10
                                 }]
                             }
                         ],
-                        columnGap: 20
+                        columnGap: 20,
+                        style: 'colText'
                     }
                 ],
                 pageBreak: 'after'
@@ -576,8 +551,8 @@ function generatePDF(mode) {
                 stack: [{
                         text: 'Defect Definitions',
                         style: 'pageTopHeader',
-                        margin: [0, 5, 0, 0]
                     },
+                    makeAGap(),
                     {
                         table: {
                             widths: [100, '*'],
@@ -712,48 +687,48 @@ function generatePDF(mode) {
                         },
                         margin: [0, 10, 0, 20]
                     },
+                    makeAGap(),
                     {
                         text: 'Assessment Access',
                         style: 'pageTopHeader',
-                        margin: [0, 5, 0, 0]
                     },
+                    makeAGap(),
                     {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
                                         text: AssessmentAccess1,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: AssessmentAccess2,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: AssessmentAccess3,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     }
                                 ]
                             },
                             {
                                 stack: [{
                                         text: AssessmentAccess4,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: AssessmentAccess5,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     },
                                     {
                                         text: AssessmentAccess6,
-                                        style: 'colText'
+                                        style: 'paragraphMargin'
                                     }
                                 ]
                             }
                         ],
+                        style: 'colText',
                         columnGap: 20
                     }
-
-
                 ],
                 pageBreak: 'after'
             },
@@ -876,6 +851,13 @@ function generatePDF(mode) {
                     getSiteAreaTable(),
                     getAccessLimitationTable('siteAccessLimitationsTable', 'siteAccessItem', 'siteAccessImageRef', 'SiteAccessSelect', 'siteAccessNotes'),
                     getMinorDefectsTable('siteMinorDefectsTable', 'siteMaintenanceItemNo', 'siteMaintenanceImgRef', 'siteMaintenanceNotes', 'siteMinorRecommendationText'),
+                    // getMajorDefectsTable('siteMajorDefectsTable', 'siteMajorItemNo', 'siteMajorImgRef', 'siteMajorNotes', 'siteMajorRecommendationText'),
+                    // getGeneralNotes('siteGeneralNotes')
+                ],
+                pageBreak: 'after'
+            },
+            {
+                stack:[
                     getMajorDefectsTable('siteMajorDefectsTable', 'siteMajorItemNo', 'siteMajorImgRef', 'siteMajorNotes', 'siteMajorRecommendationText'),
                     getGeneralNotes('siteGeneralNotes')
                 ],
@@ -899,16 +881,17 @@ function generatePDF(mode) {
                     getAreaTable('exteriorArea', 'exteriorAreaName', 'exteriorAreaRow'),
                     getAccessLimitationTable('exteriorAccessLimitationsTable', 'exteriorAccessItem', 'exteriorAccessImageRef', 'exteriorAccessSelect', 'exteriorAccessNotes'),
                     getMinorDefectsTable('exteriorMinorDefectsTable', 'exteriorMinorDefectItemNo', 'exteriorMinorDefectImgRef', 'exteriorMinorDefectNotes', 'exteriorMinorRecommendationText'),
+                    // getMajorDefectsTable('exteriorMajorDefectsTable', 'exteriorMajorItemNo', 'exteriorMajorImgRef', 'exteriorMajorNotes', 'exteriorMajorRecommendationText'),
+                    // getGeneralNotes('exteriorGeneralNotes')
+                ],
+                pageBreak: 'after',
+            },
+            {
+                stack:[
                     getMajorDefectsTable('exteriorMajorDefectsTable', 'exteriorMajorItemNo', 'exteriorMajorImgRef', 'exteriorMajorNotes', 'exteriorMajorRecommendationText'),
                     getGeneralNotes('exteriorGeneralNotes')
-
-                    // getSiteAreaTable(),
-                    // getAccessLimitationTable(),
-                    // getMinorDefectsTable(),
-                    // getMajorDefectsTable(),
-                    // getGeneralNotes()
                 ],
-                pageBreak: 'after'
+                pageBreak: 'after',
             },
             /**
              * (10) Property Interior - Dry Areas
@@ -951,10 +934,17 @@ function generatePDF(mode) {
                     getAreaTable('InteriorWetArea', 'InteriorWetAreaName', 'InteriorWetAreaRow'),
                     getAccessLimitationTable('interiorWetAccessLimitationsTable', 'interiorWetAccessItem', 'interiorWetAccessImageRef', 'interiorWetAccessSelect', 'interiorWetAccessNotes'),
                     getMinorDefectsTable('interiorWetMinorTable', 'interiorWetMinorItemNo', 'interiorWetMinorImgRef', 'interiorWetMinorNotes', 'interiorWetMinorRecommendationText'),
+                    makeAGap(),
+                    // getMajorDefectsTable('interiorWetMajorTable', 'interiorWetMajorItemNo', 'interiorWetMajorImgRef', 'interiorWetMajorNotes', 'interiorWetMajorRecommendationText'),
+                    // getGeneralNotes('interiorWetMajorGeneralNotes')
+                ],
+                pageBreak: 'after',
+            },
+            {
+                stack:[
                     getMajorDefectsTable('interiorWetMajorTable', 'interiorWetMajorItemNo', 'interiorWetMajorImgRef', 'interiorWetMajorNotes', 'interiorWetMajorRecommendationText'),
                     getGeneralNotes('interiorWetMajorGeneralNotes')
                 ]
-                //pageBreak: 'after'
             },
             /**
              * Photographs
@@ -970,10 +960,10 @@ function generatePDF(mode) {
          * */
         styles: {
             coverPageHeader: {
-                fontSize: 50,
-                color: 'black',
-                italics: true,
-                margin: [20, 50, 0, 100]
+                fontSize: 26,
+                bold: true,
+                color: 'red',
+                margin: [20, 50, 0, 50]
             },
             pageTopHeader: {
                 fontSize: 20,
@@ -1004,19 +994,12 @@ function generatePDF(mode) {
             tableText: {
                 fontSize: 10
             },
-
-
-
-
-
             firstHeader: {
                 fontSize: 20,
                 color: 'red',
                 bold: true,
                 margin: [0, 0, 0, 20]
             },
-
-
             fourthHeader: {
                 fontSize: 20,
                 color: 'red',
@@ -1029,7 +1012,6 @@ function generatePDF(mode) {
             },
             paragraph1: {
                 fontSize: 11,
-
                 margin: [5, 2, 10, 100]
             },
             coverPageText: {
@@ -1075,12 +1057,9 @@ function generatePDF(mode) {
                 fontSize: 9,
                 bold: true
             },
-
-
             paragraphMargin: {
                 margin: [0, 0, 0, 6]
             },
-
             bulletMargin: {
                 margin: [0, 0, 0, 5]
             },

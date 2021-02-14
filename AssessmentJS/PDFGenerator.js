@@ -99,14 +99,14 @@ function generatePDF(mode) {
                                         text: coverPageText,
                                         alignment: 'justify',
                                         fontSize: 9,
-                                        margin: [10, 30, 10, 10]
+                                        margin: [10, 10, 5, 10]
                                     },
                                     {
                                         border: [false, true, true, true],
                                         stack: [
-                                            getCoverImage('AssessmentCoverImage')
+                                            getCoverImage("AssessmentCoverImage","AssessmentCoverImageAngle")
                                         ],
-                                        margin: [10, 10, 10, 10]
+                                        margin: [5, 10, 10, 10]
                                     }
                                 ]
                             ]
@@ -131,14 +131,14 @@ function generatePDF(mode) {
                     {
                         text: 'Property Assessment Details',
                         style: 'pageTopHeader',
-                        margin: [0, 30, 0, 5]
+                        margin: [0, 20, 0, 5]
                     },
                     {
                         table: {
                             widths: [61, '*', 51, '*'],
                             body: [
                                 [{
-                                    text: 'CUSTOMER DETAILS',
+                                    text: 'CLIENT DETAILS',
                                     style: 'tableHeader',
                                     colSpan: 4,
                                     border: [false, false, false, true]
@@ -350,7 +350,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: scopeOfAssessment1,
+                                        text: getSSTCText1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -758,7 +758,7 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: 'key',
+                        text: 'Key',
                         style: 'key'
                     },
                     getKeyTable(),
@@ -1353,7 +1353,7 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: termsAndConditionsP1,
+                        text: getTermsAndConditionsP1(),
                         style: 'paragraphMargin',
                         alignment: 'justify'
                     },

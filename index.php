@@ -8,7 +8,10 @@
 
   if (SharedIsLoggedIn())
   {
-    header("location: member.php");
+    if (SharedIsDev())
+      header("Location: member.php");
+    else    
+      header("Location: http://test.archicentreaustraliainspections.com/member.php");
     exit;
   }
 
@@ -19,8 +22,8 @@
 
     if (SharedLogin($email, $pwd))
     {
-      header("location: member.php");
-      exit;
+       header("location: member.php");
+        exit;
     }
     else
       $loginerr = true;
@@ -241,7 +244,7 @@
       $('#divRequestScope').panel('open');
     }
 
-  function doSubmitRequestReport()
+    function doSubmitRequestReport()
     {
       var firstname = $('#fldYourFirstname').val();
       var lastname = $('#fldYourLastname').val();
@@ -326,7 +329,6 @@
       else
         doMandatoryInputField('fldYourFirstname', 'Please specify your first name');
     }
-
     function doNewBooking()
     {
       function doReset()
@@ -349,6 +351,7 @@
 
         //$('#fldNewBookingBudget').numberbox('clear');
         $('#fldNewBookingNotes').textbox('clear');
+        $('#fldNewBookingClientNotes').textbox('clear');
 
         // Properties TAB
         $('#fldNewBookingState').combobox('clear');
@@ -444,6 +447,7 @@
                 var reportid = $('#fldNewBookingReport').combobox('getValue');
                 //var budget = $('#fldNewBookingBudget').numberbox('getValue');
                 var notes = $('#fldNewBookingNotes').textbox('getValue');
+                var clientnotes = $('#fldNewBookingClientNotes').textbox('getValue');
 
                 var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                 var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
@@ -494,6 +498,7 @@
                             reportid: reportid,
                             //budget: budget,
                             notes: notes,
+                            clientnotes:notes,
 
                             numstories: numstories,
                             numbedrooms: numbedrooms,
@@ -550,19 +555,19 @@
                       else
                       {
                         $('#newbookingtabs').tabs('select', 0);
-                        doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                        doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                       }
                     }
                     else
                     {
                       $('#newbookingtabs').tabs('select', 0);
-                      doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                      doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                     }
                   }
                   else
                   {
                     $('#newbookingtabs').tabs('select', 0);
-                    doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                    doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                   }
                 }
                 else
@@ -588,10 +593,88 @@
       ).dialog('center').dialog('open');
     }
 
+    function doLogin()
+    {
+      // console.log("log in");
+      var uid = $('#fldEmail').textbox('getValue');
+      // console.log(uid);
+      var pwd = $('#fldLoginPassword').passwordbox('getValue');
+      // console.log(pwd);
+      if(!_.isBlank(uid))
+      {
+        if(!_.isBlank(pwd))
+        {
+          $('#fldUid').textbox('setValue',uid);
+          $('#fldPwd').textbox('setValue',pwd);
+          document.getElementById('frmLogin').submit();
+        }
+        else
+        {
+          doMandatoryInputField('fldPassword', 'Please enter password');
+        }
+      }
+      else
+      {
+        doMandatoryInputField('fldEmail', 'Please enter email');
+      }
+    }
+
+    function doOpenLoginDlg()
+    {
+      $('#dlgLogin').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#fldLoginPassword').passwordbox('textbox').bind
+            (
+              'keydown',
+              function(ev)
+              {
+                if (ev.keyCode == 13)
+                  doLogin();
+              }
+            );
+            
+            $('#fldEmail').textbox('textbox').bind
+            (
+              'keydown',
+              function(ev)
+              {
+                if (ev.keyCode == 13)
+                  doLogin();
+              }
+            );
+            doTextboxFocus('fldEmail');
+          },
+          buttons:
+          [
+            {
+              text: 'Login',
+              handler: function()
+              {
+                doLogin();
+              }
+            },
+            {
+              text:'Cancel',
+              handler:function()
+              {
+                $('#dlgLogin').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
     // ************************************************************************************************************
     // Document ready...
     $(document).ready(function()
     {
+      document.getElementById("dlgBookingNew").style.display = "block";
+      document.getElementById("dlgLogin").style.display = "block";
+      document.getElementById("footer").style.display = "block";
+      document.getElementById("header").style.display = "block";
       $.noty.defaults =
       {
         layout: 'top',
@@ -623,12 +706,16 @@
         buttons: false
       };
 
+      // $('#fldUid').textbox('textbox').hide();
+
       $('#btnLogin').bind
       (
         'click',
         function()
         {
-          document.getElementById('frmLogin').submit();
+          console.log("click");
+          // document.getElementById('frmLogin').submit();
+          doOpenLoginDlg();
         }
       );
 
@@ -700,7 +787,7 @@
 <body>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Dialogs...                                                                                                                                                              -->
-  <div id="dlgBookingNew" class="easyui-dialog" title="New Booking" style="width: 800px; height: 640px;" data-options="resizable: false, modal: true, closable: false, closed: true">
+  <div id="dlgBookingNew" class="easyui-dialog" title="New Booking" style="width: 800px; height: 640px;display:none" data-options="resizable: false, modal: true, closable: false, closed: true">
     <div class="easyui-panel" title="Booking Details" data-options="fit: true">
       <div id="newbookingtabs" class="easyui-tabs" data-options="fit: true, pill: true">
         <div title="Customer Details" data-options="iconCls: 'icon-man'">
@@ -757,6 +844,10 @@
             <tr>
               <td style="vertical-align: top;">Notes:</td>
               <td><input id="fldNewBookingNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 300px"></td>
+            </tr>
+            <tr style="margin-top:5px">
+              <td style="vertical-align: top">Client Notes:</td>
+              <td><input id="fldNewBookingClientNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 150px"></td>
             </tr>
           </table>
         </div>
@@ -850,13 +941,25 @@
     </div>
   </div>
 
+  <div id="dlgLogin" class="easyui-dialog" title="Login to ArchiCentre" style="width: 375px; height: 175px;display:none" data-options="resizable: false, modal: true, closable: false,closed: true">
+    <table>
+      <tr>
+        <td>Email:</td>
+        <td><input type="text" id="fldEmail" class="easyui-textbox" data-options="iconCls: 'icon-man'" style="width:250px"></td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input id="fldLoginPassword" class="easyui-passwordbox" style="width:250px"></td>
+      </tr>
+    </table>
+  </div>
+
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Main content...                                                                                                                                                              -->
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>
     <?php require_once("footer.php"); ?>
-
-    <div id="p" data-options="region: 'west'" title="Reports" style="width: 30%; padding: 10px">
+    <div id="p" data-options="region: 'west'" title="Reports" collapsed="true" style="width: 30%; padding: 10px">
       <div class="easyui-accordion" data-options="selected: 0, fit: true" >
         <?php
           if (!SharedIsLoggedIn())

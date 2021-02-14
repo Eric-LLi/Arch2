@@ -12,26 +12,6 @@ function reorderImages()
     //console.log("need to reorder the images");
     var totalContainers = $("#HOWImagesTable").children('div');
     var BigContainer = document.getElementById('HOWImagesTable');
-    //console.log(totalContainers);
-    // for (var i=0;i<totalContainers.length;i++)
-    // {
-    //     var id = totalContainers[i].id.replace(/[^\d.]/g, '');
-    //     var imgContainerID = id + "_CPimgContainer";
-    //     var ImgID = totalContainers.eq(i).children('img').get(0).id;
-
-    //     console.log(imgContainerID);
-    //     console.log(id);
-    //     console.log(ImgID);
-    //     // console.log( Number(totalContainers[i].id.replace(/[^\d.]/g, '')));
-    //     //console.log((totalContainers[i].id));
-    //     console.log(totalContainers.eq(i).children('button').get(0).onclick);
-    //     var imgRmBtnID = totalContainers.eq(i).children('button').get(0).id;
-    //     // $("#" + imgRmBtnID).click(function () {
-    //     //     imagesRemoveBtn(imgContainerID, newImgID);
-    //     // });
-    //     totalContainers.eq(i).children('button').get(0).onclick = function(){imagesRemoveBtn(imgContainerID, ImgID)};
-        
-    // }
     totalContainers.sort(function(a,b)
     {
         return Number(a.id.replace(/[^\d.]/g, '')) - Number(b.id.replace(/[^\d.]/g, ''));
@@ -45,14 +25,39 @@ function reorderImages()
         BigContainer.appendChild(totalContainers[i]);
         var id = totalContainers[i].id.replace(/[^\d.]/g, '');
         var imgContainerID = id + "_HOWimgContainer";
+        var myImage = totalContainers.eq(i).children('img').get(0);
         var ImgID = totalContainers.eq(i).children('img').get(0).id;
-        // console.log(imgContainerID);
-        // console.log(id);
-        // console.log(ImgID);
+        var rotateBtnID = totalContainers.eq(i).children('button').eq(1).get(0).id;
+        var angleID = totalContainers.eq(i).children('input').eq(1).get(0).id;
+        var rotateBnt = document.getElementById(rotateBtnID);
         var removeBtn = document.getElementById(totalContainers.eq(i).children('button').get(0).id);
         var removeFunction = "imagesRemoveBtn('"+imgContainerID+"', '"+ImgID+"')";
-        //console.log(removeFunction);
+        var rotateFunction = "rotateOneImage('" + id + "')";
+        var originalAngle = parseInt(document.getElementById(angleID).value);
+        if(originalAngle > 0)
+        {
+            if(originalAngle == 90 || originalAngle == 270)
+            {
+                console.log("the degree is 90 or 270");
+                myImage.style.marginTop = "75px";
+                myImage.style.marginBottom = "75px";
+                $("#" + ImgID).rotate(originalAngle);            }
+            else
+            {
+                myImage.style.marginTop = "35px";
+                myImage.style.marginBottom = "35px";
+                $("#" + ImgID).rotate(originalAngle);
+            }
+
+        }
+        else
+        {
+            myImage.style.marginTop = "35px";
+            myImage.style.marginBottom = "35px";
+        }
+
         removeBtn.setAttribute("onclick", removeFunction);
+        rotateBnt.setAttribute("onclick", rotateFunction);
         //console.log(removeBtn);
         
     }
@@ -529,23 +534,25 @@ function createOneCell(tableID, name, select, textAreaName) {
     selectList.id = select + rowCount;
     selectList.style.width = "100%";
 
-    var selectOption = ["Choose an item", "√", 'X', '--', 'U', 'IW', 'R', 'P', 'N'];
-    var selectValue = [" ", "No Defects Evident", "Defect Evident", "Not Relevant", "Untested",
-        "Incomplete Work", "Reasonable Access", "Partial Access", 'Not Accessible'];
+    // var selectOption = ["Choose an item", "√", 'X', '--', 'U', 'IW', 'R', 'P', 'N'];
+    var selectOption = ["Choose an item", "√ - No Defects Evident", 'X - Defect Evident', '-- -  Not Relevant', 'U - Untested', 'IW - Incomplete Work','R- Reasonable Access', 'P - Partial Access', 'N - Not Accessible'];
 
+    // var selectValue = [" ", "No Defects Evident", "Defect Evident", "Not Relevant", "Untested",
+    //     "Incomplete Work", "Reasonable Access", "Partial Access", 'Not Accessible'];
 
+    var selectValue = ["Choose an item", "√", "X", "--", "U","IW","R", "P", 'N'];
     //Create and append the options
     for (var i = 0; i < selectOption.length; i++) {
         var option = document.createElement("option");
-        var group = document.createElement('optgroup');
-        group.label = selectValue[i];
+        // var group = document.createElement('optgroup');
+        // group.label = selectValue[i];
         option.text = selectOption[i];
         if (i === 0) {
             option.selected = true;
             option.disabled = true;
         }
-        group.appendChild(option);
-        selectList.appendChild(group);
+        //group.appendChild(option);
+        selectList.appendChild(option);
     }
 
     cell2.appendChild(selectList);
@@ -553,7 +560,8 @@ function createOneCell(tableID, name, select, textAreaName) {
     //create text area for notes
     var textArea = document.createElement('textarea');
     textArea.setAttribute('class', 'form-control');
-    textArea.setAttribute('placeholder', 'Notes');
+    // textArea.setAttribute('placeholder', 'Notes');
+    textArea.setAttribute('placeholder', 'Number/Letter');
     //textArea.id = "HOWSiteNotes" + rowCount;
     textArea.id = textAreaName + rowCount;
     textArea.style.height = '51px';
@@ -605,25 +613,74 @@ function createOneOutBuildingSpaceCell() {
 
 
             //Create and append the options
-            for (var a = 0; a < selectOption.length; a++) {
-                var option = document.createElement("option");
-                var group = document.createElement('optgroup');
-                group.label = selectValue[a];
-                option.text = selectOption[a];
-                if (a === 0) {
-                    option.selected = true;
-                    option.disabled = true;
+            if(i == columnCount - 1)
+            {
+                //load Access Select Option
+                var selectOption = ["Choose an item", 'R- Reasonable Access', 'P - Partial Access', 'N - Not Accessible'];
+                var selectValue = ["Choose an item", "R", "P", 'N'];
+            
+                for (var a = 0; a < selectValue.length; a++) {
+                    var option = document.createElement("option");
+                    // var group = document.createElement('optgroup');
+                    // group.label = selectValue[i];
+                    option.text = selectOption[a];
+                    option.value = selectValue[a];
+                    if (a === 0) {
+                        option.selected = true;
+                        option.disabled = true;
+                    }
+                    // group.appendChild(option);
+                    selectList.appendChild(option);
                 }
-                group.appendChild(option);
-                selectList.appendChild(group);
             }
+            else
+            {
+                // load Select Option
+                var selectOption = ["Choose an item", "√ - No Defects Evident", 'X - Defect Evident', '-- -  Not Relevant', 'U - Untested', 'IW - Incomplete Work'];
+                var selectValue = ["Choose an item", "√", "X", "--", "U","IW"];
+            
+            
+                //Create and append the options
+                for (var b = 0; b < selectOption.length; b++) {
+                    var option = document.createElement("option");
+                    // var group = document.createElement('optgroup');
+                    // group.label = selectValue[i];
+                    option.text = selectOption[b];
+                    option.value = selectValue[b];
+                    if (b === 0) {
+                        option.selected = true;
+                        option.disabled = true;
+                    }
+                    // group.appendChild(option);
+                    selectList.appendChild(option);
+                }
 
-
+            }
+            // for (var a = 0; a < selectOption.length; a++) {
+            //     var option = document.createElement("option");
+            //     var group = document.createElement('optgroup');
+            //     group.label = selectValue[a];
+            //     option.text = selectOption[a];
+            //     if (a === 0) {
+            //         option.selected = true;
+            //         option.disabled = true;
+            //     }
+            //     group.appendChild(option);
+            //     selectList.appendChild(group);
+            // }
 
             //create an name input for the cell1
             var textArea = document.createElement('textarea');
             textArea.setAttribute('class', 'form-control');
-            textArea.setAttribute('placeholder', 'Notes');
+            if(i == columnCount - 1)
+            {
+                textArea.setAttribute('placeholder', 'Letter');
+            }
+            else
+            {
+                textArea.setAttribute('placeholder', 'Number');
+            }
+            
             textArea.id = 'HOWOutBuildingPlace' + (rowCount - 1) + 'Text' + id;
             textArea.style.height = '50px';
             textArea.style.marginTop = '10px';
@@ -824,7 +881,8 @@ $("#HOW_ImgsUpload").change(function (e) {
                                     lastModified: file.lastModifiedDate
                                 });
     
-                                doUploadFile(imgFile, element[1], element[2], element[3], "", "HOWImagesTable", element[4]);
+                                doUploadFile(imgFile, element[1], element[2], element[3], "", "HOWImagesTable", element[4], element[0],'','','','','',element[5],element[6]);
+
     
                                 $("#HOWImagesTable").show();
                             }
@@ -835,36 +893,6 @@ $("#HOW_ImgsUpload").change(function (e) {
                         orientation: orientation
                     });
                 });
-
-                // var reader = new FileReader();
-                // reader.onload = function (e) {
-                //     //                imgFile.src = e.target.result
-                //     var data = e.target.result;
-                //     var image = new Image();
-                //     image.onload = function () {
-                //         var width = image.width;
-                //         var height = image.height;
-
-                //         var code = resizeImage_Canvas(image).toDataURL("image/jpeg");
-
-                //         if (!isEmpty(code)) {
-                //             $("#" + element[1]).attr("src", code);
-
-                //             var imgFile = new File([convertBase64UrlToBlob(code, file.type)], file.name, {
-                //                 type: file.type,
-                //                 lastModified: file.lastModifiedDate
-                //             });
-
-                //             //                            console.log("UploadID: " + imgFile, element[1], element[2], element[3], "", "HOWImagesTable");
-                //             doUploadFile(imgFile, element[1], element[2], element[3], "", "HOWImagesTable", element[4]);
-
-                //             //                            $("#Imgpage-loader").hide();
-                //             $("#HOWImagesTable").show();
-                //         }
-                //     };
-                //     image.src = data;
-                // };
-                // reader.readAsDataURL(file);
             });
             automaticNumbering();
         }
@@ -874,23 +902,29 @@ $("#HOW_ImgsUpload").change(function (e) {
 
 //Photos page; create html image, text, remove button and container.
 function createPhoto(id) {
-    var imgContainer = document.createElement("div"),
+    var lastContainer = document.getElementById("HOWImagesTable"),
+        imgContainer = document.createElement("div"),
         newImg = document.createElement("img"),
         imgText = document.createElement("input"),
         imgLabel = document.createElement("label"),
         imgRmBtn = document.createElement("button"),
-        lastContainer = document.getElementById("HOWImagesTable"),
+        rotateBtn = document.createElement("button"),
+        angleInput = document.createElement("input"),
 
         imgContainerID = id + "_HOWimgContainer",
         newImgID = 'HOWImage' + id,
         imgLabelID = "HOWimageCaption" + id,
         imgTextID = "HOWImageText" + id,
         imgRmBtnID = "HOWImageRemoveButton" + id;
+        rotateBtnID = "HOWImgRotateBtn" + id,
+        angleInputID = "HOWImgAngle" + id;
 
     //Setting element's attribute.
     imgContainer.setAttribute("id", imgContainerID);
 
     imgLabel.setAttribute("id", imgLabelID);
+    $("#" + imgLabelID).html("IMG " + id);
+
 
     newImg.setAttribute("id", newImgID);
 
@@ -900,21 +934,40 @@ function createPhoto(id) {
 
     imgRmBtn.setAttribute("id", imgRmBtnID);
     imgRmBtn.setAttribute("class", "btn btn-danger");
+    imgRmBtn.innerHTML = "Remove";
+
+
+    rotateBtn.setAttribute("id", rotateBtnID);
+    rotateBtn.setAttribute("class","btn btn-info");
+    rotateBtn.setAttribute("type", "button");
+    rotateBtn.innerHTML = "Rotate";
+
+
+    angleInput.setAttribute("id", angleInputID);
+    angleInput.setAttribute("type", "text");
+    angleInput.style.display = "none";
 
     lastContainer.appendChild(imgContainer);
     document.getElementById(imgContainerID).appendChild(newImg);
-    document.getElementById(imgContainerID).appendChild(document.createElement('br'));
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgLabel);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgText);
+    document.getElementById(imgContainerID).appendChild(angleInput);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
     document.getElementById(imgContainerID).appendChild(imgRmBtn);
+    document.getElementById(imgContainerID).appendChild(document.createElement("br"));
+    document.getElementById(imgContainerID).appendChild(rotateBtn);
 
-    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID, imgLabelID];
+    var elements = [imgContainerID, newImgID, imgTextID, imgRmBtnID, imgLabelID,rotateBtnID,angleInputID];
 
-    $("#" + imgLabelID).html("IMG " + id);
-    $("#" + imgRmBtnID).html("Remove");
     //Photos images remove button listerner.
     $("#" + imgRmBtnID).click(function () {
         imagesRemoveBtn(imgContainerID, newImgID);
+    });
+
+    $("#" + rotateBtnID).click(function () {
+        rotateOneImage(id);
     });
     return elements;
 }
@@ -927,6 +980,43 @@ function imagesRemoveBtn(containerID, imgID) {
     automaticNumbering();
 }
 
+
+function rotateOneImage(ID)
+{
+    console.log("click");
+    var angelInputID = "HOWImgAngle" + ID;
+    var imgID = 'HOWImage' + ID;
+    var originalAngle = document.getElementById(angelInputID).value;
+    var rotateAngle = parseInt(originalAngle) + 90;
+    var myImage = document.getElementById(imgID);
+    if(originalAngle == null || originalAngle == "undefined" || originalAngle == "")
+    {
+        originalAngle = 0;
+    }
+    var rotateAngle = parseInt(originalAngle) + 90
+
+    //Set the image margin based on the degre to aovide overlapping with other objects/elements
+    if(rotateAngle == 90 || rotateAngle == 270)
+    {
+        //console.log("the degree is 90 or 270");
+        myImage.style.marginTop = "75px";
+        myImage.style.marginBottom = "75px";
+        $("#" + imgID).rotate(rotateAngle);
+    }
+    else
+    {
+        myImage.style.marginTop = "35px";
+        myImage.style.marginBottom = "35px";
+        $("#" + imgID).rotate(rotateAngle);
+    }
+
+    if(rotateAngle==360)
+    {
+        rotateAngle = 0;
+    }
+
+    document.getElementById(angelInputID).value = rotateAngle;
+}
 //Resize an image
 function resizeImage_Canvas(img) {
     var MAX_WIDTH = 480,

@@ -3,7 +3,7 @@
  */
 
 /**
- * Get CUSTOMER DETAILS Table
+ * Get CLIENT DETAILS Table
  * */
 function getCustomerDetailsTable() {
     var result;
@@ -12,7 +12,7 @@ function getCustomerDetailsTable() {
             widths: [85, '*', 70, '*', 40, '*'],
             body: [
                 [{
-                    text: 'CUSTOMER DETAILS',
+                    text: 'CLIENT DETAILS',
                     border: [false, false, false, true],
                     style: 'tableHeader',
                     colSpan: 6

@@ -1,6 +1,6 @@
 <?php
   require_once("shared.php");
-  
+
   if (isset($_POST['fldLogout']))
   {
     SharedLogout();
@@ -76,10 +76,10 @@
     var cache_architects = [];
     var cache_inspectors = [];
     var cache_members = [];
+    var logevents = [];
     var map_booking = null;
     var marker = null;
     var markerinfo = null;
-
     // ************************************************************************************************************
     // Mapping helpers
     function initMap()
@@ -201,21 +201,38 @@
     // Sort Report arrays by alphabetically(AA-115)
     function sortByName(array)
     {
-      console.log('screenimng ');
+      // console.log('sortByName ');
+      //console.log(array);
+      //1st, remove the array index 3, it is the combined report - timber insepction report, no need to show to the user. 
+      // var sortlist = array;
       var newArray;
-      newArray = array.sort(function(a, b) {
-      var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-        // names must be equal
-        return 0;
+      //var remain = sortlist.splice(3,1);
+      var sortlist = array.filter(function(element){
+        return (element.id !== 3)
+      })
+
+      //2nd, remove the array index 6 - 13, it is all the construction reports, no longer be offered (AA-162)
+      
+      sortlist = sortlist.filter(function(element){
+        return (element.id <6 || element.id >13)
+      })
+
+      //console.log(sortlist);
+
+      newArray = sortlist.sort(function(a, b) 
+      {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+          // names must be equal
+          return 0;
       });
-      console.log(newArray);
+      // console.log(reports);
      return newArray;
     }
 
@@ -242,7 +259,7 @@
           {
             // console.log(response.rows);
             cache_bookings = response.rows;
-            // document.getElementById('totalbookings').innerHTML = cache_bookings.length;
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
             $('#divBookingsG').datagrid('reload');
           }
           else if(response.rc == -1)
@@ -294,8 +311,541 @@
       );
     }
 
+    function doSendTrigger(ev)
+    {
+      $('#divEvents').trigger(ev);
+    }
+
     <!-- *********************************************************************************************************************************************************************** -->
     <!-- Report handlers...                                                                                                                                                              -->
+    function doSalesReportBatch()
+    {
+      var batches = [];
+      $('#dlgSalesReportBatch').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#fldSelectSalesBatch').combobox({valueField: 'value', textField: 'label'});
+
+            $.post
+            (
+              'ajax_report_getsalesbatches.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>'
+              },
+              function(result)
+              {
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
+                {
+                  if (response.rows.length == 1)
+                  {
+                    $('#btnRunReportSales').linkbutton('disable');
+                  }
+                  else
+                  {
+                    $('#btnRunReportSales').linkbutton('enable');
+                    response.rows.forEach
+                    (
+                      function(row, ndx)
+                      {
+                        if (ndx > 0)
+                          batches.push({label: row.batchno, value: row.batchno});
+                      }
+                    );
+
+                    $('#fldSelectSalesBatch').combobox('loadData', batches);
+                  }
+                }
+              }
+            );
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              id: 'btnRunReportSales',
+              handler: function()
+              {
+                $.post
+                (
+                  'ajax_report_sales.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: $('#fldSelectSalesBatch').combobox('getValue')
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'New Batch',
+              handler: function()
+              {
+                $.post
+                (
+                  'ajax_report_sales.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: 0
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReport').dialog('close');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSalesReportBatch').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSalesReportDateRange()
+    {
+      $('#dlgSalesReportDateRange').dialog
+      (
+        {
+          onOpen: function()
+          {
+            $('#dtSalesReportDateFrom').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            $('#dtSalesReportDateTo').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            // Default to this month...
+            $('#dtSalesReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+            $('#dtSalesReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              handler: function()
+              {
+                var datefrom = $('#dtSalesReportDateFrom').datebox('getValue');
+                var dateto = $('#dtSalesReportDateTo').datebox('getValue');
+                var now = moment();
+
+                if (_.isBlank(datefrom) && _.isBlank(dateto))
+                {
+                  doMandatoryTextbox('Please select a start and end date for the report', 'dtSalesReportDateFrom');
+                  return;
+                }
+
+                if (!_.isBlank(datefrom) && !_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(dateto))
+                  {
+                    doMandatoryTextbox('Start date can not be after end date...', 'dtSalesReportDateFrom');
+                    return;
+                  }
+                }
+
+                if (_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(now))
+                  {
+                    doMandatoryTextbox('Start date can not be after today...', 'dtSalesReportDateFrom');
+                      return;
+                  }
+                  dateto = now.format('YYYY-MM-DD 23:59:59');
+                }
+
+                if (_.isBlank(datefrom))
+                {
+                  if (moment(dateto).isBefore(now))
+                  {
+                    doMandatoryTextbox('End date can not be before today...', 'dtSalesReportDateTo');
+                    return;
+                  }
+                  datefrom = now.format('YYYY-MM-DD 00:00:00');
+                }
+
+                $.post
+                (
+                  'ajax_report_salesdt.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    datefrom: datefrom,
+                    dateto: dateto
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                      window.open(response.filename, '_blank');
+                  }
+                );
+                $('#dlgSalesReportDateRange').dialog('close');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSalesReportDateRange').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSuppliersReportBatch()
+    {
+      var batches = [];
+
+      function doSuppliersReportSelectAll(ev, args)
+      {
+        cache_members.forEach
+        (
+          function(m)
+          {
+            $('#fldSuppliersReportBatchMember').combobox('select', m.uuid);
+          }
+        );
+      }
+
+      $('#divEvents').off('suppliersbatchallmembers', doSuppliersReportSelectAll);
+
+      $('#dlgSuppliersReportBatch').dialog
+      (
+        {
+          onClose: function()
+          {
+            $('#divEvents').off('suppliersbatchallmembers', doSuppliersReportSelectAll);
+          },
+          onOpen: function()
+          {
+            $('#fldSelectSuppliersBatch').combobox({valueField: 'value', textField: 'label'});
+
+            $('#fldSuppliersReportBatchMember').combobox
+            (
+              {
+                valueField: 'uuid',
+                textField: 'name',
+                limitToList: true,
+                multiple: true,
+                data: cache_members
+              }
+            );
+
+            $.post
+            (
+              'ajax_report_getsuppliersbatches.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>'
+              },
+              function(result)
+              {
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
+                {
+                  if (response.rows.length == 1)
+                  {
+                    $('#btnRunReportSsuppliers').linkbutton('disable');
+                  }
+                  else
+                  {
+                    $('#btnRunReportSsuppliers').linkbutton('enable');
+                    response.rows.forEach
+                    (
+                      function(row, ndx)
+                      {
+                        if (ndx > 0)
+                          batches.push({label: row.batchno, value: row.batchno});
+                      }
+                    );
+
+                    $('#fldSelectSuppliersBatch').combobox('loadData', batches);
+                  }
+                }
+              }
+            );
+
+            doSuppliersReportSelectAll(null, null);
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              id: 'btnRunReportSuppliers',
+              handler: function()
+              {
+                var members = $('#fldSuppliersReportBatchMember').combobox('getValues');
+
+                $.post
+                (
+                  'ajax_report_suppliers.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: $('#fldSelectSuppliersBatch').combobox('getValue'),
+                    members: members
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                    {
+                      noty({text:response.reports.length + ' reports found...', type: 'success', timeout: 10000});
+                      response.reports.forEach
+                      (
+                        function(r)
+                        {
+                          window.open(r, '_blank');
+                        }
+                      );
+                    }
+                  }
+                );
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'New Batch',
+              handler: function()
+              {
+                var members = $('#fldSuppliersReportBatchMember').combobox('getValues');
+
+                $.post
+                (
+                  'ajax_report_suppliers.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    batchno: 0,
+                    members: members
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                    {
+                      noty({text:response.reports.length + ' reports found...', type: 'success', timeout: 10000});
+                      response.reports.forEach
+                      (
+                        function(r)
+                        {
+                          window.open(r, '_blank');
+                        }
+                      );
+                    }
+                  }
+                );
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            },
+            {
+              text: 'Reset',
+              handler: function()
+              {
+                $('#fldSelectSuppliersBatch').combobox('clear');
+                $('#fldSuppliersReportBatchMember').combobox('clear');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSuppliersReportBatch').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+    function doSuppliersReportDateRange()
+    {
+      function doSuppliersReportSelectAll(ev, args)
+      {
+        cache_members.forEach
+        (
+          function(m)
+          {
+            $('#fldSuppliersReportDateRangeMember').combobox('select', m.uuid);
+          }
+        );
+      }
+
+      $('#divEvents').on('suppliersdaterangeallmembers', doSuppliersReportSelectAll);
+
+      $('#dlgSuppliersReportDateRange').dialog
+      (
+        {
+          onClose: function()
+          {
+            $('#divEvents').off('suppliersdaterangeallmembers', doSuppliersReportSelectAll);
+          },
+          onOpen: function()
+          {
+            $('#dtSuppliersReportDateFrom').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            $('#dtSuppliersReportDateTo').datebox
+            (
+              {
+                formatter: function(date) {return moment(date).format('YYYY-MM-DD');},
+                parser: function(d) {if (_.isUndefined(d) || _.isBlank(d)) return new Date(); return moment(d).toDate();}
+              }
+            );
+
+            $('#fldSuppliersReportDateRangeMember').combobox
+            (
+              {
+                valueField: 'uuid',
+                textField: 'name',
+                limitToList: true,
+                multiple: true,
+                data: cache_members
+              }
+            );
+
+            // Default to this month...
+            $('#dtSuppliersReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+            $('#dtSuppliersReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+
+            doSuppliersReportSelectAll(null, null);
+          },
+          buttons:
+          [
+            {
+              text: 'Run',
+              handler: function()
+              {
+                var datefrom = $('#dtSuppliersReportDateFrom').datebox('getValue');
+                var dateto = $('#dtSuppliersReportDateTo').datebox('getValue');
+                var members = $('#fldSuppliersReportDateRangeMember').combobox('getValues');
+                var now = moment();
+
+                console.log(members);
+
+                if (_.isBlank(datefrom) && _.isBlank(dateto))
+                {
+                  doMandatoryTextbox('Please select a start and end date for the report', 'dtSuppliersReportDateFrom');
+                  return;
+                }
+
+                if (!_.isBlank(datefrom) && !_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(dateto))
+                  {
+                    doMandatoryTextbox('Start date can not be after end date...', 'dtSuppliersReportDateFrom');
+                    return;
+                  }
+                }
+
+                if (_.isBlank(dateto))
+                {
+                  if (moment(datefrom).isAfter(now))
+                  {
+                    doMandatoryTextbox('Start date can not be after today...', 'dtSuppliersReportDateFrom');
+                      return;
+                  }
+                  dateto = now.format('YYYY-MM-DD 23:59:59');
+                }
+
+                if (_.isBlank(datefrom))
+                {
+                  if (moment(dateto).isBefore(now))
+                  {
+                    doMandatoryTextbox('End date can not be before today...', 'dtSuppliersReportDateTo');
+                    return;
+                  }
+                  datefrom = now.format('YYYY-MM-DD 00:00:00');
+                }
+
+                $.post
+                (
+                  'ajax_report_suppliersdt.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    datefrom: datefrom,
+                    dateto: dateto,
+                    members: members
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                    {
+                      noty({text:response.reports.length + ' reports found...', type: 'success', timeout: 10000});
+                      response.reports.forEach
+                      (
+                        function(r)
+                        {
+                          window.open(r, '_blank');
+                        }
+                      );
+                    }
+                  }
+                );
+                $('#dlgSuppliersReportDateRange').dialog('close');
+              }
+            },
+            {
+              text: 'Reset',
+              handler: function()
+              {
+                $('#dtSuppliersReportDateFrom').datebox('setValue', moment().date(1).format('YYYY-MM-DD'));
+                $('#dtSuppliersReportDateTo').datebox('setValue', moment().format('YYYY-MM-DD'));
+                $('#fldSuppliersReportDateRangeMember').combobox('clear');
+              }
+            },
+            {
+              text: 'Close',
+              handler: function()
+              {
+                $('#dlgSuppliersReportDateRange').dialog('close');
+              }
+            }
+          ]
+        }
+      ).dialog('center').dialog('open');
+    }
+
+
     function doReportNumReportsByType()
     {
       $('#dlgNumReporsByType').dialog
@@ -402,6 +952,7 @@
                     function(row)
                     {
                       row.numrep = parseInt(row.numrep);
+                     
                     }
                   );
 
@@ -409,19 +960,21 @@
                   (
                     {
                       dataSource: response.data,
+                      // dataSource:testingdata,
                       tooltip:
                       {
                         enabled: true,
                         percentPrecision: 2,
                         customizeText: function()
                         {
-                          return this.argumentText + ' - ' + this.percentText;
+                          return this.argumentText + '(' + this.valueText + ')' + ' - ' + this.percentText ;
                         }
                       },
                       legend:
                       {
+                        orientation: "vertical",
                         horizontalAlignment: 'right',
-                        verticalAlignment: 'top',
+                        verticalAlignment: "bottom",
                         margin: 0
                       },
                       series:
@@ -458,6 +1011,41 @@
           ]
         }
       ).dialog('center').dialog('open');
+    }
+
+    function doAuditHistoryReport()
+    {
+      if (!doGridGetSelectedRowData
+        (
+          'divBookingsG',
+          function(row, index)
+          {
+            if (!_.isNull(row.datecompleted))
+            {
+              $.post
+              (
+                'ajax_report_audithistory.php',
+                {
+                  uuid: '<?php echo $_SESSION['uuid']; ?>',
+                  bookingcode: row.bookingcode
+                },
+                function(result)
+                {
+                  console.log(result);
+                  var response = JSON.parse(result);
+
+                  if (response.rc == 0)
+                    window.open(response.filename, '_blank');
+                  else
+                    noty({text: response.msg, type: 'error', timeout: 10000});
+                }
+              );          
+            }
+            else
+              noty({text: 'Can only audit completed reports - please select another report', type: 'warning', timeout: 4000});
+          }
+        ))
+        noty({text: 'Please select a booking to view audit history report', type: 'warning', timeout: 4000});
     }
 
     // ************************************************************************************************************
@@ -561,6 +1149,7 @@
         $('#fldNewMemberPhone').textbox('clear');
         $('#fldNewMemberRegno').textbox('clear');
         $('#fldNewMemberCompany').textbox('clear');
+        $('#cbNewMemberGSTinc').switchbutton('check');
 
         // Address TAB
         $('#fldNewMemberAddress1').textbox('clear');
@@ -607,6 +1196,7 @@
                 var phone = $('#fldNewMemberPhone').textbox('getValue');
                 var regno = $('#fldNewMemberRegno').textbox('getValue');
                 var company = $('#fldNewMemberCompany').textbox('getValue');
+                var gstinc = doSwitchButtonChecked('cbNewMemberGSTinc');
 
                 var address1 = $('#fldNewMemberAddress1').textbox('getValue');
                 var address2 = $('#fldNewMemberAddress2').textbox('getValue');
@@ -635,6 +1225,7 @@
                         city: city,
                         postcode: postcode,
                         state: state,
+                        gstinc: gstinc,
 
                         uuid: '<?php echo $_SESSION['uuid']; ?>'
                       };
@@ -725,6 +1316,7 @@
         $('#fldNewMemberPhone').textbox('clear');
         $('#fldNewMemberRegno').textbox('clear');
         $('#fldNewMemberCompany').textbox('clear');
+        $('#cbNewMemberGSTinc').switchbutton('check');
 
         // Address TAB
         $('#fldNewMemberAddress1').textbox('clear');
@@ -777,6 +1369,8 @@
                   $('#fldNewMemberRegno').textbox('setValue', m.regno);
                   $('#fldNewMemberCompany').textbox('setValue', m.company);
 
+                  $('#cbNewMemberGSTinc').switchbutton((m.gstinc == 1) ? 'check' : 'uncheck');
+
                   // Address TAB
                   $('#fldNewMemberAddress1').textbox('setValue', m.address1);
                   $('#fldNewMemberAddress2').textbox('setValue', m.address2);
@@ -804,6 +1398,7 @@
                 var phone = $('#fldNewMemberPhone').textbox('getValue');
                 var regno = $('#fldNewMemberRegno').textbox('getValue');
                 var company = $('#fldNewMemberCompany').textbox('getValue');
+                var gstinc = doSwitchButtonChecked('cbNewMemberGSTinc');
 
                 var address1 = $('#fldNewMemberAddress1').textbox('getValue');
                 var address2 = $('#fldNewMemberAddress2').textbox('getValue');
@@ -833,6 +1428,7 @@
                         city: city,
                         postcode: postcode,
                         state: state,
+                        gstinc: gstinc,
 
                         uuid: '<?php echo $_SESSION['uuid']; ?>'
                       };
@@ -912,7 +1508,7 @@
     {
       function doReset()
       {
-        // Customer TAB
+        // Client TAB
         $('#fldNewBookingCustState').combobox('clear');
 
         $('#fldNewBookingCustFirstName').textbox('clear');
@@ -931,20 +1527,21 @@
         $('#fldNewBookingReport').combobox('clear');
         $('#fldNewBookingReport').combobox('enable');
         $('#fldNewBookingReport').combobox('setValue', 0); // set the default report type is 'Unassigned', id is 0;
-        $('#fldNewBookingBudget').numberbox('clear');
         <?php
           if (SharedIsAdmin())
           {
         ?>
-           
+            $('#fldNewBookingBudget').numberbox('clear');
             $('#fldNewBookingCommission').numberbox('clear');
             $('#fldNewBookingTravel').numberbox('clear');
             $('#fldNewBookingSpotter').numberbox('clear');
+            $('#fldNewBookingCancellationFee').numberbox('setValue',0.00);
 
         <?php
           }
         ?>
         $('#fldNewBookingNotes').textbox('clear');
+        $('#fldNewBookingClientNotes').textbox('clear');
 
         // Properties TAB
         $('#fldNewBookingState').combobox('clear');
@@ -985,7 +1582,7 @@
           },
           onOpen: function()
           {
-            // Customer TAB
+            // Client TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
             
             $('#fldNewBookingQuoteDesTR').hide();
@@ -1073,7 +1670,7 @@
                 $('#fldNewBookingCustEmail2').tagbox('textbox').trigger($.Event("keydown", {keyCode: 13}));
                 var custemail = $('#fldNewBookingCustEmail2').tagbox('getValues');
                 
-                custemail = JSON.stringify(custemail);
+                custemail = JSON.stringify(custemail); 
                 custemail = custemail.slice(1, custemail.length - 1);
                 custemail = custemail.replace(/"/g,"");
 
@@ -1089,20 +1686,20 @@
                 var custstate = $('#fldNewBookingCustState').combobox('getValue');
 
                 var reportid = $('#fldNewBookingReport').combobox('getValue');  
-                var budget = $('#fldNewBookingBudget').numberbox('getValue');             
                 <?php
                   if (SharedIsAdmin())
                   {
                 ?>
-                   
+                    var budget = $('#fldNewBookingBudget').numberbox('getValue');             
                     var commission = $('#fldNewBookingCommission').numberbox('getValue');
                     var travel = $('#fldNewBookingTravel').numberbox('getValue');
                     var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
+                    var cancellationfee = $('#fldNewBookingCancellationFee').numberbox('getValue');
                 <?php
                   }
                 ?>
                 var notes = $('#fldNewBookingNotes').textbox('getValue');
-
+                var clientnotes = $('#fldNewBookingClientNotes').textbox('getText');
                 var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                 var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
                 var numbathrooms = $('#fldNewBookingNumBathRooms').combobox('getValue');
@@ -1154,18 +1751,21 @@
                             custstate: custstate,
 
                             reportid: reportid,
-                            budget: budget,
+                            
                             <?php
                               if (SharedIsAdmin())
                               {
                             ?>
+                                budget: budget,
                                 commission: commission,
                                 travel: travel,
                                 spotter: spotter,
+                                cancellationfee:cancellationfee,
                             <?php
                               }
                             ?>
                             notes: notes,
+                            clientnotes:clientnotes,
 
                             numstories: numstories,
                             numbedrooms: numbedrooms,
@@ -1234,19 +1834,19 @@
                       else
                       {
                         $('#newbookingtabs').tabs('select', 0);
-                        doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                        doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                       }
                     }
                     else
                     {
                       $('#newbookingtabs').tabs('select', 0);
-                      doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                      doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                     }
                   }
                   else
                   {
                     $('#newbookingtabs').tabs('select', 0);
-                    doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                    doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                   }
                 }
                 else
@@ -1290,9 +1890,14 @@
 
     function doUpdateBooking(booking)
     {
+      // console.log(booking.bookingcode);
+      // console.log(booking.linkedbookingcode);
+      // console.log(booking.reportid);
+      // console.log(booking.linked_bookingcode);
+      //console.log(booking.clientnotes);
       function doReset()
       {
-        // Customer TAB
+        // Client TAB
         $('#fldNewBookingCustState').combobox('clear');
 
         $('#fldNewBookingCustFirstName').textbox('clear');
@@ -1306,7 +1911,7 @@
         $('#fldNewBookingCustCity').textbox('clear');
         $('#fldNewBookingCustPostcode').textbox('clear');
         $('#fldNewBookingQuoteDes').textbox('clear');
-        $('#fldNewBookingBudget').numberbox('clear');
+       
 
         // Report TAB
         //$('#fldNewBookingReport').combobox('disable');
@@ -1315,14 +1920,16 @@
           if (SharedIsAdmin())
           {
         ?>
-           
+            $('#fldNewBookingBudget').numberbox('clear');
             $('#fldNewBookingCommission').numberbox('clear');
             $('#fldNewBookingTravel').numberbox('clear');
             $('#fldNewBookingSpotter').numberbox('clear');
+            $('#fldNewBookingCancellationFee').numberbox('setValue',0.00);
         <?php
           }
         ?>
         $('#fldNewBookingNotes').textbox('clear');
+        $('#fldNewBookingClientNotes').textbox('clear');
 
         // Properties TAB
         $('#fldNewBookingState').combobox('clear');
@@ -1363,7 +1970,8 @@
           },
           onOpen: function()
           {
-            // Customer TAB
+            
+            // Client TAB
             $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
 
             // Properties TAB
@@ -1447,7 +2055,7 @@
                 if (response.rc == 0)
                 {
                   var b = response.booking;
-                  // Customer TAB
+                  // Client TAB
                   $('#fldNewBookingCustState').combobox('setValue', b.custstate);
 
                   $('#fldNewBookingCustFirstName').textbox('setValue', b.custfirstname);
@@ -1465,13 +2073,15 @@
 
                   // Report TAB
                   //$('#fldNewBookingReport').combobox('setValue', b.reportid);
-                  if(b.reportid == 3 || booking.linked_bookingcode !== null )
+                  console.log(b.reportid);
+                  if(b.reportid == 3 || booking.linked_bookingcode !== null || b.reportid == 24)
                   {
                     console.log("this is a combined report, select the timber one or the property one,cannot change report type, regardless whether there is save report data");
                     $('#fldNewBookingReport').combobox({data: reports});
                     $('#fldNewBookingReport').combobox('disable');
                   }
-                  else
+                  
+                  else if(b.reportid < 6 || b.reportid > 13)
                   {
                     if(b.reportdata  === null)
                     {
@@ -1484,23 +2094,46 @@
                       $('#fldNewBookingReport').combobox('disable');
                     }
                   }
-                   $('#fldNewBookingReport').combobox('setValue', b.reportid);
-                   $('#fldNewBookingBudget').numberbox('setValue', b.budget);
+                  else
+                  {
+                    {
+                      //AA-162, the construction report is not longer offered. so any existing construction report will not be allowed to change report type no matter what. 
+                      console.log("AA-162, the construction report is not longer offered. so any existing construction report will not be allowed to change report type no matter what. ");
+                      $('#fldNewBookingReport').combobox({data: reports});
+                      $('#fldNewBookingReport').combobox('disable');
+                    }
+                  }
+                  $('#fldNewBookingReport').combobox('setValue', b.reportid);
+                    
+                    //if the booking has been paid, the aggreed price cannot be changed any more ,set the text fields readonly
+                    // if(booking.datepaid != null)
+                    // {
+                    //   $('#fldNewBookingBudget').numberbox({readonly:true,disabled:true});
+                    // }
 
                   <?php
                     if (SharedIsAdmin())
                     {
                   ?>
-                     
+                      $('#fldNewBookingBudget').numberbox('setValue', b.budget);
                       $('#fldNewBookingCommission').numberbox('setValue', b.commission);
                       $('#fldNewBookingTravel').numberbox('setValue', b.travel);
                       $('#fldNewBookingSpotter').numberbox('setValue', b.spotter);
+                      console.log(b.cancellationfee);
+                      if(b.cancellationfee == null)
+                      {
+                        $('#fldNewBookingCancellationFee').numberbox('setValue',0.00);
+                      }
+                      else
+                      {
+                        $('#fldNewBookingCancellationFee').numberbox('setValue', b.cancellationfee);
+                      }
                   <?php
                     }
                   ?>
                   $('#fldNewBookingNotes').textbox('setValue', b.notes);
+                  $('#fldNewBookingClientNotes').textbox('setValue', b.clientnotes);
                   $('#fldNewBookingQuoteDes').textbox('setValue', b.quote_description);
-
                   // Properties TAB
                   $('#fldNewBookingState').combobox('setValue', b.state);
                   $('#fldNewBookingNumStories').combobox('setValue', b.numstories);
@@ -1559,22 +2192,24 @@
                 var custcity = $('#fldNewBookingCustCity').textbox('getValue');
                 var custpostcode = $('#fldNewBookingCustPostcode').textbox('getValue');
                 var custstate = $('#fldNewBookingCustState').combobox('getValue');
-
                 var reportid = $('#fldNewBookingReport').combobox('getValue');
-                var budget = $('#fldNewBookingBudget').numberbox('getValue');
-                console.log("budget" + budget);
+                
                 <?php
                   if (SharedIsAdmin())
                   {
                 ?>
+                    var budget = $('#fldNewBookingBudget').numberbox('getValue');
                     var commission = $('#fldNewBookingCommission').numberbox('getValue');
                     var travel = $('#fldNewBookingTravel').numberbox('getValue');
                     var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
+                    var cancellationfee = $('#fldNewBookingCancellationFee').numberbox('getValue');
+                    console.log("budget" + budget);
                 <?php
                   }
                 ?>
                 var notes = $('#fldNewBookingNotes').textbox('getValue');
-
+                var clientnotes = $('#fldNewBookingClientNotes').textbox('getText');
+                console.log(clientnotes);
                 var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                 var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
                 var numbathrooms = $('#fldNewBookingNumBathRooms').combobox('getValue');
@@ -1627,20 +2262,21 @@
                             custcity: custcity,
                             custpostcode: custpostcode,
                             custstate: custstate,
-
                             reportid: reportid,
-                            budget: budget,
                             <?php
                               if (SharedIsAdmin())
                               {
                             ?>
+                                budget: budget,
                                 commission: commission,
                                 travel: travel,
                                 spotter: spotter,
+                                cancellationfee:cancellationfee,
                             <?php
                               }
                             ?>
                             notes: notes,
+                            clientnotes:clientnotes,
 
                             numstories: numstories,
                             numbedrooms: numbedrooms,
@@ -1665,7 +2301,8 @@
 
                             uuid: '<?php echo $_SESSION['uuid']; ?>',
                             bookingcode: booking.bookingcode,
-
+                            combinedtimberid:booking.linkedbookingcode,
+                            combinedpropertyid:booking.linked_bookingcode,
                             quotedescription:quotedescription
 
                           };
@@ -1711,19 +2348,19 @@
                       else
                       {
                         $('#newbookingtabs').tabs('select', 0);
-                        doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                        doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                       }
                     }
                     else
                     {
                       $('#newbookingtabs').tabs('select', 0);
-                      doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                      doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                     }
                   }
                   else
                   {
                     $('#newbookingtabs').tabs('select', 0);
-                    doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                    doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                   }
                 }
                 else
@@ -1744,7 +2381,14 @@
               {
                 $('#dlgBookingNew').dialog('close');
               }
-            }
+            },
+            // {
+            //   text:'Print',
+            //   handler:function()
+            //   {
+            //     printJS('dlgBookingNew', 'html')
+            //   }
+            // }
           ]
         }
       ).dialog('center').dialog('open');
@@ -1831,21 +2475,44 @@
           'divBookingsG',
           function(row, index)
           {
-            if (row.reportid == 3)
+            console.log("row.reportid " + row.reportid);
+            console.log("row.bookingcode " + row.bookingcode);
+            console.log("row.linkedbookingcode " +row.linkedbookingcode);
+            console.log("row.linked_bookingcode " +row.linked_bookingcode);
+            var oldreports;
+            if(row.reportid == 24)
             {
+              var timberid;
+              if(row.linkedbookingcode != null)
+              {
+                // console.log("new reports");
+                oldreports = false;
+                timberid = row.linkedbookingcode;
+              }
+              else
+              {
+                // console.log("old reports");
+                oldreports = true;
+                timberid = row.linked_bookingcode;
+              }
+              console.log("report id is 24, the link timber id is " + timberid);
               doPromptOkCancel
               (
-                'Cancel booking ' + row.bookingcode + ' and' +row.linkedbookingcode + ' ?',
+                'Cancel booking ' + row.bookingcode + ' and ' + timberid + ' ?',
                 function(result)
                 {
                   if (result)
                   {
                     $.post
                     (
-                      'ajax_cancelbooking.php',
+                      'ajax_cancelbookings.php',
                       {
                         uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode
+                        bookingcode: row.bookingcode,
+                        timberid:timberid,
+                        propertyid:row.bookingcode,
+                        reportid:row.reportid,
+                        oldreports:oldreports
                       },
                       function(result)
                       {
@@ -1868,41 +2535,9 @@
                 }
               );
             }
-            else if (row.linked_bookingcode != null)
+            else if (row.reportid == 3)
             {
-              doPromptOkCancel
-              (
-                'Cancel booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
-                function(result)
-                {
-                  if (result)
-                  {
-                    $.post
-                    (
-                      'ajax_cancelbooking.php',
-                      {
-                        uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode
-                      },
-                      function(result)
-                      {
-                        var response = JSON.parse(result);
-
-                        if (response.rc == 0)
-                        {
-                          doRefreshBookings();
-                          noty({text: response.msg, type: 'success', timeout: 3000});
-                        }
-                        else
-                        {
-                          noty({text: response.msg, type: 'error', timeout: 10000});
-                        }
-
-                      }
-                    );
-                  }
-                }
-              );
+              noty({text: "This is a linke timber pest report, please select the Combined Property Assessment & Timber Pest to cancel both of the reports ", type: 'warnning', timeout: 4000});
             }
             else
             {
@@ -1918,7 +2553,7 @@
                       'ajax_cancelbooking.php',
                       {
                         uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode
+                        bookingcode: row.bookingcode,
                       },
                       function(result)
                       {
@@ -2115,19 +2750,23 @@
           }
           // console.log(row);
 
-          
-         
-         
-          //assign combined reports
-          if (row.reportid == 3 || row.linked_bookingcode != null)
+          /*
+            AA-113, the new process is it only change the selected report status, 
+            unless it is select the combined property assessment report, and set the status to 'paid', and 'closed'. 
+          */         
+          if (row.reportid == 3)
           {
-            if(row.reportid == 3)
+            var propertyid;
+            title = 'Change booking ' + row.bookingcode + ' status';
+            if(row.linked_bookingcode != null)
             {
-              title = 'Change booking ' + row.bookingcode + ' and ' + row.linkedbookingcode + ' status';
+              oldreports = false;
+              propertyid = row.linked_bookingcode;
             }
-            else if(row.linked_bookingcode != null)
+            else
             {
-              title = 'Change booking ' + row.bookingcode + ' and ' + row.linked_bookingcode + ' status';
+              oldreports = true;
+              propertyid = row.linkedbookingcode;
             }
             $('#dlgChangeStatus').dialog
             (
@@ -2175,25 +2814,31 @@
                     handler: function()
                     {
                       var statusid = $('#fldSelectTheStatus').combobox('getValue');
-                      var bookingcode2;
-
                       if (!_.isBlank(statusid))
                       {
-                        // $('#divEvents').trigger('changestatus', {statusid: statusid});
-                        if(row.linked_bookingcode != null)
+                        if(statusid == 4 || statusid == 7) // for closed or paid the combined property assessment report, will need to close or paid the link timber as well. Need to inform the admin first then ask permission. 
                         {
-                          bookingcode2 = row.linked_bookingcode
+                          var title;
+                          if(statusid == 4)
+                          {
+                            title = "You cannot set the linked timper pest report to paid, please select the combined property & timber pest report to change both reports' status";
+                          }
+                          else
+                          {
+                            title = "You cannot set the linked timper pest report to closed, please select the combined property & timber pest report to change both reports' status";
+                          }
+                          noty({text: title, type: 'error', timeout: 10000});
                         }
                         else
                         {
-                          bookingcode2 = row.linkedbookingcode
+                          $('#divEvents').trigger('changestatus', {statusid: statusid});
+                          $('#dlgChangeStatus').dialog('close');
                         }
-                        console.log(bookingcode2);
-                       $('#divEvents').trigger('changestatusboth', {statusid: statusid,bookingcode2:bookingcode2});
-                        $('#dlgChangeStatus').dialog('close');
                       }
                       else
+                      {
                         doMandatoryTextbox('Please select an status', 'fldSelectTheStatus');
+                      }                     
                     }
                   },
                   {
@@ -2214,6 +2859,147 @@
               }
             ).dialog('center').dialog('open');
 
+          }
+          else if (row.reportid == 24)
+          {
+            var timberid;
+            var title = 'Change booking ' + row.bookingcode + ' status';
+            if(row.linkedbookingcode != null)
+            {
+              oldreports = false;
+              timberid = row.linkedbookingcode;
+            }
+            else
+            {
+              oldreports = true;
+              timberid = row.linked_bookingcode;
+            }
+
+            $('#dlgChangeStatus').dialog
+            (
+              {
+                title: title,
+                modal: true,
+                onClose: function()
+                {
+                },
+                onOpen: function()
+                {
+                  $('#fldSelectTheStatus').combobox
+                  (
+                    {
+                      valueField: 'id',
+                      textField: 'status',
+                      data: changestatus,
+                      onSelect: function(record)
+                      {
+                        $('#btnSelectStatus').linkbutton('enable');
+                      },
+                      formatter:function(row)
+                      {
+                        if(row.id != 5)
+                        {
+                          var imageFile = row.icon;
+                          return '<img class="searchcombo_img" src="'+imageFile+'"/><span class="searchcombo_text">'+row.status+'</span>';
+                        }
+                        else
+                        {
+                          return '<span class="searchcombo_text">'+row.status+'</span>';
+                        }
+                      
+                      },
+                    }
+                  );
+                  doReset();
+                },
+                buttons:
+                [
+                  {
+                    text: 'Change',
+                    disabled: true,
+                    id: 'btnSelectStatus',
+                    handler: function()
+                    {
+                      var statusid = $('#fldSelectTheStatus').combobox('getValue');
+                      if (!_.isBlank(statusid))
+                      {
+                        if(statusid == 4 || statusid == 7) // for closed or paid the combined property assessment report, will need to close or paid the link timber as well. Need to inform the admin first then ask permission. 
+                        {
+                          if(statusid == 4)
+                          {
+                            title = 'You select the combined property assessment & timber pest report. Do you want to mark both booking ' + row.bookingcode + ' and ' + timberid + ' as paid?';
+
+                          }
+                          else
+                          {
+                            title = 'You select the combined property assessment & timber pest report. Do you want to close both booking ' + row.bookingcode + ' and ' + timberid + ' ?';
+                          }
+                          doPromptOkCancel
+                          (
+                            title,
+                            function(result)
+                            {
+                              if (result)
+                              {
+                                $.post
+                                (
+                                  'ajax_setbookingstatusboth.php',
+                                  {
+                                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                                    bookingcode: row.bookingcode,
+                                    timberid:timberid,
+                                    propertyid:"",
+                                    reportid:row.reportid,
+                                    oldreports:oldreports,
+                                    status: statusid
+                                  },
+                                  function(result)
+                                  {
+                                    var response = JSON.parse(result);
+                                    console.log(response);
+                                    if (response.rc == 0)
+                                    {
+                                      $('#dlgChangeStatus').dialog('close');
+                                      doSearchBookings(false);
+                                    }
+                                      // doRefreshBookings();
+                                    else
+                                      noty({text: response.msg, type: 'error', timeout: 10000});
+                                  }
+                                );
+                              }
+                            }
+                          );
+                        }
+                        else
+                        {
+                          $('#divEvents').trigger('changestatus', {statusid: statusid});
+                          $('#dlgChangeStatus').dialog('close');
+                        }
+                      }
+                      else
+                      {
+                        doMandatoryTextbox('Please select an status', 'fldSelectTheStatus');
+                      }
+                    }
+                  },
+                  {
+                    text: 'Reset',
+                    handler: function()
+                    {
+                      doReset();
+                    }
+                  },
+                  {
+                    text: 'Close',
+                    handler: function()
+                    {
+                      $('#dlgChangeStatus').dialog('close');
+                    }
+                  }
+                ]
+              }
+            ).dialog('center').dialog('open');
           }
           else
           {
@@ -2340,7 +3126,7 @@
             noty({text: 'This is an unassinged report, cannot allocate architect', type: 'warning', timeout: 4000});
           }
           //assign combined reports
-          else if (row.reportid == 3 || row.linked_bookingcode != null)
+          else if (row.reportid == 3 || row.reportid == 24)
           {
             function doReset()
             {
@@ -2656,6 +3442,82 @@
           {
             noty({text: 'This is a quote report, cannot mark it as paid', type: 'warning', timeout: 4000});
           }
+          else if (row.reportid == 3)
+          {
+            noty({text: "This is a linke timber pest report, please select the Combined Property Assessment & Timber Pest to pay both of the reports ", type: 'warnning', timeout: 4000});
+          }
+          else if (row.reportid == 24)
+          {
+            var timberid;
+            if(row.linkedbookingcode != null)
+            {
+              oldreports = false;
+              timberid = row.linkedbookingcode;
+            }
+            else
+            {
+              oldreports = true;
+              timberid = row.linked_bookingcode;
+            }
+            console.log("report id is 24, the link timber id is " + timberid);
+            doPromptOkCancel
+            (
+              'Mark booking ' + row.bookingcode + ' and ' + timberid + ' as paid?',
+              function(result)
+              {
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_setbookingstatusboth.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      timberid:timberid,
+                      propertyid:"",
+                      reportid:row.reportid,
+                      oldreports:oldreports,
+                      status: 4
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
+
+                      if (response.rc == 0)
+                      {
+                        $.post
+                        (
+                          'ajax_sendreceipt.php',
+                          {
+                            uuid: '<?php echo $_SESSION['uuid']; ?>',
+                            bookingcode: row.bookingcode,
+                            timberid:timberid
+                          },
+                          function(result)
+                          {
+                            var response = JSON.parse(result);
+
+                            if (response.rc == 0)
+                            {
+                              doSearchBookings(false);
+                              noty({text: response.msg, type: 'success', timeout: 3000});
+                            }
+                              // doRefreshBookings();
+                            else
+                              noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
+                        );
+                      }
+                        // doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
+              }
+            );
+
+          }
           else
           {
             doPromptOkCancel
@@ -2679,7 +3541,28 @@
 
                       if (response.rc == 0)
                       {
-                        doSearchBookings(false);
+                        $.post
+                        (
+                          'ajax_sendreceipt.php',
+                          {
+                            uuid: '<?php echo $_SESSION['uuid']; ?>',
+                            bookingcode: row.bookingcode,
+                            timberid:""
+                          },
+                          function(result)
+                          {
+                            var response = JSON.parse(result);
+
+                            if (response.rc == 0)
+                            {
+                              doSearchBookings(false);
+                              noty({text: response.msg, type: 'success', timeout: 3000});
+                            }
+                              // doRefreshBookings();
+                            else
+                              noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
+                        );
                       }
                         // doRefreshBookings();
                       else
@@ -2702,53 +3585,63 @@
         'divBookingsG',
         function(row)
         {
-          if(row.reportid == 0)
+          console.log(row.datecompleted);
+          console.log(row.dateapproved);
+          if(row.datecompleted == null && row.dateapproved == null)
           {
-            // console.log("this is an unassinged report, cannot allocate architect yet");
-            noty({text: 'This is an unassinged report, cannot mark it as completed', type: 'warning', timeout: 4000});
-          }
-          else if(row.reportid == 23)
-          {
-            noty({text: 'This is a quote report, cannot mark it as completed, please select a report type first', type: 'warning', timeout: 4000});
+            if(row.reportid == 0)
+            {
+              // console.log("this is an unassinged report, cannot allocate architect yet");
+              noty({text: 'This is an unassinged report, cannot mark it as completed', type: 'warning', timeout: 4000});
+            }
+            else if(row.reportid == 23)
+            {
+              noty({text: 'This is a quote report, cannot mark it as completed, please select a report type first', type: 'warning', timeout: 4000});
+            }
+            else
+            {
+              doPromptOkCancel
+              (
+                'Mark booking ' + row.bookingcode + ' as completed?',
+                function(result)
+                {
+                  if (result)
+                  {
+                    $.post
+                    (
+                      'ajax_setbookingstatus.php',
+                      {
+                        uuid: '<?php echo $_SESSION['uuid']; ?>',
+                        bookingcode: row.bookingcode,
+                        status: 3
+                      },
+                      function(result)
+                      {
+                        var response = JSON.parse(result);
+
+                        if (response.rc == 0)
+                        {
+                          doReloadBookings(); //Complete only visible to architect/inspector, always get all bookings, so use reload. search toolbar is not availabel for them. 
+                          //doSearchBookings();
+                        }
+                        else
+                          noty({text: response.msg, type: 'error', timeout: 10000});
+                      }
+                    );
+                  }
+                }
+              );
+            }
           }
           else
           {
-            doPromptOkCancel
-            (
-              'Mark booking ' + row.bookingcode + ' as completed?',
-              function(result)
-              {
-                if (result)
-                {
-                  $.post
-                  (
-                    'ajax_setbookingstatus.php',
-                    {
-                      uuid: '<?php echo $_SESSION['uuid']; ?>',
-                      bookingcode: row.bookingcode,
-                      status: 3
-                    },
-                    function(result)
-                    {
-                      var response = JSON.parse(result);
-
-                      if (response.rc == 0)
-                      {
-                        doReloadBookings(); //Complete only visible to architect/inspector, always get all bookings, so use reload. search toolbar is not availabel for them. 
-                        //doSearchBookings();
-                      }
-                      else
-                        noty({text: response.msg, type: 'error', timeout: 10000});
-                    }
-                  );
-                }
-              }
-            );
+            noty({text: 'This booking has already completed. No changes allowed', type: 'warning', timeout: 5000});
           }
+          
 
         }
       ))
-        noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
+        noty({text: 'Please select a booking', type: 'warning', timeout: 5000});
     }
 
     function doMarkUnCompleted()
@@ -2863,6 +3756,114 @@
         noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
     }
 
+    function doTaxInvoice()
+    {
+      if (!doGridGetSelectedRowData
+      (
+        'divBookingsG',
+        function(row)
+        {
+          if(row.reportid == 0)
+          {
+            // console.log("this is an unassinged report, cannot allocate architect yet");
+            noty({text: 'This is an unassinged report, cannot send a tax invoice', type: 'warning', timeout: 4000});
+          }
+          else if(row.reportid == 23)
+          {
+            noty({text: 'This is a quote report, cannot send a tax invoice', type: 'warning', timeout: 4000});
+          }
+          else if (row.reportid == 3)
+          {
+            noty({text: "This is a linke timber pest report, please select the Combined Property Assessment & Timber Pest to send a tax invoice ", type: 'warnning', timeout: 4000});
+          }
+          else if (row.reportid == 24)
+          {
+            var timberid;
+            if(row.linkedbookingcode != null)
+            {
+              oldreports = false;
+              timberid = row.linkedbookingcode;
+            }
+            else
+            {
+              oldreports = true;
+              timberid = row.linked_bookingcode;
+            }
+            console.log("report id is 24, the link timber id is " + timberid);
+            doPromptOkCancel
+            (
+              'Send a tax invoice for the booking ' + row.bookingcode + ' and ' + timberid + ' ?',
+              function(result)
+              {
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_sendtaxinvoice.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      timberid:timberid
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
+
+                      if (response.rc == 0)
+                      {
+                        doSearchBookings(false);
+                        noty({text: response.msg, type: 'success', timeout: 3000});
+                      }
+                        // doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
+              }
+            );
+
+          }
+          else
+          {
+            doPromptOkCancel
+            (
+              'Send a tax invoice for the booking ' + row.bookingcode + ' ?',
+              function(result)
+              {
+                if (result)
+                {
+                  $.post
+                  (
+                    'ajax_sendtaxinvoice.php',
+                    {
+                      uuid: '<?php echo $_SESSION['uuid']; ?>',
+                      bookingcode: row.bookingcode,
+                      timberid:""
+                    },
+                    function(result)
+                    {
+                      var response = JSON.parse(result);
+
+                      if (response.rc == 0)
+                      {
+                        doSearchBookings(false);
+                        noty({text: response.msg, type: 'success', timeout: 3000});
+                      }
+                        // doRefreshBookings();
+                      else
+                        noty({text: response.msg, type: 'error', timeout: 10000});
+                    }
+                  );
+                }
+              }
+            );
+          }
+        }
+      ))
+        noty({text: 'Please select a booking', type: 'warning', timeout: 10000});
+    }
+
 
     function doOpenReport()
     {
@@ -2957,6 +3958,12 @@
                 case 22:
                   $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                   break;
+                case 24:
+                  $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
+                case 25:
+                  $.redirect('AssessmentReportTypeA.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                  break;
               }
             }
           <?php
@@ -2964,7 +3971,7 @@
           else
           {
           ?>
-              console.log(row.archuuid);
+              //console.log(row.archuuid);
               let uuid = '<?php echo $_SESSION['uuid']; ?>';
               console.log(uuid);
               if(_.isNull(row.archuuid) || row.archuuid != uuid)
@@ -3054,6 +4061,12 @@
                     case 22:
                       $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                       break;
+                    case 24:
+                      $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
+                    case 25:
+                      $.redirect('AssessmentReportTypeA.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                      break;
                   }
                 }
               }
@@ -3071,130 +4084,186 @@
 
     function doEmailCustomer()
     {
+      
       if (!doGridGetSelectedRowData
         (
           'divBookingsG',
           function(row)
           {
+            console.log("row.reportid " + row.reportid);
+            console.log("row.bookingcode" + row.bookingcode);
+            console.log("row.linkedbookingcode" +row.linkedbookingcode);
+            console.log("row.linked_bookingcode" +row.linked_bookingcode);
+            console.log("row.dateapproved " + row.dateapproved);
             if(row.reportid == 0)
             {
               // console.log("this is an unassinged report, cannot allocate architect yet")
-              noty({text: 'This is an unassinged report, cannot send report to customer', type: 'warning', timeout: 3000});
+              noty({text: 'This is an unassinged report, cannot send report to client', type: 'warning', timeout: 3000});
             }
+            
             else if(row.reportid == 23)
             {
-              noty({text: 'This is a quote report, cannot send report to customer', type: 'warning', timeout: 4000});
+              noty({text: 'This is a quote report, cannot send report to client', type: 'warning', timeout: 4000});
+            }
+            else if (row.reportid == 24)
+            {
+              console.log("combined report, select property assessment report");
+              if(!_.isNull(row.dateapproved))
+              {
+                var timberid;
+                if(row.linkedbookingcode != null)
+                {
+                  timberid = row.linkedbookingcode;
+                }
+                else
+                {
+                  timberid = row.linked_bookingcode;
+                }
+                console.log("report id is 24, the link timber id is " + timberid);
+                doPromptOkCancel
+                (
+                  'Email client booking ' + row.bookingcode + ' and ' +timberid + ' ?',
+                  function(result)
+                  {
+                    if (result)
+                    {
+                      $.post
+                      (
+                        'ajax_emailbookings.php',
+                        {
+                          uuid: '<?php echo $_SESSION['uuid']; ?>',
+                          bookingcode: row.bookingcode,
+                          timberid:timberid,
+                          propertyid:"",
+                          reportid:row.reportid
+                        },
+                        function(result)
+                        {
+                          var response = JSON.parse(result);
+
+                          if (response.rc == 0)
+                          {
+                            // doRefreshBookings();
+                            doSearchBookings(false);
+                            noty({text: response.msg, type: 'success', timeout: 3000});
+                          }
+                          else
+                          {
+                            noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
+
+                        }
+                      );
+                    }
+                  }
+                );
+              }
+              else
+              {
+                noty({text: 'This booking has not been approved, cannot send email to client!', type: 'warning', timeout: 4000});
+              }
             }
             else if (row.reportid == 3)
             {
-              doPromptOkCancel
-              (
-                'Email customer booking ' + row.bookingcode + ' and' +row.linkedbookingcode + ' ?',
-                function(result)
+              if(!_.isNull(row.dateapproved))
+              {
+                var propertyid;
+                if(row.linked_bookingcode != null)
                 {
-                  if (result)
-                  {
-                    $.post
-                    (
-                      'ajax_emailbooking.php',
-                      {
-                        uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode
-                      },
-                      function(result)
-                      {
-                        var response = JSON.parse(result);
-
-                        if (response.rc == 0)
-                        {
-                          // doRefreshBookings();
-                          doSearchBookings(false);
-                          noty({text: response.msg, type: 'success', timeout: 3000});
-                        }
-                        else
-                        {
-                          noty({text: response.msg, type: 'error', timeout: 10000});
-                        }
-
-                      }
-                    );
-                  }
+                  propertyid = row.linked_bookingcode;
                 }
-              );
-            }
-            else if (row.linked_bookingcode != null)
-            {
-              doPromptOkCancel
-              (
-                'Email customer booking ' + row.bookingcode + ' and' +row.linked_bookingcode + ' ?',
-                function(result)
+                else
                 {
-                  if (result)
-                  {
-                    $.post
-                    (
-                      'ajax_emailbooking.php',
-                      {
-                        uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode
-                      },
-                      function(result)
-                      {
-                        var response = JSON.parse(result);
-
-                        if (response.rc == 0)
-                        {
-                          // doRefreshBookings();
-                          doSearchBookings(false);
-                          noty({text: response.msg, type: 'success', timeout: 3000});
-                        }
-                        else
-                        {
-                          noty({text: response.msg, type: 'error', timeout: 10000});
-                        }
-
-                      }
-                    );
-                  }
+                  propertyid = row.linkedbookingcode;
                 }
-              );
+                doPromptOkCancel
+                (
+                  'Email client booking ' + row.bookingcode + ' and ' +propertyid + ' ?',
+                  function(result)
+                  {
+                    if (result)
+                    {
+                      $.post
+                      (
+                        'ajax_emailbookings.php',
+                        {
+                          uuid: '<?php echo $_SESSION['uuid']; ?>',
+                          bookingcode: row.bookingcode,
+                          timberid:"",
+                          propertyid:propertyid,
+                          reportid:row.reportid
+                        },
+                        function(result)
+                        {
+                          var response = JSON.parse(result);
+
+                          if (response.rc == 0)
+                          {
+                            // doRefreshBookings();
+                            doSearchBookings(false);
+                            noty({text: response.msg, type: 'success', timeout: 3000});
+                          }
+                          else
+                          {
+                            noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
+
+                        }
+                      );
+                    }
+                  }
+                );
+              }
+              else
+              {
+                noty({text: 'This booking has not been approved, cannot send email to client!', type: 'warning', timeout: 4000});
+              }
+             
             }
             else
             {
-              doPromptOkCancel
-              (
-                'Email customer booking ' + row.bookingcode + '?',
-                function(result)
-                {
-                  if (result)
+              if(!_.isNull(row.dateapproved))
+              {
+                doPromptOkCancel
+                (
+                  'Email client booking ' + row.bookingcode + '?',
+                  function(result)
                   {
-                    $.post
-                    (
-                      'ajax_emailbooking.php',
-                      {
-                        uuid: '<?php echo $_SESSION['uuid']; ?>',
-                        bookingcode: row.bookingcode
-                      },
-                      function(result)
-                      {
-                        var response = JSON.parse(result);
-
-                        if (response.rc == 0)
+                    if (result)
+                    {
+                      $.post
+                      (
+                        'ajax_emailbooking.php',
                         {
-                          //doRefreshBookings();
-                          doSearchBookings(false);
-                          noty({text: response.msg, type: 'success', timeout: 3000});
-                        }
-                        else
+                          uuid: '<?php echo $_SESSION['uuid']; ?>',
+                          bookingcode: row.bookingcode
+                        },
+                        function(result)
                         {
-                          noty({text: response.msg, type: 'error', timeout: 10000});
-                        }
+                          var response = JSON.parse(result);
 
-                      }
-                    );
+                          if (response.rc == 0)
+                          {
+                            //doRefreshBookings();
+                            doSearchBookings(false);
+                            noty({text: response.msg, type: 'success', timeout: 3000});
+                          }
+                          else
+                          {
+                            noty({text: response.msg, type: 'error', timeout: 10000});
+                          }
+
+                        }
+                      );
+                    }
                   }
-                }
-              );
+                );
+              }
+              else
+              {
+                noty({text: 'This booking has not been approved, cannot send email to client!', type: 'warning', timeout: 4000});
+              }
+              
             }  
           }
         )
@@ -3203,7 +4272,7 @@
     }
 
     /**
-     * Copy Booking, the open dialogue similiar to the new booking dialogue, but the customer details have been populated in advanced. 
+     * Copy Booking, the open dialogue similiar to the new booking dialogue, but the client details have been populated in advanced. 
      */
 
     function doCopyBooking()
@@ -3230,7 +4299,7 @@
            
             function doReset()
             {
-              // Customer TAB
+              // Client TAB
               // $('#fldNewBookingCustState').combobox('clear');
             
               // $('#fldNewBookingCustFirstName').textbox('clear');
@@ -3244,7 +4313,7 @@
               // $('#fldNewBookingCustCity').textbox('clear');
               // $('#fldNewBookingCustPostcode').textbox('clear');
 
-              //Populate the customer details fields. 
+              //Populate the client details fields. 
               $('#fldNewBookingCustFirstName').textbox('setValue',selectedCustFirstName);
               $('#fldNewBookingCustLastName').textbox('setValue',selectedCustLastName);
               $('#fldNewBookingCustMobile').textbox('setValue',selectedCustMobile);
@@ -3271,11 +4340,13 @@
                   $('#fldNewBookingCommission').numberbox('clear');
                   $('#fldNewBookingTravel').numberbox('clear');
                   $('#fldNewBookingSpotter').numberbox('clear');
+                  $('#fldNewBookingCancellationFee').numberbox('clear');
 
               <?php
                 }
               ?>
               $('#fldNewBookingNotes').textbox('clear');
+              $('#fldNewBookingClientNotes').textbox('clear');
 
               // Properties TAB
               $('#fldNewBookingState').combobox('clear');
@@ -3316,7 +4387,7 @@
                 },
                 onOpen: function()
                 {
-                  // Customer TAB
+                  // Client TAB
                   $('#fldNewBookingCustState').combobox({valueField: 'name', textField: 'name', limitToList: true, data: states});
                   
                   $('#fldNewBookingCustEmail2').tagbox
@@ -3436,10 +4507,12 @@
                           var commission = $('#fldNewBookingCommission').numberbox('getValue');
                           var travel = $('#fldNewBookingTravel').numberbox('getValue');
                           var spotter = $('#fldNewBookingSpotter').numberbox('getValue');
+                          var cancellationfee = $('#fldNewBookingCancellationFee').numberbox('getValue');
                       <?php
                         }
                       ?>
                       var notes = $('#fldNewBookingNotes').textbox('getValue');
+                      var clientnotes = $('#fldNewBookingClientNotes').textbox('getValue');
 
                       var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                       var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
@@ -3463,6 +4536,9 @@
                       var estateagentcontact = $('#fldNewBookingEstateAgentContact').textbox('getValue');
                       var estateagentmobile = $('#fldNewBookingEstateAgentMobile').textbox('getValue');
                       var estateagentphone = $('#fldNewBookingEstateAgentPhone').textbox('getValue');
+
+                      var quotedescription = $('#fldNewBookingQuoteDes').textbox('getValue');
+
                       //console.log(custemail);
 
                       if (!_.isBlank(reportid))
@@ -3490,18 +4566,20 @@
                                   custstate: custstate,
 
                                   reportid: reportid,
+                                  budget: budget,
                                   <?php
                                     if (SharedIsAdmin())
                                     {
                                   ?>
-                                      budget: budget,
                                       commission: commission,
                                       travel: travel,
                                       spotter: spotter,
+                                      cancellationfee:cancellationfee,
                                   <?php
                                     }
                                   ?>
                                   notes: notes,
+                                  clientnotes:clientnotes,
 
                                   numstories: numstories,
                                   numbedrooms: numbedrooms,
@@ -3523,7 +4601,9 @@
                                   estateagentcontact: estateagentcontact,
                                   estateagentmobile: estateagentmobile,
                                   estateagentphone: estateagentphone,
-                                  uuid: '<?php echo $_SESSION['uuid']; ?>'
+                                  uuid: '<?php echo $_SESSION['uuid']; ?>',
+
+                                  quotedescription:quotedescription
                                 };
                                 //console.log(data);
 
@@ -3557,19 +4637,19 @@
                             else
                             {
                               $('#newbookingtabs').tabs('select', 0);
-                              doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                              doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                             }
                           }
                           else
                           {
                             $('#newbookingtabs').tabs('select', 0);
-                            doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                            doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                           }
                         }
                         else
                         {
                           $('#newbookingtabs').tabs('select', 0);
-                          doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                          doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                         }
                       }
                       else
@@ -3660,12 +4740,26 @@
       var img = '';
       var tooltip = '';
       var lnk = '';
+
+      //console.log(row.datepaid);
       
-      if (!_.isNull(row.lastemailed))
+      if(!_.isNull(row.lastinvoiced) && _.isNull(row.lastemailed))
       {
+        //has sent an tax invoice, but not sent report to the client
+        var lastinvoiced = moment(row.lastinvoiced).format('dddd, MMMM Do YYYY, h:mm:ss a');
+        img = '<img src="images/led/ball-darkblue.png" width="20" height="20">';
+        tooltip = 'A tax invoice has been sent ';
+        if (row.invoicecount == 1)
+          tooltip += ' on ' + lastinvoiced;
+        else
+          tooltip += row.invoicecount + ' times, the last being on ' + lastinvoiced;
+      }
+      else if (!_.isNull(row.lastemailed))
+      {
+        //has sent the report to the client
         var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
         img = '<img src="images/led/ball-yellow.png" width="20" height="20">';
-        tooltip = 'Customer has been emailed ';
+        tooltip = 'Client has been emailed ';
         if (row.emailcount == 1)
           tooltip += ' on ' + lastemailed;
         else
@@ -3708,7 +4802,7 @@
       // {
       //   var lastemailed = moment(row.lastemailed).format('dddd, MMMM Do YYYY, h:mm:ss a');
       //   img = '<img src="images/led/ball-yellow.png" width="24" height="24">';
-      //   tooltip = 'Customer has been emailed ';
+      //   tooltip = 'Client has been emailed ';
       //   if (row.emailcount == 1)
       //     tooltip += ' on ' + lastemailed;
       //   else
@@ -3794,7 +4888,7 @@
         img = '<img src="images/boss.png" width="20" height="20">';
         //+ row.usercreatedid + ' '
         lnk = '<a href="#" title="Spotted by '  +row.usercreatedfirstname+ ' ' +  row.usercreatedlastname + '" class="easyui-tooltip" data-options="showDelay: 50;">' + img + '</a>';
-        console.log("not create by admin");
+        //console.log("not create by admin");
         return lnk;
       }
 
@@ -3878,6 +4972,7 @@
           {
             cache_bookings = response.rows;
             // console.log(cache_bookings);
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
             $('#divBookingsG').datagrid('reload');
             // var bookingPager = $('#divBookingsG').datagrid('getPager').pagination({total:response.total}); 
           }
@@ -3886,16 +4981,54 @@
             cache_bookings = response.rows;
             // console.log(cache_bookings);
             $('#divBookingsG').datagrid('reload');
-            noty({text: response.msg, type: 'warning', timeout: 10000});
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
+            noty({text: response.msg, type: 'warning', timeout: 2000});
           }
         }
       );
+    }
+
+    function doSearchBookingNo()
+    {
+      $('#divBookingsG').datagrid('loading');
+      console.log('***** Searching bookings Number...');
+      var bookingno = $('#fldSearchBookingNo').textbox('getValue');
+      console.log('the search booking number ' + bookingno );
+      $.post
+      (
+        'ajax_searchbybookingid.php',
+        {
+          uuid: '<?php echo $_SESSION['uuid']; ?>',
+          itype: <?php echo $_SESSION['itype']; ?>,
+          bookingno:bookingno
+        },
+        function(result)
+        {
+          var response = JSON.parse(result);
+          if(response.rc == 0)
+          {
+            cache_bookings = response.rows;
+            // console.log(cache_bookings);
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
+            $('#divBookingsG').datagrid('reload');
+          }
+          else
+          {
+            cache_bookings = response.rows;
+            // console.log(cache_bookings);
+            $('#divBookingsG').datagrid('reload');
+            document.getElementById('totalbookings').innerHTML = cache_bookings.length + ' Bookings';
+            noty({text: response.msg, type: 'warning', timeout: 2000});
+          }
+        }
+      )
     }
 
     function doResetSearch()
     {
       //$('#cbSearchReportStatus').combobox('setValue',0);
       $('#fldSearchEmail').textbox('clear');
+      $('#fldSearchBookingNo').textbox('clear');
       doSearchBookings(false);
       //doRefreshBookings();
     }
@@ -3972,6 +5105,91 @@
     {
       console.log(cache_bookings.length);
     }
+
+    function doPrintSummary()
+    {
+      if (!doGridGetSelectedRowData
+        (
+          'divBookingsG',
+          function(row, index)
+          {
+            var combinedreport = false;
+            var oldreports = false;
+            var timbercode,propertycode,linkedbookingcode=null;
+            // console.log("row.reportid " + row.reportid);
+            // console.log("row.bookingcode " + row.bookingcode);
+            // console.log("row.linkedbookingcode " +row.linkedbookingcode);
+            // console.log("row.linked_bookingcode " +row.linked_bookingcode);
+            if(row.reportid == 3)
+            {
+              console.log("This is a linked timber pest report,need to get the linked property report code");
+              combinedreport = true;
+              if(row.linkedbookingcode != null)
+              {
+                propertycode = row.linkedbookingcode;
+                linkedbookingcode = row.linkedbookingcode;
+              }
+              else
+              {
+                oldreports = true;
+                propertycode = row.linked_bookingcode;
+                linkedbookingcode = row.linked_bookingcode;
+              }
+            }
+            else if (row.reportid == 24)
+            {
+              console.log("This is a linked combined property report,need to get the linked timber pest report code");
+              combinedreport = true;
+              if(row.linkedbookingcode != null)
+              {
+                timbercode = row.linkedbookingcode;
+                linkedbookingcode = row.linkedbookingcode;
+              }
+              else
+              {
+                oldreports = true;
+                timbercode = row.linked_bookingcode;
+                linkedbookingcode = row.linked_bookingcode;
+              }
+              
+            }
+            $.post
+            (
+              'ajax_printbooking.php',
+              {
+                uuid: '<?php echo $_SESSION['uuid']; ?>',
+                bookingcode: row.bookingcode,
+                combinedreport:combinedreport,
+                linkedbookingcode:linkedbookingcode,
+              },
+              function(result)
+              {
+                var response = JSON.parse(result);
+
+                if (response.rc == 0)
+                {
+                  //console.log(response.logs);
+                  logevents = response.logs;
+                  var linkedreport = response.linkedreport;
+                  //console.log(response);
+                  //console.log(linkedreport.length);
+                  doDlgSummary(row,reports,auditevents,logevents,linkedreport);
+                  //generatePDF(row,reports,auditevents,logevents);
+                  // doRefreshBookings();
+                  // doSearchBookings(false);
+                  //noty({text: response.msg, type: 'success', timeout: 3000});
+                }
+                else
+                {
+                  noty({text: response.msg, type: 'error', timeout: 10000});
+                }
+
+              }
+            );          
+          }
+        ))
+        noty({text: 'Please select a booking to print the summary', type: 'warning', timeout: 4000});
+    }
     // ************************************************************************************************************
     // Document ready...
 
@@ -4028,7 +5246,7 @@
           rownumbers: true,
           striped: true,
           toolbar: '#tbBookings',
-          showFooter: true,
+          showFooter: false,
           sortName: 'bookingcode',
           sortOrder: 'desc',
           remoteSort: false,
@@ -4081,7 +5299,7 @@
           [
             [
               {title: 'Report',         colspan: 5},
-              {title: 'Customer',       colspan: 4},
+              {title: 'Client',       colspan: 4},
               {title: 'Property',       colspan: 12},
               {title: 'Architect',      colspan: 4},
               {title: 'Completed',      rowspan: 2, field: 'datecompleted',     width: 150, align: 'right',  resizable: false, sortable: false},
@@ -4233,6 +5451,12 @@
                       case 22:
                         $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                         break;
+                      case 24:
+                        $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
+                      case 25:
+                        $.redirect('AssessmentReportTypeA.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                        break;
                     }
                   }
                 <?php
@@ -4251,7 +5475,6 @@
                    {
                     r = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
                     let uuid = '<?php echo $_SESSION['uuid']; ?>';
-                    //console.log(uuid);
                     if(row.reportid == 0)
                     {
                       // console.log("this is an unassinged report, cannot allocate architect yet")
@@ -4331,6 +5554,12 @@
                           break;
                         case 22:
                           $.redirect('PostDilapidationReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 24:
+                          $.redirect('AssessmentReport.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
+                          break;
+                        case 25:
+                          $.redirect('AssessmentReportTypeA.php', {bookingcode: row.bookingcode, r: r}, 'POST', '_blank');
                           break;
                       }
                     }
@@ -4456,6 +5685,28 @@
         }
       );
 
+      $('#divBookingSummaryG').datagrid
+      (
+          {
+              idField:'logid',
+              fitColumns:true,
+              singleSelect:false,
+              striped:true,
+              autoRowHeight: false,
+              // data:logevents,
+              loader: function(param, success, error)
+              {
+                  success({total: logevents.length, rows: logevents});
+              },
+              columns:[
+                  [
+                      {title:'Action',field:'eventid',width:150,align:'left',resizable:true,formatter:function(value,row,index){return logevent(row.eventid,auditevents).event}},
+                      {title:'Time',field:'datecreated',width:150,align:'left',resizable:true}
+                  ]
+              ]
+          }
+      )
+      
 
       // ************************************************************************************************************
       // Populate data...
@@ -4549,32 +5800,88 @@
             function(row, index)
             {
               //console.log(row);
-              $.post
-              (
-                'ajax_assignboth.php',
+              if(row.reportid == 24)
+              {
+                console.log("combined report, select property assessment report");
+                var timberid;
+                if(row.linkedbookingcode != null)
                 {
-                  uuid: '<?php echo $_SESSION['uuid']; ?>',
-                  bookingcode: row.bookingcode,
-                  linkedbookingcode: row.linkedbookingcode,
-                  linked_bookingcode: row.linked_bookingcode,
-                  archuuid: args.archuuid,
-                  inspectoruuid: args.inspectoruuid,
-                  usercreateid:row.usercreatedid,
-                  usercreatetype:row.usercreatetype
-                },
-                function(result)
-                {
-                  var response = JSON.parse(result);
-
-                  if (response.rc == 0)
-                  {
-                    //doRefreshBookings();
-                    doSearchBookings(false);
-                  }
-                  else
-                    noty({text: response.msg, type: 'error', timeout: 10000});
+                  timberid = row.linkedbookingcode;
                 }
-              );
+                else
+                {
+                  timberid = row.linked_bookingcode;
+                }
+                console.log("report id is 24, the link timber id is " + timberid);
+                $.post
+                (
+                  'ajax_assignboth.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    bookingcode: row.bookingcode,
+                    timberid:timberid,
+                    propertyid:"",
+                    archuuid: args.archuuid,
+                    inspectoruuid: args.inspectoruuid,
+                    reportid:row.reportid,
+                    usercreateid:row.usercreatedid,
+                    usercreatetype:row.usercreatetype
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                    {
+                      //doRefreshBookings();
+                      doSearchBookings(false);
+                    }
+                    else
+                      noty({text: response.msg, type: 'error', timeout: 10000});
+                  }
+                );
+              }
+              else if (row.reportid == 3)
+              {
+                var propertyid;
+                if(row.linked_bookingcode != null)
+                {
+                  propertyid = row.linked_bookingcode;
+                }
+                else
+                {
+                  propertyid = row.linkedbookingcode;
+                }
+                console.log("report id is 3, the link property id is " + propertyid);
+                $.post
+                (
+                  'ajax_assignboth.php',
+                  {
+                    uuid: '<?php echo $_SESSION['uuid']; ?>',
+                    bookingcode: row.bookingcode,
+                    timberid:"",
+                    propertyid:propertyid,
+                    reportid:row.reportid,
+                    archuuid: args.archuuid,
+                    inspectoruuid: args.inspectoruuid,
+                    usercreateid:row.usercreatedid,
+                    usercreatetype:row.usercreatetype
+                  },
+                  function(result)
+                  {
+                    var response = JSON.parse(result);
+
+                    if (response.rc == 0)
+                    {
+                      //doRefreshBookings();
+                      doSearchBookings(false);
+                    }
+                    else
+                      noty({text: response.msg, type: 'error', timeout: 10000});
+                  }
+                );
+              }
+             
             }
           );
         }
@@ -4678,24 +5985,29 @@
       ?>
           <a href="javascript:void(0)" onClick="doCopyBooking()" class="easyui-linkbutton" iconCls="icon-duplicate">Copy Booking</a>
           <a href="javascript:void(0)" onClick="doUploadReportPDF()" class="easyui-linkbutton" iconCls="icon-upload">Upload PDF Report</a>
+          <a href="javascript:void(0)" onClick="doTaxInvoice()" class="easyui-linkbutton" iconCls="icon-receipt">Tax Invoice</a>
           <a href="javascript:void(0)" onClick="doMarkPaid()" class="easyui-linkbutton" iconCls="icon-payment">Paid</a>
           <a href="javascript:void(0)" onClick="doAssignMember()" class="easyui-linkbutton" iconCls="icon-man">Allocated Arch/Inspect</a>
           <!-- <a href="javascript:void(0)" onClick="doMarkUnCompleted()" class="easyui-linkbutton" iconCls="icon-redo">Architect Reedit</a> -->
           <a href="javascript:void(0)" onClick="doMarkApproved()" class="easyui-linkbutton" iconCls="icon-checkboxes">Approved</a>
-          <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Customer</a>
+          <a href="javascript:void(0)" onClick="doEmailCustomer()" class="easyui-linkbutton" iconCls="icon-email">Email Client</a>
           <a href="javascript:void(0)" onClick="doCancelBooking()" class="easyui-linkbutton" iconCls="icon-remove">Cancel Booking</a>
           <a href="javascript:void(0)" onClick="doChangeStatus()" class="easyui-linkbutton" iconCls="icon-move">Change Status</a>
+          <a href="javascript:void(0)" onClick="doPrintSummary()" class="easyui-linkbutton" iconCls="icon-orderform">Booking Summary</a>
+          <a href="javascript:void(0)" onClick="doAuditHistoryReport()" class="easyui-linkbutton" iconCls="icon-calendar">Audit History</a>
           <br/>
           <div id="tbSearch" style="margin-top:5px;margin-bottom:5px;border-top:1px solid grey; padding-top:10px">
             <span>Status: </span> 
             <input id="cbSearchReportStatus" class="easyui-combobox" name="status_search" data-options="valueField:'id',textField:'status',data:reportstatus" style="width: 230px;">	
-            <span>Customer Email: </span>  
+            <span>Client Email: </span>  
             <input type="text" id="fldSearchEmail" class="easyui-textbox" style="width: 200px;">
             <a href="javascript:void(0)" onClick="doSearchBookings(true)" class="easyui-linkbutton" iconCls="icon-search" id="searchButton">Search</a>
             <a href="javascript:void(0)" onClick="doResetSearch()" class="easyui-linkbutton" iconCls="icon-cancel">Reset</a>
-            <label id="totalbookings"> </label>
-
+            <span>Booking Number: </span>  
+            <input type="number" id="fldSearchBookingNo" class="easyui-textbox" style="width: 200px;">
+            <a href="javascript:void(0)" onClick="doSearchBookingNo()" class="easyui-linkbutton"  id="searchNoButton" data-options="iconCls:'icon-binoculars',width:'60px'">Find</a>
           </div>
+
       <?php
         }
         else
@@ -4705,6 +6017,10 @@
     <?php
         }
       ?>
+      <div style="margin-top:5px;margin-bottom:5px;padding-top:10px">
+        <span style="font-weight:bold;color:brown">Total: </span>
+        <label id="totalbookings" style="font-weight:bold;color:brown"> </label>
+      </div>
 
       
       <!-- deprecated Functions -->
@@ -4739,12 +6055,64 @@
   </div>
   <!-- *********************************************************************************************************************************************************************** -->
   <!-- Reports...                                                                                                                                                              -->
-  <div id="dlgNumReporsByType" class="easyui-dialog" title="#Reports by Type" style="width: 800px; height: 600px;" data-options="resizable: false, modal: false, closable: false, closed: true">
+  <div id="dlgNumReporsByType" class="easyui-dialog" title="#Reports by Type" style="width: 1000px; height: 800px;" data-options="resizable: true, modal: false, closable: false, closed: true">
     <div id="divNumReporsByTypeChart" style="width: 98%; height: 80%;"></div>
   </div>
 
-  <div id="dlgNumReporsByMember" class="easyui-dialog" title="#Reports by Member" style="width: 800px; height: 600px;" data-options="resizable: false, modal: false, closable: false, closed: true">
-    <div id="divNumReporsByMemberChart" style="width: 98%; height: 80%;"></div>
+  <div id="dlgNumReporsByMember" class="easyui-dialog" title="#Reports by Member" style="width: 1500px; height: 800px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <div id="divNumReporsByMemberChart" style="width: 100%; height: 80%;"></div>
+  </div>
+
+  <div id="dlgSalesReportBatch" class="easyui-dialog" title="Sales Report by Batch" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td>Batch:</td>
+        <td><div id="fldSelectSalesBatch" style="width: 100px;"></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSalesReportDateRange" class="easyui-dialog" title="Sales Report by Date Range" style="width: 300px; height: 200px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td style="width: 100px;">Date From:</td>
+        <td><input id="dtSalesReportDateFrom" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Date To:</td>
+        <td><input id="dtSalesReportDateTo" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSuppliersReportBatch" class="easyui-dialog" title="Suppliers Report by Batch" style="width: 500px; height: 250px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td>Batch:</td>
+        <td><div id="fldSelectSuppliersBatch" style="width: 100px;"></div></td>
+      </tr>
+      <tr>
+        <td>Member:</td>
+        <td><div id="fldSuppliersReportBatchMember" style="width: 300px;"></div><a id="btnSuppliersReportBatchAllMembers" href="javascript:doSendTrigger('suppliersbatchallmembers');" class="easyui-linkbutton">Select All</a></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="dlgSuppliersReportDateRange" class="easyui-dialog" title="Suppliers Report by Date Range" style="width: 500px; height: 250px;" data-options="resizable: true, modal: false, closable: false, closed: true">
+    <table>
+      <tr>
+        <td style="width: 100px;">Date From:</td>
+        <td><input id="dtSuppliersReportDateFrom" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Date To:</td>
+        <td><input id="dtSuppliersReportDateTo" class="easyui-datebox" style="width: 120px;"></td>
+      </tr>
+      <tr>
+        <td>Member:</td>
+        <td><div id="fldSuppliersReportDateRangeMember" style="width: 300px;"></div><a id="btnSuppliersReportDateRangeAllMembers" href="javascript:doSendTrigger('suppliersdaterangeallmembers');" class="easyui-linkbutton">Select All</a></td>
+      </tr>
+    </table>
   </div>
 
   <!-- *********************************************************************************************************************************************************************** -->
@@ -4794,7 +6162,7 @@
         <div title="Details" data-options="iconCls: 'icon-man'">
           <table>
             <tr>
-              <td>First Name:</td>
+              <td width="120">First Name:</td>
               <td><input id="fldNewMemberFirstName" class="easyui-textbox" data-options="" style="width: 300px;"></td>
             </tr>
             <tr>
@@ -4825,6 +6193,10 @@
               <td>Type:</td>
               <td><div id="fldNewMemberType" style="width: 300px;"></div></td>
             </tr>
+            <tr>
+              <td>GST Included?:</td>
+              <td><input id="cbNewMemberGSTinc" class="easyui-switchbutton" data-options="width: 60, checked: true, onText: 'Yes', offText: 'No'"></td>
+            </tr>
           </table>
         </div>
 
@@ -4834,7 +6206,7 @@
               <td>Address 1:</td>
               <td><input id="fldNewMemberAddress1" class="easyui-textbox" style="width: 300px;" data-options="prompt: 'Enter address, cursor up/down for selection'"></td>
             </tr>
-            <tr>
+            <tr style="display:none">
               <td>Address 2:</td>
               <td><input id="fldNewMemberAddress2" class="easyui-textbox" style="width: 300px;"></td>
             </tr>
@@ -4859,7 +6231,7 @@
   <div id="dlgBookingNew" class="easyui-dialog" title="New Booking" style="width: 800px; height: 640px;" data-options="resizable: false, modal: true, closable: false, closed: true">
     <div class="easyui-panel" title="Booking Details" data-options="fit: true">
       <div id="newbookingtabs" class="easyui-tabs" data-options="fit: true, pill: true">
-        <div title="Customer Details" data-options="iconCls: 'icon-man'">
+        <div title="Client Details" data-options="iconCls: 'icon-man'">
           <table>
             <tr>
               <td>First Name:</td>
@@ -4919,14 +6291,15 @@
               <td>Quote Type Description:</td>
               <td><div id="fldNewBookingQuoteDes" class="easyui-textbox" multiline="true" style="width: 300px;height:30px"></div></td>
             </tr>
-            <tr>
-                <td>Agreed Price:</td>
-                <td><input id="fldNewBookingBudget" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
-              </tr>
+            
             <?php
               if (SharedIsAdmin())
               {
             ?>
+                <tr>
+                    <td>Agreed Price:</td>
+                    <td><input id="fldNewBookingBudget" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
+                </tr>
                 <tr>
                   <td>Commission:</td>
                   <td><input id="fldNewBookingCommission" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
@@ -4939,13 +6312,21 @@
                   <td>Spotter Fee:</td>
                   <td><input id="fldNewBookingSpotter" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
                 </tr>
+                <tr>
+                  <td>Cancellation Fee:</td>
+                  <td><input id="fldNewBookingCancellationFee" class="easyui-numberbox" data-options="precision: 2, groupSeparator: ',', prefix: '$'" style="width: 120px;"></td>
+                </tr>
                 
             <?php
               }
             ?>
             <tr>
               <td style="vertical-align: top;">Notes:</td>
-              <td><input id="fldNewBookingNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 300px"></td>
+              <td><input id="fldNewBookingNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 150px"></td>
+            </tr>
+            <tr style="margin-top:5px">
+              <td style="vertical-align: top">Client Notes:</td>
+              <td><input id="fldNewBookingClientNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 150px"></td>
             </tr>
           </table>
         </div>
@@ -5052,16 +6433,336 @@
     </div>
   </div>
 
+  <!-- <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;" data-options="resizable: false, modal: true, closable: false, closed: true">
+      <div id="bookingsummarytabs" class="easyui-tabs" data-options="fit: true, pill: true">
+        <div title="Customer Details" data-options="iconCls: 'icon-man'">
+          <table class="summary">
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryCustName" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryCustEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryCustMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Phone:</td>
+              <td><label id="fldSummaryCustPhone" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Address: </td>
+              <td><label id="fldSummaryCustAddress" class="summary"></label></td>
+            </tr>
+          </table>
+        </div>
+        <div title="Report Details" data-options="iconCls: 'icon-notes'">
+          <table class="summary">
+              <tr>
+                <td class="summary">Agreed Price:</td>
+                <td><label id="fldSummaryAgreedPrice" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Commission:</td>
+                <td><label id="fldSummaryCommission" class="summary"></label></td>
+              </tr>
+              <tr> 
+                <td class="summary">Travel Costs:</td>
+                <td><label id="fldSummaryTravelCost" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Spotter Fee:</td>
+                <td><label id="fldSummarySpotterFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Cancellation Fee:</td>
+                <td><label id="fldSummaryCancellationFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;" ><label id="fldSummaryNotes" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Client Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;"><label id="fldSummaryClientNotes" class="summary"></label></td>
+              </tr>
+          </table>
+        </div>
+        <div title="Property Details" data-options="iconCls: 'icon-warehouse'">
+          <table class="summary">
+              <tr>
+                <td class="summary">Address:</td>
+                <td><label id="fldSummaryPropertyAddress" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Rooms:</td>
+                <td>
+                  <label id="fldSummaryRoomsStoreys" class="summary"></label>
+                  <label id="fldSummaryRoomsBedrooms" class="summary"></label>
+                  <label id="fldSummaryRoomsBathrooms" class="summary"></label>
+                  <label id="fldSummaryRoomstotal" class="summary"></label>
+                  <label id="fldSummaryRoomsoutbuildings" class="summary"></label>
+                </td>
+              </tr>
+              <tr>
+                <td class="summary">Construction:</td>
+                <td><label id="fldSummaryPropertyConstruction" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Age:</td>
+                <td><label id="fldSummaryPropertyAge" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Required:</td>
+                <td>
+                  <label id="fldSummaryRequiredMeeting" class="summary"></label>
+                  <label id="fldSummaryRequiredAdvice" class="summary"></label>
+                  <label id="fldSummaryRequiredInspection" class="summary"></label>
+                </td>
+              </tr>
+
+          </table>
+        </div>
+        <div title="Estate Agent" data-options="iconCls: 'icon-users'">
+          <table class="summary">
+            <tr class="summary">
+              <td class="summary">Company:</td>
+              <td><label id="fldSummaryAgentCompany" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryAgentEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryAgentMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryAgentPhone" class="summary"></label></td>
+            </tr>
+          </table>
+
+
+        </div>
+        <div title="Architect" data-options="iconCls: 'icon-man'">
+          <table class="summary" id="summaryArchTabl1">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle1" class="summary">Architect</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno1" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil1" class="summary"></label></td>
+            </tr>
+          </table>
+
+          <table class="summary" id="summaryArchTabl2" style="display:none">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle2" class="summary">Inspector</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno2" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
+            </tr>
+          </table>
+
+        </div>
+        <div title="Audit History" data-options="iconCls: 'icon-inventory'">
+          <div id="divBookingSummaryG" data-option="fit:true"></div>
+        </div>
+      </div>
+  </div> -->
+  <div id="dlgSummary" class="easyui-dialog" style="width: 800px; height: 640px;overflow:auto" data-options="resizable: true, modal: true, closable: false, closed: true">
+          <table class="summary" id="summaryCustomerTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Customer Details</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryCustName" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryCustEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryCustMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Phone:</td>
+              <td><label id="fldSummaryCustPhone" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Address: </td>
+              <td><label id="fldSummaryCustAddress" class="summary"></label></td>
+            </tr>
+          </table>
+          <table class="summary" id="summaryReportTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Report Details</label></td>
+            </tr>
+              <tr>
+                <td class="summary">Agreed Price:</td>
+                <td><label id="fldSummaryAgreedPrice" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Commission:</td>
+                <td><label id="fldSummaryCommission" class="summary"></label></td>
+              </tr>
+              <tr> 
+                <td class="summary">Travel Costs:</td>
+                <td><label id="fldSummaryTravelCost" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Spotter Fee:</td>
+                <td><label id="fldSummarySpotterFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Cancellation Fee:</td>
+                <td><label id="fldSummaryCancellationFee" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;" ><label id="fldSummaryNotes" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Client Notes: </td>
+                <td style="padding-top: .5em;padding-bottom: .5em;"><label id="fldSummaryClientNotes" class="summary"></label></td>
+              </tr>
+          </table>
+          <table class="summary" id="summaryPropertyTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Property Details</label></td>
+            </tr>
+              <tr>
+                <td class="summary">Address:</td>
+                <td><label id="fldSummaryPropertyAddress" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Rooms:</td>
+                <td>
+                  <label id="fldSummaryRoomsStoreys" class="summary"></label>
+                  <label id="fldSummaryRoomsBedrooms" class="summary"></label>
+                  <label id="fldSummaryRoomsBathrooms" class="summary"></label>
+                  <label id="fldSummaryRoomstotal" class="summary"></label>
+                  <label id="fldSummaryRoomsoutbuildings" class="summary"></label>
+                </td>
+              </tr>
+              <tr>
+                <td class="summary">Construction:</td>
+                <td><label id="fldSummaryPropertyConstruction" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Age:</td>
+                <td><label id="fldSummaryPropertyAge" class="summary"></label></td>
+              </tr>
+              <tr>
+                <td class="summary">Required:</td>
+                <td>
+                  <label id="fldSummaryRequiredMeeting" class="summary"></label>
+                  <label id="fldSummaryRequiredAdvice" class="summary"></label>
+                  <label id="fldSummaryRequiredInspection" class="summary"></label>
+                </td>
+              </tr>
+
+          </table>
+          <table class="summary" id="summaryAgentTable">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2" style="text-align: left;"><label class="summary">Estate Agent</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Company:</td>
+              <td><label id="fldSummaryAgentCompany" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryAgentEmail" class="summary"></label></td>
+            </tr>
+              <td class="summary">Mobile:</td>
+              <td><label id="fldSummaryAgentMobile" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryAgentPhone" class="summary"></label></td>
+            </tr>
+          </table>
+          <table class="summary" id="summaryArchTabl1">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle1" class="summary">Architect</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno1" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail1" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil1" class="summary"></label></td>
+            </tr>
+          </table>
+          <table class="summary" id="summaryArchTabl2" style="display:none">
+            <tr class="summary">
+              <td class="summaryHeader" colspan="2"><label id="fldSummaryArchTitle2" class="summary">Inspector</label></td>
+            </tr>
+            <tr class="summary">
+              <td class="summary">Name:</td>
+              <td><label id="fldSummaryArchName2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Reg. No.</td>
+              <td><label id="fldSummaryArchRegno2" class="summary"></label></td>
+            </tr>
+              <td class="summary">Email:</td>
+              <td><label id="fldSummaryArchEmail2" class="summary"></label></td>
+            </tr>
+            <tr>
+              <td class="summary">Office Phone:</td>
+              <td><label id="fldSummaryArchMobil2" class="summary"></label></td>
+            </tr>
+          </table>
+          <label class="summary" style="font-weight: bold;padding:15px" id="summaryHistoryTableTitle">Action History</label>
+          <div id="divBookingSummaryG" data-option="fit:true"></div>
+  </div>
+
   <div class="easyui-layout" data-options="fit: true">
     <?php require_once("header.php"); ?>
     <?php require_once("footer.php"); ?>
 
-    <div id="p" data-options="region: 'west,collapsed:true'" title="Reports" style="width: 30%; padding: 10px">
+    <div id="p" data-options="region: 'west'" title="Administration Menu" collapsed="true" style="width: 25%; padding: 10px">
 
-      <div class="easyui-accordion" data-options="selected: 0, fit: true" >
+      <div class="easyui-accordion" data-options="selected: 0, fit: true">
         <div title="Members" data-options="iconCls:'icon-people'" style="overflow: auto; padding: 10px;">
-          <h3 style= "color:#0099FF;">Members</h3>
-          <div id="divMembersG" style="width: 98%;" ></div>
+          <!-- <h3 style= "color:#0099FF;">Members</h3> -->
+          <div id="divMembersG" style="width: 98%;height:auto" ></div>
         </div>
 
         <?php
@@ -5069,10 +6770,14 @@
           {
         ?>
             <div title="Reports" data-options="iconCls:'icon-barchart'" style="overflow: auto; padding: 10px;">
-              <h3 style= "color:#0099FF;">Select Report</h3>
+              <!-- <h3 style= "color:#0099FF;">Select Report</h3> -->
               <table>
-                <tr><td><a id="btnNumReportsByType" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 160" onclick="doReportNumReportsByType()">#Reports by Type</a></td></tr>
-                <tr><td><a id="btnNumReportsByMember" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 160" onclick="doReportNumReportsByMember()">#Reports by Member</a></td></tr>
+                <tr><td><a id="btnNumReportsByType" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 240" onclick="doReportNumReportsByType()">#Reports by Type</a></td></tr>
+                <tr><td><a id="btnNumReportsByMember" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-barchart', width: 240" onclick="doReportNumReportsByMember()">#Reports by Member</a></td></tr>
+                <tr><td><a id="btnSalesReportBatch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-product', width: 240" onclick="doSalesReportBatch()">Sales Report by Batch</a></td></tr>
+                <tr><td><a id="btnSalesReportDateRange" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-calendar', width: 240" onclick="doSalesReportDateRange()">Sales Report by Date</a></td></tr>
+                <tr><td><a id="btnSupplierReportBatch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-product', width: 240" onclick="doSuppliersReportBatch()">Supplier Report by Batch</a></td></tr>
+                <tr><td><a id="btnSupplierReportDateRange" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-calendar', width: 240" onclick="doSuppliersReportDateRange()">Supplier Report by Date</a></td></tr>
               </table>
             </div>
         <?php
@@ -5085,6 +6790,9 @@
       <div id="divBookingsG" data-options="fit: true" ></div>
     </div>
   </div>
+
+  
+
   <div id="divEvents" style="display: none;"></div>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=initMap&key=AIzaSyCcXBPESLUxA846ZL6JoUefrlclXKFv4zg" async defer></script>
 </body>

@@ -1007,135 +1007,81 @@ require_once("loadbooking.php");
                     </div>
                 </div>
                 <!--First Tap Architect’s Solution-->
-                <div title="Architect’s Solutions" id="ASolution" style="padding:10px;font-size: 18px">
+                <div title="Architect Recommendations" id="ASolution" style="padding:10px;font-size: 18px">
                     <div class="easyui-tabs" data-options="plain:true" style="width:inherit;height:auto">
                         <div id="HA_DivHSConcerns" title="Health & Safety Concerns" data-title="Health & Safety Concerns (Urgent - within 1 month)"
                             style="padding:10px;font-size: 18px">
-                            <table id="C_SolutionTable" class="table table-bordered" style="table-layout:fixed">
+                            <table id="C_SolutionTable" class="table table-bordered" style="table-layout:fixed;width:100%">
+                                <colgroup>
+                                    <col style="width: 19%;">
+                                    <col style="width: 33%;">
+                                    <col style="width: 33%;">
+                                    <col style="width: 15%;">
+                                </colgroup>
                                 <tr>
-                                    <th colspan="5">
+                                    <th colspan="4">
                                         <p class="text-center bg-danger text-white">Urgent - within 1 month.</p>
                                     </th>
                                 </tr>
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="4">
                                         <button type="button" class="btn btn-primary" id="C_SolutionAddItem" onclick="button_AddSolutionItem(this.id);">Add item</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Category</th>
-                                    <th>CODE</th>
-                                    <th>Architect’s Comment (In addition to preset text only)</th>
-                                    <th>Trade</th>
-                                    <th>Cost-indicative</th>
+                                    <th style="text-align:center">Category</th>
+                                    <th style="text-align:center">Architect’s Comment</th>
+                                    <th style="text-align:center">Trade</th>
+                                    <th style="text-align:center">Cost-indicative</th>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <select class="form-control" id="C0_category">
-                                            <option value="-1" disabled selected>Choose an item</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="form-control" id="C0_code">
-                                            <option value="-1" disabled selected>Internal use</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <textarea class="form-control" rows="5" id="C0_commentText"></textarea>
-                                    </td>
-                                    <td>
-                                        <select class="form-control" id="C0_tradeSelect" onchange="tradeOnchange(this.id);">
-                                            <option value="-1" disabled selected>--</option>
-                                        </select>
-                                        <textarea class="form-control" id="C0_mirrorText" disabled></textarea>
-                                        <button class="btn btn-danger w-100" id="C0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
-                                    </td>
-                                    <td>
-                                        <textarea class="form-control" id="C0_costText"></textarea>
-                                    </td>
-                                </tr>
+                            </tr>
                             </table>
                         </div>
                         <div id="HA_DivRMaintenance" title="Repair & Maintenance" data-title="Repair & Maintenance (RECOMMENDED – longer term)" style="padding:10px;font-size: 18px">
                             <table id="M_SolutionTable" class="table table-bordered" style="table-layout:fixed">
+                                <colgroup>
+                                    <col   style="width: 19%;">
+                                    <col   style="width: 33%;">
+                                    <col   style="width: 33%;">
+                                    <col   style="width: 15%;">
+                                </colgroup>
                                 <tr>
-                                    <th colspan="5">
+                                    <th colspan="4">
                                         <p class="text-center bg-primary text-white">Recommended - longer term.</p>
                                     </th>
                                 </tr>
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="4">
                                         <button type="button" class="btn btn-primary" id="M_SolutionAddItem" onclick="button_AddSolutionItem(this.id);">Add item</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Category</th>
-                                    <th>CODE</th>
-                                    <th>Architect’s Comment (In addition to preset text only)</th>
-                                    <th>Trade</th>
-                                    <th>Cost-indicative</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <select class="form-control" id="M0_category">
-                                            <option value="-1" disabled selected>Choose an item</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="form-control" id="M0_code">
-                                            <option value="-1" disabled selected>Internal use</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <textarea class="form-control" rows="5" id="M0_commentText"></textarea>
-                                    </td>
-                                    <td>
-                                        <select class="form-control" id="M0_tradeSelect" onchange="tradeOnchange(this.id);">
-                                            <option value="-1" disabled selected>--</option>
-                                        </select>
-                                        <textarea disabled class="form-control" id="M0_mirrorText"></textarea>
-                                        <button class="btn btn-danger w-100" id="M0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
-                                    </td>
-                                    <td>
-                                        <textarea class="form-control" id="M0_costText"></textarea>
-                                    </td>
+                                    <th style="text-align:center">Category</th>
+                                    <th style="text-align:center">Architect’s Comment</th>
+                                    <th style="text-align:center">Trade</th>
+                                    <th style="text-align:center">Cost-indicative</th>
                                 </tr>
                             </table>
                         </div>
                         <div id="HA_DivEnergyEfficiency" title="Energy Efficiency - Optional" data-title="Energy Efficiency - Optional" style="padding:10px;font-size: 18px">
                             <table id="E_SolutionTable" class="table table-bordered" style="table-layout:fixed">
+                                <colgroup>
+                                    <col style="width: 19%;">
+                                    <col style="width: 33%;">
+                                    <col style="width: 33%;">
+                                    <col style="width: 15%;">
+                                </colgroup>
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="4">
                                         <button type="button" class="btn btn-primary" id="E_SolutionAddItem" onclick="button_AddSolutionItem(this.id);">Add item</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Category</th>
-                                    <th>CODE</th>
-                                    <th>Architect’s Comment (In addition to preset text only)</th>
-                                    <th>Trade </th>
-                                    <th>Cost-indicative</th>
-                                </tr>
-                                <tr>
-                                    <td>Enenrgy Efficiency</td>
-                                    <td>
-                                        <select class="form-control" id="E0_code">
-                                            <option value="-1" disabled selected>Internal use</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <textarea class="form-control" id="E_commentText"></textarea>
-                                    </td>
-                                    <td>
-                                        <select id="E0_tradeSelect" class="form-control" onchange="tradeOnchange(this.id);">
-                                            <option value="-1" disabled selected>--</option>
-                                        </select>
-                                        <textarea disabled class="form-control" id="E0_mirrorText"></textarea>
-                                        <button class="btn btn-danger w-100" id="E0_mirrorClean" onclick="tradeClear(this.id)">Clear</button>
-                                    </td>
-                                    <td>
-                                        <textarea class="form-control" id="E0_costText"></textarea>
-                                    </td>
+                                    <th style="text-align:center">Category</th>
+                                    <th style="text-align:center">Architect’s Comment</th>
+                                    <th style="text-align:center">Trade</th>
+                                    <th style="text-align:center">Cost-indicative</th>
                                 </tr>
                             </table>
                         </div>
@@ -1150,7 +1096,6 @@ require_once("loadbooking.php");
                     <div id="Img-main-container">
                         <div id="Img-loader">Loading document ...</div>
                         <div id="HA_ImgsContents"></div>
-                        <!--                    HA_ImgsContents HA_ImgsCA_indicateText-->
                         <div id="Imgpage-loader">Loading page ...</div>
                     </div>
                 </div>
@@ -1296,7 +1241,7 @@ require_once("loadbooking.php");
     ?>
                 <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
                 <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-                <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
+                <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Client</button> -->
                 <?php
         }
         else

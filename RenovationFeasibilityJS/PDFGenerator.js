@@ -101,9 +101,10 @@ function generatePDF(mode) {
                                 [
                                     {
                                         colSpan:2,
-                                        text:'Feasibility Study',
+                                        text:'Making a Start',
                                         border: [true, true, true, false],
-                                        style:'thirdHeader'
+                                        style:'thirdHeader',
+                                        color: 'red',
                                         //margin:[10,30,10,10]
                                     },
                                     {}
@@ -118,7 +119,7 @@ function generatePDF(mode) {
                                         rowSpan:4,
                                         border: [false, false, true, true],
                                         stack: [
-                                            getCoverImage('RenovationFeasibilityCoverImage')
+                                            getCoverImage('RenovationFeasibilityCoverImage','RenovationFeasibilityCoverImageAngle')
                                         ]
                                         //margin:[10,10,10,10]
                                     }
@@ -168,7 +169,8 @@ function generatePDF(mode) {
                         }
                     },
                     {
-                        text: "Client's Details",
+                        // text: "Client's Details",
+                        text: "",
                         style: 'pageTopHeader',
                         margin: [0, 20, 0, 5]
                     },
@@ -258,7 +260,9 @@ function generatePDF(mode) {
             {
                 stack:[
                     {
-                        text: 'Existing Home and Site',
+                        ul: [
+                            'Existing Home and Site',
+                        ],
                         style: 'thirdHeader'
                     },
                     makeAGap(),
@@ -278,8 +282,10 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                      text:'Project Requirements',
-                      style: 'thirdHeader'
+                        ul: [
+                            'Project Requirements',
+                        ],
+                        style: 'thirdHeader'
                     },
                     makeAGap(),
                     {
@@ -287,7 +293,7 @@ function generatePDF(mode) {
                         fontSize:9
                     },
                     {
-                        text:'Overall Objective',
+                        text:'OVERALL OBJECTIVE',
                         style:'fifthHeader',
                         margin:[0,5,0,0]
                     },
@@ -329,7 +335,9 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: 'Design Consideration',
+                        ul: [
+                            'Design Consideration',
+                        ],
                         style: 'thirdHeader'
                     },
                     {
@@ -344,7 +352,9 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: 'Design Sustainability Features',
+                        ul: [
+                            'Design Sustainability Features',
+                        ],
                         style: 'thirdHeader',
                         margin:[0,5,0,5]
                     },
@@ -359,7 +369,9 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: 'Relevant Required Approvals',
+                        ul: [
+                            'Relevant Required Approvals',
+                        ],
                         style: 'thirdHeader',
                         margin:[0,5,0,5]
                     },
@@ -480,10 +492,6 @@ function generatePDF(mode) {
              */
             {
                 stack: [
-                    // getDrawings('renovationDrawing0', 'renovationDrawingText0'),
-                    // getDrawings('renovationDrawing1', 'renovationDrawingText1'),
-                    // getDrawings('renovationDrawing2', 'renovationDrawingText2'),
-                    // getDrawings('renovationDrawing3', 'renovationDrawingText3')
                     getImagesTable()
                 ],
                 //pageBreak:'after'
@@ -546,7 +554,7 @@ function generatePDF(mode) {
                             {
                                 stack:[
                                     {
-                                        text:termConditionText1,
+                                        text:getTermsAndConditionsP1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -720,7 +728,7 @@ function generatePDF(mode) {
             },
             thirdHeader: {
                 fontSize: 15,
-                color: 'red',
+                color: 'blue',
                 bold: true
             },
             fourthHeader: {

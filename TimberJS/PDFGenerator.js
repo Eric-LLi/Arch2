@@ -107,7 +107,7 @@ function generatePDF(mode) {
                                     {
                                         border: [false, true, true, true],
                                         stack: [
-                                            getCoverImage('TimberCoverImage')
+                                            getCoverImage('TimberCoverImage','TimberCoverImageAngle')
                                         ],
                                         margin:[10,10,10,10]
                                     }
@@ -160,7 +160,7 @@ function generatePDF(mode) {
                             {
                                 stack: [
                                     {
-                                        text: scopeOfInspectionP1,
+                                        text: getSSTCText1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -819,7 +819,7 @@ function generatePDF(mode) {
                             {
                                 stack: [
                                     {
-                                        text: termConditionP1,
+                                        text: getTermsAndConditionsP1(),
                                         style: 'paragraphMargin'
                                     },
                                     {

@@ -5,9 +5,11 @@
 /*
  Define variables
  */
-var PropertyAssessmentReport = "This pre-lease / pre-purchase Property Assessment Report is a visual assessment of the conditions of the reasonably accessible areas of the property at the time of the assessment, including the subject premises and associated areas where the property is a unit.";
+var PropertyAssessmentReport = "This pre-lease / pre-purchase Property Assessment Report is a visual assessment of the conditions of the reasonably accessible areas of the property at the time of the assessment.";
 
 var ScopeOfAssessment1 = "This Report is prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and in accordance with Australian Standard 4349.1-2007 Inspection of Buildings Part 1: Pre-purchase inspections – Residential Buildings (pending release of Australian Standard for pre-purchase inspections of non-residential buildings) and any other Australian Standards, definitions or referenced documents cited in the Terms and Conditions.";
+
+var ScopeOfAssessmentSA1 = "This Report is prepared by Archicentre Australia – a trading name of ArchiAdvisorySA Pty Ltd – and in accordance with Australian Standard 4349.1-2007 Inspection of Buildings Part 1: Pre-purchase inspections – Residential Buildings (pending release of Australian Standard for pre-purchase inspections of non-residential buildings) and any other Australian Standards, definitions or referenced documents cited in the Terms and Conditions.";
 
 var ScopeOfAssessment2 = "This Report is a subjective assessment prepared by the inspecting architect on a visual assessment of the condition of the reasonably accessible parts of the property and on the basis of the prevailing structural, soil and weather conditions at the time of the assessment and does not cover enquiries of councils or other authorities. It is not a certificate of compliance for the property within the requirements of any Act, regulation, ordinance or local by-law.";
 
@@ -75,6 +77,8 @@ var GeneralAdvice7 = "If you are purchasing the property, Archicentre Australia 
 var GeneralAdvice8 = "The Assessment is limited to the nominated individual property including associated private open space. It is not the scope of this assessment to include all common or other adjacent property. Legal advice should be obtained as to the liability to contribute to the cost of repairs in respect of any common property.";
 
 var Conditions1 = "This Report has been prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope of Assessment and the Terms and Conditions of the Contract and the Assessment and Archicentre Australia accepts no responsibility to other persons relying on the report.";
+
+var ConditionsSA1 = "This Report has been prepared by Archicentre Australia – a trading name of ArchiadvisorySA Pty Ltd – and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope of Assessment and the Terms and Conditions of the Contract and the Assessment and Archicentre Australia accepts no responsibility to other persons relying on the report.";
 
 var Conditions2 = "This Report has been prepared in accordance with Australian Standard 4349.1-2007 Inspection of Buildings Part 1: Pre-purchase Inspections – Residential Buildings (pending release of Australian Standard for pre-purchase inspections of non-residential buildings) and to any other Australian Standards, definitions or referenced documents cited in the Terms and Conditions. ";
 

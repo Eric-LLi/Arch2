@@ -106,7 +106,7 @@ function generatePDF(mode) {
                                     {
                                         border: [false, true, true, true],
                                         stack: [
-                                            getCoverImage('PostDilapidationCoverImage')
+                                            getCoverImage('PostDilapidationCoverImage','PostDilapidationCoverImageAngle')
                                         ],
                                         margin: [5, 5, 5, 5]
                                         //margin:[10,10,10,10]
@@ -246,7 +246,7 @@ function generatePDF(mode) {
                     {
 
                         stack: [{
-                                text: termsAndConditionsDP1,
+                                text: getTermsAndConditionsP1(),
                                 style: 'paragraphMargin',
                                 alignment: 'justify'
                             },

@@ -92,10 +92,10 @@ function generatePDF(mode) {
                             }
                         ]
                     },
-                    {
-                        text:'New Home Design',
-                        style: 'pageTopHeader'
-                    },
+                    // {
+                    //     text:'New Home Design',
+                    //     style: 'pageTopHeader'
+                    // },
                     makeAGap(),
                     giveMeHugeDraft(mode),
 
@@ -109,7 +109,8 @@ function generatePDF(mode) {
                                         colSpan:2,
                                         text:'Feasibility Study',
                                         border: [true, true, true, false],
-                                        style:'thirdHeader'
+                                        style:'thirdHeader',
+                                        color: 'red',
                                         //margin:[10,30,10,10]
                                     },
                                     {}
@@ -124,7 +125,7 @@ function generatePDF(mode) {
                                         rowSpan:3,
                                         border: [false, false, true, true],
                                         stack: [
-                                            getCoverImage('HomeFeasibilityCoverImage')
+                                            getCoverImage('HomeFeasibilityCoverImage','HomeFeasibilityCoverImageAngle')
                                         ]
                                         //margin:[10,10,10,10]
                                     }
@@ -143,7 +144,8 @@ function generatePDF(mode) {
                                     {
                                         text: archHomeFeasibilityReportText3,
                                         border: [true, false, false, true],
-                                        fontSize: 9
+                                        fontSize: 9,
+                                        margin:[0,0,0,5]
                                     },
                                     ''
                                 ]
@@ -164,12 +166,13 @@ function generatePDF(mode) {
                             }
                         }
                     },
-
-                    {
-                        text: "Client's Details",
-                        style: 'pageTopHeader',
-                        margin: [0, 30, 0, 5]
-                    },
+                    makeAGap(),
+                    makeAGap(),
+                    // {
+                    //     text: "Client's Details",
+                    //     style: 'pageTopHeader',
+                    //     margin: [0, 30, 0, 5]
+                    // },
                      getCustomerDetailsTable(),
                      makeAGap(),
                      getAssessmentDetailsTable(),
@@ -251,7 +254,9 @@ function generatePDF(mode) {
             {
                 stack:[
                     {
-                        text: 'Existing Site',
+                        ul: [
+                            'Existing Site',
+                        ],
                         style: 'thirdHeader'
                     },
                     makeAGap(),
@@ -268,6 +273,13 @@ function generatePDF(mode) {
                         text:getTextArea('property'),
                         fontSize:9,
                         margin:[0,5,0,0]
+                    },
+                    makeAGap(),
+                    {
+                        ul: [
+                            'Project Requirements',
+                        ],
+                        style: 'thirdHeader'
                     },
                     makeAGap(),
                     {
@@ -301,7 +313,9 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: 'Design Consideration',
+                        ul: [
+                            'Design Consideration',
+                        ],
                         style: 'thirdHeader'
                     },
                     {
@@ -315,8 +329,11 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: 'Design Sustainability Features',
-                        style: 'thirdHeader'
+                        ul: [
+                            'Design Sustainability Features',
+                        ],
+                        style: 'thirdHeader',
+                        margin:[0,5,0,5]
                     },
                     {
                         text:'The following notes outline some of the proposed sustainability features of the Design:',
@@ -329,8 +346,11 @@ function generatePDF(mode) {
                     },
                     makeAGap(),
                     {
-                        text: 'Relevant Required Approvals',
-                        style: 'thirdHeader'
+                        ul: [
+                            'Relevant Required Approvals',
+                        ],
+                        style: 'thirdHeader',
+                        margin:[0,5,0,5]
                     },
                     {
                         text:archHomeApprovals1,
@@ -520,7 +540,7 @@ function generatePDF(mode) {
                             {
                                 stack: [
                                     {
-                                        text: termConditionText1,
+                                        text: getTermsAndConditionsP1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -694,7 +714,7 @@ function generatePDF(mode) {
             },
             thirdHeader: {
                 fontSize: 15,
-                color: 'red',
+                color: 'blue',
                 bold: true
             },
             fourthHeader: {

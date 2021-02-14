@@ -68,7 +68,7 @@
         <!-- Inspection Info -->
         <div id="ConstructCustomerDetails" class="container">
             <hr style="height:1px;border:none;color:#333;background-color:#333;">
-            <h3 class="sectionSubHead" style="font-size: 18px">CUSTOMER DETAILS</h3>
+            <h3 class="sectionSubHead" style="font-size: 18px">CLIENT DETAILS</h3>
             <form>
                 <div class="row">
                     <div class="col-sm-6">
@@ -521,10 +521,18 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="col-sm">
-                            <img id="ConstructionCoverImage" src="#" alt="Image1" style="width:0;height:265px;display: none" />
+                            <img id="ConstructionCoverImage" src="#" alt="Image1" style="width:400px;display: none" />
                         </div>
                         <div class="col-sm">
-                            <input class="btn btn-danger" type="button" value="Remove" id="ConstructionCoverImageRemoveButton" onclick="RemoveConstructionCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 100%">
+                            <input class="btn btn-danger" type="button" value="Remove" id="ConstructionCoverImageRemoveButton" onclick="RemoveConstructionCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
+                            <br>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="ConstructionCoverImageAngle" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
+                            <br>
+                        </div>
+                        <div class="col-sm">
+                            <input class="btn btn-info" type="button" value="Rotate" id="ConstructionCoverImageRotateButton" onclick="RotateConstructionCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
                             <br>
                         </div>
                     </div>
@@ -538,13 +546,13 @@
             <h2 style="text-align: left; color: red;font-weight: bold">Construction Quality Assurance Assessment Report</h2><br>
             <table>
                 <tr style="width:100%">
-                    <th class="sectionSubHeaderSmaller" colspan="6" style="color: red">
+                    <th class="sectionSubHeaderSmaller"  style="color: red;width:80%">
                         LIST OF EVIDENT DEFECTIVE OR INCOMPLETE WORK
                     </th>
                 </tr>
-                <tr>
-                    <td>
-                        <textarea id="listOfDefective" rows="10" class="form-control" style="padding: 2px 2px; height: 200px" title="evident defective" onkeyup="assignNumber('listOfDefective')"></textarea>
+                <tr style="width:100%">
+                    <td colspan = "2">
+                        <textarea  id="listOfDefective" rows="25" class="form-control" style="padding: 2px 2px; height: 240px" title="evident defective" onkeyup="AutoNumbering('listOfDefective')"></textarea>
                     </td>
                 </tr>
             </table>
@@ -633,6 +641,7 @@
             <div class="container">
                 <input type="button" id="get_ConstructionImage" value="Upload Images (Max 30 images)" class="uploadImageButton" onclick="ConstructionUploadImages()" style="white-space: normal; width: 15%">
                 <input type="file" id="ConstructionUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+                <input type="file" id="ConstructionUploadOneImage" class="inputImage" accept="image/x-png,image/jpeg">
             </div>
             <div class="container">
                 <table id="ConstructionImagesTable" style="display: none">
@@ -764,7 +773,7 @@
     ?>
                 <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
                 <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-                <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
+                <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Client</button> -->
                 <?php
         }
         else

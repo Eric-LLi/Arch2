@@ -99,8 +99,10 @@
                   "b1.budget," .
                   "b1.commission," .
 				          "b1.travel," .
-				          "b1.spotter," .
+                  "b1.spotter," .
+                  "b1.cancellationfee," .
                   "b1.notes," .
+                  "b1.clientnotes," .
 
                   "b1.numstories," .
                   "b1.numbedrooms," .
@@ -130,6 +132,8 @@
 
                   "b1.emailcount," .
                   "b1.lastemailed," .
+                  "b1.invoicecount," .
+                  "b1.lastinvoiced," .
                   "b1.datecompleted," .
                   "b1.datecancelled,".
                   "b1.dateapproved," .

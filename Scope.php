@@ -376,6 +376,7 @@
 
         //$('#fldNewBookingBudget').numberbox('clear');
         $('#fldNewBookingNotes').textbox('clear');
+        $('#fldNewBookingClientNotes').textbox('clear');
 
         // Properties TAB
         $('#fldNewBookingState').combobox('clear');
@@ -471,6 +472,7 @@
                 var reportid = $('#fldNewBookingReport').combobox('getValue');
                 //var budget = $('#fldNewBookingBudget').numberbox('getValue');
                 var notes = $('#fldNewBookingNotes').textbox('getValue');
+                var clientnotes = $('#fldNewBookingClientNotes').textbox('getValue');
 
                 var numstories = $('#fldNewBookingNumStories').combobox('getValue');
                 var numbedrooms = $('#fldNewBookingNumBedRooms').combobox('getValue');
@@ -577,19 +579,19 @@
                       else
                       {
                         $('#newbookingtabs').tabs('select', 0);
-                        doMandatoryTextbox('Please enter customer\'s email or mobile', 'fldNewBookingCustEmail');
+                        doMandatoryTextbox('Please enter client\'s email or mobile', 'fldNewBookingCustEmail');
                       }
                     }
                     else
                     {
                       $('#newbookingtabs').tabs('select', 0);
-                      doMandatoryTextbox('Please enter customer\'s last name', 'fldNewBookingCustLastName');
+                      doMandatoryTextbox('Please enter client\'s last name', 'fldNewBookingCustLastName');
                     }
                   }
                   else
                   {
                     $('#newbookingtabs').tabs('select', 0);
-                    doMandatoryTextbox('Please enter customer\'s first name', 'fldNewBookingCustFirstName');
+                    doMandatoryTextbox('Please enter client\'s first name', 'fldNewBookingCustFirstName');
                   }
                 }
                 else
@@ -784,6 +786,10 @@
             <tr>
               <td style="vertical-align: top;">Notes:</td>
               <td><input id="fldNewBookingNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 300px"></td>
+            </tr>
+            <tr style="margin-top:5px">
+              <td style="vertical-align: top">Client Notes:</td>
+              <td><input id="fldNewBookingClientNotes" class="easyui-textbox" multiline="true" style="width: 600px; height: 150px"></td>
             </tr>
           </table>
         </div>

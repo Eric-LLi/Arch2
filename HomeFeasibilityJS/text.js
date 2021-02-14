@@ -12,7 +12,7 @@ var archHomeFeasibilityNotes1 = 'Further detailed work outside the scope of this
 
 var archHomeFeasibilityNotes2 = 'This further detailed work may also include structural engineering, development/planning consent and/or building construction approval, assessment of ground conditions, energy, asbestos (and other latent factors), as well as other investigations and/or considerations.';
 
-var archHomeFeasibilityNotes3 = 'Once this further work is completed, the sets of documents/drawings required for permits/approvals application and for the builder to commence construction works can be completed. This further work and construction documentation is not covered in the Report, but can be provided independently by your Archicentre Australia Architect.  This further work is explained in more detail later in this Report.';
+var archHomeFeasibilityNotes3 = 'Once this further work is completed, the sets of documents/drawings required for permits/approvals application and for the builder to commence construction works can be completed. This further work and construction documentation is not covered in the Report, but can be provided independently by your Archicentre Australia Architect.';
 
 var archHomeApprovals1 = 'The construction of the Design presented in this Report will require a number of statutory or regulatory approvals and/or permits.  If you decide to proceed, further investigation into the nature and extent of work required to make application for these permits will form part of the further detailed work.';
 
@@ -43,6 +43,8 @@ var attachmentText2 = ' along with some additional information we hope you will 
 var thankYou = 'We thank you for the opportunity to prepare a New Home Design for you. We hope that you are excited by the Design presented and that you take advantage of the many additional services that your Archicentre Australia Architect can provide to assist you with the development of your project.';
 
 var termConditionText1 = 'This Report, which includes any appendices and referenced documents, has been prepared by Archicentre Australia trading as ArchiAdvisory Pty Ltd and the named architect and is supplied to you (the named client) on the basis of and subject to these Terms and Conditions and the Scope of this Report as described above. Archicentre Australia accepts no responsibility to other persons.';
+
+var termConditionTextSA1 = 'This Report, which includes any appendices and referenced documents, has been prepared by Archicentre Australia - a trading name of ArchiadvisorySA Pty Ltd and the named architect and is supplied to you (the named client) on the basis of and subject to these Terms and Conditions and the Scope of this Report as described above. Archicentre Australia accepts no responsibility to other persons.';
 
 var termConditionText2 = 'The visual assessment undertaken for this Report will only include areas of the property that are safe and reasonably accessible. These will be determined by the architect at the time of the visual assessment. Workplace Health and Safety access conditions apply subject to relevant State and Territory regulations.';
 

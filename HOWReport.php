@@ -461,61 +461,61 @@
 	                        <th style="text-align: left" id="HOWSiteName0">Retaining Walls</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect0" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote0"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote0"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWSiteName1">Gas Supply</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect1" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote1"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote1"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWSiteName2">Stormwater Drains</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect2" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote2"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote2"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWSiteName3">Electricity Supply</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect3" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote3"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote3"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWSiteName4">Water Supply</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect4" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote4"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote4"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWSiteName5">Sewerage System</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect5" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote5"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote5"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWSiteName6">Trees</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect6" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote6"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote6"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWSiteName7">Paving</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect7" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote7"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote7"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left " id="HOWSiteName8">Site Drainage</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect8" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote8"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSiteNote8"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWSiteName9">Site Access</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWSiteSelect9" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSiteNote9"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 50px;" id="HOWSiteNote9"></textarea></th>
 	                    </tr>
 	                </table>
 	                </div>
@@ -528,109 +528,109 @@
 	                        <th style="text-align: left" id="HOWBuildingName0">Slab edge</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect0" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote0"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote0"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName1">Eaves</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect1" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote1"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote1"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName2">Attached Elements</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect2" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote2" ></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote2" ></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName3">If Masonry - DPC</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect3" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote3" ></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote3" ></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName4">Doors</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect4" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote4"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote4"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName5">Roof Cladding</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect5" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote5"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote5"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName6">Walls-Structure</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect6" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote6"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote6"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName7">Windows</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect7" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote7"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote7"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName8">Roof Drainage</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect8" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote8"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote8"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName9">Walls-Finish</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect9" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote9"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote9"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName10">Windows Sill Gap</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect10" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote10"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote10"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName11">Flashings</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect11" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote11"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote11"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName12" >Sub-Floor Vents</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect12" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote12"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote12"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName13" >Mortar</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect13" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote13"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote13"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName14" >Roof Pitch</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect14" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote14"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote14"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName15" >Weep Holes</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect15" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote15"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWBuildingNote15"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName16" >Perimeter Access</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect16" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote16"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 50px;" id="HOWBuildingNote16"></textarea></th>
 	                    </tr>
 	                    <tr>
 	                        <th style="text-align: left" id="HOWBuildingName17" >Roof Access</th>
 	                        <th style="text-align: left">
 	                            <select id="HOWBuildingSelect17" style="width:100%"  title="checkList"></select>
-	                        <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWBuildingNote17"></textarea></th>
+	                        <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 50px;" id="HOWBuildingNote17"></textarea></th>
 	                    </tr>
 	                </table>
 	            </div>
@@ -643,43 +643,43 @@
 	                    <th style="text-align: left" id="HOWSubFloorName0">Stumps&Piers</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWSubFloorSelect0" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSubFloorNote0"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSubFloorNote0"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWSubFloorName1">Walls</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWSubFloorSelect1" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSubFloorNote1"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSubFloorNote1"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWSubFloorName2">Framing</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWSubFloorSelect2" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSubFloorNote2"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSubFloorNote2"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWSubFloorName3">Ventilation</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWSubFloorSelect3" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSubFloorNote3"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSubFloorNote3"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWSubFloorName4">Ground Moisture</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWSubFloorSelect4" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSubFloorNote4"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSubFloorNote4"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWSubFloorName5">Services</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWSubFloorSelect5" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSubFloorNote5"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWSubFloorNote5"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWSubFloorName6">Sub-floor Access</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWSubFloorSelect6" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWSubFloorNote6"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 50px;" id="HOWSubFloorNote6"></textarea></th>
 	                </tr>
 	            </table>
 	        </div>
@@ -690,37 +690,37 @@
 	                    <th style="text-align: left" id="HOWRoofVoidName0">Structure</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWRoofVoidSelect0" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWRoofVoidNote0"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWRoofVoidNote0"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWRoofVoidName1">Sarking</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWRoofVoidSelect1" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWRoofVoidNote1"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWRoofVoidNote1"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWRoofVoidName2">Insulation</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWRoofVoidSelect2" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWRoofVoidNote2"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWRoofVoidNote2"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWRoofVoidName3">Roof Cladding</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWRoofVoidSelect3" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWRoofVoidNote3"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWRoofVoidNote3"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWRoofVoidName4">Roof Services</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWRoofVoidSelect4" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWRoofVoidNote4"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 50px;" id="HOWRoofVoidNote4"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWRoofVoidName5">Roof Void Access</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWRoofVoidSelect5" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 50px;" id="HOWRoofVoidNote5"></textarea></th>
+	                    <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 50px;" id="HOWRoofVoidNote5"></textarea></th>
 	                </tr>
 	            </table>
 
@@ -752,37 +752,37 @@
 	                            <th class="zui-sticky-col" style="height: 103px" id="HOWOutBuildingPlace0">Garage</th>
 	                            <td width="12%">
 	                                <select id="HOWOutBuildingPlace0Select0" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace0Text0" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace0Text0" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 	                            </td>
 	                            <td width="12%">
 	                                <select id="HOWOutBuildingPlace0Select1" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace0Text1" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace0Text1" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 	                            </td>
 	                            <td width="12%">
 	                                <select id="HOWOutBuildingPlace0Select2" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace0Text2" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace0Text2" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 	                            </td>
 	                            <td width="12%">
 	                                <select id="HOWOutBuildingPlace0Select3" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace0Text3" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace0Text3" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 	                            </td>
 	                            <td width="12%">
 	                                <select id="HOWOutBuildingPlace0Select4" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace0Text4" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace0Text4" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td width="12%">
 	                                <select id="HOWOutBuildingPlace0Select5" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace0Text5" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace0Text5" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 	                            </td>
 	                            <td width="12%">
 	                                <select id="HOWOutBuildingPlace0Select6" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace0Text6" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace0Text6" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td width="12%">
 	                                <select id="HOWOutBuildingPlace0Select7" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace0Text7" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace0Text7" class="form-control" placeholder="Letter" style="height: 50px;margin-top: 10px"></textarea>
 	                            </td>
 	                            <!--<td>15</td>-->
 	                            <!--<td>C</td>-->
@@ -795,41 +795,41 @@
 	                            <th class="zui-sticky-col" style="height: 103px" id="HOWOutBuildingPlace1">Porch</th>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace1Select0" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace1Text0" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace1Text0" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace1Select1" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace1Text1" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace1Text1" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace1Select2" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace1Text2" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace1Text2" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace1Select3" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace1Text3" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace1Text3" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace1Select4" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace1Text4" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace1Text4" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace1Select5" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace1Text5" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace1Text5" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace1Select6" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace1Text6" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace1Text6" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace1Select7" title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace1Text7" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace1Text7" class="form-control" placeholder="Letter" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <!--<td class="zui-sticky-col">Isaiah Thomas</td>-->
@@ -845,41 +845,41 @@
 	                            <th  class="zui-sticky-col" style="height: 103px" id="HOWOutBuildingPlace2">Verandah</th>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace2Select0"  title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace2Text0" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace2Text0" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace2Select1"  title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace2Text1" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace2Text1" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace2Select2"  title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace2Text2" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace2Text2" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace2Select3"  title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace2Text3" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace2Text3" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace2Select4"  title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace2Text4" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace2Text4" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace2Select5"  title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace2Text5" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace2Text5" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace2Select6"  title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace2Text6" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace2Text6" class="form-control" placeholder="Number" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <td>
 	                                <select id="HOWOutBuildingPlace2Select7"  title="checkList"></select>
-	                                <textarea id="HOWOutBuildingPlace2Text7" class="form-control" placeholder="Notes" style="height: 50px;margin-top: 10px"></textarea>
+	                                <textarea id="HOWOutBuildingPlace2Text7" class="form-control" placeholder="Letter" style="height: 50px;margin-top: 10px"></textarea>
 
 	                            </td>
 	                            <!--<td class="zui-sticky-col">Ben McLemore</td>-->
@@ -902,25 +902,25 @@
 	                    <th style="text-align: left" id="HOWServiceName0">Hot Water System</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWServicesSelect0" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea id="HOWServiceNote0" class="form-control" placeholder="Notes" style="height: 50px;"></textarea></th>
+	                    <th style="text-align: left"><textarea id="HOWServiceNote0" class="form-control" placeholder="Number" style="height: 50px;"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWServiceName1">Smoke Detectors</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWServicesSelect1" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea id="HOWServiceNote1" class="form-control" placeholder="Notes" style="height: 50px;"></textarea></th>
+	                    <th style="text-align: left"><textarea id="HOWServiceNote1" class="form-control" placeholder="Number" style="height: 50px;"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWServiceName2">Switchboard</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWServicesSelect2" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea id="HOWServiceNote2" class="form-control" placeholder="Notes" style="height: 50px;"></textarea></th>
+	                    <th style="text-align: left"><textarea id="HOWServiceNote2" class="form-control" placeholder="Number" style="height: 50px;"></textarea></th>
 	                </tr>
 	                <tr>
 	                    <th style="text-align: left" id="HOWServiceName3">Access</th>
 	                    <th style="text-align: left">
 	                        <select id="HOWServicesSelect3" style="width:100%"  title="checkList"></select>
-	                    <th style="text-align: left"><textarea id="HOWServiceNote3" class="form-control" placeholder="Notes" style="height: 50px;"></textarea></th>
+	                    <th style="text-align: left"><textarea id="HOWServiceNote3" class="form-control" placeholder="Letter" style="height: 50px;"></textarea></th>
 	                </tr>
 	            </table>
 	        </div>
@@ -934,67 +934,67 @@
 	                            <th style="text-align: left" id="HOWInternal_EntryName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote0" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote0" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote1" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote1" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote2" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote2" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote3" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote3" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote4" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote4" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote5" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote5" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote6" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote6" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote7" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote7" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote8" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote8" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote9" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote9" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_EntryName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_EntrySelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote10" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternal_EntryNote10" class="form-control" placeholder="Letter" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1006,67 +1006,67 @@
 	                            <th style="text-align: left" id="HOWInternal_StairName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StairNote9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StairName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StairSelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StairNote10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_StairNote10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1078,67 +1078,67 @@
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LivingFrontNote9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LivingFrontName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LivingFrontSelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LivingFrontNote10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_LivingFrontNote10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1150,67 +1150,67 @@
 	                            <th style="text-align: left" id="HOWInternal_LoungeName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_LoungeNote9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_LoungeName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_LoungeSelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_LoungeNote10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_LoungeNote10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1222,103 +1222,103 @@
 	                            <th style="text-align: left" id="HOWInternal_KitchenName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_KitchenNote10"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName11">Sink/Water Pressure</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect11" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote11"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote11"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName12">Splashback</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect12" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote12"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote12"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName13">Bench-top</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect13" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote13"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote13"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName14">Exhaust/Range hood</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect14" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote14"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote14"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName15">Stove/Cooktop/Oven</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect15" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote15"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote15"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_KitchenName16">Dishwasher</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_KitchenSelect16" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_KitchenNote16"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_KitchenNote16"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1330,67 +1330,67 @@
 	                            <th style="text-align: left" id="HOWInternal_FamilyName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_FamilyNote9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_FamilyName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_FamilySelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_FamilyNote10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_FamilyNote10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1402,67 +1402,67 @@
 	                            <th style="text-align: left" id="HOWInternal_DiningName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_DiningNote9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_DiningName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_DiningSelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_DiningNote10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_DiningNote10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1474,67 +1474,67 @@
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select5" style="width:100%"  title="checkList" ></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select6" style="width:100%"  title="checkList" ></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select7" style="width:100%"  title="checkList" ></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select8" style="width:100%"  title="checkList" ></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select9" style="width:100%"  title="checkList" ></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom1Note9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom1Name10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom1Select10" style="width:100%"  title="checkList"> </select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom1Note10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_Bedroom1Note10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1546,67 +1546,67 @@
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom2Note9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom2Name10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom2Select10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom2Note10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_Bedroom2Note10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1618,67 +1618,67 @@
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name2">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name3">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom3Note9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom3Name10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom3Select10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom3Note10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_Bedroom3Note10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1690,67 +1690,67 @@
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name2">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name3">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_Bedroom4Note9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_Bedroom4Name10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_Bedroom4Select10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_Bedroom4Note10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_Bedroom4Note10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1762,67 +1762,67 @@
 	                            <th style="text-align: left" id="HOWInternal_StudyName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_StudyNote9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_StudyName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_StudySelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_StudyNote10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_StudyNote10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1834,67 +1834,67 @@
 	                            <th style="text-align: left" id="HOWInternal_RetreatName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote0"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote0"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote1"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote1"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName2">Walls</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote2"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote2"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote3"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote3"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote4"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote4"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote5"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote5"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote6"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote6"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote7"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote7"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote8"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote8"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote9"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Number" style="height: 51px;" id="HOWInternal_RetreatNote9"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternal_RetreatName10">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternal_RetreatSelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea class="form-control" placeholder="Notes" style="height: 51px;" id="HOWInternal_RetreatNote10"></textarea></th>
+	                            <th style="text-align: left"><textarea class="form-control" placeholder="Letter" style="height: 51px;" id="HOWInternal_RetreatNote10"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -1911,91 +1911,91 @@
 	                            <th style="text-align: left" id="HOWInternalService_WCName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote0" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote0" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote1" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote1" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName2">Walls(incl tiles)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote2" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote2" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote3" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote3" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote4" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote4" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote5" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote5" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote6" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote6" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote7" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote7" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote8" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote8" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote9" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote9" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName10">Exhaust</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote10" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote10" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName11">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect11" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote11" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote11" class="form-control" placeholder="Letter" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName12">Mirror</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect12" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote12" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote12" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName13">Basin/Trough</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect13" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote13" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote13" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_WCName14">Toilet Suite</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_WCSelect14" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote14" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_WCNote14" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -2007,97 +2007,97 @@
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note0" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note0" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note1" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note1" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name2">Walls(incl tiles)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note2" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note2" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note3" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note3" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note4" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note4" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note5" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note5" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note6" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note6" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note7" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note7" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note8" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note8" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note9" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note9" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name10">Exhaust</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note10" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note10" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name11">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select11" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note11" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note11" class="form-control" placeholder="Letter" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name12">Mirror</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select12" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note12" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note12" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name13">Bath</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select13" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note13" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note13" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name14">Basin/Trough</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select14" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note14" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note14" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom1Name15">Shower</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom1Select15" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note15" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom1Note15" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -2109,97 +2109,97 @@
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note0" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note0" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note1" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note1" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name2">Walls(incl tiles)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note2" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note2" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note3" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note3" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note4" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note4" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note5" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note5" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note6" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note6" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note7" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note7" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note8" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note8" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note9" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note9" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name10">Exhaust</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note10" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note10" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name11">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select11" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note11" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note11" class="form-control" placeholder="Letter" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name12">Mirror</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select12" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note12" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note12" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name13">Bath</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select13" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note13" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note13" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name14">Basin/Trough</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select14" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note14" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note14" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom2Name15">Shower</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom2Select15" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note15" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom2Note15" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -2211,97 +2211,97 @@
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note0" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note0" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note1" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note1" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name2">Walls(incl tiles)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note2" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note2" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note3" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note3" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note4" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note4" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note5" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note5" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note6" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note6" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note7" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note7" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note8" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note8" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note9" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note9" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name10">Exhaust</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note10" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note10" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name11">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select11" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note11" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note11" class="form-control" placeholder="Letter" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name12">Mirror</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select12" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note12" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note12" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name13">Bath</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select13" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note13" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note13" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name14">Basin/Trough</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select14" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note14" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note14" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom3Name15">Shower</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom3Select15" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note15" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom3Note15" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -2313,97 +2313,97 @@
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note0" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note0" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note1" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note1" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name2">Walls(incl tiles)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note2" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note2" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note3" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note3" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note4" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note4" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note5" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note5" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note6" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note6" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note7" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note7" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note8" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note8" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note9" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note9" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name10">Exhaust</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note10" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note10" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name11">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select11" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note11" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note11" class="form-control" placeholder="Letter" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name12">Mirror</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select12" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note12" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note12" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name13">Bath</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select13" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note13" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note13" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name14">Basin/Trough</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select14" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note14" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note14" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_Bathroom4Name15">Shower</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_Bathroom4Select15" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note15" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_Bathroom4Note15" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -2415,85 +2415,85 @@
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName0">Floor(Structure)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote0" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote0" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName1">Floor(Cover)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote1" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote1" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName2">Walls(incl tiles)</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote2" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote2" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName3">Windows</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote3" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote3" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName4">Doors</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote4" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote4" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName5">Ceiling</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote5" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote5" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName6">Joinery</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect6" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote6" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote6" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName7">Elec.Fittings</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect7" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote7" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote7" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName8">Ventilation</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect8" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote8" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote8" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName9">Dampness</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect9" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote9" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote9" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName10">Exhaust</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect10" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote10" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote10" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName11">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect11" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote11" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote11" class="form-control" placeholder="Letter" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName12">Mirror</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect12" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote12" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote12" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_LaundryName13">Basin/Trough</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_LaundrySelect13" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote13" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_LaundryNote13" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -2505,37 +2505,37 @@
 	                            <th style="text-align: left" id="HOWInternalService_ServiceName0">Heater/Unit</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_ServiceSelect0" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote0" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote0" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_ServiceName1">Cooler/Unit</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_ServiceSelect1" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote1" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote1" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_ServiceName2">Hot Water Service</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_ServiceSelect2" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote2" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote2" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_ServiceName3">Smoke Detector/s</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_ServiceSelect3" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote3" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote3" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_ServiceName4">Switchboard</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_ServiceSelect4" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote4" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote4" class="form-control" placeholder="Number" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                        <tr>
 	                            <th style="text-align: left" id="HOWInternalService_ServiceName5">Access</th>
 	                            <th style="text-align: left">
 	                                <select id="HOWInternalService_ServiceSelect5" style="width:100%"  title="checkList"></select>
-	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote5" class="form-control" placeholder="Notes" style="height: 51px;"></textarea></th>
+	                            <th style="text-align: left"><textarea id="HOWInternalService_ServiceNote5" class="form-control" placeholder="Letter" style="height: 51px;"></textarea></th>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -2775,7 +2775,7 @@
     ?>
     <button onclick="SaveReport()" type="button" class="btn btn-primary save">Save</button>
     <button onclick="generatePDF('final')" type="button" class="btn btn-primary">View as PDF</button>
-    <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Customer</button> -->
+    <!-- <button onclick="checkPDF()" type="button" class="btn btn-primary">Save as Report for Client</button> -->
     <?php
         }
         else

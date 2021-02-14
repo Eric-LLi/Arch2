@@ -380,7 +380,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: TermsNConditions1,
+                                        text:   getTermsAndConditionsP1(),
                                         style: 'paragraphMargin'
                                     },
                                     {

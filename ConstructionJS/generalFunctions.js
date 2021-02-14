@@ -164,17 +164,51 @@ function determineFooter(mode) {
                                 ],
                                 alignment: 'left',
                                 fontSize: 7,
-                                margin: [0, 5, 0, 0],
+                                margin: [0, 15, 0, 0],
                                 color: '#8E8B8B'
                             }
                         ]
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -4.5, 10, 0]
+                margin: [40, 1, 10, 0]
             };
             return result;
-        } else {
+        } 
+        else if (state === 'SA')
+        {
+            result = {
+                width: '*',
+                table: {
+                    widths: [80,350],
+                    body: [
+                        [
+                            {
+                                image:footerImage,
+                                alignment:'left',
+                                width:80,
+                                height:34
+                            },
+                            {
+                                text:[
+                                    '© COPYRIGHT ',
+                                    {text:currentYear},
+                                    ' ARCHICENTRE AUSTRALIA, \na trading name of ArchiadvisorySA Pty Ltd ABN 65 644 777 159, \na division of ARCHIADVISORY PTY LTD ABN 51 614 712 613'
+                                ],
+                                alignment: 'left',
+                                fontSize: 7,
+                                margin: [0, 15, 0, 0],
+                                color: '#8E8B8B'
+                            }
+                        ]
+                    ]
+                },
+                layout: 'noBorders',
+                margin: [40, 1, 10, 0]
+            };
+            return result;
+        } 
+        else {
             result = {
                 width: '*',
                 table: {
@@ -197,7 +231,7 @@ function determineFooter(mode) {
                                 // text: '© COPYRIGHT 2019 ARCHICENTRE AUSTRALIA, a division of ARCHIADVISORY PTY LTD ABN 51 614 712 613',
                                 alignment: 'left',
                                 fontSize: 7,
-                                margin: [0, 22, 0, 0],
+                                margin: [0, 15, 0, 0],
                                 color: '#8E8B8B'
                             }
                         ]
@@ -205,7 +239,7 @@ function determineFooter(mode) {
                     ]
                 },
                 layout: 'noBorders',
-                margin: [40, -4.5, 10, 0]
+                margin: [40, 1, 10, 0]
             };
             return result;
         }
@@ -395,9 +429,126 @@ function checkImage(id) {
 }
 
 /**
+ * 
+ * @param {*} imgid 
+ * @param {*} angleid 
+ * New method to get the Cover Image, will rotate the image display if it is rotated on the HTML page. 
+ */
+function getCoverImage(imgid,angleid)
+{
+    var imageSection,imgSrc;
+    var myImage = document.getElementById(imgid);
+    var myWidth = myImage.width;
+    var imgangle = document.getElementById(angleid).value;
+    if(imgangle == null || imgangle == "undefined" || imgangle == "")
+    {
+        imgangle = 0;
+    }
+    else
+    {
+        imgangle = parseInt(imgangle);
+    }
+    //console.log("the angle of the cover img is " + imgangle);
+    
+    if (myWidth == 0) {
+        console.log('not cover');
+        imageSection = {
+            text: "",
+            width: 0,
+            height: 0
+        }
+    } 
+    else 
+    {
+        console.log('has cover');
+        //Doesn't matter if the image is upload or reload, if it is rotated, use the canvas for all scenario, use the canvas.toDataURL to get the base64. 
+        var canvas = document.createElement("canvas");
+        canvas.height = canvas.width = 0;
+        var context = canvas.getContext('2d');
+        var imgwidth = myImage.width;
+        var imgheight = myImage.height;
+     
+        if(imgangle == 90)
+        {
+            canvas.width = imgheight ;
+            canvas.height = imgwidth;
+            var scale = imgheight/imgwidth;
+            // console.log("scale: " + scale);
+            // console.log("canvas.width: " + canvas.width);
+            // console.log("canvas.height: " + canvas.height);
+            context.save();
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            //context.translate(imgwidth/2, imgheight/2);
+            context.rotate(imgangle*Math.PI/180);
+            context.drawImage(myImage,canvas.width/scale,0, -(imgheight)/scale, -(imgwidth)*scale);
+            context.restore();
+        }
+        else if (imgangle == 180)
+        {
+            canvas.width = imgwidth ;
+            canvas.height = imgheight;
+            var scale = imgwidth/imgheight;
+            // console.log("scale: " + scale);
+            // console.log("canvas.width: " + canvas.width);
+            // console.log("canvas.height: " + canvas.height);
+            context.save();
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            // context.translate(imgwidth/2, imgheight/2);
+            context.rotate(imgangle*Math.PI/180);
+            context.drawImage(myImage,0,0, -(imgwidth), -(imgheight));
+            context.restore();
+        }
+        else if(imgangle == 270)
+        {
+            canvas.width = imgheight ;
+            canvas.height = imgwidth;
+            var scale = imgheight/imgwidth;
+            // console.log("scale: " + scale);
+            // console.log("canvas.width: " + canvas.width);
+            // console.log("canvas.height: " + canvas.height);
+            context.save();
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            // context.translate(imgwidth/2, imgheight/2);
+            context.rotate(imgangle*Math.PI/180);
+            context.drawImage(myImage,0,canvas.height*scale, -(imgheight)/scale, -(imgwidth)*scale);
+            context.restore();
+        }
+        else
+        {
+            canvas.width = imgwidth ;
+            canvas.height = imgheight;
+            var scale = imgwidth/imgheight;
+            // console.log("scale: " + scale);
+            // console.log("canvas.width: " + canvas.width);
+            // console.log("canvas.height: " + canvas.height);
+            context.save();
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            // context.translate(imgwidth/2, imgheight/2);
+            context.rotate(imgangle*Math.PI/180);
+            context.drawImage(myImage,canvas.width,canvas.height, -(imgwidth), -(imgheight));
+            context.restore();
+        }
+        imgSrc = canvas.toDataURL("image/jpeg");
+
+        imageSection = {
+            image: imgSrc,
+            //height: 180,
+            width: 220
+        }
+
+    }
+    return imageSection;
+
+}
+
+/**
  * Images
  * */
-function getCoverImage(id) {
+function getCoverImage2(id) {
     var imageSection;
     var myImage = document.getElementById(id);
     var myWidth = myImage.width;
@@ -559,8 +710,8 @@ function giveMeTheNumber(id) {
 
     makeItAnArr = cleanArray(getIt(id).split('\n'));
     totalParagraphs = totalParagraphs + makeItAnArr.length;
-    console.log(makeItAnArr);
-    console.log(totalParagraphs);
+    // console.log(makeItAnArr);
+    // console.log(totalParagraphs);
 
     if (makeItAnArr.length != 0)
     {
@@ -570,7 +721,7 @@ function giveMeTheNumber(id) {
             var content =
             {
                 text:makeItAnArr[i].slice(3),
-                margin:[0,0,0,3],
+                margin:[0,0,0,2],
                 alignment:'left'
             };
             data.push(content);
@@ -585,4 +736,42 @@ function giveMeTheNumber(id) {
 
     //console.log(data);
     return data;
+}
+
+/**
+ * To get the state of the property, to determin the text 1 in the scope of service and Terms & Conditions. 
+ * State SA requires different text 1
+ */
+function getSSTCText1()
+{
+    // console.log('getSSTCText1');
+    var text1;
+    var state = document.getElementById('state').value;
+    if(state == 'SA')
+    {
+        text1 = scopeOfInspectionSAP1;
+    }
+    else
+    {
+        text1 = scopeOfInspectionP1;
+    }
+
+    return text1;
+}
+
+function getTermsAndConditionsP1()
+{
+    // console.log('getSSTCText1');
+    var text1;
+    var state = document.getElementById('state').value;
+    if(state == 'SA')
+    {
+        text1 = termsConditionsSAP1;
+    }
+    else
+    {
+        text1 = termsConditionsP1;
+    }
+
+    return text1;
 }

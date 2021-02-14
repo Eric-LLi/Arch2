@@ -522,7 +522,7 @@ function generatePDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, '*', 150],
+                    widths: [80, '*', 130, 80],
                     body: HSConcernsData
                 }
             },
@@ -530,7 +530,7 @@ function generatePDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, '*', 150],
+                    widths: [80, '*', 130, 80],
                     body: RepairMaintenanceData
                 }
             },
@@ -543,7 +543,7 @@ function generatePDF(mode) {
             {
                 style: 'tableContent',
                 table: {
-                    widths: [100, 'auto', 150, '*', 150],
+                    widths: [80, '*', 130, 80],
                     body: EnergyEfficiencyData
                 }
             },
@@ -609,7 +609,8 @@ function generatePDF(mode) {
                 columns: [{
                     width: 250,
                     stack: [
-                        page11_body,
+                        //page11_body,
+                        getTermsAndConditionsP1(),
                         {
                             margin: [20, 0, 0, 0],
                             ol: [
@@ -653,7 +654,7 @@ function generatePDF(mode) {
             /**
              * (10) Report Detail Page ten
              */
-            giveMeHugeDraft(mode),
+            //giveMeHugeDraft(mode),
             //            //Sketch title
             //            {
             //                text: $('#HA_DIVSketchs').attr('data-title'),

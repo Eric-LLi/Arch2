@@ -14,7 +14,6 @@ global $reportTypes;
       $uuid = $_POST['uuid'];
       $bookingcode = $_POST['bookingcode'];
       $header = file_get_contents('Email_Header.html');
-      $footer = file_get_contents('Email_Footer.html'); 
       $userid = SharedGetUserIdFromUuid($uuid, $dblink);
       $linkBookingID = '';
       $bookings_id = '';
@@ -108,11 +107,28 @@ global $reportTypes;
               //error_log($booking['archemail']);
               $bookings_id = $booking["bookings_id"];
               $linkBookingID = $booking['linked_bookingcode'];
+              $workstate = $booking['state'];//the property's state, not the client's living state. 
+              if($workstate == 'NSW')
+              {
+                  $footer = file_get_contents('Email_Footer_NSW.html');
+              }
+              elseif($workstate == 'SA')
+              {
+                $footer = file_get_contents('Email_Footer_SA.html');
+              }
+              else
+              {
+                  $footer = file_get_contents('Email_Footer.html'); 
+              }
 
-              // Let customer know...
+              //Footer , get current year. 
+              $currentyear = date("Y");
+              $footer = str_replace("XXX_YEAR",$currentyear,$footer);
+              
+              // Let client know...
                if ($booking['custemail'] != "")
               {
-                error_log('i am in sending email to customer');
+                error_log('i am in sending email to client');
                 error_log($booking['custemail']);
                 $html = file_get_contents('email_cancelreportnotification.html');
                 $html = str_replace("XXX_CUSTFIRSTNAME", $booking['custfirstname'], $html);

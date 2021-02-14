@@ -11,6 +11,13 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.MaintenSectionSubHead{
+    color: #1a2ee2;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .sectionSubHeadBigger {
     color: #f44336;
     font-weight: bold;
@@ -199,4 +206,8 @@ input[type="submit"] {
     display:inline-block;
     line-height:12px;
     padding-top:5px;
+}
+
+.attachmentlabel{
+    margin-bottom:0px;
 }

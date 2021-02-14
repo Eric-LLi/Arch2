@@ -14,6 +14,10 @@
 <link rel="stylesheet" href="css/animate.min.css?<?php echo time(); ?>">
 <link rel="stylesheet" href="js/easyui/themes/default/easyui.css?<?php echo time(); ?>">
 <link rel="stylesheet" href="js/easyui/themes/icon.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="js/easyui/texteditor.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="css/index.css?<?php echo time(); ?>">
+<link rel="stylesheet" href="js/summernote/summernote.css?<?php echo time(); ?>">
+
 
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
@@ -21,6 +25,7 @@
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="js/easyui/datagrid-filter.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="js/easyui/plugins/jquery.tagbox.js?<?php echo time(); ?>"></script>
+<script type="text/javascript" src="js/easyui/plugins/jquery.texteditor.js?<?php echo time(); ?>"></script>
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/underscore.string.js"></script>
 <script type="text/javascript" src="js/moment.min.js"></script>
@@ -29,8 +34,20 @@
 <script type="text/javascript" src="js/dx.chartjs.js"></script>
 <script type="text/javascript" src="js/accounting.min.js"></script>
 <script type="text/javascript" src="js/decimal.min.js"></script>
+<script type="text/javascript" src="js/summernote/summernote.js"></script>
+<script type="text/javascript" src="js/html2canvas.min.js"></script>
+<script type="text/javascript" src="js/html2canvas.js"></script>
+
 <script src="js/images.js"></script>
 <script src="js/loadImageJS/load-image.all.min.js"></script>
+<script src="js/PrintJS/print.min.js"></script>
+<script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
+<script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
+<script type="text/javascript" src="SummaryJS/dlg-summary.js?<?php echo time(); ?>"></script>
+<script type="text/javascript" src="SummaryJS/PDFGenerator.js?<?php echo time(); ?>"></script>
+<script type="text/javascript" src="SummaryJS/generalFunctions.js?<?php echo time(); ?>"></script>
+
+<script type="text/javascript" src="https://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.min.js"></script>
 
 <style>
   .button-rounded
@@ -104,19 +121,25 @@
   .totals_footer {font-weight: bold; color: #cd853f}
 
   #divNewBookingsMap {width: 100%; height: 100%; display: block;}
+
+  .textbox-text .textbox-readonly{
+    font-size: 15px;
+  }
+
 </style>
 
 <script>
+//id:3 --> Combined Report _ Timber Report;
+//id:24 --> Combined Report _ Porerty Assessetment Report;
   var reports =
   [
-    {name: 'Architect\'s Advice', id: 5},
     {name:'Unassigned',id:0},
     {name: 'Property Assessment', id: 1},
     {name: 'Timber Pest Inspection', id: 2},
     //{name: 'Combined Timber Pest Inspection Report', id: 3},
-    {name: 'Property and Timber Pest', id: 3},
+    {name: 'Timber Pest Inspection', id: 3},
     {name: 'Maintenance Advice', id: 4},
-    
+    {name: 'Architect\'s Advice', id: 5},
     {name: 'Construction Quality Assurance - Stage 1', id: 6},
 		{name: 'Construction Quality Assurance - Stage 2', id: 7},
 		{name: 'Construction Quality Assurance - Stage 3', id: 8},
@@ -134,16 +157,17 @@
     // {name: 'Commercial Dilapidation Survey', id: 20},
     {name: 'Home Access & Services - Residential', id: 21},
     {name: 'Post-Dilapidation Survey',id:22},
-    {name: 'Quote Report',id:23}
+    {name: 'Quote Report',id:23},
+    {name: 'Combined Property Assessment & Timber Pest',id:24},
+    {name: 'Property Assessment - Type A',id:25}
   ];
-  //This is the selected list for use to select when edit a report, cannot change a report combined report, so remove the combined one. 
+  //This is the selected list for use to select when edit a report, can change a booking from one report type to another. but cannot change a report combined report, so remove the combined one.
   var editreports =
   [
     {name:'Unassigned',id:0},
     {name: 'Property Assessment', id: 1},
     {name: 'Timber Pest Inspection', id: 2},
-    //{name: 'Combined Timber Pest Inspection Report', id: 3},
-    // {name: 'Property and Timber Pest', id: 3},
+    {name: 'Timber Pest Inspection', id: 3},
     {name: 'Maintenance Advice', id: 4},
     {name: 'Architect\'s Advice', id: 5},
     {name: 'Construction Quality Assurance - Stage 1', id: 6},
@@ -163,7 +187,10 @@
     // {name: 'Commercial Dilapidation Survey', id: 20},
     {name: 'Home Access & Services - Residential', id: 21},
     {name: 'Post-Dilapidation Survey',id:22},
-    {name: 'Quote Report',id:23}
+    {name: 'Quote Report',id:23},
+    // {name: 'Combined Property Assessment & Timber Pest',id:24}
+    {name: 'Property Assessment - Type A Report',id:25}
+    
   ];
 
   //This is for the status select combox search
@@ -216,7 +243,9 @@
     // {name: 'Commercial Dilapidation Survey Scope', id: 20},
     {name: 'Residential Home Access & Services Scope', id: 21},
     {name: 'Post-Dilapidation Survey Scope',id:22},
-    {name: 'Quote Report Scope',id:23}
+    {name: 'Quote Report Scope',id:23},
+    {name: 'Combined Property Assessment & Timber Pest',id:24},
+    {name: 'Property Assessment - Type A',id:25}
   ];
   var states =
   [
@@ -229,6 +258,26 @@
     {name: 'ACT'},
     {name: 'NT'}
   ];
+
+  //This is auditing,record activities of each booking. 
+  var auditevents = 
+  [
+    {event:'booking is created',id:1},
+    {event:'booking is edited', id:2},
+    {event:'booking is paid',id:3},
+    {event:'booking is set to unpaid',id:4},
+    {event:'booking is set no agreed priced',id:5},
+    {event:'booking is assigned, the work started', id:6},
+    {event:'report is edited and saved',id:7},
+    {event:'report is completed', id:8},
+    {event:'report is approved', id:9},
+    {event:'report is sent to the customer', id:10},
+    {event:'booking is closed', id:11},
+    {event:'booking is cancelled', id:12},
+    {event:'tax invoice is sent to the customer', id:13},
+
+  ];
+
   var numitems =
   [
     {name: 1},
@@ -372,8 +421,10 @@ function isEmpty(val) {
   // Data helpers
   function doGetStringFromIdInObjArray(objarr, id)
   {
-    var result = $.grep(objarr, function(ev) {return ev.id == id;});
-
+    var result = $.grep(objarr, function(ev) 
+    {
+      return ev.id == id;
+    });
     return _.isNull(result) || (result.length == 0) ? '' : result[0].name;
   }
 

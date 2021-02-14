@@ -19,6 +19,8 @@ var introductionP6 = 'Email: office@archicentreaustralia.com.au';
 
 var reportStandardP1 = 'Your Report is prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – in accordance with Australian Standard 4349.0-2007-Inspection of Buildings Part 0: General Requirements and to any other Australian Standards cited in these Terms and Conditions.';
 
+var reportStandardP1SA = 'Your Report is prepared by Archicentre Australia – a trading name of ArchiadvisorySA Pty Ltd – in accordance with Australian Standard 4349.0-2007-Inspection of Buildings Part 0: General Requirements and to any other Australian Standards cited in these Terms and Conditions.';
+
 var reportStandardP2 = 'The architect can only assess the reasonably and safely accessible parts of the property.  It is your responsibility to ensure that any inaccessible parts of the property that can be made reasonably accessible for an assessment, where appropriate for the scope of advice sought, are made so, prior to the assessment.  Areas which are not reasonably and safely accessible cannot be assessed.';
 
 var whatIncTextM = 'The Report is limited to a visual investigation of the property, item, area or matter of your concern.  Where this relates to a defect or problem with a building or property element the architect will, where appropriate:';
@@ -100,6 +102,8 @@ var generalAdviceBulletList7 = 'If you are purchasing the property, Archicentre 
 var forStrataCompanyTitlePropertiesP1 = 'The Assessment is limited to the nominated individual property including associated private open space. It is not the scope of this assessment to include all common or other adjacent property. Legal advice should be obtained as to the liability to contribute to the cost of repairs in respect of any common property.';
 
 var termConditionP1M = 'The Report has been prepared by Archicentre Australia – a division of ArchiAdvisory Pty Ltd – and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope of Advice and these Terms and Conditions. Archicentre Australia accepts no responsibility to other persons relying on the Report.';
+
+var termConditionP1MSA = 'The Report has been prepared by Archicentre Australia – a trading name of ArchiadvisorySA Pty Ltd – and the named architect and is supplied to you (the named client) on the basis of and subject to the Scope of Advice and these Terms and Conditions. Archicentre Australia accepts no responsibility to other persons relying on the Report.';
 
 var termConditionP2M = 'The Report has been prepared in accordance with Australian Standard 4349.0-2007 Inspection of Buildings Part 0: General Requirements and to any other Australian Standards and definitions cited in the Terms and Conditions.';
 

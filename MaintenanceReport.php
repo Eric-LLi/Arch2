@@ -25,7 +25,7 @@
     <!-- Customized CSS -->
     <!--<link rel="stylesheet" href="../CSS/general.css">-->
     <!--<link rel="stylesheet" href="../CSS/maintenanceCSS.css">-->
-    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/general.css?<?php echo time(); ?>">
     <!--  Import pdfMake  -->
     <script src='node_modules/pdfmake/build/pdfmake.min.js'></script>
     <script src='node_modules/pdfmake/build/vfs_fonts.js'></script>
@@ -81,7 +81,7 @@
 <!-- Inspection Info -->
 <div id="MaintenanceCustomerDetails" class="container">
     <hr>
-    <h3 class="sectionSubHead">CUSTOMER DETAILS</h3>
+    <h3 class="sectionSubHead">CLIENT DETAILS</h3>
     <form>
         <div class="row">
             <div class="col-sm-6">
@@ -300,11 +300,19 @@
             <div class="col-sm-6">
                 <div class="col-sm">
                     <img id="MaintenanceCoverImage" src="#" alt="Image1"
-                         style="width:100%;height:100%;display: none"/>
+                         style="width:400px;display: none"/>
                 </div>
                 <div class="col-sm">
                     <input class="btn btn-danger" type="button" value="Remove" id="MaintenanceCoverImageRemoveButton"
-                           onclick="RemoveMaintenanceCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width:100%">
+                           onclick="RemoveMaintenanceCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width:400px">
+                    <br>
+                </div>
+                <div class="col-sm">
+                    <input type="text" id="MaintenanceCoverImageAngle" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
+                <br>
+                </div>
+                <div class="col-sm">
+                    <input class="btn btn-info" type="button" value="Rotate" id="MaintenanceCoverImageRotateButton" onclick="RotateCoverImage()" style="display: none; margin-top: 5px;margin-bottom: 5px;width: 400px">
                     <br>
                 </div>
             </div>
@@ -320,7 +328,7 @@
     <form>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="sectionSubHead" style="font-size: 20px">Introduction: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px;">Executive Summary: </label>
                 <label style="width:100%">The following summarizes our advice with respect to particular concerns identified at the property</label>
                 <textarea id="YMAS-TEXT1" title="summary"
                           class="autoExpand"
@@ -329,7 +337,7 @@
         </div>
         <div class="row form-group">
             <div class="col-sm">
-                <label class="sectionSubHead" style="font-size: 20px">Major Defects: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Consequences: </label>
                 <label style="width:100%">Significant risk or cost consequences of not proceeding with this advice are as follows:</label>
                 <textarea id="YMAS-TEXT2"
                           placeholder="Please write down the brief consequences here..."
@@ -339,11 +347,14 @@
         <!--&#10;(Bullet points will be assigned automatically.) -->
         <div class="row form-group">
             <div class="col-sm">
-                <label class="sectionSubHead" style="font-size: 20px">Serious Structural Defects: </label>
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations:</label>
                 <label style="width:100%">Under the circumstances our recommendations are as follows</label>
                 <textarea id="YMAS-TEXT3"
                           placeholder="Please write down the brief recommendations here..."
-                          class="form-control" style="border: 2px solid #000000;height: 200px" onfocus="startBullet('YMAS-TEXT3')" onkeyup="assignBullet('YMAS-TEXT3')"></textarea>
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+                <!-- <textarea id="YMAS-TEXT3"
+                          placeholder="Please write down the brief recommendations here..."
+                          class="form-control" style="border: 2px solid #000000;height: 200px" onfocus="startBullet('YMAS-TEXT3')" onkeyup="assignBullet('YMAS-TEXT3')"></textarea> -->
             </div>
         </div>
     </form>
@@ -351,8 +362,118 @@
     <hr>
 </div>
 
-<!--Advice-->
 <div class="container">
+    <h2 class="content-head text-center firstH1">Introduction</h2><br>
+</div>
+<div class="container">
+    <form>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">The property comprises: </label>
+                <textarea id="INTRO-TEXT1" title="summary"
+                          class="autoExpand"
+                          style="border: 2px solid #000000;height: 200px" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Client Motivation for this report: </label>
+                <textarea id="INTRO-TEXT2"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Externally: </label>
+                <textarea id="INTRO-TEXT3"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Internally: </label>
+                <textarea id="INTRO-TEXT4"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+    </form>
+    <br>
+    <hr>
+</div>
+
+<div class="container">
+    <h2 class="content-head text-center firstH1">Advice</h2><br>
+</div>
+<div class="container">
+    <form>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Document Retrieval: </label>
+                <textarea id="ADVICE-TEXT1" title="summary"
+                          class="autoExpand"
+                          style="border: 2px solid #000000;height: 200px" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Priorities: </label>
+                <textarea id="ADVICE-TEXT2" title="summary"
+                          class="autoExpand"
+                          style="border: 2px solid #000000;height: 200px" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Observations and Analysis:</label>
+                <textarea id="ADVICE-TEXT3"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations – Initial Scope: </label>
+                <textarea id="ADVICE-TEXT4"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Recommendations – Long Term Strategies: </label>
+                <textarea id="ADVICE-TEXT5"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Consequences: </label>
+                <textarea id="ADVICE-TEXT6"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm">
+                <label class="MaintenSectionSubHead" style="font-size: 20px">Summary: </label>
+                <textarea id="ADVICE-TEXT7"
+                          placeholder=""
+                          class="form-control" style="border: 2px solid #000000;height: 200px"></textarea>
+            </div>
+        </div>
+        <!-- <div class="easyui-texteditor" title="TextEditor" style="width:700px;height:300px;padding:20px" id="texteditor">
+           
+        </div> -->
+    </form>
+    <br>
+    <hr>
+</div>
+<!--Advice-->
+<!-- <div class="container">
     <h2 class="content-head text-center firstH1">Advice</h2><br>
 </div>
 <div class="container">
@@ -385,7 +506,7 @@
     </form>
     <br>
     <hr>
-</div>
+</div> -->
 
 <!--Photographs-->
 <div class="container">
@@ -395,6 +516,8 @@
     <input type="button" id="get_image" value="Upload Images (Max 40 images)" class="uploadImageButton"
            onclick="MaintenanceUploadImages()" style="white-space: normal; width: 15%">
     <input type="file" id="MaintenanceUploadImages" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    <input type="file" id="MaintenanceUploadOneImage" class="inputImage" accept="image/x-png,image/jpeg">
+
 </div>
 <div class="container">
     <table id="MaintenanceImagesTable" style="display: none">
@@ -418,6 +541,8 @@
     <input type="button" id="get_drawing" value="Upload Drawings (Max 6 drawings)" class="uploadImageButton"
            onclick="MaintenanceUploadDrawings()" style="white-space: normal; width: 15%">
     <input type="file" id="MaintenanceUploadDrawings" class="inputImage" accept="image/x-png,image/jpeg" multiple>
+    <input type="file" id="MaintenanceUploadOneDrawing" class="inputImage" accept="image/x-png,image/jpeg">
+
 </div>
 <div class="container">
     <table id="MaintenanceDrawingsTable" style="display: none">
@@ -451,7 +576,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <label>Property Management Guide</label>
+            <label class="attachmentlabel">Property Maintenance Guide</label>
             <select id="6000" style="width:100%" title="attachment selection">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -462,7 +587,7 @@
             </select>
         </div>
         <div class="col-sm-4">
-            <label>Cracking in Masonry</label>
+            <label class="attachmentlabel">Cracking in Masonry</label>
             <select id="6001" style="width:100%" title="attachment selection">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -473,7 +598,7 @@
             </select>
         </div>
         <div class="col-sm-4">
-            <label>Treatment of Dampness</label>
+            <label class="attachmentlabel">Treatment of Dampness</label>
             <select id="6002" style="width:100%" title="attachment selection">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -484,9 +609,9 @@
             </select>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top:20px">
         <div class="col-sm-4">
-            <label>Health & Safety Warning</label>
+            <label class="attachmentlabel">Health & Safety Warning</label>
             <select id="6003" style="width:100%" title="attachment selection">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -497,7 +622,7 @@
             </select>
         </div>
         <div class="col-sm-4">
-            <label>Roofing & Guttering</label>
+            <label class="attachmentlabel">Roofing & Guttering</label>
             <select id="6004" style="width:100%" title="attachment selection">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -508,7 +633,7 @@
             </select>
         </div>
         <div class="col-sm-4">
-            <label>Re-stumping</label>
+            <label class="attachmentlabel">Re-stumping</label>
             <select id="6005" style="width:100%" title="attachment selection">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -519,9 +644,9 @@
             </select>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top:20px">
         <div class="col-sm-4">
-            <label>Termites & Borers</label>
+            <label class="attachmentlabel">Termites & Borers</label>
             <select id="6006" style="width:100%" title="attachment selection">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>
@@ -532,7 +657,7 @@
             </select>
         </div>
         <div class="col-sm-4">
-            <label>Cost Guide</label>
+            <label class="attachmentlabel">Cost Guide</label>
             <select id="6007" style="width:100%" title="attachment selection">
                 <optgroup label="No Visible Significant Defect">
                     <option value="√">✔</option>

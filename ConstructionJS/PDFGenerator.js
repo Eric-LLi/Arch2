@@ -36,6 +36,8 @@ function generatePDF(mode) {
     };
     // Page start drawing from here...
     var docDefinition = {
+        pageSize:'A4',
+        pagemARGINS:[40,60,40,60],
         footer: function (currentPage, pageCount) {
             if (currentPage === 1) {
                 return {
@@ -107,7 +109,7 @@ function generatePDF(mode) {
                                     {
                                         border: [false, true, true, true],
                                         stack: [
-                                            getCoverImage('ConstructionCoverImage')
+                                            getCoverImage('ConstructionCoverImage','ConstructionCoverImageAngle')
                                         ],
                                         margin: [5, 5, 5, 5]
                                         //margin:[10,10,10,10]
@@ -206,7 +208,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: scopeOfInspectionP1,
+                                        text: getSSTCText1(),
                                         style: 'paragraphMargin'
                                     },
                                     {
@@ -379,7 +381,7 @@ function generatePDF(mode) {
                         alignment: 'justify',
                         columns: [{
                                 stack: [{
-                                        text: termsConditionsP1,
+                                        text: getTermsAndConditionsP1(),
                                         style: 'paragraphMargin'
                                     },
                                     {

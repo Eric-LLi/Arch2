@@ -10,3 +10,5 @@ shared.php
 node_modules/
 invoices_pdf/
 tmp/
+photos/
+
