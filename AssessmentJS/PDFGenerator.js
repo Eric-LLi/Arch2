@@ -99,14 +99,14 @@ function generatePDF(mode) {
                                         text: coverPageText,
                                         alignment: 'justify',
                                         fontSize: 9,
-                                        margin: [10, 30, 10, 10]
+                                        margin: [10, 10, 5, 10]
                                     },
                                     {
                                         border: [false, true, true, true],
                                         stack: [
                                             getCoverImage("AssessmentCoverImage","AssessmentCoverImageAngle")
                                         ],
-                                        margin: [10, 10, 10, 10]
+                                        margin: [5, 10, 10, 10]
                                     }
                                 ]
                             ]
@@ -131,7 +131,7 @@ function generatePDF(mode) {
                     {
                         text: 'Property Assessment Details',
                         style: 'pageTopHeader',
-                        margin: [0, 30, 0, 5]
+                        margin: [0, 20, 0, 5]
                     },
                     {
                         table: {
